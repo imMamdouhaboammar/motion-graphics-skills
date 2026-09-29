@@ -46,6 +46,8 @@ python "$MOTION_DIRECTOR_DIR/scripts/route_motion.py" --context motion-route.jso
 
 Keep the JSON result as the production route. Every hop must have a reason, inherited truth, and a return contract.
 
+If the router returns `"status": "blocked"`, stop. A required capability is missing. Do not silently replace a fidelity gate, GPU gate, or final review gate with an easier path.
+
 Re-route only when evidence changes the job, not because another effect looks easier.
 
 ## 3. Challenge mode means preserve the hard part
@@ -180,11 +182,20 @@ python "$VIDEO_REVIEW_SKILL_DIR/scripts/review_video.py" review final.mp4 \
   --expect-audio
 ```
 
-Then inspect the actual playback with audio and muted, inspect the first second densely, inspect all important transitions frame by frame, inspect the CTA and ending, and compare the result against the approved motion thesis and reference contract.
+Use the returned `round_dir` for the strict temporal audit:
+
+```bash
+python "$VIDEO_REVIEW_SKILL_DIR/scripts/strict_video_signals.py" final.mp4 \
+  --output "$ROUND_DIR/strict-signals.json"
+```
+
+Then inspect the actual playback with audio and muted, inspect the first second densely, inspect all important transitions frame by frame, inspect every strict-signal candidate, inspect the CTA and ending, and compare the result against the approved motion thesis and reference contract.
+
+Record confirmed visual defects with `review_round.py add`, attest the required visual passes with `review_round.py attest`, and run `review_round.py status` before signoff.
 
 Machine findings are evidence, not taste.
 
-A confirmed defect is closed only by a later rendered artifact.
+A confirmed defect is closed only by a later rendered artifact and a `review_round.py resolve` entry that points to that later video.
 
 Never mark a video complete because screenshots look fine.
 
