@@ -13,5 +13,5 @@ jobs:
       - name: Checkout Code
         uses: actions/checkout@v4
 
-      - name: Validate 14 Skills and Prompts
+      - name: Validate 15 Skills and Prompts
         run: bash validate-skills.sh
