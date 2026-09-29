@@ -87,6 +87,8 @@ def available_categories(refs: list[dict]) -> list[str]:
 def build_recipe(refs: list[dict], categories: list[str], seed: int, index: int) -> dict:
     rng = random.Random(seed + index * 1009)
     target_slots = min(6, len(categories))
+    if len(refs) <= 2 and target_slots > 2 and target_slots % 2:
+        target_slots -= 1
     remaining = set(categories)
     counts: Counter = Counter()
     limit = source_limit(target_slots, len(refs))
