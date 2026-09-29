@@ -123,13 +123,20 @@ def terminate_process_group(proc: subprocess.Popen[bytes], grace: float) -> None
 
 
 def run_hook(command: str, log_path: Path, timeout: float) -> dict:
-    argv = shlex.split(command)
     result = {
-        "command": argv,
+        "command": [],
         "started_at": utc_now(),
         "timed_out": False,
         "exit_code": None,
     }
+    try:
+        argv = shlex.split(command)
+    except ValueError as exc:
+        result["exit_code"] = 2
+        result["error"] = str(exc)
+        log_path.write_text(f"parse error: {exc}\n", encoding="utf-8")
+        return result
+    result["command"] = argv
     if not argv:
         result["exit_code"] = 2
         log_path.write_text("empty hook command\n", encoding="utf-8")
