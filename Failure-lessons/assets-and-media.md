@@ -79,3 +79,27 @@ Use ASR for timings. Take caption and on-screen text from the approved script. N
 ### Status
 
 Resolved.
+
+---
+
+## A licence recorded without the credit it requires
+
+### What happened
+
+`ASSET_SOURCES.md` recorded each CC BY-SA photo's licence and source page but not its author. The suggested post credit named only the subjects and "via Wikimedia Commons". Two reviewers (Codex, rated P1, and CodeRabbit) flagged that anyone following the handoff could publish the film without a compliant credit.
+
+### Root cause
+
+**Confirmed**: the author column was deferred to "credited on the file page", and nobody turned the licence terms into the text a publisher has to paste.
+
+### Fix
+
+Authors, licence versions and licence links were read from the Wikimedia Commons API (`extmetadata`: Artist, LicenseShortName, LicenseUrl), not taken from the reviewer's suggestion. A copyable credit states the changes and the share-alike terms.
+
+### Prevention rule
+
+Record the author at download time, from the source's metadata. Ship a credit the publisher can paste, not a reminder to write one. For BY-SA, that credit includes the creator, source link, licence version and link, changes made, and the same-licence statement.
+
+### Status
+
+Resolved.

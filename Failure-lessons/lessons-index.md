@@ -42,6 +42,7 @@ Search this table before debugging. If your problem matches a failure class, sta
 | Scene ended before its exit tween | Clip duration typed beside, not derived from, its tweens | A clip covers every tween of its content; check the contract, not only frames | Timing | Resolved | [composition-and-transitions](composition-and-transitions.md#a-scene-ended-before-its-exit-tween-finished) |
 | Readiness swallowed asset errors | Error handlers that convert failure to success | Readiness rejects with the failing asset | Composition | Resolved | [render-pipeline](render-pipeline.md#related-failure-readiness-that-swallowed-asset-errors) |
 | Deleted donors still registered | Manifest and lock not updated with the file | Remove file, manifest and lock entry together | Repository | Resolved | [delivery-and-repo-workflow](delivery-and-repo-workflow.md#registry-donors-left-registered-after-they-were-deleted) |
+| Licence recorded without its credit | Attribution deferred to the source page | Record the author at download; ship a paste-ready credit | Assets, delivery | Resolved | [assets-and-media](assets-and-media.md#a-licence-recorded-without-the-credit-it-requires) |
 
 ## Rules we now enforce
 

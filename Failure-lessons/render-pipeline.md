@@ -283,7 +283,7 @@ A reviewer (Codex) found the opposite defect in the same promise. Each `decode()
 
 ### Status
 
-Resolved. The timeout-with-message is not yet built into `clip-audit.js` (open).
+Resolved. `projects/mgs-promo/tools/font-check.cjs` now races readiness against 20 s. Red run: with `return tl` restored in a scratch copy, it fails with `window.__ready did not settle within 20000 ms` instead of hanging. `clip-audit.js` has no such timeout yet (open).
 
 ---
 
