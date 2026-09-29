@@ -18,6 +18,7 @@ REQUIRED_ATTESTATIONS = (
     "first_second_inspected",
     "transitions_inspected",
     "ending_inspected",
+    "strict_signals_inspected",
 )
 
 
@@ -121,6 +122,7 @@ def attest(
     transitions_inspected: bool,
     ending_inspected: bool,
     reference_compared: bool,
+    strict_signals_inspected: bool,
 ) -> dict[str, Any]:
     state = {
         "watched_with_audio": watched_with_audio,
@@ -129,6 +131,7 @@ def attest(
         "transitions_inspected": transitions_inspected,
         "ending_inspected": ending_inspected,
         "reference_compared": reference_compared,
+        "strict_signals_inspected": strict_signals_inspected,
         "updated_at": datetime.now(timezone.utc).isoformat(),
     }
     write_json(state_path(round_dir), state)
@@ -153,6 +156,11 @@ def round_status(round_dir: Path) -> dict[str, Any]:
         key for key in required_attestations if not bool(state.get(key, False))
     ]
 
+    strict_signal_path = round_dir / "strict-signals.json"
+    missing_evidence: list[str] = []
+    if not strict_signal_path.exists():
+        missing_evidence.append("strict-signals.json")
+
     machine_hard = int(
         (manifest.get("finding_counts") or {}).get("hard", 0)
         if isinstance(manifest, dict)
@@ -164,7 +172,7 @@ def round_status(round_dir: Path) -> dict[str, Any]:
         status = "blocked-machine-hard-findings"
     elif pending_hard:
         status = "blocked-visual-hard-findings"
-    elif missing_attestations:
+    elif missing_attestations or missing_evidence:
         status = "agent-review-required"
 
     return {
@@ -173,7 +181,11 @@ def round_status(round_dir: Path) -> dict[str, Any]:
         "pending_hard_count": len(pending_hard),
         "machine_hard_count": machine_hard,
         "missing_attestations": missing_attestations,
+        "missing_evidence": missing_evidence,
         "reference_compared": bool(state.get("reference_compared", False)),
+        "strict_signals_inspected": bool(
+            state.get("strict_signals_inspected", False)
+        ),
         "pending": pending,
     }
 
@@ -213,6 +225,10 @@ def build_parser() -> argparse.ArgumentParser:
     attest_parser.add_argument("--transitions-inspected", action="store_true")
     attest_parser.add_argument("--ending-inspected", action="store_true")
     attest_parser.add_argument("--reference-compared", action="store_true")
+    attest_parser.add_argument(
+        "--strict-signals-inspected",
+        action="store_true",
+    )
 
     status = sub.add_parser("status")
     status.add_argument("round_dir", type=Path)
@@ -255,6 +271,7 @@ def main() -> int:
                 transitions_inspected=args.transitions_inspected,
                 ending_inspected=args.ending_inspected,
                 reference_compared=args.reference_compared,
+                strict_signals_inspected=args.strict_signals_inspected,
             )
         else:
             result = round_status(args.round_dir)
