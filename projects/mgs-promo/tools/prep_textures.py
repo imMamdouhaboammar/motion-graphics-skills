@@ -37,4 +37,7 @@ def stamp_ink():
     Image.fromarray((a * 255).clip(0, 255).astype("uint8")).filter(ImageFilter.GaussianBlur(0.6)).save(OUT + "stamp-ink.png")
 
 if __name__ == "__main__":
-    paper_fibre(); grain(); stamp_ink(); print("textures ok")
+    paper_fibre()
+    grain()
+    stamp_ink()
+    print("textures ok")
