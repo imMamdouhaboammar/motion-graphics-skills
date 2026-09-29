@@ -132,11 +132,13 @@ The default cap is 3 wildcard references.
 
 Create a compact JSON gene pool using the schema in `references/reference-gene-schema.md`.
 
-When there are enough extracted genes, run:
+When there are enough extracted genes, resolve the directory containing this installed `SKILL.md` first. Invoke the helper from that directory, never from the project working directory.
 
 ```bash
-python scripts/mix_matrix.py gene-pool.json --recipes 3
+python "$MIX_AND_MATCH_SKILL_DIR/scripts/mix_matrix.py" gene-pool.json --recipes 3
 ```
+
+`MIX_AND_MATCH_SKILL_DIR` must point to the installed `mix-and-match` skill directory that contains this `SKILL.md`.
 
 The tool creates combination scaffolds. It does not decide what is creative.
 
@@ -180,7 +182,9 @@ Pairs genes that normally do not belong together, but can be reconciled by the b
 
 ### Wildcard route
 
-Uses at least one cross-domain wildcard as a structural idea, not decoration.
+When an accepted wildcard is available, use at least one cross-domain wildcard as a structural idea, not decoration.
+
+If discovery is prohibited or no wildcard passes the acceptance rules, replace this with a Constraint route. The Constraint route must use only the supplied references plus one project-derived rule such as one moving object, one transition carrier, one material, or one spatial axis. It still needs a mechanism distinct from the Coherent and Tension routes.
 
 For each hypothesis define:
 
