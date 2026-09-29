@@ -5,7 +5,7 @@ description: Make a 30-45 second product launch video in code with Claude Code, 
 
 # Launch video, built in code\n\nThis is a specialist recipe for a product, offer, cohort, or software launch. It is not the default for event films, editorial brand films, documentary promos, or broad motion-graphics direction. Use motion-director for those jobs.
 
-A launch video sells one thing in 30-45 seconds. You build it as one HTML file with `window.seek(seconds)`, then export to MP4.
+A launch video sells one thing in 30-45 seconds. For a new code-driven build, use HyperFrames as the production runtime and let its router select the correct workflow. Keep deterministic standalone HTML with `window.seek(seconds)` only as a fallback when HyperFrames cannot own the project.
 
 **Before you start:** read `brand.md` and `MOTION.md` if they exist. If not, run `brand-intake` first, or ask for hex codes, a font and a logo file. Never call a result on-brand without them.
 
@@ -49,7 +49,7 @@ Show the beat sheet and wait for a yes.
 ## Step 3: Build brief (paste into Claude Code)
 
 ```
-Build a [LENGTH]-second product launch video at [WIDTH] x [HEIGHT]. Reuse the current project runtime. If this is a HyperFrames project, use its native composition contract. Otherwise build one self-contained deterministic index.html. Use only the files I attached. Nothing loaded from the internet.
+Build a [LENGTH]-second product launch video at [WIDTH] x [HEIGHT]. Reuse the current project runtime. If this is a new code-driven project, use HyperFrames as the production runtime, follow its router and native composition contract, search its registry before hand-building reusable effects, and use its CLI for validation, preview and render. Fall back to one self-contained deterministic index.html only when HyperFrames is unavailable or incompatible, and record the reason. Use only the files I attached. Nothing loaded from the internet.
 
 Style: clean, premium product launch. Background [BG], text [TEXT], one accent [ACCENT], font [FONT] or a system sans-serif. Generous space. Product screens float on soft shadows with slow push-ins. One sentence is split across the beats and each fragment lands with a short, confident move.
 
@@ -71,4 +71,6 @@ After the build: capture one frame from the middle of every beat. Check for cut-
 
 ## Step 5: Export
 
-HyperFrames (free, open source): `npx skills add heygen-com/hyperframes`, then `npx hyperframes render`. Export a 16:9 and a 4:5 cut. Check which tools exist before installing, and ask first.
+When HyperFrames owns the project, its validation and render path is required. Use its installed CLI guidance for lint, check, proof snapshots, preview and render. Export the requested cuts through the same project rather than creating a parallel exporter.
+
+If HyperFrames is not available and the project is not already tied to another renderer, stop and report the missing dependency before inventing a replacement pipeline.
