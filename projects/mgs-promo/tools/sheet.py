@@ -1,5 +1,7 @@
 # Labelled contact sheet from a snapshot folder: python3 tools/sheet.py <dir> <out.png> [cols]
-import sys, glob, re
+import glob
+import re
+import sys
 from PIL import Image, ImageDraw
 d, out = sys.argv[1], sys.argv[2]
 cols = int(sys.argv[3]) if len(sys.argv) > 3 else 9
