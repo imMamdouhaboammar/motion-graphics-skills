@@ -270,6 +270,14 @@ class VideoReviewTests(unittest.TestCase):
         self.assertEqual(finding["code"], "video-analysis-pass-failed")
         self.assertEqual(finding["severity"], "hard")
 
+    def test_run_command_timeout_returns_failed_process_and_writes_log(self) -> None:
+        review = load_module()
+        with tempfile.TemporaryDirectory() as tmp:
+            log_file = Path(tmp) / "timed_out.log"
+            res = review.run_command(["sleep", "1"], timeout=0.01, log_path=log_file)
+            self.assertEqual(res.returncode, 124)
+            self.assertIn("Command timed out", log_file.read_text(encoding="utf-8"))
+
     def test_reference_contract_requires_reference_video(self) -> None:
         review = load_module()
         with self.assertRaises(review.ReviewError):

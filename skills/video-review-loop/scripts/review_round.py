@@ -131,23 +131,6 @@ def resolve_finding(
                     "mtime_ns": stat.st_mtime_ns,
                 }
                 outcome = "fixed-in-later-artifact"
-            elif outcome != "user-accepted":
-                ev_tokens = evidence.strip().split()
-                if ev_tokens:
-                    first_token = Path(ev_tokens[0])
-                    if first_token.is_dir() and (first_token / "manifest.json").is_file():
-                        lr_manifest = load_json(first_token / "manifest.json", {})
-                        if isinstance(lr_manifest, dict) and lr_manifest.get("source"):
-                            resolved_artifact = dict(lr_manifest["source"])
-                            outcome = "fixed-in-later-round"
-                    elif first_token.is_file():
-                        stat = first_token.resolve().stat()
-                        resolved_artifact = {
-                            "path": str(first_token.resolve()),
-                            "size_bytes": stat.st_size,
-                            "mtime_ns": stat.st_mtime_ns,
-                        }
-                        outcome = "fixed-in-later-artifact"
 
             if item.get("severity") == "hard":
                 if outcome != "user-accepted":
@@ -197,6 +180,41 @@ def attest(
         "strict_signals_inspected": strict_signals_inspected,
         "updated_at": datetime.now(timezone.utc).isoformat(),
     }
+    write_json(state_path(round_dir), state)
+    return state
+
+
+def accept_machine_finding(
+    round_dir: Path,
+    code: str,
+    *,
+    reason: str,
+) -> dict[str, Any]:
+    state = load_json(state_path(round_dir), {})
+    if not isinstance(state, dict):
+        state = {}
+    accepted = state.get("accepted_machine_findings")
+    if not isinstance(accepted, list):
+        accepted = []
+
+    findings_file = round_dir / "findings.json"
+    if findings_file.is_file():
+        machine_findings = load_json(findings_file, [])
+        valid_codes = {
+            item.get("code") for item in machine_findings
+            if isinstance(item, dict) and item.get("code")
+        }
+        if valid_codes and code not in valid_codes:
+            raise ValueError(f"Unknown machine finding code: {code}")
+
+    if not any(isinstance(e, dict) and e.get("code") == code for e in accepted):
+        accepted.append({
+            "code": code,
+            "reason": reason,
+            "accepted_at": datetime.now(timezone.utc).isoformat(),
+        })
+    state["accepted_machine_findings"] = accepted
+    state["updated_at"] = datetime.now(timezone.utc).isoformat()
     write_json(state_path(round_dir), state)
     return state
 
@@ -346,11 +364,30 @@ def round_status(round_dir: Path) -> dict[str, Any]:
     elif not strict_signal_evidence_valid(round_dir, manifest):
         missing_evidence.append("strict-signals.json:invalid")
 
-    machine_hard = int(
-        (manifest.get("finding_counts") or {}).get("hard", 0)
-        if isinstance(manifest, dict)
-        else 0
-    )
+    accepted_entries = state.get("accepted_machine_findings", [])
+    accepted_codes = {
+        entry.get("code") for entry in accepted_entries
+        if isinstance(entry, dict) and entry.get("code")
+    }
+
+    findings_file = round_dir / "findings.json"
+    machine_hard = 0
+    if findings_file.is_file():
+        machine_findings = load_json(findings_file, [])
+        if isinstance(machine_findings, list):
+            machine_hard = sum(
+                1 for item in machine_findings
+                if isinstance(item, dict)
+                and item.get("severity") == "hard"
+                and item.get("code") not in accepted_codes
+            )
+    else:
+        total_manifest_hard = int(
+            (manifest.get("finding_counts") or {}).get("hard", 0)
+            if isinstance(manifest, dict)
+            else 0
+        )
+        machine_hard = max(0, total_manifest_hard - len(accepted_codes))
 
     status = "review-complete"
     if source_changed:
@@ -371,6 +408,7 @@ def round_status(round_dir: Path) -> dict[str, Any]:
         "pending_count": len(pending),
         "pending_hard_count": len(pending_hard),
         "machine_hard_count": machine_hard,
+        "accepted_machine_findings": sorted(accepted_codes),
         "missing_attestations": missing_attestations,
         "missing_evidence": missing_evidence,
         "source_changed": source_changed,
@@ -443,6 +481,11 @@ def build_parser() -> argparse.ArgumentParser:
 
     status = sub.add_parser("status")
     status.add_argument("round_dir", type=Path)
+
+    accept_m = sub.add_parser("accept-machine")
+    accept_m.add_argument("round_dir", type=Path)
+    accept_m.add_argument("--code", required=True)
+    accept_m.add_argument("--reason", required=True)
     return parser
 
 
@@ -468,6 +511,12 @@ def main() -> int:
                 later_artifact=args.later_artifact,
                 later_round=args.later_round,
                 user_accepted=args.user_accepted,
+            )
+        elif args.command == "accept-machine":
+            result = accept_machine_finding(
+                args.round_dir,
+                args.code,
+                reason=args.reason,
             )
         elif args.command == "pending":
             manifest = load_json(args.round_dir / "manifest.json", {})

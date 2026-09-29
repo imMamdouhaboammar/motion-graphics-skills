@@ -188,6 +188,28 @@ class ReviewRoundTests(unittest.TestCase):
                     user_accepted=False,
                 )
 
+    def test_resolve_hard_finding_ignores_free_text_existing_file(self) -> None:
+        mod = load_module()
+        with tempfile.TemporaryDirectory() as tmp:
+            round_dir = make_round(Path(tmp) / "round")
+            dummy = Path(tmp) / "notes.txt"
+            dummy.write_text("some fix notes")
+            mod.add_finding(
+                round_dir,
+                timestamp="00:04.280",
+                severity="hard",
+                defect="Arabic headline clips",
+                fix="increase safe area",
+                evidence="inspection",
+            )
+            with self.assertRaises(ValueError):
+                mod.resolve_finding(
+                    round_dir,
+                    "V001",
+                    resolution="fixed",
+                    evidence=f"{dummy} says headline fixed",
+                )
+
     def test_round_status_keeps_hard_finding_pending_if_unproven(self) -> None:
         mod = load_module()
         with tempfile.TemporaryDirectory() as tmp:
@@ -249,6 +271,43 @@ class ReviewRoundTests(unittest.TestCase):
                 strict_signals_inspected=False,
             )
             self.assertEqual(mod.round_status(round_dir)["status"], "blocked-machine-hard-findings")
+
+    def test_user_acceptance_of_machine_hard_finding_unblocks_round(self) -> None:
+        mod = load_module()
+        with tempfile.TemporaryDirectory() as tmp:
+            round_dir = make_round(Path(tmp) / "round", machine_hard=1, strict_signals=True)
+            (round_dir / "findings.json").write_text(
+                json.dumps([
+                    {
+                        "code": "frame-rate-mismatch",
+                        "severity": "hard",
+                        "message": "Expected 30 fps, got 24 fps",
+                    }
+                ]),
+                encoding="utf-8",
+            )
+            mod.attest(
+                round_dir,
+                watched_with_audio=True,
+                watched_muted=True,
+                first_second_inspected=True,
+                transitions_inspected=True,
+                ending_inspected=True,
+                reference_compared=False,
+                strict_signals_inspected=True,
+            )
+            self.assertEqual(mod.round_status(round_dir)["status"], "blocked-machine-hard-findings")
+            self.assertEqual(mod.round_status(round_dir)["machine_hard_count"], 1)
+
+            mod.accept_machine_finding(
+                round_dir,
+                "frame-rate-mismatch",
+                reason="Client requested cinematic 24fps export",
+            )
+            status = mod.round_status(round_dir)
+            self.assertEqual(status["machine_hard_count"], 0)
+            self.assertEqual(status["status"], "review-complete")
+            self.assertIn("frame-rate-mismatch", status["accepted_machine_findings"])
 
 
     def test_reference_round_requires_reference_comparison_attestation(self) -> None:

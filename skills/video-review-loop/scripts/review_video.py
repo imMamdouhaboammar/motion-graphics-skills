@@ -530,8 +530,11 @@ def run_command(
         )
     except FileNotFoundError as exc:
         raise ReviewError(f"Required executable not found: {argv[0]}") from exc
-    except subprocess.TimeoutExpired as exc:
-        raise ReviewError(f"Command timed out: {argv[0]}") from exc
+    except subprocess.TimeoutExpired:
+        message = f"Command timed out after {timeout}s: {argv[0]}\n"
+        if log_path is not None:
+            log_path.write_text(message, encoding="utf-8")
+        return subprocess.CompletedProcess(argv, 124, "", message)
 
     if log_path is not None:
         log_path.write_text(
