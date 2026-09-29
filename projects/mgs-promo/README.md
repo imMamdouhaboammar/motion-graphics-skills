@@ -33,4 +33,4 @@ The render path used for delivery, and the exact encode flags, are in `inspectio
 
 ## Credits
 
-Photography under CC BY-SA needs a credit line where the film is posted. See `ASSET_SOURCES.md`.
+Photography under CC BY-SA needs a credit where the film is posted. A copyable credit with authors, sources and licence links is in `ASSET_SOURCES.md`.

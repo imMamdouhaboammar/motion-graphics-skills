@@ -512,6 +512,7 @@
             G[k].style.backgroundPosition = o + 'px ' + ((o * 7) % 256) + 'px';
           } }, 0);
 
+          window.__timelines = window.__timelines || {};   // the runtime provides it; standalone tools may not
           window.__timelines['main'] = tl;
           return true;   // never return tl: a GSAP timeline is a thenable and would hold this promise until a paused timeline ends
         });

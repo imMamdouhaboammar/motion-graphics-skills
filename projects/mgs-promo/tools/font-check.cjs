@@ -7,7 +7,12 @@ const { chromium } = require('playwright');
   const p = await b.newPage({ viewport: { width: 1080, height: 1920 } });
   await p.goto(process.argv[2], { waitUntil: 'domcontentloaded' });
   const r = await p.evaluate(async () => {
-    try { await window.__ready; } catch (e) { return { readyError: String(e) }; }
+    // bounded: a readiness promise that never settles (for example one that adopted a paused GSAP
+    // timeline) must fail this gate with a message instead of hanging it
+    const TIMEOUT_MS = 20000;
+    try {
+      await Promise.race([window.__ready, new Promise((_, rej) => setTimeout(() => rej(new Error(`window.__ready did not settle within ${TIMEOUT_MS} ms`)), TIMEOUT_MS))]);
+    } catch (e) { return { readyError: String(e) }; }
     const faces = []; document.fonts.forEach(f => faces.push(`${f.family} ${f.weight} ${f.status}`));
     const c = document.createElement('canvas').getContext('2d');
     const w = f => { c.font = f; return c.measureText('الموشن اترك تعليق Claude Code').width; };

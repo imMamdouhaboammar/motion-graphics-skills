@@ -8,18 +8,30 @@ Higgsfield was connected. `balance` returned `{"credits": 0, "subscription_plan_
 
 ## Photography (cutouts)
 
-All four were keyed in this project (`border flood-fill + enclosed-hole removal`, scripts in the session notes), then given one shared print treatment: duotone ink `#161412` to paper `#F6F2EA`, S-curve contrast, seeded midtone grain, 1 px die-cut edge. The HyperFrames ML background remover was tried first and rejected for these product shots (it removed most of the objects).
+All four were keyed in this project with `tools/prep_cutouts.py` (border flood-fill, enclosed-hole removal, optional floor-shadow cutoff), then given one shared print treatment: duotone ink `#161412` to paper `#F6F2EA`, S-curve contrast, seeded midtone grain, 1 px die-cut edge. The HyperFrames ML background remover was tried first and rejected for these product shots (it removed most of the objects).
 
-| File | Subject | Source | Licence | Changes |
-|---|---|---|---|---|
-| `assets/cutouts/mic_akg.png` | AKG C214 condenser microphone | https://commons.wikimedia.org/wiki/File:AKG_C214_Condenser_microphone.jpg | CC BY-SA 3.0 (author credited on the file page) | cutout, duotone, resize |
-| `assets/cutouts/kb_wm.png` | Wireless computer keyboard | https://commons.wikimedia.org/wiki/File:Wireless_Computer_Keyboard.jpg | CC BY-SA 4.0 (author credited on the file page) | cutout, duotone, resize |
-| `assets/cutouts/scissors.png` | Pair of scissors with black handle | https://commons.wikimedia.org/wiki/File:Pair_of_scissors_with_black_handle,_2015-06-07.jpg | CC BY-SA 4.0 (author credited on the file page) | cutout, duotone, resize, mirrored in the film |
-| `assets/cutouts/hp_iso.png` | Isolated headphones | rawpixel via Openverse (id d6c09406…), https://www.rawpixel.com | CC0 1.0 | cutout, duotone, resize |
+| File | Subject | Author | Source | Licence | Changes |
+|---|---|---|---|---|---|
+| `assets/cutouts/mic_akg.png` | AKG C214 condenser microphone | Lucasbosch | https://commons.wikimedia.org/wiki/File:AKG_C214_Condenser_microphone.jpg | CC BY-SA 3.0, https://creativecommons.org/licenses/by-sa/3.0/ | cutout, duotone, resize |
+| `assets/cutouts/kb_wm.png` | Wireless computer keyboard | Pixloom | https://commons.wikimedia.org/wiki/File:Wireless_Computer_Keyboard.jpg | CC BY-SA 4.0, https://creativecommons.org/licenses/by-sa/4.0/ | cutout, duotone, resize |
+| `assets/cutouts/scissors.png` | Pair of scissors with black handle | Crisco 1492 | https://commons.wikimedia.org/wiki/File:Pair_of_scissors_with_black_handle,_2015-06-07.jpg | CC BY-SA 4.0, https://creativecommons.org/licenses/by-sa/4.0/ | cutout, duotone, resize, mirrored in the film |
+| `assets/cutouts/hp_iso.png` | Isolated headphones | not credited (rawpixel) | https://www.rawpixel.com/image/5967923/isolated-headphones | CC0 1.0 | cutout, duotone, resize |
+
+Authors and licences were read from the Wikimedia Commons API (`extmetadata`: Artist, LicenseShortName, LicenseUrl) and from Openverse for the CC0 image.
 
 Rejected candidates: Zenit camera (chrome keyed badly), "vintage microphone png" (fake checkerboard baked into a JPEG), potted-succulent line art (wrong material).
 
-CC BY-SA assets require attribution and share-alike on the adapted images. Put a credit line in the post caption or description, for example: "Photos: AKG C214, Wireless keyboard, Scissors via Wikimedia Commons (CC BY-SA)".
+CC BY-SA requires credit to the creator, a link to the source and to the licence, a note that the images were changed, and that the adapted images are offered under the same licence. Copy this credit into the post description (or a pinned comment where the platform has no description):
+
+```
+Photos, adapted (cut out, duotone, resized) and shared under the same licences:
+"AKG C214 Condenser microphone" by Lucasbosch, https://commons.wikimedia.org/wiki/File:AKG_C214_Condenser_microphone.jpg, CC BY-SA 3.0 https://creativecommons.org/licenses/by-sa/3.0/
+"Wireless Computer Keyboard" by Pixloom, https://commons.wikimedia.org/wiki/File:Wireless_Computer_Keyboard.jpg, CC BY-SA 4.0 https://creativecommons.org/licenses/by-sa/4.0/
+"Pair of scissors with black handle" by Crisco 1492, https://commons.wikimedia.org/wiki/File:Pair_of_scissors_with_black_handle,_2015-06-07.jpg, CC BY-SA 4.0 https://creativecommons.org/licenses/by-sa/4.0/
+Headphones: rawpixel, CC0.
+```
+
+This is a practical credit, not legal advice. For paid placements, have the credit checked against the platform's rules.
 
 ## Drawn in code
 
