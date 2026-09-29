@@ -62,5 +62,23 @@ class StrictVideoSignalTests(unittest.TestCase):
         self.assertEqual(findings[0]["severity"], "review")
 
 
+    def test_signalstats_command_places_gpu_input_args_before_input(self) -> None:
+        mod = load_module()
+        argv = mod.signalstats_argv(
+            Path("/tmp/final.mp4"),
+            "ffmpeg",
+            ["-hwaccel", "videotoolbox"],
+        )
+        input_index = argv.index("-i")
+        self.assertLess(argv.index("-hwaccel"), input_index)
+        self.assertEqual(argv[input_index + 1], "/tmp/final.mp4")
+        self.assertIn("signalstats,metadata=print", argv)
+
+    def test_signalstats_command_supports_explicit_cpu_path(self) -> None:
+        mod = load_module()
+        argv = mod.signalstats_argv(Path("/tmp/final.mp4"), "ffmpeg", [])
+        self.assertEqual(argv[:3], ["ffmpeg", "-hide_banner", "-i"])
+
+
 if __name__ == "__main__":
     unittest.main()
