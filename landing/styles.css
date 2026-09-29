@@ -76,33 +76,37 @@ a:focus-visible,
 
 .site-nav {
   position: sticky;
-  top: 0;
-  z-index: 15;
+  top: 16px;
+  z-index: 50;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  width: min(calc(100% - 48px), var(--max));
-  margin: 0 auto;
-  padding: 18px 0 15px;
-  background: color-mix(in srgb, var(--paper) 90%, transparent);
-  border-bottom: 1px solid var(--rule);
-  backdrop-filter: blur(18px);
+  width: min(calc(100% - 40px), 1140px);
+  margin: 14px auto 0;
+  padding: 10px 18px;
+  background: rgba(255, 255, 255, 0.88);
+  border: 1px solid var(--rule-strong);
+  border-radius: 999px;
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  box-shadow: 0 12px 32px rgba(15, 23, 42, 0.05);
 }
 
 .brand {
   display: inline-flex;
   align-items: center;
-  gap: 11px;
-  font-size: 0.93rem;
+  gap: 10px;
+  font-size: 0.92rem;
   font-weight: 700;
   text-decoration: none;
   letter-spacing: -0.02em;
+  color: var(--ink);
 }
 
 .brand-logo {
   display: block;
-  width: 36px;
-  height: 24px;
+  width: 32px;
+  height: 22px;
   object-fit: cover;
   object-position: center;
 }
@@ -110,24 +114,33 @@ a:focus-visible,
 .site-nav nav {
   display: flex;
   align-items: center;
-  gap: 26px;
-  font-size: 0.83rem;
+  gap: 8px;
+  font-size: 0.84rem;
   font-weight: 600;
 }
 
 .site-nav nav a {
   text-decoration: none;
-  transition: color 220ms var(--ease);
+  padding: 6px 14px;
+  border-radius: 999px;
+  color: var(--ink-soft);
+  transition: color 200ms var(--ease), background-color 200ms var(--ease);
 }
 
 .site-nav nav a:hover {
-  color: var(--coral);
+  color: var(--ink);
+  background: rgba(15, 23, 42, 0.05);
 }
 
 .nav-github {
-  padding: 8px 13px;
-  border: 1px solid var(--rule-strong);
-  border-radius: 999px;
+  background: var(--ink) !important;
+  color: white !important;
+  border: 1px solid var(--ink);
+}
+
+.nav-github:hover {
+  background: #1e293b !important;
+  color: white !important;
 }
 
 .hero,
@@ -139,17 +152,42 @@ footer {
 
 .hero {
   position: relative;
-  min-height: calc(100dvh - 76px);
+  min-height: calc(100dvh - 84px);
   display: grid;
   grid-template-columns: minmax(0, 1.04fr) minmax(420px, 0.96fr);
   align-items: center;
   gap: clamp(48px, 6vw, 110px);
-  padding: clamp(72px, 9vw, 132px) 0 80px;
+  padding: clamp(64px, 8vw, 110px) 0 80px;
 }
 
 .hero-copy {
   position: relative;
   z-index: 2;
+}
+
+.hero-eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 24px;
+  padding: 6px 14px;
+  border-radius: 999px;
+  background: rgba(194, 65, 12, 0.07);
+  border: 1px solid rgba(194, 65, 12, 0.16);
+  color: var(--coral-text);
+  font-family: "SFMono-Regular", Consolas, monospace;
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.eyebrow-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--coral);
+  box-shadow: 0 0 6px rgba(194, 65, 12, 0.4);
 }
 
 .hero h1 {
@@ -204,30 +242,34 @@ footer {
 .install-chip {
   display: inline-flex;
   align-items: center;
-  gap: 16px;
+  gap: 14px;
   max-width: 100%;
-  padding: 12px 14px 12px 16px;
+  padding: 8px 10px 8px 18px;
   border: 1px solid var(--rule-strong);
-  border-radius: 12px;
+  border-radius: 999px;
   color: var(--ink);
-  background: rgba(255, 253, 248, 0.72);
+  background: var(--paper-3);
   cursor: pointer;
   box-shadow: var(--shadow-soft);
   transition:
-    transform 240ms var(--ease),
-    background-color 240ms var(--ease),
-    box-shadow 240ms var(--ease);
+    transform 220ms var(--ease),
+    border-color 220ms var(--ease),
+    box-shadow 220ms var(--ease);
 }
 
 .install-chip:hover {
   transform: translateY(-2px);
-  background: var(--paper-3);
+  border-color: rgba(194, 65, 12, 0.35);
   box-shadow: var(--shadow);
+}
+
+.install-chip:active {
+  transform: translateY(0) scale(0.99);
 }
 
 .install-chip code {
   font-family: "SFMono-Regular", Consolas, monospace;
-  font-size: 0.78rem;
+  font-size: 0.8rem;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -235,11 +277,23 @@ footer {
 
 .copy-state {
   flex: none;
-  font-size: 0.72rem;
-  font-weight: 700;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 6px 14px;
+  border-radius: 999px;
+  background: rgba(194, 65, 12, 0.08);
   color: var(--coral-text);
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
   text-transform: uppercase;
-  letter-spacing: 0.08em;
+  transition: background-color 200ms var(--ease), color 200ms var(--ease);
+}
+
+.install-chip:hover .copy-state {
+  background: var(--coral);
+  color: white;
 }
 
 .text-link {
@@ -247,16 +301,38 @@ footer {
   align-items: center;
   gap: 8px;
   font-weight: 700;
-  text-decoration-thickness: 1px;
-  text-underline-offset: 4px;
+  color: var(--ink);
+  text-decoration: none;
+  padding: 10px 16px;
+  border-radius: 999px;
+  border: 1px solid transparent;
+  transition:
+    background-color 220ms var(--ease),
+    border-color 220ms var(--ease),
+    transform 220ms var(--ease);
+}
+
+.text-link:hover {
+  background: rgba(15, 23, 42, 0.04);
+  border-color: var(--rule);
+  transform: translateY(-1px);
 }
 
 .text-link span {
-  transition: transform 220ms var(--ease);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  background: rgba(15, 23, 42, 0.06);
+  font-size: 0.78rem;
+  transition: transform 220ms var(--ease), background-color 220ms var(--ease);
 }
 
 .text-link:hover span {
-  transform: translate(3px, -3px);
+  transform: translate(2px, -2px);
+  background: rgba(15, 23, 42, 0.12);
 }
 
 .hero-stage {
@@ -268,19 +344,30 @@ footer {
   position: relative;
   width: 100%;
   aspect-ratio: 0.82;
-  padding: 18px;
-  background: #fffdf8;
-  border-radius: 20px;
-  box-shadow: var(--shadow);
-  transform: rotate(1.1deg);
+  padding: 16px;
+  background: var(--paper-3);
+  border: 1px solid var(--rule-strong);
+  border-radius: 22px;
+  box-shadow:
+    0 24px 64px rgba(15, 23, 42, 0.08),
+    0 4px 12px rgba(15, 23, 42, 0.03);
+  transform: rotate(1deg);
+  transition: transform 380ms var(--ease), box-shadow 380ms var(--ease);
+}
+
+.stage-paper:hover {
+  transform: rotate(0deg) translateY(-4px);
+  box-shadow:
+    0 32px 80px rgba(15, 23, 42, 0.12),
+    0 6px 16px rgba(15, 23, 42, 0.04);
 }
 
 .stage-paper::before {
   content: "";
   position: absolute;
-  inset: 10px;
+  inset: 8px;
   border: 1px solid var(--rule);
-  border-radius: 13px;
+  border-radius: calc(22px - 6px);
   pointer-events: none;
 }
 
@@ -869,11 +956,12 @@ footer {
 .install-panel {
   position: relative;
   overflow: hidden;
-  padding: clamp(38px, 6vw, 76px);
-  background: var(--ink);
+  padding: clamp(40px, 6vw, 80px);
+  background: linear-gradient(180deg, #0a1120 0%, #030710 100%);
   color: white;
-  border-radius: 18px;
-  box-shadow: var(--shadow);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 24px;
+  box-shadow: 0 32px 80px rgba(7, 14, 27, 0.25), inset 0 1px 0 rgba(255, 255, 255, 0.1);
 }
 
 .install-panel::after {
@@ -909,7 +997,7 @@ footer {
 }
 
 .install-panel p {
-  color: rgba(255,255,255,0.68);
+  color: rgba(255,255,255,0.72);
 }
 
 .install-command {
@@ -920,20 +1008,25 @@ footer {
   display: grid;
   grid-template-columns: auto 1fr auto;
   align-items: center;
-  gap: 14px;
-  padding: 17px 18px;
-  border: 1px solid rgba(255,255,255,0.20);
-  border-radius: 12px;
-  background: rgba(255,255,255,0.055);
+  gap: 16px;
+  padding: 10px 12px 10px 22px;
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.05);
   color: white;
   cursor: pointer;
   text-align: left;
-  transition: background-color 220ms var(--ease), transform 220ms var(--ease);
+  transition: background-color 220ms var(--ease), border-color 220ms var(--ease), transform 220ms var(--ease);
 }
 
 .install-command:hover {
   transform: translateY(-2px);
-  background: rgba(255,255,255,0.09);
+  background: rgba(255, 255, 255, 0.08);
+  border-color: rgba(255, 255, 255, 0.28);
+}
+
+.install-command:active {
+  transform: translateY(0) scale(0.995);
 }
 
 .install-command code {
@@ -946,7 +1039,24 @@ footer {
 }
 
 .install-command .copy-state {
-  color: #ff9f8a;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 8px 18px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.12);
+  color: white;
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  transition: background-color 200ms var(--ease), transform 200ms var(--ease);
+}
+
+.install-command:hover .copy-state {
+  background: var(--coral);
+  color: white;
+  transform: scale(1.02);
 }
 
 .prompt-mark {
