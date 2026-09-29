@@ -224,3 +224,57 @@ Every URL or CLI option has a default path. A preview option should never be abl
 ### Status
 
 Resolved.
+
+
+---
+
+## A readiness promise adopted a paused GSAP timeline
+
+### Context
+
+A browser audit loaded the composition successfully. Fonts were ready, images were decoded, and the timeline registry existed, but every tool that awaited `window.__ready` stayed pending.
+
+### Observable symptom
+
+Playwright navigation completed, yet the clip audit or readiness check appeared to hang indefinitely. Increasing the page-load timeout did not address the blocked await.
+
+### Incorrect assumption
+
+That anything returned from an async readiness function is just a value.
+
+### Root cause
+
+**Confirmed** from runtime diagnosis. The readiness function returned a GSAP timeline. GSAP timelines expose a `then` method, so JavaScript promise resolution treated the returned timeline as a thenable. Because the timeline was paused, the readiness promise never settled.
+
+### Why the architecture allowed it
+
+The readiness promise did two jobs: it signaled asset readiness and also returned a runtime object. That coupled a gate to an object whose promise-like behavior was not obvious at the call site.
+
+The diagnostic path repeated the risk when a browser tool evaluated `window.__ready` directly, because automation frameworks also await promise-like values returned from page evaluation.
+
+### Fix
+
+- readiness functions resolve to `undefined` or another plain non-thenable value
+- timelines live in their own registry instead of being returned through the readiness gate
+- the browser readiness probe inspects `window.__ready` inside the page and returns only plain JSON
+- long-running browser tools can run through `scripts/work_guard.py` so a blocked readiness gate is contained and leaves evidence
+
+### Verification
+
+The failure was isolated by racing the readiness gate against a timeout while independently checking fonts, images, and timeline state. Those independent checks completed while `window.__ready` remained pending. After the readiness return value was made plain, the gate resolved.
+
+The work guard regression suite separately proves that a silent blocked command is contained, its process tree is terminated, and its logs and summary survive.
+
+### Prevention rule
+
+A readiness promise answers only whether deterministic tools may begin. Never return timelines, players, renderers, or other possibly thenable runtime objects from it.
+
+A browser diagnostic must never return the inspected readiness object from `page.evaluate`. Return plain state.
+
+### Reusable lesson
+
+When a promise appears stuck after its visible prerequisites have completed, inspect the value it resolves with. Promise assimilation can turn an innocent-looking return value into another wait.
+
+### Status
+
+Resolved in the originating project and encoded as reusable guard and probe behavior in `motion-director`.
