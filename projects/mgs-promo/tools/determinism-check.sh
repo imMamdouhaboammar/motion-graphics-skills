@@ -7,11 +7,14 @@
 set -euo pipefail
 OUT="${1:-$(mktemp -d)}"; mkdir -p "$OUT"
 HOGS=()
+nproc_count() {
+  nproc 2>/dev/null || sysctl -n hw.ncpu 2>/dev/null || getconf _NPROCESSORS_ONLN 2>/dev/null || echo 4
+}
 stop_hogs() { for p in "${HOGS[@]:-}"; do [ -n "$p" ] && kill "$p" 2>/dev/null || true; done; HOGS=(); }
 trap stop_hogs EXIT
 for run in a b; do
   if [ "$run" = b ] && [ "${LOAD:-1}" = 1 ]; then
-    for _ in $(seq "$(nproc)"); do python3 -c 'while True: pass' & HOGS+=("$!"); done
+    for _ in $(seq "$(nproc_count)"); do python3 -c 'while True: pass' & HOGS+=("$!"); done
   fi
   npx --yes hyperframes@"${HF_VERSION:-0.8.92}" render -f 30 -q delivery -o "$OUT/run-$run.mp4" >"$OUT/run-$run.log" 2>&1 || { echo "render $run failed, see $OUT/run-$run.log"; tail -5 "$OUT/run-$run.log"; exit 2; }
   stop_hogs
@@ -19,11 +22,23 @@ for run in a b; do
 done
 python3 - "$OUT" <<'PY'
 import sys
+
 d = sys.argv[1]
-rd = lambda f: [l.split(',')[-1] for l in open(f) if not l.startswith('#')]
-a, b = rd(d + '/run-a.md5'), rd(d + '/run-b.md5')
+
+
+def rd(f):
+    with open(f) as fp:
+        return [line.split(",")[-1] for line in fp if not line.startswith("#")]
+
+
+a = rd(d + "/run-a.md5")
+b = rd(d + "/run-b.md5")
 bad = [i for i, (x, y) in enumerate(zip(a, b)) if x != y]
-if len(a) != len(b): print(f'FAIL: frame counts differ ({len(a)} vs {len(b)})'); sys.exit(1)
-if bad: print(f'FAIL: {len(bad)}/{len(a)} frames differ, first {bad[0]}, last {bad[-1]}'); sys.exit(1)
-print(f'PASS: {len(a)}/{len(a)} frames bit-identical across two renders')
+if len(a) != len(b):
+    print(f"FAIL: frame counts differ ({len(a)} vs {len(b)})")
+    sys.exit(1)
+if bad:
+    print(f"FAIL: {len(bad)}/{len(a)} frames differ, first {bad[0]}, last {bad[-1]}")
+    sys.exit(1)
+print(f"PASS: {len(a)}/{len(a)} frames bit-identical across two renders")
 PY

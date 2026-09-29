@@ -30,5 +30,6 @@ const { chromium } = require('playwright');
   console.log(JSON.stringify(r, null, 1));
   const bad = r.readyError || r.faces.some(f => !f.endsWith('loaded')) ||
     [r.serifArabicVsFallback, r.sansArabicVsFallback, r.monoLatinVsFallback].some(([a, ...fb]) => fb.some(z => Math.abs(a - z) < 1));
-  console.log(bad ? 'FAIL' : 'PASS'); process.exit(bad ? 1 : 0);
+  console.log(bad ? 'FAIL' : 'PASS');
+  process.exit(bad ? 1 : 0);
 })();
