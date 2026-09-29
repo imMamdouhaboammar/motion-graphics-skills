@@ -1147,7 +1147,7 @@ def review_video(args: argparse.Namespace) -> int:
         "source": source_manifest(video),
         "reference": reference_manifest,
         "reference_contract": (
-            str(args.reference_contract.resolve())
+            source_manifest(args.reference_contract)
             if args.reference_contract is not None
             else None
         ),

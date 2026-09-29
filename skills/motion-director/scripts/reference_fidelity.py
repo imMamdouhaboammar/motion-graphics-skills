@@ -271,15 +271,8 @@ def validate_plan(
                 if str(item).strip()
             ]
 
-            secondary = {
-                str(item).strip().lower()
-                for item in contract_result.get("secondary_motifs", [])
-                if str(item).strip()
-            }
-            for item in promoted_clean:
-                if item.lower() in secondary:
-                    salience_inversions.append(item)
-                else:
+            if not approved_expansion:
+                for item in promoted_clean:
                     salience_inversions.append(item)
 
             new_dominant = visual_direction.get("new_dominant_motifs")

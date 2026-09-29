@@ -204,6 +204,11 @@ def attest(
 def artifact_matches_manifest(artifact: Any) -> bool:
     if artifact is None:
         return True
+    if isinstance(artifact, str):
+        raw_path = artifact.strip()
+        if not raw_path:
+            return True
+        return Path(raw_path).is_file()
     if not isinstance(artifact, dict):
         return False
 
@@ -228,6 +233,10 @@ def source_matches_manifest(manifest: dict[str, Any]) -> bool:
 
 def reference_matches_manifest(manifest: dict[str, Any]) -> bool:
     return artifact_matches_manifest(manifest.get("reference"))
+
+
+def reference_contract_matches_manifest(manifest: dict[str, Any]) -> bool:
+    return artifact_matches_manifest(manifest.get("reference_contract"))
 
 
 def strict_signal_evidence_valid(
@@ -324,6 +333,11 @@ def round_status(round_dir: Path) -> dict[str, Any]:
         if isinstance(manifest, dict)
         else True
     )
+    contract_changed = (
+        not reference_contract_matches_manifest(manifest)
+        if isinstance(manifest, dict)
+        else True
+    )
 
     strict_signal_path = round_dir / "strict-signals.json"
     missing_evidence: list[str] = []
@@ -343,6 +357,8 @@ def round_status(round_dir: Path) -> dict[str, Any]:
         status = "source-artifact-changed"
     elif reference_changed:
         status = "reference-artifact-changed"
+    elif contract_changed:
+        status = "reference-contract-changed"
     elif machine_hard:
         status = "blocked-machine-hard-findings"
     elif pending_hard:
@@ -359,6 +375,7 @@ def round_status(round_dir: Path) -> dict[str, Any]:
         "missing_evidence": missing_evidence,
         "source_changed": source_changed,
         "reference_changed": reference_changed,
+        "reference_contract_changed": contract_changed,
         "reference_compared": bool(state.get("reference_compared", False)),
         "strict_signals_inspected": bool(
             state.get("strict_signals_inspected", False)

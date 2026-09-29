@@ -25,6 +25,7 @@ def make_round(
     machine_hard: int = 0,
     *,
     reference: bool = False,
+    reference_contract: bool = False,
     strict_signals: bool = False,
 ) -> Path:
     root.mkdir(parents=True)
@@ -48,6 +49,15 @@ def make_round(
             "path": str(reference_path.resolve()),
             "size_bytes": ref_stat.st_size,
             "mtime_ns": ref_stat.st_mtime_ns,
+        }
+    if reference_contract:
+        contract_path = root / "reference-contract.json"
+        contract_path.write_text('{"mode": "structural-fidelity"}', encoding="utf-8")
+        contract_stat = contract_path.stat()
+        manifest["reference_contract"] = {
+            "path": str(contract_path.resolve()),
+            "size_bytes": contract_stat.st_size,
+            "mtime_ns": contract_stat.st_mtime_ns,
         }
     (root / "manifest.json").write_text(
         json.dumps(manifest),
@@ -370,6 +380,33 @@ class ReviewRoundTests(unittest.TestCase):
             status = mod.round_status(round_dir)
             self.assertEqual(status["status"], "reference-artifact-changed")
             self.assertTrue(status["reference_changed"])
+
+    def test_completed_round_is_invalidated_when_reference_contract_changes(self) -> None:
+        mod = load_module()
+        with tempfile.TemporaryDirectory() as tmp:
+            round_dir = make_round(
+                Path(tmp) / "round",
+                reference=True,
+                reference_contract=True,
+                strict_signals=True,
+            )
+            mod.attest(
+                round_dir,
+                watched_with_audio=True,
+                watched_muted=True,
+                first_second_inspected=True,
+                transitions_inspected=True,
+                ending_inspected=True,
+                reference_compared=True,
+                strict_signals_inspected=True,
+            )
+            self.assertEqual(mod.round_status(round_dir)["status"], "review-complete")
+
+            contract = round_dir / "reference-contract.json"
+            contract.write_text('{"mode": "structural-fidelity", "mutated": true}', encoding="utf-8")
+            status = mod.round_status(round_dir)
+            self.assertEqual(status["status"], "reference-contract-changed")
+            self.assertTrue(status["reference_contract_changed"])
 
 
 if __name__ == "__main__":

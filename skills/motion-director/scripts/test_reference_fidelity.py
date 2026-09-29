@@ -332,7 +332,7 @@ class ReferenceFidelityTests(unittest.TestCase):
                     "object-scale",
                     "transition-causality"
                 ],
-                "promoted_secondary_motifs": [],
+                "promoted_secondary_motifs": ["paper texture"],
                 "new_dominant_motifs": ["tactile paper collage world"],
                 "user_approved_style_expansion": True,
             },
