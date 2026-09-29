@@ -218,5 +218,40 @@ class RouteMotionTests(unittest.TestCase):
             self.assertEqual(data["blockers"], [])
 
 
+    def test_invalid_reference_mode_blocks_route(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            pack = Path(tmp)
+            make_pack(pack, ["motion-director", "video-review-loop"])
+            data = route(pack, {
+                "deliverable": "broad-film",
+                "brand_ready": True,
+                "reference_count": 1,
+                "reference_mode": "structural-ish",
+                "difficulty_mode": "normal",
+            })
+            self.assertEqual(data["status"], "blocked")
+            self.assertTrue(any(
+                item["name"] == "routing-context"
+                for item in data["blockers"]
+            ))
+
+    def test_invalid_difficulty_mode_blocks_route(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            pack = Path(tmp)
+            make_pack(pack, ["motion-director", "video-review-loop"])
+            data = route(pack, {
+                "deliverable": "broad-film",
+                "brand_ready": True,
+                "reference_count": 1,
+                "reference_mode": "inspiration",
+                "difficulty_mode": "preserv",
+            })
+            self.assertEqual(data["status"], "blocked")
+            self.assertTrue(any(
+                item["name"] == "routing-context"
+                for item in data["blockers"]
+            ))
+
+
 if __name__ == "__main__":
     unittest.main()
