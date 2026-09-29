@@ -15,3 +15,6 @@ jobs:
 
       - name: Validate 15 Skills and Prompts
         run: bash validate-skills.sh
+
+      - name: Test Mix and Match helper
+        run: python skills/mix-and-match/scripts/test_mix_matrix.py
