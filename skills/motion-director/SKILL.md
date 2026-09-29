@@ -376,7 +376,7 @@ Do not copy HyperFrames internals into this repository.
 
 Keep this skill focused on creative direction and production decisions.
 
-Read references/hyperframes-playbook.md.
+Read references/hyperframes-playbook.md. Read references/reliability-guard.md before hang-prone browser, audit, render, or verification commands and use the bundled work guard instead of ad-hoc timeout loops.
 
 ## Phase 11: still-frame gate
 
@@ -450,7 +450,7 @@ Hard-fail:
 
 ## Phase 13: technical gate
 
-Use the active runtime's supported checks. For HyperFrames, prefer its lint, check, snapshot, preview, render, and verification paths over custom capture code. For a working non-HyperFrames project, preserve its deterministic renderer unless a measured problem justifies change.
+Use the active runtime's supported checks. For HyperFrames, prefer its lint, check, snapshot, preview, render, and verification paths over custom capture code. Run hang-prone checks through the reliability guard with measured deadlines or a heartbeat. For a working non-HyperFrames project, preserve its deterministic renderer unless a measured problem justifies change.
 
 Verify the actual final file for target dimensions, duration, frame rate, color space, codec, audio alignment, and end hold.
 
