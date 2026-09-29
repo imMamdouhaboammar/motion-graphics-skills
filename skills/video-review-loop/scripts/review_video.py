@@ -308,7 +308,10 @@ def parse_blackdetect(text: str) -> list[dict[str, float]]:
     ]
 
 
-def parse_freezedetect(text: str) -> list[dict[str, float]]:
+def parse_freezedetect(
+    text: str,
+    video_duration: float | None = None,
+) -> list[dict[str, float]]:
     start_re = re.compile(rf"freeze_start:\s*(?P<value>{NUMBER})")
     duration_re = re.compile(rf"freeze_duration:\s*(?P<value>{NUMBER})")
     end_re = re.compile(rf"freeze_end:\s*(?P<value>{NUMBER})")
@@ -335,6 +338,14 @@ def parse_freezedetect(text: str) -> list[dict[str, float]]:
                 "duration": current["duration"],
             })
             current = {}
+
+    if current and "start" in current and video_duration is not None:
+        end = max(float(video_duration), current["start"])
+        result.append({
+            "start": current["start"],
+            "end": end,
+            "duration": max(0.0, end - current["start"]),
+        })
 
     return result
 
@@ -411,13 +422,17 @@ def safe_stem(path: Path) -> str:
 
 
 def create_round_paths(root: Path, video: Path) -> dict[str, Path]:
-    review_root = root.parent
-    review_root.mkdir(parents=True, exist_ok=True)
-    gitignore = review_root / ".gitignore"
+    root.mkdir(parents=True, exist_ok=True)
+
+    if root.name == "rounds" and root.parent.name == ".motion-review":
+        ignore_dir = root.parent
+    else:
+        ignore_dir = root
+
+    gitignore = ignore_dir / ".gitignore"
     if not gitignore.exists():
         gitignore.write_text("*\n!.gitignore\n", encoding="utf-8")
 
-    root.mkdir(parents=True, exist_ok=True)
     stamp = datetime.now(timezone.utc).strftime("%Y%m%dT%H%M%S.%fZ")
     round_dir = root / f"{stamp}-{safe_stem(video)}"
     suffix = 1
@@ -916,7 +931,7 @@ def review_video(args: argparse.Namespace) -> int:
         ))
 
     black = parse_blackdetect(video_log)
-    freezes = parse_freezedetect(video_log)
+    freezes = parse_freezedetect(video_log, video_duration=video_duration)
 
     audio_stream = technical.get("audio")
     silence: list[dict[str, float]] = []
