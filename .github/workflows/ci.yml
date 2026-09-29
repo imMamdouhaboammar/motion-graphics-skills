@@ -18,3 +18,8 @@ jobs:
 
       - name: Test Motion Work Guard
         run: python skills/motion-director/scripts/test_work_guard.py
+
+      - name: Check Browser Readiness Probe
+        run: |
+          node --check skills/motion-director/scripts/browser-readiness-probe.cjs
+          node skills/motion-director/scripts/browser-readiness-probe.cjs --help
