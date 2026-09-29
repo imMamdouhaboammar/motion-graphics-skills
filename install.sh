@@ -5,7 +5,7 @@ set -e
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 SKILLS_SRC="$SCRIPT_DIR/skills"
 
-echo "🎨 Installing motion-graphics-skills (14 skills) across AI agent environments..."
+echo "🎨 Installing motion-graphics-skills (15 skills) across AI agent environments..."
 
 if [ ! -d "$SKILLS_SRC" ]; then
   echo "❌ Error: skills directory not found at $SKILLS_SRC"
@@ -23,7 +23,7 @@ install_skills() {
     rm -rf "$target_dir/$sname"
     cp -R "$skill" "$target_dir/$sname"
   done
-  echo "  ✅ Installed 14 skills for $agent_name -> $target_dir"
+  echo "  ✅ Installed 15 skills for $agent_name -> $target_dir"
 }
 
 # 1. Claude Code (~/.claude/skills)
