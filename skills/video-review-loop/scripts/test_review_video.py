@@ -246,5 +246,20 @@ class VideoReviewTests(unittest.TestCase):
             )
 
 
+    def test_video_analysis_failure_is_a_hard_blocker(self) -> None:
+        review = load_module()
+        finding = review.video_analysis_failure_finding()
+        self.assertEqual(finding["code"], "video-analysis-pass-failed")
+        self.assertEqual(finding["severity"], "hard")
+
+    def test_reference_contract_requires_reference_video(self) -> None:
+        review = load_module()
+        with self.assertRaises(review.ReviewError):
+            review.validate_reference_inputs(
+                reference=None,
+                reference_contract=Path("/tmp/reference-contract.json"),
+            )
+
+
 if __name__ == "__main__":
     unittest.main()
