@@ -366,6 +366,36 @@ footer {
   text-align: right;
 }
 
+.director-cameo {
+  position: absolute;
+  right: 18px;
+  bottom: 116px;
+  z-index: 3;
+  display: flex;
+  align-items: flex-end;
+  gap: 8px;
+  pointer-events: none;
+}
+
+.director-cameo img {
+  display: block;
+  width: 74px;
+  height: 74px;
+  image-rendering: pixelated;
+  filter: drop-shadow(0 8px 12px rgba(0, 19, 47, 0.16));
+}
+
+.director-cameo span {
+  margin-bottom: 9px;
+  padding: 4px 7px;
+  border-radius: 6px;
+  background: rgba(255,253,248,0.94);
+  color: var(--ink);
+  font-family: "SFMono-Regular", Consolas, monospace;
+  font-size: 0.6rem;
+  box-shadow: 0 5px 14px rgba(0,19,47,0.08);
+}
+
 .timeline {
   position: relative;
   display: grid;
@@ -1069,6 +1099,13 @@ footer a {
 
   .stage-frame {
     min-height: 56%;
+  }
+
+  .director-cameo {
+    right: 10px;
+    bottom: 100px;
+    transform: scale(0.84);
+    transform-origin: right bottom;
   }
 
   .timeline {
