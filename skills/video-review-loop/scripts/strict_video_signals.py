@@ -193,8 +193,16 @@ def analyze(
     frames = parse_signalstats(run_signalstats(video, ffmpeg_bin, input_args))
     flashes = detect_one_frame_flashes(frames)
     luma_changes = detect_extreme_luma_changes(frames)
+    stat = video.stat()
+    source_manifest = {
+        "path": str(video.resolve()),
+        "size_bytes": stat.st_size,
+        "mtime_ns": stat.st_mtime_ns,
+    }
     return {
+        "status": "pass",
         "source": str(video.resolve()),
+        "source_manifest": source_manifest,
         "frames_analyzed": len(frames),
         "findings": flashes + luma_changes,
         "counts": {
