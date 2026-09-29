@@ -472,7 +472,7 @@ For broad or multi-stage work, create a small JSON task context and run `scripts
 
 The router reads the installed skill graph, selects only relevant specialists, explains every hop, adds GPU and review gates, and skips unavailable optional capabilities with a named fallback.
 
-Read `references/neural-links.md` and obey each stage's handoff packet. Specialists inherit shared truth, return only their delta, and return to `motion-director` for broad film work.
+Read `references/neural-links.md` and obey each stage's handoff packet. When a supplied reference is a benchmark rather than loose inspiration, also read `references/reference-fidelity.md` and lock the fidelity contract before creative substitution. Specialists inherit shared truth, return only their delta, and return to `motion-director` for broad film work.
 
 For a truly narrow request, a specialist may finish independently. Do not run the whole graph when the user asked for one bounded artifact.
 
