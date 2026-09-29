@@ -51,4 +51,4 @@ Thmanyah Serif Text was checked and not needed.
 ## Runtime
 
 - `assets/vendor/gsap.min.js`: GSAP 3.14.2 from npm, vendored so the render needs no CDN.
-- `compositions/components/grain-overlay.html`: HyperFrames registry component, used as the donor for the grain layer (its CSS keyframe loop was replaced by a timeline-driven, on-twos swap so it is seek-safe).
+- HyperFrames registry components `grain-overlay` and `code-terminal-run` were installed, read as donors and removed. The grain layer borrows only the idea of an overlay grain. Its state comes from seek time (tile and offset on twos), because the registry component animates with an infinite CSS loop driven by the wall clock.

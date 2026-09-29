@@ -9,12 +9,5 @@
   "media": {
     "autoProxy": true
   },
-  "authoringSkill": "general-video",
-  "registryItems": [
-    {
-      "name": "grain-overlay",
-      "type": "hyperframes:component",
-      "target": "compositions/components/grain-overlay.html"
-    }
-  ]
+  "authoringSkill": "general-video"
 }

@@ -194,7 +194,7 @@
       </div>
 
       <!-- B7 + B8 · 15.18 the stamp, then the desk (sits under B6 so the split reveals it) -->
-      <div class="scene clip" id="b78" data-start="15.18" data-duration="7.46" data-track-index="1" style="z-index:3">
+      <div class="scene clip" id="b78" data-start="15.18" data-duration="7.5" data-track-index="1" style="z-index:3">
         <div id="b78-ground"></div>
         <div class="fibre"></div>
         <div id="b7-sheet" class="abs" data-layout-allow-overflow>
@@ -213,7 +213,7 @@
       <div class="wipe" id="wipe2" data-layout-allow-occlusion></div>
 
       <!-- B6 · 13.62 the pause: one line, one word -->
-      <div class="scene clip" id="b6" data-start="13.62" data-duration="1.82" data-track-index="2" style="z-index:4">
+      <div class="scene clip" id="b6" data-start="13.62" data-duration="1.86" data-track-index="2" style="z-index:4">
         <div id="b6-top" class="half">
           <div id="b6-lead" class="abs ar"><span class="m"><span>ولسه</span></span> <span class="m"><span>فيه</span></span></div>
           <div id="b6-more" class="abs ar serif"><span class="m"><span>أكثر</span></span></div>
@@ -257,13 +257,14 @@
 
         function ready() {
           var imgs = Array.prototype.slice.call(document.images).map(function (im) {
-            return im.decode ? im.decode().catch(function () {}) : Promise.resolve();
+            // a missing or corrupt asset rejects readiness, so a broken master cannot render silently
+            return im.decode ? im.decode().catch(function (e) { throw new Error('image failed to decode: ' + im.getAttribute('src') + ' (' + e + ')'); }) : Promise.resolve();
           });
           var faces = ['500 40px TSans', '700 40px TSans', '900 40px TSerif', '500 40px JBMono'].map(function (f) {
             return document.fonts.load(f, 'الموشن Ae');
           });
           var bgs = ['assets/tex/paper-fibre.png', 'assets/tex/stamp-ink.png', 'assets/tex/grain-0.png', 'assets/tex/grain-1.png', 'assets/tex/grain-2.png'].map(function (u) {
-            var i = new Image(); i.src = u; return i.decode().catch(function () {});
+            var i = new Image(); i.src = u; return i.decode().catch(function (e) { throw new Error('texture failed to decode: ' + u + ' (' + e + ')'); });
           });
           return Promise.all(faces.concat(imgs, bgs)).then(function () { return document.fonts.ready; });
         }

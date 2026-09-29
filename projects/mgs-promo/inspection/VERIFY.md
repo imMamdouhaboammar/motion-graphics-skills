@@ -24,11 +24,15 @@ Cross-correlation of the final file's audio against `assets/audio/vo-master.wav`
 
 ## Determinism
 
-Two independent renders of the final code: **798/798 frames bit-identical** (`framemd5`).
+`tools/determinism-check.sh` on the final code (two renders, second under CPU load): **798/798 frames bit-identical** (`framemd5`). The master re-rendered after the scene-lifetime fix is also frame-identical to the previous one.
 
 This check caught a real bug. Earlier renders disagreed run to run (up to 245 frames, 46 to 62 dB PSNR). The grain layer swapped `background-image` every 2 frames. All three tiles now stay painted and only opacity switches.
 
 Proof, with `tools/determinism-check.sh` (second render under CPU load): the old grain code FAILS (48 of 798 frames differ), the current code PASSES (798 of 798). Two idle renders of the old code matched, so an idle pair does not catch this race.
+
+## Asset readiness
+
+Image and texture decode failures now reject `window.__ready` instead of being swallowed. Red run: with `assets/cutouts/mic_akg.png` removed from a scratch copy, the font gate reports `image failed to decode: assets/cutouts/mic_akg.png (EncodingError ...)` and FAIL. The intact project reports PASS.
 
 ## Fonts
 
