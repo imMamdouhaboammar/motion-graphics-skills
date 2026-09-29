@@ -33,9 +33,13 @@ DEFAULT_CATEGORIES = [
 
 def load_pool(path: Path) -> dict:
     data = json.loads(path.read_text(encoding="utf-8"))
+    if not isinstance(data, dict):
+        raise ValueError("gene pool root must be an object")
     refs = data.get("references")
     if not isinstance(refs, list) or len(refs) < 2:
         raise ValueError("gene pool needs at least two references")
+    if any(not isinstance(ref, dict) for ref in refs):
+        raise ValueError("reference entries must be objects")
     ids = [str(ref.get("id", "")).strip() for ref in refs]
     if any(not ref_id for ref_id in ids):
         raise ValueError("every reference needs a non-empty id")
@@ -107,14 +111,36 @@ def build_recipe(refs: list[dict], categories: list[str], seed: int, index: int)
         pool = under_limit or eligible
         min_count = min(counts[ref["id"]] for ref in pool)
         pool = [ref for ref in pool if counts[ref["id"]] == min_count]
-        rng.shuffle(pool)
-        source = pool[0]
 
-        source_categories = [
-            category for category in remaining if category in source["_genes"]
+        candidates = [
+            (ref, category)
+            for ref in pool
+            for category in sorted(remaining)
+            if category in ref["_genes"]
         ]
-        source_categories.sort()
-        category = rng.choice(source_categories)
+        rng.shuffle(candidates)
+        used = set(counts)
+
+        def candidate_score(candidate: tuple[dict, str]) -> tuple[int, int, int]:
+            ref, category = candidate
+            next_counts = counts.copy()
+            next_counts[ref["id"]] += 1
+            next_remaining = remaining - {category}
+            future = {
+                other["id"]
+                for other in refs
+                if next_counts[other["id"]] < limit
+                and any(item in other["_genes"] for item in next_remaining)
+            }
+            source_options = sum(item in ref["_genes"] for item in remaining)
+            competition = sum(category in other["_genes"] for other in refs)
+            return (
+                len(used | {ref["id"]} | future),
+                -source_options,
+                -competition,
+            )
+
+        source, category = max(candidates, key=candidate_score)
         remaining.remove(category)
         gene = rng.choice(source["_genes"][category])
         counts[source["id"]] += 1
