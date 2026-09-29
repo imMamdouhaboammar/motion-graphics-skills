@@ -27,7 +27,9 @@ A strong run should satisfy all applicable assertions.
 - considers at least three concept hypotheses
 - mixes genes across more than one source
 - applies a meaningful mutation before final adoption
-- uses wildcard references structurally rather than decoratively
+- uses wildcard references structurally rather than decoratively when one is available
+- substitutes a distinct non-wildcard third route when discovery is prohibited or no wildcard qualifies
+- resolves bundled helper scripts relative to the installed skill directory, not the project working directory
 - avoids one-source dominance
 
 ## Originality safeguards
