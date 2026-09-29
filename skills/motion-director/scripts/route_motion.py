@@ -147,6 +147,7 @@ def build_route(
     stages: list[dict[str, Any]] = []
     skipped_optional: list[dict[str, str]] = []
     warnings: list[str] = []
+    blockers: list[dict[str, str]] = []
     required_references: list[str] = []
 
     def add_stage(name: str, reason: str, *, required: bool = True) -> None:
@@ -165,7 +166,13 @@ def build_route(
                     "reason": f"{reason}. Capability is not installed",
                 })
                 return
-            warnings.append(f"{name} is not installed. motion-director must use its documented fallback")
+            blockers.append({
+                "name": name,
+                "reason": f"{reason}. Required capability is not installed",
+            })
+            warnings.append(
+                f"{name} is required for this route and is not installed; production must stop or the task must be reclassified"
+            )
             return
         stages.append({
             "name": name,
@@ -249,6 +256,7 @@ def build_route(
 
     return {
         "version": 1,
+        "status": "blocked" if blockers else "ready",
         "entry": "motion-director",
         "deliverable": deliverable,
         "installed": sorted(name for name, present in availability.items() if present),
@@ -259,6 +267,7 @@ def build_route(
             "difficulty_preservation": difficulty_preservation,
         },
         "skipped_optional": skipped_optional,
+        "blockers": blockers,
         "warnings": warnings,
     }
 
