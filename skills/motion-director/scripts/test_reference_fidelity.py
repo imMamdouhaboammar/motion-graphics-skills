@@ -157,6 +157,17 @@ class ReferenceFidelityTests(unittest.TestCase):
 
     def test_complete_plan_passes(self) -> None:
         plan = {
+            "visual_direction": {
+                "dominant_language": "large cropped object-led scenes alternate between complete light and dark worlds",
+                "preserves": [
+                    "world-flips",
+                    "object-scale",
+                    "transition-causality"
+                ],
+                "promoted_secondary_motifs": [],
+                "new_dominant_motifs": [],
+                "user_approved_style_expansion": False,
+            },
             "implementations": [
                 {
                     "contract_id": "world-flips",
