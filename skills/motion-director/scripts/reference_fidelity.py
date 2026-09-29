@@ -62,6 +62,12 @@ def validate_contract(contract: dict[str, Any]) -> dict[str, Any]:
 
     if mode not in {"structural-fidelity", "translation", "inspiration", "mix"}:
         missing.append("mode")
+    if not difficulty_mode:
+        missing.append("difficulty_mode")
+    elif difficulty_mode not in {"normal", "preserve"}:
+        issues.append(
+            f"unsupported difficulty_mode: {difficulty_mode}"
+        )
 
     reference = contract.get("reference")
     if not isinstance(reference, dict) or not str(reference.get("source", "")).strip():
