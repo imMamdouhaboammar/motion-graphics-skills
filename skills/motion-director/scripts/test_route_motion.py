@@ -182,5 +182,34 @@ class RouteMotionTests(unittest.TestCase):
                 self.assertIn("must_return", stage["handoff"])
 
 
+    def test_missing_required_reference_gate_blocks_route(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            pack = Path(tmp)
+            make_pack(pack, ["motion-director", "launch-video", "video-review-loop"])
+            data = route(pack, {
+                "deliverable": "launch",
+                "brand_ready": True,
+                "reference_count": 1,
+                "reference_mode": "structural-fidelity",
+                "difficulty_mode": "preserve",
+            })
+            self.assertEqual(data["status"], "blocked")
+            self.assertIn(
+                "reference-fidelity",
+                [item["name"] for item in data["blockers"]],
+            )
+
+    def test_ready_route_has_no_blockers(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            pack = Path(tmp)
+            make_pack(pack, ["motion-director", "launch-video", "video-review-loop"])
+            data = route(pack, {
+                "deliverable": "launch",
+                "brand_ready": True,
+            })
+            self.assertEqual(data["status"], "ready")
+            self.assertEqual(data["blockers"], [])
+
+
 if __name__ == "__main__":
     unittest.main()
