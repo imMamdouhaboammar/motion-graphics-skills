@@ -14,6 +14,10 @@
   <img src="https://img.shields.io/badge/runs_in-Claude_Code_%C2%B7_Codex-58B6FF?style=flat-square&labelColor=00132F" alt="Runs in Claude Code and Codex">
   <a href="LICENSE"><img src="https://img.shields.io/badge/license-Proprietary-red?style=flat-square&labelColor=00132F" alt="Licence"></a>
   <a href="https://github.com/imMamdouhaboammar"><img src="https://img.shields.io/badge/creator-Mamdouh_Aboammar-FFD11A?style=flat-square&labelColor=00132F" alt="Creator"></a>
+<p align="center">
+  <img src="assets/sprites/robot_director_00_128.png" alt="Orb Camera Drone" width="44">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  <img src="assets/sprites/robot_director_01_128.png" alt="Lead Motion Director" width="56">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  <img src="assets/sprites/robot_director_07_128.png" alt="Social Spark" width="44">
 </p>
 
 <p align="center">
@@ -21,6 +25,7 @@
   <a href="#see-it-work">See it work</a> &nbsp;·&nbsp;
   <a href="#the-skills">The skills</a> &nbsp;·&nbsp;
   <a href="#how-they-fit-together">How they fit</a> &nbsp;·&nbsp;
+  <a href="#meet-the-director-crew">The Fleet</a> &nbsp;·&nbsp;
   <a href="#prompts">Prompts</a> &nbsp;·&nbsp;
   <a href="https://github.com/imMamdouhaboammar">Author</a>
 </p>
@@ -134,18 +139,25 @@ Add HyperFrames once (free, open source): `npx skills add heygen-com/hyperframes
 
 ### Start here: one line, 60 seconds
 
-Before any skill, paste this into Claude Code on Opus 5.5:
-
-```
-Make a dynamic 15-second motion graphics video that shows what an incredible motion designer you are. Go all out.
-```
-
-Then change it by describing the edit:
-
-- "Slow down the second scene."
-- "Swap the text for mine: [your words]."
-- "Use my brand colours: [hex codes]."
-- "Make it 1080 x 1350 for LinkedIn."
+<table>
+  <tr>
+    <td width="96" align="center" valign="middle">
+      <img src="assets/sprites/robot_director_01_128.png" alt="Motion Director Bot" width="76"><br>
+      <sub><strong>Motion Director</strong></sub>
+    </td>
+    <td>
+      <p>Before touching any specialist skill, paste this into Claude Code (Opus 5.5) or Codex:</p>
+      <pre><code>Make a dynamic 15-second motion graphics video that shows what an incredible motion designer you are. Go all out.</code></pre>
+      <p>Then direct the cut like a lead designer giving real notes:</p>
+      <ul>
+        <li><em>"Slow down the second scene."</em></li>
+        <li><em>"Swap the text for mine: [your words]."</em></li>
+        <li><em>"Use my brand colours: [hex codes]."</em></li>
+        <li><em>"Make it 1080 x 1350 for LinkedIn."</em></li>
+      </ul>
+    </td>
+  </tr>
+</table>
 
 When you want a specific job done properly, pick a skill below.
 
@@ -155,19 +167,20 @@ Fourteen skills, with motion-director as the broad creative front door. Type the
 
 | Stage | Skill | What you get | Say this |
 |---|---|---|---|
-| Direct | [**motion-director**](skills/motion-director/) | Master creative direction, concept, craft, HyperFrames routing, review, and production for broad motion work. | "Direct this motion film from reference to final render." |\n| Set up | [**brand-intake**](skills/brand-intake/) | Builds brand.md and MOTION.md. Every other skill reads them first. | "Set up my brand for motion. Here are five frames I like." |
-| Plan | [**motion-brief-writer**](skills/motion-brief-writer/) | Turns a rough idea into a precise build brief in your brand. | "Write me a motion brief for my next milestone post." |
-| Launch | [**launch-video**](skills/launch-video/) | A 30 to 45 second launch for a product, offer or cohort. | "Make a launch video for my new cohort." |
-| Launch | [**apple-launch-film**](skills/apple-launch-film/) | A Mac-style launch film. Menu bar, notch and widgets, all code. | "Make it look like an Apple keynote launch." |
-| Explain | [**vox-explainer**](skills/vox-explainer/) | A 30 to 60 second documentary explainer. | "Make a Vox-style video: why do we dream?" |
-| Explain | [**animated-chart**](skills/animated-chart/) | A looping chart. Every value stays exactly as you give it. | "Animate my chart. Here are my numbers." |
-| Explain | [**milestone-reveal**](skills/milestone-reveal/) | A night sky of points that pulls into your real number. | "Make a milestone video for my follower count." |
-| Explain | [**motion-effects**](skills/motion-effects/) | 16 premium effects in your brand, as 8-second loops. | "Build the search-to-results effect in my brand." |
-| Open | [**title-sequence-3d**](skills/title-sequence-3d/) | An 8 to 15 second 3D opener that stops the scroll. | "Make a cinematic 3D intro for my next video." |
-| Compare | [**model-showdown**](skills/model-showdown/) | One brief, three AI models, stacked into one video. | "Same prompt, three AIs. Make a model showdown." |
-| Promote | [**newsletter-promo**](skills/newsletter-promo/) | A 12 to 20 second promo that sends people to an edition. | "Make a promo for this week’s newsletter." |
-| Promote | [**loop-cover**](skills/loop-cover/) | Your newsletter cover as a seamless looping GIF. | "Make my newsletter cover a looping GIF." |
-| Promote | [**reel-export**](skills/reel-export/) | Any video as a clean 1080 x 1920 Reel or TikTok. | "Make this a reel for Instagram." |
+| <img src="assets/sprites/robot_director_01_128.png" width="22" align="absmiddle" alt="Direct"> Direct | [**motion-director**](skills/motion-director/) | Master creative direction, concept, craft, HyperFrames routing, review, and production for broad motion work. | "Direct this motion film from reference to final render." |
+| <img src="assets/sprites/robot_director_04_128.png" width="22" align="absmiddle" alt="Set up"> Set up | [**brand-intake**](skills/brand-intake/) | Builds brand.md and MOTION.md. Every other skill reads them first. | "Set up my brand for motion. Here are five frames I like." |
+| <img src="assets/sprites/robot_director_02_128.png" width="22" align="absmiddle" alt="Plan"> Plan | [**motion-brief-writer**](skills/motion-brief-writer/) | Turns a rough idea into a precise build brief in your brand. | "Write me a motion brief for my next milestone post." |
+| <img src="assets/sprites/robot_director_10_128.png" width="22" align="absmiddle" alt="Launch"> Launch | [**launch-video**](skills/launch-video/) | A 30 to 45 second launch for a product, offer or cohort. | "Make a launch video for my new cohort." |
+| <img src="assets/sprites/robot_director_08_128.png" width="22" align="absmiddle" alt="Launch"> Launch | [**apple-launch-film**](skills/apple-launch-film/) | A Mac-style launch film. Menu bar, notch and widgets, all code. | "Make it look like an Apple keynote launch." |
+| <img src="assets/sprites/robot_director_00_128.png" width="22" align="absmiddle" alt="Explain"> Explain | [**vox-explainer**](skills/vox-explainer/) | A 30 to 60 second documentary explainer. | "Make a Vox-style video: why do we dream?" |
+| <img src="assets/sprites/robot_director_03_128.png" width="22" align="absmiddle" alt="Explain"> Explain | [**animated-chart**](skills/animated-chart/) | A looping chart. Every value stays exactly as you give it. | "Animate my chart. Here are my numbers." |
+| <img src="assets/sprites/robot_director_05_128.png" width="22" align="absmiddle" alt="Explain"> Explain | [**milestone-reveal**](skills/milestone-reveal/) | A night sky of points that pulls into your real number. | "Make a milestone video for my follower count." |
+| <img src="assets/sprites/robot_director_09_128.png" width="22" align="absmiddle" alt="Explain"> Explain | [**motion-effects**](skills/motion-effects/) | 16 premium effects in your brand, as 8-second loops. | "Build the search-to-results effect in my brand." |
+| <img src="assets/sprites/robot_director_11_128.png" width="22" align="absmiddle" alt="Open"> Open | [**title-sequence-3d**](skills/title-sequence-3d/) | An 8 to 15 second 3D opener that stops the scroll. | "Make a cinematic 3D intro for my next video." |
+| <img src="assets/sprites/robot_director_06_128.png" width="22" align="absmiddle" alt="Compare"> Compare | [**model-showdown**](skills/model-showdown/) | One brief, three AI models, stacked into one video. | "Same prompt, three AIs. Make a model showdown." |
+| <img src="assets/sprites/robot_director_07_128.png" width="22" align="absmiddle" alt="Promote"> Promote | [**newsletter-promo**](skills/newsletter-promo/) | A 12 to 20 second promo that sends people to an edition. | "Make a promo for this week’s newsletter." |
+| <img src="assets/sprites/robot_director_07_128.png" width="22" align="absmiddle" alt="Promote"> Promote | [**loop-cover**](skills/loop-cover/) | Your newsletter cover as a seamless looping GIF. | "Make my newsletter cover a looping GIF." |
+| <img src="assets/sprites/robot_director_07_128.png" width="22" align="absmiddle" alt="Promote"> Promote | [**reel-export**](skills/reel-export/) | Any video as a clean 1080 x 1920 Reel or TikTok. | "Make this a reel for Instagram." |
 
 See each skill's `SKILL.md` for its trigger phrases, the inputs it asks for and what it learned the hard way.
 
@@ -321,6 +334,41 @@ npx skills add heygen-com/hyperframes
 ```
 
 The master skill adds creative direction, narrative, typography, composition, motion craft, Arabic RTL guidance, reference analysis, and visual QA. HyperFrames is expected to handle the renderable project contract, reusable registry, supported adapters, diagnostics, preview, rendering, batch variants, and audio relationships for greenfield projects. The pack does not copy HyperFrames' renderer or rebuild its engine.
+
+## Meet the Motion Director Crew
+
+Every frame is code, and every cut has a specialist. These retro cyberpunk pixel art mascots were crafted with the Sprite Fusion API to personify the creative roles across the 14 skills:
+
+<p align="center">
+  <img src="assets/sprites/cyberpunk_director_preview_grid.png" alt="Motion Director Robot Fleet" width="620">
+</p>
+
+<table>
+  <tr>
+    <td width="25%" align="center" valign="top">
+      <img src="assets/sprites/robot_director_01_128.png" width="64" alt="Lead Director"><br>
+      <strong>Lead Director</strong><br>
+      <sub><code>motion-director</code><br>Master creative direction, art notes, and timeline flow.</sub>
+    </td>
+    <td width="25%" align="center" valign="top">
+      <img src="assets/sprites/robot_director_00_128.png" width="64" alt="Orb Camera Drone"><br>
+      <strong>Camera Drone</strong><br>
+      <sub><code>title-sequence-3d</code><br>Cinematic orbits, camera tracking, and depth sweeps.</sub>
+    </td>
+    <td width="25%" align="center" valign="top">
+      <img src="assets/sprites/robot_director_04_128.png" width="64" alt="Terminal Rig"><br>
+      <strong>Terminal Rig</strong><br>
+      <sub><code>brand-intake</code><br>Code foundations, design tokens, and motion config.</sub>
+    </td>
+    <td width="25%" align="center" valign="top">
+      <img src="assets/sprites/robot_director_07_128.png" width="64" alt="Social Spark"><br>
+      <strong>Social Spark</strong><br>
+      <sub><code>reel-export</code><br>Vertical cuts, looping covers, and viral promos.</sub>
+    </td>
+  </tr>
+</table>
+
+Explore the full 12-sprite pixel catalog and manifests in [`assets/sprites/`](assets/sprites/).
 
 ## Contributing
 

@@ -9,73 +9,85 @@
         "index": 0,
         "asset_id": "813648f3-0489-44dc-a350-b14cf1386ede",
         "url": "https://media.spritefusion.com/pixel-art-assets/01283d31-54bd-4c70-91b1-ee445a49b938/813648f3-0489-44dc-a350-b14cf1386ede/image.png?v=1790696041966",
-        "local_path": "assets/sprites/robot_director_00_813648f3-0489-44dc-a350-b14cf1386ede.png"
+        "local_path": "assets/sprites/robot_director_00_813648f3-0489-44dc-a350-b14cf1386ede.png",
+        "display_path": "assets/sprites/robot_director_00_128.png"
       },
       {
         "index": 1,
         "asset_id": "c3d0f8bd-7f64-40a7-b719-53aa9c90a7a5",
         "url": "https://media.spritefusion.com/pixel-art-assets/01283d31-54bd-4c70-91b1-ee445a49b938/c3d0f8bd-7f64-40a7-b719-53aa9c90a7a5/image.png?v=1790696042753",
-        "local_path": "assets/sprites/robot_director_01_c3d0f8bd-7f64-40a7-b719-53aa9c90a7a5.png"
+        "local_path": "assets/sprites/robot_director_01_c3d0f8bd-7f64-40a7-b719-53aa9c90a7a5.png",
+        "display_path": "assets/sprites/robot_director_01_128.png"
       },
       {
         "index": 2,
         "asset_id": "01cf10a3-c13e-471d-9524-6c4440cb68cb",
         "url": "https://media.spritefusion.com/pixel-art-assets/01283d31-54bd-4c70-91b1-ee445a49b938/01cf10a3-c13e-471d-9524-6c4440cb68cb/image.png?v=1790696043267",
-        "local_path": "assets/sprites/robot_director_02_01cf10a3-c13e-471d-9524-6c4440cb68cb.png"
+        "local_path": "assets/sprites/robot_director_02_01cf10a3-c13e-471d-9524-6c4440cb68cb.png",
+        "display_path": "assets/sprites/robot_director_02_128.png"
       },
       {
         "index": 3,
         "asset_id": "1d9ac433-d637-4bc2-af2b-ffedf10269b7",
         "url": "https://media.spritefusion.com/pixel-art-assets/01283d31-54bd-4c70-91b1-ee445a49b938/1d9ac433-d637-4bc2-af2b-ffedf10269b7/image.png?v=1790696043799",
-        "local_path": "assets/sprites/robot_director_03_1d9ac433-d637-4bc2-af2b-ffedf10269b7.png"
+        "local_path": "assets/sprites/robot_director_03_1d9ac433-d637-4bc2-af2b-ffedf10269b7.png",
+        "display_path": "assets/sprites/robot_director_03_128.png"
       },
       {
         "index": 4,
         "asset_id": "6d52bb78-5f57-4c9d-b1a7-5a4bd3de8eae",
         "url": "https://media.spritefusion.com/pixel-art-assets/01283d31-54bd-4c70-91b1-ee445a49b938/6d52bb78-5f57-4c9d-b1a7-5a4bd3de8eae/image.png?v=1790696044247",
-        "local_path": "assets/sprites/robot_director_04_6d52bb78-5f57-4c9d-b1a7-5a4bd3de8eae.png"
+        "local_path": "assets/sprites/robot_director_04_6d52bb78-5f57-4c9d-b1a7-5a4bd3de8eae.png",
+        "display_path": "assets/sprites/robot_director_04_128.png"
       },
       {
         "index": 5,
         "asset_id": "37636fd7-ade2-4627-bda9-9d6fd49daa80",
         "url": "https://media.spritefusion.com/pixel-art-assets/01283d31-54bd-4c70-91b1-ee445a49b938/37636fd7-ade2-4627-bda9-9d6fd49daa80/image.png?v=1790696044985",
-        "local_path": "assets/sprites/robot_director_05_37636fd7-ade2-4627-bda9-9d6fd49daa80.png"
+        "local_path": "assets/sprites/robot_director_05_37636fd7-ade2-4627-bda9-9d6fd49daa80.png",
+        "display_path": "assets/sprites/robot_director_05_128.png"
       },
       {
         "index": 6,
         "asset_id": "5662a6b7-c1ac-47c8-b914-2fbdcf1ab9db",
         "url": "https://media.spritefusion.com/pixel-art-assets/01283d31-54bd-4c70-91b1-ee445a49b938/5662a6b7-c1ac-47c8-b914-2fbdcf1ab9db/image.png?v=1790696045714",
-        "local_path": "assets/sprites/robot_director_06_5662a6b7-c1ac-47c8-b914-2fbdcf1ab9db.png"
+        "local_path": "assets/sprites/robot_director_06_5662a6b7-c1ac-47c8-b914-2fbdcf1ab9db.png",
+        "display_path": "assets/sprites/robot_director_06_128.png"
       },
       {
         "index": 7,
         "asset_id": "dd59c77e-a0ad-4ec3-8192-9e7933b78171",
         "url": "https://media.spritefusion.com/pixel-art-assets/01283d31-54bd-4c70-91b1-ee445a49b938/dd59c77e-a0ad-4ec3-8192-9e7933b78171/image.png?v=1790696046412",
-        "local_path": "assets/sprites/robot_director_07_dd59c77e-a0ad-4ec3-8192-9e7933b78171.png"
+        "local_path": "assets/sprites/robot_director_07_dd59c77e-a0ad-4ec3-8192-9e7933b78171.png",
+        "display_path": "assets/sprites/robot_director_07_128.png"
       },
       {
         "index": 8,
         "asset_id": "bb961a8e-ca27-4834-9573-8308ffb7be22",
         "url": "https://media.spritefusion.com/pixel-art-assets/01283d31-54bd-4c70-91b1-ee445a49b938/bb961a8e-ca27-4834-9573-8308ffb7be22/image.png?v=1790696047156",
-        "local_path": "assets/sprites/robot_director_08_bb961a8e-ca27-4834-9573-8308ffb7be22.png"
+        "local_path": "assets/sprites/robot_director_08_bb961a8e-ca27-4834-9573-8308ffb7be22.png",
+        "display_path": "assets/sprites/robot_director_08_128.png"
       },
       {
         "index": 9,
         "asset_id": "4e4d4812-374d-4717-bc67-6a8bd81717ab",
         "url": "https://media.spritefusion.com/pixel-art-assets/01283d31-54bd-4c70-91b1-ee445a49b938/4e4d4812-374d-4717-bc67-6a8bd81717ab/image.png?v=1790696047972",
-        "local_path": "assets/sprites/robot_director_09_4e4d4812-374d-4717-bc67-6a8bd81717ab.png"
+        "local_path": "assets/sprites/robot_director_09_4e4d4812-374d-4717-bc67-6a8bd81717ab.png",
+        "display_path": "assets/sprites/robot_director_09_128.png"
       },
       {
         "index": 10,
         "asset_id": "9709d604-2c6e-4ac7-9c05-8db4112abea8",
         "url": "https://media.spritefusion.com/pixel-art-assets/01283d31-54bd-4c70-91b1-ee445a49b938/9709d604-2c6e-4ac7-9c05-8db4112abea8/image.png?v=1790696048941",
-        "local_path": "assets/sprites/robot_director_10_9709d604-2c6e-4ac7-9c05-8db4112abea8.png"
+        "local_path": "assets/sprites/robot_director_10_9709d604-2c6e-4ac7-9c05-8db4112abea8.png",
+        "display_path": "assets/sprites/robot_director_10_128.png"
       },
       {
         "index": 11,
         "asset_id": "a3c85719-fd8c-418b-b8ba-1a852eb18706",
         "url": "https://media.spritefusion.com/pixel-art-assets/01283d31-54bd-4c70-91b1-ee445a49b938/a3c85719-fd8c-418b-b8ba-1a852eb18706/image.png?v=1790696049780",
-        "local_path": "assets/sprites/robot_director_11_a3c85719-fd8c-418b-b8ba-1a852eb18706.png"
+        "local_path": "assets/sprites/robot_director_11_a3c85719-fd8c-418b-b8ba-1a852eb18706.png",
+        "display_path": "assets/sprites/robot_director_11_128.png"
       }
     ]
   }
