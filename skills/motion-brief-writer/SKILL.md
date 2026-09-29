@@ -40,7 +40,7 @@ Part 2: one build prompt in a code block, with:
 - four states with timings: start, change, hold, return (last frame matches the first)
 - the exact text and numbers, marked as fixed
 - colours, font and assets. Asset files are attached by me, so name them without a path
-- runtime decision: reuse the current project runtime first. If HyperFrames already owns the project, follow its native composition contract. Otherwise a deterministic HTML composition with window.seek(seconds) is the fallback
+- runtime decision: reuse the current project runtime first. For a greenfield code-driven build, specify HyperFrames as the production runtime and use its router to choose the correct workflow. A deterministic standalone HTML composition with window.seek(seconds) is a fallback only when HyperFrames is unavailable or incompatible, and the brief must state that reason
 - reduced-motion behavior that shows a useful held frame where the delivery is interactive
 - after the build: capture named frames, check them for overlap, cut-off text and changed numbers, fix confirmed defects in one batch, then do one confirmation pass
 - no installs, spending, sending or publishing without asking me
