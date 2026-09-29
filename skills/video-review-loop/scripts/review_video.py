@@ -662,6 +662,30 @@ def build_edge_frames(
     return outputs
 
 
+def build_reference_comparison(
+    reference_sheet: Path,
+    output_sheet: Path,
+    ffmpeg_bin: str,
+    destination: Path,
+    log_path: Path,
+) -> bool:
+    result = run_command([
+        ffmpeg_bin,
+        "-y",
+        "-hide_banner",
+        "-i",
+        str(reference_sheet),
+        "-i",
+        str(output_sheet),
+        "-filter_complex",
+        "[0:v]scale=-2:1080[r];[1:v]scale=-2:1080[o];[r][o]hstack=inputs=2",
+        "-frames:v",
+        "1",
+        str(destination),
+    ], timeout=120, log_path=log_path)
+    return result.returncode == 0 and destination.exists()
+
+
 def build_waveform(
     video: Path,
     ffmpeg_bin: str,
@@ -754,6 +778,7 @@ def write_review_markdown(
     path: Path,
     source: Path,
     findings: list[dict[str, Any]],
+    reference_items: list[dict[str, Any]] | None = None,
 ) -> None:
     lines = [
         "# Video Review Round",
@@ -770,6 +795,25 @@ def write_review_markdown(
             )
     else:
         lines.append("- No machine hard failures or warnings were produced.")
+    if reference_items:
+        lines.extend([
+            "",
+            "## Reference fidelity gate",
+            "",
+            "Compare the actual reference and output videos, not only isolated frames.",
+            "The paired contact sheet is orientation evidence, not final proof.",
+            "",
+        ])
+        for item in reference_items:
+            evidence = (
+                f" Evidence: {item['evidence']}."
+                if item.get("evidence")
+                else ""
+            )
+            lines.append(
+                f"- [ ] {item['id']}: {item['mechanism']}.{evidence}"
+            )
+
     lines.extend([
         "",
         "## Required visual review",
