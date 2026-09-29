@@ -1,0 +1,17 @@
+name: Skills Validation CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      - name: Validate 14 Skills and Prompts
+        run: bash validate-skills.sh

@@ -1,0 +1,33 @@
+{
+  "$schema": "https://json.schemastore.org/claude-plugin-manifest.json",
+  "name": "motion-graphics-skills",
+  "displayName": "Motion Graphics Skill Pack",
+  "version": "1.0.0",
+  "description": "14 Claude Code and Codex skills for launch-grade motion graphics. Every frame is code.",
+  "author": {
+    "name": "Mamdouh Aboammar",
+    "url": "https://github.com/imMamdouhaboammar"
+  },
+  "homepage": "https://github.com/imMamdouhaboammar/motion-graphics-skills",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/imMamdouhaboammar/motion-graphics-skills.git"
+  },
+  "license": "Proprietary",
+  "categories": [
+    "motion-graphics",
+    "design",
+    "video",
+    "developer-tools",
+    "agent-tools"
+  ],
+  "compatibility": {
+    "claudeCode": ">=1.0.0",
+    "claudeDesktop": ">=1.0.0",
+    "cursor": ">=0.40.0",
+    "codex": ">=0.1.0",
+    "opencode": ">=1.0.0",
+    "antigravity": ">=1.0.0"
+  },
+  "entrypoint": "skills"
+}

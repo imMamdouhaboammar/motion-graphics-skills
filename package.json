@@ -1,0 +1,27 @@
+{
+  "name": "motion-graphics-skills",
+  "version": "1.0.0",
+  "description": "14 Claude Code and Codex skills for launch-grade motion graphics. Every frame is code.",
+  "type": "module",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/imMamdouhaboammar/motion-graphics-skills.git"
+  },
+  "scripts": {
+    "validate": "bash validate-skills.sh"
+  },
+  "keywords": [
+    "motion-graphics",
+    "claude-code",
+    "codex",
+    "agent-skills",
+    "animation",
+    "video",
+    "hyperframes",
+    "creative-technologist",
+    "threejs",
+    "gsap"
+  ],
+  "author": "Mamdouh Aboammar <https://github.com/imMamdouhaboammar>",
+  "license": "SEE LICENSE IN LICENSE"
+}

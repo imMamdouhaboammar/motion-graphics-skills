@@ -1,0 +1,17 @@
+{
+  "$schema": "https://skills.sh/schema.json",
+  "name": "motion-graphics-skills",
+  "version": "1.0.0",
+  "description": "14 Claude Code and Codex skills for launch-grade motion graphics. Every frame is code.",
+  "repository": "https://github.com/imMamdouhaboammar/motion-graphics-skills",
+  "author": "Mamdouh Aboammar",
+  "license": "Proprietary",
+  "skills": "skills",
+  "tags": [
+    "motion-graphics",
+    "agent-skills",
+    "animation",
+    "video",
+    "creative-direction"
+  ]
+}

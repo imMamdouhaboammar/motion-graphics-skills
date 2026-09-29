@@ -1,9 +1,5 @@
 <p align="center">
-  <picture>
-    <source media="(prefers-color-scheme: dark)" srcset="assets/readme/hero-dark.png">
-    <source media="(prefers-color-scheme: light)" srcset="assets/readme/hero-light.png">
-    <img alt="Motion Graphics Skill Pack by Mamdouh Aboammar" src="assets/readme/hero-light.png" width="100%">
-  </picture>
+  <img src="assets/readme/logo.svg" alt="Motion Graphics Skills Logo" width="380">
 </p>
 
 <h1 align="center">Motion Graphics Skill Pack</h1>
@@ -117,12 +113,22 @@ Add HyperFrames once (free, open source): `npx skills add heygen-com/hyperframes
 
 <table>
   <tr>
-    <td width="64%" valign="top"><img src="assets/readme/demo-launch.gif" alt="A 20-second product launch film built entirely in code" width="100%"></td>
-    <td width="36%" valign="top"><img src="assets/readme/demo-milestone.gif" alt="A 12-second milestone loop that resolves into 250,000 LinkedIn followers" width="100%"></td>
-  </tr>
-  <tr>
-    <td valign="top"><sub>A 20-second launch film. Deep blue glass, one glow, every word from a fact list I approved. No screen recording.</sub></td>
-    <td valign="top"><sub>A 12-second milestone loop. A night sky of points pulls into my real number.</sub></td>
+    <td width="50%" valign="top" align="center">
+      <h3>TEOLA Product Launch</h3>
+      <video src="https://github.com/imMamdouhaboammar/motion-graphics-skills/raw/main/TEOLA-ad.mp4" controls width="100%"></video>
+      <p align="center">
+        <a href="https://github.com/imMamdouhaboammar/motion-graphics-skills/blob/main/TEOLA-ad.mp4">▶ Play TEOLA-ad.mp4</a>
+      </p>
+      <p align="left"><sub>Full product launch commercial built completely with code and motion direction. Deep blue glass, glow transitions, and every word from an approved fact list.</sub></p>
+    </td>
+    <td width="50%" valign="top" align="center">
+      <h3>Four Steps Events Motion Final</h3>
+      <video src="https://github.com/imMamdouhaboammar/motion-graphics-skills/raw/main/projects/four-steps-events/renders/Four-Steps-Events-Motion-Final-v2.mp4" controls width="100%"></video>
+      <p align="center">
+        <a href="https://github.com/imMamdouhaboammar/motion-graphics-skills/blob/main/projects/four-steps-events/renders/Four-Steps-Events-Motion-Final-v2.mp4">▶ Play Four-Steps-Events-Motion-Final-v2.mp4</a>
+      </p>
+      <p align="left"><sub>Bilingual event promo with Arabic typography, custom brand cutouts, synchronized voiceover, and kinetic typography.</sub></p>
+    </td>
   </tr>
 </table>
 
