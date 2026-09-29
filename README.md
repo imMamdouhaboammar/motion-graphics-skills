@@ -21,6 +21,7 @@
 </p>
 
 <p align="center">
+  <a href="https://immamdouhaboammar.github.io/motion-graphics-skills/">Website</a> &nbsp;·&nbsp;
   <a href="#install">Install</a> &nbsp;·&nbsp;
   <a href="#see-it-work">See it work</a> &nbsp;·&nbsp;
   <a href="#the-skills">The skills</a> &nbsp;·&nbsp;
