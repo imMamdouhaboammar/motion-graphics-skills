@@ -344,7 +344,7 @@ def parse_freezedetect(
         result.append({
             "start": current["start"],
             "end": end,
-            "duration": max(0.0, end - current["start"]),
+            "duration": round(max(0.0, end - current["start"]), 6),
         })
 
     return result
@@ -392,6 +392,26 @@ def volume_finding(max_volume: float | None) -> dict[str, Any] | None:
             {"max_volume_db": max_volume},
         )
     return None
+
+
+def video_analysis_failure_finding() -> dict[str, Any]:
+    return make_finding(
+        "video-analysis-pass-failed",
+        "hard",
+        "FFmpeg could not complete the primary video analysis pass",
+        {"log": "video-analysis.log"},
+    )
+
+
+def validate_reference_inputs(
+    reference: Path | None,
+    reference_contract: Path | None,
+) -> None:
+    if reference_contract is not None and reference is None:
+        raise ReviewError(
+            "--reference-contract requires --reference so structural fidelity "
+            "is checked against the actual benchmark video"
+        )
 
 
 def end_hold_finding(
@@ -860,6 +880,8 @@ def review_video(args: argparse.Namespace) -> int:
     if not video.is_file():
         raise ReviewError(f"Video not found: {video}")
 
+    validate_reference_inputs(args.reference, args.reference_contract)
+
     gpu = load_gpu_policy()
     signals = gpu.probe_signals(args.ffmpeg_bin)
     gate_code, gpu_result = gpu_gate(signals, allow_cpu=args.allow_cpu)
@@ -923,12 +945,7 @@ def review_video(args: argparse.Namespace) -> int:
         round_dir / "video-analysis.log",
     )
     if video_code != 0:
-        findings.append(make_finding(
-            "video-analysis-pass-failed",
-            "warning",
-            "FFmpeg video detector pass failed. Review the saved log",
-            {"log": "video-analysis.log"},
-        ))
+        findings.append(video_analysis_failure_finding())
 
     black = parse_blackdetect(video_log)
     freezes = parse_freezedetect(video_log, video_duration=video_duration)
