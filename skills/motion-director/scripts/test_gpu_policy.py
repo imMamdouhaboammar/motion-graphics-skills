@@ -174,5 +174,19 @@ class GPUPolicyTests(unittest.TestCase):
         self.assertEqual(parsed, ["h264_nvenc", "h264_videotoolbox"])
 
 
+    def test_qsv_encoder_without_qsv_backend_does_not_count_as_accelerated(self) -> None:
+        gpu = load_module()
+        result = gpu.select_backend({
+            "os": "Linux",
+            "ffmpeg_hwaccels": [],
+            "ffmpeg_encoders": ["h264_qsv"],
+            "nvidia_smi": False,
+            "vaapi_devices": [],
+        })
+        self.assertIsNone(result["backend"])
+        self.assertIsNone(result["video_encoder"])
+        self.assertFalse(result["encode_accelerated"])
+
+
 if __name__ == "__main__":
     unittest.main()
