@@ -28,7 +28,18 @@ def make_round(
     strict_signals: bool = False,
 ) -> Path:
     root.mkdir(parents=True)
-    manifest = {"finding_counts": {"hard": machine_hard, "warning": 0}}
+    source = root / "source.mp4"
+    source.write_bytes(b"video-fixture")
+    stat = source.stat()
+    source_manifest = {
+        "path": str(source.resolve()),
+        "size_bytes": stat.st_size,
+        "mtime_ns": stat.st_mtime_ns,
+    }
+    manifest = {
+        "finding_counts": {"hard": machine_hard, "warning": 0},
+        "source": source_manifest,
+    }
     if reference:
         manifest["reference"] = {"path": "/tmp/reference.mp4"}
     (root / "manifest.json").write_text(
@@ -37,7 +48,14 @@ def make_round(
     )
     if strict_signals:
         (root / "strict-signals.json").write_text(
-            json.dumps({"findings": [], "counts": {}}),
+            json.dumps({
+                "status": "pass",
+                "source": str(source.resolve()),
+                "source_manifest": source_manifest,
+                "frames_analyzed": 10,
+                "findings": [],
+                "counts": {},
+            }),
             encoding="utf-8",
         )
     return root
@@ -168,6 +186,49 @@ class ReviewRoundTests(unittest.TestCase):
                 "strict_signals_inspected",
                 status["missing_attestations"],
             )
+
+
+    def test_completed_round_is_invalidated_when_source_changes(self) -> None:
+        mod = load_module()
+        with tempfile.TemporaryDirectory() as tmp:
+            round_dir = make_round(Path(tmp) / "round", strict_signals=True)
+            mod.attest(
+                round_dir,
+                watched_with_audio=True,
+                watched_muted=True,
+                first_second_inspected=True,
+                transitions_inspected=True,
+                ending_inspected=True,
+                reference_compared=False,
+                strict_signals_inspected=True,
+            )
+            source = round_dir / "source.mp4"
+            source.write_bytes(b"changed-video-fixture")
+            status = mod.round_status(round_dir)
+            self.assertEqual(status["status"], "source-artifact-changed")
+            self.assertTrue(status["source_changed"])
+
+    def test_malformed_strict_signal_evidence_does_not_satisfy_gate(self) -> None:
+        mod = load_module()
+        with tempfile.TemporaryDirectory() as tmp:
+            round_dir = make_round(Path(tmp) / "round", strict_signals=True)
+            (round_dir / "strict-signals.json").write_text(
+                json.dumps({"status": "pass", "frames_analyzed": 0}),
+                encoding="utf-8",
+            )
+            mod.attest(
+                round_dir,
+                watched_with_audio=True,
+                watched_muted=True,
+                first_second_inspected=True,
+                transitions_inspected=True,
+                ending_inspected=True,
+                reference_compared=False,
+                strict_signals_inspected=True,
+            )
+            status = mod.round_status(round_dir)
+            self.assertEqual(status["status"], "agent-review-required")
+            self.assertIn("strict-signals.json:invalid", status["missing_evidence"])
 
 
 if __name__ == "__main__":
