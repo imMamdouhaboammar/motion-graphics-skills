@@ -47,7 +47,8 @@ if (!reducedMotion && window.gsap) {
 
   const intro = gsap.timeline({ defaults: { ease: "power4.out" } });
   intro
-    .from(".hero h1", { y: 54, opacity: 0, duration: 1.05 })
+    .from(".hero-eyebrow", { y: 20, opacity: 0, duration: 0.7 })
+    .from(".hero h1", { y: 54, opacity: 0, duration: 1.05 }, "-=0.45")
     .from(".hero-lede", { y: 24, opacity: 0, duration: 0.78 }, "-=0.62")
     .from(".hero-actions", { y: 18, opacity: 0, duration: 0.68 }, "-=0.48")
     .from(".hero-stage", { y: 44, rotate: -1.4, opacity: 0, duration: 1.05 }, "-=0.82")
