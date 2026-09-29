@@ -99,7 +99,7 @@ def validate_contract(contract: dict[str, Any]) -> dict[str, Any]:
         seen_ids.add(contract_id)
         if not is_specific(mechanism):
             issues.append(f"must_preserve[{index}].mechanism is too vague")
-        if difficulty_mode == "preserve" and not is_specific(why_hard):
+        if difficulty_mode == "preserve" and len(why_hard.split()) < 3:
             issues.append(f"must_preserve[{index}].why_hard is required in preserve mode")
         if not evidence:
             issues.append(f"must_preserve[{index}].evidence is required")
