@@ -36,6 +36,47 @@ class MixMatrixTests(unittest.TestCase):
         self.assertEqual(result.returncode, 2)
         self.assertIn("at least two references", result.stderr)
 
+    def test_rejects_non_object_root(self) -> None:
+        result = run_tool(["not", "an", "object"])
+        self.assertEqual(result.returncode, 2)
+        self.assertIn("root must be an object", result.stderr)
+
+    def test_rejects_non_object_reference(self) -> None:
+        result = run_tool(
+            {
+                "references": [
+                    "not-an-object",
+                    {"id": "B", "genes": {"motion": ["mask reveal"]}},
+                ]
+            }
+        )
+        self.assertEqual(result.returncode, 2)
+        self.assertIn("reference entries must be objects", result.stderr)
+
+    def test_preserves_feasible_cross_source_pairing(self) -> None:
+        payload = {
+            "references": [
+                {
+                    "id": "A",
+                    "genes": {
+                        "motion": ["a-motion"],
+                        "material": ["a-material"],
+                    },
+                },
+                {
+                    "id": "B",
+                    "genes": {
+                        "motion": ["b-motion"],
+                    },
+                },
+            ]
+        }
+        result = run_tool(payload, "--recipes", "1", "--seed", "0")
+        self.assertEqual(result.returncode, 0, result.stderr)
+        recipe = json.loads(result.stdout)["recipes"][0]
+        self.assertEqual(set(recipe["source_share"]), {"A", "B"})
+        self.assertEqual(recipe["warnings"], [])
+
     def test_generates_three_cross_source_recipes(self) -> None:
         payload = {
             "brief": "Arabic promo",
