@@ -180,6 +180,8 @@ Prefer:
 
 The viewer should feel one continuous thought.
 
+When the user supplies multiple references, asks to combine visual languages, or the first direction remains too close to one source, route concept development through `mix-and-match` before locking the motion thesis. Use its selected direction as concept input, then return here for production.
+
 Read references/concept-library.md when the first idea is obvious, generic, or too literal. Read references/narrative-direction.md for multi-beat films.
 
 ## Phase 4: create a motion thesis
@@ -473,6 +475,8 @@ For broad or multi-stage work, create a small JSON task context and run `scripts
 The router reads the installed skill graph, selects only relevant specialists, explains every hop, adds GPU and review gates, and skips unavailable optional capabilities with a named fallback.
 
 Read `references/neural-links.md` and obey each stage's handoff packet. When a supplied reference is a benchmark rather than loose inspiration, also read `references/reference-fidelity.md` and lock the fidelity contract before creative substitution. Specialists inherit shared truth, return only their delta, and return to `motion-director` for broad film work.
+
+For multiple-reference recombination, route through `mix-and-match` when installed, then return its selected direction to `motion-director` before the motion thesis is locked.
 
 For a truly narrow request, a specialist may finish independently. Do not run the whole graph when the user asked for one bounded artifact.
 

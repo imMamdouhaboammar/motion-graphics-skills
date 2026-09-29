@@ -118,7 +118,7 @@ Fix the composition first.
 
 Good Arabic kinetic patterns:
 
-- masked line rise
+- masked line rise (a word waiting for its cue is hidden as well as offset: a mask padded for dots and descenders is taller than the word, and the waiting word shows through the padding)
 - word-by-word arrival
 - baseline shift
 - large display crop

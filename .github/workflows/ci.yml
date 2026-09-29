@@ -16,6 +16,9 @@ jobs:
       - name: Validate Skills and Prompts
         run: bash validate-skills.sh
 
+      - name: Test Mix and Match helper
+        run: python skills/mix-and-match/scripts/test_mix_matrix.py
+
       - name: Test Motion Router
         run: python skills/motion-director/scripts/test_route_motion.py
 

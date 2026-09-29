@@ -55,3 +55,22 @@ TO USE THE WORK.
 For inquiries or licensing permissions, contact:
 Mamdouh Aboammar
 GitHub: https://github.com/imMamdouhaboammar
+
+==============================================================================
+THIRD-PARTY COMPONENTS
+==============================================================================
+
+The terms above cover the Owner's own work only. Files by third parties keep
+their own licences, and those licences prevail for those files. In particular,
+under projects/mgs-promo/:
+  - assets/fonts/jetbrains-mono-*.woff2: JetBrains Mono, Copyright 2020 The
+    JetBrains Mono Project Authors, SIL Open Font License 1.1. The full notice
+    and licence text are in assets/fonts/OFL-jetbrains-mono.txt.
+  - assets/cutouts/mic_akg.png, kb_wm.png, scissors.png: adapted photographs
+    under CC BY-SA 3.0 / 4.0; the adaptations are shared under the same
+    licences. Authors, sources and licence links are in ASSET_SOURCES.md.
+  - assets/cutouts/hp_iso.png: CC0 1.0.
+  - assets/vendor/gsap.min.js: GSAP, subject to https://gsap.com/standard-license.
+  - assets/fonts/thmanyah*.woff2: Thmanyah fonts, used with the rights holder's
+    permission for this project and not licensed onward by this file.
+  - assets/audio/sfx/*: from the HyperFrames SFX library, under its own terms.

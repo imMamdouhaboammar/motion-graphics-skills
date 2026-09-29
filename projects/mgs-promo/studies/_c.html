@@ -1,0 +1,23 @@
+<body>
+<div id="root" data-composition-id="main" data-start="0" data-duration="2.6" data-width="1080" data-height="1920">
+  <div class="scene night clip" id="b1" data-start="0" data-duration="1.5" data-track-index="1">
+    <div class="abs ar" id="w" style="left:0;right:0;top:640px;height:420px;text-align:center;font-family:TSerif;font-weight:900;font-size:330px;line-height:420px;color:var(--cream);clip-path:inset(0 0 0 100%)">الموشن</div>
+    <div class="abs" id="cur" style="top:660px;height:380px;width:64px;left:1020px;background:var(--clay)"></div>
+    <div class="abs ar" id="q" style="left:0;right:0;top:1090px;text-align:center;font-family:TSerif;font-weight:900;font-size:170px;color:var(--clay)">هذا؟</div>
+  </div>
+  __B2__
+</div>
+<script>
+document.fonts.ready.then(()=>{
+  const tl=gsap.timeline({paused:true});
+  // cursor sits at the right (RTL start), blinks once, then paints the word right->left
+  tl.fromTo('#cur',{opacity:1},{opacity:0,duration:0.001},0.12).to('#cur',{opacity:1,duration:0.001},0.22);
+  tl.fromTo('#cur',{x:0},{x:-1000,duration:0.5,ease:'power3.inOut'},0.30);
+  tl.fromTo('#w',{clipPath:'inset(0 0% 0 100%)'},{clipPath:'inset(0 0% 0 0%)',duration:0.5,ease:'power3.inOut'},0.30);
+  tl.to('#cur',{scaleX:0.3,transformOrigin:'0 50%',duration:0.2,ease:'power2.out'},0.80);
+  tl.fromTo('#q',{yPercent:70,opacity:0},{yPercent:0,opacity:1,duration:0.3,ease:'power2.out'},0.83);
+  tl.fromTo('#ae',{y:120,opacity:0},{y:0,opacity:1,duration:0.4,ease:'power3.out'},1.55);
+  window.__timelines["main"]=tl;
+});
+</script>
+</body></html>
