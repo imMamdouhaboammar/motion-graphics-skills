@@ -1,0 +1,19 @@
+Create a beautiful 12-second silent looping motion promo for Charlie Hills's LinkedIn AI OS. Deliver ONE self-contained index.html. Output the complete HTML only, without markdown fences. Do not use tools, browse, install, delegate or alter files. A shared renderer will execute window.seek(t) and export each model's output at the same settings.
+
+Audience: busy non-technical marketers who want a repeatable LinkedIn content workflow in their own voice.
+Purpose: a real branded example in a how-to newsletter, with a gentle invitation to apply. Do not promise automatic business results or imply a cohort date is confirmed.
+Verified public offer from https://growth.charliehills.io/linkedin-ai-os-workshop checked 25/09/2026: a six-week cohort, install and configure the LinkedIn AI OS around the participant's voice, audience and offer in weeks 1-2; a 30-day posting challenge in weeks 3-6; six weekly calls; Claude Code required. The page CTA is Get the resources & apply. The form gives resources first, then an application. Charlie is considering October or November, not confirmed. OMIT dates, prices, scarcity, follower metrics and 'doors are open'. Do not claim the system generates all content without human input.
+
+Exact visible text (these strings only, preserve wording):
+LinkedIn AI OS
+Your ideas. Your voice.
+A system you can use every week.
+Build it with me.
+Get the resources & apply
+Charlie Hills
+Claude Code required
+
+Visual concept: literal cream double doors open into a refined content workspace. Idea notes flow into a voice card, then resolve into a polished stack of LinkedIn-style post cards. No fake testimonials or metrics. End with the invitation card. Return through the doors for a seamless loop. Make it feel editorial and tactile, not a generic particle tunnel. Use strong composition, generous space, short readable lines, shadows and deliberate motion. No outside logos or images.
+Brand: navy #00132F, cream #F7F6F2, white #FFFFFF, terracotta #D97557. System sans-serif font. Tiny original pixel crab detail is optional. No external requests/fonts/libraries. Inline SVG/CSS/JS permitted.
+Canvas exactly1080x1350, responsive preview allowed. Timeline: 0-2s doors/brand, 2-5s reveal workspace and ideas/voice, 5-8s post cards/system message, 8-11s CTA held, 11-12s return. Keep Claude Code required readable on the CTA. Safe margins72px. No tiny text under32px except Charlie Hills/requirement minimum26px. Title minimum64px. Cards may use abstract rules instead of extra copy.
+Implementation: deterministic window.seek(seconds), wrap modulo12, with every visual state derived from time. Automatic requestAnimationFrame playback when not in ?render mode. Under ?render freeze until seek. Set window.__ready=true after initialisation. Reduced-motion preference displays the CTA held state. At t=0 and t=12 the image must match. Do not add controls, debug text, model name or screenshots. Return only complete HTML.

@@ -105,7 +105,7 @@ Open a fresh Codex task and check the skills load from `.agents/skills/<name>/SK
 <details>
 <summary><strong>Export to MP4</strong></summary>
 
-Add HyperFrames once (free, open source): `npx skills add heygen-com/hyperframes`. No export tools at all? [My export kit (Mac and Windows)](https://drive.google.com/file/d/18ugNPOOHqLTbkekSYPzvC1wJStMjWg8y/view?usp=drivesdk) turns any of these HTML files into an MP4.
+Add HyperFrames once (free, open source): `npx skills add heygen-com/hyperframes`. Or use the included [Animation Export Kit](tools/animation-export-kit) to turn any of these HTML files into an MP4 (Mac and Windows).
 
 </details>
 

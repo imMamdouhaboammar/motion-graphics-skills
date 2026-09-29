@@ -1,0 +1,43 @@
+Build one looping explainer animation as a single self-contained HTML file called index.html. No images, no external fonts, no libraries and nothing loaded from the internet. Draw everything with HTML, CSS and inline SVG.
+
+WHAT IT EXPLAINS
+How my LinkedIn AI OS cohort runs, week by week. It is a six-week cohort. Weeks 1-2: set the system up around your voice, your audience and your offer. Weeks 3-6: a 30-day posting challenge. Six weekly calls. Claude Code is required.
+
+SIZE AND LENGTH
+- 1080 x 1350 pixels, 12.0 seconds, silent.
+- The frame at 12.0 must match the frame at 0.0 exactly, so it loops with no jump.
+
+FIXED TEXT (use exactly these words, add no others)
+- "LinkedIn AI OS"
+- "A six-week cohort"
+- "Weeks 1-2"
+- "Set it up around you"
+- "Your voice" / "Your audience" / "Your offer"
+- "Weeks 3-6"
+- "30-day posting challenge"
+- "Six weekly calls"
+- "Claude Code required"
+- "Get the resources & apply"
+- "Charlie Hills"
+No dates, prices, places left, follower numbers or results. No testimonials. No fake app screens.
+
+THE SEQUENCE (t in seconds)
+1. 0.0-1.2  Title: "LinkedIn AI OS" and "A six-week cohort" on cream. A thin empty timeline sits below with six week ticks.
+2. 1.2-4.0  Weeks 1-2: the first third of the timeline fills in terracotta. A card rises: "Weeks 1-2", "Set it up around you", then three chips appear one by one: "Your voice", "Your audience", "Your offer".
+3. 4.0-7.2  Weeks 3-6: the rest of the timeline fills. A second card: "Weeks 3-6", "30-day posting challenge", with a 30-square grid that fills left to right, row by row.
+4. 7.2-8.6  Six call markers pop onto the timeline, one per week, with the label "Six weekly calls".
+5. 8.6-11.0 Invitation hold: the cards step back, a navy card shows "Get the resources & apply" as a button, "Claude Code required" under it, "Charlie Hills" at the bottom. Hold still long enough to read.
+6. 11.0-12.0 Return: everything eases back to the title state from step 1.
+
+LOOK
+- Cream background #F7F6F2, navy #00132F for text and dark cards, terracotta #D97557 as the one accent, white #FFFFFF for cards.
+- System sans-serif font. Title at least 88px, labels at least 34px, nothing under 30px.
+- Keep 80px clear on every edge. Generous spacing, soft shadows, no gradients on text, no glow, no bouncing.
+
+BUILD RULES
+- Work out every frame from the time alone. Add window.seek(seconds) that draws that exact moment. No CSS transitions, timers or animation loops decide what is on screen.
+- Under ?render in the URL, do not auto-play. Wait for seek. Set window.__ready = true when ready. Without ?render, play on a loop.
+- Reduced-motion setting: show the invitation hold, still.
+
+AFTER THE BUILD
+- Capture frames at 0.6, 2.5, 3.8, 6.0, 8.0, 9.8 and 11.5 seconds. Check each one for overlapping text, cut-off text and any word that is not in the fixed list. Check 0.0 and 12.0 match. Fix what is real and keep the first version.

@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>LinkedIn AI OS: Story ad</title>
+<style>
+html,body{margin:0;background:#00132F;overflow:hidden}
+#stage{position:relative;width:1080px;height:1920px;overflow:hidden;background:#00132F;color:#F7F6F2;
+  font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;-webkit-font-smoothing:antialiased}
+.abs{position:absolute}
+.line{z-index:10;left:90px;right:90px;text-align:center;font-weight:800;letter-spacing:-.035em;line-height:1.02}
+#ideas{top:700px;font-size:128px;color:#F7F6F2}
+#voice{top:720px;font-size:128px;color:#D97557}
+#system{top:330px;font-size:110px;color:#F7F6F2}
+#cta{z-index:10;left:90px;right:90px;top:330px;display:flex;flex-direction:column;align-items:center;text-align:center}
+#brand{font-size:60px;font-weight:800;color:#D97557;letter-spacing:-.01em}
+#build{font-size:120px;font-weight:800;letter-spacing:-.035em;line-height:1.02;margin-top:26px}
+#btn{margin-top:60px;font-size:46px;font-weight:800;color:#FFFFFF;background:#D97557;padding:32px 56px;border-radius:70px;white-space:nowrap}
+#req{margin-top:46px;font-size:38px;font-weight:600}
+#name{margin-top:18px;font-size:36px;font-weight:700;opacity:.8}
+.note{border-radius:22px;box-shadow:0 14px 34px rgba(0,0,0,.28);overflow:hidden}
+.note .bars,.note .face{position:absolute;inset:0}
+.bar{position:absolute;height:9%;border-radius:40px;background:#D6D1C4}
+.dot{position:absolute;left:6%;top:14%;width:13%;height:35%;border-radius:50%;background:#00132F}
+</style>
+</head>
+<body>
+<div id="stage">
+  <div id="notes"></div>
+  <div id="ideas" class="abs line">Your ideas.</div>
+  <div id="voice" class="abs line">Your voice.</div>
+  <div id="system" class="abs line">A system you can use every week.</div>
+  <div id="cta" class="abs">
+    <div id="brand">LinkedIn AI OS</div>
+    <div id="build">Build it with me.</div>
+    <div id="btn">Get the resources &amp; apply</div>
+    <div id="req">Claude Code required</div>
+    <div id="name">Charlie Hills</div>
+  </div>
+</div>
+<script>
+(function () {
+  const D = 12, TAU = Math.PI * 2;
+  const $ = id => document.getElementById(id);
+  const stage = $('stage');
+  const clamp = x => Math.max(0, Math.min(1, x));
+  const p = (t, a, b) => clamp((t - a) / (b - a));
+  const ease = x => x < .5 ? 4 * x * x * x : 1 - Math.pow(-2 * x + 2, 3) / 2;
+  const mix = (a, b, x) => a + (b - a) * x;
+
+  // Seven note shapes. Scattered (x, y, rotation), gathered (x, y), and three become cards.
+  const N = [
+    { s: [130, 430, -9],  g: [440, 1110] }, { s: [950, 480, 8],   g: [650, 1120] },
+    { s: [170, 1090, 6],  g: [540, 1210] }, { s: [915, 1050, -7], g: [460, 1240] },
+    { s: [340, 1320, 10], g: [630, 1250] }, { s: [770, 1340, -5], g: [540, 1070] },
+    { s: [545, 1190, 3],  g: [540, 1160] }];
+  const CARD = [ { c: [540, 1000, -3], low: [540, 1235, -3] }, { c: [540, 1110, 0], low: [540, 1300, 0] }, { c: [540, 1220, 3], low: [540, 1365, 3] } ];
+  const notesEl = $('notes');
+  const els = N.map((n, i) => {
+    const d = document.createElement('div'); d.className = 'note abs';
+    d.innerHTML = '<div class="bars"><div class="bar" style="left:14%;top:26%;width:72%"></div><div class="bar" style="left:14%;top:46%;width:60%"></div><div class="bar" style="left:14%;top:66%;width:66%"></div></div>' +
+      '<div class="face"><div class="dot"></div><div class="bar" style="left:23%;top:18%;width:40%;background:#00132F"></div><div class="bar" style="left:23%;top:34%;width:24%"></div>' +
+      '<div class="bar" style="left:6%;top:60%;width:86%"></div><div class="bar" style="left:6%;top:76%;width:64%"></div></div>';
+    notesEl.appendChild(d); return d;
+  });
+
+  function draw(t) {
+    t = ((t % D) + D) % D;
+    const up = ease(p(t, 2.4, 3.2));            // "Your ideas." moves up
+    const words1Out = ease(p(t, 4.8, 5.4));     // opening words leave
+    const gather = ease(p(t, 3.0, 4.6));        // notes gather
+    const card = ease(p(t, 5.0, 6.4));          // notes become cards
+    const low = ease(p(t, 7.6, 8.6));           // cards settle under the invitation
+    const ret = ease(p(t, 11.1, 12));           // back to the opening
+    const ctaOut = ease(p(t, 11.0, 11.4));
+
+    // Words
+    const ideas = $('ideas');
+    ideas.style.opacity = Math.max(1 - words1Out, ease(p(t, 11.4, 12)));
+    ideas.style.transform = `translateY(${mix(0, -170, up * (1 - ease(p(t, 11.0, 11.3))))}px)`;
+    const v = ease(p(t, 2.6, 3.3)) * (1 - words1Out);
+    $('voice').style.opacity = v;
+    $('voice').style.transform = `translateY(${mix(40, 0, v)}px)`;
+    const s = ease(p(t, 5.2, 6.0)) * (1 - ease(p(t, 7.6, 8.2)));
+    $('system').style.opacity = s;
+    $('system').style.transform = `translateY(${mix(30, 0, s)}px)`;
+    const c = ease(p(t, 8.0, 8.9)) * (1 - ctaOut);
+    $('cta').style.opacity = c;
+    $('cta').style.transform = `translateY(${mix(40, 0, c)}px)`;
+
+    // Notes and cards
+    els.forEach((el, i) => {
+      const n = N[i], drift = 14 * Math.sin(TAU * t / D + i * 1.3);
+      const sx = n.s[0] + drift, sy = n.s[1] + drift * .6, sr = n.s[2];
+      // The two top notes drop down the outer edges first, then move in, so they never cross the words
+      const gx = i < 2 ? ease(p(t, 3.9, 4.6)) : gather, gy = i < 2 ? ease(p(t, 3.0, 3.9)) : gather;
+      let x = mix(sx, n.g[0], gx), y = mix(sy, n.g[1], gy), r = mix(sr, sr * .3, gather);
+      let w = 150, h = 150, op = 1, face = 0;
+      if (i < 3) {
+        const k = CARD[i];
+        x = mix(x, k.c[0], card); y = mix(y, k.c[1], card); r = mix(r, k.c[2], card);
+        w = mix(150, 720, card); h = mix(150, 270, card); face = card;
+        const sc = mix(1, .8, low);
+        x = mix(x, k.low[0], low); y = mix(y, k.low[1], low); w *= sc; h *= sc;
+      } else {
+        op = 1 - ease(p(t, 5.0, 5.8));
+      }
+      // Return: everything eases back to its scattered opening state
+      x = mix(x, sx, ret); y = mix(y, sy, ret); r = mix(r, sr, ret);
+      w = mix(w, 150, ret); h = mix(h, 150, ret); face = face * (1 - ret); op = Math.max(op, ret);
+      el.style.width = w + 'px'; el.style.height = h + 'px';
+      el.style.left = (x - w / 2) + 'px'; el.style.top = (y - h / 2) + 'px';
+      el.style.transform = `rotate(${r}deg)`; el.style.opacity = op;
+      el.style.zIndex = i < 3 ? 3 - i : 0;
+      el.style.background = face > .5 ? '#FFFFFF' : '#F7F6F2';
+      el.children[0].style.opacity = 1 - face; el.children[1].style.opacity = face;
+    });
+  }
+
+  window.seek = s => draw(s);
+  const render = new URLSearchParams(location.search).has('render');
+  const reduce = window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches;
+  function fit() { if (render) return; const k = Math.min(innerWidth / 1080, innerHeight / 1920); stage.style.transform = `scale(${k})`; stage.style.transformOrigin = '0 0'; }
+  fit(); addEventListener('resize', fit);
+  if (render) draw(0);
+  else if (reduce) draw(10);
+  else { const t0 = performance.now(); const loop = now => { draw((now - t0) / 1000); requestAnimationFrame(loop); }; requestAnimationFrame(loop); }
+  window.__ready = true;
+})();
+</script>
+</body>
+</html>

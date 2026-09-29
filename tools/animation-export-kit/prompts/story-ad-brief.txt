@@ -1,0 +1,43 @@
+Build one looping portrait ad for an Instagram Story or Reel, as a single self-contained HTML file called index.html. No images, no external fonts, no libraries and nothing loaded from the internet. Draw everything with HTML, CSS and inline SVG.
+
+WHAT IT SAYS
+An invitation to my LinkedIn AI OS: your ideas and your voice, turned into a system you use every week, built with me. Claude Code is required.
+
+SIZE AND LENGTH
+- 1080 x 1920 pixels, 12.0 seconds, silent.
+- The frame at 12.0 must match the frame at 0.0 exactly, so it loops with no jump.
+
+SAFE ZONES
+- Keep every word between y = 300 and y = 1500. The top 300px and bottom 420px carry the platform's own buttons and captions. Nothing important there, only background shapes.
+- Keep 90px clear on the left and right.
+
+FIXED TEXT (use exactly these words, add no others)
+- "Your ideas."
+- "Your voice."
+- "A system you can use every week."
+- "LinkedIn AI OS"
+- "Build it with me."
+- "Get the resources & apply"
+- "Claude Code required"
+- "Charlie Hills"
+No dates, prices, places left, follower numbers or results. No testimonials. No logos.
+
+THE SEQUENCE (t in seconds)
+1. 0.0-2.4  Big type, one line: "Your ideas." Small abstract note shapes (rounded paper squares with blank lines, no words) drift in around it.
+2. 2.4-4.8  "Your ideas." moves up, "Your voice." lands under it. The notes gather towards the centre.
+3. 4.8-7.6  The notes straighten and turn into three clean content cards stacked with a slight fan (abstract: a circle and blank lines, no words). "A system you can use every week." sits above them.
+4. 7.6-11.0 Invitation hold: the cards slide down and settle. "LinkedIn AI OS", "Build it with me.", a terracotta button "Get the resources & apply", "Claude Code required", and "Charlie Hills". Hold still long enough to read.
+5. 11.0-12.0 Return: everything eases back to the opening state.
+
+LOOK
+- Navy background #00132F, cream #F7F6F2 and white #FFFFFF for type and cards, terracotta #D97557 as the one accent.
+- System sans-serif font. Headline lines at least 110px, the button text at least 44px, nothing under 34px.
+- Calm and editorial. Soft shadows, no glow, no bouncing, no flashing.
+
+BUILD RULES
+- Work out every frame from the time alone. Add window.seek(seconds) that draws that exact moment. No CSS transitions, timers or animation loops decide what is on screen.
+- Under ?render in the URL, do not auto-play. Wait for seek. Set window.__ready = true when ready. Without ?render, play on a loop.
+- Reduced-motion setting: show the invitation hold, still.
+
+AFTER THE BUILD
+- Capture frames at 1.2, 3.6, 6.2, 9.0 and 11.5 seconds. Check each one for overlapping text, cut-off text, any word outside the safe zone and any word that is not in the fixed list. Check 0.0 and 12.0 match. Fix what is real and keep the first version.

@@ -1,0 +1,16 @@
+{
+  "name": "animation-export-kit",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Turn an animated HTML file with window.seek(seconds) into an MP4.",
+  "type": "module",
+  "engines": {
+    "node": ">=18"
+  },
+  "scripts": {
+    "render": "node render.mjs"
+  },
+  "dependencies": {
+    "puppeteer": "23.11.1"
+  }
+}
