@@ -8,7 +8,7 @@
   <meta name="theme-color" content="#f8fafc">
   <meta name="robots" content="index,follow,max-image-preview:large">
   <link rel="canonical" href="https://immamdouhaboammar.github.io/motion-graphics-skills/">
-  <link rel="icon" href="https://raw.githubusercontent.com/imMamdouhaboammar/motion-graphics-skills/main/assets/readme/logo.svg" type="image/svg+xml">
+  <link rel="icon" href="./assets/readme/logo.svg" type="image/svg+xml">
 
   <meta property="og:type" content="website">
   <meta property="og:title" content="Give your AI agent a motion director">
@@ -49,7 +49,7 @@
 
   <header class="site-nav">
     <a class="brand" href="#top" aria-label="Motion Graphics Skills home">
-      <img class="brand-logo" src="https://raw.githubusercontent.com/imMamdouhaboammar/motion-graphics-skills/main/assets/readme/logo.svg" alt="" width="36" height="24">
+      <img class="brand-logo" src="./assets/readme/logo.svg" alt="" width="36" height="24">
       <span>Motion Graphics Skills</span>
     </a>
 
@@ -57,6 +57,7 @@
       <a href="#proof">Work</a>
       <a href="#system">System</a>
       <a href="#skills">Skills</a>
+      <a href="#guide">Guide</a>
       <a class="nav-github" href="https://github.com/imMamdouhaboammar/motion-graphics-skills">GitHub</a>
     </nav>
   </header>
@@ -79,13 +80,13 @@
         </p>
 
         <div class="hero-actions">
-          <button class="install-chip" data-copy="npx skills add imMamdouhaboammar/motion-graphics-skills" type="button">
-            <code>npx skills add imMamdouhaboammar/motion-graphics-skills</code>
+          <button class="install-chip" data-copy="bunx skills add imMamdouhaboammar/motion-graphics-skills" type="button">
+            <code>bunx skills add imMamdouhaboammar/motion-graphics-skills</code>
             <span class="copy-state" aria-live="polite">Copy</span>
           </button>
-          <a class="text-link" href="https://github.com/imMamdouhaboammar/motion-graphics-skills">
-            Open the repository
-            <span aria-hidden="true">↗</span>
+          <a class="text-link" href="#guide">
+            Read the guide
+            <span aria-hidden="true">↓</span>
           </a>
         </div>
       </div>
@@ -110,9 +111,19 @@
             <div class="frame-note">art direction before animation</div>
           </div>
 
-          <div class="director-cameo">
-            <img src="https://raw.githubusercontent.com/imMamdouhaboammar/motion-graphics-skills/main/assets/sprites/robot_director_01_128.png" alt="" width="74" height="74">
-            <span>motion-director</span>
+          <div class="director-cameo" id="heroCameo">
+            <div class="cameo-bubble" aria-live="polite">
+              <span class="bubble-tag">DIRECTOR WISDOM</span>
+              <p class="bubble-text" id="cameoTipText">"Geometry is measured, taste is reviewed."</p>
+              <div class="bubble-action-row">
+                <span class="bubble-counter" id="cameoTipCounter">1 / 6</span>
+                <button class="bubble-next" id="cameoNextBtn" type="button" aria-label="Next director tip">Tip ↻</button>
+              </div>
+            </div>
+            <a class="cameo-robot" href="#tab-fleet" id="cameoRobotLink" aria-label="Meet the 12 Director Mascots in the Guide">
+              <img src="./assets/sprites/robot_director_01_128.png" alt="Lead Motion Director mascot" width="74" height="74">
+              <span class="cameo-badge">motion-director</span>
+            </a>
           </div>
 
           <div class="timeline" aria-hidden="true">
@@ -217,8 +228,10 @@
       <div class="proof-layout">
         <figure class="proof-film proof-wide">
           <div class="video-shell">
+            <img class="video-poster" src="./assets/readme/teola-preview.gif" alt="TEOLA product launch animated preview thumbnail" width="1280" height="800" loading="lazy">
             <video
               class="lazy-video"
+              poster="./assets/readme/teola-preview.gif"
               muted
               loop
               playsinline
@@ -228,7 +241,10 @@
               aria-label="TEOLA product launch motion graphics example">
               <track kind="captions" src="./captions/teola-en.vtt" srclang="en" label="English" default>
             </video>
-            <button class="video-load" type="button">Load film</button>
+            <button class="video-load" type="button" aria-label="Play TEOLA product launch film">
+              <svg class="play-icon" viewBox="0 0 24 24" width="18" height="18" fill="currentColor" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg>
+              <span>Play film</span>
+            </button>
           </div>
           <figcaption>
             <strong>TEOLA Product Launch</strong>
@@ -238,8 +254,10 @@
 
         <figure class="proof-film proof-tall">
           <div class="video-shell portrait">
+            <img class="video-poster" src="./assets/readme/four-steps-preview.gif" alt="Four Steps Arabic motion animated preview thumbnail" width="720" height="1120" loading="lazy">
             <video
               class="lazy-video"
+              poster="./assets/readme/four-steps-preview.gif"
               muted
               loop
               playsinline
@@ -249,7 +267,10 @@
               aria-label="Four Steps Arabic event motion graphics example">
               <track kind="captions" src="./captions/four-steps-ar.vtt" srclang="ar" label="العربية" default>
             </video>
-            <button class="video-load" type="button">Load film</button>
+            <button class="video-load" type="button" aria-label="Play Four Steps Arabic motion film">
+              <svg class="play-icon" viewBox="0 0 24 24" width="18" height="18" fill="currentColor" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg>
+              <span>Play film</span>
+            </button>
           </div>
           <figcaption>
             <strong>Four Steps Events</strong>
@@ -310,6 +331,428 @@
         <p>Reference analysis</p>
         <p>Timecoded review</p>
         <p>Programmatic video</p>
+      </div>
+    </section>
+
+    <section class="guide section-shell" id="guide">
+      <div class="guide-heading">
+        <div>
+          <h2>Documentation &amp; Guide<br><span>mastering agentic motion</span></h2>
+          <p>From intake to pristine render. Everything you need to direct Claude Code, Codex, and HyperFrames with creative confidence.</p>
+        </div>
+        <div class="guide-badge-box">
+          <span class="guide-badge-status">v1.2 · 14 SKILLS · BUN-READY</span>
+        </div>
+      </div>
+
+      <div class="guide-tabs" role="tablist" aria-label="Documentation sections">
+        <button class="guide-tab is-active" role="tab" id="tab-btn-jumpstart" aria-selected="true" aria-controls="tab-jumpstart">
+          <span class="tab-num">01</span> 60-Second Jumpstart
+        </button>
+        <button class="guide-tab" role="tab" id="tab-btn-pipeline" aria-selected="false" aria-controls="tab-pipeline">
+          <span class="tab-num">02</span> 5-Stage Pipeline
+        </button>
+        <button class="guide-tab" role="tab" id="tab-btn-recipes" aria-selected="false" aria-controls="tab-recipes">
+          <span class="tab-num">03</span> Prompt Recipes
+        </button>
+        <button class="guide-tab" role="tab" id="tab-btn-fleet" aria-selected="false" aria-controls="tab-fleet">
+          <span class="tab-num">04</span> Meet The Fleet (12 Mascots)
+        </button>
+      </div>
+
+      <!-- Tab 1: Jumpstart -->
+      <div class="guide-panel is-active" id="tab-jumpstart" role="tabpanel" aria-labelledby="tab-btn-jumpstart">
+        <div class="jumpstart-grid">
+          <article class="guide-card">
+            <div class="card-step-badge">STEP 1</div>
+            <h3>Install the Skill Pack</h3>
+            <p>One command loads all 14 motion direction and production skills into your environment. Works natively with Bun and npx.</p>
+            <div class="code-box">
+              <code>bunx skills add imMamdouhaboammar/motion-graphics-skills</code>
+              <button class="inline-copy" data-copy="bunx skills add imMamdouhaboammar/motion-graphics-skills" type="button" aria-label="Copy Bun install command">Copy</button>
+            </div>
+            <div class="code-box-alt">
+              <span>npx fallback:</span>
+              <code>npx skills add imMamdouhaboammar/motion-graphics-skills</code>
+              <button class="inline-copy" data-copy="npx skills add imMamdouhaboammar/motion-graphics-skills" type="button" aria-label="Copy npx install command">Copy</button>
+            </div>
+          </article>
+
+          <article class="guide-card">
+            <div class="card-step-badge">STEP 2</div>
+            <h3>Intake Your Brand Truth</h3>
+            <p>Before animating a single pixel, run <code>brand-intake</code>. It inspects your real palette, typography, logos, and generates <code>brand.md</code> and <code>MOTION.md</code>.</p>
+            <div class="code-box prompt-bg">
+              <code>"Set up my brand for motion. Here are 3 brand assets and our hex codes."</code>
+              <button class="inline-copy" data-copy="Set up my brand for motion. Here are 3 brand assets and our hex codes." type="button" aria-label="Copy brand intake prompt">Copy</button>
+            </div>
+            <p class="card-subnote">Every other skill automatically reads those two contracts first.</p>
+          </article>
+
+          <article class="guide-card">
+            <div class="card-step-badge">STEP 3</div>
+            <h3>Direct Your First Film</h3>
+            <p>Invoke <code>motion-director</code>. Direct the agent like a human creative director, referencing styles, duration, and visual mechanisms.</p>
+            <div class="code-box prompt-bg">
+              <code>"Direct a 30s product launch video for my developer tool from reference to final render."</code>
+              <button class="inline-copy" data-copy="Direct a 30s product launch video for my developer tool from reference to final render." type="button" aria-label="Copy motion director prompt">Copy</button>
+            </div>
+            <p class="card-subnote">HyperFrames compiles deterministic timelines; the director reviews the frames.</p>
+          </article>
+        </div>
+      </div>
+
+      <!-- Tab 2: 5-Stage Pipeline -->
+      <div class="guide-panel" id="tab-pipeline" role="tabpanel" aria-labelledby="tab-btn-pipeline">
+        <div class="pipeline-list">
+          <div class="pipeline-step">
+            <div class="pipeline-num">01</div>
+            <div class="pipeline-body">
+              <div class="pipeline-title-row">
+                <h4>Brand Intake &amp; Evidence Grounding</h4>
+                <span class="pipeline-tag">brand-intake</span>
+              </div>
+              <p>Extracts colors, logos, typography, voiceover claims, and rules. Never animates against unverified or hallucinated design tokens.</p>
+              <div class="pipeline-rule">
+                <strong>Failure Lesson:</strong> "Scenes never fetch during render. One readiness promise gates the first frame."
+              </div>
+            </div>
+          </div>
+
+          <div class="pipeline-step">
+            <div class="pipeline-num">02</div>
+            <div class="pipeline-body">
+              <div class="pipeline-title-row">
+                <h4>Brief Architecture &amp; Beatboard</h4>
+                <span class="pipeline-tag">motion-brief-writer</span>
+              </div>
+              <p>Translates goals into timecoded beats, narrative arcs, and audio cues. Computes voiceover ends and reserves the end hold.</p>
+              <div class="pipeline-rule">
+                <strong>Failure Lesson:</strong> "Plan the end hold in the beat map. Duration defined once in the composition."
+              </div>
+            </div>
+          </div>
+
+          <div class="pipeline-step">
+            <div class="pipeline-num">03</div>
+            <div class="pipeline-body">
+              <div class="pipeline-title-row">
+                <h4>Visual Mechanism &amp; Staging</h4>
+                <span class="pipeline-tag">motion-director · specialists</span>
+              </div>
+              <p>Selects a physical or graphic mechanism (spotlight clock, perspective hallway, origami folding, kinetic typography) instead of arbitrary slide transitions.</p>
+              <div class="pipeline-rule">
+                <strong>Failure Lesson:</strong> "Never crossfade two saturated fields. Carry an object, shape a mask, or hard cut."
+              </div>
+            </div>
+          </div>
+
+          <div class="pipeline-step">
+            <div class="pipeline-num">04</div>
+            <div class="pipeline-body">
+              <div class="pipeline-title-row">
+                <h4>Deterministic HyperFrames Compilation</h4>
+                <span class="pipeline-tag">HyperFrames · WebGL · SVG</span>
+              </div>
+              <p>Compiles into deterministic requestAnimationFrame loops, SVG geometric transforms, and GPU shaders. Zero layout-property animations.</p>
+              <div class="pipeline-rule">
+                <strong>Failure Lesson:</strong> "Geometry is measured, taste is reviewed. Arabic dots are part of the letter."
+              </div>
+            </div>
+          </div>
+
+          <div class="pipeline-step">
+            <div class="pipeline-num">05</div>
+            <div class="pipeline-body">
+              <div class="pipeline-title-row">
+                <h4>Anti-Slop Audit &amp; Film Review</h4>
+                <span class="pipeline-tag">reel-export · QA gates</span>
+              </div>
+              <p>Generates contact sheets, tests phone-size readability, audits safe margins (>= 48px), and enforces a strict 7-rule anti-slop pass before final export.</p>
+              <div class="pipeline-rule">
+                <strong>Failure Lesson:</strong> "Diagnose from a measurement at full resolution, never solely from thumbnails."
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Tab 3: Prompt Recipes -->
+      <div class="guide-panel" id="tab-recipes" role="tabpanel" aria-labelledby="tab-btn-recipes">
+        <div class="recipes-grid">
+          <article class="recipe-card">
+            <div class="recipe-header">
+              <span class="recipe-badge">EXPLAINER</span>
+              <h3>Vox-Style Documentary</h3>
+            </div>
+            <p>Cutout paper collage, dynamic highlight pens, authentic newspaper textures, and kinetic typography.</p>
+            <div class="recipe-prompt">
+              <code>"Make a Vox-style video: explain how vector search works in 45 seconds using paper textures, highlighters, and rhythmic camera pans."</code>
+              <button class="inline-copy" data-copy='Make a Vox-style video: explain how vector search works in 45 seconds using paper textures, highlighters, and rhythmic camera pans.' type="button">Copy Prompt</button>
+            </div>
+          </article>
+
+          <article class="recipe-card">
+            <div class="recipe-header">
+              <span class="recipe-badge">LAUNCH</span>
+              <h3>Apple Keynote Minimalist</h3>
+            </div>
+            <p>Dark mode, floating hardware bezels, camera orbits, crisp spec typography, and subtle ambient glows.</p>
+            <div class="recipe-prompt">
+              <code>"Make an Apple keynote launch film for our new developer platform. Dark mode, notch interaction, fluid camera orbit, and spec callouts."</code>
+              <button class="inline-copy" data-copy='Make an Apple keynote launch film for our new developer platform. Dark mode, notch interaction, fluid camera orbit, and spec callouts.' type="button">Copy Prompt</button>
+            </div>
+          </article>
+
+          <article class="recipe-card">
+            <div class="recipe-header">
+              <span class="recipe-badge">BILINGUAL</span>
+              <h3>Arabic &amp; English Event Reel</h3>
+            </div>
+            <p>RTL reading direction, authentic Amiri Arabic ligature protection, safe descender zones, and synchronous translation.</p>
+            <div class="recipe-prompt">
+              <code>"Direct a 60s bilingual motion reel for our summit. Amiri font for Arabic RTL, Inter for English, with strict dot-zone margin protection."</code>
+              <button class="inline-copy" data-copy='Direct a 60s bilingual motion reel for our summit. Amiri font for Arabic RTL, Inter for English, with strict dot-zone margin protection.' type="button">Copy Prompt</button>
+            </div>
+          </article>
+
+          <article class="recipe-card">
+            <div class="recipe-header">
+              <span class="recipe-badge">DATA</span>
+              <h3>Animated Financial Chart</h3>
+            </div>
+            <p>Looping SVG data visualization with spring easing, verified coordinates, zero interpolation drift.</p>
+            <div class="recipe-prompt">
+              <code>"Animate this quarterly metrics table into a looping SVG line-and-bar chart with spring physics and zero value drift."</code>
+              <button class="inline-copy" data-copy='Animate this quarterly metrics table into a looping SVG line-and-bar chart with spring physics and zero value drift.' type="button">Copy Prompt</button>
+            </div>
+          </article>
+        </div>
+      </div>
+
+      <!-- Tab 4: Meet The Fleet (12 Mascots) -->
+      <div class="guide-panel" id="tab-fleet" role="tabpanel" aria-labelledby="tab-btn-fleet">
+        <div class="fleet-intro">
+          <p>Meet the 12 specialized director robots that power the skill pack. Each robot commands a specific craft discipline with its own trigger prompt and aesthetic rules.</p>
+        </div>
+
+        <div class="fleet-grid">
+          <!-- 01: Lead Motion Director -->
+          <article class="fleet-card">
+            <div class="fleet-card-header">
+              <div class="fleet-avatar">
+                <img src="./assets/sprites/robot_director_01_128.png" alt="Lead Motion Director" width="48" height="48" loading="lazy">
+              </div>
+              <div class="fleet-meta">
+                <h4>Motion Director</h4>
+                <span class="fleet-badge">Lead Choreographer</span>
+              </div>
+            </div>
+            <p class="fleet-desc">Master creative direction, narrative pacing, art direction, and HyperFrames pipeline compilation.</p>
+            <div class="fleet-prompt-box">
+              <span class="fleet-prompt-text">"Direct this motion film from reference to final render."</span>
+              <button class="fleet-copy-btn" data-copy="Direct this motion film from reference to final render." type="button">Copy</button>
+            </div>
+          </article>
+
+          <!-- 04: Brand Intake -->
+          <article class="fleet-card">
+            <div class="fleet-card-header">
+              <div class="fleet-avatar">
+                <img src="./assets/sprites/robot_director_04_128.png" alt="Brand Intake Specialist" width="48" height="48" loading="lazy">
+              </div>
+              <div class="fleet-meta">
+                <h4>Brand Intake</h4>
+                <span class="fleet-badge">Asset Inspector</span>
+              </div>
+            </div>
+            <p class="fleet-desc">Generates <code>brand.md</code> and <code>MOTION.md</code>. Gates the timeline so scenes never fetch unverified tokens.</p>
+            <div class="fleet-prompt-box">
+              <span class="fleet-prompt-text">"Set up my brand for motion. Here are five frames I like."</span>
+              <button class="fleet-copy-btn" data-copy="Set up my brand for motion. Here are five frames I like." type="button">Copy</button>
+            </div>
+          </article>
+
+          <!-- 02: Motion Brief Writer -->
+          <article class="fleet-card">
+            <div class="fleet-card-header">
+              <div class="fleet-avatar">
+                <img src="./assets/sprites/robot_director_02_128.png" alt="Motion Brief Writer" width="48" height="48" loading="lazy">
+              </div>
+              <div class="fleet-meta">
+                <h4>Brief Writer</h4>
+                <span class="fleet-badge">Story Architect</span>
+              </div>
+            </div>
+            <p class="fleet-desc">Turns raw concepts into structured beatboards, narrative arcs, and precise voiceover synchronization.</p>
+            <div class="fleet-prompt-box">
+              <span class="fleet-prompt-text">"Write me a motion brief for my next milestone post."</span>
+              <button class="fleet-copy-btn" data-copy="Write me a motion brief for my next milestone post." type="button">Copy</button>
+            </div>
+          </article>
+
+          <!-- 10: Launch Video -->
+          <article class="fleet-card">
+            <div class="fleet-card-header">
+              <div class="fleet-avatar">
+                <img src="./assets/sprites/robot_director_10_128.png" alt="Product Launch Video Specialist" width="48" height="48" loading="lazy">
+              </div>
+              <div class="fleet-meta">
+                <h4>Launch Video</h4>
+                <span class="fleet-badge">Launch Specialist</span>
+              </div>
+            </div>
+            <p class="fleet-desc">Directs high-impact 30 to 45 second commercial launches for digital products, cohorts, and platforms.</p>
+            <div class="fleet-prompt-box">
+              <span class="fleet-prompt-text">"Make a launch video for my new cohort."</span>
+              <button class="fleet-copy-btn" data-copy="Make a launch video for my new cohort." type="button">Copy</button>
+            </div>
+          </article>
+
+          <!-- 08: Apple Launch Film -->
+          <article class="fleet-card">
+            <div class="fleet-card-header">
+              <div class="fleet-avatar">
+                <img src="./assets/sprites/robot_director_08_128.png" alt="Apple Launch Film Director" width="48" height="48" loading="lazy">
+              </div>
+              <div class="fleet-meta">
+                <h4>Apple Launch Film</h4>
+                <span class="fleet-badge">Keynote Pro</span>
+              </div>
+            </div>
+            <p class="fleet-desc">Cupertino-inspired hardware keynotes with notch interactions, spec overlays, and slick camera orbits.</p>
+            <div class="fleet-prompt-box">
+              <span class="fleet-prompt-text">"Make it look like an Apple keynote launch."</span>
+              <button class="fleet-copy-btn" data-copy="Make it look like an Apple keynote launch." type="button">Copy</button>
+            </div>
+          </article>
+
+          <!-- 00: Vox Explainer -->
+          <article class="fleet-card">
+            <div class="fleet-card-header">
+              <div class="fleet-avatar">
+                <img src="./assets/sprites/robot_director_00_128.png" alt="Vox Explainer Director" width="48" height="48" loading="lazy">
+              </div>
+              <div class="fleet-meta">
+                <h4>Vox Explainer</h4>
+                <span class="fleet-badge">Documentary Drone</span>
+              </div>
+            </div>
+            <p class="fleet-desc">Documentary paper collages, archival reveals, animated tape and highlighters, and rhythmic camera pans.</p>
+            <div class="fleet-prompt-box">
+              <span class="fleet-prompt-text">"Make a Vox-style video: why do we dream?"</span>
+              <button class="fleet-copy-btn" data-copy="Make a Vox-style video: why do we dream?" type="button">Copy</button>
+            </div>
+          </article>
+
+          <!-- 03: Animated Chart -->
+          <article class="fleet-card">
+            <div class="fleet-card-header">
+              <div class="fleet-avatar">
+                <img src="./assets/sprites/robot_director_03_128.png" alt="Animated Chart Specialist" width="48" height="48" loading="lazy">
+              </div>
+              <div class="fleet-meta">
+                <h4>Animated Chart</h4>
+                <span class="fleet-badge">Precision Grapher</span>
+              </div>
+            </div>
+            <p class="fleet-desc">Looping quantitative visualizations. Mathematical accuracy with spring damping physics and zero drift.</p>
+            <div class="fleet-prompt-box">
+              <span class="fleet-prompt-text">"Animate my chart. Here are my numbers."</span>
+              <button class="fleet-copy-btn" data-copy="Animate my chart. Here are my numbers." type="button">Copy</button>
+            </div>
+          </article>
+
+          <!-- 05: Milestone Reveal -->
+          <article class="fleet-card">
+            <div class="fleet-card-header">
+              <div class="fleet-avatar">
+                <img src="./assets/sprites/robot_director_05_128.png" alt="Milestone Reveal Director" width="48" height="48" loading="lazy">
+              </div>
+              <div class="fleet-meta">
+                <h4>Milestone Reveal</h4>
+                <span class="fleet-badge">Particle Revealer</span>
+              </div>
+            </div>
+            <p class="fleet-desc">Night-sky particle constellations that pull together into your authentic metrics milestone.</p>
+            <div class="fleet-prompt-box">
+              <span class="fleet-prompt-text">"Make a milestone video for my follower count."</span>
+              <button class="fleet-copy-btn" data-copy="Make a milestone video for my follower count." type="button">Copy</button>
+            </div>
+          </article>
+
+          <!-- 09: Motion Effects -->
+          <article class="fleet-card">
+            <div class="fleet-card-header">
+              <div class="fleet-avatar">
+                <img src="./assets/sprites/robot_director_09_128.png" alt="Motion Effects Engineer" width="48" height="48" loading="lazy">
+              </div>
+              <div class="fleet-meta">
+                <h4>Motion Effects</h4>
+                <span class="fleet-badge">Kinetic FX Engineer</span>
+              </div>
+            </div>
+            <p class="fleet-desc">16 premium procedural effects: liquid morphs, particle bursts, search-to-results, and organic reveals.</p>
+            <div class="fleet-prompt-box">
+              <span class="fleet-prompt-text">"Build the search-to-results effect in my brand."</span>
+              <button class="fleet-copy-btn" data-copy="Build the search-to-results effect in my brand." type="button">Copy</button>
+            </div>
+          </article>
+
+          <!-- 11: Title Sequence 3D -->
+          <article class="fleet-card">
+            <div class="fleet-card-header">
+              <div class="fleet-avatar">
+                <img src="./assets/sprites/robot_director_11_128.png" alt="Title Sequence 3D Director" width="48" height="48" loading="lazy">
+              </div>
+              <div class="fleet-meta">
+                <h4>Title Sequence 3D</h4>
+                <span class="fleet-badge">Spatial Cinematographer</span>
+              </div>
+            </div>
+            <p class="fleet-desc">Cinematic 8 to 15 second 3D typographic openers with depth of field and dynamic volumetric lighting.</p>
+            <div class="fleet-prompt-box">
+              <span class="fleet-prompt-text">"Make a cinematic 3D intro for my next video."</span>
+              <button class="fleet-copy-btn" data-copy="Make a cinematic 3D intro for my next video." type="button">Copy</button>
+            </div>
+          </article>
+
+          <!-- 06: Model Showdown -->
+          <article class="fleet-card">
+            <div class="fleet-card-header">
+              <div class="fleet-avatar">
+                <img src="./assets/sprites/robot_director_06_128.png" alt="Model Showdown Arbiter" width="48" height="48" loading="lazy">
+              </div>
+              <div class="fleet-meta">
+                <h4>Model Showdown</h4>
+                <span class="fleet-badge">Model Arbiter</span>
+              </div>
+            </div>
+            <p class="fleet-desc">Side-by-side comparative benchmarking reels stacking multiple AI model outputs into synchronized video.</p>
+            <div class="fleet-prompt-box">
+              <span class="fleet-prompt-text">"Same prompt, three AIs. Make a model showdown."</span>
+              <button class="fleet-copy-btn" data-copy="Same prompt, three AIs. Make a model showdown." type="button">Copy</button>
+            </div>
+          </article>
+
+          <!-- 07: Reel Export & Loop Cover -->
+          <article class="fleet-card">
+            <div class="fleet-card-header">
+              <div class="fleet-avatar">
+                <img src="./assets/sprites/robot_director_07_128.png" alt="Reel Export & Distribution Optimizer" width="48" height="48" loading="lazy">
+              </div>
+              <div class="fleet-meta">
+                <h4>Reel &amp; Loop Export</h4>
+                <span class="fleet-badge">Distribution Engine</span>
+              </div>
+            </div>
+            <p class="fleet-desc">Adapts any film into 9:16 vertical reels for Instagram/TikTok and seamless looping GIF covers.</p>
+            <div class="fleet-prompt-box">
+              <span class="fleet-prompt-text">"Make this a reel for Instagram with safe captions."</span>
+              <button class="fleet-copy-btn" data-copy="Make this a reel for Instagram with safe captions." type="button">Copy</button>
+            </div>
+          </article>
+        </div>
       </div>
     </section>
 

@@ -4,10 +4,10 @@ document.querySelectorAll("[data-copy]").forEach((button) => {
   button.addEventListener("click", async () => {
     const text = button.dataset.copy;
     const state = button.querySelector(".copy-state");
+    const originalText = button.textContent;
 
     try {
       await navigator.clipboard.writeText(text);
-      state.textContent = "Copied";
     } catch {
       const area = document.createElement("textarea");
       area.value = text;
@@ -18,12 +18,19 @@ document.querySelectorAll("[data-copy]").forEach((button) => {
       area.select();
       document.execCommand("copy");
       area.remove();
-      state.textContent = "Copied";
     }
 
-    window.setTimeout(() => {
-      state.textContent = button.classList.contains("install-command") ? "Copy command" : "Copy";
-    }, 1800);
+    if (state) {
+      state.textContent = "Copied";
+      window.setTimeout(() => {
+        state.textContent = button.classList.contains("install-command") ? "Copy command" : "Copy";
+      }, 1800);
+    } else {
+      button.textContent = "Copied ✓";
+      window.setTimeout(() => {
+        button.textContent = originalText;
+      }, 1800);
+    }
   });
 });
 
@@ -32,12 +39,14 @@ document.querySelectorAll(".video-load").forEach((button) => {
     const shell = button.closest(".video-shell");
     const video = shell.querySelector("video");
 
+    shell.classList.add("is-playing");
+
     if (!video.src) {
       video.src = video.dataset.src;
       video.load();
     }
 
-    button.remove();
+    button.style.display = "none";
     video.play().catch(() => {});
   });
 });
@@ -204,3 +213,75 @@ const pageVisible = new IntersectionObserver((entries) => {
 }, { threshold: 0.1 });
 
 document.querySelectorAll("video").forEach((video) => pageVisible.observe(video));
+
+/* Director Cameo Wisdom Tips */
+const directorTips = [
+  "Geometry is measured, taste is reviewed.",
+  "Arabic dots are part of the letter — never clip the dot zone.",
+  "Never crossfade two saturated fields: cut or carry an object.",
+  "The first frame waits for everything it paints.",
+  "No card soup. One dominant visual subject per beat.",
+  "Plan the end hold in the beat map before rendering."
+];
+
+let currentTipIndex = 0;
+const tipText = document.getElementById("cameoTipText");
+const tipCounter = document.getElementById("cameoTipCounter");
+const nextBtn = document.getElementById("cameoNextBtn");
+
+function showTip(index) {
+  if (!tipText) return;
+  currentTipIndex = (index + directorTips.length) % directorTips.length;
+  tipText.textContent = `"${directorTips[currentTipIndex]}"`;
+  if (tipCounter) {
+    tipCounter.textContent = `${currentTipIndex + 1} / ${directorTips.length}`;
+  }
+}
+
+if (nextBtn) {
+  nextBtn.addEventListener("click", (e) => {
+    e.preventDefault();
+    showTip(currentTipIndex + 1);
+  });
+}
+
+if (!reducedMotion) {
+  window.setInterval(() => {
+    showTip(currentTipIndex + 1);
+  }, 7500);
+}
+
+/* Guide Tab Switching */
+const guideTabs = document.querySelectorAll(".guide-tab");
+const guidePanels = document.querySelectorAll(".guide-panel");
+
+function activateGuideTab(targetId) {
+  guideTabs.forEach((tab) => {
+    const isTarget = tab.getAttribute("aria-controls") === targetId;
+    tab.classList.toggle("is-active", isTarget);
+    tab.setAttribute("aria-selected", isTarget ? "true" : "false");
+  });
+
+  guidePanels.forEach((panel) => {
+    panel.classList.toggle("is-active", panel.id === targetId);
+  });
+}
+
+guideTabs.forEach((tab) => {
+  tab.addEventListener("click", () => {
+    const targetId = tab.getAttribute("aria-controls");
+    activateGuideTab(targetId);
+  });
+});
+
+const cameoRobotLink = document.getElementById("cameoRobotLink");
+if (cameoRobotLink) {
+  cameoRobotLink.addEventListener("click", (e) => {
+    e.preventDefault();
+    activateGuideTab("tab-fleet");
+    const guideSection = document.getElementById("guide");
+    if (guideSection) {
+      guideSection.scrollIntoView({ behavior: "smooth" });
+    }
+  });
+}
