@@ -111,10 +111,26 @@ def validate_contract(contract: dict[str, Any]) -> dict[str, Any]:
         if "must_preserve>=2" not in missing:
             missing.append("must_preserve>=2")
 
+    dominant_language = str(contract.get("dominant_language", "")).strip()
+    secondary_motifs = contract.get("secondary_motifs")
+    if not isinstance(secondary_motifs, list):
+        secondary_motifs = []
+    secondary_motifs = [
+        str(item).strip()
+        for item in secondary_motifs
+        if str(item).strip()
+    ]
+
     shortcuts = contract.get("forbidden_shortcuts")
     if difficulty_mode == "preserve":
         if not isinstance(shortcuts, list) or len([x for x in shortcuts if str(x).strip()]) < 1:
             missing.append("forbidden_shortcuts>=1")
+        if not dominant_language:
+            missing.append("dominant_language")
+        elif not is_specific(dominant_language):
+            issues.append("dominant_language is too vague to enforce")
+        if not secondary_motifs:
+            missing.append("secondary_motifs>=1")
 
     translate = contract.get("may_translate")
     if mode in {"structural-fidelity", "translation"} and not isinstance(translate, list):
@@ -125,6 +141,8 @@ def validate_contract(contract: dict[str, Any]) -> dict[str, Any]:
         "mode": mode,
         "difficulty_mode": difficulty_mode,
         "contract_ids": sorted(seen_ids),
+        "dominant_language": dominant_language,
+        "secondary_motifs": secondary_motifs,
         "missing": missing,
         "issues": issues,
     }
@@ -160,10 +178,80 @@ def validate_plan(
     unmapped = sorted(expected - mapped)
     unknown = sorted(mapped - expected)
 
+    direction_unmapped: list[str] = []
+    salience_inversions: list[str] = []
+    unapproved_style_expansions: list[str] = []
+
+    if contract_result.get("difficulty_mode") == "preserve":
+        visual_direction = plan.get("visual_direction")
+        if not isinstance(visual_direction, dict):
+            issues.append("visual_direction is required in preserve mode")
+        else:
+            direction_language = str(
+                visual_direction.get("dominant_language", "")
+            ).strip()
+            if not is_specific(direction_language):
+                issues.append(
+                    "visual_direction.dominant_language is too vague"
+                )
+
+            preserves = visual_direction.get("preserves")
+            if not isinstance(preserves, list):
+                preserves = []
+            preserves_set = {
+                str(item).strip()
+                for item in preserves
+                if str(item).strip()
+            }
+            direction_unmapped = sorted(expected - preserves_set)
+
+            promoted = visual_direction.get("promoted_secondary_motifs")
+            if not isinstance(promoted, list):
+                issues.append(
+                    "visual_direction.promoted_secondary_motifs must be a list"
+                )
+                promoted = []
+            promoted_clean = [
+                str(item).strip()
+                for item in promoted
+                if str(item).strip()
+            ]
+
+            secondary = {
+                str(item).strip().lower()
+                for item in contract_result.get("secondary_motifs", [])
+                if str(item).strip()
+            }
+            for item in promoted_clean:
+                if item.lower() in secondary:
+                    salience_inversions.append(item)
+                else:
+                    salience_inversions.append(item)
+
+            new_dominant = visual_direction.get("new_dominant_motifs")
+            if not isinstance(new_dominant, list):
+                issues.append(
+                    "visual_direction.new_dominant_motifs must be a list"
+                )
+                new_dominant = []
+            new_dominant_clean = [
+                str(item).strip()
+                for item in new_dominant
+                if str(item).strip()
+            ]
+            approved_expansion = bool(
+                visual_direction.get("user_approved_style_expansion", False)
+            )
+            if new_dominant_clean and not approved_expansion:
+                unapproved_style_expansions.extend(new_dominant_clean)
+
     return {
         "mapped_contract_ids": sorted(mapped & expected),
         "unmapped_contract_ids": unmapped,
         "unknown_contract_ids": unknown,
+        "direction_unmapped_contract_ids": direction_unmapped,
+        "salience_inversions": salience_inversions,
+        "unapproved_style_expansions": unapproved_style_expansions,
         "plan_issues": issues,
     }
 
@@ -193,6 +281,9 @@ def main() -> int:
             if (
                 plan_result["unmapped_contract_ids"]
                 or plan_result["unknown_contract_ids"]
+                or plan_result["direction_unmapped_contract_ids"]
+                or plan_result["salience_inversions"]
+                or plan_result["unapproved_style_expansions"]
                 or plan_result["plan_issues"]
             ):
                 result["status"] = "fail"
