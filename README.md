@@ -5,12 +5,12 @@
 <h1 align="center">Motion Graphics Skill Pack</h1>
 
 <p align="center">
-  <strong>14 skills for directing and building professional motion graphics with Claude Code. Every frame is code.</strong>
+  <strong>15 skills for directing and building professional motion graphics with Claude Code. Every frame is code.</strong>
 </p>
 
 <p align="center">
   <a href="https://github.com/imMamdouhaboammar/motion-graphics-skills/stargazers"><img src="https://img.shields.io/github/stars/imMamdouhaboammar/motion-graphics-skills?style=flat-square&color=D97557&labelColor=00132F&label=stars" alt="GitHub stars"></a>
-  <img src="https://img.shields.io/badge/skills-14-D97557?style=flat-square&labelColor=00132F" alt="14 skills">
+  <img src="https://img.shields.io/badge/skills-15-D97557?style=flat-square&labelColor=00132F" alt="15 skills">
   <img src="https://img.shields.io/badge/runs_in-Claude_Code_%C2%B7_Codex-58B6FF?style=flat-square&labelColor=00132F" alt="Runs in Claude Code and Codex">
   <a href="LICENSE"><img src="https://img.shields.io/badge/license-Proprietary-red?style=flat-square&labelColor=00132F" alt="Licence"></a>
   <a href="https://github.com/imMamdouhaboammar"><img src="https://img.shields.io/badge/creator-Mamdouh_Aboammar-FFD11A?style=flat-square&labelColor=00132F" alt="Creator"></a>
@@ -54,7 +54,7 @@ Download this repo (green **Code** button, then **Download ZIP**) and unzip it, 
 git clone https://github.com/imMamdouhaboammar/motion-graphics-skills.git
 ```
 
-Copy the 14 folders inside `skills/` into `~/.claude/skills/` (every project) or your project's `.claude/skills/` (one project). This loop keeps any skill folder you already have:
+Copy the 15 folders inside `skills/` into `~/.claude/skills/` (every project) or your project's `.claude/skills/` (one project). This loop keeps any skill folder you already have:
 
 ```bash
 mkdir -p ~/.claude/skills
@@ -168,11 +168,12 @@ When you want a specific job done properly, pick a skill below.
 
 ## The skills
 
-Fourteen skills, with motion-director as the broad creative front door. Type the line on the right into Claude Code and the right skill picks it up.
+Fifteen skills, with motion-director as the broad creative front door. Type the line on the right into Claude Code and the right skill picks it up.
 
 | Stage | Skill | What you get | Say this |
 |---|---|---|---|
 | <img src="assets/sprites/robot_director_01_128.png" width="22" align="absmiddle" alt="Direct"> Direct | [**motion-director**](skills/motion-director/) | Master creative direction, concept, craft, HyperFrames routing, review, and production for broad motion work. | "Direct this motion film from reference to final render." |
+| <img src="assets/sprites/robot_director_01_128.png" width="22" align="absmiddle" alt="Mix"> Mix | [**mix-and-match**](skills/mix-and-match/) | Cross-pollinates multiple references into an original concept direction with wildcard discovery and creative-distance checks. | "Mix these references into one original direction." |
 | <img src="assets/sprites/robot_director_04_128.png" width="22" align="absmiddle" alt="Set up"> Set up | [**brand-intake**](skills/brand-intake/) | Builds brand.md and MOTION.md. Every other skill reads them first. | "Set up my brand for motion. Here are five frames I like." |
 | <img src="assets/sprites/robot_director_02_128.png" width="22" align="absmiddle" alt="Plan"> Plan | [**motion-brief-writer**](skills/motion-brief-writer/) | Turns a rough idea into a precise build brief in your brand. | "Write me a motion brief for my next milestone post." |
 | <img src="assets/sprites/robot_director_10_128.png" width="22" align="absmiddle" alt="Launch"> Launch | [**launch-video**](skills/launch-video/) | A 30 to 45 second launch for a product, offer or cohort. | "Make a launch video for my new cohort." |
@@ -198,6 +199,7 @@ flowchart TD
   D["motion-director<br/>concept · art direction · runtime routing · QA"]
   B["brand-intake<br/>brand.md + MOTION.md"]
   P["motion-brief-writer"]
+  M["mix-and-match<br/>reference genes · wildcards · creative distance"]
   L["launch-video · apple-launch-film"]
   E["vox-explainer · animated-chart · milestone-reveal · motion-effects"]
   O["title-sequence-3d"]
@@ -206,6 +208,7 @@ flowchart TD
 
   D --> B
   D --> P
+  D --> M
   D --> L
   D --> E
   D --> O
@@ -221,6 +224,7 @@ For broad motion work, start with `motion-director`. Run `brand-intake` once per
 ```
 "Direct this motion film" → motion-director\n"Review this motion cut by timecode" → motion-director\n"Set up my brand" → brand-intake
 "Brief this animation" → motion-brief-writer
+"Mix these references into one original direction" → mix-and-match
 "Make a launch video for my coaching programme" → launch-video
 "Make an Apple-style launch for my app" → apple-launch-film
 "Why does every logo look the same now?" → vox-explainer
