@@ -856,6 +856,25 @@ def review_video(args: argparse.Namespace) -> int:
     round_dir = paths["round_dir"]
     evidence_dir = paths["evidence_dir"]
 
+    reference_contract = None
+    reference_items: list[dict[str, Any]] = []
+    if args.reference_contract is not None:
+        try:
+            reference_contract = json.loads(
+                args.reference_contract.read_text(encoding="utf-8")
+            )
+        except (OSError, json.JSONDecodeError) as exc:
+            raise ReviewError(f"Reference contract cannot be read: {exc}") from exc
+        if not isinstance(reference_contract, dict):
+            raise ReviewError("Reference contract must contain a JSON object")
+        fidelity = load_reference_fidelity()
+        contract_result = fidelity.validate_contract(reference_contract)
+        if contract_result["status"] != "pass":
+            raise ReviewError(
+                "Reference contract failed validation before final video review"
+            )
+        reference_items = reference_checklist(reference_contract)
+
     gpu_result = verify_gpu_decode(
         video,
         args.ffmpeg_bin,
@@ -943,6 +962,45 @@ def review_video(args: argparse.Namespace) -> int:
             {"log": "contact-sheet.log"},
         ))
 
+    reference_comparison_ok = False
+    reference_manifest = None
+    if args.reference is not None:
+        if not args.reference.is_file():
+            raise ReviewError(f"Reference video not found: {args.reference}")
+        reference_probe = probe_video(args.reference, args.ffprobe_bin)
+        _, reference_technical = analyze_probe(reference_probe, {})
+        write_json(round_dir / "reference-technical.json", reference_technical)
+        reference_duration = (
+            reference_technical.get("video", {}).get("duration")
+            if isinstance(reference_technical.get("video"), dict)
+            else reference_technical.get("format_duration")
+        )
+        reference_sheet = evidence_dir / "reference-contact-sheet.jpg"
+        reference_sheet_ok = build_contact_sheet(
+            args.reference,
+            args.ffmpeg_bin,
+            gpu_result,
+            reference_duration,
+            reference_sheet,
+            round_dir / "reference-contact-sheet.log",
+        )
+        if reference_sheet_ok and contact_ok:
+            reference_comparison_ok = build_reference_comparison(
+                reference_sheet,
+                evidence_dir / "contact-sheet.jpg",
+                args.ffmpeg_bin,
+                evidence_dir / "reference-vs-output.jpg",
+                round_dir / "reference-vs-output.log",
+            )
+        if not reference_comparison_ok:
+            findings.append(make_finding(
+                "reference-comparison-generation-failed",
+                "warning",
+                "Reference versus output comparison evidence could not be generated",
+                {"log": "reference-vs-output.log"},
+            ))
+        reference_manifest = source_manifest(args.reference)
+
     samples_ok = build_sample_frames(
         video,
         args.ffmpeg_bin,
@@ -984,7 +1042,12 @@ def review_video(args: argparse.Namespace) -> int:
             ))
 
     write_json(round_dir / "findings.json", findings)
-    write_review_markdown(round_dir / "review.md", video, findings)
+    write_review_markdown(
+        round_dir / "review.md",
+        video,
+        findings,
+        reference_items=reference_items,
+    )
 
     hard_count = sum(item["severity"] == "hard" for item in findings)
     warning_count = sum(item["severity"] == "warning" for item in findings)
@@ -998,12 +1061,19 @@ def review_video(args: argparse.Namespace) -> int:
             else "agent-review-required"
         ),
         "source": source_manifest(video),
+        "reference": reference_manifest,
+        "reference_contract": (
+            str(args.reference_contract.resolve())
+            if args.reference_contract is not None
+            else None
+        ),
         "gpu": gpu_result,
         "expectations": expectations | {
             "expect_end_hold": args.expect_end_hold,
         },
         "evidence": {
             "contact_sheet": contact_ok,
+            "reference_comparison": reference_comparison_ok,
             "sample_frames": samples_ok,
             "edge_frames": edge_frames,
             "waveform": waveform_ok,
@@ -1047,6 +1117,8 @@ def build_parser() -> argparse.ArgumentParser:
     review.add_argument("--duration-tolerance", type=float, default=0.08)
     review.add_argument("--expect-audio", action="store_true")
     review.add_argument("--expect-end-hold", type=float, default=0.0)
+    review.add_argument("--reference", type=Path)
+    review.add_argument("--reference-contract", type=Path)
     review.add_argument("--allow-cpu", action="store_true")
     review.add_argument("--ffmpeg-bin", default="ffmpeg")
     review.add_argument("--ffprobe-bin", default="ffprobe")
