@@ -103,3 +103,27 @@ Record the author at download time, from the source's metadata. Ship a credit th
 ### Status
 
 Resolved.
+
+---
+
+## A grayscale texture used as a mask masked nothing
+
+### What happened
+
+The «عرض قوي» stamp was meant to look inked: `tools/prep_textures.py` builds a seeded pressure and speckle map (`stamp-ink.png`) and the stamp uses it as `mask-image`. The shipped master showed a flat, perfectly even stamp. A reviewer (Codex, P2) spotted it on the delivered contact sheet. Nobody on the production side had, because the flat stamp looked finished.
+
+### Root cause
+
+**Confirmed**: the texture was saved as an 8-bit grayscale PNG with no alpha channel. CSS `mask-image` masks by alpha for raster images by default (`mask-mode: match-source`), so every pixel counted as fully opaque and the pressure values were never used. A snapshot with the fixed texture shows the wear; the old frame does not.
+
+### Fix
+
+`prep_textures.py` now writes the pressure values into the alpha channel (an `LA` PNG with white luminance). Alpha is read the same way by every engine, so the fix does not depend on `mask-mode: luminance` or its WebKit prefix. The other textures regenerate byte-identical from the same seeds, and the master was re-rendered and re-verified.
+
+### Prevention rule
+
+A mask texture carries its values in alpha. After adding any texture, compare one frame with it against one frame without it; if they match, the texture does nothing. "The render looks fine" cannot catch an effect that is missing, because the missing version also looks fine.
+
+### Status
+
+Resolved.

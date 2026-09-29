@@ -43,10 +43,12 @@ Search this table before debugging. If your problem matches a failure class, sta
 | Readiness swallowed asset errors | Error handlers that convert failure to success | Readiness rejects with the failing asset | Composition | Resolved | [render-pipeline](render-pipeline.md#related-failure-readiness-that-swallowed-asset-errors) |
 | Deleted donors still registered | Manifest and lock not updated with the file | Remove file, manifest and lock entry together | Repository | Resolved | [delivery-and-repo-workflow](delivery-and-repo-workflow.md#registry-donors-left-registered-after-they-were-deleted) |
 | Licence recorded without its credit | Attribution deferred to the source page | Record the author at download; ship a paste-ready credit | Assets, delivery | Resolved | [assets-and-media](assets-and-media.md#a-licence-recorded-without-the-credit-it-requires) |
+| Stamp texture never distressed the stamp | Grayscale PNG used as an alpha mask | Mask values live in alpha; compare a frame with and without every texture | Assets, CSS | Resolved | [assets-and-media](assets-and-media.md#a-grayscale-texture-used-as-a-mask-masked-nothing) |
+| Font gate passed a Latin-only subset | Red run tested total absence only; mixed-script sample | Red run reproduces the likely partial failure; measure each script apart | Verification | Resolved | [testing-and-verification](testing-and-verification.md#a-red-run-that-tested-the-easy-failure) |
 
 ## Rules we now enforce
 
-1. **A check is trusted only after it has been seen failing.** Reintroduce the defect in a copy of the project, run the check, restore.
+1. **A check is trusted only after it has been seen failing.** Reintroduce the defect in a copy of the project, run the check, restore. The red run uses the likely partial failure (a subset font, one missing script), not only a deleted file.
 2. **Duration has one owner.** The composition defines it. The render range and the mux derive from it. The hold is verified by frame count on the final file.
 3. **The first frame waits for everything it paints.** Scenes never fetch. One readiness promise, awaited by every tool.
 4. **Geometry is measured, taste is reviewed.** Clipping, margins, duration and frame counts come from tools. Composition and hierarchy come from people.
@@ -60,3 +62,4 @@ Search this table before debugging. If your problem matches a failure class, sta
 12. **"No findings" is read with "how much was measured".** After every code edit, render and look at the frames it could reach.
 13. **One change per diagnostic render.** A cause goes into code or docs only once it is confirmed.
 14. **ASR gives timings, the approved script gives words.**
+15. **Every texture proves it does something.** A frame with the texture and one without must differ. Mask values live in the alpha channel.

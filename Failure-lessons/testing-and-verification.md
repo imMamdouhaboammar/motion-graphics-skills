@@ -240,3 +240,27 @@ Change one thing per diagnostic render, or bisect when several changed. A hypoth
 
 Resolved.
 
+---
+
+## A red run that tested the easy failure
+
+### What happened
+
+The font gate (`projects/mgs-promo/tools/font-check.cjs`) had a red run on record: remove a Thmanyah file, see FAIL. A reviewer (Codex, P2) pointed out that the likely real defect is different: a Latin-only subset of the font. The gate measured one string mixing Arabic and «Claude Code», so the Latin glyphs still changed the width and the gate passed while the Arabic fell back.
+
+### Root cause
+
+**Confirmed** with a scratch copy whose Thmanyah files had their Arabic glyphs stripped (`pyftsubset --unicodes=U+0020-007E`): the old gate printed PASS. Two things were wrong. The sample mixed scripts, and the comparison used the generic family (`sans-serif`) when canvas actually paints a missing glyph in the browser default face. With only the sans face stripped, even an Arabic-only comparison against `sans-serif` passed (793 vs 799 px).
+
+### Fix
+
+Arabic and Latin are measured apart, and each face is compared with both its generic family and an undeclared family. Red: both stripped copies now FAIL. Green: the real fonts PASS.
+
+### Prevention rule
+
+The red run must reproduce the failure most likely to happen in practice, not only total absence. For fonts that means a partial file (wrong subset, missing script), measured one script at a time.
+
+### Status
+
+Resolved.
+

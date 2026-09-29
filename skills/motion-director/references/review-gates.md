@@ -113,7 +113,7 @@ Check:
 - support copy is actually support
 - line breaks are intentional
 - punctuation is correct
-- no accidental fallback
+- no accidental fallback, checked per script: measure the Arabic sample and the Latin sample apart, because a mixed string hides one script falling back
 - no transcript wallpaper
 
 ## Color gate
@@ -139,6 +139,7 @@ Check:
 - no fake text in generated imagery
 - no invented logo
 - no visual asset is only filler
+- every texture does visibly what it was made for: compare a frame with the texture against one without it (a grayscale PNG used as `mask-image` has no alpha, so it masks nothing)
 
 ## Motion gate
 
