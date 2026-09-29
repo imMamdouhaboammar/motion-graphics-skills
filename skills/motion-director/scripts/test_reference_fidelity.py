@@ -46,6 +46,13 @@ def valid_contract() -> dict:
             "density": "middle grows denser, ending becomes the quietest frame",
             "material": "object-led editorial system rather than a text-only layout",
         },
+        "dominant_language": "large object-led editorial compositions with hard light-dark resets and causal masks",
+        "secondary_motifs": [
+            "paper texture",
+            "grain",
+            "tape",
+            "print furniture"
+        ],
         "must_preserve": [
             {
                 "id": "world-flips",
@@ -119,6 +126,17 @@ class ReferenceFidelityTests(unittest.TestCase):
 
     def test_plan_must_map_every_preserved_mechanism(self) -> None:
         plan = {
+            "visual_direction": {
+                "dominant_language": "large cropped object-led scenes alternate between complete light and dark worlds",
+                "preserves": [
+                    "world-flips",
+                    "object-scale",
+                    "transition-causality"
+                ],
+                "promoted_secondary_motifs": [],
+                "new_dominant_motifs": [],
+                "user_approved_style_expansion": False,
+            },
             "implementations": [
                 {
                     "contract_id": "world-flips",
@@ -166,6 +184,93 @@ class ReferenceFidelityTests(unittest.TestCase):
             "transition-causality",
             "world-flips",
         ])
+
+
+    def test_preserve_contract_requires_salience_lock(self) -> None:
+        contract = valid_contract()
+        del contract["dominant_language"]
+        del contract["secondary_motifs"]
+        result = run_tool(contract)
+        self.assertEqual(result.returncode, 3)
+        data = json.loads(result.stdout)
+        self.assertIn("dominant_language", data["missing"])
+        self.assertIn("secondary_motifs>=1", data["missing"])
+
+    def test_plan_rejects_salience_inversion(self) -> None:
+        plan = {
+            "visual_direction": {
+                "dominant_language": "tactile paper desk with sheets tape and grain across most scenes",
+                "preserves": [
+                    "world-flips",
+                    "object-scale",
+                    "transition-causality"
+                ],
+                "promoted_secondary_motifs": [
+                    "paper texture",
+                    "grain",
+                    "tape"
+                ],
+                "new_dominant_motifs": [],
+                "user_approved_style_expansion": False,
+            },
+            "implementations": [
+                {
+                    "contract_id": "world-flips",
+                    "implementation": "alternate complete light and dark scene worlds",
+                    "verification": "major-cut comparison",
+                },
+                {
+                    "contract_id": "object-scale",
+                    "implementation": "large cropped assets dominate each object beat",
+                    "verification": "contact sheet",
+                },
+                {
+                    "contract_id": "transition-causality",
+                    "implementation": "each reset originates from a live scene object",
+                    "verification": "transition frame audit",
+                },
+            ],
+        }
+        result = run_tool(valid_contract(), plan)
+        self.assertEqual(result.returncode, 3)
+        data = json.loads(result.stdout)
+        self.assertTrue(data["salience_inversions"])
+
+    def test_plan_rejects_unapproved_new_dominant_style(self) -> None:
+        plan = {
+            "visual_direction": {
+                "dominant_language": "large cropped object-led scenes with a new glass interface world",
+                "preserves": [
+                    "world-flips",
+                    "object-scale",
+                    "transition-causality"
+                ],
+                "promoted_secondary_motifs": [],
+                "new_dominant_motifs": ["glass interface system"],
+                "user_approved_style_expansion": False,
+            },
+            "implementations": [
+                {
+                    "contract_id": "world-flips",
+                    "implementation": "alternate complete light and dark scene worlds",
+                    "verification": "major-cut comparison",
+                },
+                {
+                    "contract_id": "object-scale",
+                    "implementation": "large cropped assets dominate each object beat",
+                    "verification": "contact sheet",
+                },
+                {
+                    "contract_id": "transition-causality",
+                    "implementation": "each reset originates from a live scene object",
+                    "verification": "transition frame audit",
+                },
+            ],
+        }
+        result = run_tool(valid_contract(), plan)
+        self.assertEqual(result.returncode, 3)
+        data = json.loads(result.stdout)
+        self.assertTrue(data["unapproved_style_expansions"])
 
 
 if __name__ == "__main__":
