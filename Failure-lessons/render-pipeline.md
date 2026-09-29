@@ -224,3 +224,145 @@ Every URL or CLI option has a default path. A preview option should never be abl
 ### Status
 
 Resolved.
+
+---
+
+## A readiness promise that resolved to a timeline never resolved
+
+### Context
+
+`projects/mgs-promo/index.html` builds its scenes inside `window.__ready = ready().then(build)`. Tools outside the HyperFrames runtime (clip audit, font gate) await `window.__ready` before seeking.
+
+### What happened
+
+`build` ended with `return tl`, the GSAP timeline. A GSAP timeline is a thenable. The promise adopted it and waited for a paused timeline to complete, which never happens. The clip audit hung until its timeout twice, costing about 25 minutes, before the promise itself was tested in isolation.
+
+### Observable symptom
+
+Playwright tools stall with no output. The page looks fine, fonts report `loaded`, images are `complete`, and `window.__timelines.main` exists.
+
+### Impact
+
+Every tool that honours the readiness contract stalls. The HyperFrames render was unaffected because the runtime does not await `window.__ready`, which is why the defect stayed hidden.
+
+### Incorrect assumption
+
+That returning a useful object from the final `then` is harmless.
+
+### Root cause
+
+**Confirmed.** Each piece of `ready()` was raced against a 5 s timer in the page: images, font loads, texture decodes and `document.fonts.ready` all resolved. Only the chained promise hung. Returning `true` made it resolve at once.
+
+### Why the architecture allowed it
+
+The production renderer and the verification tools use different readiness signals. Only the tools depended on `__ready`, so the render gave no warning.
+
+### Fix
+
+`build` returns `true`, with a comment explaining why the timeline must never be returned.
+
+### Verification
+
+`tools/font-check.cjs` and `clip-audit.js` both complete after the change. Before the change, a 15 s race in the page reported `timeout`.
+
+### Prevention rule
+
+A readiness promise resolves to a plain value. Never return a GSAP timeline, tween or other thenable from a `then` callback. Every tool that awaits readiness races it against a timeout and reports "readiness never resolved" instead of hanging silently.
+
+### A second misattribution along the way
+
+While the hang was unexplained, the font gate's `page.goto` was switched from the default `load` wait to `domcontentloaded`, on the theory that four `<audio>` elements were holding the load event. That theory was wrong. After the readiness fix, `clip-audit.js` completes with the default `load` wait. The switch did no harm, but it is the same pattern as [Two changes between renders, one wrong culprit](testing-and-verification.md#two-changes-between-renders-one-wrong-culprit): test the smallest part in isolation before changing a second thing.
+
+### Reusable lesson
+
+Any library object with a `then` method (GSAP animations, some query builders, jQuery deferreds) silently changes a promise chain it is returned into.
+
+### Status
+
+Resolved. The timeout-with-message is not yet built into `clip-audit.js` (open).
+
+---
+
+## A texture swapped during capture made renders differ under load
+
+### Context
+
+The grain layer in `projects/mgs-promo/index.html` changes tile every two frames. The first version did it by assigning a new `background-image` URL to one element on every change.
+
+### What happened
+
+Renders of the same code disagreed run to run: up to 245 frames, PSNR 46 to 62 dB, spread over the whole frame at low amplitude. A pair of renders made on an idle machine matched perfectly, which briefly suggested the problem was gone.
+
+### Observable symptom
+
+Different `framemd5` hashes for the same frame across renders. Sub-visible at playback, but it breaks every "same time, same frame" comparison.
+
+### Impact
+
+Any before/after comparison, determinism claim or frame-hash regression check becomes unreliable. Earlier in the session it muddied the diagnosis of a separate bug (see [testing-and-verification.md](testing-and-verification.md#two-changes-between-renders-one-wrong-culprit)).
+
+### Incorrect assumption
+
+That a CSS background URL which was decoded once is always painted in the same frame it is assigned.
+
+### Root cause
+
+**Confirmed** as the condition, not the browser mechanism. With `tools/determinism-check.sh` (second render under CPU load):
+
+- URL-swapping grain: FAIL, 48 of 798 frames differ. A separate idle vs loaded pair differed in 111 frames.
+- Pre-painted tiles with opacity toggles: PASS, 798 of 798 identical. An idle vs loaded pair was also identical.
+- Two idle renders of the URL-swapping code: identical. The race needs contention to appear.
+
+Whether decoding or painting is late was not isolated.
+
+### Why the architecture allowed it
+
+Seeking removes timing from animation but not from resource paint. The render captures a frame as soon as the timeline is seeked, and nothing waited for a newly assigned background to paint.
+
+### Fix
+
+All three grain tiles are separate layers that are always painted. Only their opacity and position change per frame.
+
+### Verification
+
+`tools/determinism-check.sh`: red on a scratch copy with the old grain code, green on the current code. The delivered master was also re-rendered and compared by `framemd5` with 0 differing frames.
+
+### Prevention rule
+
+Nothing changes a resource URL during capture. Anything that must alternate is loaded up front and switched by opacity, transform or clip. Run the determinism check with the second render under load, because an idle pair can pass while the race is still there.
+
+### Reusable lesson
+
+The same applies to swapping `<img src>`, sprite sheets by URL, video posters, and fonts assigned late. Any fetch or decode that starts at seek time can lose the race.
+
+### Related code
+
+`#grain` and `#g0`–`#g2` in `projects/mgs-promo/index.html`, `projects/mgs-promo/tools/determinism-check.sh`.
+
+### Related lessons
+
+[Scenes built before their assets were ready](#scenes-built-before-their-assets-were-ready) is the same family at load time. This one happens during capture.
+
+### Status
+
+Resolved.
+
+---
+
+## A duration cap the supplied audio already breaks
+
+### What happened
+
+The brief asked for a film of at most 25 s. The measured WAV was 26.12 s, with the last word ending at 25.89 s. This was found at intake from `ffprobe` and `silencedetect`, before any scene was built.
+
+### Decision
+
+The VO was not sped up, trimmed or stretched, because the brief forbade secretly damaging it. The film runs the WAV plus a 0.48 s silent CTA hold (26.6 s, 798 frames), and the conflict was reported in the handoff, the PR and `beat-map.md`.
+
+### Prevention rule
+
+Measure the supplied audio against every duration constraint at intake, and record the resolution in the beat map. A cap that the master audio already breaks is the client's decision, not a silent edit.
+
+### Status
+
+Resolved as practice. Extends [Plan the end hold in the beat map](#plan-the-end-hold-in-the-beat-map).

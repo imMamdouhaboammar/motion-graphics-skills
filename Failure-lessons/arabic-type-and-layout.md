@@ -124,3 +124,86 @@ List a font's features before designing with them (`fontTools` can read WOFF2 on
 ### Status
 
 Resolved. The general rule is in `skills/motion-director/references/arabic-motion.md` (Display alternates).
+
+---
+
+## Words waiting under a mask leak through its descender padding
+
+### Context
+
+`projects/mgs-promo/index.html` reveals Arabic words with a masked rise. Each word sits in a `.m` wrapper with `overflow: hidden`. The wrapper is padded (0.12 em top, 0.3 em bottom, with matching negative margins) so that dots and descenders are never clipped once the word has arrived.
+
+### What happened
+
+Before its cue, each word waited 105 % of its own height below the mask. The mask box extends 0.3 em further down because of the padding, so the tops of the waiting words showed through the bottom band of their own masks. Seen on the first full snapshot pass: a blurred dark smudge under the «عرض قوي» stamp (the tops of "Studio", which is laid out there for a later beat), orange specks under «الموشن» (the waiting «هذا؟»), marks at the lower left at 8.1 s (the dots of «الرندر», laid out for the next beat), and a bump on the dark line at 13.8 s (the hamza of «أكثر»).
+
+### Observable symptom
+
+Stray dots, specks and smudges near where a word would later appear, visible for whole beats.
+
+### Impact
+
+Noise that reads as dirt or broken letters, especially on Arabic, where a lone dot looks like a detached letter part.
+
+### Incorrect assumption
+
+That a word shifted by 100 % of its own height is fully outside its mask. With descender padding the mask is taller than the word, so it is not.
+
+### Root cause
+
+**Confirmed**: every mark matched a waiting word's position, and all of them disappeared once waiting words were hidden.
+
+### Why the architecture allowed it
+
+The padding that protects Arabic dots in the settled state enlarges the visible window in the waiting state. The two requirements pull the same box in opposite directions.
+
+### Fix
+
+`rise()` sets the word to `opacity: 0` from time 0, switches it to `opacity: 1` at its cue, and starts the rise from `yPercent: 130`. The same was applied to the B6 words that had their own tweens.
+
+### Verification
+
+Full snapshot pass after the fix: no marks at 8.1, 13.8, 16.0 or 17.2 s. The same frames were checked at full resolution from the delivered file.
+
+### Prevention rule
+
+A word waiting for its cue must be both geometrically outside its mask box, padding included, and hidden. Never rely on the offset alone once a mask carries padding for Arabic marks.
+
+### Reusable lesson
+
+Any padded mask (clip wrappers with bleed, SVG clip paths with margins) needs its hidden state checked at the time before the reveal, not only at the time after it.
+
+### Related code
+
+`rise()` and `.m` in `projects/mgs-promo/index.html`.
+
+### Status
+
+Resolved. No automated check. `clip-audit.js` looks for cut text, not for text that should not be visible yet.
+
+---
+
+## Recurrence: the alef crop, and a Latin name that wrapped
+
+### What happened
+
+The same class as [Accidental clipping found only by eye](#accidental-clipping-found-only-by-eye) came back twice on the promo:
+
+1. Opening study B set «الموشن» at 430 px in a block wider than the frame. The frame edge cut the alef, so the word read as «لموشن», the same defect as «آخر» → «خر» on the Four Steps film. It was caught on the opening-study sheet before the full build.
+2. "Claude Code" at 172 px in an absolutely positioned box with no `white-space: nowrap` shrank to fit the space to the right of `left: 90px` and wrapped onto two lines, colliding with the timeline below.
+
+### Root cause
+
+**Confirmed** from the stills in both cases.
+
+### Fix
+
+The word stays inside the frame at 300 px. "Claude Code" is 150 px with `white-space: nowrap`, and the timeline sits below its measured line box.
+
+### Prevention rule
+
+The existing rule holds: never crop a letter that is read. Add this: every single-line display phrase gets `white-space: nowrap`, and its measured width is checked against the frame. Shrink-to-fit wrapping of Latin names is silent.
+
+### Status
+
+Resolved for this film. Recurrence shows the rule is not enforced by any tool at authoring time. The clip audit catches frame crops only after a render exists.

@@ -106,6 +106,8 @@ Keep one previous draft and the final in the repository. Store other renders as 
 
 Unresolved. The renders are in `main`. Moving them to release assets or LFS needs the owner's decision.
 
+**Applied on the promo (`projects/mgs-promo/`)**: only one previous draft (re-encoded to 3.8 MB) and the final (34.5 MB) were committed. Every other render stayed in a scratch directory outside the repository.
+
 ---
 
 ## Sending a file larger than the channel allows
@@ -122,6 +124,52 @@ A preview encode for phone review (CRF 23, capped at 4 Mbps, 17 MB), with the fu
 
 Know the delivery channel's limit before the final render. Make a review copy for chat and keep the master in storage.
 
+### Recurrence
+
+It happened again on the promo: the 34.5 MB final was sent to chat and refused at the 30 MB limit, although this entry already existed. The lesson was on record, but nothing in the handoff routine made anyone read it. A review copy (CRF 23, capped at 4 Mbps, 5.4 MB, same 1080×1920 and 798 frames) was sent afterwards.
+
+### Status
+
+Resolved as practice, recurred once. The fix is now step 1 of the handoff checklist in `skills/motion-director/references/review-gates.md`.
+
+---
+
+## Web accessibility rules applied to a render-only page
+
+### What happened
+
+An accessibility bot reviewed the composition HTML as if it were a web page: no `<main>` landmark, `<audio>` without captions, font sizes in px, an unnamed `<svg>`, and study pages with no `<title>`.
+
+### Triage
+
+- **Applied**, because they were harmless and correct: `aria-hidden="true"` on the decorative SVG, and titles on the standalone study pages.
+- **Declined, with the reason posted once**: a `<main>` wrapper (HyperFrames needs the standalone composition root directly in `<body>`), `<track>` on the audio tags (they feed the renderer and no viewer ever sees the page), rem units (the canvas is a fixed 1080×1920 frame).
+- **Acted on the intent**: viewers of the MP4 do need captions, so an Arabic WebVTT sidecar was delivered (see [assets-and-media.md](assets-and-media.md#speech-recognition-text-is-timing-data-not-caption-text)).
+
+### Prevention rule
+
+When a web-oriented reviewer flags a render composition, separate what is harmless to fix from what breaks the render contract. For each finding, ask whether the audience of the output is affected. If it is, fix it in the deliverable (captions, contrast in the frames), not in the HTML.
+
 ### Status
 
 Resolved as practice.
+
+---
+
+## The agent environment stopped mid-run
+
+### What happened
+
+In the middle of the build, the environment's permission check began returning "no verdict" for every shell command and for scheduling a reminder. Retrying spends a limited budget, and ten consecutive failures end the turn. File writes and edits still worked.
+
+### Workaround that worked
+
+Stop retrying after a few attempts. Use the time on work that needs no shell: write the asset-prep and texture steps as scripts in the repository (`tools/prep_cutouts.py`, `tools/prep_textures.py`), plus the provenance file and the README. Then end the turn with an honest status and a single next step. When the shell came back, one command ran everything that had been prepared. A side benefit: steps that had only existed as throwaway shell snippets became reproducible project scripts.
+
+### Prevention rule
+
+Keep every asset-preparation step as a script in the project from the start, not as inline shell. When tooling fails, report the outage plainly and stop, rather than burning retries or claiming progress.
+
+### Status
+
+Resolved as practice. The outage itself is outside the project.

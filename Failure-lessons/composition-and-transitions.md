@@ -164,3 +164,27 @@ Run the still-frame and creative-director gates in `skills/motion-director/refer
 ### Status
 
 Resolved for this film. The rules live in the skill.
+
+---
+
+## A round-capped stroke paints a dot before it draws
+
+### What happened
+
+The pencil sketch in B4 of `projects/mgs-promo/index.html` draws with `stroke-dasharray` and `stroke-dashoffset` (the `svg-path-draw` rule) and `stroke-linecap: round`. At full dashoffset, the dash length is zero but the round cap is still painted, so each sketch path showed a small dot at its start point before its draw began (a graphite speck at 8.1 s).
+
+### Root cause
+
+**Confirmed**: the dots were exactly at path start points and disappeared when the paths were hidden until their cue.
+
+### Fix
+
+Each sketch path is `opacity: 0` from time 0 and becomes visible at its draw cue.
+
+### Prevention rule
+
+A path drawn with dashoffset and round or square caps stays hidden until its draw starts. Butt caps do not have this problem.
+
+### Status
+
+Resolved. Worth adding to the HyperFrames `svg-path-draw` recipe upstream (not done).

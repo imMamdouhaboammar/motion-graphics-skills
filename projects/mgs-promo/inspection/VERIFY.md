@@ -26,7 +26,9 @@ Cross-correlation of the final file's audio against `assets/audio/vo-master.wav`
 
 Two independent renders of the final code: **798/798 frames bit-identical** (`framemd5`).
 
-This check caught a real bug. Earlier renders disagreed run to run (up to 245 frames, 46 to 55 dB PSNR). The cause was the grain layer swapping `background-image` every 2 frames, so a frame could be captured before the new tile had painted. All three tiles now stay painted and only opacity switches.
+This check caught a real bug. Earlier renders disagreed run to run (up to 245 frames, 46 to 62 dB PSNR). The grain layer swapped `background-image` every 2 frames. All three tiles now stay painted and only opacity switches.
+
+Proof, with `tools/determinism-check.sh` (second render under CPU load): the old grain code FAILS (48 of 798 frames differ), the current code PASSES (798 of 798). Two idle renders of the old code matched, so an idle pair does not catch this race.
 
 ## Fonts
 

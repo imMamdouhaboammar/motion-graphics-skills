@@ -232,5 +232,13 @@ Typical social delivery checks:
 - no truncated end hold (count the hold frames on the final file)
 - no missing final frame
 - every automated gate used for signoff has been seen failing on a reintroduced defect at least once
+- two renders compare frame-identical (framemd5), the second one made under CPU load, because an idle pair can hide a paint race
+- a clean audit is read together with what it measured: an audit that found no text in a beat passes it vacuously, so the frames are still viewed from the delivered file
 
 Use the runtime's own validation and ffprobe where appropriate.
+
+## Handoff checklist
+
+1. Know the delivery channel's size limit. Send a review copy for chat or messaging (the full master stays in storage).
+2. Ship caption text from the approved script. Speech recognition supplies timings only.
+3. Report any brief constraint the supplied material already breaks (for example, audio longer than the duration cap) instead of silently editing the material.

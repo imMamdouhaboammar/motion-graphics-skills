@@ -280,6 +280,8 @@ The same time should produce the same frame.
 
 Seeking removes timing from animation but not from loading. A renderer that seeks right after load exposes every race a live preview hides, such as a logo fetched while scenes are being built. Build scenes from embedded data or preloaded assets, gate the first frame on one readiness promise (fonts loaded, images decoded), and make every tool await it.
 
+That promise resolves to a plain value. Returning a GSAP timeline from its last `then` makes it wait for the paused timeline to finish, which is forever, because a timeline is a thenable. Nothing may change a resource URL during capture (swapping a `background-image` or an `<img src>` per frame). Load every variant up front and switch by opacity, or renders differ under load.
+
 ## Runtime choice
 
 ### HTML and CSS

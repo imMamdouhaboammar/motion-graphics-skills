@@ -129,6 +129,12 @@ These patterns caught real problems on this project. Each note says what it caug
 | Fault injection (impossible output path) | That the renderer really fails when ffmpeg fails | Other failure modes, such as a corrupt frame, are untested |
 | Red-green on a scratch copy of the project | Whether each check can fail, without touching the working tree | Only covers the defect you reintroduce |
 | Render once with the tail, cut the WAV-exact file from the same frames | Two deliverables that cannot drift apart | The cut must be by frame count, not time |
+| Two renders compared by `framemd5`, second one under CPU load (`projects/mgs-promo/tools/determinism-check.sh`) | A paint race in the grain layer that an idle pair of renders did not show | Only races that load provokes; it cannot prove the absence of rarer ones |
+| Cross-correlating the final file's audio with the master WAV | VO offset (0 ms) and a silent tail, measured on the delivered file rather than read from the command | Needs the master WAV; SFX lower the correlation a little |
+| Stills and contact sheets taken from the delivered MP4, not from the composition | A blank opening that snapshots of an older code state did not show | Only the frames you sample |
+| Font gate from `document.fonts` status plus width against the fallback face (`projects/mgs-promo/tools/font-check.cjs`) | That every declared face loaded; the red run with a missing file fails readiness | Width can match by coincidence; confirm with the DevTools platform-font check when available |
+| Whisper large-v3 word times cross-checked against `silencedetect` pauses | A beat map built on measured times; every pause over 120 ms lined up with a word gap | The transcript's words are not reliable Arabic (see below) |
+| Three opening studies snapshotted on one sheet before the build | A crop that cut the alef of «الموشن», and a weak first frame in two of the three routes | Judges only the first seconds |
 
 ---
 
@@ -149,3 +155,88 @@ Send long-running progress to a log file you can read (`2>&1 | tee render.log`),
 ### Status
 
 Resolved as practice.
+
+---
+
+## An audit passes when the thing it measures is missing
+
+### Context
+
+`projects/mgs-promo/index.html`, opening beat B1: «الموشن» is built from five slices created in script.
+
+### What happened
+
+A scripted text replacement added an explanatory `//` comment in front of the slice-positioning statements on the same line. Everything after `//` became part of the comment, so the slices lost their `top` and `height`, and B1 rendered as an empty dark frame with only the timecode. Lint passed, `hyperframes check` passed, and `clip-audit.js` reported PASS for 0 to 26.6 s. The audit passed because it found no visible text to measure in B1. Only the render, checked by pixel count and by eye, showed the empty frame.
+
+### Observable symptom
+
+A PASS from the geometry audit, and a render whose first 1.5 s had no hero word.
+
+### Impact
+
+The film's hook would have shipped blank if the final had not been re-rendered and inspected.
+
+### Incorrect assumption
+
+That a clean audit means the text is present and correct. It only means that no visible text is clipped.
+
+### Root cause
+
+**Confirmed**: the line in the diff, and B1 restored as soon as the statements moved to their own lines (bright pixels in the word band went from 0 to 72,199).
+
+### Why the architecture allowed it
+
+The audit measures what exists and has no list of what must exist. Edits made by string replacement inside one long line are easy to break this way and hard to see in a diff.
+
+### Fix
+
+The statements moved to their own lines. The final was re-rendered, a contact sheet was built from the delivered file, and every beat was viewed.
+
+### Verification
+
+`python3` pixel count on snapshots at 0.2 s and 1.0 s: 0 bright pixels before the fix, about 72,000 after. The clip audit was re-run afterwards with the word present.
+
+### Prevention rule
+
+After any code edit, render and look at the frames that edit could reach. A geometry or clipping audit is not a presence check. When a beat has a hero word, assert that it is visible (a pixel count in its band, or a DOM check that the text has a non-zero box) as well as unclipped. Never put a comment on the same line in front of code, especially when editing with scripts.
+
+### Reusable lesson
+
+Every "no findings" result must be read together with "how much was measured". An audit that sampled zero items passes.
+
+### Status
+
+Resolved for this film. The clip audit still does not report how many text runs it measured per beat (open).
+
+---
+
+## Two changes between renders, one wrong culprit
+
+### What happened
+
+Between two renders, two things changed: the readiness promise stopped returning the timeline, and `data-crop="intentional"` was added to the B1 slices. The next render had a blank B1. The attribute was blamed. It was removed from production, and a code comment and `inspection/VERIFY.md` stated that "HyperFrames reserves data-crop". The real cause was the swallowed line described above. Frame differences from the paint race (render-pipeline) also muddied the comparison at the time.
+
+### Incorrect assumption
+
+That the most unusual of the recent changes is the cause.
+
+### Root cause
+
+**Confirmed.** The HyperFrames runtime has no reference to `data-crop`. A render with the attribute restored is frame-identical to one without it (798 of 798 frames by `framemd5`).
+
+### Impact
+
+A false statement about the framework reached the repository in two places. Future readers would have avoided a working convention of this pack (`data-crop` is how `clip-audit.js` learns about designed crops).
+
+### Fix
+
+The attribute is back on the slices, and the claim is removed from the code comment and from `VERIFY.md`.
+
+### Prevention rule
+
+Change one thing per diagnostic render, or bisect when several changed. A hypothesis goes into code or docs only after it has been confirmed, with the evidence named. Otherwise label it as a hypothesis.
+
+### Status
+
+Resolved.
+

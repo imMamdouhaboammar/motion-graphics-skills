@@ -25,6 +25,20 @@ Search this table before debugging. If your problem matches a failure class, sta
 | Stale outputs at final paths | In-progress files at final location | Final paths hold only verified artifacts | Repository | Resolved as practice | [delivery-and-repo-workflow](delivery-and-repo-workflow.md#stale-outputs-inside-the-working-tree) |
 | Built on a merge that was not in main | History assumed, not checked | `merge-base --is-ancestor` before building on merged work | Repository | Resolved | [delivery-and-repo-workflow](delivery-and-repo-workflow.md#assuming-a-merge-landed) |
 | 310 MB of renders in Git | Binaries in normal history | One draft and the final in the repo, the rest elsewhere | Repository | Unresolved | [delivery-and-repo-workflow](delivery-and-repo-workflow.md#heavy-binaries-in-normal-git-history) |
+| Readiness promise never resolved | Thenable returned into a promise chain | Readiness resolves to a plain value; tools time out with a message | Composition, tooling | Resolved | [render-pipeline](render-pipeline.md#a-readiness-promise-that-resolved-to-a-timeline-never-resolved) |
+| Renders differed under load | Resource URL swapped during capture | Load every variant up front, switch by opacity; determinism check with the second render under load | Render | Resolved | [render-pipeline](render-pipeline.md#a-texture-swapped-during-capture-made-renders-differ-under-load) |
+| Brief cap shorter than the supplied VO | Constraint conflict found late | Measure supplied media against every constraint at intake; report, never silently edit | Beat map | Resolved as practice | [render-pipeline](render-pipeline.md#a-duration-cap-the-supplied-audio-already-breaks) |
+| Stray dots and smudges before words arrive | Hidden state of a padded mask not checked | A waiting word is outside its mask box and hidden | Type, masks | Resolved (no automated check) | [arabic-type-and-layout](arabic-type-and-layout.md#words-waiting-under-a-mask-leak-through-its-descender-padding) |
+| Alef cut again, Latin name wrapped | Clipping rule not enforced at authoring time | Nowrap plus measured width on every display line; never crop a read letter | Type, layout | Recurred, resolved for this film | [arabic-type-and-layout](arabic-type-and-layout.md#recurrence-the-alef-crop-and-a-latin-name-that-wrapped) |
+| Dot at the start of undrawn strokes | Round caps paint at zero dash length | Hide dash-drawn paths until their draw starts | SVG | Resolved | [composition-and-transitions](composition-and-transitions.md#a-round-capped-stroke-paints-a-dot-before-it-draws) |
+| Blank hero beat passed every check | Audit with nothing to measure passes | Read "no findings" with "how much was measured"; render and look after every edit | Verification | Resolved (audit has no presence check) | [testing-and-verification](testing-and-verification.md#an-audit-passes-when-the-thing-it-measures-is-missing) |
+| False framework claim written into code | Several changes per diagnostic render; guess recorded as fact | One change per diagnostic render; only confirmed causes go into code or docs | Diagnosis | Resolved | [testing-and-verification](testing-and-verification.md#two-changes-between-renders-one-wrong-culprit) |
+| Generator unusable despite a live connector | Credit assumed from connectivity | Read-only balance check first; licensed offline route ready | Assets | Resolved as practice | [assets-and-media](assets-and-media.md#a-generation-service-that-is-connected-is-not-a-service-that-can-generate) |
+| ML background removal destroyed products | Tool used outside its domain | Key flat-backdrop stock; check cutouts on light and dark; one treatment for all | Assets | Resolved (bright metal on white unsolved) | [assets-and-media](assets-and-media.md#the-ml-background-remover-failed-on-product-shots) |
+| ASR misspelled brand and Arabic words | Recognizer text treated as script | ASR for timings, approved script for text | Captions | Resolved | [assets-and-media](assets-and-media.md#speech-recognition-text-is-timing-data-not-caption-text) |
+| Final too large for chat, again | Lesson on record but not in the routine | Review copy is step 1 of the handoff checklist | Delivery | Recurred, now in the skill | [delivery-and-repo-workflow](delivery-and-repo-workflow.md#sending-a-file-larger-than-the-channel-allows) |
+| Web a11y rules on a render page | Reviewer's frame of reference differs from the artifact | Fix what is harmless, explain what breaks the render, serve the real audience in the deliverable | Review | Resolved as practice | [delivery-and-repo-workflow](delivery-and-repo-workflow.md#web-accessibility-rules-applied-to-a-render-only-page) |
+| Shell unavailable mid-run | Environment outage | Prep steps as project scripts; stop retrying, report honestly | Tooling | Resolved as practice | [delivery-and-repo-workflow](delivery-and-repo-workflow.md#the-agent-environment-stopped-mid-run) |
 
 ## Rules we now enforce
 
@@ -37,3 +51,8 @@ Search this table before debugging. If your problem matches a failure class, sta
 7. **No opacity blend between two saturated fields.** Cut, shape a mask, or carry an object across.
 8. **Diagnose at full resolution.** A contact sheet points at a candidate. It never proves a geometric defect.
 9. **Docs and deliverables ship together.** A README never names a file the same commit does not contain.
+10. **Same time, same frame, even under load.** Renders are compared by frame hash with the second one made on a busy machine. Nothing swaps a resource URL during capture.
+11. **A readiness promise resolves to a plain value.** Every tool that awaits it has a timeout that says so.
+12. **"No findings" is read with "how much was measured".** After every code edit, render and look at the frames it could reach.
+13. **One change per diagnostic render.** A cause goes into code or docs only once it is confirmed.
+14. **ASR gives timings, the approved script gives words.**
