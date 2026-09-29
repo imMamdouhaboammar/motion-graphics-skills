@@ -41,7 +41,14 @@ def make_round(
         "source": source_manifest,
     }
     if reference:
-        manifest["reference"] = {"path": "/tmp/reference.mp4"}
+        reference_path = root / "reference.mp4"
+        reference_path.write_bytes(b"reference-fixture")
+        ref_stat = reference_path.stat()
+        manifest["reference"] = {
+            "path": str(reference_path.resolve()),
+            "size_bytes": ref_stat.st_size,
+            "mtime_ns": ref_stat.st_mtime_ns,
+        }
     (root / "manifest.json").write_text(
         json.dumps(manifest),
         encoding="utf-8",
@@ -229,6 +236,31 @@ class ReviewRoundTests(unittest.TestCase):
             status = mod.round_status(round_dir)
             self.assertEqual(status["status"], "agent-review-required")
             self.assertIn("strict-signals.json:invalid", status["missing_evidence"])
+
+
+    def test_completed_round_is_invalidated_when_reference_changes(self) -> None:
+        mod = load_module()
+        with tempfile.TemporaryDirectory() as tmp:
+            round_dir = make_round(
+                Path(tmp) / "round",
+                reference=True,
+                strict_signals=True,
+            )
+            mod.attest(
+                round_dir,
+                watched_with_audio=True,
+                watched_muted=True,
+                first_second_inspected=True,
+                transitions_inspected=True,
+                ending_inspected=True,
+                reference_compared=True,
+                strict_signals_inspected=True,
+            )
+            reference = round_dir / "reference.mp4"
+            reference.write_bytes(b"changed-reference-fixture")
+            status = mod.round_status(round_dir)
+            self.assertEqual(status["status"], "reference-artifact-changed")
+            self.assertTrue(status["reference_changed"])
 
 
 if __name__ == "__main__":
