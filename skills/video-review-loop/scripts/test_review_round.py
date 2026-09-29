@@ -102,6 +102,7 @@ class ReviewRoundTests(unittest.TestCase):
                 transitions_inspected=True,
                 ending_inspected=True,
                 reference_compared=False,
+                strict_signals_inspected=False,
             )
             self.assertEqual(mod.round_status(round_dir)["status"], "blocked-machine-hard-findings")
 
