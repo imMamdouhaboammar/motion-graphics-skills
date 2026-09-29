@@ -18,3 +18,6 @@ jobs:
 
       - name: Test Motion Router
         run: python skills/motion-director/scripts/test_route_motion.py
+
+      - name: Test GPU Policy
+        run: python skills/motion-director/scripts/test_gpu_policy.py
