@@ -191,7 +191,7 @@ python "$VIDEO_REVIEW_SKILL_DIR/scripts/strict_video_signals.py" final.mp4 \
 
 Then inspect the actual playback with audio and muted, inspect the first second densely, inspect all important transitions frame by frame, inspect every strict-signal candidate, inspect the CTA and ending, and compare the result against the approved motion thesis and reference contract.
 
-Record confirmed visual defects with `review_round.py add`, attest the required visual passes with `review_round.py attest`, and run `review_round.py status` before signoff.
+Record confirmed visual defects with `review_round.py add`. When attesting the visual pass, include `--strict-signals-inspected` after inspecting every candidate in `strict-signals.json`, and include `--reference-compared` whenever a benchmark reference exists. Then run `review_round.py status` before signoff.
 
 Machine findings are evidence, not taste.
 
