@@ -88,60 +88,94 @@ def available_categories(refs: list[dict]) -> list[str]:
     return ordered + extras
 
 
+def find_assignment(
+    refs: list[dict],
+    categories: list[str],
+    target_slots: int,
+    rng: random.Random,
+    max_per_source: int,
+) -> list[tuple[str, dict]] | None:
+    ordered_categories = sorted(categories)
+    rng.shuffle(ordered_categories)
+    source_ids = [ref["id"] for ref in refs]
+    ref_by_id = {ref["id"]: ref for ref in refs}
+
+    options: dict[str, list[str]] = {}
+    for category in ordered_categories:
+        source_options = [
+            ref["id"] for ref in refs if category in ref["_genes"]
+        ]
+        rng.shuffle(source_options)
+        options[category] = source_options
+
+    counts: Counter = Counter()
+    memo: set[tuple[int, int, tuple[int, ...]]] = set()
+
+    def search(position: int, slots_left: int) -> list[tuple[str, str]] | None:
+        if slots_left == 0:
+            return []
+        if len(ordered_categories) - position < slots_left:
+            return None
+        if (
+            sum(max_per_source - counts[source_id] for source_id in source_ids)
+            < slots_left
+        ):
+            return None
+
+        state = (
+            position,
+            slots_left,
+            tuple(counts[source_id] for source_id in source_ids),
+        )
+        if state in memo:
+            return None
+        memo.add(state)
+
+        category = ordered_categories[position]
+        for source_id in options[category]:
+            if counts[source_id] >= max_per_source:
+                continue
+            counts[source_id] += 1
+            rest = search(position + 1, slots_left - 1)
+            counts[source_id] -= 1
+            if rest is not None:
+                return [(category, source_id), *rest]
+
+        return search(position + 1, slots_left)
+
+    assignment = search(0, target_slots)
+    if assignment is None:
+        return None
+    return [
+        (category, ref_by_id[source_id])
+        for category, source_id in assignment
+    ]
+
+
 def build_recipe(refs: list[dict], categories: list[str], seed: int, index: int) -> dict:
     rng = random.Random(seed + index * 1009)
     target_slots = min(6, len(categories))
     if len(refs) <= 2 and target_slots > 2 and target_slots % 2:
         target_slots -= 1
-    remaining = set(categories)
-    counts: Counter = Counter()
-    limit = source_limit(target_slots, len(refs))
-    slots = []
 
-    for _ in range(target_slots):
-        eligible = [
-            ref
-            for ref in refs
-            if any(category in ref["_genes"] for category in remaining)
-        ]
-        if not eligible:
+    base_limit = source_limit(target_slots, len(refs))
+    assignment = None
+    used_limit = base_limit
+    for candidate_limit in range(base_limit, target_slots + 1):
+        assignment = find_assignment(
+            refs,
+            categories,
+            target_slots,
+            rng,
+            candidate_limit,
+        )
+        if assignment is not None:
+            used_limit = candidate_limit
             break
 
-        under_limit = [ref for ref in eligible if counts[ref["id"]] < limit]
-        pool = under_limit or eligible
-        min_count = min(counts[ref["id"]] for ref in pool)
-        pool = [ref for ref in pool if counts[ref["id"]] == min_count]
-
-        candidates = [
-            (ref, category)
-            for ref in pool
-            for category in sorted(remaining)
-            if category in ref["_genes"]
-        ]
-        rng.shuffle(candidates)
-        used = set(counts)
-
-        def candidate_score(candidate: tuple[dict, str]) -> tuple[int, int, int]:
-            ref, category = candidate
-            next_counts = counts.copy()
-            next_counts[ref["id"]] += 1
-            next_remaining = remaining - {category}
-            future = {
-                other["id"]
-                for other in refs
-                if next_counts[other["id"]] < limit
-                and any(item in other["_genes"] for item in next_remaining)
-            }
-            source_options = sum(item in ref["_genes"] for item in remaining)
-            competition = sum(category in other["_genes"] for other in refs)
-            return (
-                len(used | {ref["id"]} | future),
-                -source_options,
-                -competition,
-            )
-
-        source, category = max(candidates, key=candidate_score)
-        remaining.remove(category)
+    slots = []
+    counts: Counter = Counter()
+    for category, source in assignment or []:
         gene = rng.choice(source["_genes"][category])
         counts[source["id"]] += 1
         slots.append(
@@ -159,12 +193,19 @@ def build_recipe(refs: list[dict], categories: list[str], seed: int, index: int)
         for source_id, count in counts.items()
         if slots
     }
-    max_share = max(shares.values(), default=0.0)
+    max_share = (
+        max(counts.values(), default=0) / len(slots)
+        if slots
+        else 0.0
+    )
     warnings = []
     if len(shares) < 2:
         warnings.append("recipe uses fewer than two sources")
-    threshold = 0.50 if len(refs) <= 2 else 0.40
-    if max_share > threshold:
+
+    base_threshold = 0.50 if len(refs) <= 2 else 0.40
+    achievable_threshold = used_limit / len(slots) if slots else base_threshold
+    threshold = max(base_threshold, achievable_threshold)
+    if max_share > threshold + 1e-9:
         warnings.append(
             f"source dominance {max_share:.0%} exceeds target {threshold:.0%}"
         )
@@ -175,7 +216,6 @@ def build_recipe(refs: list[dict], categories: list[str], seed: int, index: int)
         "source_share": shares,
         "warnings": warnings,
     }
-
 
 def main() -> int:
     parser = argparse.ArgumentParser()
