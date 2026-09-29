@@ -22,5 +22,8 @@ jobs:
       - name: Test GPU Policy
         run: python skills/motion-director/scripts/test_gpu_policy.py
 
+      - name: Test Browser GPU Probe
+        run: node skills/motion-director/scripts/test_browser_gpu_probe.cjs
+
       - name: Test Video Review Loop
         run: python skills/video-review-loop/scripts/test_review_video.py
