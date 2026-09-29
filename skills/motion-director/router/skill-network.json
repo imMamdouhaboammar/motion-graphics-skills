@@ -101,6 +101,13 @@
       "optional": false
     },
     {
+      "name": "reference-fidelity",
+      "kind": "tool",
+      "path": "skills/motion-director/scripts/reference_fidelity.py",
+      "role": "reference-gate",
+      "optional": false
+    },
+    {
       "name": "mix-and-match",
       "kind": "skill",
       "path": "skills/mix-and-match/SKILL.md",
@@ -319,6 +326,18 @@
         "rendered video",
         "delivery contract",
         "motion thesis"
+      ],
+      "returns": "motion-director"
+    },
+    {
+      "from": "motion-director",
+      "to": "reference-fidelity",
+      "relation": "prepares",
+      "when": "reference_mode is structural-fidelity or challenge mode preserves reference difficulty",
+      "passes": [
+        "reference study",
+        "reference contract",
+        "difficulty intent"
       ],
       "returns": "motion-director"
     }
