@@ -58,7 +58,9 @@ def normalize_genes(ref: dict) -> dict[str, list[str]]:
             values = [values]
         if not isinstance(values, list):
             continue
-        clean = [str(value).strip() for value in values if str(value).strip()]
+        if not all(isinstance(value, str) and value.strip() for value in values):
+            continue
+        clean = [value.strip() for value in values]
         if clean:
             result[str(category)] = clean
     return result
@@ -67,7 +69,8 @@ def normalize_genes(ref: dict) -> dict[str, list[str]]:
 def source_limit(slot_count: int, source_count: int) -> int:
     if source_count <= 2:
         return math.ceil(slot_count / 2)
-    return max(1, math.floor(slot_count * 0.40))
+    return max(math.ceil(slot_count / source_count), math.floor(slot_count * 0.40))
+
 
 
 def available_categories(refs: list[dict]) -> list[str]:
@@ -160,7 +163,6 @@ def build_recipe(refs: list[dict], categories: list[str], seed: int, index: int)
 
     base_limit = source_limit(target_slots, len(refs))
     assignment = None
-    used_limit = base_limit
     for candidate_limit in range(base_limit, target_slots + 1):
         assignment = find_assignment(
             refs,
@@ -170,7 +172,6 @@ def build_recipe(refs: list[dict], categories: list[str], seed: int, index: int)
             candidate_limit,
         )
         if assignment is not None:
-            used_limit = candidate_limit
             break
 
     slots = []
@@ -203,7 +204,7 @@ def build_recipe(refs: list[dict], categories: list[str], seed: int, index: int)
         warnings.append("recipe uses fewer than two sources")
 
     base_threshold = 0.50 if len(refs) <= 2 else 0.40
-    achievable_threshold = used_limit / len(slots) if slots else base_threshold
+    achievable_threshold = base_limit / len(slots) if slots else base_threshold
     threshold = max(base_threshold, achievable_threshold)
     if max_share > threshold + 1e-9:
         warnings.append(

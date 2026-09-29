@@ -198,6 +198,55 @@ class MixMatrixTests(unittest.TestCase):
         self.assertEqual(max(recipe["source_share"].values()), 0.50)
         self.assertEqual(recipe["warnings"], [])
 
+    def test_rejects_non_string_gene_values(self) -> None:
+        payload = {
+            "references": [
+                {
+                    "id": "A",
+                    "genes": {
+                        "motion": [None],
+                    },
+                },
+                {
+                    "id": "B",
+                    "genes": {
+                        "material": [None],
+                    },
+                },
+            ]
+        }
+        result = run_tool(payload)
+        self.assertEqual(result.returncode, 2)
+        self.assertIn("at least two usable gene categories", result.stderr)
+
+    def test_warns_on_source_dominance_when_relaxed(self) -> None:
+        payload = {
+            "references": [
+                {
+                    "id": "A",
+                    "genes": {
+                        "metaphor": ["a1"],
+                        "structure": ["a2"],
+                        "rhythm": ["a3"],
+                        "composition": ["a4"],
+                        "typography": ["a5"],
+                    },
+                },
+                {
+                    "id": "B",
+                    "genes": {
+                        "motion": ["b1"],
+                    },
+                },
+            ]
+        }
+        result = run_tool(payload, "--recipes", "1", "--seed", "0")
+        self.assertEqual(result.returncode, 0, result.stderr)
+        recipe = json.loads(result.stdout)["recipes"][0]
+        self.assertEqual(recipe["source_share"]["A"], 0.833)
+        self.assertEqual(len(recipe["warnings"]), 1)
+        self.assertIn("source dominance 83% exceeds target 50%", recipe["warnings"][0])
+
     def test_is_deterministic_for_same_seed(self) -> None:
         payload = {
             "references": [
@@ -225,3 +274,4 @@ class MixMatrixTests(unittest.TestCase):
 
 if __name__ == "__main__":
     unittest.main()
+
