@@ -9,6 +9,7 @@ that deserve frame-by-frame visual inspection.
 from __future__ import annotations
 
 import argparse
+import importlib.util
 import json
 import math
 import re
@@ -19,6 +20,40 @@ from typing import Any
 
 FRAME_RE = re.compile(r"frame:\s*(?P<frame>\d+).*?pts_time:(?P<time>[-+0-9.]+)")
 META_RE = re.compile(r"lavfi\.signalstats\.(?P<key>[A-Z0-9]+)=(?P<value>[-+0-9.eE]+)")
+GPU_POLICY_PATH = (
+    Path(__file__).resolve().parents[2]
+    / "motion-director"
+    / "scripts"
+    / "gpu_policy.py"
+)
+
+
+def load_gpu_policy():
+    spec = importlib.util.spec_from_file_location("motion_gpu_policy", GPU_POLICY_PATH)
+    if spec is None or spec.loader is None:
+        raise RuntimeError(f"GPU policy is unavailable at {GPU_POLICY_PATH}")
+    module = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(module)
+    return module
+
+
+def resolve_gpu(ffmpeg_bin: str, allow_cpu: bool) -> tuple[dict[str, Any], list[str]]:
+    gpu = load_gpu_policy()
+    signals = gpu.probe_signals(ffmpeg_bin)
+    code, decision = gpu.evaluate(
+        signals,
+        require=True,
+        allow_cpu=allow_cpu,
+    )
+    if code != 0:
+        raise RuntimeError(
+            "Strict signal audit requires a supported GPU decode path. "
+            "Use --allow-cpu only when CPU fallback is explicitly acceptable"
+        )
+    input_args: list[str] = []
+    if decision.get("decision") == "gpu":
+        input_args = list(decision.get("gpu", {}).get("ffmpeg_input_args", []))
+    return decision, input_args
 
 
 def parse_float(value: str) -> float | None:
@@ -113,20 +148,33 @@ def detect_extreme_luma_changes(
     return findings
 
 
-def run_signalstats(video: Path, ffmpeg_bin: str) -> str:
+def signalstats_argv(
+    video: Path,
+    ffmpeg_bin: str,
+    input_args: list[str],
+) -> list[str]:
+    return [
+        ffmpeg_bin,
+        "-hide_banner",
+        *input_args,
+        "-i",
+        str(video),
+        "-vf",
+        "signalstats,metadata=print",
+        "-an",
+        "-f",
+        "null",
+        "-",
+    ]
+
+
+def run_signalstats(
+    video: Path,
+    ffmpeg_bin: str,
+    input_args: list[str] | None = None,
+) -> str:
     result = subprocess.run(
-        [
-            ffmpeg_bin,
-            "-hide_banner",
-            "-i",
-            str(video),
-            "-vf",
-            "signalstats,metadata=print",
-            "-an",
-            "-f",
-            "null",
-            "-",
-        ],
+        signalstats_argv(video, ffmpeg_bin, input_args or []),
         text=True,
         capture_output=True,
         check=False,
@@ -137,8 +185,12 @@ def run_signalstats(video: Path, ffmpeg_bin: str) -> str:
     return output
 
 
-def analyze(video: Path, ffmpeg_bin: str) -> dict[str, Any]:
-    frames = parse_signalstats(run_signalstats(video, ffmpeg_bin))
+def analyze(
+    video: Path,
+    ffmpeg_bin: str,
+    input_args: list[str] | None = None,
+) -> dict[str, Any]:
+    frames = parse_signalstats(run_signalstats(video, ffmpeg_bin, input_args))
     flashes = detect_one_frame_flashes(frames)
     luma_changes = detect_extreme_luma_changes(frames)
     return {
@@ -158,6 +210,11 @@ def build_parser() -> argparse.ArgumentParser:
     parser.add_argument("video", type=Path)
     parser.add_argument("--ffmpeg-bin", default="ffmpeg")
     parser.add_argument("--output", type=Path)
+    parser.add_argument(
+        "--allow-cpu",
+        action="store_true",
+        help="explicitly permit CPU decode when no supported GPU path is available",
+    )
     return parser
 
 
@@ -168,7 +225,9 @@ def main() -> int:
         return 2
 
     try:
-        result = analyze(args.video, args.ffmpeg_bin)
+        gpu_decision, input_args = resolve_gpu(args.ffmpeg_bin, args.allow_cpu)
+        result = analyze(args.video, args.ffmpeg_bin, input_args)
+        result["gpu"] = gpu_decision
     except (OSError, RuntimeError) as exc:
         print(json.dumps({"status": "blocked", "error": str(exc)}, ensure_ascii=False, indent=2))
         return 2
