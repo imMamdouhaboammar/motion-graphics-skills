@@ -20,10 +20,18 @@ def load_module():
     return module
 
 
-def make_round(root: Path, machine_hard: int = 0) -> Path:
+def make_round(
+    root: Path,
+    machine_hard: int = 0,
+    *,
+    reference: bool = False,
+) -> Path:
     root.mkdir(parents=True)
+    manifest = {"finding_counts": {"hard": machine_hard, "warning": 0}}
+    if reference:
+        manifest["reference"] = {"path": "/tmp/reference.mp4"}
     (root / "manifest.json").write_text(
-        json.dumps({"finding_counts": {"hard": machine_hard, "warning": 0}}),
+        json.dumps(manifest),
         encoding="utf-8",
     )
     return root
@@ -89,6 +97,24 @@ class ReviewRoundTests(unittest.TestCase):
                 reference_compared=False,
             )
             self.assertEqual(mod.round_status(round_dir)["status"], "blocked-machine-hard-findings")
+
+
+    def test_reference_round_requires_reference_comparison_attestation(self) -> None:
+        mod = load_module()
+        with tempfile.TemporaryDirectory() as tmp:
+            round_dir = make_round(Path(tmp) / "round", reference=True)
+            mod.attest(
+                round_dir,
+                watched_with_audio=True,
+                watched_muted=True,
+                first_second_inspected=True,
+                transitions_inspected=True,
+                ending_inspected=True,
+                reference_compared=False,
+            )
+            status = mod.round_status(round_dir)
+            self.assertEqual(status["status"], "agent-review-required")
+            self.assertIn("reference_compared", status["missing_attestations"])
 
 
 if __name__ == "__main__":
