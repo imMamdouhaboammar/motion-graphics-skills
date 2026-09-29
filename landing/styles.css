@@ -5,6 +5,7 @@
   --ink: #00132f;
   --ink-soft: #4a5566;
   --coral: #d97557;
+  --coral-text: #a84b32;
   --gold: #e2b44c;
   --cyan: #58b6ff;
   --rule: rgba(0, 19, 47, 0.14);
@@ -171,7 +172,7 @@ footer {
   font-style: italic;
   font-weight: 400;
   letter-spacing: -0.025em;
-  color: var(--coral);
+  color: var(--coral-text);
 }
 
 .hero-lede {
@@ -239,7 +240,7 @@ footer {
   flex: none;
   font-size: 0.72rem;
   font-weight: 700;
-  color: var(--coral);
+  color: var(--coral-text);
   text-transform: uppercase;
   letter-spacing: 0.08em;
 }
@@ -1187,4 +1188,9 @@ footer a {
   .playhead {
     left: 72%;
   }
+}
+
+.proof-wide .video-shell video {
+  object-fit: contain;
+  background: var(--ink);
 }
