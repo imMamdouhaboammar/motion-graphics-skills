@@ -1,0 +1,13 @@
+{
+  "name": "four-steps-events-film",
+  "private": true,
+  "description": "Tooling for the Four Steps events film: frame-exact render, stills, font check.",
+  "scripts": {
+    "serve": "python3 -m http.server 8765 --bind 127.0.0.1",
+    "render": "node tools/render.js \"\" renders/out-video.mp4 0 54.361 30",
+    "fontcheck": "node tools/fontcheck.js"
+  },
+  "devDependencies": {
+    "playwright": "^1.56.1"
+  }
+}

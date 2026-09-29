@@ -1,0 +1,58 @@
+<!doctype html>
+<html lang="ar">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Four Steps, events film</title>
+<style>
+@font-face{font-family:TS;src:url(assets/fonts/thmanyahsans-Light.woff2) format('woff2');font-weight:300}
+@font-face{font-family:TS;src:url(assets/fonts/thmanyahsans-Regular.woff2) format('woff2');font-weight:400}
+@font-face{font-family:TS;src:url(assets/fonts/thmanyahsans-Medium.woff2) format('woff2');font-weight:500}
+@font-face{font-family:TS;src:url(assets/fonts/thmanyahsans-Bold.woff2) format('woff2');font-weight:700}
+@font-face{font-family:TS;src:url(assets/fonts/thmanyahsans-Black.woff2) format('woff2');font-weight:900}
+@font-face{font-family:TD;src:url(assets/fonts/thmanyahserifdisplay-Regular.woff2) format('woff2');font-weight:400}
+@font-face{font-family:TD;src:url(assets/fonts/thmanyahserifdisplay-Medium.woff2) format('woff2');font-weight:500}
+@font-face{font-family:TD;src:url(assets/fonts/thmanyahserifdisplay-Bold.woff2) format('woff2');font-weight:700}
+@font-face{font-family:TD;src:url(assets/fonts/thmanyahserifdisplay-Black.woff2) format('woff2');font-weight:900}
+:root{--paper:#F3EEE5;--paper2:#E6DED2;--card:#FBF7F0;--ink:#11110F;--ink2:#777168;--blue:#192EE8;--navy:#000032;--volt:#CAF222}
+html,body{margin:0;background:#111;height:100%;overflow:hidden}
+#wrap{position:absolute;left:50%;top:50%;width:1080px;height:1920px;transform-origin:0 0;overflow:hidden}
+#stage{position:absolute;inset:0;overflow:hidden;background:var(--paper);font-family:TS;color:var(--ink);direction:rtl}
+#stage *{box-sizing:border-box}
+.a{position:absolute}
+.scene{position:absolute;inset:0;overflow:hidden}
+.txt{position:absolute;white-space:nowrap;direction:rtl}
+.txt .ln{display:block}
+.txt .w{display:inline-block;will-change:transform}
+.mask .ln{overflow:hidden;padding:.16em .08em .34em;margin:-.16em -.08em -.34em}
+.lift{filter:drop-shadow(3px 4px 2px rgba(17,17,15,.16))}
+.ltr{direction:ltr;unicode-bidi:isolate}
+/* three elevations only: low (cards), medium (props, posters), high (hero objects above the composition) */
+.card{position:absolute;background:var(--card);box-shadow:3px 4px 0 rgba(17,17,15,.05),5px 6px 8px rgba(17,17,15,.15)}
+.card.e2{box-shadow:4px 6px 0 rgba(17,17,15,.05),10px 12px 16px rgba(17,17,15,.19)}
+.card.e3{box-shadow:6px 8px 0 rgba(17,17,15,.05),18px 22px 28px rgba(17,17,15,.24)}
+/* one print treatment for every photographic prop: warm, desaturated, slightly flat */
+.cut{position:absolute;display:block;filter:saturate(.45) sepia(.12) contrast(.9) brightness(1.04) drop-shadow(10px 12px 9px rgba(17,17,15,.24))}
+.cut.hi{filter:saturate(.45) sepia(.12) contrast(.9) brightness(1.04) drop-shadow(16px 20px 14px rgba(17,17,15,.27))}
+.cut.flat{filter:grayscale(.75) sepia(.14) contrast(.82) brightness(1.06) drop-shadow(10px 12px 9px rgba(17,17,15,.24))}
+.lbl{font-family:TS;font-weight:500;color:var(--ink2)}
+.card .a{white-space:nowrap}
+svg{overflow:visible}
+#fx{position:absolute;inset:0;pointer-events:none}
+#tone{position:absolute;left:-20%;top:-20%;width:140%;height:140%;transform:rotate(15deg);opacity:.22;mix-blend-mode:multiply;
+ background-image:radial-gradient(circle,rgba(17,17,15,.16) 0 .9px,transparent 1.2px);background-size:4px 4px}
+#vig{position:absolute;inset:0;background:radial-gradient(ellipse 90% 80% at 50% 48%,transparent 70%,rgba(40,34,26,.06) 100%);mix-blend-mode:multiply}
+.grain{position:absolute;inset:0;width:1080px;height:1920px;mix-blend-mode:overlay;opacity:.075;display:none}
+#transcript.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+#hud{position:fixed;left:8px;bottom:8px;color:#aaa;font:12px monospace;direction:ltr}
+</style>
+</head>
+<body>
+<main id="wrap" aria-label="Four Steps events film"><div id="stage" aria-hidden="true"></div><div id="fx"></div></main>
+<div id="hud"></div>
+<audio id="vo" src="assets/vo.wav" preload="auto" aria-describedby="transcript"><track kind="captions" src="assets/captions.ar.vtt" srclang="ar" label="العربية" default></audio>
+<p id="transcript" class="sr" lang="ar" dir="rtl">آخر فعالية كبيرة حضرتها وطلعت منها منبهر، تذكر وش اللي علق في بالك؟ المسرح؟ الإضاءة؟ ولا التنظيم اللي كان ماشي كأنه ساعة؟ كل هذا وراه ليالي تخطيط، وفريق يعرف إن أصغر غلطة قدام آلاف الضيوف تنحسب. في Four Steps، هذا شغلنا كل يوم. أدرنا فعاليات لأكبر الجهات في المملكة. من مؤتمر ومعرض الحج، لندوة الحج الكبرى، لمناسبات رسمية كل ضيف فيها له بروتوكول، وكل دقيقة لها حساب. نبدأ معك من الفكرة. نخطط، نجهز المكان والتقنية، ننتج المحتوى المرئي، ونغطي الحدث إعلاميًا لين يطلع آخر ضيف. وبعد ما تنطفي الأضواء، يبقى عندك حدث الناس تتكلم عنه، ومحتوى تستفيد منه شهور. عندك فعالية جاية؟ خلّها تنذكر باسمك. Four Steps. نمشي معك خطوة بخطوة، لين يصير الحدث. شيء الناس تشوفه، تعيشه، وتتذكره</p>
+<script src="assets/brand/event-logos.js"></script>
+<script src="film.js"></script>
+</body>
+</html>
