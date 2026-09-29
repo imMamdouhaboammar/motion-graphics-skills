@@ -79,6 +79,61 @@ class StrictVideoSignalTests(unittest.TestCase):
         argv = mod.signalstats_argv(Path("/tmp/final.mp4"), "ffmpeg", [])
         self.assertEqual(argv[:3], ["ffmpeg", "-hide_banner", "-i"])
 
+    def test_run_audit_retries_on_cpu_when_hardware_decode_fails_and_allow_cpu_is_true(self) -> None:
+        from unittest.mock import patch
+        mod = load_module()
+        gpu_decision = {
+            "decision": "gpu",
+            "backend": "videotoolbox",
+            "gpu": {
+                "ffmpeg_input_args": ["-hwaccel", "videotoolbox"],
+                "verification": "unverified",
+            },
+        }
+
+        call_args_list = []
+
+        def fake_analyze(video, ffmpeg_bin, input_args=None):
+            call_args_list.append(input_args)
+            if input_args:
+                raise RuntimeError("Hardware decode failed for codec")
+            return {
+                "status": "pass",
+                "findings": [],
+                "frames_analyzed": 10,
+                "source": str(video),
+            }
+
+        with patch.object(mod, "resolve_gpu", return_value=(gpu_decision, ["-hwaccel", "videotoolbox"])):
+            with patch.object(mod, "analyze", side_effect=fake_analyze):
+                result = mod.run_audit(Path("/tmp/test.mp4"), allow_cpu=True)
+                self.assertEqual(len(call_args_list), 2)
+                self.assertEqual(call_args_list[0], ["-hwaccel", "videotoolbox"])
+                self.assertIsNone(call_args_list[1])
+                self.assertEqual(result["gpu"]["decision"], "cpu-fallback-explicit")
+                self.assertEqual(
+                    result["gpu"]["reason"],
+                    "gpu-backend-detected-but-media-decode-failed",
+                )
+                self.assertEqual(result["gpu"]["gpu"]["verification"], "media-decode-failed")
+
+    def test_run_audit_does_not_retry_when_allow_cpu_is_false(self) -> None:
+        from unittest.mock import patch
+        mod = load_module()
+        gpu_decision = {
+            "decision": "gpu",
+            "backend": "videotoolbox",
+            "gpu": {"ffmpeg_input_args": ["-hwaccel", "videotoolbox"]},
+        }
+
+        def fake_analyze(video, ffmpeg_bin, input_args=None):
+            raise RuntimeError("Hardware decode failed")
+
+        with patch.object(mod, "resolve_gpu", return_value=(gpu_decision, ["-hwaccel", "videotoolbox"])):
+            with patch.object(mod, "analyze", side_effect=fake_analyze):
+                with self.assertRaises(RuntimeError):
+                    mod.run_audit(Path("/tmp/test.mp4"), allow_cpu=False)
+
 
 if __name__ == "__main__":
     unittest.main()

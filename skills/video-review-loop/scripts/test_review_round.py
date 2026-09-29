@@ -83,13 +83,101 @@ class ReviewRoundTests(unittest.TestCase):
             )
             self.assertEqual(item["id"], "V001")
             self.assertEqual(mod.round_status(round_dir)["status"], "blocked-visual-hard-findings")
+            later_artifact = Path(tmp) / "round-2-final.mp4"
+            later_artifact.write_bytes(b"new-rendered-content")
             mod.resolve_finding(
                 round_dir,
                 "V001",
                 resolution="fixed in next render",
-                evidence="round-2 final.mp4 at 00:04.280",
+                evidence="round-2-final.mp4 at 00:04.280",
+                later_artifact=later_artifact,
             )
             self.assertEqual(mod.round_status(round_dir)["pending_hard_count"], 0)
+
+    def test_resolve_hard_finding_without_later_artifact_or_acceptance_fails(self) -> None:
+        mod = load_module()
+        with tempfile.TemporaryDirectory() as tmp:
+            round_dir = make_round(Path(tmp) / "round")
+            mod.add_finding(
+                round_dir,
+                timestamp="00:04.280",
+                severity="hard",
+                defect="Arabic headline clips",
+                fix="increase safe area",
+                evidence="inspection",
+            )
+            with self.assertRaises(ValueError):
+                mod.resolve_finding(
+                    round_dir,
+                    "V001",
+                    resolution="fixed in source code",
+                    evidence="git commit 12345",
+                )
+
+    def test_resolve_hard_finding_with_unchanged_source_fails(self) -> None:
+        mod = load_module()
+        with tempfile.TemporaryDirectory() as tmp:
+            round_dir = make_round(Path(tmp) / "round")
+            source_file = round_dir / "source.mp4"
+            mod.add_finding(
+                round_dir,
+                timestamp="00:04.280",
+                severity="hard",
+                defect="Arabic headline clips",
+                fix="increase safe area",
+                evidence="inspection",
+            )
+            with self.assertRaises(ValueError):
+                mod.resolve_finding(
+                    round_dir,
+                    "V001",
+                    resolution="reviewed again",
+                    evidence="source.mp4",
+                    later_artifact=source_file,
+                )
+
+    def test_resolve_hard_finding_with_user_acceptance_succeeds(self) -> None:
+        mod = load_module()
+        with tempfile.TemporaryDirectory() as tmp:
+            round_dir = make_round(Path(tmp) / "round")
+            mod.add_finding(
+                round_dir,
+                timestamp="00:04.280",
+                severity="hard",
+                defect="Arabic headline clips",
+                fix="increase safe area",
+                evidence="inspection",
+            )
+            mod.resolve_finding(
+                round_dir,
+                "V001",
+                resolution="user-accepted intentional stylistic crop",
+                evidence="client email approval",
+                user_accepted=True,
+            )
+            self.assertEqual(mod.round_status(round_dir)["pending_hard_count"], 0)
+
+    def test_round_status_keeps_hard_finding_pending_if_unproven(self) -> None:
+        mod = load_module()
+        with tempfile.TemporaryDirectory() as tmp:
+            round_dir = make_round(Path(tmp) / "round")
+            mod.add_finding(
+                round_dir,
+                timestamp="00:04.280",
+                severity="hard",
+                defect="Arabic headline clips",
+                fix="increase safe area",
+                evidence="inspection",
+            )
+            findings_file = mod.findings_path(round_dir)
+            findings = json.loads(findings_file.read_text(encoding="utf-8"))
+            findings[0]["status"] = "resolved"
+            findings[0]["resolution"] = "arbitrary text"
+            findings_file.write_text(json.dumps(findings), encoding="utf-8")
+
+            status = mod.round_status(round_dir)
+            self.assertEqual(status["pending_hard_count"], 1)
+            self.assertEqual(status["status"], "blocked-visual-hard-findings")
 
     def test_clean_round_still_requires_visual_attestation(self) -> None:
         mod = load_module()

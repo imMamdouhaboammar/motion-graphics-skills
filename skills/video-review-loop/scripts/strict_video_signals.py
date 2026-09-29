@@ -226,6 +226,34 @@ def build_parser() -> argparse.ArgumentParser:
     return parser
 
 
+def run_audit(
+    video: Path,
+    ffmpeg_bin: str = "ffmpeg",
+    allow_cpu: bool = False,
+) -> dict[str, Any]:
+    gpu_decision, input_args = resolve_gpu(ffmpeg_bin, allow_cpu)
+    try:
+        result = analyze(video, ffmpeg_bin, input_args)
+        if gpu_decision.get("decision") == "gpu":
+            gpu_decision = dict(gpu_decision)
+            gpu_decision["gpu"] = dict(gpu_decision.get("gpu", {}))
+            gpu_decision["gpu"]["verification"] = "media-decode-verified"
+        result["gpu"] = gpu_decision
+        return result
+    except RuntimeError as exc:
+        if input_args and allow_cpu:
+            result = analyze(video, ffmpeg_bin, None)
+            fallback = dict(gpu_decision)
+            fallback["decision"] = "cpu-fallback-explicit"
+            fallback["reason"] = "gpu-backend-detected-but-media-decode-failed"
+            if "gpu" in gpu_decision:
+                fallback["gpu"] = dict(gpu_decision["gpu"])
+                fallback["gpu"]["verification"] = "media-decode-failed"
+            result["gpu"] = fallback
+            return result
+        raise
+
+
 def main() -> int:
     args = build_parser().parse_args()
     if not args.video.is_file():
@@ -233,9 +261,7 @@ def main() -> int:
         return 2
 
     try:
-        gpu_decision, input_args = resolve_gpu(args.ffmpeg_bin, args.allow_cpu)
-        result = analyze(args.video, args.ffmpeg_bin, input_args)
-        result["gpu"] = gpu_decision
+        result = run_audit(args.video, args.ffmpeg_bin, args.allow_cpu)
     except (OSError, RuntimeError) as exc:
         print(json.dumps({"status": "blocked", "error": str(exc)}, ensure_ascii=False, indent=2))
         return 2

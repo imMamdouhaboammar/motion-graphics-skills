@@ -100,14 +100,85 @@ def resolve_finding(
     *,
     resolution: str,
     evidence: str,
+    later_artifact: Path | str | None = None,
+    later_round: Path | str | None = None,
+    user_accepted: bool = False,
 ) -> dict[str, Any]:
     findings = load_findings(round_dir)
+    manifest = load_json(round_dir / "manifest.json", {})
+    current_source = manifest.get("source") if isinstance(manifest, dict) else None
+
     for item in findings:
         if item.get("id") == finding_id:
+            resolved_artifact: dict[str, Any] | None = None
+            outcome = "user-accepted" if user_accepted else "fixed-in-later-render"
+
+            if not user_accepted and (
+                "user-accepted" in resolution.lower()
+                or "accepted by user" in resolution.lower()
+                or "user accepted" in resolution.lower()
+                or "user-accepted" in evidence.lower()
+            ):
+                outcome = "user-accepted"
+
+            if later_round is not None:
+                lr_path = Path(later_round)
+                lr_manifest = load_json(lr_path / "manifest.json", {})
+                if not isinstance(lr_manifest, dict) or not lr_manifest.get("source"):
+                    raise ValueError(f"Invalid later round manifest at {lr_path}")
+                resolved_artifact = dict(lr_manifest["source"])
+                outcome = "fixed-in-later-round"
+            elif later_artifact is not None:
+                art_path = Path(later_artifact).resolve()
+                if not art_path.is_file():
+                    raise ValueError(f"Later artifact file not found: {art_path}")
+                stat = art_path.stat()
+                resolved_artifact = {
+                    "path": str(art_path),
+                    "size_bytes": stat.st_size,
+                    "mtime_ns": stat.st_mtime_ns,
+                }
+                outcome = "fixed-in-later-artifact"
+            elif outcome != "user-accepted":
+                ev_tokens = evidence.strip().split()
+                if ev_tokens:
+                    first_token = Path(ev_tokens[0])
+                    if first_token.is_dir() and (first_token / "manifest.json").is_file():
+                        lr_manifest = load_json(first_token / "manifest.json", {})
+                        if isinstance(lr_manifest, dict) and lr_manifest.get("source"):
+                            resolved_artifact = dict(lr_manifest["source"])
+                            outcome = "fixed-in-later-round"
+                    elif first_token.is_file():
+                        stat = first_token.resolve().stat()
+                        resolved_artifact = {
+                            "path": str(first_token.resolve()),
+                            "size_bytes": stat.st_size,
+                            "mtime_ns": stat.st_mtime_ns,
+                        }
+                        outcome = "fixed-in-later-artifact"
+
+            if item.get("severity") == "hard":
+                if outcome != "user-accepted":
+                    if not resolved_artifact:
+                        raise ValueError(
+                            "Hard visual findings must reference and fingerprint a later round/artifact "
+                            "(--later-artifact / --later-round) or record explicit user acceptance (--user-accepted)"
+                        )
+                    if current_source and (
+                        resolved_artifact.get("path") == current_source.get("path")
+                        and resolved_artifact.get("size_bytes") == current_source.get("size_bytes")
+                        and resolved_artifact.get("mtime_ns") == current_source.get("mtime_ns")
+                    ):
+                        raise ValueError(
+                            "Hard visual finding cannot be resolved while reviewed source artifact is unchanged"
+                        )
+
             item["status"] = "resolved"
             item["resolved_at"] = datetime.now(timezone.utc).isoformat()
             item["resolution"] = resolution
             item["resolution_evidence"] = evidence
+            item["resolution_outcome"] = outcome
+            item["resolved_artifact"] = resolved_artifact
             write_json(findings_path(round_dir), findings)
             return item
     raise ValueError(f"Unknown finding id: {finding_id}")
@@ -203,6 +274,30 @@ def strict_signal_evidence_valid(
     return source_path == str(manifest_source.get("path", "")).strip()
 
 
+def is_finding_resolved(
+    item: dict[str, Any],
+    current_source: dict[str, Any] | None,
+) -> bool:
+    if item.get("status") != "resolved":
+        return False
+    if item.get("severity") != "hard":
+        return True
+    if item.get("resolution_outcome") == "user-accepted":
+        return True
+    artifact = item.get("resolved_artifact")
+    if not artifact or not isinstance(artifact, dict):
+        return False
+    if not artifact_matches_manifest(artifact):
+        return False
+    if current_source and (
+        artifact.get("path") == current_source.get("path")
+        and artifact.get("size_bytes") == current_source.get("size_bytes")
+        and artifact.get("mtime_ns") == current_source.get("mtime_ns")
+    ):
+        return False
+    return True
+
+
 def round_status(round_dir: Path) -> dict[str, Any]:
     manifest = load_json(round_dir / "manifest.json", {})
     findings = load_findings(round_dir)
@@ -210,7 +305,13 @@ def round_status(round_dir: Path) -> dict[str, Any]:
     if not isinstance(state, dict):
         state = {}
 
-    pending = [item for item in findings if item.get("status") != "resolved"]
+    current_source = (
+        manifest.get("source") if isinstance(manifest, dict) else None
+    )
+    pending = [
+        item for item in findings
+        if not is_finding_resolved(item, current_source)
+    ]
     pending_hard = [item for item in pending if item.get("severity") == "hard"]
 
     required_attestations = list(REQUIRED_ATTESTATIONS)
@@ -297,6 +398,23 @@ def build_parser() -> argparse.ArgumentParser:
     resolve.add_argument("--id", required=True)
     resolve.add_argument("--resolution", required=True)
     resolve.add_argument("--evidence", required=True)
+    resolve.add_argument(
+        "--later-artifact",
+        type=Path,
+        default=None,
+        help="path to later rendered video artifact",
+    )
+    resolve.add_argument(
+        "--later-round",
+        type=Path,
+        default=None,
+        help="path to later review round directory",
+    )
+    resolve.add_argument(
+        "--user-accepted",
+        action="store_true",
+        help="explicitly record user acceptance of the defect",
+    )
 
     pending = sub.add_parser("pending")
     pending.add_argument("round_dir", type=Path)
@@ -338,12 +456,19 @@ def main() -> int:
                 args.id,
                 resolution=args.resolution,
                 evidence=args.evidence,
+                later_artifact=args.later_artifact,
+                later_round=args.later_round,
+                user_accepted=args.user_accepted,
             )
         elif args.command == "pending":
+            manifest = load_json(args.round_dir / "manifest.json", {})
+            current_source = (
+                manifest.get("source") if isinstance(manifest, dict) else None
+            )
             result = {
                 "pending": [
                     item for item in load_findings(args.round_dir)
-                    if item.get("status") != "resolved"
+                    if not is_finding_resolved(item, current_source)
                 ]
             }
         elif args.command == "attest":

@@ -479,6 +479,26 @@ def create_round_paths(root: Path, video: Path) -> dict[str, Path]:
     gitignore = ignore_dir / ".gitignore"
     if not gitignore.exists():
         gitignore.write_text("*\n!.gitignore\n", encoding="utf-8")
+    else:
+        existing = gitignore.read_text(encoding="utf-8")
+        existing_lines = {line.strip() for line in existing.splitlines()}
+        if "*" not in existing_lines:
+            rules_to_add = [
+                rule
+                for rule in [
+                    "[0-9]*T*Z-*",
+                    "*.log",
+                    "evidence/",
+                    "manifest.json",
+                ]
+                if rule not in existing_lines
+            ]
+            if rules_to_add:
+                separator = "\n" if existing.endswith("\n") else "\n\n"
+                gitignore.write_text(
+                    existing + separator + "\n".join(rules_to_add) + "\n",
+                    encoding="utf-8",
+                )
 
     stamp = datetime.now(timezone.utc).strftime("%Y%m%dT%H%M%S.%fZ")
     round_dir = root / f"{stamp}-{safe_stem(video)}"

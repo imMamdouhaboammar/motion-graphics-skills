@@ -245,6 +245,24 @@ class VideoReviewTests(unittest.TestCase):
                 "*\n!.gitignore\n",
             )
 
+    def test_custom_round_root_appends_rules_to_existing_gitignore(self) -> None:
+        review = load_module()
+        with tempfile.TemporaryDirectory() as tmp:
+            project = Path(tmp)
+            root = project / "reviews"
+            root.mkdir(parents=True)
+            local_gitignore = root / ".gitignore"
+            local_gitignore.write_text("*.notes\n", encoding="utf-8")
+
+            paths = review.create_round_paths(root, Path("/tmp/My Film.mp4"))
+            self.assertTrue(paths["round_dir"].is_dir())
+
+            content = local_gitignore.read_text(encoding="utf-8")
+            self.assertIn("*.notes", content)
+            self.assertIn("[0-9]*T*Z-*", content)
+            self.assertIn("*.log", content)
+            self.assertIn("manifest.json", content)
+
 
     def test_video_analysis_failure_is_a_hard_blocker(self) -> None:
         review = load_module()

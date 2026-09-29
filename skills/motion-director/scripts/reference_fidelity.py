@@ -5,8 +5,23 @@ from __future__ import annotations
 
 import argparse
 import json
+import re
 from pathlib import Path
 from typing import Any
+
+
+STOP_WORDS = {
+    "a", "an", "the", "and", "or", "in", "on", "at", "to", "for", "of", "with",
+    "by", "as", "is", "are", "between", "across", "into", "through", "from",
+    "each", "all", "both", "neither", "either", "than", "rather", "plus",
+    "world", "worlds", "scenes", "scene", "system", "systems", "visual",
+    "style", "direction", "most", "every"
+}
+
+
+def extract_keywords(text: str) -> set[str]:
+    cleaned = re.sub(r"[^a-zA-Z0-9]+", " ", str(text or "").lower())
+    return {t for t in cleaned.split() if len(t) > 2 and t not in STOP_WORDS}
 
 
 REQUIRED_SIGNATURE = (
@@ -193,6 +208,9 @@ def validate_plan(
         if not isinstance(visual_direction, dict):
             issues.append("visual_direction is required in preserve mode")
         else:
+            approved_expansion = bool(
+                visual_direction.get("user_approved_style_expansion", False)
+            )
             direction_language = str(
                 visual_direction.get("dominant_language", "")
             ).strip()
@@ -200,6 +218,29 @@ def validate_plan(
                 issues.append(
                     "visual_direction.dominant_language is too vague"
                 )
+            else:
+                contract_dominant = str(contract_result.get("dominant_language", "")).strip()
+                contract_keywords = extract_keywords(contract_dominant)
+                direction_keywords = extract_keywords(direction_language)
+                token_overlap = contract_keywords & direction_keywords
+
+                if contract_dominant and not approved_expansion and not token_overlap:
+                    issues.append(
+                        f"visual_direction.dominant_language does not bind to or preserve contract dominant language: '{contract_dominant}'"
+                    )
+
+                secondary_tokens: set[str] = set()
+                for motif in contract_result.get("secondary_motifs", []):
+                    for tok in extract_keywords(str(motif)):
+                        if tok not in contract_keywords:
+                            secondary_tokens.add(tok)
+
+                if not approved_expansion:
+                    for tok in secondary_tokens:
+                        if tok in direction_keywords:
+                            salience_inversions.append(
+                                f"dominant_language incorporates secondary motif '{tok}'"
+                            )
 
             preserves = visual_direction.get("preserves")
             if not isinstance(preserves, list):
@@ -245,9 +286,6 @@ def validate_plan(
                 for item in new_dominant
                 if str(item).strip()
             ]
-            approved_expansion = bool(
-                visual_direction.get("user_approved_style_expansion", False)
-            )
             if new_dominant_clean and not approved_expansion:
                 unapproved_style_expansions.extend(new_dominant_clean)
 
