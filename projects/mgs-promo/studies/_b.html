@@ -1,0 +1,26 @@
+<body>
+<div id="root" data-composition-id="main" data-start="0" data-duration="2.6" data-width="1080" data-height="1920">
+  <div class="scene night clip" id="b1" data-start="0" data-duration="1.5" data-track-index="1">
+    <div id="word" class="abs" data-crop="intentional" style="left:-120px;width:1320px;top:560px;height:560px"></div>
+    <div class="abs ar" id="q" style="left:0;right:84px;top:1150px;text-align:right;font-family:TSerif;font-weight:900;font-size:170px;color:var(--clay)">هذا؟</div>
+    <div class="abs" id="tc" style="left:84px;top:1560px;font-family:JBMono;font-size:34px;color:var(--graphite);direction:ltr">00:00:00:00</div>
+  </div>
+  __B2__
+</div>
+<script>
+document.fonts.ready.then(()=>{
+  const W=document.getElementById('word'),N=5,H=560/N;
+  const slices=[];
+  for(let i=0;i<N;i++){const s=document.createElement('div');s.style.cssText=`position:absolute;left:0;top:${i*H}px;width:1320px;height:${H}px;overflow:hidden`;
+    s.innerHTML=`<div class="ar" style="position:absolute;left:0;top:${-i*H}px;width:1320px;height:560px;text-align:center;font-family:TSerif;font-weight:900;font-size:430px;line-height:560px;color:var(--cream)">الموشن</div>`;W.appendChild(s);slices.push(s)}
+  const tl=gsap.timeline({paused:true});
+  const off=[-420,300,-180,520,-260];
+  slices.forEach((s,i)=>tl.fromTo(s,{x:off[i]},{x:0,duration:0.42+i*0.05,ease:'expo.out'},0));
+  tl.fromTo('#q',{yPercent:70,opacity:0},{yPercent:0,opacity:1,duration:0.3,ease:'power2.out'},0.83);
+  const tc=document.getElementById('tc');const o={f:0};
+  tl.fromTo(o,{f:0},{f:44,duration:1.466,ease:'none',onUpdate:()=>{const f=Math.round(o.f);tc.textContent='00:00:'+String(Math.floor(f/30)).padStart(2,'0')+':'+String(f%30).padStart(2,'0')}},0);
+  tl.fromTo('#ae',{y:120,opacity:0},{y:0,opacity:1,duration:0.4,ease:'power3.out'},1.55);
+  window.__timelines["main"]=tl;
+});
+</script>
+</body></html>
