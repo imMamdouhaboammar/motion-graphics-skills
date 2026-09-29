@@ -27,7 +27,7 @@ CC BY-SA requires credit to the creator, a link to the source and to the licence
 Photos, adapted (cut out, duotone, resized) and shared under the same licences:
 "AKG C214 Condenser microphone" by Lucasbosch, https://commons.wikimedia.org/wiki/File:AKG_C214_Condenser_microphone.jpg, CC BY-SA 3.0 https://creativecommons.org/licenses/by-sa/3.0/
 "Wireless Computer Keyboard" by Pixloom, https://commons.wikimedia.org/wiki/File:Wireless_Computer_Keyboard.jpg, CC BY-SA 4.0 https://creativecommons.org/licenses/by-sa/4.0/
-"Pair of scissors with black handle" by Crisco 1492, https://commons.wikimedia.org/wiki/File:Pair_of_scissors_with_black_handle,_2015-06-07.jpg, CC BY-SA 4.0 https://creativecommons.org/licenses/by-sa/4.0/
+"Pair of scissors with black handle" by Crisco 1492 (also mirrored), https://commons.wikimedia.org/wiki/File:Pair_of_scissors_with_black_handle,_2015-06-07.jpg, CC BY-SA 4.0 https://creativecommons.org/licenses/by-sa/4.0/
 Headphones: rawpixel, CC0.
 ```
 
