@@ -1,6 +1,12 @@
 {
   "version": 1,
   "skills": {
+    "assetseeker": {
+      "source": "agents365-ai/365-skills",
+      "sourceType": "github",
+      "skillPath": "plugins/assetseeker/skills/assetseeker/SKILL.md",
+      "computedHash": "b04562403e755899bb5cafda1b44874cc9b588cdc4cd115319f87c3c3797d2ac"
+    },
     "brandkit": {
       "source": "leonxlnx/taste-skill",
       "sourceType": "github",
@@ -60,6 +66,12 @@
       "sourceType": "github",
       "skillPath": "skills/brutalist-skill/SKILL.md",
       "computedHash": "8fc355c4aadb7d29c53ca28bc41be3cd6eea765d121e3737c4dc2d0f90a8effa"
+    },
+    "media-use": {
+      "source": "heygen-com/hyperframes",
+      "sourceType": "github",
+      "skillPath": "skills/media-use/SKILL.md",
+      "computedHash": "cf4eb03bedc13b61acbcebe294b6b8559004024797698815711a460d4cbd09fe"
     },
     "minimalist-ui": {
       "source": "leonxlnx/taste-skill",
