@@ -414,6 +414,33 @@ def validate_reference_inputs(
         )
 
 
+def validate_reference_contract_binding(
+    reference: Path,
+    reference_contract_path: Path,
+    contract: dict[str, Any],
+) -> None:
+    reference_info = contract.get("reference")
+    if not isinstance(reference_info, dict):
+        raise ReviewError("Reference contract is missing reference metadata")
+
+    raw_source = str(reference_info.get("source", "")).strip()
+    if not raw_source:
+        raise ReviewError("Reference contract is missing reference.source")
+
+    declared = Path(raw_source).expanduser()
+    if not declared.is_absolute():
+        declared = (reference_contract_path.parent / declared).resolve()
+    else:
+        declared = declared.resolve()
+
+    actual = reference.resolve()
+    if declared != actual:
+        raise ReviewError(
+            "Reference contract benchmark does not match --reference: "
+            f"contract={declared} actual={actual}"
+        )
+
+
 def end_hold_finding(
     freezes: list[dict[str, float]],
     video_duration: float | None,
@@ -910,6 +937,11 @@ def review_video(args: argparse.Namespace) -> int:
             raise ReviewError(
                 "Reference contract failed validation before final video review"
             )
+        validate_reference_contract_binding(
+            args.reference,
+            args.reference_contract,
+            reference_contract,
+        )
         reference_items = reference_checklist(reference_contract)
 
     gpu_result = verify_gpu_decode(
