@@ -7,7 +7,7 @@ Final file: `renders/mgs-promo-final.mp4`
 ```
 video  h264 High L4.1, 1080x1920, yuv420p, tv range, bt709/bt709/bt709, 30/1 fps, 798 frames, 26.600 s
 audio  aac LC, 48 kHz stereo, 26.602 s
-file   34.5 MB, 10.4 Mb/s, moov before mdat (faststart)
+file   34.6 MB, 10.4 Mb/s, moov before mdat (faststart)
 ```
 
 Render path: `npx hyperframes@0.8.92 render -f 30 -q delivery` (beginframe capture), then one social encode:
@@ -25,6 +25,8 @@ Cross-correlation of the final file's audio against `assets/audio/vo-master.wav`
 ## Determinism
 
 `tools/determinism-check.sh` on the final code (two renders, second under CPU load): **798/798 frames bit-identical** (`framemd5`). The master re-rendered after the scene-lifetime fix is also frame-identical to the previous one.
+
+The master was re-rendered once more after the stamp texture fix (below): 798/798 again, second render under load. Against the previous master, only the stamp window (15.77 to 22.57 s) changes in the picture. Lossless snapshots at 15.43, 15.6, 23.13, 25.0 and 26.5 s are byte-identical with the old and new texture; the small differences there in the delivered files come from the encoder's bit allocation.
 
 This check caught a real bug. Earlier renders disagreed run to run (up to 245 frames, 46 to 62 dB PSNR). The grain layer swapped `background-image` every 2 frames. All three tiles now stay painted and only opacity switches.
 
@@ -48,6 +50,10 @@ Red run: the CTA moved 186 px right in a scratch copy gives `CUT 23.70-26.50s "�
 The audit also exposed a vacuous pass. While a code comment had swallowed the slice positioning, B1 rendered blank and the audit passed because no text was visible. Rendering and looking found it. The rule stays the same: a clean audit only proves geometry, so the frames still need a look.
 
 Eye checks at full resolution: joined letters, dots and hamza intact, «هذا؟» question mark in the right place, «الـVoice Over» and «Claude Code» in correct bidi order, the ر tail of «أكثر» clear of the line.
+
+## Textures
+
+Each texture has to change the frame it is on. The stamp's pressure map was first saved as a grayscale PNG without alpha, and CSS `mask-image` masks by alpha, so the stamp rendered flat. The map now lives in the alpha channel. Before and after at 16.5 s: flat clay, then ink wear with speckles, «عرض قوي» still fully legible with its dots intact. Paper fibre and grain are background images, which paint their grey values directly, so the alpha rule does not apply to them; the grain visibly changes frames (it is what the determinism race above changed).
 
 ## HyperFrames check
 

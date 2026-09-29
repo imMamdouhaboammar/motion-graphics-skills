@@ -34,7 +34,10 @@ def stamp_ink():
                    .resize((W, H), Image.BICUBIC).filter(ImageFilter.GaussianBlur(10)), float) / 255
     spk = rng.random((H, W))
     a = np.where(spk < 0.06 + 0.22 * (low < 0.35), 0, 1.0) * (0.78 + 0.22 * low)
-    Image.fromarray((a * 255).clip(0, 255).astype("uint8")).filter(ImageFilter.GaussianBlur(0.6)).save(OUT + "stamp-ink.png")
+    # the pressure values go in the ALPHA channel: CSS mask-image defaults to alpha masking for raster
+    # images, so a plain grayscale PNG (no alpha) masks as fully opaque and the ink never wears
+    ink = Image.fromarray((a * 255).clip(0, 255).astype("uint8")).filter(ImageFilter.GaussianBlur(0.6))
+    Image.merge("LA", (Image.new("L", ink.size, 255), ink)).save(OUT + "stamp-ink.png")
 
 if __name__ == "__main__":
     paper_fibre(); grain(); stamp_ink(); print("textures ok")
