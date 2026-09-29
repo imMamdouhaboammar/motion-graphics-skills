@@ -77,6 +77,33 @@ class MixMatrixTests(unittest.TestCase):
             self.assertGreaterEqual(len(recipe["source_share"]), 2)
             self.assertLessEqual(max(recipe["source_share"].values()), 0.40)
 
+    def test_two_source_recipe_avoids_impossible_odd_slot_warning(self) -> None:
+        payload = {
+            "references": [
+                {
+                    "id": "A",
+                    "genes": {
+                        "motion": ["a1"],
+                        "rhythm": ["a2"],
+                        "typography": ["a3"],
+                    },
+                },
+                {
+                    "id": "B",
+                    "genes": {
+                        "material": ["b1"],
+                        "transition": ["b2"],
+                    },
+                },
+            ]
+        }
+        result = run_tool(payload, "--recipes", "1", "--seed", "7")
+        self.assertEqual(result.returncode, 0, result.stderr)
+        recipe = json.loads(result.stdout)["recipes"][0]
+        self.assertEqual(len(recipe["slots"]) % 2, 0)
+        self.assertLessEqual(max(recipe["source_share"].values()), 0.50)
+        self.assertEqual(recipe["warnings"], [])
+
     def test_is_deterministic_for_same_seed(self) -> None:
         payload = {
             "references": [
