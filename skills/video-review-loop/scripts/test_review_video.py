@@ -212,5 +212,39 @@ class VideoReviewTests(unittest.TestCase):
         self.assertIsNone(review.parse_max_volume("garbage"))
 
 
+    def test_parse_freezedetect_flushes_open_tail_freeze_at_video_end(self) -> None:
+        review = load_module()
+        intervals = review.parse_freezedetect(
+            "[freezedetect @ x] lavfi.freezedetect.freeze_start: 8.7\n"
+            "[freezedetect @ x] lavfi.freezedetect.freeze_duration: 1.3\n",
+            video_duration=10.0,
+        )
+        self.assertEqual(intervals, [{"start": 8.7, "end": 10.0, "duration": 1.3}])
+        self.assertIsNone(
+            review.end_hold_finding(
+                freezes=intervals,
+                video_duration=10.0,
+                expected_hold=1.0,
+            )
+        )
+
+    def test_custom_round_root_does_not_write_blanket_ignore_to_parent(self) -> None:
+        review = load_module()
+        with tempfile.TemporaryDirectory() as tmp:
+            project = Path(tmp)
+            root = project / "reviews"
+            review.create_round_paths(root, Path("/tmp/My Film.mp4"))
+
+            parent_gitignore = project / ".gitignore"
+            self.assertFalse(parent_gitignore.exists())
+
+            local_gitignore = root / ".gitignore"
+            self.assertTrue(local_gitignore.exists())
+            self.assertEqual(
+                local_gitignore.read_text(encoding="utf-8"),
+                "*\n!.gitignore\n",
+            )
+
+
 if __name__ == "__main__":
     unittest.main()
