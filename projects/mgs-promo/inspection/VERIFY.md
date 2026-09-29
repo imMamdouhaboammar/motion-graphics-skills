@@ -35,7 +35,7 @@ Red run: with `thmanyahserifdisplay-Black.woff2` removed from a scratch copy, re
 
 ## Arabic and clipping
 
-`skills/motion-director/scripts/clip-audit.js --step 0.1 --min 0.5 --safe 48` over 0 to 26.6 s: **PASS**, no clipping and no safe-margin warning. The B1 registration slices are declared intentional crops inside the audit harness only, because HyperFrames reserves `data-crop`.
+`skills/motion-director/scripts/clip-audit.js --step 0.1 --min 0.5 --safe 48` over 0 to 26.6 s: **PASS**, no clipping and no safe-margin warning. The B1 registration slices carry `data-crop="intentional"` in `index.html`; a re-render with the attribute is frame-identical to one without it (framemd5, 798/798).
 Red run: the CTA moved 186 px right in a scratch copy gives `CUT 23.70-26.50s "اترك" cut by frame: right 82px`, FAIL.
 
 The audit also exposed a vacuous pass. While a code comment had swallowed the slice positioning, B1 rendered blank and the audit passed because no text was visible. Rendering and looking found it. The rule stays the same: a clean audit only proves geometry, so the frames still need a look.

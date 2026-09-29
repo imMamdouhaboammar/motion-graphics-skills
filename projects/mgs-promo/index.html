@@ -283,8 +283,8 @@
           var W = $('#b1-word'), N = 5, H = 440 / N, OFF = [-360, 250, -150, 430, -230];
           for (var i = 0; i < N; i++) {
             var s = document.createElement('div');
-            // each slice shows one strip of the word by design; clip-audit declares it an intentional crop from tools/
-            s.className = 'b1-slice'; s.setAttribute('data-layout-allow-overflow', '');
+            // each slice shows one strip of the word by design: a declared crop for clip-audit and the layout audit
+            s.className = 'b1-slice'; s.setAttribute('data-layout-allow-overflow', ''); s.setAttribute('data-crop', 'intentional');
             s.style.top = i * H + 'px'; s.style.height = H + 'px';
             s.innerHTML = '<div class="ar serif" style="top:' + -i * H + 'px">الموشن</div>';
             W.appendChild(s);
