@@ -8,6 +8,7 @@ A 26.6 s vertical (1080 × 1920, 30 fps) promo for this repository, cut to a sup
 |---|---|
 | `renders/mgs-promo-final.mp4` | final master (H.264 High, yuv420p, BT.709, AAC 48 kHz, faststart) |
 | `renders/mgs-promo-draft-v1.mp4` | the previous draft, kept for comparison |
+| `renders/mgs-promo-final.ar.vtt` | Arabic captions sidecar (approved script text, measured VO timings) to upload with the post |
 | `index.html` | the composition (one GSAP timeline, seek-safe) |
 | `BRIEF.md` | the confirmed brief |
 | `reference-study.md`, `reference/` | analysis of the supplied reference video |
