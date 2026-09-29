@@ -142,6 +142,9 @@ def run_hook(command: str, log_path: Path, timeout: float) -> dict:
         log_path.write_text("empty hook command\n", encoding="utf-8")
         return result
 
+    if timeout <= 0:
+        raise ValueError("hook timeout must be > 0")
+
     started = time.monotonic()
     try:
         proc = subprocess.Popen(
@@ -157,7 +160,7 @@ def run_hook(command: str, log_path: Path, timeout: float) -> dict:
         return result
 
     try:
-        output, _ = proc.communicate(timeout=timeout if timeout > 0 else None)
+        output, _ = proc.communicate(timeout=timeout)
         result["exit_code"] = proc.returncode
     except subprocess.TimeoutExpired:
         result["timed_out"] = True
@@ -312,9 +315,11 @@ def run_guard(args: argparse.Namespace) -> int:
         raise ValueError("a command is required after --")
     if args.retry_safe < 0:
         raise ValueError("--retry-safe must be >= 0")
-    for name in ("stall_timeout", "hard_timeout", "hook_timeout", "kill_grace"):
+    for name in ("stall_timeout", "hard_timeout", "kill_grace"):
         if getattr(args, name) < 0:
             raise ValueError(f"--{name.replace('_', '-')} must be >= 0")
+    if args.hook_timeout <= 0:
+        raise ValueError("--hook-timeout must be > 0")
 
     run_dir = make_run_dir(Path(args.run_root))
     heartbeat = Path(args.heartbeat) if args.heartbeat else None
@@ -396,7 +401,7 @@ def build_parser() -> argparse.ArgumentParser:
     run.add_argument("--heartbeat", help="file whose mtime/size changes count as progress")
     run.add_argument("--probe-command", help="diagnostic command to run on timeout before containment")
     run.add_argument("--heal-command", help="recovery command to run after containment and before a safe retry")
-    run.add_argument("--hook-timeout", type=float, default=15.0, help="maximum seconds for probe/heal hooks")
+    run.add_argument("--hook-timeout", type=float, default=15.0, help="maximum seconds for probe/heal hooks; must be > 0")
     run.add_argument("--kill-grace", type=float, default=2.0, help="seconds between TERM and KILL")
     run.add_argument("--retry-safe", nargs="?", const=1, type=int, default=0, help="explicitly declare the command safe and allow N retries; bare flag means one retry")
     run.add_argument("--run-root", default=".motion-guard/runs", help="directory that receives run evidence")

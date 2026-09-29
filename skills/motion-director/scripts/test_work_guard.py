@@ -371,6 +371,36 @@ class WorkGuardTests(unittest.TestCase):
             self.assertEqual(proc.returncode, 130, stdout + stderr)
             self.assertEqual(load_summary(root)["classification"], "interrupted")
 
+    def test_zero_or_negative_hook_timeout_rejected(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp) / "runs"
+            for bad_val in ("0", "-1", "-0.5"):
+                result = run_guard(
+                    root,
+                    ["--hook-timeout", bad_val],
+                    child("-c", "print('ok')"),
+                )
+                self.assertEqual(result.returncode, 2, f"expected returncode 2 for hook-timeout {bad_val}")
+                self.assertIn("--hook-timeout must be > 0", result.stderr)
+
+    def test_run_hook_rejects_non_positive_timeout(self) -> None:
+        import importlib.util
+        spec = importlib.util.spec_from_file_location("work_guard", SCRIPT)
+        self.assertIsNotNone(spec)
+        self.assertIsNotNone(spec.loader)
+        work_guard = importlib.util.module_from_spec(spec)
+        spec.loader.exec_module(work_guard)
+
+        with tempfile.TemporaryDirectory() as tmp:
+            log_path = Path(tmp) / "hook.log"
+            with self.assertRaises(ValueError) as ctx:
+                work_guard.run_hook("true", log_path, timeout=0.0)
+            self.assertIn("hook timeout must be > 0", str(ctx.exception))
+
+            with self.assertRaises(ValueError) as ctx:
+                work_guard.run_hook("true", log_path, timeout=-1.0)
+            self.assertIn("hook timeout must be > 0", str(ctx.exception))
+
 
 if __name__ == "__main__":
     unittest.main()
