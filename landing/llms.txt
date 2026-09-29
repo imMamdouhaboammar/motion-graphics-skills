@@ -1,0 +1,29 @@
+# Motion Graphics Skill Pack
+
+> Give your AI agent a motion director
+
+Official repository: https://github.com/imMamdouhaboammar/motion-graphics-skills
+
+Motion Graphics Skill Pack is a set of 14 skills for Claude Code and Codex. It covers motion direction, brand intake, motion briefs, launch films, explainers, animated charts, 3D title sequences, motion effects, social video, Arabic and RTL motion, and render review.
+
+The master motion-director skill owns concept, narrative, art direction, typography, composition, choreography, Arabic direction and creative QA.
+
+For new code-driven motion projects, HyperFrames is the preferred production infrastructure for deterministic timelines, reusable registry blocks, diagnostics, preview, audio relationships, variants and final rendering.
+
+Key topics:
+- motion graphics
+- motion design
+- Claude Code
+- Codex
+- agent skills
+- HyperFrames
+- programmatic video
+- kinetic typography
+- 2D, 2.5D and 3D motion
+- Arabic and RTL motion
+- creative coding
+- GSAP
+- Three.js
+
+Install:
+npx skills add imMamdouhaboammar/motion-graphics-skills
