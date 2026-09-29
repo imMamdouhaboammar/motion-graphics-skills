@@ -1,5 +1,9 @@
 // Font gate: every @font-face the film declares must be 'loaded' after window.__ready, and the
 // Arabic hero words must measure differently from the fallback face (proves Thmanyah painted them).
+// Arabic and Latin are measured apart: in a mixed string a Latin-only subset of an Arabic face would
+// still change the width through its Latin glyphs and hide the Arabic falling back.
+// Each face is compared with its generic family and with an undeclared family: canvas paints a missing
+// glyph in the browser default face, which need not match the generic family.
 // usage: NODE_PATH=<global node_modules> node tools/font-check.cjs <url>
 const { chromium } = require('playwright');
 (async () => {
@@ -15,15 +19,16 @@ const { chromium } = require('playwright');
     } catch (e) { return { readyError: String(e) }; }
     const faces = []; document.fonts.forEach(f => faces.push(`${f.family} ${f.weight} ${f.status}`));
     const c = document.createElement('canvas').getContext('2d');
-    const w = f => { c.font = f; return c.measureText('الموشن اترك تعليق Claude Code').width; };
+    const w = (f, t) => { c.font = f; return c.measureText(t).width; };
+    const AR = 'الموشن اترك تعليق', LAT = 'Claude Code';
     return { faces,
-      serifVsFallback: [w('900 100px TSerif'), w('900 100px serif')],
-      sansVsFallback: [w('700 100px TSans'), w('700 100px sans-serif')],
-      monoVsFallback: [w('500 100px JBMono'), w('500 100px monospace')] };
+      serifArabicVsFallback: [w('900 100px TSerif', AR), w('900 100px serif', AR), w('900 100px NoSuchFace', AR)],
+      sansArabicVsFallback: [w('700 100px TSans', AR), w('700 100px sans-serif', AR), w('700 100px NoSuchFace', AR)],
+      monoLatinVsFallback: [w('500 100px JBMono', LAT), w('500 100px monospace', LAT), w('500 100px NoSuchFace', LAT)] };
   });
   await b.close();
   console.log(JSON.stringify(r, null, 1));
   const bad = r.readyError || r.faces.some(f => !f.endsWith('loaded')) ||
-    [r.serifVsFallback, r.sansVsFallback, r.monoVsFallback].some(([a, z]) => Math.abs(a - z) < 1);
+    [r.serifArabicVsFallback, r.sansArabicVsFallback, r.monoLatinVsFallback].some(([a, ...fb]) => fb.some(z => Math.abs(a - z) < 1));
   console.log(bad ? 'FAIL' : 'PASS'); process.exit(bad ? 1 : 0);
 })();

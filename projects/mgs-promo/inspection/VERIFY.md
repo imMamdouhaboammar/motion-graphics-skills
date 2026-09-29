@@ -36,7 +36,8 @@ Image and texture decode failures now reject `window.__ready` instead of being s
 
 ## Fonts
 
-`tools/font-check.cjs`: all four faces report `loaded` after `window.__ready`. Measured widths of the hero strings differ from the fallback faces (serif 1343 vs 1371 px, sans 1386 vs 1438, mono 1583 vs 1746).
+`tools/font-check.cjs`: all four faces report `loaded` after `window.__ready`. Arabic and Latin are measured apart, each against its generic family and against an undeclared family (what canvas paints for a missing glyph). Arabic hero words at 100 px: serif 718 vs 793/793 px, sans 773 vs 799/793. «Claude Code» in mono: 660 vs 662/519.
+Red run for a Latin-only subset: with the Arabic glyphs stripped from the Thmanyah files in a scratch copy, the gate prints FAIL (Arabic width equals the fallback, 793). The earlier mixed-string version of the gate printed PASS on the same files, and so did a check against the generic family alone when only the sans face was stripped.
 Red run: with `thmanyahserifdisplay-Black.woff2` removed from a scratch copy, readiness fails with `NetworkError` and the gate prints FAIL.
 
 ## Arabic and clipping

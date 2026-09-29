@@ -59,7 +59,7 @@ npx --yes hyperframes@0.8.92 docs <topic> # reference docs in terminal
 
 ## Documentation
 
-**For quick reference**, use the local CLI docs command (no network required):
+**For quick reference**, use the CLI docs command (it reads docs bundled in the package, so it runs offline once `hyperframes@0.8.92` is in the npm cache; the first run downloads it):
 
 ```bash
 npx --yes hyperframes@0.8.92 docs <topic>
