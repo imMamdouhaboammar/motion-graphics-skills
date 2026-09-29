@@ -21,12 +21,28 @@ function classifyRenderer(renderer) {
     'softpipe',
     'lavapipe',
     'mesa offscreen',
+    'microsoft basic render driver',
+    'basic render driver',
   ];
-  const software = !value || softwareMarkers.some((marker) => lower.includes(marker));
+  const hardwareMarkers = [
+    'apple',
+    'nvidia',
+    'intel',
+    'amd',
+    'radeon',
+  ];
+
+  const software = softwareMarkers.some((marker) => lower.includes(marker));
+  const hardware = (
+    Boolean(value)
+    && !software
+    && hardwareMarkers.some((marker) => lower.includes(marker))
+  );
+
   return {
-    hardware: !software,
+    hardware,
     renderer: value || null,
-    classification: software ? 'software-or-unknown' : 'hardware',
+    classification: hardware ? 'hardware' : 'software-or-unknown',
   };
 }
 
