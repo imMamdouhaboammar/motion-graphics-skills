@@ -67,7 +67,7 @@ No command is retried unless the caller explicitly uses `--retry-safe`.
 
 For each attempt:
 
-1. launch the command in its own process group
+1. launch the command in its own process group on POSIX; Windows support is best-effort and does not claim tested descendant containment
 2. stream stdout and stderr to the terminal and per-attempt log files
 3. track last useful activity from stdout, stderr, and an optional heartbeat file
 4. enforce optional stall and hard deadlines
