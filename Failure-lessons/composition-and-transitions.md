@@ -188,3 +188,31 @@ A path drawn with dashoffset and round or square caps stays hidden until its dra
 ### Status
 
 Resolved. Worth adding to the HyperFrames `svg-path-draw` recipe upstream (not done).
+
+---
+
+## A scene ended before its exit tween finished
+
+### What happened
+
+A reviewer (Codex) found that B6's clip ended at 15.44 s while its split tweens ran until 15.46 s, and the desk scene ended at 22.64 s while its wipe ran until 22.66 s.
+
+### Observable symptom
+
+None at 30 fps. The 20 ms gap falls between two frames: the frame before the scene ends is mid-tween, and the next frame is past the tween end, where the panels are already off-frame. A re-render with the durations extended is frame-identical (798 of 798). At 60 fps a frame would land inside the gap and show the transition cut short.
+
+### Root cause
+
+**Confirmed** from the timings. Clip durations were typed by hand beside the tweens, not derived from them.
+
+### Fix
+
+The clip durations now cover the exit tweens (B6 to 15.48 s, desk to 22.68 s).
+
+### Prevention rule
+
+A clip's end is at least the end of every tween that animates its content. Derive the duration from the last tween, or check it with the timeline, instead of typing both numbers. Frame rate can hide the gap, so check the timing contract, not only the frames.
+
+### Status
+
+Resolved.

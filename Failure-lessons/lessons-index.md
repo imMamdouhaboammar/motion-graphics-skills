@@ -39,6 +39,9 @@ Search this table before debugging. If your problem matches a failure class, sta
 | Final too large for chat, again | Lesson on record but not in the routine | Review copy is step 1 of the handoff checklist | Delivery | Recurred, now in the skill | [delivery-and-repo-workflow](delivery-and-repo-workflow.md#sending-a-file-larger-than-the-channel-allows) |
 | Web a11y rules on a render page | Reviewer's frame of reference differs from the artifact | Fix what is harmless, explain what breaks the render, serve the real audience in the deliverable | Review | Resolved as practice | [delivery-and-repo-workflow](delivery-and-repo-workflow.md#web-accessibility-rules-applied-to-a-render-only-page) |
 | Shell unavailable mid-run | Environment outage | Prep steps as project scripts; stop retrying, report honestly | Tooling | Resolved as practice | [delivery-and-repo-workflow](delivery-and-repo-workflow.md#the-agent-environment-stopped-mid-run) |
+| Scene ended before its exit tween | Clip duration typed beside, not derived from, its tweens | A clip covers every tween of its content; check the contract, not only frames | Timing | Resolved | [composition-and-transitions](composition-and-transitions.md#a-scene-ended-before-its-exit-tween-finished) |
+| Readiness swallowed asset errors | Error handlers that convert failure to success | Readiness rejects with the failing asset | Composition | Resolved | [render-pipeline](render-pipeline.md#related-failure-readiness-that-swallowed-asset-errors) |
+| Deleted donors still registered | Manifest and lock not updated with the file | Remove file, manifest and lock entry together | Repository | Resolved | [delivery-and-repo-workflow](delivery-and-repo-workflow.md#registry-donors-left-registered-after-they-were-deleted) |
 
 ## Rules we now enforce
 
@@ -52,7 +55,7 @@ Search this table before debugging. If your problem matches a failure class, sta
 8. **Diagnose at full resolution.** A contact sheet points at a candidate. It never proves a geometric defect.
 9. **Docs and deliverables ship together.** A README never names a file the same commit does not contain.
 10. **Same time, same frame, even under load.** Renders are compared by frame hash with the second one made on a busy machine. Nothing swaps a resource URL during capture.
-11. **A readiness promise resolves to a plain value.** Every tool that awaits it has a timeout that says so.
+11. **A readiness promise neither hangs nor lies.** It resolves to a plain value when everything is ready, rejects with the failing asset when something is not, and every tool that awaits it has a timeout that says so.
 12. **"No findings" is read with "how much was measured".** After every code edit, render and look at the frames it could reach.
 13. **One change per diagnostic render.** A cause goes into code or docs only once it is confirmed.
 14. **ASR gives timings, the approved script gives words.**

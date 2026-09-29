@@ -277,6 +277,10 @@ While the hang was unexplained, the font gate's `page.goto` was switched from th
 
 Any library object with a `then` method (GSAP animations, some query builders, jQuery deferreds) silently changes a promise chain it is returned into.
 
+### Related failure: readiness that swallowed asset errors
+
+A reviewer (Codex) found the opposite defect in the same promise. Each `decode()` had `.catch(function () {})`, so a missing cutout still resolved readiness and would have rendered a blank object. Decode failures now reject with the asset path. Red run: with one cutout deleted in a scratch copy, the font gate reports `image failed to decode: assets/cutouts/mic_akg.png` and FAIL. The intact project reports PASS. A readiness promise should neither hang nor lie: it resolves when everything is ready and rejects, with the reason, when something is not.
+
 ### Status
 
 Resolved. The timeout-with-message is not yet built into `clip-audit.js` (open).

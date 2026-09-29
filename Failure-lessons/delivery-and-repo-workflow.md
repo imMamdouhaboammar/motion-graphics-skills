@@ -173,3 +173,27 @@ Keep every asset-preparation step as a script in the project from the start, not
 ### Status
 
 Resolved as practice. The outage itself is outside the project.
+
+---
+
+## Registry donors left registered after they were deleted
+
+### What happened
+
+Two HyperFrames registry components were installed with `hyperframes add` to read as donors (`code-terminal-run`, `grain-overlay`). The first file was deleted by hand but stayed listed in `hyperframes.json` and `hyperframes.lock.json`. The second stayed in the repository, unused, with an infinite CSS animation driven by the wall clock that would break determinism if anyone mounted it. A reviewer (Codex) caught both.
+
+### Root cause
+
+**Confirmed**: `add` writes the manifest and lock, the pinned CLI (0.8.92) has no `remove` command, and deleting a file does not update either.
+
+### Fix
+
+Both entries were removed from the manifest and lock, and the unused component file was deleted. `ASSET_SOURCES.md` records that they were read as donors.
+
+### Prevention rule
+
+Study a registry item without installing it (`hyperframes catalog`, or `add` into a scratch project). If it was added to the project, remove its file, manifest entry and lock entry together before committing.
+
+### Status
+
+Resolved.
