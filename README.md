@@ -302,6 +302,8 @@ Add this rule to CLAUDE.md: whenever I paste a component prompt or third-party c
 
 ## Runtime philosophy
 
+For new code-driven motion projects, HyperFrames is the preferred production infrastructure. Motion Director owns the creative decisions while HyperFrames owns the production mechanics it already provides.
+
 The pack uses a reuse-first ladder:
 
 1. Current project primitives
@@ -318,7 +320,7 @@ For a fresh HyperFrames project, install its current skills with:
 npx skills add heygen-com/hyperframes
 ```
 
-The master skill adds creative direction, narrative, typography, composition, motion craft, Arabic RTL guidance, reference analysis, and visual QA. It does not copy HyperFrames' renderer or rebuild its engine.
+The master skill adds creative direction, narrative, typography, composition, motion craft, Arabic RTL guidance, reference analysis, and visual QA. HyperFrames is expected to handle the renderable project contract, reusable registry, supported adapters, diagnostics, preview, rendering, batch variants, and audio relationships for greenfield projects. The pack does not copy HyperFrames' renderer or rebuild its engine.
 
 ## Contributing
 

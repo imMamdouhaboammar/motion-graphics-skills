@@ -1,8 +1,53 @@
 # HyperFrames playbook
 
-HyperFrames is the preferred infrastructure layer when it fits the job.
+HyperFrames is the preferred production infrastructure for greenfield code-driven motion work in this pack.
 
 This skill should add creative direction, not duplicate what HyperFrames already solves.
+
+## What HyperFrames owns by default
+
+For a new renderable motion project, delegate these responsibilities to HyperFrames unless a documented incompatibility exists:
+
+- scaffold and project contract
+- deterministic render timeline
+- composition discovery
+- reusable catalog blocks
+- runtime adapters
+- keyframe and motion diagnostics
+- timeline inspection
+- lint
+- runtime and layout checks
+- proof snapshots
+- preview
+- final rendering
+- batch variants
+- audio relationships and mixing when used
+- media handling where supported
+
+The master skill should not rebuild these layers.
+
+## What Motion Director owns
+
+Keep these responsibilities in this pack:
+
+- communication job
+- concept
+- narrative arc
+- visual metaphor
+- reference analysis
+- art direction
+- typography
+- composition
+- color roles
+- material system
+- Arabic and RTL direction
+- motion thesis
+- transition logic
+- scene choreography
+- creative review
+- visual QA
+
+The division is intentional. HyperFrames is the engine and production framework. Motion Director is the creative brain and quality system.
 
 Authoritative project:
 https://github.com/heygen-com/hyperframes
@@ -155,14 +200,42 @@ Use for:
 
 For a HyperFrames project:
 
-1. Existing composition pattern
-2. Existing registry block
-3. Existing runtime adapter
-4. Existing keyframe recipe
-5. Native HTML, CSS, SVG, or Canvas inside the composition
-6. GSAP custom sequence
-7. Three.js for true 3D
-8. Custom engine only when a real gap remains
+1. Existing project composition and helpers
+2. Existing HyperFrames composition pattern
+3. Existing registry block
+4. Existing runtime adapter
+5. Existing keyframe recipe
+6. Native HTML, CSS, SVG, or Canvas inside the composition
+7. GSAP custom sequence
+8. Three.js for true 3D
+9. Custom engine only when a real gap remains
+
+For a greenfield project, do not skip directly to step 6 or later without checking the HyperFrames layers first.
+
+## When HyperFrames is mandatory
+
+Use HyperFrames as the production layer when all of these are true:
+
+- the project is new or can adopt a runtime without migration cost
+- the final result is code-driven motion graphics
+- deterministic frame rendering is required
+- the target environment can run HyperFrames
+
+Also use HyperFrames for any existing HyperFrames project. Do not bypass its CLI with a parallel custom renderer.
+
+For a new narrated film, Motion Director supplies art direction while the HyperFrames router selects the correct production workflow. Do not force the short motion-graphics workflow onto a longer narrated film.
+
+## When HyperFrames is not mandatory
+
+Do not force migration when:
+
+- the user supplied a working deterministic renderer and asked for bounded refinement
+- the deliverable is only a creative brief or storyboard
+- the job is analysis or timecoded critique with no build
+- the environment cannot run HyperFrames
+- a required capability is genuinely unsupported and a smaller fallback is more reliable
+
+Document the reason when falling back.
 
 ## Do not migrate a working project without a reason
 
@@ -280,7 +353,7 @@ Adapt copy, colors, type, timing, and material treatment to the project.
 
 ## Validation loop
 
-For HyperFrames projects, the default order is:
+For HyperFrames projects, this is the default release path, not an optional suggestion:
 
     npx hyperframes lint .
     npx hyperframes check .

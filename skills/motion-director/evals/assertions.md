@@ -22,3 +22,11 @@ A strong motion-director run should satisfy these assertions when relevant.
 - Reviews contact sheets before final render.
 - Watches final output with sound on and sound off.
 - Verifies the actual encoded file.
+
+- Uses HyperFrames as the default production infrastructure for greenfield code-driven motion when the environment supports it.
+- Does not build a parallel custom renderer for a HyperFrames project.
+- Uses HyperFrames registry search before custom implementation of a named reusable effect.
+- Uses HyperFrames lint, check, snapshot, preview, and render for HyperFrames projects.
+- Uses the HyperFrames audio layer for narration and music relationships when that layer is active.
+- Keeps concept, narrative, art direction, typography, composition, Arabic direction, and creative QA outside the infrastructure layer.
+- Documents a concrete reason when a greenfield code-driven motion project falls back from HyperFrames.

@@ -49,6 +49,30 @@ A working custom deterministic composition must not be migrated only because a n
 
 Read references/hyperframes-playbook.md before deciding how HyperFrames fits.
 
+## HyperFrames responsibility policy
+
+For greenfield code-driven motion work, HyperFrames is a production dependency, not merely an optional exporter.
+
+Use HyperFrames by default for:
+
+- project initialization and renderable composition structure
+- deterministic timeline and seek behavior
+- registry search and reusable motion blocks
+- supported animation and keyframe adapters
+- timeline inspection and diagnostics
+- lint and runtime checks
+- proof snapshots and contact-sheet inspection
+- preview
+- final rendering
+- audio mixing and voiceover relationships when audio is part of the film
+- batch and variant rendering when needed
+
+Motion Director still owns concept, narrative, art direction, typography, composition, motion thesis, visual hierarchy, Arabic direction, and creative QA.
+
+Do not duplicate HyperFrames rendering, audio, registry, validation, or timeline infrastructure inside this pack.
+
+Exception: when an existing non-HyperFrames project already has a stable deterministic renderer and the user asked for refinement, preserve it unless migration fixes a measured limitation.
+
 ## What this skill owns
 
 This skill owns:
@@ -336,15 +360,17 @@ Read references/motion-craft.md.
 
 Before hand-authoring an effect, inspect what already exists.
 
-For HyperFrames:
+For a new HyperFrames-capable project:
 
+- initialize and structure the renderable project with HyperFrames
 - search its catalog before building a named effect or transition
-- use its composition contract
-- use its animation and keyframe guidance
-- use its CLI for lint, check, snapshot, preview, and render
-- use its media layer for source assets
+- use its composition contract as the technical source of truth
+- use its animation and keyframe guidance instead of inventing an incompatible timeline model
+- use its CLI for timeline inspection, lint, check, snapshot, preview, and render
+- use its media layer for source assets where it fits
 - use its audio layer for mixing and voiceover relationships
-- use its frame or design spec conventions when useful
+- use its frame or design spec conventions as the runtime translation of brand.md and MOTION.md
+- use batch rendering for systematic variants rather than hand-duplicating compositions
 
 Do not copy HyperFrames internals into this repository.
 

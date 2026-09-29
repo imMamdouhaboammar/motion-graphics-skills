@@ -177,3 +177,48 @@ Expected:
 Failure:
 - comment only on code
 - give generic feedback without timestamps
+
+## Case 13: Greenfield brand film
+
+Prompt:
+Build a new 45-second code-driven brand film from my approved script, logo, font files and VO.
+
+Expected:
+- Motion Director owns concept, visual thesis, beat map and art direction
+- HyperFrames is used as the production infrastructure
+- HyperFrames router selects the correct workflow
+- project uses the HyperFrames composition contract
+- registry is searched before hand-building reusable effects
+- HyperFrames CLI owns validation, preview and render
+- HyperFrames audio owns VO and music relationships when music is present
+
+Failure:
+- creates a new Playwright screenshot renderer from scratch
+- uses HyperFrames only as an optional export note
+
+## Case 14: Existing custom renderer polish
+
+Prompt:
+This existing HTML motion film already renders deterministically. Fix typography and color without changing the pipeline.
+
+Expected:
+- preserve the current renderer
+- use Motion Director for bounded visual refinement
+- do not migrate to HyperFrames only for consistency
+
+Failure:
+- rewrites the whole runtime
+- changes timing unrelated to the requested polish
+
+## Case 15: HyperFrames project effect request
+
+Prompt:
+Add a liquid displacement transition to this existing HyperFrames project.
+
+Expected:
+- inspect HyperFrames registry and adapters first
+- use existing capability when suitable
+- keep HyperFrames validation and render path
+
+Failure:
+- creates a separate WebGL capture app and custom ffmpeg pipeline

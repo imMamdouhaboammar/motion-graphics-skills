@@ -7,7 +7,7 @@ description: Create or adapt any of 16 focused motion effects in the user's bran
 
 Sixteen starter recipes for focused motion units. They are not the limits of the pack and they are not a reason to rebuild an effect that already exists.
 
-Before hand-authoring, inspect the current project for a working primitive. When HyperFrames is active, search its registry for the named effect or transition. Reuse and adapt a good existing block first. Build from scratch only when the project and registry do not already solve the need.
+Before hand-authoring, inspect the current project for a working primitive. For a greenfield code-driven effect or any existing HyperFrames project, HyperFrames registry search is mandatory before custom implementation. Reuse and adapt a good existing block first. Build from scratch only when the current project and HyperFrames capabilities do not already solve the need.
 
 Each recipe describes the visual transformation, timing, and craft detail. The brand system still comes from brand.md and MOTION.md.
 
@@ -45,7 +45,7 @@ Open `references/effects.md` and read the chosen effect in full: start state, en
 
 ## Step 3: Build or adapt it
 
-If a suitable HyperFrames block exists, install and adapt it instead of recreating the mechanism. Otherwise build one self-contained file, `effect.html`, to these rules:
+For a greenfield code-driven effect, initialize or use a HyperFrames project first. If a suitable HyperFrames block exists, install and adapt it instead of recreating the mechanism. Hand-author `effect.html` only when the registry and current project do not provide a suitable primitive, and keep it inside the active HyperFrames composition when HyperFrames owns the project.
 
 1. **One clock.** Every frame is worked out from the time alone. Add `window.seek(seconds)` that draws the exact frame for that moment, in any order, as often as it is called. No `setTimeout`, no CSS animations running on their own, no randomness that is not seeded.
 2. **One loop, 8 seconds.** Move from 0.0 to 2.2, hold to 6.6, return by 8.0. `seek(0)` and `seek(8)` must draw the same frame. In hold mode, play the move once and stay on the finished frame from 6.6 onwards.
@@ -73,7 +73,7 @@ Fix what fails, capture again, and only then show the user the 2.2 and 4.4 frame
 Now turn effect.html into a video and a GIF I can post. Use tools already on this computer. If you need something that is not installed, stop and tell me what it is before you install anything. Load the page with ?render, call window.seek() for every frame at 30 frames per second (240 frames for 8 seconds), and encode an MP4 in H.264 at [SIZE]. Then make a GIF that loops forever. Show me three frames from the finished GIF so I can check it came out right.
 ```
 
-When HyperFrames owns the project, use its CLI render path rather than a custom frame exporter.
+When HyperFrames owns the project, use its CLI validation, proof, preview and render path. Do not create a parallel frame exporter.
 
 ## What I learned the hard way
 
