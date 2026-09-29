@@ -284,5 +284,16 @@ class ReferenceFidelityTests(unittest.TestCase):
         self.assertTrue(data["unapproved_style_expansions"])
 
 
+    def test_unknown_difficulty_mode_is_rejected(self) -> None:
+        contract = valid_contract()
+        contract["difficulty_mode"] = "preserv"
+        result = run_tool(contract)
+        self.assertEqual(result.returncode, 3)
+        data = json.loads(result.stdout)
+        self.assertTrue(
+            any("difficulty_mode" in issue for issue in data["issues"])
+        )
+
+
 if __name__ == "__main__":
     unittest.main()
