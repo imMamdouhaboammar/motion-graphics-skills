@@ -16,28 +16,29 @@ A light motion-design worktable
 
 The page borrows from real motion practice rather than generic AI-product UI:
 
-- warm paper surface
-- dark navy ink
-- coral as the main directional accent
+- light architectural studio neutral surface
+- crisp slate ink
+- deep coral as the main directional accent
 - cyan and gold used as small timeline signals
 - editorial serif used only for human or directional phrases
 - timelines, frame counters, playheads and contact-sheet logic used as functional motifs
 - actual rendered films used as proof
 
-No fake dashboard language, decorative terminal wallpaper, generic bento grid, neon AI glow, purple mesh, or invented interface screenshots
+No fake dashboard language, decorative terminal wallpaper, generic bento grid, neon AI glow, radial spotlight orbs, purple mesh, or invented interface screenshots
 
 ## Palette
 
-- paper: #f4f0e8
-- paper 2: #ece5d8
-- paper 3: #fffdf8
-- ink: #00132f
-- muted ink: #4a5566
-- coral: #d97557
-- cyan: #58b6ff
-- gold: #e2b44c
+- paper: #f8fafc
+- paper 2: #f1f5f9
+- paper 3: #ffffff
+- ink: #070e1b
+- muted ink: #475569
+- coral: #c2410c
+- coral-text: #9a3412
+- cyan: #0284c7
+- gold: #b45309
 
-Coral carries direction and emphasis. Cyan and gold are secondary timeline signals.
+Coral carries direction and emphasis (with high contrast coral-text for readable type). Cyan and gold are secondary timeline signals.
 
 ## Typography
 
