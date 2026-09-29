@@ -145,6 +145,59 @@ class MixMatrixTests(unittest.TestCase):
         self.assertLessEqual(max(recipe["source_share"].values()), 0.50)
         self.assertEqual(recipe["warnings"], [])
 
+    def test_balances_three_sources_when_even_assignment_is_feasible(self) -> None:
+        payload = {
+            "references": [
+                {
+                    "id": "A",
+                    "genes": {
+                        "c1": ["a1"],
+                        "c6": ["a6"],
+                    },
+                },
+                {
+                    "id": "B",
+                    "genes": {
+                        "c1": ["b1"],
+                        "c2": ["b2"],
+                        "c3": ["b3"],
+                        "c5": ["b5"],
+                    },
+                },
+                {
+                    "id": "C",
+                    "genes": {
+                        "c0": ["c0"],
+                        "c2": ["c2"],
+                        "c3": ["c3"],
+                        "c4": ["c4"],
+                        "c5": ["c5"],
+                        "c6": ["c6"],
+                    },
+                },
+            ]
+        }
+        result = run_tool(payload, "--recipes", "1", "--seed", "19")
+        self.assertEqual(result.returncode, 0, result.stderr)
+        recipe = json.loads(result.stdout)["recipes"][0]
+        self.assertEqual(recipe["source_share"], {"A": 0.333, "B": 0.333, "C": 0.333})
+        self.assertEqual(recipe["warnings"], [])
+
+    def test_small_recipe_uses_achievable_dominance_threshold(self) -> None:
+        payload = {
+            "references": [
+                {"id": "A", "genes": {"c0": ["a0"]}},
+                {"id": "B", "genes": {"c1": ["b1"]}},
+                {"id": "C", "genes": {"c0": ["c0"]}},
+            ]
+        }
+        result = run_tool(payload, "--recipes", "1", "--seed", "1")
+        self.assertEqual(result.returncode, 0, result.stderr)
+        recipe = json.loads(result.stdout)["recipes"][0]
+        self.assertEqual(len(recipe["slots"]), 2)
+        self.assertEqual(max(recipe["source_share"].values()), 0.50)
+        self.assertEqual(recipe["warnings"], [])
+
     def test_is_deterministic_for_same_seed(self) -> None:
         payload = {
             "references": [
