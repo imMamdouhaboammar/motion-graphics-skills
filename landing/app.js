@@ -50,7 +50,8 @@ if (!reducedMotion && window.gsap) {
     .from(".hero h1", { y: 54, opacity: 0, duration: 1.05 })
     .from(".hero-lede", { y: 24, opacity: 0, duration: 0.78 }, "-=0.62")
     .from(".hero-actions", { y: 18, opacity: 0, duration: 0.68 }, "-=0.48")
-    .from(".hero-stage", { y: 44, rotate: -1.4, opacity: 0, duration: 1.05 }, "-=0.82");
+    .from(".hero-stage", { y: 44, rotate: -1.4, opacity: 0, duration: 1.05 }, "-=0.82")
+    .from(".director-cameo", { y: 14, opacity: 0, duration: 0.5 }, "-=0.38");
 
   const playheadTween = gsap.to(".playhead", {
     x: () => {
