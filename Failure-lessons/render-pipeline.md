@@ -227,6 +227,7 @@ Resolved.
 
 ---
 
+<a id="a-readiness-promise-adopted-a-paused-gsap-timeline"></a>
 ## A readiness promise that resolved to a timeline never resolved
 
 ### Context
@@ -239,7 +240,7 @@ Resolved.
 
 ### Observable symptom
 
-Playwright tools stall with no output. The page looks fine, fonts report `loaded`, images are `complete`, and `window.__timelines.main` exists.
+Playwright navigation completed, yet the clip audit or readiness check appeared to hang indefinitely. The page looks fine, fonts report `loaded`, images are `complete`, and `window.__timelines.main` exists. Increasing the page-load timeout did not address the blocked await.
 
 ### Impact
 
@@ -247,27 +248,36 @@ Every tool that honours the readiness contract stalls. The HyperFrames render wa
 
 ### Incorrect assumption
 
-That returning a useful object from the final `then` is harmless.
+That returning a useful object from the final `then` is harmless, and that anything returned from an async readiness function is just a value.
 
 ### Root cause
 
-**Confirmed.** Each piece of `ready()` was raced against a 5 s timer in the page: images, font loads, texture decodes and `document.fonts.ready` all resolved. Only the chained promise hung. Returning `true` made it resolve at once.
+**Confirmed.** Each piece of `ready()` was raced against a 5 s timer in the page: images, font loads, texture decodes and `document.fonts.ready` all resolved. The readiness function returned a GSAP timeline. GSAP timelines expose a `then` method, so JavaScript promise resolution treated the returned timeline as a thenable. Because the timeline was paused, the readiness promise never settled. Returning `true` made it resolve at once.
 
 ### Why the architecture allowed it
 
-The production renderer and the verification tools use different readiness signals. Only the tools depended on `__ready`, so the render gave no warning.
+The readiness promise did two jobs: it signaled asset readiness and also returned a runtime object. That coupled a gate to an object whose promise-like behavior was not obvious at the call site. The production renderer and the verification tools use different readiness signals; only the tools depended on `__ready`, so the render gave no warning.
+
+The diagnostic path repeated the risk when a browser tool evaluated `window.__ready` directly, because automation frameworks also await promise-like values returned from page evaluation.
 
 ### Fix
 
-`build` returns `true`, with a comment explaining why the timeline must never be returned.
+- `build` returns `true`, with a comment explaining why the timeline must never be returned.
+- readiness functions resolve to `undefined` or another plain non-thenable value; timelines live in their own registry instead of being returned through the readiness gate.
+- the browser readiness probe (`skills/motion-director/scripts/browser-readiness-probe.cjs`) inspects `window.__ready` inside the page and returns only plain JSON.
+- long-running browser tools can run through `skills/motion-director/scripts/work_guard.py` so a blocked readiness gate is contained and leaves evidence.
 
 ### Verification
 
 `tools/font-check.cjs` and `clip-audit.js` both complete after the change. Before the change, a 15 s race in the page reported `timeout`.
 
+The work guard regression suite separately proves that a silent blocked command is contained, its process tree is terminated, and its logs and summary survive.
+
 ### Prevention rule
 
-A readiness promise resolves to a plain value. Never return a GSAP timeline, tween or other thenable from a `then` callback. Every tool that awaits readiness races it against a timeout and reports "readiness never resolved" instead of hanging silently.
+A readiness promise resolves to a plain value. Never return a GSAP timeline, tween, player, renderer, or other thenable from a `then` callback or readiness promise. Every tool that awaits readiness races it against a timeout and reports "readiness never resolved" instead of hanging silently.
+
+A browser diagnostic must never return the inspected readiness object from `page.evaluate`. Return plain state.
 
 ### A second misattribution along the way
 
@@ -275,7 +285,7 @@ While the hang was unexplained, the font gate's `page.goto` was switched from th
 
 ### Reusable lesson
 
-Any library object with a `then` method (GSAP animations, some query builders, jQuery deferreds) silently changes a promise chain it is returned into.
+Any library object with a `then` method (GSAP animations, some query builders, jQuery deferreds) silently changes a promise chain it is returned into. When a promise appears stuck after its visible prerequisites have completed, inspect the value it resolves with. Promise assimilation can turn an innocent-looking return value into another wait.
 
 ### Related failure: readiness that swallowed asset errors
 
@@ -283,7 +293,7 @@ A reviewer (Codex) found the opposite defect in the same promise. Each `decode()
 
 ### Status
 
-Resolved. `projects/mgs-promo/tools/font-check.cjs` now races readiness against 20 s. Red run: with `return tl` restored in a scratch copy, it fails with `window.__ready did not settle within 20000 ms` instead of hanging. `clip-audit.js` has no such timeout yet (open).
+Resolved. `projects/mgs-promo/tools/font-check.cjs` now races readiness against 20 s. Red run: with `return tl` restored in a scratch copy, it fails with `window.__ready did not settle within 20000 ms` instead of hanging. Reusable work guard and browser probe codified in `skills/motion-director`.
 
 ---
 

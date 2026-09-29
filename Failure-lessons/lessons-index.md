@@ -58,7 +58,7 @@ Search this table before debugging. If your problem matches a failure class, sta
 8. **Diagnose at full resolution.** A contact sheet points at a candidate. It never proves a geometric defect.
 9. **Docs and deliverables ship together.** A README never names a file the same commit does not contain.
 10. **Same time, same frame, even under load.** Renders are compared by frame hash with the second one made on a busy machine. Nothing swaps a resource URL during capture.
-11. **A readiness promise neither hangs nor lies.** It resolves to a plain value when everything is ready, rejects with the failing asset when something is not, and every tool that awaits it has a timeout that says so.
+11. **A readiness promise neither hangs nor lies.** It resolves to a plain value when everything is ready (never return a timeline, player, renderer, or other possibly thenable runtime object from it), rejects with the failing asset when something is not, and every tool that awaits it has a timeout that says so.
 12. **"No findings" is read with "how much was measured".** After every code edit, render and look at the frames it could reach.
 13. **One change per diagnostic render.** A cause goes into code or docs only once it is confirmed.
 14. **ASR gives timings, the approved script gives words.**
