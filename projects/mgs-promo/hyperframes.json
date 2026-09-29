@@ -15,11 +15,6 @@
       "name": "grain-overlay",
       "type": "hyperframes:component",
       "target": "compositions/components/grain-overlay.html"
-    },
-    {
-      "name": "code-terminal-run",
-      "type": "hyperframes:component",
-      "target": "compositions/components/code-terminal-run.html"
     }
   ]
 }

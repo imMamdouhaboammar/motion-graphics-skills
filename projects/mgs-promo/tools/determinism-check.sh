@@ -13,7 +13,7 @@ for run in a b; do
   if [ "$run" = b ] && [ "${LOAD:-1}" = 1 ]; then
     for _ in $(seq "$(nproc)"); do python3 -c 'while True: pass' & HOGS+=("$!"); done
   fi
-  npx hyperframes render -q delivery -o "$OUT/run-$run.mp4" >/dev/null 2>&1 || { echo "render $run failed"; exit 2; }
+  npx --yes hyperframes@"${HF_VERSION:-0.8.92}" render -f 30 -q delivery -o "$OUT/run-$run.mp4" >/dev/null 2>&1 || { echo "render $run failed"; exit 2; }
   stop_hogs
   ffmpeg -hide_banner -loglevel error -y -i "$OUT/run-$run.mp4" -map 0:v -f framemd5 "$OUT/run-$run.md5"
 done

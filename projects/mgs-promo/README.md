@@ -23,9 +23,10 @@ A 26.6 s vertical (1080 × 1920, 30 fps) promo for this repository, cut to a sup
 ## Commands
 
 ```bash
-npx hyperframes check                 # lint + runtime + layout + motion + contrast
-npx hyperframes snapshot --at 0,1,5   # proof stills
-npx hyperframes render -o renders/out.mp4
+npx hyperframes@0.8.92 check             # lint + runtime + layout + motion + contrast
+npx hyperframes@0.8.92 snapshot --at 0,1,5  # proof stills
+npx hyperframes@0.8.92 render -f 30 -q delivery -o renders/out.mp4
+bash tools/determinism-check.sh      # two renders, second under CPU load, framemd5 compare
 ```
 
 The render path used for delivery, and the exact encode flags, are in `inspection/VERIFY.md`.

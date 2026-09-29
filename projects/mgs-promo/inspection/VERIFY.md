@@ -10,7 +10,7 @@ audio  aac LC, 48 kHz stereo, 26.602 s
 file   34.5 MB, 10.4 Mb/s, moov before mdat (faststart)
 ```
 
-Render path: `npx hyperframes render -f 30 -q delivery` (beginframe capture), then one social encode:
+Render path: `npx hyperframes@0.8.92 render -f 30 -q delivery` (beginframe capture), then one social encode:
 
 ```
 ffmpeg -i <hyperframes render> -c:v libx264 -preset slower -profile:v high -level 4.1 -crf 17 \
@@ -46,7 +46,7 @@ Eye checks at full resolution: joined letters, dots and hamza intact, «هذا؟
 
 ## HyperFrames check
 
-`npx hyperframes check`: passed. Lint 0 errors, motion 0 findings, contrast 29/29 WCAG AA, layout 0 errors.
+`npx hyperframes@0.8.92 check`: passed. Lint 0 errors, motion 0 findings, contrast 29/29 WCAG AA, layout 0 errors.
 Remaining lint warnings are structural advice to split scenes into sub-compositions. They are kept monolithic on purpose: four transitions carry an object across scene boundaries (the timeline frame push, the canvas-to-sheet carry, the waveform-to-line flatten, the stamped-sheet pull-out), and one timeline keeps those handoffs exact.
 
 ## Still-frame gate
