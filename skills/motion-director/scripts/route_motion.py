@@ -196,6 +196,47 @@ def build_route(
     mix_references = bool(context.get("mix_references", False))
     reference_mode = str(context.get("reference_mode", "inspiration"))
     difficulty_mode = str(context.get("difficulty_mode", "normal"))
+
+    supported_reference_modes = {
+        "structural-fidelity",
+        "translation",
+        "inspiration",
+        "mix",
+    }
+    supported_difficulty_modes = {"normal", "preserve"}
+    invalid_modes: list[str] = []
+    if reference_mode not in supported_reference_modes:
+        invalid_modes.append(f"reference_mode={reference_mode!r}")
+    if difficulty_mode not in supported_difficulty_modes:
+        invalid_modes.append(f"difficulty_mode={difficulty_mode!r}")
+    if invalid_modes:
+        blockers.append({
+            "name": "routing-context",
+            "reason": (
+                "Unsupported routing mode(s): "
+                + ", ".join(invalid_modes)
+                + ". Production must stop until the task context is corrected"
+            ),
+        })
+        return {
+            "version": 1,
+            "status": "blocked",
+            "entry": "motion-director",
+            "deliverable": str(context.get("deliverable", "broad-film")),
+            "installed": sorted(
+                name for name, present in availability.items() if present
+            ),
+            "stages": stages,
+            "required_references": sorted(set(required_references)),
+            "constraints": {
+                "reference_mode": reference_mode,
+                "difficulty_preservation": False,
+            },
+            "skipped_optional": skipped_optional,
+            "blockers": blockers,
+            "warnings": warnings,
+        }
+
     difficulty_preservation = difficulty_mode == "preserve"
 
     if (
