@@ -450,7 +450,7 @@ Hard-fail:
 
 ## Phase 13: technical gate
 
-Use the active runtime's supported checks. For HyperFrames, prefer its lint, check, snapshot, preview, render, and verification paths over custom capture code. For a working non-HyperFrames project, preserve its deterministic renderer unless a measured problem justifies change.
+Use the active runtime's supported checks. For HyperFrames, prefer its lint, check, snapshot, preview, render, and verification paths over custom capture code. For a working non-HyperFrames project, preserve its deterministic renderer unless a measured problem justifies change. Before heavy render or media work, pass the GPU policy and preserve its backend evidence.
 
 Verify the actual final file for target dimensions, duration, frame rate, color space, codec, audio alignment, and end hold.
 
@@ -460,27 +460,23 @@ Trust a check only after it has been seen failing. Reintroduce the defect in a c
 
 ## Phase 14: handoff
 
+Run the rendered file through `video-review-loop`, inspect the actual video, and resolve every hard finding in a later render before signoff.
+
 Keep the approved script, reference study, brand files, beat map, source composition, contact sheet, one previous draft, and final render. Keep heavy failed renders out of normal Git history when release assets, artifact storage, or Git LFS are more appropriate.
 
-## Specialist routing inside this pack
+## Dynamic routing and neural handoffs
 
-Use these when the request is narrow enough:
+For broad or multi-stage work, create a small JSON task context and run `scripts/route_motion.py` before production. Keep its returned route available through the session.
 
-- brand-intake for brand.md and MOTION.md
-- motion-brief-writer for a brief only
-- launch-video for a focused product or offer launch
-- apple-launch-film for an Apple-keynote-like product film
-- vox-explainer for sourced documentary explanation
-- animated-chart for chart-first work
-- milestone-reveal for a milestone reveal
-- motion-effects for one named effect
-- title-sequence-3d for a short cinematic 3D opener
-- model-showdown for model comparison
-- newsletter-promo for edition promotion
-- loop-cover for looping covers
-- reel-export for vertical adaptation
+The router reads the installed skill graph, selects only relevant specialists, explains every hop, adds GPU and review gates, and skips unavailable optional capabilities with a named fallback.
 
-A specialist skill is a recipe, not a prison. The master art direction still comes from brand.md, MOTION.md, the brief, and the actual reference.
+Read `references/neural-links.md` and obey each stage's handoff packet. Specialists inherit shared truth, return only their delta, and return to `motion-director` for broad film work.
+
+For a truly narrow request, a specialist may finish independently. Do not run the whole graph when the user asked for one bounded artifact.
+
+Heavy media work must pass `scripts/gpu_policy.py probe --require` before execution. Never hide a CPU fallback.
+
+A rendered final video must pass `video-review-loop` before signoff. Still-frame review alone is not final evidence.
 
 ## Non-negotiables
 
