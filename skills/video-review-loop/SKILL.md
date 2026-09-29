@@ -101,6 +101,15 @@ python "$VIDEO_REVIEW_SKILL_DIR/scripts/review_video.py" review final.mp4 \
 
 Never add `--allow-cpu` merely to make a blocked run continue.
 
+After the base round returns its `round_dir`, run the strict frame-level signal audit:
+
+```bash
+python "$VIDEO_REVIEW_SKILL_DIR/scripts/strict_video_signals.py" final.mp4 \
+  --output "$ROUND_DIR/strict-signals.json"
+```
+
+This surfaces one-frame luma flashes and extreme frame-to-frame brightness changes that contact sheets can miss. These are review candidates, not automatic creative failures. Inspect every candidate on the actual video.
+
 ## Evidence package
 
 A review round lives under:
@@ -114,7 +123,10 @@ The tool creates or attempts to create:
 - `manifest.json`
 - `technical.json`
 - `findings.json`
+- `strict-signals.json` after the strict temporal pass
 - `review.md`
+- `visual-findings.json` after timecoded visual review starts
+- `review-state.json` after the visual pass is attested
 - `evidence/contact-sheet.jpg`
 - `evidence/waveform.png` when audio exists
 - sampled scene frames
@@ -194,15 +206,18 @@ Do not infer a clean film from a clean machine report.
 
 ## Timecoded findings
 
-Write visual findings into the generated `review.md`.
+Do not leave the visual pass as prose only. Record each confirmed defect in the round state:
 
-Use:
-
-```text
-00:04.280  hard     Arabic headline clips at the top edge
-00:07.520  warning  transition flashes one bright frame
-00:12.040  review   CTA arrives before the VO resolves
+```bash
+python "$VIDEO_REVIEW_SKILL_DIR/scripts/review_round.py" add "$ROUND_DIR" \
+  --time "00:04.280" \
+  --severity hard \
+  --defect "Arabic headline clips at the top edge" \
+  --fix "increase the safe area and rerender" \
+  --evidence "full playback plus frame inspection"
 ```
+
+Use `hard`, `warning`, or `review` deliberately.
 
 Each finding needs:
 
@@ -214,6 +229,28 @@ Each finding needs:
 - evidence reviewed
 
 Avoid vague notes such as "make it better."
+
+After the required visual pass, attest exactly what was inspected:
+
+```bash
+python "$VIDEO_REVIEW_SKILL_DIR/scripts/review_round.py" attest "$ROUND_DIR" \
+  --watched-with-audio \
+  --watched-muted \
+  --first-second-inspected \
+  --transitions-inspected \
+  --ending-inspected \
+  --reference-compared
+```
+
+Omit `--reference-compared` only when no benchmark reference was part of the job.
+
+Check the round before signoff:
+
+```bash
+python "$VIDEO_REVIEW_SKILL_DIR/scripts/review_round.py" status "$ROUND_DIR"
+```
+
+The status command exits nonzero until the mandatory visual pass is attested and no machine or visual hard finding blocks the round.
 
 ## Review rounds
 
@@ -232,6 +269,17 @@ round 1
 Do not mark a finding fixed only because the source code changed.
 
 The new video is the proof.
+
+When a later render proves a visual finding is fixed, resolve it with evidence:
+
+```bash
+python "$VIDEO_REVIEW_SKILL_DIR/scripts/review_round.py" resolve "$ROUND_DIR" \
+  --id V001 \
+  --resolution "fixed in round 2" \
+  --evidence "round-2 final.mp4 at 00:04.280"
+```
+
+A source-code change is not resolution evidence.
 
 After a meaningful first review, allow at most two confirmation rounds unless a hard defect still exists.
 
