@@ -89,6 +89,40 @@ class RouteMotionTests(unittest.TestCase):
             with_mix = route(pack, base_context)
             self.assertIn("mix-and-match", [stage["name"] for stage in with_mix["stages"]])
 
+    def test_structural_fidelity_adds_reference_gate_before_specialist(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            pack = Path(tmp)
+            make_pack(pack, ["motion-director", "launch-video", "video-review-loop"])
+            fidelity_tool = pack / "skills" / "motion-director" / "scripts" / "reference_fidelity.py"
+            fidelity_tool.write_text("# test\n", encoding="utf-8")
+            data = route(pack, {
+                "deliverable": "launch",
+                "brand_ready": True,
+                "reference_count": 1,
+                "reference_mode": "structural-fidelity",
+                "difficulty_mode": "preserve",
+            })
+            names = [stage["name"] for stage in data["stages"]]
+            self.assertIn("reference-fidelity", names)
+            self.assertLess(names.index("reference-fidelity"), names.index("launch-video"))
+            self.assertTrue(data["constraints"]["difficulty_preservation"])
+            self.assertEqual(data["constraints"]["reference_mode"], "structural-fidelity")
+
+    def test_inspiration_mode_does_not_force_fidelity_gate(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            pack = Path(tmp)
+            make_pack(pack, ["motion-director", "launch-video", "video-review-loop"])
+            fidelity_tool = pack / "skills" / "motion-director" / "scripts" / "reference_fidelity.py"
+            fidelity_tool.write_text("# test\n", encoding="utf-8")
+            data = route(pack, {
+                "deliverable": "launch",
+                "brand_ready": True,
+                "reference_count": 1,
+                "reference_mode": "inspiration",
+            })
+            self.assertNotIn("reference-fidelity", [stage["name"] for stage in data["stages"]])
+            self.assertFalse(data["constraints"]["difficulty_preservation"])
+
     def test_hang_prone_stage_uses_optional_work_guard_when_present(self) -> None:
         with tempfile.TemporaryDirectory() as tmp:
             pack = Path(tmp)
