@@ -121,5 +121,58 @@ class GPUPolicyTests(unittest.TestCase):
         self.assertEqual(data["gpu"]["backend"], "cuda")
 
 
+    def test_selects_videotoolbox_encoder_on_macos_when_exposed(self) -> None:
+        gpu = load_module()
+        result = gpu.select_backend({
+            "os": "Darwin",
+            "ffmpeg_hwaccels": ["videotoolbox"],
+            "ffmpeg_encoders": ["h264_videotoolbox", "hevc_videotoolbox"],
+            "nvidia_smi": False,
+            "vaapi_devices": [],
+        })
+        self.assertEqual(result["video_encoder"], "h264_videotoolbox")
+        self.assertTrue(result["encode_accelerated"])
+        self.assertEqual(result["encoder_args"], ["-c:v", "h264_videotoolbox"])
+
+    def test_selects_nvenc_for_cuda_backend(self) -> None:
+        gpu = load_module()
+        result = gpu.select_backend({
+            "os": "Linux",
+            "ffmpeg_hwaccels": ["cuda"],
+            "ffmpeg_encoders": ["h264_nvenc"],
+            "nvidia_smi": True,
+            "vaapi_devices": [],
+        })
+        self.assertEqual(result["backend"], "cuda")
+        self.assertEqual(result["video_encoder"], "h264_nvenc")
+
+    def test_require_encode_blocks_decode_only_gpu(self) -> None:
+        result = subprocess.run(
+            [sys.executable, str(SCRIPT), "evaluate", "--require", "--require-encode", "--signals-json", json.dumps({
+                "os": "Darwin",
+                "ffmpeg_hwaccels": ["videotoolbox"],
+                "ffmpeg_encoders": [],
+                "nvidia_smi": False,
+                "vaapi_devices": [],
+            })],
+            text=True,
+            capture_output=True,
+            check=False,
+        )
+        self.assertEqual(result.returncode, 4)
+        data = json.loads(result.stdout)
+        self.assertEqual(data["reason"], "hardware-encoder-required-but-unavailable")
+
+    def test_parse_encoders_extracts_video_encoder_names(self) -> None:
+        gpu = load_module()
+        parsed = gpu.parse_encoders(
+            "Encoders:\n"
+            " V....D h264_videotoolbox VideoToolbox H.264 Encoder\n"
+            " V..... h264_nvenc NVIDIA NVENC H.264 encoder\n"
+            " A..... aac AAC encoder\n"
+        )
+        self.assertEqual(parsed, ["h264_nvenc", "h264_videotoolbox"])
+
+
 if __name__ == "__main__":
     unittest.main()
