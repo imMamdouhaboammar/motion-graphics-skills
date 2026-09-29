@@ -8,6 +8,7 @@ Search this table before debugging. If your problem matches a failure class, sta
 | No room for the hold after the last word | Planning decision made too late | Compute VO end minus last key word in the beat map | Beat map | Resolved | [render-pipeline](render-pipeline.md#plan-the-end-hold-in-the-beat-map) |
 | Renderer ignored ffmpeg failure | Unchecked child process | Read exit status, fail loudly, prove with an impossible output path | Render | Resolved | [render-pipeline](render-pipeline.md#a-renderer-that-ignores-its-encoders-failure) |
 | Logo missing from frames | Content built before assets loaded | Scenes never fetch, one readiness promise gates the first frame | Composition | Resolved | [render-pipeline](render-pipeline.md#scenes-built-before-their-assets-were-ready) |
+| Readiness gate hung after assets loaded | Promise adopted a paused thenable timeline | Readiness resolves to plain state; inspect thenables through bounded probes | Browser, composition | Resolved | [render-pipeline](render-pipeline.md#a-readiness-promise-adopted-a-paused-gsap-timeline) |
 | 177 MB draft | Full-frame animated texture costs bits | Cap bitrate, keep grain fine, low and on twos | Encode | Partially mitigated | [render-pipeline](render-pipeline.md#animated-grain-and-heavy-renders) |
 | Unknown option crashed the page | Lookup without default | Every option has a default path | Composition | Resolved | [render-pipeline](render-pipeline.md#an-unknown-option-value-crashed-the-page) |
 | Arabic letters and dots cut | Geometry checked by eye only | Clip audit before delivery, intentional crops declared in code, overlaps stay above the dot zone | Type, layout | Partially mitigated | [arabic-type-and-layout](arabic-type-and-layout.md#accidental-clipping-found-only-by-eye) |
@@ -37,3 +38,4 @@ Search this table before debugging. If your problem matches a failure class, sta
 7. **No opacity blend between two saturated fields.** Cut, shape a mask, or carry an object across.
 8. **Diagnose at full resolution.** A contact sheet points at a candidate. It never proves a geometric defect.
 9. **Docs and deliverables ship together.** A README never names a file the same commit does not contain.
+10. **Readiness resolves to plain state.** Never return a timeline, player, renderer, or other possibly thenable runtime object from a readiness promise.
