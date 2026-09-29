@@ -65,7 +65,7 @@ def stream_pipe(
 ) -> None:
     try:
         while True:
-            chunk = source.read(4096)
+            chunk = os.read(source.fileno(), 4096)
             if not chunk:
                 break
             log.write(chunk)
