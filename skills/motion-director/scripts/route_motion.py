@@ -35,6 +35,11 @@ RETURN_CONTRACTS = {
         "route state",
         "approved constraints",
     ],
+    "reference-fidelity": [
+        "validated reference contract",
+        "difficulty-preservation requirements",
+        "forbidden substitutions",
+    ],
     "brand-intake": [
         "brand.md",
         "MOTION.md",
@@ -182,6 +187,18 @@ def build_route(
 
     reference_count = int(context.get("reference_count", 0) or 0)
     mix_references = bool(context.get("mix_references", False))
+    reference_mode = str(context.get("reference_mode", "inspiration"))
+    difficulty_mode = str(context.get("difficulty_mode", "normal"))
+    difficulty_preservation = difficulty_mode == "preserve"
+
+    if (
+        reference_count >= 1
+        and (reference_mode == "structural-fidelity" or difficulty_preservation)
+    ):
+        add_stage(
+            "reference-fidelity",
+            "Reference fidelity is a production constraint, so signature mechanics and difficulty must be locked before specialization",
+        )
     if reference_count >= 2 and mix_references:
         add_stage(
             "mix-and-match",
@@ -237,6 +254,10 @@ def build_route(
         "installed": sorted(name for name, present in availability.items() if present),
         "stages": stages,
         "required_references": sorted(set(required_references)),
+        "constraints": {
+            "reference_mode": reference_mode,
+            "difficulty_preservation": difficulty_preservation,
+        },
         "skipped_optional": skipped_optional,
         "warnings": warnings,
     }
