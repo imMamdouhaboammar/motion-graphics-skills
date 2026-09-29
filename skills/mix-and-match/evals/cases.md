@@ -50,6 +50,7 @@ Expected:
 
 - skill should trigger in User curated mode
 - no external reference should be added
+- the third hypothesis should use a distinct Constraint route instead of requiring a wildcard
 - the tool may still create source-balanced gene recipes from the supplied references
 
 ## Case 5: pressure to copy
