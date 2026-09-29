@@ -15,3 +15,6 @@ jobs:
 
       - name: Validate 14 Skills and Prompts
         run: bash validate-skills.sh
+
+      - name: Test Motion Work Guard
+        run: python skills/motion-director/scripts/test_work_guard.py
