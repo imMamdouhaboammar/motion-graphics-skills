@@ -1,17 +1,17 @@
 :root {
-  --paper: #f4f0e8;
-  --paper-2: #ece5d8;
-  --paper-3: #fffdf8;
-  --ink: #00132f;
-  --ink-soft: #4a5566;
-  --coral: #d97557;
-  --coral-text: #a84b32;
-  --gold: #e2b44c;
-  --cyan: #58b6ff;
-  --rule: rgba(0, 19, 47, 0.14);
-  --rule-strong: rgba(0, 19, 47, 0.25);
-  --shadow: 0 22px 70px rgba(26, 32, 42, 0.12);
-  --shadow-soft: 0 14px 34px rgba(26, 32, 42, 0.08);
+  --paper: #f8fafc;
+  --paper-2: #f1f5f9;
+  --paper-3: #ffffff;
+  --ink: #070e1b;
+  --ink-soft: #475569;
+  --coral: #c2410c;
+  --coral-text: #9a3412;
+  --gold: #b45309;
+  --cyan: #0284c7;
+  --rule: rgba(15, 23, 42, 0.08);
+  --rule-strong: rgba(15, 23, 42, 0.16);
+  --shadow: 0 20px 60px rgba(15, 23, 42, 0.06);
+  --shadow-soft: 0 8px 24px rgba(15, 23, 42, 0.04);
   --radius: 16px;
   --max: 1440px;
   --ease: cubic-bezier(0.16, 1, 0.3, 1);
@@ -29,10 +29,7 @@ html {
 body {
   margin: 0;
   color: var(--ink);
-  background:
-    radial-gradient(circle at 82% 8%, rgba(217, 117, 87, 0.10), transparent 24rem),
-    radial-gradient(circle at 8% 24%, rgba(88, 182, 255, 0.09), transparent 28rem),
-    var(--paper);
+  background-color: var(--paper);
   font-family: "Manrope", system-ui, sans-serif;
   font-size: 16px;
   line-height: 1.55;
@@ -291,9 +288,9 @@ footer {
   display: flex;
   justify-content: space-between;
   padding: 8px 12px 16px;
-  color: rgba(0, 19, 47, 0.55);
+  color: rgba(7, 14, 27, 0.65);
   font-family: "SFMono-Regular", Consolas, monospace;
-  font-size: 0.67rem;
+  font-size: 0.75rem;
 }
 
 .stage-frame {
@@ -303,10 +300,8 @@ footer {
   min-height: 58%;
   margin: 0 8px;
   overflow: hidden;
-  background:
-    radial-gradient(circle at 82% 22%, rgba(88, 182, 255, 0.26), transparent 24%),
-    radial-gradient(circle at 12% 82%, rgba(217, 117, 87, 0.28), transparent 28%),
-    var(--ink);
+  background: linear-gradient(180deg, #091322 0%, #030811 100%);
+  border: 1px solid rgba(255, 255, 255, 0.08);
   border-radius: 13px;
 }
 
@@ -314,9 +309,10 @@ footer {
   position: absolute;
   top: 14px;
   left: 16px;
-  color: rgba(255, 255, 255, 0.62);
+  color: rgba(255, 255, 255, 0.82);
   font-family: "SFMono-Regular", Consolas, monospace;
-  font-size: 0.68rem;
+  font-size: 0.75rem;
+  font-weight: 600;
   letter-spacing: 0.08em;
 }
 
@@ -388,13 +384,14 @@ footer {
 
 .director-cameo span {
   margin-bottom: 9px;
-  padding: 4px 7px;
+  padding: 4px 8px;
   border-radius: 6px;
-  background: rgba(255,253,248,0.94);
+  background: rgba(255, 255, 255, 0.96);
   color: var(--ink);
   font-family: "SFMono-Regular", Consolas, monospace;
-  font-size: 0.6rem;
-  box-shadow: 0 5px 14px rgba(0,19,47,0.08);
+  font-size: 0.75rem;
+  font-weight: 600;
+  box-shadow: 0 5px 14px rgba(0, 19, 47, 0.08);
 }
 
 .timeline {
@@ -417,9 +414,9 @@ footer {
   position: absolute;
   left: 10px;
   top: 5px;
-  font-size: 0.65rem;
+  font-size: 0.75rem;
   font-weight: 700;
-  color: rgba(0,19,47,0.62);
+  color: rgba(7, 14, 27, 0.72);
 }
 
 .track-copy {
@@ -451,7 +448,7 @@ footer {
   left: 13%;
   width: 2px;
   background: var(--coral);
-  box-shadow: 0 0 0 1px rgba(217, 117, 87, 0.05);
+  box-shadow: 0 0 0 1px rgba(194, 65, 12, 0.08);
 }
 
 .playhead::before {
@@ -469,9 +466,10 @@ footer {
   position: absolute;
   bottom: 4px;
   left: 8px;
-  color: var(--coral);
+  color: var(--coral-text);
   font-family: "SFMono-Regular", Consolas, monospace;
-  font-size: 0.62rem;
+  font-size: 0.75rem;
+  font-weight: 600;
 }
 
 .hero-footnote {
@@ -519,8 +517,8 @@ footer {
   max-width: 620px;
   font-family: "Instrument Serif", Georgia, serif;
   font-size: clamp(2.1rem, 3.4vw, 4.2rem);
-  line-height: 1;
-  color: var(--coral);
+  line-height: 1.35;
+  color: var(--coral-text);
 }
 
 .story-flow {
@@ -597,7 +595,7 @@ footer {
   font-family: "Instrument Serif", Georgia, serif;
   font-style: italic;
   font-weight: 400;
-  color: var(--coral);
+  color: var(--coral-text);
 }
 
 .system-heading p,
@@ -679,7 +677,7 @@ footer {
   font-family: "Instrument Serif", Georgia, serif;
   font-size: 2.5rem;
   font-weight: 400;
-  color: var(--coral);
+  color: var(--coral-text);
 }
 
 .core-orbit span {
@@ -1090,7 +1088,7 @@ footer a {
   }
 
   .install-chip code {
-    font-size: 0.68rem;
+    font-size: 0.75rem;
   }
 
   .stage-paper {
