@@ -359,6 +359,44 @@ class ReferenceFidelityTests(unittest.TestCase):
         data = json.loads(result.stdout)
         self.assertEqual(data["status"], "pass")
 
+    def test_plan_rejects_non_boolean_style_expansion(self) -> None:
+        plan = {
+            "visual_direction": {
+                "dominant_language": "tactile paper collage world with animated cutouts and desk elements",
+                "preserves": [
+                    "world-flips",
+                    "object-scale",
+                    "transition-causality"
+                ],
+                "promoted_secondary_motifs": [],
+                "new_dominant_motifs": ["tactile paper collage world"],
+                "user_approved_style_expansion": "false",
+            },
+            "implementations": [
+                {
+                    "contract_id": "world-flips",
+                    "implementation": "alternate complete light and dark scene worlds",
+                    "verification": "major-cut comparison",
+                },
+                {
+                    "contract_id": "object-scale",
+                    "implementation": "large cropped assets dominate each object beat",
+                    "verification": "contact sheet",
+                },
+                {
+                    "contract_id": "transition-causality",
+                    "implementation": "each reset originates from a live scene object",
+                    "verification": "transition frame audit",
+                },
+            ],
+        }
+        result = run_tool(valid_contract(), plan)
+        self.assertEqual(result.returncode, 3)
+        data = json.loads(result.stdout)
+        self.assertTrue(
+            any("user_approved_style_expansion must be a boolean" in issue for issue in data.get("plan_issues", []))
+        )
+
     def test_unknown_difficulty_mode_is_rejected(self) -> None:
         contract = valid_contract()
         contract["difficulty_mode"] = "preserv"

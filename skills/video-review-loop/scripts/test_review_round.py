@@ -157,6 +157,27 @@ class ReviewRoundTests(unittest.TestCase):
             )
             self.assertEqual(mod.round_status(round_dir)["pending_hard_count"], 0)
 
+    def test_resolve_hard_finding_rejects_free_text_without_flag(self) -> None:
+        mod = load_module()
+        with tempfile.TemporaryDirectory() as tmp:
+            round_dir = make_round(Path(tmp) / "round")
+            mod.add_finding(
+                round_dir,
+                timestamp="00:04.280",
+                severity="hard",
+                defect="Arabic headline clips",
+                fix="increase safe area",
+                evidence="inspection",
+            )
+            with self.assertRaises(ValueError):
+                mod.resolve_finding(
+                    round_dir,
+                    "V001",
+                    resolution="not user-accepted; rerender required",
+                    evidence="defect still present in current draft",
+                    user_accepted=False,
+                )
+
     def test_round_status_keeps_hard_finding_pending_if_unproven(self) -> None:
         mod = load_module()
         with tempfile.TemporaryDirectory() as tmp:

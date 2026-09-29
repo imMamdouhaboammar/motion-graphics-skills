@@ -208,9 +208,16 @@ def validate_plan(
         if not isinstance(visual_direction, dict):
             issues.append("visual_direction is required in preserve mode")
         else:
-            approved_expansion = bool(
-                visual_direction.get("user_approved_style_expansion", False)
+            raw_approved = visual_direction.get(
+                "user_approved_style_expansion", False
             )
+            if not isinstance(raw_approved, bool):
+                issues.append(
+                    "visual_direction.user_approved_style_expansion must be a boolean"
+                )
+                approved_expansion = False
+            else:
+                approved_expansion = raw_approved is True
             direction_language = str(
                 visual_direction.get("dominant_language", "")
             ).strip()

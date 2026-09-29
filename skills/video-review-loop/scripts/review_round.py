@@ -113,14 +113,6 @@ def resolve_finding(
             resolved_artifact: dict[str, Any] | None = None
             outcome = "user-accepted" if user_accepted else "fixed-in-later-render"
 
-            if not user_accepted and (
-                "user-accepted" in resolution.lower()
-                or "accepted by user" in resolution.lower()
-                or "user accepted" in resolution.lower()
-                or "user-accepted" in evidence.lower()
-            ):
-                outcome = "user-accepted"
-
             if later_round is not None:
                 lr_path = Path(later_round)
                 lr_manifest = load_json(lr_path / "manifest.json", {})

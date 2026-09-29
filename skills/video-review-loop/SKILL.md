@@ -279,7 +279,8 @@ When a later render proves a visual finding is fixed, resolve it with evidence:
 python "$VIDEO_REVIEW_SKILL_DIR/scripts/review_round.py" resolve "$ROUND_DIR" \
   --id V001 \
   --resolution "fixed in round 2" \
-  --evidence "round-2 final.mp4 at 00:04.280"
+  --later-artifact "round-2/final.mp4" \
+  --evidence "headline safe area restored at 00:04.280"
 ```
 
 A source-code change is not resolution evidence.
