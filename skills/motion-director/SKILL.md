@@ -466,6 +466,8 @@ Keep the approved script, reference study, brand files, beat map, source composi
 
 ## Dynamic routing and neural handoffs
 
+Read `references/operator-guide.md` before operating a broad or multi-stage job. It is the execution guide for routing, reference challenge mode, HyperFrames reuse, GPU enforcement, guarded commands, and final video review.
+
 For broad or multi-stage work, create a small JSON task context and run `scripts/route_motion.py` before production. Keep its returned route available through the session.
 
 The router reads the installed skill graph, selects only relevant specialists, explains every hop, adds GPU and review gates, and skips unavailable optional capabilities with a named fallback.
@@ -474,7 +476,7 @@ Read `references/neural-links.md` and obey each stage's handoff packet. Speciali
 
 For a truly narrow request, a specialist may finish independently. Do not run the whole graph when the user asked for one bounded artifact.
 
-Heavy media work must pass `scripts/gpu_policy.py probe --require` before execution. Never hide a CPU fallback.
+Heavy media work must pass `scripts/gpu_policy.py probe --require` before execution. Browser-rendered motion must also pass `scripts/browser_gpu_probe.cjs`. Heavy final encoding must pass `scripts/gpu_policy.py probe --require --require-encode` when the active runtime exposes encoder selection. Never hide a CPU fallback.
 
 A rendered final video must pass `video-review-loop` before signoff. Still-frame review alone is not final evidence.
 
