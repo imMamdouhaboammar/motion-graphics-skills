@@ -24,6 +24,12 @@ GPU_POLICY_PATH = (
     / "scripts"
     / "gpu_policy.py"
 )
+REFERENCE_FIDELITY_PATH = (
+    Path(__file__).resolve().parents[2]
+    / "motion-director"
+    / "scripts"
+    / "reference_fidelity.py"
+)
 
 
 class ReviewError(RuntimeError):
@@ -42,6 +48,55 @@ def load_gpu_policy():
 def gpu_gate(signals: dict[str, Any], allow_cpu: bool) -> tuple[int, dict[str, Any]]:
     gpu = load_gpu_policy()
     return gpu.evaluate(signals, require=True, allow_cpu=allow_cpu)
+
+
+def load_reference_fidelity():
+    spec = importlib.util.spec_from_file_location(
+        "motion_reference_fidelity",
+        REFERENCE_FIDELITY_PATH,
+    )
+    if spec is None or spec.loader is None:
+        raise ReviewError(
+            f"Reference fidelity tool is unavailable at {REFERENCE_FIDELITY_PATH}"
+        )
+    module = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(module)
+    return module
+
+
+def reference_checklist(contract: dict[str, Any]) -> list[dict[str, Any]]:
+    items = contract.get("must_preserve", [])
+    if not isinstance(items, list):
+        return []
+    checklist: list[dict[str, Any]] = []
+    for item in items:
+        if not isinstance(item, dict):
+            continue
+        contract_id = str(item.get("id", "")).strip()
+        mechanism = str(item.get("mechanism", "")).strip()
+        if not contract_id or not mechanism:
+            continue
+        checklist.append({
+            "id": contract_id,
+            "mechanism": mechanism,
+            "evidence": str(item.get("evidence", "")).strip(),
+            "required": True,
+        })
+    return checklist
+
+
+def normalized_sample_times(
+    duration: float | None,
+    count: int = 12,
+) -> list[float]:
+    if duration is None or duration <= 0 or count < 2:
+        return []
+    times = [
+        round(duration * index / (count - 1), 6)
+        for index in range(count)
+    ]
+    times[-1] = round(max(0.0, duration - 0.04), 6)
+    return times
 
 
 def parse_float(value: Any) -> float | None:
