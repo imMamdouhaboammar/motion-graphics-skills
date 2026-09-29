@@ -261,5 +261,32 @@ class VideoReviewTests(unittest.TestCase):
             )
 
 
+    def test_reference_contract_must_bind_to_actual_reference_video(self) -> None:
+        review = load_module()
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            contract_path = root / "reference-contract.json"
+            reference_a = root / "reference-a.mp4"
+            reference_b = root / "reference-b.mp4"
+            reference_a.write_bytes(b"a")
+            reference_b.write_bytes(b"b")
+            contract = {
+                "reference": {
+                    "source": "reference-a.mp4"
+                }
+            }
+            review.validate_reference_contract_binding(
+                reference_a,
+                contract_path,
+                contract,
+            )
+            with self.assertRaises(review.ReviewError):
+                review.validate_reference_contract_binding(
+                    reference_b,
+                    contract_path,
+                    contract,
+                )
+
+
 if __name__ == "__main__":
     unittest.main()
