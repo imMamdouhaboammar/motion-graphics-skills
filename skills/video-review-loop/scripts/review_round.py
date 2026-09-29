@@ -144,8 +144,13 @@ def round_status(round_dir: Path) -> dict[str, Any]:
 
     pending = [item for item in findings if item.get("status") != "resolved"]
     pending_hard = [item for item in pending if item.get("severity") == "hard"]
+
+    required_attestations = list(REQUIRED_ATTESTATIONS)
+    if isinstance(manifest, dict) and manifest.get("reference"):
+        required_attestations.append("reference_compared")
+
     missing_attestations = [
-        key for key in REQUIRED_ATTESTATIONS if not bool(state.get(key, False))
+        key for key in required_attestations if not bool(state.get(key, False))
     ]
 
     machine_hard = int(
