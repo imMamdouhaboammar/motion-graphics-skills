@@ -69,6 +69,15 @@ Required signature dimensions:
 
 Then identify at least two `must_preserve` mechanisms.
 
+In `difficulty_mode: preserve`, also lock salience before choosing an art direction:
+
+- `dominant_language`: what actually dominates the reference across shots
+- `secondary_motifs`: visible but supporting motifs that must not become the new film's dominant system
+- `may_translate`: surfaces that can change without changing the benchmark
+- `forbidden_shortcuts`: easier substitutions that would reduce the reference challenge
+
+This distinction matters because presence is not prominence. A paper texture, tape strip, glow, grid, grain layer, glass panel, or 3D accent may exist in a reference without defining its visual language.
+
 A good preserved mechanism has:
 
 - stable ID
@@ -119,6 +128,55 @@ Record the reason.
 
 "Faster" and "easier to implement" are not sufficient.
 
+## Direction gate and salience lock
+
+Before full production, the chosen direction must include a `visual_direction` block.
+
+Example:
+
+```json
+{
+  "visual_direction": {
+    "dominant_language": "large cropped object-led scenes alternating between complete light and dark worlds",
+    "preserves": [
+      "world-flips",
+      "object-scale",
+      "transition-causality"
+    ],
+    "promoted_secondary_motifs": [],
+    "new_dominant_motifs": [],
+    "user_approved_style_expansion": false
+  }
+}
+```
+
+In preserve mode:
+
+- every `must_preserve` ID must survive into the selected direction, not only the implementation details
+- `promoted_secondary_motifs` must stay empty unless the user explicitly approves changing the reference hierarchy
+- a new dominant visual system requires explicit user approval
+- an attractive reinterpretation is not a substitute for the requested benchmark
+
+### Salience inversion
+
+A salience inversion happens when a secondary detail from the reference becomes the dominant visual language of the output.
+
+Example failure:
+
+```text
+reference:
+huge cropped objects + hard cream/black resets + causal circular masks
+supporting details:
+paper texture + tape + grain + print furniture
+
+output:
+paper desk + sheets + tape + grain become the entire film
+```
+
+This is not faithful translation even though every material existed somewhere in the source.
+
+When challenge mode is active, reject the direction before full build.
+
 ## Implementation map
 
 Before full production, map every preserved mechanism to an implementation.
@@ -167,6 +225,9 @@ beautiful paper collage
 ```
 
 The implementation can be attractive and still fail the assignment.
+
+
+The same rule applies to opening studies. In challenge mode, do not select a study mainly because it is original, easy to read, fast to build, or aesthetically pleasant. Reference-mechanic coverage and difficulty preservation are the first selection criteria. Phone readability and originality are secondary gates after fidelity survives.
 
 When fidelity is required, the brief must cite the contract rather than replacing it.
 
