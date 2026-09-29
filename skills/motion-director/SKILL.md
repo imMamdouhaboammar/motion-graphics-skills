@@ -180,6 +180,7 @@ Prefer:
 
 The viewer should feel one continuous thought.
 
+When the user supplies multiple references, asks to combine visual languages, or the first direction remains too close to one source, route concept development through `mix-and-match` before locking the motion thesis. Use its selected direction as concept input, then return here for production.
 Read references/concept-library.md when the first idea is obvious, generic, or too literal. Read references/narrative-direction.md for multi-beat films.
 
 ## Phase 4: create a motion thesis
@@ -468,6 +469,7 @@ Use these when the request is narrow enough:
 
 - brand-intake for brand.md and MOTION.md
 - motion-brief-writer for a brief only
+- mix-and-match for original concept recombination across multiple references or wildcard discovery
 - launch-video for a focused product or offer launch
 - apple-launch-film for an Apple-keynote-like product film
 - vox-explainer for sourced documentary explanation

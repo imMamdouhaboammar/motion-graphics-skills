@@ -4,7 +4,7 @@
 
 Official repository: https://github.com/imMamdouhaboammar/motion-graphics-skills
 
-Motion Graphics Skill Pack is a set of 14 skills for Claude Code and Codex. It covers motion direction, brand intake, motion briefs, launch films, explainers, animated charts, 3D title sequences, motion effects, social video, Arabic and RTL motion, and render review.
+Motion Graphics Skill Pack is a set of 15 skills for Claude Code and Codex. It covers motion direction, brand intake, motion briefs, multi-reference creative recombination, launch films, explainers, animated charts, 3D title sequences, motion effects, social video, Arabic and RTL motion, and render review.
 
 The master motion-director skill owns concept, narrative, art direction, typography, composition, choreography, Arabic direction and creative QA.
 

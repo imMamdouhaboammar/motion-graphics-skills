@@ -1,0 +1,54 @@
+<!doctype html>
+<html lang="ar">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=1080, height=1920" />
+<title>Opening study C, cursor-led</title>
+<script src="assets/vendor/gsap.min.js"></script>
+<style>
+@font-face{font-family:"TSans";src:url("assets/fonts/thmanyahsans-Medium.woff2") format("woff2");font-weight:500}
+@font-face{font-family:"TSans";src:url("assets/fonts/thmanyahsans-Bold.woff2") format("woff2");font-weight:700}
+@font-face{font-family:"TSerif";src:url("assets/fonts/thmanyahserifdisplay-Black.woff2") format("woff2");font-weight:900}
+@font-face{font-family:"JBMono";src:url("assets/fonts/jetbrains-mono-latin-500-normal.woff2") format("woff2");font-weight:500}
+:root{--paper:#F1ECE2;--paper2:#E4DCCD;--ink:#161412;--night:#100F0E;--cream:#F4EFE6;--graphite:#8A8378;--clay:#D9582B}
+*{margin:0;padding:0;box-sizing:border-box}
+html,body{width:1080px;height:1920px;overflow:hidden;background:var(--night)}
+#root{position:relative;width:100%;height:100%;overflow:hidden}
+.scene{position:absolute;inset:0;overflow:hidden}
+.paper{background:var(--paper)}
+.paper::before{content:"";position:absolute;inset:0;background:url("assets/tex/paper-fibre.png");background-size:720px;mix-blend-mode:multiply;opacity:.22}
+.night{background:var(--night)}
+.ar{direction:rtl;font-family:"TSans";}
+.lat{direction:ltr;unicode-bidi:isolate;display:inline-block}
+.abs{position:absolute}
+.ae-tile{position:absolute;left:330px;top:640px;width:420px;height:410px;border-radius:70px;background:#2A1B56;box-shadow:18px 28px 40px rgba(22,20,18,.28);display:flex;align-items:center;justify-content:center}
+.ae-tile::before{content:"";position:absolute;inset:14px;border:10px solid #A58BFF;border-radius:58px}
+.ae-tile span{font-family:"TSans";font-weight:700;color:#A58BFF;font-size:200px;letter-spacing:-6px;direction:ltr}
+</style>
+</head>
+<body>
+<div id="root" data-composition-id="main" data-start="0" data-duration="2.6" data-width="1080" data-height="1920">
+  <div class="scene night clip" id="b1" data-start="0" data-duration="1.5" data-track-index="1">
+    <div class="abs ar" id="w" style="left:0;right:0;top:640px;height:420px;text-align:center;font-family:TSerif;font-weight:900;font-size:330px;line-height:420px;color:var(--cream);clip-path:inset(0 0 0 100%)">الموشن</div>
+    <div class="abs" id="cur" style="top:660px;height:380px;width:64px;left:1020px;background:var(--clay)"></div>
+    <div class="abs ar" id="q" style="left:0;right:0;top:1090px;text-align:center;font-family:TSerif;font-weight:900;font-size:170px;color:var(--clay)">هذا؟</div>
+  </div>
+    <div class="scene paper clip" id="b2" data-start="1.5" data-duration="1.1" data-track-index="2">
+    <div class="ae-tile" id="ae"><span>Ae</span></div>
+  </div>
+
+</div>
+<script>
+document.fonts.ready.then(()=>{
+  const tl=gsap.timeline({paused:true});
+  // cursor sits at the right (RTL start), blinks once, then paints the word right->left
+  tl.fromTo('#cur',{opacity:1},{opacity:0,duration:0.001},0.12).to('#cur',{opacity:1,duration:0.001},0.22);
+  tl.fromTo('#cur',{x:0},{x:-1000,duration:0.5,ease:'power3.inOut'},0.30);
+  tl.fromTo('#w',{clipPath:'inset(0 0% 0 100%)'},{clipPath:'inset(0 0% 0 0%)',duration:0.5,ease:'power3.inOut'},0.30);
+  tl.to('#cur',{scaleX:0.3,transformOrigin:'0 50%',duration:0.2,ease:'power2.out'},0.80);
+  tl.fromTo('#q',{yPercent:70,opacity:0},{yPercent:0,opacity:1,duration:0.3,ease:'power2.out'},0.83);
+  tl.fromTo('#ae',{y:120,opacity:0},{y:0,opacity:1,duration:0.4,ease:'power3.out'},1.55);
+  window.__timelines["main"]=tl;
+});
+</script>
+</body></html>
