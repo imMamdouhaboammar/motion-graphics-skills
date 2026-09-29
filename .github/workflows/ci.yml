@@ -13,7 +13,7 @@ jobs:
       - name: Checkout Code
         uses: actions/checkout@v4
 
-      - name: Validate 14 Skills and Prompts
+      - name: Validate Skills and Prompts
         run: bash validate-skills.sh
 
       - name: Test Motion Router
@@ -30,3 +30,9 @@ jobs:
 
       - name: Test Video Review Loop
         run: python skills/video-review-loop/scripts/test_review_video.py
+
+      - name: Test Strict Video Signals
+        run: python skills/video-review-loop/scripts/test_strict_video_signals.py
+
+      - name: Test Review Round Lifecycle
+        run: python skills/video-review-loop/scripts/test_review_round.py
