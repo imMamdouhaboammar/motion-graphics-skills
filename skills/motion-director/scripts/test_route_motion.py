@@ -44,9 +44,16 @@ def route(pack: Path, context: dict) -> dict:
             capture_output=True,
             check=False,
         )
-        if result.returncode != 0:
+        if result.returncode not in {0, 3}:
             raise AssertionError(result.stderr or result.stdout)
-        return json.loads(result.stdout)
+        data = json.loads(result.stdout)
+        expected_code = 3 if data.get("status") == "blocked" else 0
+        if result.returncode != expected_code:
+            raise AssertionError(
+                f"route status {data.get('status')} returned {result.returncode}, "
+                f"expected {expected_code}"
+            )
+        return data
 
 
 class RouteMotionTests(unittest.TestCase):
