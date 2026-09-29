@@ -75,6 +75,16 @@ python "$MOTION_DIRECTOR_DIR/scripts/reference_fidelity.py" validate reference-c
 
 Do not continue while the gate fails.
 
+Before choosing an opening study or art direction, apply the salience lock:
+
+- identify the reference's dominant visual language
+- identify secondary motifs that are present but not dominant
+- require the selected direction to preserve every hard mechanism
+- reject any direction that promotes a secondary motif into the dominant system
+- reject any new dominant visual language unless the user explicitly approved that expansion
+
+This matters even when the new direction looks good. A reference can contain paper, grain, tape, glow, grids, glass, or other furniture without those details being the thing the user asked you to match.
+
 Surface styling is not fidelity. Paper texture, grain, glow, glass, gradients, collage, 3D, or any other familiar treatment cannot substitute for the reference's actual rhythm, composition, transition causality, object scale, depth logic, typography behavior, and density curve.
 
 If the reference is technically or compositionally difficult, difficulty is part of the contract unless the user explicitly allows simplification.
@@ -211,6 +221,8 @@ Before committing to a direction, ask:
 - Did transition causality become decorative transitions?
 - Did the density curve flatten into one repeated scene template?
 - Did the renderer or available component library start deciding the art direction?
+- Did a supporting motif from the reference become the dominant visual system in the output?
+- Did the selected opening study win on originality or ease while preserving fewer reference mechanics than another candidate?
 
 If any answer indicates collapse, stop and revise the plan before producing the full film.
 
