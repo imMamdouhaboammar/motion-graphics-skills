@@ -120,17 +120,21 @@ Add HyperFrames once (free, open source): `npx skills add heygen-com/hyperframes
   <tr>
     <td width="50%" valign="top" align="center">
       <h3>TEOLA Product Launch</h3>
-      <video src="https://github.com/imMamdouhaboammar/motion-graphics-skills/raw/main/TEOLA-ad.mp4" controls width="100%"></video>
+      <a href="https://github.com/imMamdouhaboammar/motion-graphics-skills/blob/main/TEOLA-ad.mp4">
+        <img src="assets/readme/teola-preview.gif" alt="TEOLA Product Launch Preview" width="100%">
+      </a>
       <p align="center">
-        <a href="https://github.com/imMamdouhaboammar/motion-graphics-skills/blob/main/TEOLA-ad.mp4">▶ Play TEOLA-ad.mp4</a>
+        <a href="https://github.com/imMamdouhaboammar/motion-graphics-skills/blob/main/TEOLA-ad.mp4">▶ Play Full Video (TEOLA-ad.mp4)</a>
       </p>
       <p align="left"><sub>Full product launch commercial built completely with code and motion direction. Deep blue glass, glow transitions, and every word from an approved fact list.</sub></p>
     </td>
     <td width="50%" valign="top" align="center">
       <h3>Four Steps Events Motion Final</h3>
-      <video src="https://github.com/imMamdouhaboammar/motion-graphics-skills/raw/main/projects/four-steps-events/renders/Four-Steps-Events-Motion-Final-v2.mp4" controls width="100%"></video>
+      <a href="https://github.com/imMamdouhaboammar/motion-graphics-skills/blob/main/projects/four-steps-events/renders/Four-Steps-Events-Motion-Final-v2.mp4">
+        <img src="assets/readme/four-steps-preview.gif" alt="Four Steps Events Motion Preview" width="100%">
+      </a>
       <p align="center">
-        <a href="https://github.com/imMamdouhaboammar/motion-graphics-skills/blob/main/projects/four-steps-events/renders/Four-Steps-Events-Motion-Final-v2.mp4">▶ Play Four-Steps-Events-Motion-Final-v2.mp4</a>
+        <a href="https://github.com/imMamdouhaboammar/motion-graphics-skills/blob/main/projects/four-steps-events/renders/Four-Steps-Events-Motion-Final-v2.mp4">▶ Play Full Video (Four-Steps-Events-Motion-Final-v2.mp4)</a>
       </p>
       <p align="left"><sub>Bilingual event promo with Arabic typography, custom brand cutouts, synchronized voiceover, and kinetic typography.</sub></p>
     </td>
