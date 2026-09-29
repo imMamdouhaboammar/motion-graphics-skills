@@ -25,6 +25,7 @@ def make_round(
     machine_hard: int = 0,
     *,
     reference: bool = False,
+    strict_signals: bool = False,
 ) -> Path:
     root.mkdir(parents=True)
     manifest = {"finding_counts": {"hard": machine_hard, "warning": 0}}
@@ -34,6 +35,11 @@ def make_round(
         json.dumps(manifest),
         encoding="utf-8",
     )
+    if strict_signals:
+        (root / "strict-signals.json").write_text(
+            json.dumps({"findings": [], "counts": {}}),
+            encoding="utf-8",
+        )
     return root
 
 
@@ -71,7 +77,7 @@ class ReviewRoundTests(unittest.TestCase):
     def test_all_required_attestations_allow_review_complete(self) -> None:
         mod = load_module()
         with tempfile.TemporaryDirectory() as tmp:
-            round_dir = make_round(Path(tmp) / "round")
+            round_dir = make_round(Path(tmp) / "round", strict_signals=True)
             mod.attest(
                 round_dir,
                 watched_with_audio=True,
@@ -80,6 +86,7 @@ class ReviewRoundTests(unittest.TestCase):
                 transitions_inspected=True,
                 ending_inspected=True,
                 reference_compared=True,
+                strict_signals_inspected=True,
             )
             self.assertEqual(mod.round_status(round_dir)["status"], "review-complete")
 
@@ -102,7 +109,11 @@ class ReviewRoundTests(unittest.TestCase):
     def test_reference_round_requires_reference_comparison_attestation(self) -> None:
         mod = load_module()
         with tempfile.TemporaryDirectory() as tmp:
-            round_dir = make_round(Path(tmp) / "round", reference=True)
+            round_dir = make_round(
+                Path(tmp) / "round",
+                reference=True,
+                strict_signals=True,
+            )
             mod.attest(
                 round_dir,
                 watched_with_audio=True,
@@ -111,10 +122,51 @@ class ReviewRoundTests(unittest.TestCase):
                 transitions_inspected=True,
                 ending_inspected=True,
                 reference_compared=False,
+                strict_signals_inspected=True,
             )
             status = mod.round_status(round_dir)
             self.assertEqual(status["status"], "agent-review-required")
             self.assertIn("reference_compared", status["missing_attestations"])
+
+
+    def test_round_requires_strict_signal_evidence_before_completion(self) -> None:
+        mod = load_module()
+        with tempfile.TemporaryDirectory() as tmp:
+            round_dir = make_round(Path(tmp) / "round")
+            mod.attest(
+                round_dir,
+                watched_with_audio=True,
+                watched_muted=True,
+                first_second_inspected=True,
+                transitions_inspected=True,
+                ending_inspected=True,
+                reference_compared=False,
+                strict_signals_inspected=True,
+            )
+            status = mod.round_status(round_dir)
+            self.assertEqual(status["status"], "agent-review-required")
+            self.assertIn("strict-signals.json", status["missing_evidence"])
+
+    def test_round_requires_strict_signal_inspection_attestation(self) -> None:
+        mod = load_module()
+        with tempfile.TemporaryDirectory() as tmp:
+            round_dir = make_round(Path(tmp) / "round", strict_signals=True)
+            mod.attest(
+                round_dir,
+                watched_with_audio=True,
+                watched_muted=True,
+                first_second_inspected=True,
+                transitions_inspected=True,
+                ending_inspected=True,
+                reference_compared=False,
+                strict_signals_inspected=False,
+            )
+            status = mod.round_status(round_dir)
+            self.assertEqual(status["status"], "agent-review-required")
+            self.assertIn(
+                "strict_signals_inspected",
+                status["missing_attestations"],
+            )
 
 
 if __name__ == "__main__":
