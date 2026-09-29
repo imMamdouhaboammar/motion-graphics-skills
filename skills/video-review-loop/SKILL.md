@@ -64,6 +64,8 @@ It cannot prove:
 
 Final signoff requires video evidence.
 
+When structural fidelity is active, final signoff also requires direct reference-versus-output comparison. Do not approve from a rewritten brief alone.
+
 ## Start a review round
 
 From the project containing the rendered film:
@@ -75,6 +77,18 @@ python "$VIDEO_REVIEW_SKILL_DIR/scripts/review_video.py" review final.mp4 \
   --expect-fps 25 \
   --expect-audio
 ```
+
+When the film was built against a benchmark reference, include both the source reference and the validated fidelity contract:
+
+```bash
+python "$VIDEO_REVIEW_SKILL_DIR/scripts/review_video.py" review final.mp4 \
+  --reference reference.mp4 \
+  --reference-contract reference-contract.json
+```
+
+This creates paired reference-versus-output evidence and inserts every required preserved mechanism into the review checklist.
+
+A polished video can still fail when it chooses an easier motion grammar than the benchmark.
 
 Heavy review defaults to GPU-required execution.
 
