@@ -1,0 +1,28 @@
+<!doctype html>
+<html lang="ar">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=1080, height=1920" />
+<title>Opening study</title>
+<script src="assets/vendor/gsap.min.js"></script>
+<style>
+@font-face{font-family:"TSans";src:url("assets/fonts/thmanyahsans-Medium.woff2") format("woff2");font-weight:500}
+@font-face{font-family:"TSans";src:url("assets/fonts/thmanyahsans-Bold.woff2") format("woff2");font-weight:700}
+@font-face{font-family:"TSerif";src:url("assets/fonts/thmanyahserifdisplay-Black.woff2") format("woff2");font-weight:900}
+@font-face{font-family:"JBMono";src:url("assets/fonts/jetbrains-mono-latin-500-normal.woff2") format("woff2");font-weight:500}
+:root{--paper:#F1ECE2;--paper2:#E4DCCD;--ink:#161412;--night:#100F0E;--cream:#F4EFE6;--graphite:#8A8378;--clay:#D9582B}
+*{margin:0;padding:0;box-sizing:border-box}
+html,body{width:1080px;height:1920px;overflow:hidden;background:var(--night)}
+#root{position:relative;width:100%;height:100%;overflow:hidden}
+.scene{position:absolute;inset:0;overflow:hidden}
+.paper{background:var(--paper)}
+.paper::before{content:"";position:absolute;inset:0;background:url("assets/tex/paper-fibre.png");background-size:720px;mix-blend-mode:multiply;opacity:.22}
+.night{background:var(--night)}
+.ar{direction:rtl;font-family:"TSans";}
+.lat{direction:ltr;unicode-bidi:isolate;display:inline-block}
+.abs{position:absolute}
+.ae-tile{position:absolute;left:330px;top:640px;width:420px;height:410px;border-radius:70px;background:#2A1B56;box-shadow:18px 28px 40px rgba(22,20,18,.28);display:flex;align-items:center;justify-content:center}
+.ae-tile::before{content:"";position:absolute;inset:14px;border:10px solid #A58BFF;border-radius:58px}
+.ae-tile span{font-family:"TSans";font-weight:700;color:#A58BFF;font-size:200px;letter-spacing:-6px;direction:ltr}
+</style>
+</head>

@@ -1,0 +1,522 @@
+<!doctype html>
+<html lang="ar">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=1080, height=1920" />
+    <title>Motion Graphics Skills — Arabic promo</title>
+    <script src="assets/vendor/gsap.min.js"></script>
+    <style>
+      @font-face { font-family: "TSans"; src: url("assets/fonts/thmanyahsans-Medium.woff2") format("woff2"); font-weight: 500; }
+      @font-face { font-family: "TSans"; src: url("assets/fonts/thmanyahsans-Bold.woff2") format("woff2"); font-weight: 700; }
+      @font-face { font-family: "TSerif"; src: url("assets/fonts/thmanyahserifdisplay-Black.woff2") format("woff2"); font-weight: 900; }
+      @font-face { font-family: "JBMono"; src: url("assets/fonts/jetbrains-mono-latin-500-normal.woff2") format("woff2"); font-weight: 500; }
+
+      :root {
+        --paper: #f1ece2; --paper2: #e4dccd; --desk: #ddd3c2; --sheet: #f7f3eb;
+        --ink: #161412; --night: #100f0e; --cream: #f4efe6; --graphite: #8a8378; --dim: #b3ab9f;
+        --clay: #d9582b; --ae: #2a1b56; --ae2: #a58bff;
+        --sh-sheet: 0 8px 18px rgba(22, 20, 18, 0.16);
+        --sh-obj: drop-shadow(18px 26px 22px rgba(22, 20, 18, 0.3));
+      }
+      * { margin: 0; padding: 0; box-sizing: border-box; }
+      html, body { width: 1080px; height: 1920px; overflow: hidden; background: var(--night); }
+      #root { position: relative; width: 100%; height: 100%; overflow: hidden; }
+      .scene { position: absolute; inset: 0; overflow: hidden; }
+      .paper { background: var(--paper); }
+      .night { background: var(--night); }
+      .fibre { position: absolute; inset: -20px; background: url("assets/tex/paper-fibre.png"); background-size: 720px; mix-blend-mode: multiply; opacity: 0.1; pointer-events: none; }
+      .abs { position: absolute; }
+      .ar { direction: rtl; font-family: "TSans", sans-serif; }
+      .lat { direction: ltr; unicode-bidi: isolate; display: inline-block; }
+      .serif { font-family: "TSerif", serif; font-weight: 900; }
+      .mono { font-family: "JBMono", monospace; font-weight: 500; direction: ltr; white-space: pre; }
+      /* word mask: generous vertical padding so Arabic dots and descenders never touch the mask edge */
+      .m { display: inline-block; overflow: hidden; padding: 0.12em 0.04em 0.3em; margin: -0.12em 0 -0.3em; vertical-align: top; }
+      .m > span { display: inline-block; will-change: transform; }
+
+      /* ---------- B1 ---------- */
+      #b1-word { left: 0; width: 1080px; top: 610px; height: 440px; }
+      .b1-slice { position: absolute; left: 0; width: 1080px; overflow: hidden; }
+      .b1-slice > div { position: absolute; left: 0; width: 1080px; height: 440px; text-align: center; font-size: 300px; line-height: 440px; color: var(--cream); }
+      #b1-q { right: 96px; top: 1070px; font-size: 170px; line-height: 1.3; color: var(--clay); }
+      #b1-tc { left: 96px; top: 1500px; font-size: 32px; color: var(--graphite); }
+
+      /* ---------- B2 ---------- */
+      #b2-ghost { left: 330px; top: 860px; width: 420px; height: 410px; border-radius: 70px; background: var(--paper2); transform: rotate(-3deg); opacity: 0; }
+      #b2-tile { left: 330px; top: 860px; width: 420px; height: 410px; }
+      #b2-tile .face { position: absolute; inset: 0; border-radius: 70px; background: var(--ae); box-shadow: 18px 28px 40px rgba(22, 20, 18, 0.28); display: flex; align-items: center; justify-content: center; }
+      #b2-tile .face::before { content: ""; position: absolute; inset: 16px; border: 10px solid var(--ae2); border-radius: 56px; }
+      #b2-tile .face span { font-family: "TSans"; font-weight: 700; color: var(--ae2); font-size: 196px; direction: ltr; }
+      .tape { position: absolute; background: rgba(228, 220, 205, 0.86); box-shadow: 0 2px 4px rgba(22, 20, 18, 0.12); }
+      #b2-tapeA { left: 262px; top: 822px; width: 150px; height: 64px; transform: rotate(-38deg); }
+      #b2-tapeB { left: 356px; top: 832px; width: 110px; height: 64px; transform: rotate(-38deg); }
+      #b2-label { left: 0; width: 1080px; top: 1330px; text-align: center; font-family: "TSans"; font-weight: 700; font-size: 58px; color: var(--ink); }
+      #b2-bidoon { right: 96px; top: 360px; font-size: 300px; line-height: 1.25; color: var(--ink); }
+      #b2-sc { left: -40px; top: 430px; width: 440px; }
+      #b2-sc img { width: 440px; display: block; transform: scaleX(-1); filter: var(--sh-obj); }
+      .wipe { position: absolute; top: 0; bottom: 0; width: 132px; background: var(--clay); left: 1080px; z-index: 50; }
+
+      /* ---------- B3 ---------- */
+      #b3-world { position: absolute; left: 0; top: 0; width: 1080px; height: 1920px; transform-origin: 0 0; }
+      #b3-cmd { left: 96px; top: 380px; font-size: 48px; line-height: 70px; color: var(--cream); }
+      #b3-cmd .pr { color: var(--clay); }
+      .caret { display: inline-block; width: 26px; height: 56px; background: var(--clay); vertical-align: -10px; margin-left: 4px; }
+      #b3-out { left: 96px; top: 620px; font-size: 32px; color: var(--graphite); }
+      #b3-cc { left: 88px; top: 790px; font-family: "TSans"; font-weight: 700; font-size: 150px; line-height: 1.25; color: var(--cream); white-space: nowrap; }
+      #b3-tl { left: 96px; top: 1150px; width: 888px; height: 280px; }
+      .fr { position: absolute; top: 0; width: 120px; height: 213.333px; background: var(--paper); border-radius: 3px; overflow: hidden; }
+      .fr i { position: absolute; width: 16px; height: 16px; border-radius: 50%; background: var(--clay); }
+      #b3-rule { left: 0; top: 240px; width: 888px; height: 3px; background: var(--graphite); transform-origin: 0 50%; }
+      .tick { position: absolute; top: 230px; width: 2px; height: 13px; background: var(--graphite); }
+      #b3-head { left: 0; top: -20px; width: 4px; height: 286px; background: var(--clay); }
+
+      /* ---------- B4 / B5 ---------- */
+      #b45-ground { position: absolute; inset: 0; background: var(--paper2); }
+      #card { left: 0; top: 0; width: 1080px; height: 1920px; transform-origin: 0 0; }
+      #card .bg { position: absolute; inset: 0; background: var(--paper); box-shadow: var(--sh-sheet); }
+      #card svg { position: absolute; inset: 0; overflow: visible; }
+      #b4-idea { right: 96px; top: 150px; font-size: 150px; line-height: 1.3; color: var(--ink); }
+      #b4-render { left: 96px; top: 1395px; font-size: 150px; line-height: 1.3; color: var(--ink); }
+      #sheet { left: 150px; top: 230px; width: 780px; height: 1000px; background: var(--sheet); box-shadow: var(--sh-sheet); transform-origin: 50% 0; }
+      #sheet-title { right: 70px; top: 44px; font-size: 118px; line-height: 1.3; color: var(--ink); }
+      #sheet-lines { right: 70px; left: 70px; top: 270px; }
+      .sl { font-family: "TSans"; font-weight: 500; font-size: 30px; line-height: 76px; color: #3b3732; white-space: nowrap; text-align: right; }
+      .sl .lat { font-weight: 500; }
+      #scan { left: 40px; right: 40px; top: 260px; height: 4px; background: var(--clay); opacity: 0; }
+      #wave { left: 96px; top: 1300px; width: 700px; height: 260px; }
+      .bar { position: absolute; bottom: 130px; width: 11px; border-radius: 6px; background: var(--ink); transform-origin: 50% 100%; }
+      .barb { position: absolute; top: 130px; width: 11px; border-radius: 6px; background: var(--ink); transform-origin: 50% 0; }
+      #b5-vo { left: 90px; top: 1085px; font-family: "TSans"; font-weight: 700; font-size: 132px; line-height: 1.25; color: var(--ink); }
+      #b5-mic { left: 800px; top: 1080px; width: 250px; }
+      #b5-mic img { width: 250px; display: block; filter: var(--sh-obj); }
+      #flatline { left: 0; top: 1428px; width: 1080px; height: 6px; background: var(--clay); transform-origin: 0 50%; }
+
+      /* ---------- B6 ---------- */
+      .half { position: absolute; left: 0; width: 1080px; background: var(--night); overflow: hidden; }
+      #b6-top { top: 0; height: 1431px; }
+      #b6-bot { top: 1431px; height: 489px; }
+      #b6-line1 { left: 0; bottom: 0; width: 1080px; height: 3px; background: var(--clay); }
+      #b6-line2 { left: 0; top: 0; width: 1080px; height: 3px; background: var(--clay); }
+      #b6-lead { right: 96px; top: 760px; font-size: 64px; line-height: 1.4; color: var(--dim); font-weight: 500; }
+      #b6-more { right: 80px; bottom: 30px; font-size: 330px; line-height: 1.05; color: var(--cream); }
+
+      /* ---------- B7 / B8 ---------- */
+      #b78-ground { position: absolute; inset: 0; background: var(--desk); }
+      #b7-sheet { left: 0; top: 0; width: 1080px; height: 1920px; transform-origin: 0 0; }
+      #b7-sheet .bg { position: absolute; inset: 0; background: var(--paper); }
+      #stamp { left: 150px; top: 640px; width: 780px; height: 420px; transform: rotate(-6deg); }
+      #stamp .ink { position: absolute; inset: 0; -webkit-mask-image: url("assets/tex/stamp-ink.png"); mask-image: url("assets/tex/stamp-ink.png"); -webkit-mask-size: 100% 100%; mask-size: 100% 100%; }
+      #stamp .b1 { position: absolute; inset: 0; border: 12px solid var(--clay); border-radius: 36px; }
+      #stamp .b2 { position: absolute; inset: 26px; border: 4px solid var(--clay); border-radius: 22px; }
+      #stamp .t { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; font-size: 186px; line-height: 1; color: var(--clay); padding-bottom: 20px; }
+      #b7-on { left: 0; width: 1080px; top: 1170px; text-align: center; }
+      #b7-on { font-size: 104px; line-height: 1.3; white-space: nowrap; }
+      #b7-on .a { font-weight: 500; color: var(--graphite); }
+      #b7-on .b { font-weight: 700; color: var(--ink); }
+      .tool { position: absolute; }
+      .tool img { display: block; filter: var(--sh-obj); }
+      #t-kb { left: -30px; top: 1440px; } #t-kb img { width: 1140px; }
+      #t-mic { left: 870px; top: 20px; } #t-mic img { width: 230px; }
+      #t-hp { left: -70px; top: 170px; } #t-hp img { width: 420px; }
+      #t-sc { left: -120px; top: 1060px; } #t-sc img { width: 420px; transform: scaleX(-1); }
+      #b8-studio { left: 0; width: 1080px; top: 700px; text-align: center; font-family: "TSans"; font-weight: 700; font-size: 230px; line-height: 1.2; color: var(--ink); }
+      #b8-dot { display: inline-block; width: 64px; height: 64px; border-radius: 50%; background: var(--clay); margin-right: 26px; vertical-align: 32px; }
+      #b8-home { left: 0; width: 1080px; top: 1000px; text-align: center; font-size: 170px; line-height: 1.3; color: var(--ink); }
+
+      /* ---------- B9 ---------- */
+      #b9-lead { right: 96px; top: 690px; font-size: 64px; line-height: 1.4; font-weight: 500; color: var(--dim); }
+      #b9-cta { right: 96px; top: 820px; font-size: 196px; line-height: 1.3; color: var(--cream); white-space: nowrap; }
+      #b9-caret { top: 872px; width: 58px; height: 190px; background: var(--clay); }
+      #b9-repo { left: 0; width: 1080px; top: 1440px; text-align: center; font-size: 27px; color: var(--graphite); }
+
+      /* ---------- grain ---------- */
+      #grain { position: absolute; inset: 0; z-index: 90; pointer-events: none; mix-blend-mode: overlay; opacity: 0.09; }
+      #grain > div { position: absolute; inset: 0; background-size: 256px; opacity: 0; }
+      #g0 { background-image: url("assets/tex/grain-0.png"); } #g1 { background-image: url("assets/tex/grain-1.png"); } #g2 { background-image: url("assets/tex/grain-2.png"); }
+    </style>
+  </head>
+  <body>
+    <div id="root" data-composition-id="main" data-start="0" data-duration="26.6" data-width="1080" data-height="1920">
+
+      <!-- B1 · 0.00 hook: the word arrives out of registration -->
+      <div class="scene night clip" id="b1" data-start="0" data-duration="1.5" data-track-index="1" style="z-index:1">
+        <div id="b1-word" class="abs" data-layout-allow-overflow></div>
+        <div id="b1-q" class="abs ar serif"><span class="m"><span>هذا؟</span></span></div>
+        <div id="b1-tc" class="abs mono">00:00:00:00</div>
+      </div>
+
+      <!-- B2 · 1.50 After Effects gets cut off the page -->
+      <div class="scene paper clip" id="b2" data-start="1.5" data-duration="3.02" data-track-index="1" style="z-index:3">
+        <div class="fibre"></div>
+        <div id="b2-bidoon" class="abs ar serif"><span class="m"><span>بدون</span></span></div>
+        <div id="b2-ghost" class="abs"></div>
+        <div id="b2-tile" class="abs"><div class="face"><span>Ae</span></div></div>
+        <div id="b2-tapeA" class="tape"></div>
+        <div id="b2-tapeB" class="tape"></div>
+        <div id="b2-label" class="abs"><span class="lat">After Effects</span></div>
+        <div id="b2-sc" class="abs"><img src="assets/cutouts/scissors.png" alt="" /></div>
+      </div>
+      <div class="wipe" id="wipe1" data-layout-allow-occlusion></div>
+
+      <!-- B3 · 4.20 the real command builds a timeline -->
+      <div class="scene night clip" id="b3" data-start="4.2" data-duration="3.84" data-track-index="1" style="z-index:2">
+        <div id="b3-world">
+          <div id="b3-cmd" class="abs mono"><span class="pr">❯ </span><span id="b3-typed"></span><span class="caret" id="b3-caret"></span></div>
+          <div id="b3-out" class="abs mono"><span style="color:var(--clay)">✓</span> 14 skills installed</div>
+          <div id="b3-cc" class="abs"><span class="m"><span class="lat">Claude Code</span></span></div>
+          <div id="b3-tl" class="abs">
+            <div id="b3-rule" class="abs"></div>
+            <div id="b3-frames"></div>
+            <div id="b3-head" class="abs"></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- B4 + B5 · 7.98 canvas: idea → structure → render, then the page becomes the script and the script becomes a voice -->
+      <div class="scene clip" id="b45" data-start="7.98" data-duration="5.66" data-track-index="1" style="z-index:2">
+        <div id="b45-ground"></div>
+        <div class="fibre"></div>
+        <div id="card" class="abs">
+          <div class="bg"></div>
+          <svg id="card-svg" aria-hidden="true" width="1080" height="1920" viewBox="0 0 1080 1920"></svg>
+        </div>
+        <div id="b4-idea" class="abs ar serif"><span class="m"><span>الفكرة</span></span></div>
+        <div id="b4-render" class="abs ar serif"><span class="m"><span>الرندر</span></span></div>
+        <div id="sheet" class="abs">
+          <div id="sheet-title" class="abs ar serif"><span class="m"><span>السكربت</span></span></div>
+          <div id="sheet-lines" class="abs ar"></div>
+          <div id="scan" class="abs"></div>
+        </div>
+        <div id="b5-vo" class="abs"><span class="m"><span class="lat">Voice Over</span></span></div>
+        <div id="wave" class="abs"></div>
+        <div id="b5-mic" class="abs" data-layout-allow-overflow><img src="assets/cutouts/mic_akg.png" alt="" /></div>
+        <div id="flatline" class="abs"></div>
+      </div>
+
+      <!-- B7 + B8 · 15.18 the stamp, then the desk (sits under B6 so the split reveals it) -->
+      <div class="scene clip" id="b78" data-start="15.18" data-duration="7.5" data-track-index="1" style="z-index:3">
+        <div id="b78-ground"></div>
+        <div class="fibre"></div>
+        <div id="b7-sheet" class="abs" data-layout-allow-overflow>
+          <div class="bg"></div>
+          <div class="fibre"></div>
+          <div id="stamp" class="abs"><div class="ink"><div class="b1"></div><div class="b2"></div><div class="t ar serif">عرض قوي</div></div></div>
+          <div id="b7-on" class="abs ar"><span class="m"><span class="a">على</span></span> <span class="m"><span class="b lat">Claude Code</span></span></div>
+        </div>
+        <div id="t-hp" class="tool" data-layout-allow-overflow><img src="assets/cutouts/hp_iso.png" alt="" /></div>
+        <div id="t-mic" class="tool" data-layout-allow-overflow><img src="assets/cutouts/mic_akg.png" alt="" /></div>
+        <div id="t-sc" class="tool" data-layout-allow-overflow><img src="assets/cutouts/scissors.png" alt="" /></div>
+        <div id="t-kb" class="tool" data-layout-allow-overflow><img src="assets/cutouts/kb_wm.png" alt="" /></div>
+        <div id="b8-studio" class="abs"><span class="m"><span class="lat"><span id="b8-dot"></span>Studio</span></span></div>
+        <div id="b8-home" class="abs ar serif"><span class="m"><span>في بيتك</span></span></div>
+      </div>
+      <div class="wipe" id="wipe2" data-layout-allow-occlusion></div>
+
+      <!-- B6 · 13.62 the pause: one line, one word -->
+      <div class="scene clip" id="b6" data-start="13.62" data-duration="1.86" data-track-index="2" style="z-index:4">
+        <div id="b6-top" class="half">
+          <div id="b6-lead" class="abs ar"><span class="m"><span>ولسه</span></span> <span class="m"><span>فيه</span></span></div>
+          <div id="b6-more" class="abs ar serif"><span class="m"><span>أكثر</span></span></div>
+          <div id="b6-line1" class="abs"></div>
+        </div>
+        <div id="b6-bot" class="half"><div id="b6-line2" class="abs"></div></div>
+      </div>
+
+      <!-- B9 · 22.38 the ask -->
+      <div class="scene night clip" id="b9" data-start="22.38" data-duration="4.22" data-track-index="1" style="z-index:2">
+        <div id="b9-lead" class="abs ar"><span class="m"><span>عليك</span></span> <span class="m"><span>تبدأ</span></span> <span class="m"><span>بس</span></span></div>
+        <div id="b9-cta" class="abs ar serif"><span class="m"><span>اترك</span></span> <span class="m"><span>تعليق</span></span></div>
+        <div id="b9-caret" class="abs"></div>
+        <div id="b9-repo" class="abs mono">github.com/imMamdouhaboammar/motion-graphics-skills</div>
+      </div>
+
+      <div id="grain"><div id="g0"></div><div id="g1"></div><div id="g2"></div></div>
+
+      <audio id="vo" src="assets/audio/vo-master.wav" data-start="0" data-duration="26.122" data-track-index="10" data-volume="1"></audio>
+      <audio id="sfx-cut" src="assets/audio/sfx/click.mp3" data-start="3.22" data-duration="0.36" data-track-index="11" data-volume="0.16"></audio>
+      <audio id="sfx-enter" src="assets/audio/sfx/key-press.mp3" data-start="5.33" data-duration="0.43" data-track-index="11" data-volume="0.2"></audio>
+      <audio id="sfx-stamp" src="assets/audio/sfx/impact-bass-1.mp3" data-start="15.78" data-duration="2.1" data-track-index="11" data-volume="0.18"></audio>
+    </div>
+
+    <script>
+      (function () {
+        var $ = function (s) { return document.querySelector(s); };
+        var ENV = [0.794, 1.0, 0.728, 0.197, 0.769, 0.754, 0.717, 0.916, 0.831, 0.651, 0.483, 0.359, 0.749, 0.521, 0.648, 0.809, 0.84, 0.862, 0.913, 0.772, 0.628, 0.906, 0.73, 0.519, 0.61, 0.188, 0.784, 0.768, 0.408, 0.428, 0.703, 0.537, 0.65, 0.827, 0.798, 0.633];
+        var SCRIPT = [
+          'شايف الموشن هذا؟',
+          'تقدر تسوي زيه بدون ما تفتح <span class="lat">After Effects</span>',
+          'جهزت لك <span class="lat">Skill</span> تخلي <span class="lat">Claude Code</span> يبني الموشن معك',
+          'من الفكرة لين الرندر',
+          'ومعها <span class="lat">Skill</span> تكتب لك السكربت',
+          'و<span class="lat">Skill</span> تسوي لك الـ<span class="lat">Voice Over</span>',
+          'ولسه فيه أكثر',
+          'جايب لك عرض قوي على <span class="lat">Claude Code</span> نفسه',
+          'اترك لي تعليق وراح أرسل لك كل شيء'
+        ];
+        var CMD = 'npx skills add\nimMamdouhaboammar/\nmotion-graphics-skills';
+
+        function ready() {
+          var imgs = Array.prototype.slice.call(document.images).map(function (im) {
+            // a missing or corrupt asset rejects readiness, so a broken master cannot render silently
+            return im.decode ? im.decode().catch(function (e) { throw new Error('image failed to decode: ' + im.getAttribute('src') + ' (' + e + ')'); }) : Promise.resolve();
+          });
+          var faces = ['500 40px TSans', '700 40px TSans', '900 40px TSerif', '500 40px JBMono'].map(function (f) {
+            return document.fonts.load(f, 'الموشن Ae');
+          });
+          var bgs = ['assets/tex/paper-fibre.png', 'assets/tex/stamp-ink.png', 'assets/tex/grain-0.png', 'assets/tex/grain-1.png', 'assets/tex/grain-2.png'].map(function (u) {
+            var i = new Image(); i.src = u; return i.decode().catch(function (e) { throw new Error('texture failed to decode: ' + u + ' (' + e + ')'); });
+          });
+          return Promise.all(faces.concat(imgs, bgs)).then(function () { return document.fonts.ready; });
+        }
+
+        // word rise: the word waits fully below its mask AND hidden, so nothing peeks through the
+        // mask's descender padding before its cue
+        function rise(tl, sel, at, dur, from) {
+          tl.set(sel, { opacity: 0 }, 0);
+          tl.set(sel, { opacity: 1 }, at);
+          tl.fromTo(sel, { yPercent: from == null ? 130 : from, filter: 'blur(6px)' }, { yPercent: 0, filter: 'blur(0px)', duration: dur || 0.34, ease: 'power2.out', immediateRender: false }, at);
+        }
+
+        window.__ready = ready().then(function () {
+          var tl = gsap.timeline({ paused: true });
+
+          /* ================= B1 · 0.00–1.50 ================= */
+          var W = $('#b1-word'), N = 5, H = 440 / N, OFF = [-360, 250, -150, 430, -230];
+          for (var i = 0; i < N; i++) {
+            var s = document.createElement('div');
+            // each slice shows one strip of the word by design: a declared crop for clip-audit and the layout audit
+            s.className = 'b1-slice'; s.setAttribute('data-layout-allow-overflow', ''); s.setAttribute('data-crop', 'intentional');
+            s.style.top = i * H + 'px'; s.style.height = H + 'px';
+            s.innerHTML = '<div class="ar serif" style="top:' + -i * H + 'px">الموشن</div>';
+            W.appendChild(s);
+            tl.fromTo(s, { x: OFF[i] }, { x: 0, duration: 0.5 + i * 0.04, ease: 'expo.out' }, 0.02 + (i % 2) * 0.03);
+          }
+          rise(tl, '#b1-q .m > span', 0.83, 0.3);
+          var tc = $('#b1-tc'), tco = { f: 0 };
+          tl.fromTo(tco, { f: 0 }, { f: 45, duration: 1.5, ease: 'none', onUpdate: function () {
+            var f = Math.floor(tco.f + 1e-6); tc.textContent = '00:00:' + String(Math.floor(f / 30)).padStart(2, '0') + ':' + String(f % 30).padStart(2, '0');
+          } }, 0);
+
+          /* ================= B2 · 1.50–4.52 ================= */
+          tl.fromTo('#b2-tile', { y: -40, rotation: -3 }, { y: 0, rotation: -3, duration: 0.4, ease: 'power3.out' }, 1.5);
+          tl.fromTo('#b2-label', { opacity: 0 }, { opacity: 1, duration: 0.25, ease: 'power1.out' }, 1.62);
+          rise(tl, '#b2-bidoon .m > span', 2.33, 0.34);
+          // scissors slide in from the left edge, blade tip on the tape
+          tl.fromTo('#b2-sc', { x: -520, y: 60, rotation: 8 }, { x: 0, y: 0, rotation: 0, duration: 0.42, ease: 'power3.out' }, 2.72);
+          // snip at 3.20: forward jab, tape splits
+          tl.to('#b2-sc', { x: 34, y: 26, duration: 0.07, ease: 'power2.in' }, 3.18);
+          tl.to('#b2-sc', { x: 22, y: 18, duration: 0.12, ease: 'power2.out' }, 3.25);
+          tl.to('#b2-tapeB', { x: 60, y: 90, rotation: 12, opacity: 0, duration: 0.5, ease: 'power2.in' }, 3.22);
+          // the tile falls out on "Effects"
+          tl.set('#b2-ghost', { opacity: 1 }, 3.5);
+          tl.to('#b2-tile', { rotation: 16, y: 1350, x: 90, duration: 0.62, ease: 'power3.in' }, 3.52);
+          tl.to('#b2-sc', { x: -560, y: 40, duration: 0.45, ease: 'power3.in' }, 3.62);
+          // T1 cursor cut → B3
+          var w1 = { p: 0 };
+          tl.fromTo(w1, { p: 0 }, { p: 1, duration: 0.3, ease: 'power2.inOut', onUpdate: function () {
+            var x = 1080 - w1.p * 1212; $('#wipe1').style.left = x + 'px';
+            $('#b2').style.clipPath = 'inset(0 ' + Math.max(0, 1080 - x - 66) + 'px 0 0)';
+          } }, 4.2);
+
+          /* ================= B3 · 4.20–8.04 ================= */
+          var typed = $('#b3-typed');
+          var chunks = [3, 5, 4, 6, 5, 7, 6, 8, 6, 5, 4];   // fixed keystroke chunks, human rhythm
+          var marks = [], acc = 0; chunks.forEach(function (c) { acc += c; marks.push(Math.min(acc, CMD.length)); });
+          var ty = { t: 0 };
+          tl.fromTo(ty, { t: 0 }, { t: 1, duration: 0.86, ease: 'none', onUpdate: function () {
+            var k = Math.min(marks.length - 1, Math.floor(ty.t * marks.length));
+            var n = ty.t <= 0 ? 0 : (ty.t >= 1 ? CMD.length : marks[k]);
+            typed.textContent = CMD.slice(0, n);
+          } }, 4.4);
+          tl.fromTo('#b3-out', { opacity: 0, y: 12 }, { opacity: 1, y: 0, duration: 0.22, ease: 'power2.out' }, 5.36);
+          // caret: solid while typing, square-wave blink afterwards (integer half-cycles, pure of time)
+          var cb = { t: 0 };
+          tl.fromTo(cb, { t: 0 }, { t: 2.6, duration: 2.6, ease: 'none', onUpdate: function () {
+            $('#b3-caret').style.opacity = (cb.t < 1.0 || Math.floor(cb.t / 0.3) % 2 === 0) ? 1 : 0;
+          } }, 4.4);
+          rise(tl, '#b3-cc .m > span', 5.88, 0.4, 110);
+          tl.to(['#b3-cmd', '#b3-out'], { opacity: 0.35, duration: 0.3, ease: 'power1.out' }, 5.9);
+          // timeline: rule draws, frames drop in one by one, playhead scrubs
+          var FR = $('#b3-frames'), DOT = [[18, 150], [34, 96], [52, 60], [70, 46], [86, 64], [98, 112]];
+          tl.fromTo('#b3-rule', { scaleX: 0 }, { scaleX: 1, duration: 0.45, ease: 'power3.out' }, 6.62);
+          for (var t = 0; t <= 24; t++) {
+            var k2 = document.createElement('div'); k2.className = 'tick'; k2.style.left = (t * 37) + 'px'; FR.appendChild(k2);
+            tl.fromTo(k2, { opacity: 0 }, { opacity: 1, duration: 0.05 }, 6.62 + t * 0.016);
+          }
+          for (var f = 0; f < 6; f++) {
+            var fr = document.createElement('div'); fr.className = 'fr'; fr.id = 'fr' + f; fr.style.left = (f * 153) + 'px';
+            fr.innerHTML = '<i style="left:' + DOT[f][0] + 'px;top:' + DOT[f][1] + 'px"></i>';
+            FR.appendChild(fr);
+            tl.fromTo(fr, { y: -36, opacity: 0 }, { y: 0, opacity: 1, duration: 0.22, ease: 'power3.out' }, 6.74 + f * 0.1);
+          }
+          tl.fromTo('#b3-head', { x: -8, opacity: 0 }, { x: -8, opacity: 1, duration: 0.1 }, 6.9);
+          tl.to('#b3-head', { x: 3 * 153 + 58, duration: 0.62, ease: 'power2.inOut' }, 7.0);
+          // T2 push into frame 4 (index 3): it fills the screen and becomes the canvas
+          var cam = { p: 0 }, C = { x: 96 + 3 * 153 + 60, y: 1150 + 106.667 }, S9 = 9;
+          tl.fromTo(cam, { p: 0 }, { p: 1, duration: 0.42, ease: 'power2.in', onUpdate: function () {
+            var S = Math.pow(S9, cam.p), px = C.x + (540 - C.x) * cam.p, py = C.y + (960 - C.y) * cam.p;
+            $('#b3-world').style.transform = 'translate(' + (px - S * C.x) + 'px,' + (py - S * C.y) + 'px) scale(' + S + ')';
+          } }, 7.58);
+          tl.to('#b3-head', { opacity: 0, duration: 0.08 }, 7.6);
+
+          /* ================= B4 · 7.98–9.72 ================= */
+          // card starts full-frame (matches the pushed frame), then steps back to a canvas
+          var CW = 560, CH = 995.5, CX = 260, CY = 380, CS = CW / 1080;
+          tl.fromTo('#card', { x: 0, y: 0, scale: 1 }, { x: CX, y: CY, scale: CS, duration: 0.5, ease: 'power3.inOut' }, 7.99);
+          var svg = $('#card-svg'), NS = 'http://www.w3.org/2000/svg';
+          function path(d, cls) {
+            var p = document.createElementNS(NS, 'path'); p.setAttribute('d', d);
+            for (var k in cls) p.setAttribute(k, cls[k]);
+            svg.appendChild(p); return p;
+          }
+          // the frame's dot, carried from B3 frame 4 (16px at x70,y46 → ×9)
+          var dot = document.createElementNS(NS, 'circle');
+          dot.setAttribute('cx', 70 * 9 + 72); dot.setAttribute('cy', 46 * 9 + 72); dot.setAttribute('r', 72); dot.setAttribute('fill', '#D9582B');
+          svg.appendChild(dot);
+          var pencil = { fill: 'none', stroke: '#6f685e', 'stroke-width': 14, 'stroke-linecap': 'round', 'stroke-linejoin': 'round' };
+          var sk = [
+            path('M540 700 C 420 690, 330 610, 350 470 C 370 330, 560 290, 690 330 C 820 380, 840 560, 760 640 C 700 700, 610 712, 520 700', pencil),
+            path('M150 1180 C 330 1150, 560 1210, 740 1170 C 830 1150, 900 1175, 940 1160', pencil),
+            path('M170 1330 C 330 1320, 470 1345, 620 1325', pencil),
+            path('M170 1440 C 280 1450, 380 1430, 470 1445', pencil),
+            path('M140 1570 L 950 1560 L 945 1760 L 150 1770 Z', pencil)
+          ];
+          var guide = { fill: 'none', stroke: '#8a8378', 'stroke-width': 6, 'stroke-dasharray': '26 18' };
+          var gd = [path('M360 0 V1920', guide), path('M720 0 V1920', guide), path('M0 640 H1080', guide), path('M0 1280 H1080', guide)];
+          var solid = { fill: 'none', stroke: '#161412', 'stroke-width': 10 };
+          var st = [path('M150 1170 H940', solid), path('M170 1330 H640', solid), path('M170 1440 H470', solid), path('M150 1560 H940 V1770 H150 Z', solid)];
+          var block = document.createElementNS(NS, 'rect');
+          block.setAttribute('x', 150); block.setAttribute('y', 1560); block.setAttribute('width', 790); block.setAttribute('height', 210); block.setAttribute('fill', '#161412');
+          svg.insertBefore(block, svg.firstChild);
+          var prog = document.createElementNS(NS, 'rect');
+          prog.setAttribute('x', 0); prog.setAttribute('y', 1880); prog.setAttribute('width', 1080); prog.setAttribute('height', 40); prog.setAttribute('fill', '#D9582B');
+          svg.appendChild(prog);
+          function drawIn(el, at, dur) {
+            var L = el.getTotalLength() * 1.05;
+            // round caps paint a dot even at full dashoffset, so the stroke stays hidden until its cue
+            tl.set(el, { opacity: 0 }, 0);
+            tl.set(el, { opacity: 1 }, at);
+            tl.fromTo(el, { strokeDasharray: L, strokeDashoffset: L }, { strokeDashoffset: 0, duration: dur, ease: 'power1.inOut' }, at);
+          }
+          sk.forEach(function (p, i) { drawIn(p, 8.2 + i * 0.07, 0.3); });
+          rise(tl, '#b4-idea .m > span', 8.19, 0.34);
+          // structure: guides draw, sketch lines straighten (solid strokes draw over, sketch leaves)
+          gd.forEach(function (p, i) { tl.fromTo(p, { opacity: 0 }, { opacity: 1, duration: 0.12 }, 8.6 + i * 0.05); });
+          st.forEach(function (p, i) {
+            var L = p.getTotalLength() * 1.05;
+            tl.fromTo(p, { strokeDasharray: L, strokeDashoffset: L }, { strokeDashoffset: 0, duration: 0.26, ease: 'power2.out' }, 8.66 + i * 0.05);
+          });
+          tl.to(sk, { opacity: 0, duration: 0.18 }, 8.72);
+          // render: guides leave, the block fills, the dot grows, the progress bar completes
+          tl.to(gd, { opacity: 0, duration: 0.12 }, 9.04);
+          tl.fromTo(block, { opacity: 0 }, { opacity: 1, duration: 0.14 }, 9.08);
+          tl.fromTo(dot, { attr: { r: 72 } }, { attr: { r: 200 }, duration: 0.3, ease: 'power3.out' }, 9.06);
+          tl.fromTo(prog, { scaleX: 0 }, { scaleX: 1, transformOrigin: '0 0', duration: 0.42, ease: 'power2.inOut' }, 9.06);
+          rise(tl, '#b4-render .m > span', 9.06, 0.34);
+          tl.to('#b4-idea', { opacity: 0.3, duration: 0.25 }, 9.1);
+
+          /* ================= B5 · 9.72–13.62 ================= */
+          // the rendered canvas lifts off; the script sheet slides in under the same light
+          tl.to('#card', { x: CX - 1250, y: CY + 80, rotation: -8, duration: 0.34, ease: 'power3.in' }, 9.7);
+          tl.to(['#b4-idea', '#b4-render'], { opacity: 0, duration: 0.12 }, 9.72);
+          tl.fromTo('#sheet', { x: 1100, rotation: 4 }, { x: 0, rotation: -2, duration: 0.42, ease: 'power3.out' }, 9.74);
+          var SL = $('#sheet-lines');
+          SCRIPT.forEach(function (line, i) {
+            var d = document.createElement('div'); d.className = 'sl'; d.innerHTML = line; SL.appendChild(d);
+            // each line is written right to left by a mask
+            tl.fromTo(d, { clipPath: 'inset(0 0 0 100%)' }, { clipPath: 'inset(0 0 0 0%)', duration: 0.2, ease: 'power1.out' }, 10.0 + i * 0.1);
+          });
+          rise(tl, '#sheet-title .m > span', 10.85, 0.34);
+          // second Skill: a read head scans the page and the waveform is voiced out of it
+          tl.to('#sheet', { y: -110, scale: 0.84, duration: 0.5, ease: 'power3.inOut' }, 11.6);
+          tl.fromTo('#scan', { opacity: 0, y: 0 }, { opacity: 1, y: 0, duration: 0.06 }, 11.66);
+          tl.to('#scan', { y: 9 * 76, duration: 0.88, ease: 'none' }, 11.72);
+          tl.to('#scan', { opacity: 0, duration: 0.1 }, 12.6);
+          var WV = $('#wave');
+          ENV.forEach(function (v, i) {
+            var h = Math.max(10, v * 120);
+            var up = document.createElement('div'); up.className = 'bar'; up.style.left = (i * 19.5) + 'px'; up.style.height = h + 'px';
+            var dn = document.createElement('div'); dn.className = 'barb'; dn.style.left = (i * 19.5) + 'px'; dn.style.height = h + 'px';
+            WV.appendChild(up); WV.appendChild(dn);
+            tl.fromTo([up, dn], { scaleY: 0 }, { scaleY: 1, duration: 0.18, ease: 'power2.out' }, 11.72 + i * 0.024);
+          });
+          tl.fromTo('#b5-mic', { y: 900, rotation: 6 }, { y: 0, rotation: -4, duration: 0.5, ease: 'power3.out' }, 12.04);
+          rise(tl, '#b5-vo .m > span', 12.56, 0.36);
+          // T3: the waveform flattens into one clay line and the page clears for the pause
+          tl.to('#wave .bar, #wave .barb', { scaleY: 0.04, duration: 0.24, ease: 'power3.in' }, 13.3);
+          tl.fromTo('#flatline', { scaleX: 0 }, { scaleX: 1, duration: 0.2, ease: 'power2.out' }, 13.4);
+
+          /* ================= B6 · 13.62–15.44 ================= */
+          rise(tl, '#b6-lead .m:nth-child(1) > span', 13.72, 0.3);
+          rise(tl, '#b6-lead .m:nth-child(2) > span', 14.14, 0.3);
+          tl.set('#b6-more .m > span', { opacity: 0 }, 0);
+          tl.set('#b6-more .m > span', { opacity: 1 }, 14.52);
+          tl.fromTo('#b6-more .m > span', { yPercent: 125 }, { yPercent: 0, duration: 0.5, ease: 'power3.out', immediateRender: false }, 14.52);
+          // the line splits the dark open
+          tl.to('#b6-top', { y: -1431, duration: 0.3, ease: 'power3.in' }, 15.16);
+          tl.to('#b6-bot', { y: 489, duration: 0.3, ease: 'power3.in' }, 15.16);
+
+          /* ================= B7 · 15.18–18.14 ================= */
+          tl.fromTo('#stamp', { scale: 1.32, opacity: 0, rotation: -3 }, { scale: 1, opacity: 1, rotation: -6, duration: 0.1, ease: 'expo.in' }, 15.7);
+          tl.to('#stamp', { scale: 0.986, duration: 0.05, ease: 'power1.out' }, 15.8);
+          tl.to('#stamp', { scale: 1, duration: 0.1, ease: 'power1.out' }, 15.86);
+          rise(tl, '#b7-on .m:nth-child(1) > span', 16.6, 0.3);
+          rise(tl, '#b7-on .m:nth-child(2) > span', 16.72, 0.34);
+
+          /* ================= B8 · 18.14–22.62 ================= */
+          // T2 pull-out: the stamped page lands on a desk
+          var PS = 0.42;
+          tl.fromTo('#b7-sheet', { x: 0, y: 0, scale: 1, rotation: 0 }, { x: 540 - 540 * PS + 20, y: 470, scale: PS, rotation: 3, duration: 0.7, ease: 'power3.inOut' }, 18.12);
+          tl.fromTo('#b7-sheet .bg', { boxShadow: '0 0 0 rgba(22,20,18,0)' }, { boxShadow: '0 20px 44px rgba(22,20,18,.22)', duration: 0.5 }, 18.3);
+          tl.fromTo('#t-kb', { y: 700, rotation: 8 }, { y: 0, rotation: 4, duration: 0.5, ease: 'power3.out' }, 18.44);
+          tl.fromTo('#t-mic', { x: 520, rotation: 26 }, { x: 0, rotation: 12, duration: 0.5, ease: 'power3.out' }, 18.72);
+          tl.fromTo('#t-hp', { x: -560, y: -300, rotation: -30 }, { x: 0, y: 0, rotation: -14, duration: 0.5, ease: 'power3.out' }, 19.0);
+          tl.fromTo('#t-sc', { x: -600, rotation: 20 }, { x: 0, rotation: 8, duration: 0.5, ease: 'power3.out' }, 19.3);
+          // the page slides away under the keyboard; Studio takes the centre
+          tl.to('#b7-sheet', { y: 1200, rotation: -4, duration: 0.55, ease: 'power3.in' }, 20.3);
+          rise(tl, '#b8-studio .m > span', 20.85, 0.4, 100);
+          tl.fromTo('#b8-dot', { scale: 0 }, { scale: 1, duration: 0.2, ease: 'power2.out' }, 21.1);
+          rise(tl, '#b8-home .m > span', 21.94, 0.36);
+          var w2 = { p: 0 };
+          tl.fromTo(w2, { p: 0 }, { p: 1, duration: 0.3, ease: 'power2.inOut', onUpdate: function () {
+            var x = 1080 - w2.p * 1212; $('#wipe2').style.left = x + 'px';
+            $('#b78').style.clipPath = 'inset(0 ' + Math.max(0, 1080 - x - 66) + 'px 0 0)';
+          } }, 22.36);
+
+          /* ================= B9 · 22.38–26.60 ================= */
+          rise(tl, '#b9-lead .m:nth-child(1) > span', 22.5, 0.3);
+          rise(tl, '#b9-lead .m:nth-child(2) > span', 22.88, 0.3);
+          rise(tl, '#b9-lead .m:nth-child(3) > span', 23.54, 0.3);
+          rise(tl, '#b9-cta .m:nth-child(1) > span', 23.64, 0.36);
+          rise(tl, '#b9-cta .m:nth-child(2) > span', 24.12, 0.36);
+          tl.to('#b9-lead', { opacity: 0.55, duration: 0.3 }, 23.7);
+          // caret sits at the end of the Arabic line (its left edge) and blinks: waiting for your comment
+          var ctx = document.createElement('canvas').getContext('2d');
+          ctx.font = '900 196px TSerif'; ctx.direction = 'rtl';
+          var cw = ctx.measureText('اترك تعليق').width;
+          $('#b9-caret').style.left = Math.round(1080 - 96 - cw - 30 - 58) + 'px';
+          var bk = { t: 0 };
+          tl.fromTo(bk, { t: 0 }, { t: 2.4, duration: 2.4, ease: 'none', onUpdate: function () {
+            $('#b9-caret').style.opacity = (Math.floor(bk.t / 0.5) % 2 === 0) ? 1 : 0;
+          } }, 24.2);
+          tl.fromTo('#b9-caret', { scaleY: 0 }, { scaleY: 1, transformOrigin: '50% 100%', duration: 0.2, ease: 'power2.out' }, 24.3);
+          tl.fromTo('#b9-repo', { opacity: 0 }, { opacity: 1, duration: 0.3 }, 24.4);
+
+          /* ================= grain on twos ================= */
+          // all three tiles stay painted; only opacity switches, so no frame can catch a tile mid-load
+          var G = [$('#g0'), $('#g1'), $('#g2')], go = { t: 0 };
+          tl.fromTo(go, { t: 0 }, { t: 26.6, duration: 26.6, ease: 'none', onUpdate: function () {
+            var k = Math.floor(go.t * 15 + 1e-6) % 3;          // new tile every 2 frames at 30 fps
+            var o = (Math.floor(go.t * 15 + 1e-6) * 73) % 256;   // deterministic offset
+            for (var gi = 0; gi < 3; gi++) G[gi].style.opacity = gi === k ? 1 : 0;
+            G[k].style.backgroundPosition = o + 'px ' + ((o * 7) % 256) + 'px';
+          } }, 0);
+
+          window.__timelines = window.__timelines || {};   // the runtime provides it; standalone tools may not
+          window.__timelines['main'] = tl;
+          return true;   // never return tl: a GSAP timeline is a thenable and would hold this promise until a paused timeline ends
+        });
+      })();
+    </script>
+  </body>
+</html>
