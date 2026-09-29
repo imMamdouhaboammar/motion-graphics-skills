@@ -48,10 +48,6 @@ def choose_encoder(
         candidates.append(("h264_qsv", ["-c:v", "h264_qsv"]))
         candidates.append(("hevc_qsv", ["-c:v", "hevc_qsv"]))
 
-    # QSV can be present even when another decoder backend was selected first.
-    if "h264_qsv" in encoders:
-        candidates.append(("h264_qsv", ["-c:v", "h264_qsv"]))
-
     for name, args in candidates:
         if name in encoders:
             return name, args
