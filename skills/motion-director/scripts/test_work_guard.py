@@ -233,6 +233,81 @@ class WorkGuardTests(unittest.TestCase):
                 time.sleep(0.05)
             self.assertFalse(process_is_running(pid), f"grandchild {pid} survived containment")
 
+    @unittest.skipUnless(os.name == "posix" and Path("/proc").exists(), "requires POSIX /proc")
+    def test_ctrl_c_during_probe_contains_main_child_and_probe(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            tmp_path = Path(tmp)
+            root = tmp_path / "runs"
+            child_pid_file = tmp_path / "child.pid"
+            probe_pid_file = tmp_path / "probe.pid"
+            child_code = (
+                "import os,sys,time\n"
+                "open(sys.argv[1],'w').write(str(os.getpid()))\n"
+                "time.sleep(30)"
+            )
+            probe_code = (
+                "import os,sys,time\n"
+                "open(sys.argv[1],'w').write(str(os.getpid()))\n"
+                "time.sleep(30)"
+            )
+            probe = shlex.join(child("-c", probe_code, str(probe_pid_file)))
+            proc = subprocess.Popen(
+                [
+                    sys.executable,
+                    str(SCRIPT),
+                    "run",
+                    "--run-root",
+                    str(root),
+                    "--stall-timeout",
+                    "0.15",
+                    "--hook-timeout",
+                    "30",
+                    "--kill-grace",
+                    "0.1",
+                    "--probe-command",
+                    probe,
+                    "--",
+                    *child("-c", child_code, str(child_pid_file)),
+                ],
+                stdout=subprocess.PIPE,
+                stderr=subprocess.PIPE,
+                text=True,
+            )
+            child_pid = None
+            probe_pid = None
+            try:
+                deadline = time.monotonic() + 3
+                while time.monotonic() < deadline:
+                    if child_pid_file.exists():
+                        child_pid = int(child_pid_file.read_text(encoding="utf-8"))
+                    if probe_pid_file.exists():
+                        probe_pid = int(probe_pid_file.read_text(encoding="utf-8"))
+                    if child_pid and probe_pid:
+                        break
+                    time.sleep(0.02)
+                self.assertIsNotNone(child_pid, "main child did not start")
+                self.assertIsNotNone(probe_pid, "probe did not start")
+                proc.send_signal(signal.SIGINT)
+                stdout, stderr = proc.communicate(timeout=4)
+                self.assertEqual(proc.returncode, 130, stdout + stderr)
+
+                for pid in (child_pid, probe_pid):
+                    deadline = time.monotonic() + 2
+                    while process_is_running(pid) and time.monotonic() < deadline:
+                        time.sleep(0.05)
+                    self.assertFalse(process_is_running(pid), f"process {pid} survived Ctrl+C containment")
+                self.assertEqual(load_summary(root)["classification"], "interrupted")
+            finally:
+                for pid in (child_pid, probe_pid):
+                    if pid and process_is_running(pid):
+                        try:
+                            os.kill(pid, signal.SIGKILL)
+                        except OSError:
+                            pass
+                if proc.poll() is None:
+                    proc.kill()
+                    proc.wait(timeout=2)
+
     @unittest.skipUnless(os.name == "posix", "signal test requires POSIX")
     def test_ctrl_c_contains_child_and_exits_130(self) -> None:
         with tempfile.TemporaryDirectory() as tmp:
