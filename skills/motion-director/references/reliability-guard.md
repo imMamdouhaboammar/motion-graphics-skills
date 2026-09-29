@@ -155,7 +155,7 @@ Hook strings are parsed with `shlex.split`. Shell metacharacters are not interpr
 
 ## Process containment
 
-Each attempt runs in its own process group.
+On POSIX systems, each attempt runs in its own process group and descendant containment is verified by the regression suite.
 
 On timeout or Ctrl+C the guard:
 
@@ -163,7 +163,9 @@ On timeout or Ctrl+C the guard:
 2. waits for `--kill-grace`
 3. sends KILL when required
 
-It does not scan the machine and kill unrelated browser, Node, ffmpeg, or Python processes.
+Windows uses best-effort parent-process termination and does not currently carry the same tested descendant-containment guarantee.
+
+The guard does not scan the machine and kill unrelated browser, Node, ffmpeg, or Python processes.
 
 This boundary is important. Broad commands such as `pkill node` or `killall chromium` are not a recovery strategy.
 
