@@ -181,7 +181,6 @@ Prefer:
 The viewer should feel one continuous thought.
 
 When the user supplies multiple references, asks to combine visual languages, or the first direction remains too close to one source, route concept development through `mix-and-match` before locking the motion thesis. Use its selected direction as concept input, then return here for production.
-
 Read references/concept-library.md when the first idea is obvious, generic, or too literal. Read references/narrative-direction.md for multi-beat films.
 
 ## Phase 4: create a motion thesis
