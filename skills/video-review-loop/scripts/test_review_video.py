@@ -174,6 +174,36 @@ class VideoReviewTests(unittest.TestCase):
                 "*\n!.gitignore\n",
             )
 
+    def test_reference_contract_produces_review_checklist(self) -> None:
+        review = load_module()
+        contract = {
+            "mode": "structural-fidelity",
+            "difficulty_mode": "preserve",
+            "must_preserve": [
+                {
+                    "id": "world-flips",
+                    "mechanism": "hard light and dark world resets on major cuts",
+                    "evidence": "major cut frames",
+                },
+                {
+                    "id": "object-scale",
+                    "mechanism": "oversized intentionally cropped focal object per shot",
+                    "evidence": "contact sheet",
+                },
+            ],
+        }
+        items = review.reference_checklist(contract)
+        self.assertEqual([item["id"] for item in items], ["world-flips", "object-scale"])
+        self.assertTrue(all(item["required"] for item in items))
+
+    def test_reference_comparison_times_are_normalized(self) -> None:
+        review = load_module()
+        self.assertEqual(
+            review.normalized_sample_times(10.0, 5),
+            [0.0, 2.5, 5.0, 7.5, 9.96],
+        )
+        self.assertEqual(review.normalized_sample_times(None, 5), [])
+
     def test_malformed_detector_logs_do_not_crash(self) -> None:
         review = load_module()
         self.assertEqual(review.parse_blackdetect("garbage"), [])
