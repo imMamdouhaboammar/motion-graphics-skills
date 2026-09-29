@@ -234,6 +234,43 @@ class WorkGuardTests(unittest.TestCase):
             self.assertFalse(process_is_running(pid), f"grandchild {pid} survived containment")
 
     @unittest.skipUnless(os.name == "posix" and Path("/proc").exists(), "requires POSIX /proc")
+    def test_malformed_probe_command_does_not_escape_containment(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            tmp_path = Path(tmp)
+            root = tmp_path / "runs"
+            child_pid_file = tmp_path / "child.pid"
+            code = (
+                "import os,sys,time\n"
+                "open(sys.argv[1],'w').write(str(os.getpid()))\n"
+                "time.sleep(30)"
+            )
+            result = run_guard(
+                root,
+                [
+                    "--stall-timeout", "0.2",
+                    "--kill-grace", "0.1",
+                    "--probe-command", "'unterminated",
+                ],
+                child("-c", code, str(child_pid_file)),
+            )
+            child_pid = int(child_pid_file.read_text(encoding="utf-8"))
+            try:
+                self.assertEqual(result.returncode, 124, result.stderr)
+                summary = load_summary(root)
+                self.assertEqual(summary["classification"], "stall-timeout")
+                self.assertEqual(summary["attempts"][0]["probe"]["exit_code"], 2)
+                deadline = time.monotonic() + 2
+                while process_is_running(child_pid) and time.monotonic() < deadline:
+                    time.sleep(0.05)
+                self.assertFalse(process_is_running(child_pid), f"child {child_pid} survived malformed probe containment")
+            finally:
+                if process_is_running(child_pid):
+                    try:
+                        os.kill(child_pid, signal.SIGKILL)
+                    except OSError:
+                        pass
+
+    @unittest.skipUnless(os.name == "posix" and Path("/proc").exists(), "requires POSIX /proc")
     def test_ctrl_c_during_probe_contains_main_child_and_probe(self) -> None:
         with tempfile.TemporaryDirectory() as tmp:
             tmp_path = Path(tmp)
