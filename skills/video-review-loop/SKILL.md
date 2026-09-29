@@ -243,9 +243,9 @@ python "$VIDEO_REVIEW_SKILL_DIR/scripts/review_round.py" attest "$ROUND_DIR" \
   --reference-compared
 ```
 
-The strict-signal audit and its inspection attestation are mandatory for every round.
-
 Omit `--reference-compared` only when no benchmark reference was part of the job.
+
+Pass `--machine-findings-inspected` when machine warnings or findings are recorded for the round.
 
 Check the round before signoff:
 

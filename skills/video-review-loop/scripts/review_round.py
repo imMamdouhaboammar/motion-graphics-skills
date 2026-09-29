@@ -12,6 +12,7 @@ from typing import Any
 
 FINDINGS_FILE = "visual-findings.json"
 STATE_FILE = "review-state.json"
+VALID_VIDEO_EXTENSIONS = {".mp4", ".mov", ".webm", ".mkv", ".m4v"}
 REQUIRED_ATTESTATIONS = (
     "watched_with_audio",
     "watched_muted",
@@ -118,13 +119,31 @@ def resolve_finding(
                 lr_manifest = load_json(lr_path / "manifest.json", {})
                 if not isinstance(lr_manifest, dict) or not lr_manifest.get("source"):
                     raise ValueError(f"Invalid later round manifest at {lr_path}")
+                lr_source_path = Path(str(lr_manifest["source"].get("path", "")))
+                if lr_source_path.suffix.lower() not in VALID_VIDEO_EXTENSIONS:
+                    raise ValueError(f"Later round source must be a video file ({lr_source_path.name})")
+                lr_created = lr_manifest.get("created_at")
+                manifest_created = manifest.get("created_at")
+                if lr_created and manifest_created:
+                    try:
+                        if datetime.fromisoformat(lr_created) <= datetime.fromisoformat(manifest_created):
+                            raise ValueError("Later round must be chronologically after the current review round")
+                    except ValueError as val_err:
+                        if "chronologically" in str(val_err):
+                            raise
                 resolved_artifact = dict(lr_manifest["source"])
                 outcome = "fixed-in-later-round"
             elif later_artifact is not None:
                 art_path = Path(later_artifact).resolve()
                 if not art_path.is_file():
                     raise ValueError(f"Later artifact file not found: {art_path}")
+                if art_path.suffix.lower() not in VALID_VIDEO_EXTENSIONS:
+                    raise ValueError(f"Later artifact must be a video file ({art_path.name})")
                 stat = art_path.stat()
+                if current_source and isinstance(current_source, dict):
+                    source_mtime = current_source.get("mtime_ns")
+                    if source_mtime is not None and stat.st_mtime_ns < int(source_mtime):
+                        raise ValueError("Later artifact must be modified at or after the reviewed source artifact")
                 resolved_artifact = {
                     "path": str(art_path),
                     "size_bytes": stat.st_size,
@@ -169,6 +188,7 @@ def attest(
     ending_inspected: bool,
     reference_compared: bool,
     strict_signals_inspected: bool,
+    machine_findings_inspected: bool = False,
 ) -> dict[str, Any]:
     state = {
         "watched_with_audio": watched_with_audio,
@@ -178,6 +198,7 @@ def attest(
         "ending_inspected": ending_inspected,
         "reference_compared": reference_compared,
         "strict_signals_inspected": strict_signals_inspected,
+        "machine_findings_inspected": machine_findings_inspected,
         "updated_at": datetime.now(timezone.utc).isoformat(),
     }
     write_json(state_path(round_dir), state)
@@ -308,11 +329,16 @@ def is_finding_resolved(
         return False
     if not artifact_matches_manifest(artifact):
         return False
+    art_path = Path(str(artifact.get("path", "")))
+    if art_path.suffix.lower() not in VALID_VIDEO_EXTENSIONS:
+        return False
     if current_source and (
         artifact.get("path") == current_source.get("path")
         and artifact.get("size_bytes") == current_source.get("size_bytes")
         and artifact.get("mtime_ns") == current_source.get("mtime_ns")
     ):
+        return False
+    if current_source and int(artifact.get("mtime_ns", 0)) < int(current_source.get("mtime_ns", 0)):
         return False
     return True
 
@@ -333,9 +359,22 @@ def round_status(round_dir: Path) -> dict[str, Any]:
     ]
     pending_hard = [item for item in pending if item.get("severity") == "hard"]
 
+    finding_counts = manifest.get("finding_counts") if isinstance(manifest, dict) else {}
+    warning_count = int((finding_counts or {}).get("warning", 0))
+    raw_hard_count = int((finding_counts or {}).get("hard", 0))
+    has_machine_findings = warning_count > 0 or raw_hard_count > 0
+
+    findings_file = round_dir / "findings.json"
+    if findings_file.is_file():
+        m_findings = load_json(findings_file, [])
+        if isinstance(m_findings, list) and m_findings:
+            has_machine_findings = True
+
     required_attestations = list(REQUIRED_ATTESTATIONS)
     if isinstance(manifest, dict) and manifest.get("reference"):
         required_attestations.append("reference_compared")
+    if has_machine_findings:
+        required_attestations.append("machine_findings_inspected")
 
     missing_attestations = [
         key for key in required_attestations if not bool(state.get(key, False))
@@ -418,6 +457,9 @@ def round_status(round_dir: Path) -> dict[str, Any]:
         "strict_signals_inspected": bool(
             state.get("strict_signals_inspected", False)
         ),
+        "machine_findings_inspected": bool(
+            state.get("machine_findings_inspected", False)
+        ),
         "pending": pending,
     }
 
@@ -476,6 +518,10 @@ def build_parser() -> argparse.ArgumentParser:
     attest_parser.add_argument("--reference-compared", action="store_true")
     attest_parser.add_argument(
         "--strict-signals-inspected",
+        action="store_true",
+    )
+    attest_parser.add_argument(
+        "--machine-findings-inspected",
         action="store_true",
     )
 
@@ -539,6 +585,7 @@ def main() -> int:
                 ending_inspected=args.ending_inspected,
                 reference_compared=args.reference_compared,
                 strict_signals_inspected=args.strict_signals_inspected,
+                machine_findings_inspected=args.machine_findings_inspected,
             )
         else:
             result = round_status(args.round_dir)

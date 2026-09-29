@@ -188,6 +188,41 @@ class ReviewRoundTests(unittest.TestCase):
                     user_accepted=False,
                 )
 
+    def test_resolve_hard_finding_rejects_non_video_later_artifact(self) -> None:
+        mod = load_module()
+        with tempfile.TemporaryDirectory() as tmp:
+            round_dir = make_round(Path(tmp) / "round")
+            readme = Path(tmp) / "README.md"
+            readme.write_text("# Project Notes")
+            mod.add_finding(
+                round_dir,
+                timestamp="00:04.280",
+                severity="hard",
+                defect="Arabic headline clips",
+                fix="increase safe area",
+                evidence="inspection",
+            )
+            with self.assertRaises(ValueError):
+                mod.resolve_finding(
+                    round_dir,
+                    "V001",
+                    resolution="fixed in doc",
+                    evidence="notes",
+                    later_artifact=readme,
+                )
+
+            non_video_item = {
+                "status": "resolved",
+                "severity": "hard",
+                "resolution_outcome": "fixed-in-later-artifact",
+                "resolved_artifact": {
+                    "path": str(readme.resolve()),
+                    "size_bytes": readme.stat().st_size,
+                    "mtime_ns": readme.stat().st_mtime_ns,
+                },
+            }
+            self.assertFalse(mod.is_finding_resolved(non_video_item, None))
+
     def test_resolve_hard_finding_ignores_free_text_existing_file(self) -> None:
         mod = load_module()
         with tempfile.TemporaryDirectory() as tmp:
@@ -295,6 +330,7 @@ class ReviewRoundTests(unittest.TestCase):
                 ending_inspected=True,
                 reference_compared=False,
                 strict_signals_inspected=True,
+                machine_findings_inspected=True,
             )
             self.assertEqual(mod.round_status(round_dir)["status"], "blocked-machine-hard-findings")
             self.assertEqual(mod.round_status(round_dir)["machine_hard_count"], 1)
@@ -309,6 +345,52 @@ class ReviewRoundTests(unittest.TestCase):
             self.assertEqual(status["status"], "review-complete")
             self.assertIn("frame-rate-mismatch", status["accepted_machine_findings"])
 
+    def test_round_with_machine_warnings_requires_machine_findings_inspected_attestation(self) -> None:
+        mod = load_module()
+        with tempfile.TemporaryDirectory() as tmp:
+            round_dir = make_round(Path(tmp) / "round", strict_signals=True)
+            manifest_file = round_dir / "manifest.json"
+            manifest = json.loads(manifest_file.read_text(encoding="utf-8"))
+            manifest["finding_counts"] = {"hard": 0, "warning": 1}
+            manifest_file.write_text(json.dumps(manifest), encoding="utf-8")
+            (round_dir / "findings.json").write_text(
+                json.dumps([
+                    {
+                        "code": "variable-frame-rate-signal",
+                        "severity": "warning",
+                        "message": "Average and nominal frame rates differ",
+                    }
+                ]),
+                encoding="utf-8",
+            )
+            mod.attest(
+                round_dir,
+                watched_with_audio=True,
+                watched_muted=True,
+                first_second_inspected=True,
+                transitions_inspected=True,
+                ending_inspected=True,
+                reference_compared=False,
+                strict_signals_inspected=True,
+                machine_findings_inspected=False,
+            )
+            status = mod.round_status(round_dir)
+            self.assertEqual(status["status"], "agent-review-required")
+            self.assertIn("machine_findings_inspected", status["missing_attestations"])
+
+            mod.attest(
+                round_dir,
+                watched_with_audio=True,
+                watched_muted=True,
+                first_second_inspected=True,
+                transitions_inspected=True,
+                ending_inspected=True,
+                reference_compared=False,
+                strict_signals_inspected=True,
+                machine_findings_inspected=True,
+            )
+            status = mod.round_status(round_dir)
+            self.assertEqual(status["status"], "review-complete")
 
     def test_reference_round_requires_reference_comparison_attestation(self) -> None:
         mod = load_module()
