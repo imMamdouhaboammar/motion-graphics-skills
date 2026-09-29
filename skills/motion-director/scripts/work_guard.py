@@ -157,6 +157,11 @@ def run_hook(command: str, log_path: Path, timeout: float) -> dict:
         terminate_process_group(proc, 0.25)
         output, _ = proc.communicate()
         result["exit_code"] = TIMEOUT_EXIT
+    except KeyboardInterrupt:
+        terminate_process_group(proc, 0.25)
+        output, _ = proc.communicate()
+        log_path.write_bytes(output or b"")
+        raise
 
     log_path.write_bytes(output or b"")
     result["duration_seconds"] = round(time.monotonic() - started, 3)
@@ -252,11 +257,14 @@ def attempt_command(
             classification = "interrupted"
 
         if classification in {"stall-timeout", "hard-timeout"} and probe_command:
-            record["probe"] = run_hook(
-                probe_command,
-                run_dir / f"attempt-{attempt}.probe.log",
-                hook_timeout,
-            )
+            try:
+                record["probe"] = run_hook(
+                    probe_command,
+                    run_dir / f"attempt-{attempt}.probe.log",
+                    hook_timeout,
+                )
+            except KeyboardInterrupt:
+                classification = "interrupted"
 
         if classification is not None:
             terminate_process_group(proc, kill_grace)
