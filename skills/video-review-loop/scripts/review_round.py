@@ -138,12 +138,13 @@ def attest(
     return state
 
 
-def source_matches_manifest(manifest: dict[str, Any]) -> bool:
-    source = manifest.get("source")
-    if not isinstance(source, dict):
+def artifact_matches_manifest(artifact: Any) -> bool:
+    if artifact is None:
         return True
+    if not isinstance(artifact, dict):
+        return False
 
-    raw_path = str(source.get("path", "")).strip()
+    raw_path = str(artifact.get("path", "")).strip()
     if not raw_path:
         return False
 
@@ -153,9 +154,17 @@ def source_matches_manifest(manifest: dict[str, Any]) -> bool:
 
     stat = path.stat()
     return (
-        stat.st_size == int(source.get("size_bytes", -1))
-        and stat.st_mtime_ns == int(source.get("mtime_ns", -1))
+        stat.st_size == int(artifact.get("size_bytes", -1))
+        and stat.st_mtime_ns == int(artifact.get("mtime_ns", -1))
     )
+
+
+def source_matches_manifest(manifest: dict[str, Any]) -> bool:
+    return artifact_matches_manifest(manifest.get("source"))
+
+
+def reference_matches_manifest(manifest: dict[str, Any]) -> bool:
+    return artifact_matches_manifest(manifest.get("reference"))
 
 
 def strict_signal_evidence_valid(
@@ -217,6 +226,11 @@ def round_status(round_dir: Path) -> dict[str, Any]:
         if isinstance(manifest, dict)
         else True
     )
+    reference_changed = (
+        not reference_matches_manifest(manifest)
+        if isinstance(manifest, dict)
+        else True
+    )
 
     strict_signal_path = round_dir / "strict-signals.json"
     missing_evidence: list[str] = []
@@ -234,6 +248,8 @@ def round_status(round_dir: Path) -> dict[str, Any]:
     status = "review-complete"
     if source_changed:
         status = "source-artifact-changed"
+    elif reference_changed:
+        status = "reference-artifact-changed"
     elif machine_hard:
         status = "blocked-machine-hard-findings"
     elif pending_hard:
@@ -249,6 +265,7 @@ def round_status(round_dir: Path) -> dict[str, Any]:
         "missing_attestations": missing_attestations,
         "missing_evidence": missing_evidence,
         "source_changed": source_changed,
+        "reference_changed": reference_changed,
         "reference_compared": bool(state.get("reference_compared", False)),
         "strict_signals_inspected": bool(
             state.get("strict_signals_inspected", False)
