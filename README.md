@@ -346,7 +346,7 @@ The master skill adds creative direction, narrative, typography, composition, mo
 
 ## Meet the Motion Director Crew
 
-Every frame is code, and every cut has a specialist. These retro cyberpunk pixel art mascots were crafted with the Sprite Fusion API to personify the creative roles across the 14 skills:
+Every frame is code, and every cut has a specialist. These retro cyberpunk pixel art mascots were crafted with the Sprite Fusion API to personify the creative roles across the 15 skills:
 
 <p align="center">
   <img src="assets/sprites/cyberpunk_director_preview_grid.png" alt="Motion Director Robot Fleet" width="620">
