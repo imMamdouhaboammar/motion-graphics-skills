@@ -123,6 +123,7 @@ function txt(par, str, o) {
     fontFamily: o.serif ? 'TD' : 'TS', fontWeight: o.wt || 900, color: o.color || C.ink, textAlign: o.align || 'center',
     lineHeight: o.lh || 1.2, fontFeatureSettings: o.feat || 'normal', letterSpacing: '0' });
   if (o.origin) b.style.transformOrigin = o.origin;
+  if (o.crop) b.dataset.crop = 'intentional';   // designed crop: the clip audit skips it
   b.words = []; b.lines = [];
   str.split('\n').forEach(L => {
     const ld = el('div', 'ln', b); b.lines.push(ld); const wl = el('span', '', ld); ld.inner = wl; wl.style.display = 'inline-block';
@@ -213,7 +214,7 @@ function openingA(R) {
   const beam = box(R, 0, 0, W, H, { background: C.light, clipPath: 'polygon(0 0,0 0,0 0)' });
   const truss = cut(R, 'truss', -110, TRUSS_Y, 1300);          // sits behind the type, its rail on the gap between the lines
   const t1 = txt(R, 'آخر', { x: -60, y: 70, w: 1128, size: 450, align: 'right', lh: 1, serif: true, cls: 'lift' });
-  const t2 = txt(R, 'فعالية', { x: -70, y: 480, w: 1100, size: 310, align: 'left', lh: 1, cls: 'lift' });
+  const t2 = txt(R, 'فعالية', { x: -70, y: 480, w: 1100, size: 310, align: 'left', lh: 1, cls: 'lift', crop: 1 });
   const t3 = txt(R, 'كبيرة', { x: -40, y: 900, w: 1140, size: 370, align: 'right', lh: 1, cls: 'lift' });
   const big = [t1, t2, t3];
   const spot = el('div', 'a', R, { left: '-40px', top: '1330px', width: '480px', height: '470px', transformOrigin: '50% 30%' });
@@ -759,6 +760,7 @@ scene(38.2, 44.8, R => {
   // pieces of the event that remain: five kinds, one shape each, no blue in the dark
   function tile(kind, w, h) {
     const c = box(R, 0, 0, w, h, { background: C.card, transformOrigin: '50% 50%', overflow: 'hidden' }, 'card');
+    c.dataset.crop = 'intentional';   // content tiles are printed pieces: the quote mark bleeds, back tiles run off the frame
     if (kind === 0) { // video frame, landscape, play mark
       c.style.background = C.ink; const f = box(c, 0, 0, w, h, { background: C.navy }); stageDrawing(box(f, w * .12, h * .06, w * .76, h * .8), w * .76, h * .8);
       const s = svg(c, w / 2 - 34, h / 2 - 38, 68, 76); sv(s, 'path', { d: 'M4,4 L64,38 L4,72Z', fill: C.card });

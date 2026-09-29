@@ -243,6 +243,8 @@ Design the VO.
 
 For many scenes, the viewer should hear a full sentence while seeing only one to five important words.
 
+Plan the end hold here, not at the end of production. Compute the time between the last key word and the end of the audio. If the brand or CTA needs a longer clean hold than that gap allows, decide now whether the delivery adds a silent tail after the VO, and tell the client which version ships.
+
 If music sits under narration and HyperFrames audio is available, use its audio workflow rather than hand-building a mixer.
 
 ## Phase 7: explore before committing
@@ -368,6 +370,10 @@ For a long film, also sample every 0.5 to 1 second.
 
 Build a contact sheet. Run the one-second hierarchy test, thumbnail test, grayscale or squint test, and edge or tangency check before polishing details. Read references/anti-slop.md before signoff.
 
+A contact sheet finds candidates. It does not prove geometry. Confirm a suspected clip or overflow on a full-resolution still or by measurement before changing code.
+
+For an HTML composition with window.seek, run scripts/clip-audit.js over the whole timeline. It measures every visible text run against the frame and every clipping container and reports persistent cuts, and with --safe it warns about text near the frame edge. Declare designed crops with data-crop="intentional". The audit does not see clip-path polygons or occlusion by a sibling layer, so check light cones, shaped masks, and objects passing over words by eye.
+
 Hard-fail and fix:
 
 - no clear focal point
@@ -421,6 +427,10 @@ Hard-fail:
 Use the active runtime's supported checks. For HyperFrames, prefer its lint, check, snapshot, preview, render, and verification paths over custom capture code. For a working non-HyperFrames project, preserve its deterministic renderer unless a measured problem justifies change.
 
 Verify the actual final file for target dimensions, duration, frame rate, color space, codec, audio alignment, and end hold.
+
+The end hold is one contract across three layers: the composition's time clamp (hold frames must repeat the last frame, grain included), the render range (it must include the hold), and the mux (pad the audio, never -shortest when a hold exists). Check the hold on the final file by frame count.
+
+Trust a check only after it has been seen failing. Reintroduce the defect in a copy of the project, run the check, and restore. A font check, clip audit, or render wrapper that has never failed may be unable to fail.
 
 ## Phase 14: handoff
 

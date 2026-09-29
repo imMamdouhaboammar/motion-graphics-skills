@@ -67,6 +67,14 @@ Never accidentally clip:
 
 Inspect every hero crop at the actual final resolution.
 
+The dots carry letter identity. When a sheet, card, or mask edge overlaps the foot of a word, it removes the dots below the baseline first, and ي without its dots reads as another letter. Keep any overlap above the dot and descender zone of a word meant to be read.
+
+Widths differ between faces. Moving a word from a sans to a serif display at the same size changes its width, so recompute any layout that depended on it. With white-space nowrap, an overlong line never wraps and overflows silently.
+
+A text box revealed inside a polygon (a light cone, a torn edge) must sit inside the polygon at its widest reading frame.
+
+Measure instead of guessing. For HTML compositions, scripts/clip-audit.js measures every visible text run against the frame and every clipping container across the timeline. Mark designed crops with data-crop="intentional" so the decision is visible in code.
+
 ## Font loading
 
 Do not assume the browser used the intended font because CSS named it.

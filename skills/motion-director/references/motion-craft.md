@@ -161,6 +161,8 @@ Weak:
 
 Use dissolve only when continuity is not important.
 
+Never opacity-crossfade two different saturated fields, such as a navy field into a brand blue field. The midpoint frames produce a third colour that belongs to neither palette. Cut, use a shaped mask, or carry one object across. When a fade is unavoidable, inspect the midpoint frame.
+
 ## Shared-object transition
 
 Carry one element across the cut.
@@ -220,6 +222,8 @@ Use:
 
 Do not add a camera drift to every still composition.
 
+In a long camera travel through one world, every label belongs to its station. It arrives with the station and leaves before the station exits frame. Otherwise labels already passed are cut by the frame edge while the camera moves on.
+
 ## 2.5D
 
 2.5D is enough when the illusion comes from planar layers.
@@ -235,6 +239,8 @@ Use:
 - occlusion
 
 It is often cheaper and clearer than true 3D.
+
+In a vertical frame, two walls of cards in perspective converge on a vanishing point that sits where the headline and the eye already are. Far cards from both walls collide there. To show quantity, prefer one readable plane with depth by scale, and let the nearest object leave by moving past the lens, not by turning translucent.
 
 ## True 3D
 

@@ -39,6 +39,15 @@ open http://127.0.0.1:8765/index.html?opening=B  # alternative opening
 
 `window.seek(seconds)` draws any frame, in any order, identically every time. With `?render` the realtime clock is off and an exporter drives `seek()`.
 
+## Check before rendering
+
+```
+node tools/fontcheck.js                                                            # no system font fallback anywhere
+node ../../skills/motion-director/scripts/clip-audit.js "http://127.0.0.1:8765/index.html?render" --safe 48
+```
+
+The clip audit fails on any text cut by the frame or a clipping container for 0.5 s or more, and warns about text closer than 48 px to an edge. Designed crops carry `crop: 1` in `txt()`. Known open item in the v2 render: «فريق الاستقبال» is cut by 7 px at 27.3 to 27.8 s. See `Failure-lessons/`.
+
 ## Render
 
 ```

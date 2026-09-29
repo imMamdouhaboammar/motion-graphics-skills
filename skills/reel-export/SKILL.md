@@ -47,4 +47,5 @@ Pass means: video `h264`, `1080` x `1920`, `yuv420p`, `color_range=tv`, `bt709`,
 - **A phone recording is often HEVC and full range.** Uploaded as is, it can come out washed out or re-encoded badly. Always export a fresh H.264, limited-range file, including after any edit.
 - **A logo over footage vanishes on light frames.** Put each logo (and its label) on its own dark rounded tile.
 - **faststart matters.** Without `-movflags +faststart` the file cannot start playing until it has fully loaded.
+- **An end hold and -shortest do not mix.** Here -shortest is safe because the audio is an endless silent source. When a film holds its last frame after a finite VO, pad the audio with `apad` and drop -shortest, or ffmpeg cuts the hold. Count the hold frames on the final file.
 - **Keep the hook to two lines.** Mine were short enough to read in a second: "This Mac launch" / "is 100% code".

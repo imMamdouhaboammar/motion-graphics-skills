@@ -318,6 +318,8 @@ The master skill adds creative direction, narrative, typography, composition, mo
 
 Found a way to improve a skill? [Open an issue](https://github.com/imMamdouhaboammar/motion-graphics-skills/issues).
 
+Before debugging a render, a clipped word or a broken transition, check [Failure-lessons](Failure-lessons/lessons-index.md). It records what already went wrong on real films, how it was proven, and the rule that now prevents it.
+
 Run `bash validate-skills.sh` before you submit. It checks every skill's frontmatter, that the name matches the folder, the description length, and the house style across every skill, its reference files and the prompts folder.
 
 ## Author and Ownership
