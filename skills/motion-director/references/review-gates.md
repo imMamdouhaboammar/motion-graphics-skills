@@ -8,6 +8,8 @@ Review the actual render, frames, or composition that exists. Do not approve a h
 
 Preserve strong choices. A review should identify what to keep as clearly as what to change.
 
+Use people for composition, hierarchy, and taste. Use measurement for geometry: clipping, safe margins, duration, frame counts, and colour values. A contact sheet shows candidates, not proof. Two adjacent thumbnails can read as one overflowing line, and a dim layer behind a word can read as a strike-through. Confirm at full resolution before changing code.
+
 ## Review order
 
 Review in this order:
@@ -227,7 +229,8 @@ Typical social delivery checks:
 - faststart
 - correct duration
 - audio starts at zero
-- no truncated end hold
+- no truncated end hold (count the hold frames on the final file)
 - no missing final frame
+- every automated gate used for signoff has been seen failing on a reintroduced defect at least once
 
 Use the runtime's own validation and ffprobe where appropriate.
