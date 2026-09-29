@@ -138,6 +138,62 @@ def attest(
     return state
 
 
+def source_matches_manifest(manifest: dict[str, Any]) -> bool:
+    source = manifest.get("source")
+    if not isinstance(source, dict):
+        return True
+
+    raw_path = str(source.get("path", "")).strip()
+    if not raw_path:
+        return False
+
+    path = Path(raw_path)
+    if not path.is_file():
+        return False
+
+    stat = path.stat()
+    return (
+        stat.st_size == int(source.get("size_bytes", -1))
+        and stat.st_mtime_ns == int(source.get("mtime_ns", -1))
+    )
+
+
+def strict_signal_evidence_valid(
+    round_dir: Path,
+    manifest: dict[str, Any],
+) -> bool:
+    path = round_dir / "strict-signals.json"
+    if not path.is_file():
+        return False
+
+    try:
+        data = json.loads(path.read_text(encoding="utf-8"))
+    except (OSError, json.JSONDecodeError):
+        return False
+    if not isinstance(data, dict):
+        return False
+    if data.get("status") != "pass":
+        return False
+
+    frames_analyzed = data.get("frames_analyzed")
+    if not isinstance(frames_analyzed, int) or frames_analyzed <= 0:
+        return False
+
+    manifest_source = manifest.get("source")
+    signal_source = data.get("source_manifest")
+    if not isinstance(manifest_source, dict):
+        return False
+    if not isinstance(signal_source, dict):
+        return False
+
+    for key in ("path", "size_bytes", "mtime_ns"):
+        if signal_source.get(key) != manifest_source.get(key):
+            return False
+
+    source_path = str(data.get("source", "")).strip()
+    return source_path == str(manifest_source.get("path", "")).strip()
+
+
 def round_status(round_dir: Path) -> dict[str, Any]:
     manifest = load_json(round_dir / "manifest.json", {})
     findings = load_findings(round_dir)
@@ -156,10 +212,18 @@ def round_status(round_dir: Path) -> dict[str, Any]:
         key for key in required_attestations if not bool(state.get(key, False))
     ]
 
+    source_changed = (
+        not source_matches_manifest(manifest)
+        if isinstance(manifest, dict)
+        else True
+    )
+
     strict_signal_path = round_dir / "strict-signals.json"
     missing_evidence: list[str] = []
     if not strict_signal_path.exists():
         missing_evidence.append("strict-signals.json")
+    elif not strict_signal_evidence_valid(round_dir, manifest):
+        missing_evidence.append("strict-signals.json:invalid")
 
     machine_hard = int(
         (manifest.get("finding_counts") or {}).get("hard", 0)
@@ -168,7 +232,9 @@ def round_status(round_dir: Path) -> dict[str, Any]:
     )
 
     status = "review-complete"
-    if machine_hard:
+    if source_changed:
+        status = "source-artifact-changed"
+    elif machine_hard:
         status = "blocked-machine-hard-findings"
     elif pending_hard:
         status = "blocked-visual-hard-findings"
@@ -182,6 +248,7 @@ def round_status(round_dir: Path) -> dict[str, Any]:
         "machine_hard_count": machine_hard,
         "missing_attestations": missing_attestations,
         "missing_evidence": missing_evidence,
+        "source_changed": source_changed,
         "reference_compared": bool(state.get("reference_compared", False)),
         "strict_signals_inspected": bool(
             state.get("strict_signals_inspected", False)
