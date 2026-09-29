@@ -49,9 +49,11 @@ After Effects–style tile (a reference to the product, no Adobe artwork used), 
 |---|---|---|---|
 | `thmanyahsans-{Light,Regular,Medium,Bold,Black}.woff2` | thmanyah sans | github.com/imMamdouhaboammar/4steps-web @ `codex/4steps-build`, `/thmanyahsans/woff2` | use authorised by the user for this project |
 | `thmanyahserifdisplay-{Regular,Bold,Black}.woff2` | thmanyah serif display | same repo, `/thmanyahserifdisplay/woff2` | same |
-| `jetbrains-mono-latin-{500,700}-normal.woff2` | JetBrains Mono | npm `@fontsource/jetbrains-mono@5.3.0` | SIL OFL 1.1 |
+| `jetbrains-mono-latin-{500,700}-normal.woff2` | JetBrains Mono | npm `@fontsource/jetbrains-mono@5.3.0` | SIL OFL 1.1, Copyright 2020 The JetBrains Mono Project Authors; full notice and licence text shipped beside the files in `assets/fonts/OFL-jetbrains-mono.txt` |
 
 Thmanyah Serif Text was checked and not needed.
+
+The root `LICENSE` covers the repository owner's own work; its "Third-party components" section lists these fonts, the photos and GSAP as keeping their own licences.
 
 ## Audio
 
