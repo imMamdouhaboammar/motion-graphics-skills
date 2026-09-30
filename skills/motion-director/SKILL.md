@@ -181,6 +181,7 @@ Prefer:
 The viewer should feel one continuous thought.
 
 When the user supplies multiple references, asks to combine visual languages, or the first direction remains too close to one source, route concept development through `mix-and-match` before locking the motion thesis. Use its selected direction as concept input, then return here for production.
+
 Read references/concept-library.md when the first idea is obvious, generic, or too literal. Read references/narrative-direction.md for multi-beat films.
 
 ## Phase 4: create a motion thesis
@@ -451,7 +452,7 @@ Hard-fail:
 
 ## Phase 13: technical gate
 
-Use the active runtime's supported checks. For HyperFrames, prefer its lint, check, snapshot, preview, render, and verification paths over custom capture code. Run hang-prone checks through the reliability guard with measured deadlines or a heartbeat. For a working non-HyperFrames project, preserve its deterministic renderer unless a measured problem justifies change.
+Use the active runtime's supported checks. For HyperFrames, prefer its lint, check, snapshot, preview, render, and verification paths over custom capture code. Run hang-prone checks through the reliability guard with measured deadlines or a heartbeat. For a working non-HyperFrames project, preserve its deterministic renderer unless a measured problem justifies change. Before heavy render or media work, pass the GPU policy and preserve its backend evidence.
 
 Verify the actual final file for target dimensions, duration, frame rate, color space, codec, audio alignment, and end hold.
 
@@ -461,28 +462,27 @@ Trust a check only after it has been seen failing. Reintroduce the defect in a c
 
 ## Phase 14: handoff
 
+Run the rendered file through `video-review-loop`, inspect the actual video, and resolve every hard finding in a later render before signoff.
+
 Keep the approved script, reference study, brand files, beat map, source composition, contact sheet, one previous draft, and final render. Keep heavy failed renders out of normal Git history when release assets, artifact storage, or Git LFS are more appropriate.
 
-## Specialist routing inside this pack
+## Dynamic routing and neural handoffs
 
-Use these when the request is narrow enough:
+Read `references/operator-guide.md` before operating a broad or multi-stage job. It is the execution guide for routing, reference challenge mode, HyperFrames reuse, GPU enforcement, guarded commands, and final video review.
 
-- brand-intake for brand.md and MOTION.md
-- motion-brief-writer for a brief only
-- mix-and-match for original concept recombination across multiple references or wildcard discovery
-- launch-video for a focused product or offer launch
-- apple-launch-film for an Apple-keynote-like product film
-- vox-explainer for sourced documentary explanation
-- animated-chart for chart-first work
-- milestone-reveal for a milestone reveal
-- motion-effects for one named effect
-- title-sequence-3d for a short cinematic 3D opener
-- model-showdown for model comparison
-- newsletter-promo for edition promotion
-- loop-cover for looping covers
-- reel-export for vertical adaptation
+For broad or multi-stage work, create a small JSON task context and run `scripts/route_motion.py` before production. Keep its returned route available through the session.
 
-A specialist skill is a recipe, not a prison. The master art direction still comes from brand.md, MOTION.md, the brief, and the actual reference.
+The router reads the installed skill graph, selects only relevant specialists, explains every hop, adds GPU and review gates, and skips unavailable optional capabilities with a named fallback.
+
+Read `references/neural-links.md` and obey each stage's handoff packet. When a supplied reference is a benchmark rather than loose inspiration, also read `references/reference-fidelity.md` and lock the fidelity contract before creative substitution. Specialists inherit shared truth, return only their delta, and return to `motion-director` for broad film work.
+
+For multiple-reference recombination, route through `mix-and-match` when installed, then return its selected direction to `motion-director` before the motion thesis is locked.
+
+For a truly narrow request, a specialist may finish independently. Do not run the whole graph when the user asked for one bounded artifact.
+
+Heavy media work must pass `scripts/gpu_policy.py probe --require` before execution. Browser-rendered motion must also pass `scripts/browser_gpu_probe.cjs`. Heavy final encoding must pass `scripts/gpu_policy.py probe --require --require-encode` when the active runtime exposes encoder selection. Never hide a CPU fallback.
+
+A rendered final video must pass `video-review-loop` before signoff. Still-frame review alone is not final evidence.
 
 ## Non-negotiables
 

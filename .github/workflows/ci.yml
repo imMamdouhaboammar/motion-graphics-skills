@@ -13,7 +13,7 @@ jobs:
       - name: Checkout Code
         uses: actions/checkout@v4
 
-      - name: Validate 15 Skills and Prompts
+      - name: Validate Skills and Prompts
         run: bash validate-skills.sh
 
       - name: Test Mix and Match helper
@@ -26,3 +26,24 @@ jobs:
         run: |
           node --check skills/motion-director/scripts/browser-readiness-probe.cjs
           node skills/motion-director/scripts/browser-readiness-probe.cjs --help
+
+      - name: Test Motion Router
+        run: python skills/motion-director/scripts/test_route_motion.py
+
+      - name: Test Reference Fidelity Gate
+        run: python skills/motion-director/scripts/test_reference_fidelity.py
+
+      - name: Test GPU Policy
+        run: python skills/motion-director/scripts/test_gpu_policy.py
+
+      - name: Test Browser GPU Probe
+        run: node skills/motion-director/scripts/test_browser_gpu_probe.cjs
+
+      - name: Test Video Review Loop
+        run: python skills/video-review-loop/scripts/test_review_video.py
+
+      - name: Test Strict Video Signals
+        run: python skills/video-review-loop/scripts/test_strict_video_signals.py
+
+      - name: Test Review Round Lifecycle
+        run: python skills/video-review-loop/scripts/test_review_round.py
