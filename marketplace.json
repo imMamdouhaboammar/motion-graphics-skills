@@ -2,8 +2,8 @@
   "$schema": "https://json.schemastore.org/claude-plugin-manifest.json",
   "name": "motion-graphics-skills",
   "displayName": "Motion Graphics Skill Pack",
-  "version": "1.0.0",
-  "description": "15 Claude Code and Codex skills for launch-grade motion graphics. Every frame is code.",
+  "version": "1.1.0",
+  "description": "20 Claude Code and Codex skills for launch-grade motion graphics and video editing. Every frame is code.",
   "author": {
     "name": "Mamdouh Aboammar",
     "url": "https://github.com/imMamdouhaboammar"
