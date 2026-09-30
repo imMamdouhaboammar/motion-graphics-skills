@@ -242,7 +242,7 @@ body { font-family: "TS", sans-serif; direction: rtl; color: var(--g); }
 </style>
 </head>
 <body>
-<div id="root">
+<main id="root">
 
 <!-- S1 بسألك سؤال -->
 <div class="scene bg-paper" id="s1"><div class="cam">
@@ -274,7 +274,7 @@ body { font-family: "TS", sans-serif; direction: rtl; color: var(--g); }
   <div class="fibre"></div>
   <div class="abs c" id="s4-t1">ليش تعطيك</div>
   <div class="abs" id="s4-tag">
-    <svg viewBox="0 0 480 700"><path d="M240 0 L240 150" stroke="#1e4a42" stroke-width="6" fill="none"/>
+    <svg aria-hidden="true" viewBox="0 0 480 700"><path d="M240 0 L240 150" stroke="#1e4a42" stroke-width="6" fill="none"/>
       <path d="M100 150 L380 150 L440 230 L440 640 Q440 680 400 680 L80 680 Q40 680 40 640 L40 230 Z" fill="#2f675d"/>
       <circle cx="240" cy="220" r="26" fill="#ece4d2"/></svg>
     <div class="abs" id="s4-tagt">تقييم</div>
@@ -298,7 +298,7 @@ body { font-family: "TS", sans-serif; direction: rtl; color: var(--g); }
   <div class="stack" id="s6-t"><span class="chip" id="s6-c1">أغلب الناس يدورون</span><span class="chip sh" id="s6-c2">على جدار</span><span class="chip" id="s6-c3">بعد ما يجي السيل</span></div>
   <div class="abs" id="s6-walls"></div>
   <div class="abs" id="s6-person"></div>
-  <div class="abs" id="water"><svg viewBox="0 0 1200 2600" preserveAspectRatio="none"><path id="wv2" fill="#4f8a7d"/><path id="wv1" fill="#2f675d"/></svg></div>
+  <div class="abs" id="water"><svg aria-hidden="true" viewBox="0 0 1200 2600" preserveAspectRatio="none"><path id="wv2" fill="#4f8a7d"/><path id="wv1" fill="#2f675d"/></svg></div>
 </div><div class="nav" data-nav></div></div>
 
 <!-- S7a الخبر انتشر -->
@@ -322,7 +322,7 @@ body { font-family: "TS", sans-serif; direction: rtl; color: var(--g); }
 <!-- S7c الوقت ضيق -->
 <div class="scene bg-gd" id="s7c"><div class="cam">
   <div class="fibre"></div>
-  <div class="abs" id="clock"><svg viewBox="0 0 500 500">
+  <div class="abs" id="clock"><svg aria-hidden="true" viewBox="0 0 500 500">
     <circle cx="250" cy="250" r="230" fill="#f3ecdd"/><circle cx="250" cy="250" r="230" fill="none" stroke="#163a33" stroke-width="16"/>
     <g id="ticks"></g>
     <path id="wedge" fill="#4f8a7d" opacity=".55"/>
@@ -346,7 +346,7 @@ body { font-family: "TS", sans-serif; direction: rtl; color: var(--g); }
 <div class="scene bg-gd" id="s9"><div class="cam" id="s9cam">
   <div id="wall"></div>
   <div class="abs" id="glow"></div>
-  <svg class="abs" id="rays" viewBox="0 0 900 840"><path d="M300 0 L600 0 L900 840 L0 840 Z" fill="#f3ecdd" opacity=".22"/></svg>
+  <svg aria-hidden="true" class="abs" id="rays" viewBox="0 0 900 840"><path d="M300 0 L600 0 L900 840 L0 840 Z" fill="#f3ecdd" opacity=".22"/></svg>
   <div class="abs" id="door"></div>
   <div class="fibre"></div>
   <div class="abs c disp" id="wm">جدار</div>
@@ -362,8 +362,8 @@ body { font-family: "TS", sans-serif; direction: rtl; color: var(--g); }
     <div class="abs" id="n2">جاهزية</div>
     <div class="abs" id="n3">مجاني</div>
   </div>
-  <svg class="abs" id="pin" viewBox="0 0 80 110"><ellipse cx="40" cy="104" rx="16" ry="5" fill="rgba(0,0,0,.3)"/><path d="M38 60 L40 104 L42 60 Z" fill="#9a9a8e"/><circle cx="40" cy="36" r="30" fill="#163a33"/><circle cx="31" cy="27" r="9" fill="#4f8a7d"/></svg>
-  <svg class="abs" id="check" viewBox="0 0 240 240"><circle cx="120" cy="120" r="110" fill="#f3ecdd"/><path id="ckp" d="M62 124 L104 164 L180 80" fill="none" stroke="#2f675d" stroke-width="26" stroke-linecap="round" stroke-linejoin="round"/></svg>
+  <svg aria-hidden="true" class="abs" id="pin" viewBox="0 0 80 110"><ellipse cx="40" cy="104" rx="16" ry="5" fill="rgba(0,0,0,.3)"/><path d="M38 60 L40 104 L42 60 Z" fill="#9a9a8e"/><circle cx="40" cy="36" r="30" fill="#163a33"/><circle cx="31" cy="27" r="9" fill="#4f8a7d"/></svg>
+  <svg aria-hidden="true" class="abs" id="check" viewBox="0 0 240 240"><circle cx="120" cy="120" r="110" fill="#f3ecdd"/><path id="ckp" d="M62 124 L104 164 L180 80" fill="none" stroke="#2f675d" stroke-width="26" stroke-linecap="round" stroke-linejoin="round"/></svg>
 </div><div class="nav cr" data-nav></div></div>
 
 <!-- S12/S13 يراجعون / يحددون -->
@@ -374,14 +374,14 @@ body { font-family: "TS", sans-serif; direction: rtl; color: var(--g); }
   <div class="abs" id="cards"></div>
   <div class="abs" id="aim"><i></i><i></i><i></i><i></i></div>
   <div class="abs chip" id="exposed">مكشوف</div>
-  <div class="abs" id="mag"><svg viewBox="0 0 360 460"><circle cx="180" cy="170" r="140" fill="rgba(243,236,221,.35)" stroke="#1e4a42" stroke-width="30"/><circle cx="180" cy="170" r="140" fill="none" stroke="#4f8a7d" stroke-width="8"/><rect x="160" y="320" width="44" height="140" rx="18" fill="#1e4a42" transform="rotate(-20 180 320)"/></svg></div>
+  <div class="abs" id="mag"><svg aria-hidden="true" viewBox="0 0 360 460"><circle cx="180" cy="170" r="140" fill="rgba(243,236,221,.35)" stroke="#1e4a42" stroke-width="30"/><circle cx="180" cy="170" r="140" fill="none" stroke="#4f8a7d" stroke-width="8"/><rect x="160" y="320" width="44" height="140" rx="18" fill="#1e4a42" transform="rotate(-20 180 320)"/></svg></div>
 </div><div class="nav" data-nav></div></div>
 
 <!-- S14 الشرارة -->
 <div class="scene bg-gd" id="s14"><div class="cam" id="s14cam">
   <div class="fibre"></div>
   <div class="stack" id="s14-t"><span class="chip cr" id="s14-c1">وش الشرارة</span><span class="chip" style="background:#163a33" id="s14-c2">اللي ممكن تشعل</span></div>
-  <div class="abs" id="match"><svg viewBox="0 0 240 900">
+  <div class="abs" id="match"><svg aria-hidden="true" viewBox="0 0 240 900">
     <rect x="104" y="150" width="32" height="700" rx="8" fill="#e8d9b8"/><rect x="104" y="150" width="12" height="700" rx="6" fill="#f3e8cf"/>
     <ellipse cx="120" cy="140" rx="36" ry="52" fill="#163a33"/><ellipse cx="110" cy="126" rx="10" ry="16" fill="#2f675d"/>
     <g id="flame" style="transform-origin:120px 140px"><path d="M120 -60 C170 20 170 80 120 120 C70 80 70 20 120 -60 Z" fill="#f2c96b"/><path d="M120 10 C145 50 145 85 120 110 C95 85 95 50 120 10 Z" fill="#fff4d6"/></g></svg></div>
@@ -403,11 +403,11 @@ body { font-family: "TS", sans-serif; direction: rtl; color: var(--g); }
   <div class="fibre"></div>
   <div class="stack cen" id="s16-h"><span class="chip" id="s16-hc">بعد التقييم بتعرف</span></div>
   <div class="row" id="r1" style="top:520px"><div class="num">١</div><div class="q chip sh">مين تتصل فيه؟</div>
-    <div class="ic"><svg viewBox="0 0 200 200"><rect x="55" y="15" width="90" height="170" rx="18" fill="#2f675d"/><rect x="66" y="36" width="68" height="120" rx="4" fill="#f3ecdd"/><circle cx="100" cy="170" r="7" fill="#f3ecdd"/><g class="ring" style="transform-origin:100px 100px"><path d="M160 60 Q185 100 160 140" stroke="#2f675d" stroke-width="9" fill="none" stroke-linecap="round"/><path d="M40 60 Q15 100 40 140" stroke="#2f675d" stroke-width="9" fill="none" stroke-linecap="round"/></g></svg></div></div>
+    <div class="ic"><svg aria-hidden="true" viewBox="0 0 200 200"><rect x="55" y="15" width="90" height="170" rx="18" fill="#2f675d"/><rect x="66" y="36" width="68" height="120" rx="4" fill="#f3ecdd"/><circle cx="100" cy="170" r="7" fill="#f3ecdd"/><g class="ring" style="transform-origin:100px 100px"><path d="M160 60 Q185 100 160 140" stroke="#2f675d" stroke-width="9" fill="none" stroke-linecap="round"/><path d="M40 60 Q15 100 40 140" stroke="#2f675d" stroke-width="9" fill="none" stroke-linecap="round"/></g></svg></div></div>
   <div class="row" id="r2" style="top:880px"><div class="num">٢</div><div class="q chip sh">وين البيان؟</div>
-    <div class="ic"><svg viewBox="0 0 200 200"><path d="M40 10 L130 10 L165 45 L165 190 L40 190 Z" fill="#f6f1e5" stroke="#2f675d" stroke-width="8"/><path d="M130 10 L130 45 L165 45" fill="none" stroke="#2f675d" stroke-width="8"/><rect x="62" y="70" width="80" height="12" rx="4" fill="#2f675d"/><rect x="62" y="100" width="80" height="12" rx="4" fill="#9dbdb3"/><rect x="62" y="130" width="56" height="12" rx="4" fill="#9dbdb3"/></svg></div></div>
+    <div class="ic"><svg aria-hidden="true" viewBox="0 0 200 200"><path d="M40 10 L130 10 L165 45 L165 190 L40 190 Z" fill="#f6f1e5" stroke="#2f675d" stroke-width="8"/><path d="M130 10 L130 45 L165 45" fill="none" stroke="#2f675d" stroke-width="8"/><rect x="62" y="70" width="80" height="12" rx="4" fill="#2f675d"/><rect x="62" y="100" width="80" height="12" rx="4" fill="#9dbdb3"/><rect x="62" y="130" width="56" height="12" rx="4" fill="#9dbdb3"/></svg></div></div>
   <div class="row" id="r3" style="top:1240px"><div class="num">٣</div><div class="q chip sh">وين الثغرة؟</div><div class="sub" id="r3s">غيرك شايفها... قبلك</div>
-    <div class="ic"><svg viewBox="0 0 200 200"><g fill="#2f675d"><rect x="10" y="30" width="85" height="40" rx="3"/><rect x="105" y="30" width="85" height="40" rx="3"/><rect x="10" y="80" width="40" height="40" rx="3"/><rect x="60" y="80" width="85" height="40" rx="3"/><rect x="155" y="80" width="35" height="40" rx="3"/><rect x="10" y="130" width="85" height="40" rx="3"/><rect x="105" y="130" width="85" height="40" rx="3"/></g><path class="crack" d="M112 26 L96 62 L118 88 L92 118 L110 150 L98 176" fill="none" stroke="#ece4d2" stroke-width="9" stroke-linejoin="round"/></svg></div></div>
+    <div class="ic"><svg aria-hidden="true" viewBox="0 0 200 200"><g fill="#2f675d"><rect x="10" y="30" width="85" height="40" rx="3"/><rect x="105" y="30" width="85" height="40" rx="3"/><rect x="10" y="80" width="40" height="40" rx="3"/><rect x="60" y="80" width="85" height="40" rx="3"/><rect x="155" y="80" width="35" height="40" rx="3"/><rect x="10" y="130" width="85" height="40" rx="3"/><rect x="105" y="130" width="85" height="40" rx="3"/></g><path class="crack" d="M112 26 L96 62 L118 88 L92 118 L110 150 L98 176" fill="none" stroke="#ece4d2" stroke-width="9" stroke-linejoin="round"/></svg></div></div>
 </div><div class="nav" data-nav></div></div>
 
 <!-- S17 المصلحة -->
@@ -442,14 +442,14 @@ body { font-family: "TS", sans-serif; direction: rtl; color: var(--g); }
   <div class="abs" id="phone">
     <div class="top"><div class="av">ج</div><div class="nm">جدار<small>متصل الآن</small></div></div>
     <div id="chat"><div id="bub">جاهز<small>✓✓</small></div></div>
-    <div id="inp"><div class="f"><span id="inpt"></span></div><div class="s" id="send"><svg width="44" height="44" viewBox="0 0 44 44"><path d="M4 22 L40 4 L30 40 L22 26 Z" fill="#f3ecdd"/></svg></div></div>
+    <div id="inp"><div class="f"><span id="inpt"></span></div><div class="s" id="send"><svg aria-hidden="true" width="44" height="44" viewBox="0 0 44 44"><path d="M4 22 L40 4 L30 40 L22 26 Z" fill="#f3ecdd"/></svg></div></div>
   </div>
-  <div class="abs" id="pinc"><div class="pi"><svg width="56" height="56" viewBox="0 0 56 56"><path d="M20 4 L36 4 L34 20 L44 30 L12 30 L22 20 Z" fill="#f3ecdd"/><rect x="26" y="30" width="4" height="22" fill="#f3ecdd"/></svg></div><div class="tx">الرقم في التعليق المثبت<small>ورد التقييم يوصلك على الواتساب</small></div></div>
+  <div class="abs" id="pinc"><div class="pi"><svg aria-hidden="true" width="56" height="56" viewBox="0 0 56 56"><path d="M20 4 L36 4 L34 20 L44 30 L12 30 L22 20 Z" fill="#f3ecdd"/><rect x="26" y="30" width="4" height="22" fill="#f3ecdd"/></svg></div><div class="tx">الرقم في التعليق المثبت<small>ورد التقييم يوصلك على الواتساب</small></div></div>
   <div class="abs c" id="lock">بينك وبين الأزمة الإعلامية <b>جدار</b></div>
 </div><div class="nav cr" data-nav></div></div>
 
-<div id="grain"><div id="g0"></div><div id="g1"></div><div id="g2"></div></div>
-</div>
+<div id="grain" aria-hidden="true"><div id="g0"></div><div id="g1"></div><div id="g2"></div></div>
+</main>
 
 <script>
 const VO_END = 57.8;
@@ -464,7 +464,7 @@ const LEAD = 0.1; // words land a hair before they are spoken
 $$('[data-nav]').forEach(n => n.innerHTML = '<span>جدار</span><span>إدارة الأزمات</span><span>تقييم الجاهزية</span>');
 
 function fig(col, robe) {
-  return `<svg viewBox="0 0 220 440"><path d="M28 440 L38 262 Q110 222 182 262 L192 440 Z" fill="${robe}" stroke="#d8d0bf" stroke-width="3"/>
+  return `<svg aria-hidden="true" viewBox="0 0 220 440"><path d="M28 440 L38 262 Q110 222 182 262 L192 440 Z" fill="${robe}" stroke="#d8d0bf" stroke-width="3"/>
     <path d="M30 200 Q28 72 110 64 Q192 72 190 200 L206 330 Q110 292 14 330 Z" fill="${robe}" stroke="#d8d0bf" stroke-width="3"/>
     <ellipse cx="110" cy="178" rx="54" ry="64" fill="${col}"/>
     <path d="M44 104 Q110 84 176 104" stroke="#1c2a26" stroke-width="12" fill="none" stroke-linecap="round"/></svg>`;
