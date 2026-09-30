@@ -33,3 +33,19 @@ def test_generate_paper_html():
     assert "TITLE" in html
     assert "window.seek" in html
     assert "width: 1080px" in html
+
+
+def test_inline_piece_json_cannot_close_script_tag():
+    dangerous = build_paper_piece("</script><div>owned</div>", 100, 100, 0.0)
+    html = generate_paper_html([dangerous])
+    assert html.count("</script>") == 1
+    assert "\\u003c/script>" in html
+
+
+def test_seek_renders_every_frame_from_quantized_time():
+    piece = build_paper_piece("FRAME", 100, 100, 0.0)
+    html = generate_paper_html([piece])
+    assert "function renderFrame(stepT)" in html
+    assert "renderFrame(stepT);" in html
+    assert "el.style.visibility" in html
+    assert "const progress =" in html

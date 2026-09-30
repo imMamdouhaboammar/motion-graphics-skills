@@ -52,6 +52,15 @@ jobs:
       - name: Validate Skills and Prompts
         run: bash validate-skills.sh
 
+      - name: Test video editing skill planners
+        run: |
+          python -m pytest \
+            skills/jump-cut-pacing/scripts/test_cut_plan.py \
+            skills/paper-cut-motion/scripts/test_paper_builder.py \
+            skills/speaker-cutout/scripts/test_speaker_layer.py \
+            skills/video-spotlight/scripts/test_spotlight_plan.py \
+            -v
+
       - name: Test Mix and Match helper
         run: python skills/mix-and-match/scripts/test_mix_matrix.py
 
