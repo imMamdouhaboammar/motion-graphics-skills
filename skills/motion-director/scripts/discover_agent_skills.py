@@ -154,7 +154,7 @@ def scan(skills_dir: Path) -> list[dict[str, Any]]:
     return entries
 
 
-def build_index(skills_dir: Path) -> dict[str, Any]:
+def build_index(skills_dir: Path, repo_root: Path | None = None) -> dict[str, Any]:
     entries = scan(skills_dir)
 
     # Group by category for quick lookup
@@ -163,9 +163,19 @@ def build_index(skills_dir: Path) -> dict[str, Any]:
         cat = entry["category"]
         by_category.setdefault(cat, []).append(entry["name"])
 
+    # Use a relative source path so the JSON never contains machine-specific
+    # absolute paths (which fail the house-style validator).
+    if repo_root and repo_root != Path("."):
+        try:
+            source_str = str(skills_dir.relative_to(repo_root))
+        except ValueError:
+            source_str = ".agents/skills"
+    else:
+        source_str = ".agents/skills"
+
     return {
         "version":     2,
-        "source":      str(skills_dir),
+        "source":      source_str,
         "total":       len(entries),
         "skills":      entries,
         "by_category": by_category,
@@ -201,8 +211,9 @@ def build_parser() -> argparse.ArgumentParser:
 
 def main() -> int:
     args = build_parser().parse_args()
+    repo_root = Path(__file__).resolve().parents[3]
 
-    index = build_index(args.skills_dir)
+    index = build_index(args.skills_dir, repo_root=repo_root)
     payload = json.dumps(index, ensure_ascii=False, indent=2)
 
     if args.dry_run:
