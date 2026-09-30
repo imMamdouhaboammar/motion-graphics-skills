@@ -285,3 +285,76 @@ if (cameoRobotLink) {
     }
   });
 }
+
+
+/* Searchable skill catalog */
+const skillRows = Array.from(document.querySelectorAll(".skill-index-row"));
+const skillFilters = Array.from(document.querySelectorAll("[data-skill-filter]"));
+const skillSearch = document.getElementById("skillSearch");
+const skillVisibleCount = document.getElementById("skillVisibleCount");
+const skillEmpty = document.getElementById("skillEmpty");
+let activeSkillFilter = "all";
+
+function updateSkillCatalog() {
+  const query = skillSearch ? skillSearch.value.trim().toLowerCase() : "";
+  let visible = 0;
+
+  skillRows.forEach((row) => {
+    const categoryMatch = activeSkillFilter === "all" || row.dataset.category === activeSkillFilter;
+    const queryMatch = !query || row.textContent.toLowerCase().includes(query);
+    const show = categoryMatch && queryMatch;
+    row.hidden = !show;
+    if (show) visible += 1;
+  });
+
+  if (skillVisibleCount) {
+    skillVisibleCount.textContent = visible + " / " + skillRows.length + " visible";
+  }
+  if (skillEmpty) {
+    skillEmpty.hidden = visible !== 0;
+  }
+}
+
+skillFilters.forEach((button) => {
+  button.addEventListener("click", () => {
+    activeSkillFilter = button.dataset.skillFilter || "all";
+    skillFilters.forEach((item) => {
+      const active = item === button;
+      item.classList.toggle("is-active", active);
+      item.setAttribute("aria-pressed", active ? "true" : "false");
+    });
+    updateSkillCatalog();
+  });
+});
+
+if (skillSearch) {
+  skillSearch.addEventListener("input", updateSkillCatalog);
+  skillSearch.addEventListener("keydown", (event) => {
+    if (event.key === "Escape" && skillSearch.value) {
+      skillSearch.value = "";
+      updateSkillCatalog();
+    }
+  });
+}
+
+updateSkillCatalog();
+
+/* Keyboard navigation for guide tabs */
+guideTabs.forEach((tab, index) => {
+  tab.setAttribute("tabindex", tab.classList.contains("is-active") ? "0" : "-1");
+  tab.addEventListener("keydown", (event) => {
+    if (!["ArrowRight", "ArrowLeft", "Home", "End"].includes(event.key)) return;
+    event.preventDefault();
+
+    let nextIndex = index;
+    if (event.key === "ArrowRight") nextIndex = (index + 1) % guideTabs.length;
+    if (event.key === "ArrowLeft") nextIndex = (index - 1 + guideTabs.length) % guideTabs.length;
+    if (event.key === "Home") nextIndex = 0;
+    if (event.key === "End") nextIndex = guideTabs.length - 1;
+
+    const nextTab = guideTabs[nextIndex];
+    activateGuideTab(nextTab.getAttribute("aria-controls"));
+    guideTabs.forEach((item) => item.setAttribute("tabindex", item === nextTab ? "0" : "-1"));
+    nextTab.focus();
+  });
+});
