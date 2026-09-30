@@ -78,8 +78,8 @@ Reduced motion keeps the composition and removes spatial looping.
 3. Split creative direction from production infrastructure
 4. Show actual rendered work
 5. Explain the anti-slop quality system
-6. Reveal the fourteen specialist skills
-7. End on one install command
+6. Reveal the twenty-skill catalog by discipline, with search and filtering
+7. Give the visitor a direct map into the current operating docs\n8. End on one install command
 
 ## Runtime
 
@@ -114,3 +114,15 @@ Reject:
 - excessive rounded containers
 - invented logos or brand marks
 - motion that exists only to prove animation skill
+
+
+## Catalog and documentation behavior
+
+The skills section is an editorial index, not a card wall.
+
+- all current skill folders must be represented
+- filters organize by direction, editing, building, publishing and review
+- search works without a framework
+- every skill row links to its canonical folder in the repository
+- the Guide includes a Docs Map for the master operator docs, craft references and video-editing lane
+- landing/validate_landing.py must fail CI when the repository skill set and the page drift apart

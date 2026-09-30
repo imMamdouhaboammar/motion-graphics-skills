@@ -3,27 +3,58 @@
 > Give your AI agent a motion director
 
 Official repository: https://github.com/imMamdouhaboammar/motion-graphics-skills
+Website: https://immamdouhaboammar.github.io/motion-graphics-skills/
+Version: 1.1.0
 
-Motion Graphics Skill Pack is a set of 15 skills for Claude Code and Codex. It covers motion direction, brand intake, motion briefs, multi-reference creative recombination, launch films, explainers, animated charts, 3D title sequences, motion effects, social video, Arabic and RTL motion, and render review.
+Motion Graphics Skill Pack is a set of 20 skills for Claude Code and Codex covering creative direction, reference analysis, brand intake, motion briefs, motion graphics, video editing, programmatic video, Arabic and RTL motion, publishing, and rendered-film review.
 
-The master motion-director skill owns concept, narrative, art direction, typography, composition, choreography, Arabic direction and creative QA.
+The master motion-director skill owns concept, narrative, art direction, typography, composition, choreography, production routing and creative QA.
 
-For new code-driven motion projects, HyperFrames is the preferred production infrastructure for deterministic timelines, reusable registry blocks, diagnostics, preview, audio relationships, variants and final rendering.
+For new code-driven motion projects, HyperFrames is the preferred production infrastructure for deterministic timelines, reusable registry blocks, diagnostics, preview, audio relationships, variants and final rendering. Existing stable runtimes should be preserved when rebuilding would add no value.
 
-Key topics:
-- motion graphics
-- motion design
-- Claude Code
-- Codex
-- agent skills
-- HyperFrames
-- programmatic video
-- kinetic typography
-- 2D, 2.5D and 3D motion
-- Arabic and RTL motion
-- creative coding
-- GSAP
-- Three.js
+## Skill groups
+
+Direct:
+- motion-director
+- mix-and-match
+- brand-intake
+- motion-brief-writer
+
+Edit:
+- jump-cut-pacing
+- speaker-cutout
+- video-spotlight
+- paper-cut-motion
+
+Build:
+- launch-video
+- apple-launch-film
+- vox-explainer
+- animated-chart
+- milestone-reveal
+- motion-effects
+- title-sequence-3d
+- model-showdown
+
+Publish:
+- newsletter-promo
+- loop-cover
+- reel-export
+
+Review:
+- video-review-loop
+
+## Core docs
+
+- README: https://github.com/imMamdouhaboammar/motion-graphics-skills#readme
+- Motion Director: https://github.com/imMamdouhaboammar/motion-graphics-skills/blob/main/skills/motion-director/SKILL.md
+- Operator Guide: https://github.com/imMamdouhaboammar/motion-graphics-skills/blob/main/skills/motion-director/references/operator-guide.md
+- HyperFrames Playbook: https://github.com/imMamdouhaboammar/motion-graphics-skills/blob/main/skills/motion-director/references/hyperframes-playbook.md
+- Reference Analysis: https://github.com/imMamdouhaboammar/motion-graphics-skills/blob/main/skills/motion-director/references/reference-analysis.md
+- Reference Fidelity: https://github.com/imMamdouhaboammar/motion-graphics-skills/blob/main/skills/motion-director/references/reference-fidelity.md
+- Motion Craft: https://github.com/imMamdouhaboammar/motion-graphics-skills/blob/main/skills/motion-director/references/motion-craft.md
+- Arabic Motion: https://github.com/imMamdouhaboammar/motion-graphics-skills/blob/main/skills/motion-director/references/arabic-motion.md
+- Anti-Slop Gate: https://github.com/imMamdouhaboammar/motion-graphics-skills/blob/main/skills/motion-director/references/anti-slop.md
 
 Install:
 npx skills add imMamdouhaboammar/motion-graphics-skills
