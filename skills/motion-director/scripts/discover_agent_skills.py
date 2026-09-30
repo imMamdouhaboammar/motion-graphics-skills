@@ -97,6 +97,7 @@ _UTILITY_PATTERN   = re.compile(r"\b(output|enforcement|performance|util|helper)
 
 
 def _classify(name: str, description: str) -> str:
+    """Classify a skill into a semantic utility category based on its name and description."""
     text = f"{name} {description}"
     if _GSAP_PATTERN.search(text):
         return "gsap-utility"
@@ -155,6 +156,7 @@ def scan(skills_dir: Path) -> list[dict[str, Any]]:
 
 
 def build_index(skills_dir: Path, repo_root: Path | None = None) -> dict[str, Any]:
+    """Build the full agent skills index dictionary from the scanned skills directory."""
     entries = scan(skills_dir)
 
     # Group by category for quick lookup
@@ -187,6 +189,7 @@ def build_index(skills_dir: Path, repo_root: Path | None = None) -> dict[str, An
 # ---------------------------------------------------------------------------
 
 def build_parser() -> argparse.ArgumentParser:
+    """Construct the command-line argument parser for agent skill discovery."""
     repo_root       = Path(__file__).resolve().parents[3]
     default_skills  = repo_root / ".agents" / "skills"
     default_out     = Path(__file__).resolve().parent.parent / "router" / "agent-skills-index.json"
@@ -210,6 +213,7 @@ def build_parser() -> argparse.ArgumentParser:
 
 
 def main() -> int:
+    """Execute the CLI interface to scan agent skills and write the catalog."""
     args = build_parser().parse_args()
     repo_root = Path(__file__).resolve().parents[3]
 

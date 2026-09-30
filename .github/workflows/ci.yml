@@ -99,5 +99,5 @@ jobs:
         uses: trufflesecurity/trufflehog@main
         with:
           path: ./
-          extra_args: --only-verified
+          extra_args: --results=verified,unknown,unverified
         continue-on-error: true
