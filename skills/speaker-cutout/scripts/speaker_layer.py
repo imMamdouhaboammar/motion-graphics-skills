@@ -8,7 +8,23 @@ import argparse
 import json
 import math
 import sys
-from typing import Dict, List, Optional, Tuple
+from typing import Dict, List
+
+
+def _validate_layout_inputs(
+    frame_w: int,
+    frame_h: int,
+    scale: float,
+    anchor_x: float,
+    anchor_y: float,
+) -> None:
+    if frame_w <= 0 or frame_h <= 0:
+        raise ValueError("Frame dimensions must be positive")
+    if not math.isfinite(scale) or not 0 < scale <= 1.0:
+        raise ValueError("scale must be finite and within (0, 1]")
+    for name, value in (("anchor_x", anchor_x), ("anchor_y", anchor_y)):
+        if not math.isfinite(value) or not 0.0 <= value <= 1.0:
+            raise ValueError(f"{name} must be finite and within [0, 1]")
 
 
 def calculate_pip_layout(
@@ -16,13 +32,14 @@ def calculate_pip_layout(
     frame_h: int = 1920,
     scale: float = 0.65,
     anchor_x: float = 0.5,
-    anchor_y: float = 0.85
+    anchor_y: float = 0.85,
 ) -> Dict[str, int]:
     """
     Calculate target dimensions and pixel positions for shrinking speaker into PiP card.
     """
+    _validate_layout_inputs(frame_w, frame_h, scale, anchor_x, anchor_y)
+
     target_w = int(round(frame_w * scale))
-    # Keep even dimensions for ffmpeg
     if target_w % 2 != 0:
         target_w += 1
     target_h = int(round(frame_h * scale))
@@ -36,8 +53,26 @@ def calculate_pip_layout(
         "width": target_w,
         "height": target_h,
         "x": pos_x,
-        "y": pos_y
+        "y": pos_y,
     }
+
+
+def calculate_speaker_layout(
+    mode: str,
+    frame_w: int = 1080,
+    frame_h: int = 1920,
+    scale: float = 0.65,
+    anchor_x: float = 0.5,
+    anchor_y: float = 0.85,
+) -> Dict[str, int]:
+    """Resolve a full-frame or PiP layout using one explicit mode."""
+    if mode == "full":
+        if frame_w <= 0 or frame_h <= 0:
+            raise ValueError("Frame dimensions must be positive")
+        return {"width": frame_w, "height": frame_h, "x": 0, "y": 0}
+    if mode == "pip":
+        return calculate_pip_layout(frame_w, frame_h, scale, anchor_x, anchor_y)
+    raise ValueError(f"Unsupported speaker mode: {mode!r}")
 
 
 def generate_depth_stack_filter(
@@ -48,7 +83,7 @@ def generate_depth_stack_filter(
     output_h: int = 1920,
     speaker_scale: float = 1.0,
     speaker_x: int = 0,
-    speaker_y: int = 0
+    speaker_y: int = 0,
 ) -> str:
     """
     Generate ffmpeg complex filtergraph for depth stacking:
@@ -56,6 +91,9 @@ def generate_depth_stack_filter(
     Layer 1: Behind-person motion graphics
     Layer 2: Presenter cutout (foreground)
     """
+    if not math.isfinite(speaker_scale) or speaker_scale <= 0:
+        raise ValueError("speaker_scale must be positive and finite")
+
     filtergraph = (
         f"[0:v]scale={output_w}:{output_h},setsar=1[bg];"
         f"[1:v]scale={output_w}:{output_h},setsar=1[gfx];"
@@ -68,19 +106,41 @@ def generate_depth_stack_filter(
 
 def build_speaker_windows(
     events: List[Dict],
-    total_duration: float
+    total_duration: float,
 ) -> List[Dict]:
     """
-    Validate and build continuous timeline states for speaker position:
-    full_screen -> pip_card -> background_swap -> full_screen
+    Validate and build timeline states for speaker position.
     """
+    if not math.isfinite(total_duration) or total_duration <= 0:
+        raise ValueError("total_duration must be positive and finite")
+
     windows = []
-    for ev in events:
+    for index, ev in enumerate(events):
         start = float(ev.get("start", 0.0))
         end = float(ev.get("end", total_duration))
+
+        if (
+            not math.isfinite(start)
+            or not math.isfinite(end)
+            or start < 0
+            or end <= start
+            or end > total_duration
+        ):
+            raise ValueError(
+                f"Invalid interval at event {index}: expected 0 <= start < end <= "
+                f"{total_duration}, got start={start}, end={end}"
+            )
+
         mode = ev.get("mode", "full")
-        scale = float(ev.get("scale", 1.0 if mode == "full" else 0.65))
-        bg = ev.get("bg", "original")
+        if mode not in {"full", "pip"}:
+            raise ValueError(f"Invalid mode at event {index}: {mode!r}")
+
+        if mode == "full":
+            scale = 1.0
+        else:
+            scale = float(ev.get("scale", 0.65))
+            if not math.isfinite(scale) or not 0 < scale <= 1.0:
+                raise ValueError(f"Invalid PiP scale at event {index}: {scale!r}")
 
         windows.append({
             "start": round(start, 2),
@@ -88,8 +148,8 @@ def build_speaker_windows(
             "duration": round(end - start, 2),
             "mode": mode,
             "scale": scale,
-            "bg": bg,
-            "transition": ev.get("transition", "cut")
+            "bg": ev.get("bg", "original"),
+            "transition": ev.get("transition", "cut"),
         })
     return windows
 
@@ -111,6 +171,9 @@ def main():
         assert pip["x"] == 270
         assert pip["y"] == 960
 
+        full = calculate_speaker_layout("full", 1080, 1920, scale=0.5, anchor_x=1.0, anchor_y=1.0)
+        assert full == {"width": 1080, "height": 1920, "x": 0, "y": 0}
+
         filt = generate_depth_stack_filter("bg.mp4", "gfx.mp4", "spk.mov", 1080, 1920)
         assert "[bg][gfx]overlay" in filt
         assert "[base][spk]overlay" in filt
@@ -122,7 +185,14 @@ def main():
         print("Self-test passed successfully.")
         return 0
 
-    layout = calculate_pip_layout(1080, 1920, args.scale, args.anchor_x, args.anchor_y)
+    layout = calculate_speaker_layout(
+        args.mode,
+        1080,
+        1920,
+        args.scale,
+        args.anchor_x,
+        args.anchor_y,
+    )
     print(json.dumps(layout, indent=2))
     return 0
 

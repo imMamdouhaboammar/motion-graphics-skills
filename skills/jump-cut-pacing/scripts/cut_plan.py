@@ -7,10 +7,11 @@ face-guarded zoom alternation (1.0x vs 1.15x).
 
 import argparse
 import json
+import math
 import re
 import subprocess
 import sys
-from typing import Dict, List, Tuple
+from typing import Dict, List, Optional, Tuple
 
 
 def parse_silence_log(log_text: str, min_duration: float = 0.45) -> List[Tuple[float, float]]:
@@ -47,23 +48,32 @@ def invert_silences_to_speech(
 ) -> List[Tuple[float, float]]:
     """
     Invert silence intervals to active speech chunks with breath padding.
+
+    pad_start is the lead-in preserved before a speech segment begins.
+    pad_end is the tail preserved after a speech segment ends.
     """
+    if total_duration <= 0 or not math.isfinite(total_duration):
+        return []
+
+    if pad_start < 0 or pad_end < 0:
+        raise ValueError("Speech padding values must be non-negative")
+
     if not silences:
-        return [(0.0, total_duration)] if total_duration > 0 else []
+        return [(0.0, total_duration)]
 
     speech = []
     last_end = 0.0
 
     for s_start, s_end in silences:
-        seg_start = max(0.0, last_end - pad_end) if last_end > 0 else 0.0
-        seg_end = min(total_duration, s_start + pad_start)
+        seg_start = max(0.0, last_end - pad_start) if last_end > 0 else 0.0
+        seg_end = min(total_duration, s_start + pad_end)
 
         if seg_end - seg_start > 0.15:
             speech.append((round(seg_start, 3), round(seg_end, 3)))
         last_end = s_end
 
     if last_end < total_duration:
-        seg_start = max(0.0, last_end - pad_end)
+        seg_start = max(0.0, last_end - pad_start)
         seg_end = total_duration
         if seg_end - seg_start > 0.15:
             speech.append((round(seg_start, 3), round(seg_end, 3)))
@@ -80,12 +90,17 @@ def generate_jump_cut_plan(
     """
     Assign alternating zooms to speech cuts while keeping face framing safe.
     """
-    plan = []
-    current_zoom = base_zoom
+    if base_zoom <= 0 or push_zoom <= 0:
+        raise ValueError("Zoom values must be positive")
+    if not 0.0 <= zoom_anchor_y <= 1.0:
+        raise ValueError("zoom_anchor_y must be between 0.0 and 1.0")
 
+    plan = []
     for idx, (start, end) in enumerate(speech_segments):
+        if not all(math.isfinite(v) for v in (start, end)) or start < 0 or end <= start:
+            raise ValueError(f"Invalid speech interval: start={start}, end={end}")
+
         duration = round(end - start, 3)
-        # Alternate zoom every cut to mask discontinuity
         zoom = push_zoom if (idx % 2 == 1) else base_zoom
         plan.append({
             "segment_id": idx + 1,
@@ -94,20 +109,51 @@ def generate_jump_cut_plan(
             "duration": duration,
             "zoom": zoom,
             "zoom_anchor_y": zoom_anchor_y,
-            "face_safe": True
+            "face_safe": True,
         })
 
     return plan
 
 
-def run_silence_detect(video_path: str, noise_db: float = -35.0, min_dur: float = 0.45) -> str:
-    """Run ffmpeg silencedetect and return stdout/stderr."""
+def probe_media_duration(video_path: str) -> float:
+    """Return source duration in seconds using ffprobe."""
     cmd = [
-        "ffmpeg", "-v", "info", "-i", video_path,
-        "-af", f"silencedetect=noise={noise_db}dB:d={min_dur}",
-        "-f", "null", "-"
+        "ffprobe",
+        "-v",
+        "error",
+        "-show_entries",
+        "format=duration",
+        "-of",
+        "default=noprint_wrappers=1:nokey=1",
+        video_path,
     ]
-    res = subprocess.run(cmd, capture_output=True, text=True)
+    res = subprocess.run(cmd, capture_output=True, text=True, check=True)
+    raw = res.stdout.strip()
+    try:
+        duration = float(raw)
+    except ValueError as exc:
+        raise ValueError(f"ffprobe returned an invalid duration: {raw!r}") from exc
+
+    if not math.isfinite(duration) or duration <= 0:
+        raise ValueError(f"Source duration must be positive and finite, got {duration!r}")
+    return duration
+
+
+def run_silence_detect(video_path: str, noise_db: float = -35.0, min_dur: float = 0.45) -> str:
+    """Run ffmpeg silencedetect and return its diagnostic log."""
+    cmd = [
+        "ffmpeg",
+        "-v",
+        "info",
+        "-i",
+        video_path,
+        "-af",
+        f"silencedetect=noise={noise_db}dB:d={min_dur}",
+        "-f",
+        "null",
+        "-",
+    ]
+    res = subprocess.run(cmd, capture_output=True, text=True, check=True)
     return res.stderr
 
 
@@ -122,8 +168,21 @@ def build_cut_summary(plan: List[Dict], total_input_duration: float) -> Dict:
         "cut_duration": cut_duration,
         "reduction_percentage": reduction_pct,
         "total_segments": len(plan),
-        "segments": plan
+        "segments": plan,
     }
+
+
+def _format_command_error(exc: subprocess.CalledProcessError) -> str:
+    detail = (exc.stderr or exc.stdout or "").strip()
+    return detail or str(exc)
+
+
+def _resolve_duration(video_path: str, supplied_duration: Optional[float]) -> float:
+    if supplied_duration is None:
+        return probe_media_duration(video_path)
+    if not math.isfinite(supplied_duration) or supplied_duration <= 0:
+        raise ValueError("--total-duration must be a positive finite number")
+    return supplied_duration
 
 
 def main():
@@ -131,7 +190,7 @@ def main():
     parser.add_argument("video", nargs="?", default="", help="Input video or audio file")
     parser.add_argument("--noise-db", type=float, default=-35.0, help="Noise threshold in dB (default: -35.0)")
     parser.add_argument("--min-silence", type=float, default=0.45, help="Minimum silence duration in seconds")
-    parser.add_argument("--total-duration", type=float, default=0.0, help="Total source duration if known")
+    parser.add_argument("--total-duration", type=float, default=None, help="Override source duration in seconds")
     parser.add_argument("--output", "-o", help="Output JSON path")
     parser.add_argument("--test", action="store_true", help="Run self-tests")
 
@@ -166,11 +225,20 @@ def main():
         parser.print_help()
         return 1
 
-    log_output = run_silence_detect(args.video, args.noise_db, args.min_silence)
+    try:
+        total_duration = _resolve_duration(args.video, args.total_duration)
+        log_output = run_silence_detect(args.video, args.noise_db, args.min_silence)
+    except subprocess.CalledProcessError as exc:
+        print(f"Media command failed: {_format_command_error(exc)}", file=sys.stderr)
+        return 2
+    except (OSError, ValueError) as exc:
+        print(f"Could not analyze source media: {exc}", file=sys.stderr)
+        return 2
+
     silences = parse_silence_log(log_output, args.min_silence)
-    speech = invert_silences_to_speech(silences, args.total_duration)
+    speech = invert_silences_to_speech(silences, total_duration)
     plan = generate_jump_cut_plan(speech)
-    summary = build_cut_summary(plan, args.total_duration)
+    summary = build_cut_summary(plan, total_duration)
 
     out_json = json.dumps(summary, indent=2)
     if args.output:
