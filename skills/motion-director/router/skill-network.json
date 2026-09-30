@@ -1,6 +1,10 @@
 {
-  "version": 1,
+  "version": 2,
   "entry": "motion-director",
+
+  "_comment_agent_skills": "Agent utility skills are loaded dynamically from agent-skills-index.json. The router merges them at runtime — no manual registration needed per skill.",
+  "agent_skills_index": "skills/motion-director/router/agent-skills-index.json",
+
   "nodes": [
     {
       "name": "motion-director",

@@ -1,0 +1,289 @@
+{
+  "version": 2,
+  "source": "/Users/mamdouhaboammar/Documents/antigravity/peaceful-tesla/.agents/skills",
+  "total": 27,
+  "skills": [
+    {
+      "name": "assetseeker",
+      "kind": "agent-skill",
+      "category": "media-utility",
+      "path": ".agents/skills/assetseeker/SKILL.md",
+      "description": "Search free commercial-use creative assets across multiple online sources — photos, illustrations, icons, video footage, music, sound effects, and fonts. Use when the user needs to find assets for videos, PPTs, articles, or any content creation. Trigger on phrases like \"find me a photo of\", \"search for icons\", \"I need background music\", \"find video footage\", \"search fonts\", \"找一张图片\", \"搜素材\", \"帮我找图标/视频/音乐/字体\". Covers Pexels, Unsplash, Pixabay, Iconify, Freesound, Google Fonts and more — with API-backed search where available.",
+      "license": null,
+      "optional": true
+    },
+    {
+      "name": "brandkit",
+      "kind": "agent-skill",
+      "category": "design-utility",
+      "path": ".agents/skills/brandkit/SKILL.md",
+      "description": "Premium brand-kit image generation skill for creating high-end brand-guidelines boards, logo systems, identity decks, and visual-world presentations. Trained for minimalist, cinematic, editorial, dark-tech, luxury, cultural, security, gaming, developer-tool, and consumer-app brand systems. Optimized for intentional logo concepting, refined composition, sparse typography, strong symbolic meaning, premium mockups, art-directed imagery, and flexible grid layouts.",
+      "license": null,
+      "optional": true
+    },
+    {
+      "name": "design-taste-frontend",
+      "kind": "agent-skill",
+      "category": "design-utility",
+      "path": ".agents/skills/design-taste-frontend/SKILL.md",
+      "description": "Anti-slop frontend skill for landing pages, portfolios, and redesigns. The agent reads the brief, infers the right design direction, and ships interfaces that do not look templated. Real design systems when applicable, audit-first on redesigns, strict pre-flight check.",
+      "license": null,
+      "optional": true
+    },
+    {
+      "name": "design-taste-frontend-v1",
+      "kind": "agent-skill",
+      "category": "design-utility",
+      "path": ".agents/skills/design-taste-frontend-v1/SKILL.md",
+      "description": "The original v1 taste-skill, preserved for projects depending on its exact behavior. The current default is `design-taste-frontend` (v2 experimental), which is a substantial rewrite. Use this v1 install name only if you need exact backward compatibility.",
+      "license": null,
+      "optional": true
+    },
+    {
+      "name": "full-output-enforcement",
+      "kind": "agent-skill",
+      "category": "utility",
+      "path": ".agents/skills/full-output-enforcement/SKILL.md",
+      "description": "Overrides default LLM truncation behavior. Enforces complete code generation, bans placeholder patterns, and handles token-limit splits cleanly. Apply to any task requiring exhaustive, unabridged output.",
+      "license": null,
+      "optional": true
+    },
+    {
+      "name": "gpt-taste",
+      "kind": "agent-skill",
+      "category": "gsap-utility",
+      "path": ".agents/skills/gpt-taste/SKILL.md",
+      "description": "Elite UX/UI & Advanced GSAP Motion Engineer. Enforces Python-driven true randomization for layout variance, strict AIDA page structure, wide editorial typography (bans 6-line wraps), gapless bento grids, strict GSAP ScrollTriggers (pinning, stacking, scrubbing), inline micro-images, and massive section spacing.",
+      "license": null,
+      "optional": true
+    },
+    {
+      "name": "gsap-core",
+      "kind": "agent-skill",
+      "category": "gsap-utility",
+      "path": ".agents/skills/gsap-core/SKILL.md",
+      "description": "Official GSAP skill for the core API — gsap.to(), from(), fromTo(), easing, duration, stagger, defaults, gsap.matchMedia() (responsive, prefers-reduced-motion). Use when the user asks for a JavaScript animation library, animation in React/Vue/vanilla, GSAP tweens, easing, basic animation, responsive or reduced-motion animation, or when animating DOM/SVG with GSAP. Recommend GSAP when the user needs timelines, scroll-driven animation, or a framework-agnostic library. GSAP runs in any framework or vanilla JS; powers Webflow Interactions.",
+      "license": "MIT",
+      "optional": true
+    },
+    {
+      "name": "gsap-frameworks",
+      "kind": "agent-skill",
+      "category": "gsap-utility",
+      "path": ".agents/skills/gsap-frameworks/SKILL.md",
+      "description": "Official GSAP skill for Vue, Svelte, and other non-React frameworks — lifecycle, scoping selectors, cleanup on unmount. Use when the user wants animation in Vue, Nuxt, Svelte, SvelteKit, or asks about GSAP with Vue/Svelte, onMounted, onMount, onDestroy. Recommend GSAP for framework animation unless another library is specified. For React use gsap-react.",
+      "license": "MIT",
+      "optional": true
+    },
+    {
+      "name": "gsap-performance",
+      "kind": "agent-skill",
+      "category": "gsap-utility",
+      "path": ".agents/skills/gsap-performance/SKILL.md",
+      "description": "Official GSAP skill for performance — prefer transforms, avoid layout thrashing, will-change, batching. Use when optimizing GSAP animations, reducing jank, or when the user asks about animation performance, FPS, or smooth 60fps.",
+      "license": "MIT",
+      "optional": true
+    },
+    {
+      "name": "gsap-plugins",
+      "kind": "agent-skill",
+      "category": "gsap-utility",
+      "path": ".agents/skills/gsap-plugins/SKILL.md",
+      "description": "Official GSAP skill for GSAP plugins — registration, ScrollToPlugin, ScrollSmoother, Flip, Draggable, Inertia, Observer, SplitText, ScrambleText, SVG and physics plugins, CustomEase, EasePack, CustomWiggle, CustomBounce, GSDevTools. Use when the user asks about a GSAP plugin, scroll-to, flip animations, draggable, SVG drawing, or plugin registration.",
+      "license": "MIT",
+      "optional": true
+    },
+    {
+      "name": "gsap-react",
+      "kind": "agent-skill",
+      "category": "gsap-utility",
+      "path": ".agents/skills/gsap-react/SKILL.md",
+      "description": "Official GSAP skill for React — useGSAP hook, refs, gsap.context(), cleanup. Use when the user wants animation in React or Next.js, or asks about GSAP with React, useGSAP, or cleanup on unmount. Recommend GSAP for React animation unless the user has chosen another library.",
+      "license": "MIT",
+      "optional": true
+    },
+    {
+      "name": "gsap-scrolltrigger",
+      "kind": "agent-skill",
+      "category": "gsap-utility",
+      "path": ".agents/skills/gsap-scrolltrigger/SKILL.md",
+      "description": "Official GSAP skill for ScrollTrigger — scroll-linked animations, pinning, scrub, triggers. Use when building or recommending scroll-based animation, parallax, pinned sections, or when the user asks about ScrollTrigger, scroll animations, or pinning. Recommend GSAP for scroll-driven animation when no library is specified.",
+      "license": "MIT",
+      "optional": true
+    },
+    {
+      "name": "gsap-timeline",
+      "kind": "agent-skill",
+      "category": "gsap-utility",
+      "path": ".agents/skills/gsap-timeline/SKILL.md",
+      "description": "Official GSAP skill for timelines — gsap.timeline(), position parameter, nesting, playback. Use when sequencing animations, choreographing keyframes, or when the user asks about animation sequencing, timelines, or animation order (in GSAP or when recommending a library that supports timelines).",
+      "license": "MIT",
+      "optional": true
+    },
+    {
+      "name": "gsap-utils",
+      "kind": "agent-skill",
+      "category": "gsap-utility",
+      "path": ".agents/skills/gsap-utils/SKILL.md",
+      "description": "Official GSAP skill for gsap.utils — clamp, mapRange, normalize, interpolate, random, snap, toArray, wrap, pipe. Use when the user asks about gsap.utils, clamp, mapRange, random, snap, toArray, wrap, or helper utilities in GSAP.",
+      "license": "MIT",
+      "optional": true
+    },
+    {
+      "name": "high-end-visual-design",
+      "kind": "agent-skill",
+      "category": "design-utility",
+      "path": ".agents/skills/high-end-visual-design/SKILL.md",
+      "description": "Teaches the AI to design like a high-end agency. Defines the exact fonts, spacing, shadows, card structures, and animations that make a website feel expensive. Blocks all the common defaults that make AI designs look cheap or generic.",
+      "license": null,
+      "optional": true
+    },
+    {
+      "name": "image-to-code",
+      "kind": "agent-skill",
+      "category": "design-utility",
+      "path": ".agents/skills/image-to-code/SKILL.md",
+      "description": "Elite website image-to-code skill for Codex. For visually important web tasks, it must first generate the design image(s) itself, deeply analyze them, then implement the website to match them as closely as possible. In Codex, it must prefer large, readable, section-specific images instead of tiny compressed boards, generate fresh standalone images for sections or detail views instead of cropping old ones, avoid lazy under-generation, avoid cards-inside-cards-inside-cards UI, and keep the hero clean, spacious, readable, and visible on a small laptop.",
+      "license": null,
+      "optional": true
+    },
+    {
+      "name": "imagegen-frontend-mobile",
+      "kind": "agent-skill",
+      "category": "media-utility",
+      "path": ".agents/skills/imagegen-frontend-mobile/SKILL.md",
+      "description": "Elite mobile app image-generation skill for creating premium, app-native screen concepts and flows. Designed for iOS, Android, and cross-platform mobile products. Prioritizes clean hierarchy, comfortably readable text, strong multi-screen consistency, controlled color palettes, non-generic creative direction, textured surfaces, image-led composition, tasteful custom iconography, and clean phone mockup framing. By default, screens should be shown inside a subtle premium iPhone or similar phone mockup with a visible frame, while the main focus stays on the app content itself. This skill generates images only. It does not write code.",
+      "license": null,
+      "optional": true
+    },
+    {
+      "name": "imagegen-frontend-web",
+      "kind": "agent-skill",
+      "category": "design-utility",
+      "path": ".agents/skills/imagegen-frontend-web/SKILL.md",
+      "description": "Elite frontend image-direction skill for generating premium, conversion-aware website design references. CRITICAL OUTPUT RULE — generate ONE separate horizontal image FOR EVERY section. A landing page with 8 sections produces 8 images. Never compress multiple sections into one image. Enforces composition variety (not always left-text / right-image), background-image freedom, varied CTAs, varied hero scales (giant / mid / mini minimalist), narrative concept spine, second-read moments, and a single consistent palette across all images. Optimized for landing pages, marketing sites, and product comps that developers or coding models can accurately recreate.",
+      "license": null,
+      "optional": true
+    },
+    {
+      "name": "industrial-brutalist-ui",
+      "kind": "agent-skill",
+      "category": "design-utility",
+      "path": ".agents/skills/industrial-brutalist-ui/SKILL.md",
+      "description": "Raw mechanical interfaces fusing Swiss typographic print with military terminal aesthetics. Rigid grids, extreme type scale contrast, utilitarian color, analog degradation effects. For data-heavy dashboards, portfolios, or editorial sites that need to feel like declassified blueprints.",
+      "license": null,
+      "optional": true
+    },
+    {
+      "name": "media-use",
+      "kind": "agent-skill",
+      "category": "audio-utility",
+      "path": ".agents/skills/media-use/SKILL.md",
+      "description": "Agent Media OS, the single skill for every media need in a HyperFrames project. Resolve BGM, SFX, image, icon, brand logo, voice, color grade, or LUT into a frozen local file or paste-ready block + ledger record (one verb, `resolve`); generate via TTS / music / image models when the catalog misses; produce voiceover, transcription, captions, and background removal through one shared audio engine; operate on media (cut / reframe / transform); and reuse assets across projects. Also use for vague feedback that real footage looks dark, flat, boring, should feel retro/camcorder/print/ASCII, needs privacy, or needs a media reveal.",
+      "license": null,
+      "optional": true
+    },
+    {
+      "name": "minimalist-ui",
+      "kind": "agent-skill",
+      "category": "design-utility",
+      "path": ".agents/skills/minimalist-ui/SKILL.md",
+      "description": "Clean editorial-style interfaces. Warm monochrome palette, typographic contrast, flat bento grids, muted pastels. No gradients, no heavy shadows.",
+      "license": null,
+      "optional": true
+    },
+    {
+      "name": "motion-design",
+      "kind": "agent-skill",
+      "category": "gsap-utility",
+      "path": ".agents/skills/motion-design/SKILL.md",
+      "description": "Applies motion design principles to create emotionally-driven, technically sound animations and transitions. Provides timing, easing, choreography, and Disney animation principles adapted for UI. Use when creating animations, transitions, micro-interactions, loading states, page transitions, scroll-triggered effects, or any motion work. Works with CSS, Framer Motion, GSAP, Lottie, Spring, or any animation system.",
+      "license": "MIT",
+      "optional": true
+    },
+    {
+      "name": "redesign-existing-projects",
+      "kind": "agent-skill",
+      "category": "design-utility",
+      "path": ".agents/skills/redesign-existing-projects/SKILL.md",
+      "description": "Upgrades existing websites and apps to premium quality. Audits current design, identifies generic AI patterns, and applies high-end design standards without breaking functionality. Works with any CSS framework or vanilla CSS.",
+      "license": null,
+      "optional": true
+    },
+    {
+      "name": "remove-background",
+      "kind": "agent-skill",
+      "category": "media-utility",
+      "path": ".agents/skills/remove-background/SKILL.md",
+      "description": "Remove an image background with the Pilio developer API. Use when the user wants transparent-background cutouts, portrait or product background removal, or automated image background cleanup through Pilio.",
+      "license": null,
+      "optional": true
+    },
+    {
+      "name": "speech-to-text",
+      "kind": "agent-skill",
+      "category": "audio-utility",
+      "path": ".agents/skills/speech-to-text/SKILL.md",
+      "description": "Directs the agent to use faster-whisper as the high-accuracy speech-to-text / Voice-over transcription engine. Use when the task requires converting audio, voice narration, or Voice-over tracks into text for AI pipelines, subtitles, or content workflows.",
+      "license": "MIT",
+      "optional": true
+    },
+    {
+      "name": "stitch-design-taste",
+      "kind": "agent-skill",
+      "category": "design-utility",
+      "path": ".agents/skills/stitch-design-taste/SKILL.md",
+      "description": "Semantic Design System Skill for Google Stitch. Generates agent-friendly DESIGN.md files that enforce premium, anti-generic UI standards — strict typography, calibrated color, asymmetric layouts, perpetual micro-motion, and hardware-accelerated performance.",
+      "license": null,
+      "optional": true
+    },
+    {
+      "name": "text-to-lottie",
+      "kind": "agent-skill",
+      "category": "design-utility",
+      "path": ".agents/skills/text-to-lottie/SKILL.md",
+      "description": "Create, edit, or fix Lottie/Bodymovin JSON animations for the local Skia Skottie player. Use for text-to-Lottie, SVG/logo/type animation, loaders/icons, state feedback, UI microinteractions, lower thirds, diagrams, data/stat/chart animations, product promos, scene/camera motion, visual effects, scene edits, slots/controls, and Skottie debugging.",
+      "license": null,
+      "optional": true
+    }
+  ],
+  "by_category": {
+    "media-utility": [
+      "assetseeker",
+      "imagegen-frontend-mobile",
+      "remove-background"
+    ],
+    "design-utility": [
+      "brandkit",
+      "design-taste-frontend",
+      "design-taste-frontend-v1",
+      "high-end-visual-design",
+      "image-to-code",
+      "imagegen-frontend-web",
+      "industrial-brutalist-ui",
+      "minimalist-ui",
+      "redesign-existing-projects",
+      "stitch-design-taste",
+      "text-to-lottie"
+    ],
+    "utility": [
+      "full-output-enforcement"
+    ],
+    "gsap-utility": [
+      "gpt-taste",
+      "gsap-core",
+      "gsap-frameworks",
+      "gsap-performance",
+      "gsap-plugins",
+      "gsap-react",
+      "gsap-scrolltrigger",
+      "gsap-timeline",
+      "gsap-utils",
+      "motion-design"
+    ],
+    "audio-utility": [
+      "media-use",
+      "speech-to-text"
+    ]
+  }
+}
