@@ -76,6 +76,10 @@ Whisper large-v3 on the Arabic VO gave word times that matched `silencedetect` p
 
 Use ASR for timings. Take caption and on-screen text from the approved script. Never ship ASR text for a brand name or for Arabic without comparing it to the script.
 
+### Extension: a hallucinated phrase over the final silence
+
+On the JEDAR VO (faster-whisper `medium`, Saudi Arabic), the transcript ended with «اشتركوا في القناة», which is not in the VO: three words stamped at 57.58 s over the silent tail, a known Whisper failure on silence. It also misheard «خلني» as «خم», «ضيق» as «ضيد», and «ما أحد» as «ماحد». The word times still lined up with the voice. Treat any ASR word with a near-zero duration, or any words after the last word of the script, as noise, and align cues to the script's word list, not to the transcript's.
+
 ### Status
 
 Resolved.
@@ -127,3 +131,51 @@ A mask texture carries its values in alpha. After adding any texture, compare on
 ### Status
 
 Resolved.
+
+---
+
+## Files attached in chat were not in the container
+
+### What happened
+
+The owner attached the VO (WAV) and the reference film (MP4) to a chat message for a cloud session. Neither file existed anywhere on the container's disk: `/mnt/user-data/uploads` was empty and a filesystem search found no media. The owner then uploaded both to the GitHub repository, and they arrived with a `git pull`.
+
+### Root cause
+
+**Confirmed** as observed behaviour: attachments on that surface did not reach the session's filesystem. Whether this holds for every surface is not known.
+
+### Impact
+
+A round trip lost. Starting the film anyway would have meant inventing timing and a visual language the owner had already supplied.
+
+### Prevention rule
+
+At intake, locate every supplied file on disk (`find / -xdev -iname "*.wav" -o -iname "*.mp4"`) before planning. If one is missing, stop, say so, and offer concrete routes (repository branch, Drive, direct link). Never build timing without the real VO or match a reference without the real reference.
+
+### Status
+
+Resolved as practice. Now step 1 of the intake checklist in `skills/motion-director/references/review-gates.md`.
+
+---
+
+## A reference built on generated imagery, matched with vector illustration
+
+### What happened
+
+The owner asked for a film "exactly like" a reference whose frames are AI-generated photographic collage (people, props, rooms) over flat type. The build matched the reference's grammar (palette, masthead, word-by-word type in bars, huge numerals, split panels, pinned note, seesaw, browser stack) and replaced the photographs with flat vector illustration. A generation service was connected, but using it spends the owner's credit, so it was not used without asking.
+
+### Root cause
+
+**Confirmed** decision, not an accident. The gap was declared at delivery.
+
+### Why it matters
+
+"Exactly like" is judged by the owner on imagery first. A film that matches every structural rule of the reference can still read as a different film if the image layer differs.
+
+### Prevention rule
+
+In the reference study, classify the image layer (generated, stock, filmed, illustrated) and agree the route with the owner before the build: generate (check credit first, see [the generation entry](#a-generation-service-that-is-connected-is-not-a-service-that-can-generate)), license stock, or illustrate. Record the decision in the project README.
+
+### Status
+
+Unresolved. The owner has not yet chosen whether to regenerate the image layer.

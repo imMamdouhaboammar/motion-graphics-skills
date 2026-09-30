@@ -238,8 +238,14 @@ Typical social delivery checks:
 
 Use the runtime's own validation and ffprobe where appropriate.
 
+## Intake checklist
+
+1. Find every supplied file (VO, reference, logo, fonts) on disk. If one is missing, stop and ask for a route (repository, Drive, direct link). Never approximate supplied media.
+2. Probe the environment once: browser builds on disk against the installed Playwright version, `ffmpeg` and `ffprobe` on `PATH`, the project fonts.
+3. List the references this skill asks you to read and read them. Record any deviation from a skill default (for example, a renderer other than HyperFrames) in the project README with its reason.
+
 ## Handoff checklist
 
-1. Know the delivery channel's size limit. Send a review copy for chat or messaging (the full master stays in storage).
-2. Ship caption text from the approved script. Speech recognition supplies timings only.
+1. Know the delivery channel's size limit. Send a review copy for chat or messaging (the full master stays in storage). Size the review copy by bitrate, not CRF: total bitrate = limit × 8 × 0.9 ÷ duration (30 MB over 59 s is about 3.6 Mbps). Check the file size before sending.
+2. Ship caption text from the approved script. Speech recognition supplies timings only, and any recognized words after the script's last word are noise.
 3. Report any brief constraint the supplied material already breaks (for example, audio longer than the duration cap) instead of silently editing the material.

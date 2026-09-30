@@ -34,7 +34,7 @@ ffmpeg -i renders/video.mp4 -i assets/vo.wav \
 npm run audit                    # clip audit over the whole film
 ```
 
-`CHROME_PATH` is needed when the installed Playwright package expects a browser build the machine does not have (see [the Playwright entry](../../Failure-lessons/delivery-and-repo-workflow.md#a-fresh-playwright-install-expects-a-browser-the-machine-does-not-have)). Opening `index.html` without `?render` and clicking the page plays a live preview with the VO.
+`CHROME_PATH` is needed when the installed Playwright package expects a browser build the machine does not have (see [the Playwright entry](../../Failure-lessons/delivery-and-repo-workflow.md#environment-tooling-assumed-rather-than-checked)). Opening `index.html` without `?render` and clicking the page plays a live preview with the VO.
 
 ## Open items
 

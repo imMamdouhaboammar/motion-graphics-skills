@@ -124,7 +124,7 @@ Before style, collect what cannot be invented:
 - event or client logos
 - final platform and aspect ratio
 - final audio if one exists
-- the reference video or frames if one exists
+- the reference video or frames if one exists, located on disk before planning (chat attachments do not always arrive, so ask for a route when one is missing). Run the intake checklist in references/review-gates.md
 
 Never invent a testimonial, result, attendance figure, client, award, date, price, certification, or official logo.
 

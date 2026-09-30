@@ -111,6 +111,10 @@ Use people for composition, hierarchy and taste. Use measurement for anything ge
 
 Partially mitigated (see the audit's known gaps in [arabic-type-and-layout.md](arabic-type-and-layout.md#accidental-clipping-found-only-by-eye)).
 
+### Recurrence
+
+On the JEDAR film (`projects/jedar-lesh-majani/`), 26 stills at beat peaks and a one-frame-per-second contact sheet passed a tag that hung into the top edge for half a second (5.7 to 6.2 s). The first full clip audit found it. Stills are sampled where the designer expects action; defects live in the transitions between those samples. See [A parked element peeked into the frame](composition-and-transitions.md#a-parked-element-peeked-into-the-frame-before-its-entrance).
+
 ---
 
 ## Patterns worth reusing
@@ -135,6 +139,9 @@ These patterns caught real problems on this project. Each note says what it caug
 | Font gate from `document.fonts` status plus width against the fallback face (`projects/mgs-promo/tools/font-check.cjs`) | That every declared face loaded; the red run with a missing file fails readiness | Width can match by coincidence; confirm with the DevTools platform-font check when available |
 | Whisper large-v3 word times cross-checked against `silencedetect` pauses | A beat map built on measured times; every pause over 120 ms lined up with a word gap | The transcript's words are not reliable Arabic (see below) |
 | Three opening studies snapshotted on one sheet before the build | A crop that cut the alef of «الموشن», and a weak first frame in two of the three routes | Judges only the first seconds |
+| Stills at every beat peak before the first full render | Four layout defects on the JEDAR film (a typed line cut by its window, icons over question chips, a chip edge to edge, a label under the wordmark) in one minute instead of a 4.5 minute render | Nothing between the sampled times |
+| A cue table built from word-level ASR times, every cue fired a fixed `LEAD` (0.1 s) before the word | Words landing with the voice on every cue of a 58 s VO without hand timing | Only as good as the ASR times; misheard words still give usable times, hallucinated words over silence do not |
+| Red run of the clip audit on a scratch HTML copy served by the same server | That the audit catches the parked-tag defect it claims to protect (`FAIL` on the old code, `PASS` on the fix) | Covers only the reintroduced defect |
 
 ---
 
