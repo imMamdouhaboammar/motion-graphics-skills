@@ -19,8 +19,8 @@ It exists so that a mistake in a motion project is paid for once. The next film,
 | [arabic-type-and-layout.md](arabic-type-and-layout.md) | Accidental clipping of Arabic text and how to catch it |
 | [composition-and-transitions.md](composition-and-transitions.md) | Colour mixing in crossfades, perspective stacks, camera travel, light cones |
 | [testing-and-verification.md](testing-and-verification.md) | Checks that could not fail, diagnosis from thumbnails, red-green proofs, patterns worth reusing |
-| [delivery-and-repo-workflow.md](delivery-and-repo-workflow.md) | Docs that claim unshipped files, stale outputs, history rewrites, heavy binaries, channel limits, reviewer triage, environment outages |
-| [assets-and-media.md](assets-and-media.md) | Generation credit checks, keying stock cutouts, ASR versus script text |
+| [delivery-and-repo-workflow.md](delivery-and-repo-workflow.md) | Docs that claim unshipped files, stale outputs, history rewrites, heavy binaries, channel limits, reviewer triage, environment outages and tooling probes, skipped skill references, writes that ran despite a rejection |
+| [assets-and-media.md](assets-and-media.md) | Generation credit checks, keying stock cutouts, ASR versus script text, supplied files missing at intake, matching a reference's image layer |
 
 ## Entry format
 
@@ -52,3 +52,5 @@ Keep entries distilled. No raw logs, temporary IDs, secrets, or conversation dum
 The first entries come from the Four Steps events film (`projects/four-steps-events/`): a 54-second Arabic 9:16 editorial collage built as a deterministic HTML composition, rendered frame by frame with Playwright and ffmpeg, then taken through a creative-director polish pass and several rounds of automated code review.
 
 The second set comes from the Motion Graphics Skills promo (`projects/mgs-promo/`): a 26.6-second Arabic 9:16 film built as a HyperFrames composition over a supplied Saudi VO, verified with frame-hash determinism checks, a clip audit, a font gate and audio cross-correlation.
+
+The third set comes from the JEDAR film (`projects/jedar-lesh-majani/`): a 59-second Arabic 9:16 editorial film built from a client reference and a supplied Saudi VO, as a deterministic HTML and GSAP composition rendered with the Four Steps renderer, timed from a faster-whisper word transcript, and checked with stills, a contact sheet and a red-green clip audit.

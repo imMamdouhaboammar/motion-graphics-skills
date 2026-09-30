@@ -216,3 +216,67 @@ A clip's end is at least the end of every tween that animates its content. Deriv
 ### Status
 
 Resolved.
+
+---
+
+## A parked element peeked into the frame before its entrance
+
+### Context
+
+`projects/jedar-lesh-majani/index.html`, scene S4. A hang tag carrying the word «تقييم» waits above the frame and drops in on its VO cue at 6.2 s.
+
+### What happened
+
+The tag was parked with `y: -900` from a layout top of 470 px, on a 700 px tall element. A second tween, `fromTo('#s4-tag', { rotation: 9 }, ...)` at 6.55 s, applied its start rotation immediately at build time (GSAP `fromTo` defaults to `immediateRender: true`). The rotated corner of the tag and the lower part of «تقييم» hung into the top of the frame from 5.7 s to 6.2 s, over the masthead, before the tag was meant to exist.
+
+### Observable symptom
+
+A green shape and a cut Arabic word at the top edge for half a second before the drop.
+
+### Impact
+
+A read word cut by the frame edge, and an object visible before its cue, in the hook of a paid ad.
+
+### Incorrect assumption
+
+That an offset that looks large enough parks an element out of frame. The offset was picked by eye, not computed from the element's height and its rotated bounds.
+
+### Root cause
+
+**Confirmed**. The clip audit reported `CUT 5.70-6.20s "تقييم" cut by frame: top 95px`. Reintroducing the old two tweens in a scratch copy reproduces the same finding.
+
+### Why the architecture allowed it
+
+The parked state has no owner. Nothing in the composition says "this element is not in the film yet". Visibility was left to geometry, and a second tween silently changed that geometry at time 0. The contact-sheet stills were taken at 5.2 s and 7.2 s, both outside the half-second window.
+
+### Fix
+
+The element is hidden until its cue and parked beyond its own height: `gsap.set('#s4-tag', { opacity: 0, y: -1300 })`, `tl.set(..., { opacity: 1 }, 6.2)`, and the rotation tween is created with `immediateRender: false` so it cannot change the parked state.
+
+### Verification
+
+Red-green with the project's clip audit, served from the same page:
+
+- old code in a scratch copy, 5 to 8 s: `FAIL`, one cut at 5.70 to 6.20 s
+- current `index.html`, 5 to 8 s: `PASS`
+- whole film at 0.2 s steps with `--safe 40`: `PASS`
+
+### Prevention rule
+
+An element that waits for its entrance is hidden (`opacity: 0` or `visibility: hidden`) and positioned outside the frame by more than its own rotated bounds. Any `fromTo` whose start state must not apply before its start time gets `immediateRender: false`.
+
+### Reusable lesson
+
+This is the same class as [words waiting under a mask](arabic-type-and-layout.md#words-waiting-under-a-mask-leak-through-its-descender-padding): the hidden state of an element was never checked, only its arrived state. It applies to anything parked off-frame, behind a mask, or at zero scale.
+
+### Related code
+
+`projects/jedar-lesh-majani/index.html` (S4 block), `projects/jedar-lesh-majani/tools/clip-audit.js`.
+
+### Related lessons
+
+[Visual review misses what it is not looking for](testing-and-verification.md#visual-review-misses-what-it-is-not-looking-for)
+
+### Status
+
+Resolved for this film. The audit catches a parked element only when it carries text; a parked shape without text is not measured.

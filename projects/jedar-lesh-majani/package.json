@@ -1,0 +1,11 @@
+{
+  "name": "jedar-lesh-majani",
+  "private": true,
+  "description": "JEDAR motion film: ليش مجاني؟ (1080x1920, 59s)",
+  "scripts": {
+    "serve": "python3 -m http.server 8765",
+    "render": "node tools/render.js tail=1.2 renders/video.mp4 0 59 30",
+    "audit": "node tools/clip-audit.js 'http://127.0.0.1:8765/index.html?render' --step 0.2 --safe 40"
+  },
+  "dependencies": { "gsap": "^3.12.5", "playwright": "^1.49.0" }
+}
