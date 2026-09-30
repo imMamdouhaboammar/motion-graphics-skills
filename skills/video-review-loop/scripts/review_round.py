@@ -190,7 +190,10 @@ def attest(
     strict_signals_inspected: bool,
     machine_findings_inspected: bool = False,
 ) -> dict[str, Any]:
-    state = {
+    state = load_json(state_path(round_dir), {})
+    if not isinstance(state, dict):
+        state = {}
+    state.update({
         "watched_with_audio": watched_with_audio,
         "watched_muted": watched_muted,
         "first_second_inspected": first_second_inspected,
@@ -200,7 +203,7 @@ def attest(
         "strict_signals_inspected": strict_signals_inspected,
         "machine_findings_inspected": machine_findings_inspected,
         "updated_at": datetime.now(timezone.utc).isoformat(),
-    }
+    })
     write_json(state_path(round_dir), state)
     return state
 

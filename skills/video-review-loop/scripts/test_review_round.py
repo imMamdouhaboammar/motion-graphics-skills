@@ -550,5 +550,42 @@ class ReviewRoundTests(unittest.TestCase):
             self.assertTrue(status["reference_contract_changed"])
 
 
+    def test_attest_preserves_accepted_machine_findings(self) -> None:
+        mod = load_module()
+        with tempfile.TemporaryDirectory() as tmp:
+            round_dir = make_round(Path(tmp) / "round", strict_signals=True)
+            # Write findings.json so accept_machine_finding has valid codes
+            findings_file = round_dir / "findings.json"
+            findings_file.write_text(
+                json.dumps([{"code": "black-interval", "severity": "hard", "message": "Black frame"}]),
+                encoding="utf-8",
+            )
+            # 1. Accept a machine finding first
+            mod.accept_machine_finding(round_dir, "black-interval", reason="approved by director")
+            state_after_accept = mod.load_json(round_dir / "review-state.json", {})
+            self.assertIn("accepted_machine_findings", state_after_accept)
+            self.assertEqual(len(state_after_accept["accepted_machine_findings"]), 1)
+
+            # 2. Now attest — must NOT erase accepted_machine_findings
+            mod.attest(
+                round_dir,
+                watched_with_audio=True,
+                watched_muted=True,
+                first_second_inspected=True,
+                transitions_inspected=True,
+                ending_inspected=True,
+                reference_compared=False,
+                strict_signals_inspected=True,
+                machine_findings_inspected=True,
+            )
+            state_after_attest = mod.load_json(round_dir / "review-state.json", {})
+            self.assertIn("accepted_machine_findings", state_after_attest)
+            self.assertEqual(len(state_after_attest["accepted_machine_findings"]), 1)
+            self.assertEqual(
+                state_after_attest["accepted_machine_findings"][0]["code"],
+                "black-interval",
+            )
+
+
 if __name__ == "__main__":
     unittest.main()

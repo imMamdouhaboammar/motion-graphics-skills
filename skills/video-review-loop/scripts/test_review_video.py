@@ -314,5 +314,50 @@ class VideoReviewTests(unittest.TestCase):
                 )
 
 
+    def test_audio_analysis_failure_is_hard_when_expect_audio_set(self) -> None:
+        review = load_module()
+        # analyze_probe must flag missing audio as hard when expect_audio=True
+        probe_no_audio = {
+            "format": {"duration": "10.000"},
+            "streams": [
+                {
+                    "codec_type": "video",
+                    "codec_name": "h264",
+                    "width": 1920,
+                    "height": 1080,
+                    "avg_frame_rate": "25/1",
+                    "r_frame_rate": "25/1",
+                    "duration": "10.000",
+                }
+            ],
+        }
+        findings, _ = review.analyze_probe(probe_no_audio, {"expect_audio": True})
+        codes = [f["code"] for f in findings]
+        self.assertIn("audio-missing", codes)
+        hard = [f for f in findings if f["code"] == "audio-missing"]
+        self.assertEqual(hard[0]["severity"], "hard")
+
+    def test_reference_with_no_video_stream_emits_reference_unusable(self) -> None:
+        review = load_module()
+        # analyze_probe on a reference that has no video stream returns video-stream-missing (hard)
+        probe_no_video = {
+            "format": {"duration": "5.000"},
+            "streams": [
+                {
+                    "codec_type": "audio",
+                    "codec_name": "aac",
+                    "duration": "5.000",
+                    "sample_rate": "48000",
+                    "channels": 2,
+                }
+            ],
+        }
+        ref_findings, _ = review.analyze_probe(probe_no_video, {})
+        ref_hard = [f for f in ref_findings if f.get("severity") == "hard"]
+        self.assertTrue(len(ref_hard) >= 1)
+        codes = {f["code"] for f in ref_hard}
+        self.assertIn("video-stream-missing", codes)
+
+
 if __name__ == "__main__":
     unittest.main()

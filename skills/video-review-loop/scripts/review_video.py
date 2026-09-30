@@ -1015,9 +1015,10 @@ def review_video(args: argparse.Namespace) -> int:
             round_dir / "audio-analysis.log",
         )
         if audio_code != 0:
+            audio_failure_severity = "hard" if bool(args.expect_audio) else "warning"
             findings.append(make_finding(
                 "audio-analysis-pass-failed",
-                "warning",
+                audio_failure_severity,
                 "FFmpeg audio detector pass failed. Review the saved log",
                 {"log": "audio-analysis.log"},
             ))
@@ -1055,38 +1056,48 @@ def review_video(args: argparse.Namespace) -> int:
         if not args.reference.is_file():
             raise ReviewError(f"Reference video not found: {args.reference}")
         reference_probe = probe_video(args.reference, args.ffprobe_bin)
-        _, reference_technical = analyze_probe(reference_probe, {})
+        reference_probe_findings, reference_technical = analyze_probe(reference_probe, {})
         write_json(round_dir / "reference-technical.json", reference_technical)
-        reference_duration = (
-            reference_technical.get("video", {}).get("duration")
-            if isinstance(reference_technical.get("video"), dict)
-            else reference_technical.get("format_duration")
-        )
-        reference_sheet = evidence_dir / "reference-contact-sheet.jpg"
-        reference_sheet_ok = build_contact_sheet(
-            args.reference,
-            args.ffmpeg_bin,
-            gpu_result,
-            reference_duration,
-            reference_sheet,
-            round_dir / "reference-contact-sheet.log",
-        )
-        if reference_sheet_ok and contact_ok:
-            reference_comparison_ok = build_reference_comparison(
-                reference_sheet,
-                evidence_dir / "contact-sheet.jpg",
-                args.ffmpeg_bin,
-                evidence_dir / "reference-vs-output.jpg",
-                round_dir / "reference-vs-output.log",
-            )
-        if not reference_comparison_ok:
+        ref_hard = [f for f in reference_probe_findings if f.get("severity") == "hard"]
+        if ref_hard:
+            findings.extend(ref_hard)
             findings.append(make_finding(
-                "reference-comparison-generation-failed",
-                "warning",
-                "Reference versus output comparison evidence could not be generated",
-                {"log": "reference-vs-output.log"},
+                "reference-unusable",
+                "hard",
+                "Reference file has no usable video stream; comparison skipped",
+                {},
             ))
-        reference_manifest = source_manifest(args.reference)
+        else:
+            reference_duration = (
+                reference_technical.get("video", {}).get("duration")
+                if isinstance(reference_technical.get("video"), dict)
+                else reference_technical.get("format_duration")
+            )
+            reference_sheet = evidence_dir / "reference-contact-sheet.jpg"
+            reference_sheet_ok = build_contact_sheet(
+                args.reference,
+                args.ffmpeg_bin,
+                gpu_result,
+                reference_duration,
+                reference_sheet,
+                round_dir / "reference-contact-sheet.log",
+            )
+            if reference_sheet_ok and contact_ok:
+                reference_comparison_ok = build_reference_comparison(
+                    reference_sheet,
+                    evidence_dir / "contact-sheet.jpg",
+                    args.ffmpeg_bin,
+                    evidence_dir / "reference-vs-output.jpg",
+                    round_dir / "reference-vs-output.log",
+                )
+            if not reference_comparison_ok:
+                findings.append(make_finding(
+                    "reference-comparison-generation-failed",
+                    "warning",
+                    "Reference versus output comparison evidence could not be generated",
+                    {"log": "reference-vs-output.log"},
+                ))
+            reference_manifest = source_manifest(args.reference)
 
     samples_ok = build_sample_frames(
         video,
