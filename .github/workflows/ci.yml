@@ -56,6 +56,9 @@ jobs:
       - name: Validate landing catalog sync
         run: python landing/validate_landing.py
 
+      - name: Check landing JavaScript syntax
+        run: node --check landing/app.js
+
       - name: Test video editing skill planners
         run: |
           python -m pytest \
