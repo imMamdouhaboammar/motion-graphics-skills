@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "source": "/Users/mamdouhaboammar/Documents/antigravity/peaceful-tesla/.agents/skills",
+  "source": ".agents/skills",
   "total": 27,
   "skills": [
     {

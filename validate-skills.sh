@@ -28,25 +28,39 @@ ok()   { printf "  ${GREEN}v${NC} %s\n" "$1"; PASS=$((PASS+1)); }
 
 # House style for any markdown file: prose outside fenced code blocks, inline code stripped.
 check_style() {
-  local file="$1" label="$2" prose
-  prose="$(awk '/^```/{f=!f; next} !f' "$file")"
-  if printf "%s" "$prose" | grep -q $'\xe2\x80\x94'; then
+  local file="$1" label="$2"
+  local em_matches
+  em_matches="$(awk '/^```/{f=!f; next} !f && /\xe2\x80\x94/{print "    line " NR ": " $0}' "$file")"
+  if [[ -n "$em_matches" ]]; then
     err "$label: em dash found in prose"
+    printf "%s\n" "$em_matches"
   else
     ok "$label: no em dashes in prose"
   fi
-  if printf "%s" "$prose" | sed 's/`[^`]*`//g' | grep -q ';'; then
+
+  local semi_matches
+  semi_matches="$(awk '/^```/{f=!f; next} !f {line=$0; gsub(/`[^`]*`/, "", line); if (line ~ /;/) print "    line " NR ": " $0}' "$file")"
+  if [[ -n "$semi_matches" ]]; then
     err "$label: semicolon found in prose"
+    printf "%s\n" "$semi_matches"
   else
     ok "$label: no semicolons in prose"
   fi
-  if grep -q '/Users/' "$file"; then
+
+  local user_matches
+  user_matches="$(grep -n '/Users/' "$file" 2>/dev/null | sed 's/^/    line /' || true)"
+  if [[ -n "$user_matches" ]]; then
     err "$label: local /Users/ path found"
+    printf "%s\n" "$user_matches"
   else
     ok "$label: no local paths"
   fi
-  if grep -qiw 'steal' "$file"; then
+
+  local steal_matches
+  steal_matches="$(grep -niw 'steal' "$file" 2>/dev/null | sed 's/^/    line /' || true)"
+  if [[ -n "$steal_matches" ]]; then
     err "$label: banned word 'steal' found"
+    printf "%s\n" "$steal_matches"
   fi
 }
 
@@ -57,18 +71,19 @@ if [[ ! -d "$SKILLS_DIR" ]]; then
   exit 1
 fi
 
-for skill_dir in "$SKILLS_DIR"/*/; do
-  [[ -d "$skill_dir" ]] || continue
+validate_skill() {
+  local skill_dir="$1"
   SKILL_COUNT=$((SKILL_COUNT+1))
+  local skill_name
   skill_name="$(basename "$skill_dir")"
-  skill_md="${skill_dir}SKILL.md"
+  local skill_md="${skill_dir}SKILL.md"
 
   printf "${CYAN}%s${NC}\n" "$skill_name"
 
   # SKILL.md exists
   if [[ ! -f "$skill_md" ]]; then
-    err "SKILL.md missing"
-    continue
+    err "SKILL.md missing: $skill_md"
+    return
   fi
 
   # Folder name format
@@ -79,30 +94,34 @@ for skill_dir in "$SKILLS_DIR"/*/; do
   fi
 
   # Frontmatter present
+  local first_line
   first_line="$(head -n1 "$skill_md")"
   if [[ "$first_line" != "---" ]]; then
-    err "SKILL.md must start with YAML frontmatter (---)"
-    continue
+    err "SKILL.md must start with YAML frontmatter (---) in $skill_md"
+    return
   fi
 
   # Extract frontmatter (between the first two --- delimiters)
+  local frontmatter
   frontmatter="$(awk '/^---[[:space:]]*$/{n++; next} n==1{print} n==2{exit}' "$skill_md")"
 
   # name field
+  local yaml_name
   yaml_name="$(printf "%s" "$frontmatter" | awk -F': ' '/^name:/{print $2; exit}' | tr -d '"' | tr -d "'" | tr -d '[:space:]')"
   if [[ -z "$yaml_name" ]]; then
-    err "name field missing from frontmatter"
+    err "name field missing from frontmatter in $skill_md"
   elif [[ "$yaml_name" != "$skill_name" ]]; then
-    err "name '$yaml_name' does not match folder '$skill_name'"
+    err "name '$yaml_name' does not match folder '$skill_name' in $skill_md"
   else
     ok "name matches folder"
   fi
 
   if [[ ${#yaml_name} -gt 64 ]]; then
-    err "name exceeds 64 characters"
+    err "name exceeds 64 characters: '$yaml_name' in $skill_md"
   fi
 
   # description field — parse only the frontmatter we already extracted (not the body)
+  local desc_block
   desc_block="$(printf "%s\n" "$frontmatter" | awk '
     BEGIN{in_desc=0}
     /^description:/{
@@ -117,11 +136,11 @@ for skill_dir in "$SKILLS_DIR"/*/; do
     }
   ')"
 
-  desc_len=${#desc_block}
+  local desc_len=${#desc_block}
   if [[ $desc_len -eq 0 ]]; then
-    err "description field missing or empty"
+    err "description field missing or empty in $skill_md"
   elif [[ $desc_len -gt 1024 ]]; then
-    err "description is $desc_len chars, must be 1024 or fewer"
+    err "description is $desc_len chars, must be 1024 or fewer in $skill_md"
   else
     ok "description present ($desc_len chars)"
   fi
@@ -130,36 +149,51 @@ for skill_dir in "$SKILLS_DIR"/*/; do
   if [[ "$desc_block" == *"when"* || "$desc_block" == *"Use"* || "$desc_block" == *"use"* ]]; then
     ok "description has trigger phrasing"
   else
-    warn "description should include 'use' or 'when' trigger phrasing"
+    warn "description should include 'use' or 'when' trigger phrasing in $skill_md"
   fi
 
   # File size
+  local line_count
   line_count=$(wc -l < "$skill_md" | tr -d '[:space:]')
   if [[ $line_count -gt 500 ]]; then
-    warn "SKILL.md is $line_count lines, consider moving detail to references/"
+    warn "SKILL.md is $line_count lines, consider moving detail to references/ in $skill_md"
   else
     ok "SKILL.md size OK ($line_count lines)"
   fi
 
   # House style: prose outside fenced code blocks
-  prose="$(awk '/^```/{f=!f; next} !f' "$skill_md")"
-  if printf "%s" "$prose" | grep -q $'\xe2\x80\x94'; then
+  local em_matches
+  em_matches="$(awk '/^```/{f=!f; next} !f && /\xe2\x80\x94/{print "    line " NR ": " $0}' "$skill_md")"
+  if [[ -n "$em_matches" ]]; then
     err "em dash found in prose"
+    printf "%s\n" "$em_matches"
   else
     ok "no em dashes in prose"
   fi
-  if printf "%s" "$prose" | sed 's/`[^`]*`//g' | grep -q ';'; then
+
+  local semi_matches
+  semi_matches="$(awk '/^```/{f=!f; next} !f {line=$0; gsub(/`[^`]*`/, "", line); if (line ~ /;/) print "    line " NR ": " $0}' "$skill_md")"
+  if [[ -n "$semi_matches" ]]; then
     err "semicolon found in prose"
+    printf "%s\n" "$semi_matches"
   else
     ok "no semicolons in prose"
   fi
-  if grep -rq '/Users/' "$skill_dir"; then
-    err "local /Users/ path found"
+
+  local user_paths
+  user_paths="$(grep -rn '/Users/' "$skill_dir" 2>/dev/null | sed 's/^/    /' || true)"
+  if [[ -n "$user_paths" ]]; then
+    err "local /Users/ path found:"
+    printf "%s\n" "$user_paths"
   else
     ok "no local paths"
   fi
-  if grep -rqiw 'steal' "$skill_dir"; then
-    err "banned word 'steal' found"
+
+  local steal_found
+  steal_found="$(grep -rniw 'steal' "$skill_dir" 2>/dev/null | sed 's/^/    /' || true)"
+  if [[ -n "$steal_found" ]]; then
+    err "banned word 'steal' found:"
+    printf "%s\n" "$steal_found"
   fi
 
   # House style in reference and eval files
@@ -184,6 +218,11 @@ for skill_dir in "$SKILLS_DIR"/*/; do
   done
 
   printf "\n"
+}
+
+for skill_dir in "$SKILLS_DIR"/*/; do
+  [[ -d "$skill_dir" ]] || continue
+  validate_skill "$skill_dir"
 done
 
 if [[ -d "$PROMPTS_DIR" ]]; then

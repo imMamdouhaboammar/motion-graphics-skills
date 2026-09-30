@@ -1,1 +1,42 @@
+# Build outputs
+renders/
+inspection/
+*.mp4
+*.mov
+*.gif
+
+# Node
+node_modules/
+.npm/
+
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+.pytest_cache/
+*.egg-info/
+dist/
+build/
+.coverage
+htmlcov/
+
+# Environment
+.env
+.env.local
+.env.*.local
+
+# macOS
 .DS_Store
+.AppleDouble
+.LSOverride
+
+# Editor
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Temp / cache
+*.tmp
+*.log
+.cache/
