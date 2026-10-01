@@ -1,6 +1,6 @@
 # Full videos inside GitHub README
 
-GitHub renders a full, controllable video player in a README for videos uploaded via its **Markdown attachment uploader** or the official GitHub CLI media attachment option (`gh` 2.99+). A relative path to an MP4 committed in this repository, a `raw.githubusercontent.com` URL, and an `iframe` are **not equivalent** and must not be presented as working inline video embeds.
+GitHub can render a full, controllable video player in a README when the video has been uploaded through its **Markdown attachment uploader** or the official GitHub CLI media attachment option (`gh` 2.99+) and the resulting asset URL is placed **alone on a Markdown line**. A relative path to an MP4 committed in this repository, a `raw.githubusercontent.com` URL, and an `iframe` are **not equivalent** and must not be presented as working inline video embeds.
 
 The original high-quality masters remain under `projects/**/renders/` and the root `TEOLA-ad.mp4`. GitHub attachment copies are only for in-README streaming, with audio, seek bar and fullscreen (subject to the browser's and GitHub's player behavior).
 
@@ -26,7 +26,7 @@ python3 tools/publish_readme_videos.py --pr 33 --max-mb 10 --commit
 git push origin fix/readme-playable-promos-20261001
 ```
 
-This command:
+This command (requires local access to all six master MP4s):
 1. Reads **each of the six final film masters**, including the original sound and full duration.
 2. Uploads originals if they are below the size limit. Otherwise, makes a separate 2-pass H.264/AAC upload encode within the 10 MB attachment limit. The final masters in the repository **remain untouched**.
 3. Uses official `gh pr comment --attach` to upload full videos and create real `github.com/user-attachments/assets/UUID` links.
@@ -68,7 +68,7 @@ python3 tools/embed_readme_videos.py readme-video-attachments.json --check
 python3 -m unittest discover -s tests -p 'test_embed_readme_videos.py' -v
 ```
 
-This replaces the six labeled thumbnail slots with native HTML5 `<video>` players containing only verified **GitHub attachment URL shapes**. Commit the updated README and inspect the rendered README on GitHub (not only a local Markdown preview). GitHub may start players muted; unmute using the native control to hear the original audio.
+This replaces six labeled thumbnail slots with a **bare GitHub attachment URL in its own Markdown paragraph**. GitHub recognizes these links and creates its native video player on the rendered README. URLs in HTML tables, image Markdown or ordinary repository-file links are not equivalent. Commit the updated README and inspect the rendered README on GitHub (not only a local Markdown preview). GitHub may start players muted; unmute using the native control to hear the original audio.
 
 ## Acceptance checklist
 
@@ -77,6 +77,6 @@ This replaces the six labeled thumbnail slots with native HTML5 `<video>` player
 - Seek, play/pause, fullscreen and audio controls work in desktop and mobile browsers.
 - The original high-quality MP4s remain downloadable and their source links remain valid.
 - Revisit the rendered README to confirm that GitHub has not changed its Markdown/media policy.
-- Keep the README lightweight: use `preload="metadata"` so six full films are not eagerly downloaded at page load.
+- Keep the README source lightweight. GitHub controls the media-player preloading policy; do not claim client-side loading behavior without a real-browser check.
 
 **Known constraint:** the connected GitHub repository API can edit files and create PRs but does not expose the media upload endpoint with a personal OAuth or PAT token. Use personally authenticated `gh` CLI 2.99+ or the GitHub web editor. Never commit generated UUIDs or pretend a source MP4 path is an inline player.
