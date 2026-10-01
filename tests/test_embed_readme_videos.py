@@ -26,6 +26,15 @@ class ReadmeVideoTests(unittest.TestCase):
             validate_manifest({"arabic": URL + "' onload='alert(1)"})
         with self.assertRaises(ValueError):
             validate_manifest({"not-a-film": URL})
+        with self.assertRaises(ValueError):
+            validate_manifest({"arabic": URL + "#"})
+        with self.assertRaises(ValueError):
+            validate_manifest({"arabic": URL + "?query=1"})
+
+    def test_rejects_duplicate_normalized_uuids_with_different_casing(self):
+        upper_url = URL.upper().replace("HTTPS://", "https://").replace("GITHUB.COM", "github.com")
+        with self.assertRaisesRegex(ValueError, "own uploaded video asset"):
+            validate_manifest({"arabic": URL, "curve": upper_url})
 
     def test_replaces_thumbnail_with_full_length_embedded_player(self):
         output = render(EXAMPLE, {"arabic": URL})

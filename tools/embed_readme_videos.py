@@ -25,16 +25,20 @@ def validate_manifest(manifest: object) -> dict[str, str]:
     if unknown:
         raise ValueError(f"Unknown film IDs: {', '.join(sorted(unknown))}")
     validated = {}
+    normalized_uuids: list[str] = []
     for film, value in manifest.items():
         if not isinstance(value, str) or value.strip() != value:
             raise ValueError(f"Invalid URL for {film}")
+        if "#" in value or "?" in value:
+            raise ValueError(f"{film}: upload MP4 via GitHub Markdown editor and paste a github.com/user-attachments/assets/UUID URL")
         u = urlsplit(value)
         if (u.scheme != "https" or u.netloc != "github.com"
                 or not ATTACHMENT.fullmatch(u.path) or u.query or u.fragment
                 or u.username or u.password):
             raise ValueError(f"{film}: upload MP4 via GitHub Markdown editor and paste a github.com/user-attachments/assets/UUID URL")
         validated[film] = value
-    if len(set(validated.values())) != len(validated):
+        normalized_uuids.append(u.path.lower().rsplit("/", 1)[-1])
+    if len(set(normalized_uuids)) != len(normalized_uuids):
         raise ValueError("Each film must have its own uploaded video asset")
     return validated
 

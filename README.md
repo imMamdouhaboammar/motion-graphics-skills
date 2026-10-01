@@ -39,7 +39,7 @@ Creative direction and code-driven motion production without requiring After Eff
 
 ## Watch the work
 
-Six completed films, presented in their final running order with original audio. Watch every full-length video directly inside this README with native GitHub video playback controls, timeline seeking, and fullscreen support. Original master renders and project sources are also available below each film.
+Six completed films, presented in their final running order with original audio. Watch every full-length video directly inside this README with native GitHub video playback controls, timeline seeking, and fullscreen support. Original master renders and project sources (where provided) are also available below each film.
 
 ### Motion Graphics Skills | Arabic promo
 
