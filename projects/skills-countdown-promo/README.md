@@ -23,6 +23,9 @@ python3 tools/cues.py                                  # after changing any cue
 npx hyperframes@0.8.92 lint
 npx hyperframes@0.8.92 snapshot --at 1,5.6,9.6,15.4,20.3,26.4,28.4,35.4,37.4,44.2,46.6,50
 npx hyperframes@0.8.92 render -f 30 -q delivery -o renders/out.mp4
+# master: copy the video, lift the mix to about -14 LUFS, name the final
+ffmpeg -i renders/out.mp4 -t 52 -c:v copy -af "volume=8.8dB,alimiter=limit=0.7:level=false,aresample=48000" \
+  -c:a aac -b:a 192k -movflags +faststart renders/skills-promo-final.mp4
 ```
 
 To change the number in the hook, edit `COUNT` in `index.html` (it is 49: the skill folders with a SKILL.md on `main`).

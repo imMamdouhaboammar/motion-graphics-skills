@@ -66,6 +66,17 @@ lines.append('      <!-- /CUES -->')
 
 p = pathlib.Path(__file__).resolve().parent.parent / "index.html"
 html = p.read_text(encoding="utf-8")
+
+# the grid above must match the scene clips in index.html, or the cues would drift
+expected = {f"s{k + 1}": (S0 + k * SEC, SEC) for k in range(5)}
+expected["end"] = (END, TOTAL - END)
+for sid, (start, dur) in expected.items():
+    m = re.search(rf'id="{sid}" data-start="([\d.]+)" data-duration="([\d.]+)"', html)
+    if not m:
+        raise SystemExit(f"scene {sid} not found in {p}; nothing written")
+    got = (float(m.group(1)), float(m.group(2)))
+    if abs(got[0] - start) > 0.002 or abs(got[1] - dur) > 0.002:
+        raise SystemExit(f"scene {sid} is {got} in index.html but the cue grid expects ({start:.3f}, {dur:.3f}); nothing written")
 html, n = re.subn(r"      <!-- CUES -->.*?      <!-- /CUES -->", "\n".join(lines), html, flags=re.S)
 if n != 1:
     raise SystemExit(f"expected one CUES block in {p}, found {n}; nothing written")
