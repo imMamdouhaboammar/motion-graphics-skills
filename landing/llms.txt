@@ -4,9 +4,9 @@
 
 Official repository: https://github.com/imMamdouhaboammar/motion-graphics-skills
 Website: https://immamdouhaboammar.github.io/motion-graphics-skills/
-Version: 1.1.0
+Version: 1.2.0
 
-Motion Graphics Skill Pack is a set of 22 skills for Claude Code and Codex covering creative direction, reference analysis, brand intake, motion briefs, motion graphics, video editing, programmatic video, Arabic and RTL motion, publishing, and rendered-film review.
+Motion Graphics Skill Pack is a set of 49 skills for Claude Code and Codex covering creative direction, reference analysis, brand intake, motion briefs, motion graphics, video editing, programmatic video, Arabic and RTL motion, publishing, and rendered-film review.
 
 The master motion-director skill owns concept, narrative, art direction, typography, composition, choreography, production routing and creative QA.
 
@@ -19,12 +19,23 @@ Direct:
 - mix-and-match
 - brand-intake
 - motion-brief-writer
+- brandkit
+- design-taste-frontend
+- design-taste-frontend-v1
+- gpt-taste
+- high-end-visual-design
+- motion-design
+- redesign-existing-projects
+- stitch-design-taste
 
 Edit:
 - jump-cut-pacing
 - speaker-cutout
 - video-spotlight
 - paper-cut-motion
+- media-use
+- remove-background
+- speech-to-text
 
 Build:
 - launch-video
@@ -37,6 +48,20 @@ Build:
 - model-showdown
 - sfx-picker
 - tonejs
+- assetseeker
+- gsap-core
+- gsap-frameworks
+- gsap-plugins
+- gsap-react
+- gsap-scrolltrigger
+- gsap-timeline
+- gsap-utils
+- image-to-code
+- imagegen-frontend-mobile
+- imagegen-frontend-web
+- industrial-brutalist-ui
+- minimalist-ui
+- text-to-lottie
 
 Publish:
 - newsletter-promo
@@ -45,6 +70,8 @@ Publish:
 
 Review:
 - video-review-loop
+- full-output-enforcement
+- gsap-performance
 
 ## Core docs
 
