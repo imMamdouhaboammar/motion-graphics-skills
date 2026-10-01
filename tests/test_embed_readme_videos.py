@@ -4,7 +4,7 @@ import tempfile
 import unittest
 from pathlib import Path
 from tools.embed_readme_videos import render, validate_manifest
-from tools.publish_readme_videos import FILMS, parse_comment
+from tools.publish_readme_videos import FILMS, parse_comment, locate_uploaded_comment
 
 EXAMPLE = """<!-- readme-video:arabic:start -->
   <a href="projects/mgs-promo/renders/mgs-promo-final.mp4"><img src="poster.png"></a>
@@ -63,6 +63,24 @@ class ReadmeVideoTests(unittest.TestCase):
         with self.assertRaises(ValueError):
             parse_comment("### arabic\n\nhttps://github.com/user-attachments/assets/"
                           "95f6dc55-5fce-4661-b5df-8043f32cb359", "missing-marker")
+
+    def test_find_upload_marker_in_paginated_comments(self):
+        marker = "README_VIDEO_BATCH_unique"
+        first_page = [
+            {"body": "unrelated bot comment " + str(index)}
+            for index in range(100)
+        ]
+        later = [{"body": "six uploaded videos " + marker}]
+        ndjson = "\n".join(__import__("json").dumps(comment) for comment in first_page + later)
+        match = locate_uploaded_comment(ndjson, marker)
+        self.assertIn(marker, match)
+
+    def test_missing_or_duplicated_upload_marker_fails_closed(self):
+        marker = "README_VIDEO_BATCH_unique"
+        with self.assertRaises(ValueError):
+            locate_uploaded_comment('{"body": "not our upload"}', marker)
+        with self.assertRaises(ValueError):
+            locate_uploaded_comment('{"body": "' + marker + '"}\n{"body": "' + marker + '"}', marker)
 
     def test_all_six_final_files_are_listed(self):
         readme = (Path(__file__).resolve().parents[1] / "README.md").read_text()
