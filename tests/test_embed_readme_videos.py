@@ -75,6 +75,12 @@ class ReadmeVideoTests(unittest.TestCase):
         match = locate_uploaded_comment(ndjson, marker)
         self.assertIn(marker, match)
 
+    def test_accepts_cli_quoted_json_comment_format(self):
+        marker = "README_VIDEO_BATCH_quoted"
+        item = {"body": "upload found " + marker}
+        quoted = json.dumps(json.dumps(item))
+        self.assertIn(marker, locate_uploaded_comment(quoted, marker))
+
     def test_missing_or_duplicated_upload_marker_fails_closed(self):
         marker = "README_VIDEO_BATCH_unique"
         with self.assertRaises(ValueError):
