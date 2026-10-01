@@ -56,13 +56,47 @@ def render(readme: str, urls: dict[str, str]) -> str:
     return readme
 
 
+
+def check_readme_video_ready(readme: str) -> int:
+    """Enforce six real, distinct standalone attachment URLs before merging.
+
+    This is a structural release check, not proof of playback in a browser.
+    """
+    urls: dict[str, str] = {}
+    for film in FILMS:
+        begin = f"<!-- readme-video:{film}:start -->"
+        end = f"<!-- readme-video:{film}:end -->"
+        if readme.count(begin) != 1 or readme.count(end) != 1:
+            raise ValueError(f"{film}: missing or duplicate player slot")
+        match = re.search(re.escape(begin) + r"([\\s\\S]*?)" + re.escape(end), readme)
+        if match is None:
+            raise ValueError(f"{film}: malformed player slot")
+        candidate = match.group(1).strip()
+        if "\\n" in candidate or not candidate.startswith("https://github.com/user-attachments/assets/"):
+            raise ValueError(f"{film}: full video attachment URL has not been published")
+        urls[film] = candidate
+    try:
+        validate_manifest(urls)
+    except ValueError as error:
+        raise ValueError(f"README has duplicate or invalid video attachment URL: {error}") from error
+    return len(urls)
+
+
 def main() -> int:
     p = argparse.ArgumentParser(description=__doc__)
-    p.add_argument("manifest", type=Path, help="JSON file with film ID -> GitHub user-attachment URL")
+    p.add_argument("manifest", type=Path, nargs="?", help="JSON file with film ID -> GitHub user-attachment URL")
     p.add_argument("--readme", type=Path, default=ROOT / "README.md")
     p.add_argument("--check", action="store_true", help="Report unsynchronized README without writing")
+    p.add_argument("--check-ready", action="store_true",
+                   help="Fail until six actual standalone GitHub video attachment links exist")
     args = p.parse_args()
     old = args.readme.read_text(encoding="utf-8")
+    if args.check_ready:
+        count = check_readme_video_ready(old)
+        print(f"README has {count} unique GitHub video attachment URLs; browser playback review still required")
+        return 0
+    if args.manifest is None:
+        p.error("manifest is required unless --check-ready is supplied")
     new = render(old, json.loads(args.manifest.read_text(encoding="utf-8")))
     if args.check:
         if old != new:
