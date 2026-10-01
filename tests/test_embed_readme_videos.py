@@ -29,10 +29,9 @@ class ReadmeVideoTests(unittest.TestCase):
 
     def test_replaces_thumbnail_with_full_length_embedded_player(self):
         output = render(EXAMPLE, {"arabic": URL})
-        self.assertIn('<video src="' + URL + '"', output)
-        self.assertIn('controls', output)
-        self.assertIn('preload="metadata"', output)
-        self.assertIn('width="300"', output)
+        self.assertIn("\\n\\n" + URL + "\\n\\n", output)
+        self.assertNotIn("<video", output)
+        self.assertNotIn("![", output)
         self.assertNotIn('src="poster.png"', output)
         self.assertIn('readme-video:arabic:start', output)
 
@@ -70,6 +69,9 @@ class ReadmeVideoTests(unittest.TestCase):
         for film in ("arabic", "curve", "countdown", "teola", "four-steps", "jedar"):
             self.assertEqual(readme.count(f"<!-- readme-video:{film}:start -->"), 1)
             self.assertEqual(readme.count(f"<!-- readme-video:{film}:end -->"), 1)
+        showcase = readme.split("## Watch the work", 1)[1].split("## Install", 1)[0]
+        self.assertNotIn("<table>", showcase)
+        self.assertEqual(showcase.count("<!-- readme-video:"), 12)
 
 
 if __name__ == "__main__":
