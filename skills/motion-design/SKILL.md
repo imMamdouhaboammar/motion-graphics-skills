@@ -37,14 +37,14 @@ Use this skill when:
 
 Before creating any animation:
 
-1. **Emotional target?**  -  joy, calm, urgency, elegance
-2. **Motion Personality?**  -  Playful, Premium, Corporate, Energetic
-3. **Primary property?**  -  position, scale, rotation, opacity
-4. **Duration?**  -  see duration table below
-5. **Easing family?**  -  entrance=decelerate, exit=accelerate
-6. **Hero element?**  -  apply staging principles
-7. **Secondary + ambient layers?**  -  add richness
-8. **1/3 rules?**  -  motion distance, simultaneous elements
+1. **Emotional target?** — joy, calm, urgency, elegance
+2. **Motion Personality?** — Playful, Premium, Corporate, Energetic
+3. **Primary property?** — position, scale, rotation, opacity
+4. **Duration?** — see duration table below
+5. **Easing family?** — entrance=decelerate, exit=accelerate
+6. **Hero element?** — apply staging principles
+7. **Secondary + ambient layers?** — add richness
+8. **1/3 rules?** — motion distance, simultaneous elements
 
 ---
 
@@ -80,7 +80,7 @@ Select ONE archetype per project. Apply consistently.
 
 **Default**: Corporate for UI, Playful for illustrations.
 
-**Brand Motion Identity**  -  define three constants:
+**Brand Motion Identity** — define three constants:
 1. **Signature easing**: One curve for 80% of animations
 2. **Duration palette**: 3 durations (quick / standard / slow)
 3. **Entrance pattern**: One consistent entry style
@@ -207,9 +207,9 @@ Select ONE archetype per project. Apply consistently.
 ## Choreography Essentials
 
 **Coordinated entry**:
-- Lead with the hero  -  primary element enters first or most prominently
-- Spatial consistency  -  all elements enter from same direction
-- Counter-motion  -  hero moves right → ambient moves left at 20-30% speed
+- Lead with the hero — primary element enters first or most prominently
+- Spatial consistency — all elements enter from same direction
+- Counter-motion — hero moves right → ambient moves left at 20-30% speed
 
 **1/3 Rule (distance)**: No motion travels more than 1/3 of screen without a keyframe change.
 
@@ -260,13 +260,13 @@ Select ONE archetype per project. Apply consistently.
 
 ## Quality Rules
 
-### CRITICAL  -  never break
-1. **Never linear for spatial movement**  -  always use easing curves (linear only for spinners, progress bars)
-2. **Never opacity-only** for important state changes  -  combine with position or scale
+### CRITICAL — never break
+1. **Never linear for spatial movement** — always use easing curves (linear only for spinners, progress bars)
+2. **Never opacity-only** for important state changes — combine with position or scale
 3. **Never exceed 1/3 screen** without intermediate keyframe
-4. **Always three motion layers**  -  primary + secondary + ambient
+4. **Always three motion layers** — primary + secondary + ambient
 
-### HIGH  -  strongly follow
+### HIGH — strongly follow
 1. Match duration to element type (see tables)
 2. Use directional easing (ease-out entrance, ease-in exit)
 3. Apply Disney principles (especially anticipation, follow-through)
@@ -293,23 +293,23 @@ Select ONE archetype per project. Apply consistently.
 ## File Reference
 
 **Philosophy** (director/):
-- [core-philosophy.md](director/core-philosophy.md)  -  Three Pillars deep dive
-- [decision-framework.md](director/decision-framework.md)  -  Full decision pipeline
-- [disney-principles.md](director/disney-principles.md)  -  12 principles, UI-adapted
-- [motion-personality.md](director/motion-personality.md)  -  4 archetypes + brand identity
-- [emotion-mapping.md](director/emotion-mapping.md)  -  Emotion → motion + color psychology
-- [choreography.md](director/choreography.md)  -  Multi-element coordination
-- [narrative-structure.md](director/narrative-structure.md)  -  Micro-story framework
-- [context-adaptation.md](director/context-adaptation.md)  -  Platform, a11y, performance
+- [core-philosophy.md](director/core-philosophy.md) — Three Pillars deep dive
+- [decision-framework.md](director/decision-framework.md) — Full decision pipeline
+- [disney-principles.md](director/disney-principles.md) — 12 principles, UI-adapted
+- [motion-personality.md](director/motion-personality.md) — 4 archetypes + brand identity
+- [emotion-mapping.md](director/emotion-mapping.md) — Emotion → motion + color psychology
+- [choreography.md](director/choreography.md) — Multi-element coordination
+- [narrative-structure.md](director/narrative-structure.md) — Micro-story framework
+- [context-adaptation.md](director/context-adaptation.md) — Platform, a11y, performance
 
 **Reference** (reference/):
-- [timing-easing-tables.md](reference/timing-easing-tables.md)  -  Duration + easing lookups
-- [property-selection.md](reference/property-selection.md)  -  Property communication guide
-- [troubleshooting.md](reference/troubleshooting.md)  -  Animation smells + fixes
-- [quality-checklist.md](reference/quality-checklist.md)  -  Evaluation criteria
+- [timing-easing-tables.md](reference/timing-easing-tables.md) — Duration + easing lookups
+- [property-selection.md](reference/property-selection.md) — Property communication guide
+- [troubleshooting.md](reference/troubleshooting.md) — Animation smells + fixes
+- [quality-checklist.md](reference/quality-checklist.md) — Evaluation criteria
 
 **Patterns** (patterns/):
-- [entrance-exit.md](patterns/entrance-exit.md)  -  Entrance/exit recipes
-- [state-feedback.md](patterns/state-feedback.md)  -  Success, error, loading, hover
-- [ambient-continuous.md](patterns/ambient-continuous.md)  -  Looping, breathing, parallax
-- [multi-element.md](patterns/multi-element.md)  -  Stagger + choreography recipes
+- [entrance-exit.md](patterns/entrance-exit.md) — Entrance/exit recipes
+- [state-feedback.md](patterns/state-feedback.md) — Success, error, loading, hover
+- [ambient-continuous.md](patterns/ambient-continuous.md) — Looping, breathing, parallax
+- [multi-element.md](patterns/multi-element.md) — Stagger + choreography recipes
