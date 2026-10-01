@@ -35,6 +35,16 @@
 
 This pack directs and builds code-driven motion graphics without requiring After Effects. It covers brand films, event promos, explainers, kinetic typography, editorial collage, charts, title sequences, product launches, 2D, 2.5D and true 3D. Claude Code or Codex can author the composition, while HyperFrames can provide the reusable runtime, validation, preview, audio and rendering layers instead of rebuilding them.
 
+<p align="center">
+  <a href="projects/skills-promo-curve/renders/skills-promo-curve.mp4">
+    <img src="assets/readme/curve-promo-preview.gif" alt="The Curve: promo for this skill pack" width="300">
+  </a>
+</p>
+<p align="center">
+  <a href="projects/skills-promo-curve/renders/skills-promo-curve.mp4">▶ Watch the 31-second promo with sound</a><br>
+  <sub>This promo was made with the pack: one coral easing curve becomes a beat map, a waveform, a film strip and a phone. Source in <a href="projects/skills-promo-curve/">projects/skills-promo-curve</a>.</sub>
+</p>
+
 ## Install
 
 One line, about 30 seconds:

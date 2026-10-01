@@ -1,0 +1,526 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=1080, height=1920" />
+    <title>Motion Graphics Skills: The Curve</title>
+    <script src="assets/vendor/gsap.min.js"></script>
+    <style>
+      @font-face { font-family: "Inter"; src: url("assets/fonts/inter-latin-400-normal.woff2") format("woff2"); font-weight: 400; }
+      @font-face { font-family: "Inter"; src: url("assets/fonts/inter-latin-500-normal.woff2") format("woff2"); font-weight: 500; }
+      @font-face { font-family: "Inter"; src: url("assets/fonts/inter-latin-600-normal.woff2") format("woff2"); font-weight: 600; }
+      @font-face { font-family: "Inter"; src: url("assets/fonts/inter-latin-700-normal.woff2") format("woff2"); font-weight: 700; }
+      @font-face { font-family: "Inter"; src: url("assets/fonts/inter-latin-800-normal.woff2") format("woff2"); font-weight: 800; }
+      @font-face { font-family: "Inter"; src: url("assets/fonts/inter-latin-900-normal.woff2") format("woff2"); font-weight: 900; }
+      @font-face { font-family: "JBMono"; src: url("assets/fonts/jetbrains-mono-latin-500-normal.woff2") format("woff2"); font-weight: 500; }
+
+      :root { --paper: #f2eee6; --ink: #141414; --grey: #8f8a80; --void: #0a0a0a; --coral: #ff5a3c; --red: #ee2b2b; --card: #1d1d1d; }
+      * { margin: 0; padding: 0; box-sizing: border-box; }
+      html, body { width: 1080px; height: 1920px; overflow: hidden; background: var(--paper); }
+      #root { position: relative; width: 1080px; height: 1920px; overflow: hidden; background: var(--paper); font-family: "Inter", sans-serif; color: var(--ink); }
+      .layer { position: absolute; inset: 0; }
+      .abs { position: absolute; }
+      .w, .l { display: inline-block; opacity: 0; }
+      .hid { opacity: 0; }
+      .px { image-rendering: pixelated; }
+
+      #paper { background: var(--paper); }
+      #grid { position: absolute; inset: 0; -webkit-mask-image: radial-gradient(ellipse 60% 46% at 50% 50%, #000 30%, transparent 100%); mask-image: radial-gradient(ellipse 60% 46% at 50% 50%, #000 30%, transparent 100%); }
+      #void { background: radial-gradient(ellipse 80% 60% at 50% 52%, #1a1513 0%, #0a0a0a 70%); clip-path: inset(0 100% 0 0); }
+      #playhead { position: absolute; top: 0; width: 6px; height: 1920px; margin-left: -3px; background: var(--coral); box-shadow: 0 0 24px 6px rgba(255, 90, 60, 0.55); opacity: 0; }
+      #playhead::before { content: ""; position: absolute; left: -15px; top: 0; border-left: 18px solid transparent; border-right: 18px solid transparent; border-top: 26px solid var(--coral); }
+
+      #curve { position: absolute; left: 0; top: 0; overflow: visible; }
+      #curve path { fill: none; stroke: var(--coral); stroke-width: 12; stroke-linecap: round; stroke-linejoin: round; }
+      #curve.glow path { filter: drop-shadow(0 0 14px rgba(255, 90, 60, 0.75)); }
+
+      /* graph editor furniture for the opening */
+      #axes line { stroke: #c9c3b8; stroke-width: 3; }
+      #axes text { font: 500 24px "JBMono"; fill: #a39d92; }
+      #handles line { stroke: #9a948a; stroke-width: 3; }
+      #handles circle { fill: #fff; stroke: #9a948a; stroke-width: 3; }
+      #dot { width: 34px; height: 34px; margin: -17px 0 0 -17px; border-radius: 50%; background: #fff; border: 6px solid var(--coral); }
+
+      /* text */
+      .beat { position: absolute; left: 0; width: 1080px; text-align: center; white-space: nowrap; }
+      .sm { font: 500 60px/1.25 "Inter"; letter-spacing: -0.025em; }
+      .bg { font: 900 150px/1.02 "Inter"; letter-spacing: -0.05em; text-transform: uppercase; color: var(--coral); }
+      .on-void .sm { color: #f4efe8; }
+      .on-paper .sm { color: var(--ink); }
+      .on-void .bg { text-shadow: 0 0 34px rgba(255, 90, 60, 0.65); }
+
+      /* pinned objects ride the curve */
+      .pin { position: absolute; left: 0; top: 0; width: 0; height: 0; }
+      .dia { position: absolute; left: -22px; top: -22px; width: 44px; height: 44px; transform: rotate(45deg); background: #fff; border: 7px solid var(--coral); border-radius: 6px; }
+      .bot { position: absolute; left: -88px; top: -196px; width: 176px; height: 176px; }
+      .chip { position: absolute; height: 66px; padding: 0 22px; border-radius: 12px; background: var(--card); color: #fff; font: 600 36px/66px "JBMono"; letter-spacing: -0.02em; white-space: nowrap; box-shadow: 0 16px 28px rgba(0,0,0,.28); }
+      .on-void .chip, .chip.v { background: #141414; border: 2px solid var(--coral); color: #fff; }
+      .wire { position: absolute; left: 0; top: 0; overflow: visible; }
+      .wire path { fill: none; stroke: #8a857c; stroke-width: 3; stroke-dasharray: 7 8; stroke-linecap: round; }
+      .sw { position: absolute; width: 78px; height: 78px; left: -39px; top: -112px; border-radius: 50%; box-shadow: 0 12px 22px rgba(0,0,0,.18); }
+      .aa { position: absolute; left: -64px; top: -150px; width: 128px; height: 116px; border-radius: 22px; background: #fff; font: 900 74px/116px "Inter"; text-align: center; letter-spacing: -0.04em; box-shadow: 0 12px 22px rgba(0,0,0,.16); }
+      .tick { position: absolute; left: -14px; top: -14px; width: 28px; height: 28px; transform: rotate(45deg); background: var(--coral); border-radius: 4px; }
+      .tickline { position: absolute; left: -2px; top: -70px; width: 4px; height: 56px; background: #b9b2a6; border-radius: 2px; }
+      .refcard { position: absolute; left: -95px; top: -360px; width: 190px; height: 338px; border-radius: 16px; background: #fff; box-shadow: 0 20px 36px rgba(0,0,0,.22); overflow: hidden; }
+      .refcard .lbl { position: absolute; left: 0; right: 0; bottom: 14px; text-align: center; font: 600 22px "JBMono"; color: #77726a; }
+
+      .mini { position: absolute; width: 130px; height: 231px; border-radius: 12px; overflow: hidden; box-shadow: 0 16px 28px rgba(0,0,0,.2); border: 3px solid #e2ddd3; }
+      .chk { position: absolute; width: 56px; height: 56px; border-radius: 50%; background: var(--coral); }
+      .chk::after { content: ""; position: absolute; left: 19px; top: 11px; width: 14px; height: 25px; border-right: 7px solid #fff; border-bottom: 7px solid #fff; transform: rotate(40deg); }
+      #scan { position: absolute; top: 1010px; width: 6px; height: 330px; margin-left: -3px; background: var(--coral); border-radius: 3px; box-shadow: 0 0 22px rgba(255,90,60,.6); }
+
+      #phoneUI { position: absolute; left: 342px; top: 772px; width: 396px; height: 716px; border-radius: 34px; background: #f7f3ec; overflow: hidden; }
+      #phoneUI .bar { position: absolute; left: 24px; top: 26px; font: 700 26px "Inter"; color: var(--ink); }
+      #phoneUI .heart { position: absolute; left: 24px; bottom: 30px; width: 60px; height: 60px; }
+      #posted { position: absolute; left: 610px; top: 1440px; height: 70px; padding: 0 26px; border-radius: 36px; background: var(--ink); color: #fff; font: 700 34px/70px "Inter"; white-space: nowrap; }
+
+      #term { position: absolute; left: 140px; top: 880px; font: 500 46px/72px "JBMono"; color: #f4efe8; white-space: pre; }
+      #term b { color: var(--coral); font-weight: 500; }
+
+      #e-logo { position: absolute; left: 320px; top: 330px; width: 440px; height: 282px; }
+      #e-title { position: absolute; left: 0; width: 1080px; top: 690px; text-align: center; font: 800 84px/1.05 "Inter"; letter-spacing: -0.04em; color: #fff; white-space: nowrap; }
+      #e-cta { position: absolute; left: 540px; top: 980px; height: 96px; padding: 0 44px 0 34px; border-radius: 50px; background: var(--red); color: #fff; font: 800 46px/96px "Inter"; white-space: nowrap; box-shadow: 0 0 40px rgba(238,43,43,.45); }
+      #e-url { position: absolute; left: 0; width: 1080px; top: 1110px; text-align: center; font: 600 31px/1.3 "Inter"; color: #c9c3b8; white-space: nowrap; }
+      .crew { position: absolute; left: -55px; top: -114px; width: 110px; height: 110px; }
+
+      #pill { position: absolute; left: 540px; top: 1730px; height: 62px; padding: 0 32px; border-radius: 40px; background: var(--red); color: #fff; font: 700 29px/62px "Inter"; white-space: nowrap; box-shadow: 0 10px 24px rgba(238, 43, 43, 0.25); }
+    </style>
+  </head>
+  <body>
+    <div id="root" data-composition-id="main" data-start="0" data-duration="31" data-width="1080" data-height="1920">
+      <div class="scene clip layer" id="stage" data-start="0" data-duration="31" data-track-index="1">
+        <div class="layer" id="paper">
+          <svg id="grid" width="1080" height="1920" viewBox="0 0 1080 1920" aria-hidden="true">
+            <defs><pattern id="gp" width="120" height="120" patternUnits="userSpaceOnUse" x="0" y="0"><path d="M0 0.5 H120 M0.5 0 V120" stroke="#d3cdc2" stroke-width="2" stroke-dasharray="2 9" fill="none" /></pattern></defs>
+            <rect width="1080" height="1920" fill="url(#gp)" />
+          </svg>
+          <svg class="abs" id="axes" width="1080" height="1920" style="left:0;top:0" aria-hidden="true">
+            <line x1="140" y1="600" x2="140" y2="1350" /><line x1="140" y1="1350" x2="990" y2="1350" />
+            <text x="152" y="630">value</text><text x="900" y="1390">time</text>
+          </svg>
+        </div>
+        <div class="layer" id="void"></div>
+        <div class="layer" id="objs"></div>
+        <svg class="abs" id="handles" width="1080" height="1920" style="left:0;top:0" aria-hidden="true">
+          <line x1="140" y1="1350" x2="420" y2="1350" /><circle cx="420" cy="1350" r="14" />
+          <line x1="940" y1="700" x2="660" y2="700" /><circle cx="660" cy="700" r="14" />
+        </svg>
+        <svg id="curve" width="1080" height="1920" aria-hidden="true"><path id="cp" d="" /></svg>
+        <div class="abs" id="dot"></div>
+        <div class="layer" id="pins"></div>
+        <div class="layer" id="texts"></div>
+        <div id="playhead"></div>
+        <div id="pill">@imMamdouhaboammar</div>
+      </div>
+
+      <audio id="a-vo" src="assets/audio/vo.wav" data-start="0" data-duration="27.48" data-track-index="10" data-volume="1"></audio>
+      <!-- CUES -->
+      <audio id="a-bed" src="assets/audio/music/bed.wav" data-start="0" data-duration="31.0" data-track-index="11" data-volume="0.2"></audio>
+      <audio id="s1" src="assets/audio/sfx/swipe.wav" data-start="0.05" data-duration="0.6" data-track-index="12" data-volume="0.18"></audio>
+      <audio id="s2" src="assets/audio/sfx/hit-light.wav" data-start="0.66" data-duration="0.5" data-track-index="12" data-volume="0.22"></audio>
+      <audio id="s3" src="assets/audio/sfx/whoosh-elec.wav" data-start="1.82" data-duration="0.85" data-track-index="12" data-volume="0.32"></audio>
+      <audio id="s4" src="assets/audio/sfx/glitch.wav" data-start="2.64" data-duration="0.9" data-track-index="13" data-volume="0.16"></audio>
+      <audio id="s5" src="assets/audio/sfx/hit-mid.wav" data-start="3.88" data-duration="0.6" data-track-index="12" data-volume="0.3"></audio>
+      <audio id="s6" src="assets/audio/sfx/pop2.wav" data-start="4.76" data-duration="0.22" data-track-index="12" data-volume="0.42"></audio>
+      <audio id="s7" src="assets/audio/sfx/whoosh-rev.wav" data-start="4.81" data-duration="0.5" data-track-index="13" data-volume="0.3"></audio>
+      <audio id="s8" src="assets/audio/sfx/whoosh1.wav" data-start="5.6" data-duration="0.49" data-track-index="12" data-volume="0.35"></audio>
+      <audio id="s9" src="assets/audio/sfx/type1.wav" data-start="5.82" data-duration="0.45" data-track-index="13" data-volume="0.25"></audio>
+      <audio id="s10" src="assets/audio/sfx/type2.wav" data-start="6.12" data-duration="0.32" data-track-index="12" data-volume="0.25"></audio>
+      <audio id="s11" src="assets/audio/sfx/pop1.wav" data-start="6.94" data-duration="0.14" data-track-index="12" data-volume="0.42"></audio>
+      <audio id="s12" src="assets/audio/sfx/pop2.wav" data-start="7.06" data-duration="0.22" data-track-index="13" data-volume="0.3"></audio>
+      <audio id="s13" src="assets/audio/sfx/click.wav" data-start="7.19" data-duration="0.3" data-track-index="12" data-volume="0.3"></audio>
+      <audio id="s14" src="assets/audio/sfx/pop1.wav" data-start="8.02" data-duration="0.14" data-track-index="12" data-volume="0.32"></audio>
+      <audio id="s15" src="assets/audio/sfx/pop1.wav" data-start="8.12" data-duration="0.14" data-track-index="13" data-volume="0.32"></audio>
+      <audio id="s16" src="assets/audio/sfx/pop1.wav" data-start="8.22" data-duration="0.14" data-track-index="12" data-volume="0.32"></audio>
+      <audio id="s17" src="assets/audio/sfx/pop2.wav" data-start="8.68" data-duration="0.22" data-track-index="12" data-volume="0.42"></audio>
+      <audio id="s18" src="assets/audio/sfx/hit-light.wav" data-start="9.38" data-duration="0.5" data-track-index="12" data-volume="0.28"></audio>
+      <audio id="s19" src="assets/audio/sfx/pop1.wav" data-start="10.32" data-duration="0.14" data-track-index="12" data-volume="0.42"></audio>
+      <audio id="s20" src="assets/audio/sfx/pop2.wav" data-start="10.44" data-duration="0.22" data-track-index="13" data-volume="0.3"></audio>
+      <audio id="s21" src="assets/audio/sfx/click.wav" data-start="10.57" data-duration="0.3" data-track-index="12" data-volume="0.3"></audio>
+      <audio id="s22" src="assets/audio/sfx/ui-open.wav" data-start="11.64" data-duration="0.6" data-track-index="12" data-volume="0.25"></audio>
+      <audio id="s23" src="assets/audio/sfx/hit-light.wav" data-start="12.58" data-duration="0.5" data-track-index="12" data-volume="0.22"></audio>
+      <audio id="s24" src="assets/audio/sfx/pop1.wav" data-start="12.58" data-duration="0.14" data-track-index="13" data-volume="0.2"></audio>
+      <audio id="s25" src="assets/audio/sfx/pop1.wav" data-start="12.65" data-duration="0.14" data-track-index="14" data-volume="0.2"></audio>
+      <audio id="s26" src="assets/audio/sfx/pop1.wav" data-start="12.72" data-duration="0.14" data-track-index="13" data-volume="0.2"></audio>
+      <audio id="s27" src="assets/audio/sfx/pop1.wav" data-start="12.79" data-duration="0.14" data-track-index="14" data-volume="0.2"></audio>
+      <audio id="s28" src="assets/audio/sfx/pop1.wav" data-start="12.86" data-duration="0.14" data-track-index="13" data-volume="0.2"></audio>
+      <audio id="s29" src="assets/audio/sfx/pop1.wav" data-start="12.93" data-duration="0.14" data-track-index="14" data-volume="0.2"></audio>
+      <audio id="s30" src="assets/audio/sfx/whoosh-elec.wav" data-start="13.2" data-duration="0.85" data-track-index="12" data-volume="0.32"></audio>
+      <audio id="s31" src="assets/audio/sfx/pop1.wav" data-start="13.48" data-duration="0.14" data-track-index="13" data-volume="0.42"></audio>
+      <audio id="s32" src="assets/audio/sfx/click.wav" data-start="13.73" data-duration="0.3" data-track-index="13" data-volume="0.3"></audio>
+      <audio id="s33" src="assets/audio/sfx/pop1.wav" data-start="14.3" data-duration="0.14" data-track-index="12" data-volume="0.42"></audio>
+      <audio id="s34" src="assets/audio/sfx/hit-light.wav" data-start="14.48" data-duration="0.5" data-track-index="12" data-volume="0.22"></audio>
+      <audio id="s35" src="assets/audio/sfx/click.wav" data-start="14.98" data-duration="0.3" data-track-index="12" data-volume="0.35"></audio>
+      <audio id="s36" src="assets/audio/sfx/pop2.wav" data-start="15.24" data-duration="0.22" data-track-index="13" data-volume="0.42"></audio>
+      <audio id="s37" src="assets/audio/sfx/ding.wav" data-start="15.44" data-duration="0.6" data-track-index="12" data-volume="0.3"></audio>
+      <audio id="s38" src="assets/audio/sfx/whoosh1.wav" data-start="16.1" data-duration="0.49" data-track-index="12" data-volume="0.35"></audio>
+      <audio id="s39" src="assets/audio/sfx/pop1.wav" data-start="16.32" data-duration="0.14" data-track-index="13" data-volume="0.42"></audio>
+      <audio id="s40" src="assets/audio/sfx/whoosh-rev.wav" data-start="16.4" data-duration="0.5" data-track-index="14" data-volume="0.22"></audio>
+      <audio id="s41" src="assets/audio/sfx/scan.wav" data-start="17.22" data-duration="1.6" data-track-index="12" data-volume="0.18"></audio>
+      <audio id="s42" src="assets/audio/sfx/pop1.wav" data-start="17.358" data-duration="0.14" data-track-index="13" data-volume="0.3"></audio>
+      <audio id="s43" src="assets/audio/sfx/pop1.wav" data-start="17.67" data-duration="0.14" data-track-index="13" data-volume="0.3"></audio>
+      <audio id="s44" src="assets/audio/sfx/pop1.wav" data-start="17.982" data-duration="0.14" data-track-index="13" data-volume="0.3"></audio>
+      <audio id="s45" src="assets/audio/sfx/pop1.wav" data-start="18.293" data-duration="0.14" data-track-index="13" data-volume="0.3"></audio>
+      <audio id="s46" src="assets/audio/sfx/pop1.wav" data-start="18.605" data-duration="0.14" data-track-index="13" data-volume="0.3"></audio>
+      <audio id="s47" src="assets/audio/sfx/whoosh-rev.wav" data-start="19.4" data-duration="0.5" data-track-index="12" data-volume="0.3"></audio>
+      <audio id="s48" src="assets/audio/sfx/pop2.wav" data-start="20.05" data-duration="0.22" data-track-index="12" data-volume="0.42"></audio>
+      <audio id="s49" src="assets/audio/sfx/send.wav" data-start="21.02" data-duration="0.9" data-track-index="12" data-volume="0.35"></audio>
+      <audio id="s50" src="assets/audio/sfx/whoosh-elec.wav" data-start="21.5" data-duration="0.85" data-track-index="13" data-volume="0.32"></audio>
+      <audio id="s51" src="assets/audio/sfx/type1.wav" data-start="21.8" data-duration="0.45" data-track-index="14" data-volume="0.25"></audio>
+      <audio id="s52" src="assets/audio/sfx/type2.wav" data-start="22.15" data-duration="0.32" data-track-index="12" data-volume="0.25"></audio>
+      <audio id="s53" src="assets/audio/sfx/type1.wav" data-start="22.5" data-duration="0.45" data-track-index="12" data-volume="0.25"></audio>
+      <audio id="s54" src="assets/audio/sfx/type2.wav" data-start="22.85" data-duration="0.32" data-track-index="13" data-volume="0.25"></audio>
+      <audio id="s55" src="assets/audio/sfx/whoosh-rev.wav" data-start="23.45" data-duration="0.5" data-track-index="12" data-volume="0.3"></audio>
+      <audio id="s56" src="assets/audio/sfx/riser-ui.wav" data-start="23.9" data-duration="1.2" data-track-index="13" data-volume="0.2"></audio>
+      <audio id="s57" src="assets/audio/sfx/hit-mid.wav" data-start="24.38" data-duration="0.6" data-track-index="12" data-volume="0.3"></audio>
+      <audio id="s58" src="assets/audio/sfx/twinkle.wav" data-start="25.05" data-duration="2.6" data-track-index="12" data-volume="0.3"></audio>
+      <audio id="s59" src="assets/audio/sfx/pop1.wav" data-start="25.6" data-duration="0.14" data-track-index="13" data-volume="0.18"></audio>
+      <audio id="s60" src="assets/audio/sfx/pop1.wav" data-start="25.7" data-duration="0.14" data-track-index="14" data-volume="0.18"></audio>
+      <audio id="s61" src="assets/audio/sfx/pop1.wav" data-start="25.8" data-duration="0.14" data-track-index="13" data-volume="0.18"></audio>
+      <audio id="s62" src="assets/audio/sfx/pop1.wav" data-start="25.9" data-duration="0.14" data-track-index="14" data-volume="0.18"></audio>
+      <audio id="s63" src="assets/audio/sfx/pop1.wav" data-start="26.0" data-duration="0.14" data-track-index="13" data-volume="0.18"></audio>
+      <audio id="s64" src="assets/audio/sfx/pop1.wav" data-start="26.1" data-duration="0.14" data-track-index="14" data-volume="0.18"></audio>
+      <audio id="s65" src="assets/audio/sfx/pop1.wav" data-start="26.2" data-duration="0.14" data-track-index="13" data-volume="0.18"></audio>
+      <audio id="s66" src="assets/audio/sfx/ding.wav" data-start="26.5" data-duration="0.6" data-track-index="13" data-volume="0.32"></audio>
+      <!-- /CUES -->
+    </div>
+
+    <script>
+      (function () {
+        var $ = function (s, r) { return (r || document).querySelector(s); };
+        var $$ = function (s, r) { return Array.prototype.slice.call((r || document).querySelectorAll(s)); };
+        var TOTAL = 31;
+
+        /* ================= the curve engine =================
+           One coral bezier with K cubic segments. Every shape is K+1 anchors, so any shape can morph into any other. */
+        var K = 16, PI = Math.PI;
+        var seed = 23;
+        function rnd() { seed = (seed * 16807) % 2147483647; return (seed - 1) / 2147483646; }
+        function anchors(fn) { var A = []; for (var i = 0; i <= K; i++) A.push(fn(i / K, i)); return A; }
+        function smooth(A) {       // Catmull-Rom through the anchors
+          var P = [A[0]];
+          for (var i = 0; i < K; i++) {
+            var p0 = A[i - 1] || A[i], p1 = A[i], p2 = A[i + 1], p3 = A[i + 2] || A[i + 1];
+            P.push([p1[0] + (p2[0] - p0[0]) / 6, p1[1] + (p2[1] - p0[1]) / 6], [p2[0] - (p3[0] - p1[0]) / 6, p2[1] - (p3[1] - p1[1]) / 6], p2);
+          }
+          return P;
+        }
+        function sharp(A) {
+          var P = [A[0]];
+          for (var i = 0; i < K; i++) {
+            var a = A[i], b = A[i + 1];
+            P.push([a[0] + (b[0] - a[0]) / 3, a[1] + (b[1] - a[1]) / 3], [a[0] + 2 * (b[0] - a[0]) / 3, a[1] + 2 * (b[1] - a[1]) / 3], b);
+          }
+          return P;
+        }
+        function rrect(x0, y0, x1, y1, r) {   // 17 anchors round a rounded rectangle, starting and ending at top centre
+          var cx = (x0 + x1) / 2, h = (y1 - y0);
+          return [[cx, y0], [x1 - r, y0], [x1, y0 + r], [x1, y0 + h * 0.36], [x1, y0 + h * 0.64], [x1, y1 - r], [x1 - r, y1], [cx, y1],
+                  [x0 + r, y1], [x0, y1 - r], [x0, y0 + h * 0.64], [x0, y0 + h * 0.36], [x0, y0 + r], [x0 + r, y0], [x0 + (cx - x0) * 0.45, y0], [x0 + (cx - x0) * 0.75, y0], [cx, y0]];
+        }
+        var AMP1 = [0, 50, 140, 70, 200, 110, 250, 150, 300, 140, 230, 90, 170, 60, 100, 30, 0];
+        var AMP2 = [0, 90, 80, 160, 120, 210, 170, 260, 200, 240, 150, 180, 100, 110, 50, 40, 0];
+        var SH = {
+          ease: smooth(anchors(function (u) { return [140 + 800 * u, 1350 - 650 * u * u * (3 - 2 * u)]; })),
+          tangle: smooth(anchors(function (u, i) { return i === 0 ? [140, 1350] : i === K ? [940, 700] : [200 + 680 * rnd(), 680 + 720 * rnd()]; })),
+          line1060: sharp(anchors(function (u) { return [140 + 800 * u, 1060]; })),
+          wave1: smooth(anchors(function (u) { return [40 + 1000 * u, 1220 + 110 * Math.sin(u * 2 * PI + 0.4)]; })),
+          wave2: smooth(anchors(function (u) { return [40 + 1000 * u, 1220 + 110 * Math.sin(u * 2 * PI + 2.6)]; })),
+          line1220: sharp(anchors(function (u) { return [40 + 1000 * u, 1220]; })),
+          wf1: sharp(anchors(function (u, i) { return [40 + 1000 * u, 1180 + (i % 2 ? -1 : 1) * AMP1[i]]; })),
+          wf2: sharp(anchors(function (u, i) { return [40 + 1000 * u, 1180 + (i % 2 ? -1 : 1) * AMP2[i]]; })),
+          line1340: sharp(anchors(function (u) { return [40 + 1000 * u, 1340]; })),
+          phone: smooth(rrect(330, 760, 750, 1500, 46)),
+          line1120: smooth(rrect(120, 1120, 960, 1120, 0)),   // a flattened rectangle: reads as a line, opens straight into the frame
+          frame: smooth(rrect(46, 46, 1034, 1874, 60)),
+          arch: smooth(anchors(function (u) { return [70 + 940 * u, 1640 - 230 * Math.sin(PI * u)]; }))
+        };
+
+        var E = {
+          lin: function (p) { return p; },
+          io: function (p) { return p < 0.5 ? 4 * p * p * p : 1 - Math.pow(-2 * p + 2, 3) / 2; },
+          out: function (p) { return 1 - Math.pow(1 - p, 3); },
+          back: function (p) { var c1 = 1.7, c3 = c1 + 1; return 1 + c3 * Math.pow(p - 1, 3) + c1 * Math.pow(p - 1, 2); },
+          elastic: function (p) { if (p === 0 || p === 1) return p; return Math.pow(2, -10 * p) * Math.sin((p * 10 - 0.75) * (2 * PI / 3)) + 1; }
+        };
+
+        /* the curve's story, keyed to the voice-over word times (assets/audio/vo-words.json) */
+        var MORPH = [
+          [2.0, 3.95, 'tangle', 'io'],      // "then the timeline eats your whole week"
+          [4.76, 5.35, 'line1060', 'elastic'], // "skip"
+          [6.6, 7.2, 'wave1', 'back'],      // "brand-intake"
+          [10.1, 10.7, 'wave2', 'io'],      // "motion-director"
+          [12.45, 12.85, 'line1220', 'back'], // "beat map"
+          [13.25, 13.75, 'wf1', 'back'],    // "sfx-picker"
+          [14.3, 14.42, 'wf2', 'out'], [14.48, 14.6, 'wf1', 'out'], [14.98, 15.1, 'wf2', 'out'], [15.24, 15.36, 'wf1', 'out'], [15.44, 15.6, 'wf2', 'back'],
+          [16.15, 16.6, 'line1340', 'io'],  // "video-review-loop"
+          [19.4, 20.05, 'phone', 'back'],   // "reel-export"
+          [21.55, 22.0, 'line1120', 'io'],  // "one repo"
+          [23.45, 24.0, 'frame', 'io'],     // "every frame"
+          [25.0, 25.7, 'arch', 'io']        // end card
+        ];
+        function shapeAt(t) {
+          var cur = SH.ease;
+          for (var i = 0; i < MORPH.length; i++) {
+            var m = MORPH[i], to = SH[m[2]];
+            if (t >= m[1]) { cur = to; continue; }
+            if (t > m[0]) {
+              var k = E[m[3]]((t - m[0]) / (m[1] - m[0]));
+              return cur.map(function (p, j) { return [p[0] + (to[j][0] - p[0]) * k, p[1] + (to[j][1] - p[1]) * k]; });
+            }
+            break;
+          }
+          return cur;
+        }
+        function pathD(P) {
+          var d = 'M' + P[0][0].toFixed(1) + ' ' + P[0][1].toFixed(1);
+          for (var i = 1; i < P.length; i += 3) d += 'C' + [P[i], P[i + 1], P[i + 2]].map(function (q) { return q[0].toFixed(1) + ' ' + q[1].toFixed(1); }).join(' ');
+          return d;
+        }
+
+        /* paper and void: the playhead sweep flips the world */
+        var FLIPS = [[1.82, 'void'], [5.6, 'paper'], [13.2, 'void'], [16.1, 'paper'], [21.5, 'void']];
+        var SWEEP = 0.34;
+        function worldAt(t) {
+          var w = 'paper', x = null, to = null;
+          for (var i = 0; i < FLIPS.length; i++) {
+            var f = FLIPS[i];
+            if (t >= f[0] + SWEEP) { w = f[1]; continue; }
+            if (t >= f[0]) { x = 1080 * E.io((t - f[0]) / SWEEP); to = f[1]; }
+            break;
+          }
+          return { w: w, x: x, to: to };
+        }
+
+        /* ================= beats: text keyed to spoken words ================= */
+        var BEATS = [
+          { id: 'b1', world: 'paper', y: 260, sm: [['you', 0.0], ['can', 0.16], ['see', 0.3], ['the', 0.48]], bg: ['motion', 0.66], after: [['in', 0.94], ['your', 1.16], ['head.', 1.32]], out: 1.8 },
+          { id: 'b2', world: 'void', y: 260, sm: [['then', 2.0], ['the', 2.18], ['timeline', 2.54], ['eats', 2.96], ['your', 3.3], ['whole', 3.52]], bg: ['week.', 3.88], out: 4.5 },
+          { id: 'b3', world: 'void', y: 260, sm: [['so', 4.62], ['skip', 4.76], ['the', 5.0], ['timeline.', 5.2]], out: 5.55 },
+          { id: 'b4', world: 'paper', y: 260, sm: [['brand-intake', 6.94], ['learns', 7.3], ['your', 7.76]], bg: ['timing', 9.38], out: 10.05 },
+          { id: 'b5', world: 'paper', y: 260, sm: [['turns', 10.78], ['any', 11.26], ['reference', 11.64], ['into', 12.02], ['a', 12.4]], bg: ['beat map', 12.58], out: 13.15 },
+          { id: 'b6', world: 'void', y: 260, sm: [['gives', 14.3], ['every', 14.48], ['move', 14.98], ['its', 15.24]], bg: ['sound', 15.44], out: 16.05 },
+          { id: 'b7', world: 'paper', y: 260, sm: [['checks', 17.22], ['the', 17.5], ['render', 17.7]], bg: ['frame by frame', 18.06], out: 19.35 },
+          { id: 'b8', world: 'paper', y: 260, sm: [['makes', 20.18], ['it', 20.44], ['ready', 20.62], ['to', 20.82]], bg: ['post', 21.02], out: 21.45 },
+          { id: 'b9', world: 'void', y: 250, bg: ['one repo.', 21.72], bg2: ['one install.', 22.64], out: 23.42 },
+          { id: 'b10', world: 'void', y: 760, sm: [['every', 23.54], ['frame', 23.88], ['is', 24.22]], bg: ['code.', 24.38], big: true, out: 24.98 }
+        ];
+        function buildBeat(b) {
+          var d = document.createElement('div'); d.className = 'beat on-' + b.world; d.id = b.id; d.style.top = b.y + 'px';
+          var h = '';
+          if (b.sm) h += '<div class="sm">' + b.sm.map(function (w) { return '<span class="w">' + w[0] + '</span>'; }).join(' ') + '</div>';
+          if (b.bg) h += '<div class="bg"' + (b.big ? ' style="font-size:250px"' : '') + '><span class="lw">' + b.bg[0] + '</span></div>';
+          if (b.bg2) h += '<div class="bg b2"><span class="lw">' + b.bg2[0] + '</span></div>';
+          if (b.after) h += '<div class="sm aft">' + b.after.map(function (w) { return '<span class="w">' + w[0] + '</span>'; }).join(' ') + '</div>';
+          d.innerHTML = h; $('#texts').appendChild(d);
+          $$('.bg', d).forEach(function (el) { var w = el.scrollWidth, fs = parseFloat(getComputedStyle(el).fontSize); if (w > 1000) el.style.fontSize = Math.floor(fs * 1000 / w) + 'px'; });
+          return d;
+        }
+        function splitLetters(el) {
+          var t = el.textContent; el.textContent = '';
+          for (var i = 0; i < t.length; i++) { var s = document.createElement('span'); s.className = 'l'; s.textContent = t[i] === ' ' ? ' ' : t[i]; el.appendChild(s); }
+          return $$('.l', el);
+        }
+
+        /* ================= pinned objects ================= */
+        var PINS = [];
+        function pin(html, idx, cls) {
+          var p = document.createElement('div'); p.className = 'pin' + (cls ? ' ' + cls : ''); p.innerHTML = html;
+          $('#pins').appendChild(p); PINS.push({ el: p, idx: idx }); return p;
+        }
+        function wireSVG(x1, y1) {
+          return '<svg class="wire" width="1" height="1"><path d="M0 0 C ' + (x1 * 0.2) + ' ' + (y1 * 0.6) + ', ' + (x1 * 0.7) + ' ' + (y1 * 0.95) + ', ' + x1 + ' ' + y1 + '"/></svg>';
+        }
+        function skillPin(idx, bot, cmd, chipX, chipY, onVoid) {
+          return pin(wireSVG(chipX + 30, chipY + 66) + '<div class="chip hid' + (onVoid ? ' v' : '') + '" style="left:' + chipX + 'px;top:' + chipY + 'px">' + cmd + '</div>' +
+                     '<img class="bot px hid" src="assets/img/mascots/m' + bot + '.png" alt="" /><div class="dia hid"></div>', idx);
+        }
+
+        function miniSVG(shape, bg, extra) {
+          var s = 130 / 1080, P = shape.map(function (q) { return [q[0] * s, q[1] * s]; });
+          return '<svg width="130" height="231" viewBox="0 0 130 231"><rect width="130" height="231" fill="' + bg + '"/>' + (extra || '') +
+                 '<path d="' + pathD(P) + '" fill="none" stroke="#ff5a3c" stroke-width="3" stroke-linecap="round"/></svg>';
+        }
+
+        function ready() {
+          var imgs = Array.prototype.slice.call(document.images).map(function (im) {
+            return im.decode().catch(function (e) { throw new Error('image failed to decode: ' + im.getAttribute('src') + ' (' + e + ')'); });
+          });
+          var faces = ['400 40px Inter', '500 40px Inter', '600 40px Inter', '700 40px Inter', '800 40px Inter', '900 40px Inter', '500 40px JBMono'].map(function (f) { return document.fonts.load(f, 'Ae5#'); });
+          return Promise.all(faces.concat(imgs)).then(function () { return document.fonts.ready; }).then(function () {
+            var missing = ['500 40px Inter', '900 40px Inter', '500 40px JBMono'].filter(function (f) { return !document.fonts.check(f, 'Ae'); });
+            if (missing.length) throw new Error('font missing: ' + missing.join(', '));
+            return true;
+          });
+        }
+
+        var B = {};
+        window.__ready = ready().then(function () {
+          /* skill stations on the curve */
+          B.s4 = skillPin(3, '04', '/brand-intake', -120, -300);
+          B.sw = [8, 10, 12].map(function (idx, i) { return pin('<div class="sw hid" style="background:' + ['#ff5a3c', '#141414', '#e8c9a8'][i] + '"></div>', idx); });
+          B.aa = pin('<div class="aa hid">Aa</div>', 14);
+          B.s5 = skillPin(3, '01', '/motion-director', 70, -300);
+          B.ref = pin('<div class="refcard hid">' + miniSVG(SH.wave2, '#f2eee6').replace('width="130" height="231"', 'width="190" height="338"') + '<div class="lbl">reference</div></div>', 11);
+          B.ticks = [5, 7, 9, 11, 13, 15].map(function (idx) { return pin('<div class="tickline hid"></div><div class="tick hid"></div>', idx); });
+          B.s6 = skillPin(7, '03', '/sfx-picker', 60, -330, true);
+          B.s7 = skillPin(15, '05', '/video-review-loop', -560, -470);
+          B.s8 = skillPin(0, '07', '/reel-export', 120, -250);
+          B.crew = ['00', '01', '03', '04', '05', '07', '11'].map(function (m, c) { return pin('<img class="crew px hid" src="assets/img/mascots/m' + m + '.png" alt="" />', 2 + c * 2); });
+
+          /* film strip for the review beat: minis of this film's own frames */
+          var minis = [[SH.ease, '#f2eee6'], [SH.tangle, '#0a0a0a'], [SH.line1060, '#f2eee6'], [SH.wave1, '#f2eee6'], [SH.wf1, '#0a0a0a']];
+          var oh = '';
+          minis.forEach(function (m, i) { oh += '<div class="mini hid" style="left:' + (70 + i * 152) + 'px;top:1062px">' + miniSVG(m[0], m[1]) + '</div><div class="chk hid" style="left:' + (107 + i * 152) + 'px;top:990px"></div>'; });
+          oh += '<div id="scan" class="hid" style="left:60px"></div>';
+          oh += '<div id="phoneUI" class="hid"><div class="bar">@imMamdouhaboammar</div>' + miniSVG(SH.ease, '#f7f3ec').replace('width="130" height="231"', 'width="396" height="716" style="position:absolute;left:0;top:0"') +
+                '<svg class="heart" viewBox="0 0 60 60"><path d="M30 52 C10 38 4 28 4 19 C4 10 11 4 19 4 C24 4 28 7 30 11 C32 7 36 4 41 4 C49 4 56 10 56 19 C56 28 50 38 30 52Z" fill="#ff5a3c"/></svg></div>';
+          oh += '<div id="posted" class="hid">posted ✓</div>';
+          oh += '<div id="term" class="hid"><b>$ </b><span class="ty"></span></div>';
+          oh += '<img id="e-logo" class="hid" src="assets/img/logo.svg" alt="Motion Graphics Skills logo" />';
+          oh += '<div id="e-title"><span class="lw">Motion Graphics Skills</span></div>';
+          oh += '<div class="beat on-void sm" id="e-made" style="top:800px;font-size:48px;color:#c9c3b8">' + [['this', 25.04], ['video', 25.18], ['was', 25.46], ['made', 25.66], ['with', 25.86], ['it.', 26.06]].map(function (w) { return '<span class="w">' + w[0] + '</span>'; }).join(' ') + '</div>';
+          oh += '<div id="e-cta" class="hid">★ Grab it on GitHub</div>';
+          oh += '<div id="e-url" class="hid">github.com/imMamdouhaboammar/motion-graphics-skills</div>';
+          $('#objs').innerHTML = oh;
+          BEATS.forEach(buildBeat);
+          return Promise.all($$('#pins img, #objs img').map(function (im) { return im.decode().catch(function (e) { throw new Error('image failed to decode: ' + im.getAttribute('src') + ' (' + e + ')'); }); }));
+        }).then(function () {
+          var tl = gsap.timeline({ paused: true });
+          var cp = $('#cp'), curve = $('#curve'), dot = $('#dot'), voidL = $('#void'), ph = $('#playhead'), objs = $('#objs');
+
+          /* ---------- the clock: curve, pins and worlds are pure functions of time ---------- */
+          var clock = { t: 0 };
+          function render(t) {
+            var A = t < 28.8 ? 5 : Math.max(0, 5 * (29.3 - t) / 0.5);   // the line breathes; it settles for the end hold
+            var P = shapeAt(t).map(function (q, j) { return [q[0] + A * Math.sin(t * 2.1 + j * 0.7), q[1] + A * Math.cos(t * 1.7 + j * 0.9)]; });
+            cp.setAttribute('d', pathD(P));
+            var len = cp.getTotalLength();
+            var draw = t < 1.1 ? E.out(Math.min(1, t / 1.1)) : 1;
+            cp.style.strokeDasharray = len.toFixed(1) + ' ' + len.toFixed(1);
+            cp.style.strokeDashoffset = (len * (1 - draw)).toFixed(1);
+            if (t < 1.8) { var u = Math.max(0, Math.min(1, (t - 0.25) / 1.35)); var q = cp.getPointAtLength(len * E.io(u) * draw); dot.style.left = q.x + 'px'; dot.style.top = q.y + 'px'; }
+            PINS.forEach(function (p) { var a = P[p.idx * 3]; p.el.style.left = a[0].toFixed(1) + 'px'; p.el.style.top = a[1].toFixed(1) + 'px'; });
+            var W = worldAt(t);
+            if (W.x === null) { voidL.style.clipPath = W.w === 'void' ? 'inset(0 0 0 0)' : 'inset(0 100% 0 0)'; ph.style.opacity = 0; }
+            else {
+              voidL.style.clipPath = W.to === 'void' ? 'inset(0 ' + (1080 - W.x).toFixed(1) + 'px 0 0)' : 'inset(0 0 0 ' + W.x.toFixed(1) + 'px)';
+              ph.style.opacity = 1; ph.style.left = W.x.toFixed(1) + 'px';
+            }
+            curve.classList.toggle('glow', W.w === 'void' || (W.x !== null && W.to === 'void'));
+          }
+          tl.fromTo(clock, { t: 0 }, { t: TOTAL, duration: TOTAL, ease: 'none', onUpdate: function () { render(clock.t); } }, 0);
+
+          /* ---------- helpers ---------- */
+          function wordsIn(els, times) { els.forEach(function (w, i) {
+            tl.fromTo(w, { opacity: 0, y: 26, filter: 'blur(10px)' }, { opacity: 1, y: 0, filter: 'blur(0px)', duration: 0.3, ease: 'power3.out', immediateRender: false }, times[i] - 0.04);
+          }); }
+          function lettersIn(el, at, win, spread) {
+            splitLetters(el).forEach(function (l) {
+              var dx = (rnd() - 0.5) * (spread || 200), dy = (rnd() - 0.3) * (spread || 200) * 0.5, d = (win || 0.25) * rnd();
+              tl.fromTo(l, { opacity: 0, x: dx, y: dy, filter: 'blur(16px)', scale: 1.3 }, { opacity: 1, x: 0, y: 0, filter: 'blur(0px)', scale: 1, duration: 0.45, ease: 'expo.out', immediateRender: false }, at + d);
+            });
+          }
+          function pop(el, at, from, y) { tl.fromTo(el, { opacity: 0, scale: from == null ? 0.4 : from, y: y == null ? 30 : y }, { opacity: 1, scale: 1, y: 0, duration: 0.42, ease: 'back.out(2)', immediateRender: false }, at); }
+          function out(el, at, d) { tl.fromTo(el, { opacity: 1, filter: 'blur(0px)', y: 0 }, { opacity: 0, filter: 'blur(14px)', y: -40, duration: d || 0.22, ease: 'power2.in', immediateRender: false }, at); }
+          function hop(el, from, to) {   // pixel mascots move on twos
+            var o = { t: 0 };
+            if (to <= from) throw new Error('hop() needs to > from');
+            tl.fromTo(o, { t: 0 }, { t: to - from, duration: to - from, ease: 'none', immediateRender: false, onUpdate: function () { el.style.translate = '0 ' + (Math.floor(o.t / 0.27) % 2 ? -10 : 0) + 'px'; } }, from);
+          }
+          function station(s, at, outAt) {
+            var dia = $('.dia', s), bot = $('.bot', s), chip = $('.chip', s), wire = $('.wire', s);
+            tl.set(wire, { opacity: 0 }, 0);
+            pop(dia, at, 0.2, 0); pop(bot, at + 0.12, 0.5, 60); pop(chip, at + 0.25, 0.7, 20);
+            tl.fromTo(wire, { opacity: 0 }, { opacity: 1, duration: 0.2, immediateRender: false }, at + 0.3);
+            hop(bot, at + 0.6, outAt - 0.1);
+            tl.fromTo(s, { opacity: 1 }, { opacity: 0, duration: 0.2, immediateRender: false }, outAt);
+          }
+
+          /* ---------- text beats ---------- */
+          BEATS.forEach(function (b) {
+            var d = $('#' + b.id);
+            if (b.sm) wordsIn($$('.sm:not(.aft) .w', d), b.sm.map(function (w) { return w[1]; }));
+            if (b.after) wordsIn($$('.aft .w', d), b.after.map(function (w) { return w[1]; }));
+            if (b.bg) lettersIn($('.bg:not(.b2) .lw', d), b.bg[1], 0.22, b.big ? 320 : 220);
+            if (b.bg2) lettersIn($('.b2 .lw', d), b.bg2[1], 0.22, 220);
+            out(d, b.out);
+          });
+
+          /* ---------- B1 graph editor ---------- */
+          tl.fromTo('#axes', { opacity: 0 }, { opacity: 1, duration: 0.4 }, 0);
+          tl.fromTo('#handles', { opacity: 0 }, { opacity: 1, duration: 0.3, immediateRender: false }, 0.9);
+          tl.set('#handles', { opacity: 0 }, 0);
+          tl.fromTo(['#axes', '#handles', '#dot'], { opacity: 1 }, { opacity: 0, duration: 0.25, immediateRender: false }, 1.7);
+          tl.fromTo('#dot', { opacity: 0, scale: 0 }, { opacity: 1, scale: 1, duration: 0.25, ease: 'back.out(2)', immediateRender: false }, 0.25);
+          tl.set('#dot', { opacity: 0 }, 0);
+
+          /* ---------- B3 "write it": typed onto the straight line ---------- */
+          var wr = document.createElement('div'); wr.className = 'beat on-paper'; wr.id = 'write'; wr.style.top = '880px';
+          wr.innerHTML = '<div class="bg" style="color:#141414;font-size:190px"><span class="ty"></span><span id="caret" style="display:inline-block;width:14px;height:150px;background:#ff5a3c;vertical-align:-10px;margin-left:8px"></span></div>';
+          $('#texts').appendChild(wr);
+          tl.fromTo(wr, { opacity: 0 }, { opacity: 1, duration: 0.05, immediateRender: false }, 5.7); tl.set(wr, { opacity: 0 }, 0);
+          var wo = { n: 0 }, WT = 'WRITE IT.';
+          tl.fromTo(wo, { n: 0 }, { n: WT.length, duration: 0.55, ease: 'none', immediateRender: false, onUpdate: function () { $('.ty', wr).textContent = WT.slice(0, Math.round(wo.n)); } }, 5.8);
+          var bk = { t: 0 };
+          tl.fromTo(bk, { t: 0 }, { t: 1.4, duration: 1.4, ease: 'none', immediateRender: false, onUpdate: function () { $('#caret').style.opacity = Math.floor(bk.t / 0.3) % 2 ? 0 : 1; } }, 5.6);
+          out(wr, 6.7, 0.25);
+
+          /* ---------- B4 brand-intake ---------- */
+          station(B.s4, 6.94, 10.05);
+          B.sw.forEach(function (s, i) { pop($('.sw', s), 8.02 + i * 0.1, 0.2, 40); tl.fromTo(s, { opacity: 1 }, { opacity: 0, duration: 0.2, immediateRender: false }, 10.05); });
+          pop($('.aa', B.aa), 8.68, 0.3, 40); tl.fromTo(B.aa, { opacity: 1 }, { opacity: 0, duration: 0.2, immediateRender: false }, 10.05);
+
+          /* ---------- B5 motion-director ---------- */
+          station(B.s5, 10.32, 13.15);
+          tl.fromTo($('.refcard', B.ref), { opacity: 0, y: -400, rotation: -14 }, { opacity: 1, y: 0, rotation: -4, duration: 0.55, ease: 'back.out(1.6)', immediateRender: false }, 11.64);
+          tl.fromTo(B.ref, { opacity: 1 }, { opacity: 0, duration: 0.2, immediateRender: false }, 12.45);
+          B.ticks.forEach(function (s, i) {
+            pop($('.tick', s), 12.58 + i * 0.07, 0.2, 0); tl.fromTo($('.tickline', s), { opacity: 0, scaleY: 0 }, { opacity: 1, scaleY: 1, transformOrigin: '50% 100%', duration: 0.25, immediateRender: false }, 12.6 + i * 0.07);
+            tl.fromTo(s, { opacity: 1 }, { opacity: 0, duration: 0.2, immediateRender: false }, 13.15);
+          });
+
+          /* ---------- B6 sfx-picker ---------- */
+          station(B.s6, 13.48, 16.05);
+
+          /* ---------- B7 video-review-loop ---------- */
+          station(B.s7, 16.32, 19.35);
+          $$('.mini', objs).forEach(function (m, i) { tl.fromTo(m, { opacity: 0, x: 700 }, { opacity: 1, x: 0, duration: 0.55, ease: 'expo.out', immediateRender: false }, 16.4 + i * 0.06); out(m, 19.3); });
+          tl.fromTo('#scan', { opacity: 1, x: 0 }, { opacity: 1, x: 780, duration: 1.6, ease: 'none', immediateRender: false }, 17.2);
+          tl.fromTo('#scan', { opacity: 1 }, { opacity: 0, duration: 0.15, immediateRender: false }, 18.85);
+          $$('.chk', objs).forEach(function (c, i) { pop(c, 17.2 + 1.6 * (77 + i * 152) / 780, 0.2, 0); out(c, 19.3); });
+
+          /* ---------- B8 reel-export ---------- */
+          station(B.s8, 20.05, 21.45);
+          tl.fromTo('#phoneUI', { opacity: 0, scale: 0.92 }, { opacity: 1, scale: 1, duration: 0.35, ease: 'power2.out', immediateRender: false }, 19.95);
+          pop($('#phoneUI .heart'), 21.02, 0.2, 0);
+          pop('#posted', 21.08, 0.6, 20);
+          out(['#phoneUI', '#posted'], 21.45);
+
+          /* ---------- B9 install ---------- */
+          var term = $('#term'), TT = 'npx skills add\n  imMamdouhaboammar/\n  motion-graphics-skills', to = { n: 0 };
+          tl.fromTo(term, { opacity: 0 }, { opacity: 1, duration: 0.15, immediateRender: false }, 21.75);
+          tl.fromTo(to, { n: 0 }, { n: TT.length, duration: 1.45, ease: 'none', immediateRender: false, onUpdate: function () { $('.ty', term).textContent = TT.slice(0, Math.round(to.n)); } }, 21.8);
+          out(term, 23.42);
+
+          /* ---------- B11 end card ---------- */
+          tl.fromTo('#pill', { opacity: 0, y: 30, xPercent: -50 }, { opacity: 1, y: 0, xPercent: -50, duration: 0.35, ease: 'back.out(1.7)' }, 0.3);
+          tl.fromTo('#pill', { opacity: 1 }, { opacity: 0, duration: 0.2, immediateRender: false }, 24.9);
+          tl.fromTo('#e-logo', { opacity: 0, scale: 0.8, filter: 'blur(14px)' }, { opacity: 1, scale: 1, filter: 'blur(0px)', duration: 0.6, ease: 'expo.out', immediateRender: false }, 25.05);
+          lettersIn($('#e-title .lw'), 25.25, 0.35, 180);
+          $$('#e-title .l').forEach(function (l) { l.style.color = '#fff'; });
+          wordsIn($$('#e-made .w'), [25.04, 25.18, 25.46, 25.66, 25.86, 26.06]);
+          tl.fromTo('#e-cta', { opacity: 0, scale: 0.6, xPercent: -50 }, { opacity: 1, scale: 1, xPercent: -50, duration: 0.45, ease: 'back.out(2)', immediateRender: false }, 26.5);
+          tl.set('#e-cta', { xPercent: -50 }, 0);
+          tl.fromTo('#e-url', { opacity: 0, y: 16 }, { opacity: 1, y: 0, duration: 0.35, immediateRender: false }, 26.86);
+          B.crew.forEach(function (s, i) { var im = $('img', s); pop(im, 25.6 + i * 0.1, 0.3, 50); hop(im, 26.3 + (i % 2) * 0.135, 29.2); });
+
+          tl.set({}, {}, TOTAL);
+          window.__timelines = window.__timelines || {};
+          window.__timelines['main'] = tl;
+          return true;
+        });
+      })();
+    </script>
+  </body>
+</html>

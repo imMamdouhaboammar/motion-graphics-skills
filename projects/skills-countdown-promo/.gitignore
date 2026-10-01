@@ -1,0 +1,5 @@
+stock-raw/
+snapshots/
+renders/*
+!renders/skills-promo-final.mp4
+.debug/
