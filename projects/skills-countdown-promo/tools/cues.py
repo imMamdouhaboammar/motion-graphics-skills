@@ -65,7 +65,7 @@ for i, (t, n, d, v, tr) in enumerate(sorted(cues)):
 lines.append('      <!-- /CUES -->')
 
 p = pathlib.Path(__file__).resolve().parent.parent / "index.html"
-html = p.read_text()
+html = p.read_text(encoding="utf-8")
 html = re.sub(r"      <!-- CUES -->.*?      <!-- /CUES -->", "\n".join(lines), html, flags=re.S)
-p.write_text(html)
+p.write_text(html, encoding="utf-8")
 print(f"{len(cues)} cues written; end card {END:.3f}, total {TOTAL}")

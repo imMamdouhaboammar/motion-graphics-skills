@@ -438,9 +438,9 @@
           var imgs = Array.prototype.slice.call(document.images).map(function (im) {
             return im.decode ? im.decode().catch(function (e) { throw new Error('image failed to decode: ' + im.getAttribute('src') + ' (' + e + ')'); }) : Promise.resolve();
           });
-          var faces = ['400 40px Inter', '500 40px Inter', '700 40px Inter', '800 40px Inter', '500 40px JBMono'].map(function (f) { return document.fonts.load(f, 'Ae5#'); });
+          var faces = ['400 40px Inter', '500 40px Inter', '600 40px Inter', '700 40px Inter', '800 40px Inter', '500 40px JBMono'].map(function (f) { return document.fonts.load(f, 'Ae5#'); });
           return Promise.all(faces.concat(imgs)).then(function () { return document.fonts.ready; }).then(function () {
-            var missing = ['400 40px Inter', '800 40px Inter', '500 40px JBMono'].filter(function (f) { return !document.fonts.check(f, 'Ae'); });
+            var missing = ['400 40px Inter', '600 40px Inter', '800 40px Inter', '500 40px JBMono'].filter(function (f) { return !document.fonts.check(f, 'Ae'); });
             if (missing.length) throw new Error('font missing: ' + missing.join(', '));
             return true;
           });
