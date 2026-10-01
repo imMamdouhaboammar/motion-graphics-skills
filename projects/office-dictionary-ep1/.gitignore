@@ -1,0 +1,5 @@
+stock-raw/
+snapshots/
+renders/*
+!renders/office-dictionary-ep1.mp4
+.debug/
