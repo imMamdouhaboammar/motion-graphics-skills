@@ -101,6 +101,23 @@ def parse_comment(body: str, marker: str) -> dict[str, str]:
     return result
 
 
+
+def locate_uploaded_comment(ndjson: str, marker: str) -> str:
+    """Locate an exact batch marker across all paginated GitHub comment responses."""
+    matches: list[str] = []
+    for line in ndjson.splitlines():
+        if not line.strip():
+            continue
+        entry = json.loads(line)
+        if not isinstance(entry, dict):
+            raise ValueError("Unexpected GitHub comment payload")
+        body = entry.get("body")
+        if isinstance(body, str) and marker in body:
+            matches.append(body)
+    if len(matches) != 1:
+        raise ValueError(f"Expected one uploaded comment for {marker}, found {len(matches)}")
+    return matches[0]
+
 def main() -> int:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--pr", type=int, default=33, help="Draft PR to host video attachments")
@@ -127,13 +144,12 @@ def main() -> int:
         for film in FILMS:
             arguments.extend(["--attach", str(videos[film])])
         run(*arguments)
-        comments = json.loads(run("gh", "api",
-                                  f"repos/{REPO}/issues/{opts.pr}/comments?per_page=100"))
-        matches = [c for c in comments if marker in c.get("body", "")]
-        if len(matches) != 1:
-            raise RuntimeError("Could not identify the uploaded PR comment, "
-                               "so README was left unchanged. Inspect PR comments.")
-        urls = parse_comment(matches[0]["body"], marker)
+        # PR bots can produce >100 comments. Fetch and parse every page before
+        # searching for our upload marker, rather than silently truncating page 1.
+        comments_ndjson = run("gh", "api", "--paginate",
+                              "--jq", ".[] | @json",
+                              f"repos/{REPO}/issues/{opts.pr}/comments?per_page=100")
+        urls = parse_comment(locate_uploaded_comment(comments_ndjson, marker), marker)
         readme_path = ROOT / "README.md"
         updated = render(readme_path.read_text(encoding="utf-8"), urls)
         readme_path.write_text(updated, encoding="utf-8")
