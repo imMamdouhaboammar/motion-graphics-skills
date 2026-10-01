@@ -2,7 +2,7 @@
 """Writes the <audio> cue block in index.html from one table.
 
 Times derive from the same grid the timeline uses: 110 BPM bed, first kick 0.025 s,
-one bar 2.18 s, each skill gets three bars. Run after changing any cue:
+one bar 2.18 s, each skill gets four bars. Run after changing any cue:
     python3 tools/cues.py
 """
 import pathlib, re
@@ -60,12 +60,14 @@ busy = {}   # track -> end time; overlapping cues go to the next free track
 for i, (t, n, d, v, tr) in enumerate(sorted(cues)):
     while busy.get(tr, -1) > t:
         tr += 1
-    busy[tr] = t + d
+    busy[tr] = round(t + d, 3)
     lines.append(f'      <audio id="a{i+1}" src="assets/audio/sfx/{n}.wav" data-start="{t}" data-duration="{d}" data-track-index="{tr}" data-volume="{v}"></audio>')
 lines.append('      <!-- /CUES -->')
 
 p = pathlib.Path(__file__).resolve().parent.parent / "index.html"
 html = p.read_text(encoding="utf-8")
-html = re.sub(r"      <!-- CUES -->.*?      <!-- /CUES -->", "\n".join(lines), html, flags=re.S)
+html, n = re.subn(r"      <!-- CUES -->.*?      <!-- /CUES -->", "\n".join(lines), html, flags=re.S)
+if n != 1:
+    raise SystemExit(f"expected one CUES block in {p}, found {n}; nothing written")
 p.write_text(html, encoding="utf-8")
 print(f"{len(cues)} cues written; end card {END:.3f}, total {TOTAL}")

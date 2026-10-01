@@ -175,7 +175,7 @@
       <audio id="a36" src="assets/audio/sfx/whoosh-elec.wav" data-start="18.855" data-duration="0.85" data-track-index="14" data-volume="0.4"></audio>
       <audio id="a37" src="assets/audio/sfx/ui-open.wav" data-start="19.105" data-duration="0.6" data-track-index="13" data-volume="0.36"></audio>
       <audio id="a38" src="assets/audio/sfx/scan.wav" data-start="19.205" data-duration="1.2" data-track-index="15" data-volume="0.28"></audio>
-      <audio id="a39" src="assets/audio/sfx/pop1.wav" data-start="19.705" data-duration="0.14" data-track-index="16" data-volume="0.55"></audio>
+      <audio id="a39" src="assets/audio/sfx/pop1.wav" data-start="19.705" data-duration="0.14" data-track-index="13" data-volume="0.55"></audio>
       <audio id="a40" src="assets/audio/sfx/pop1.wav" data-start="20.205" data-duration="0.14" data-track-index="13" data-volume="0.55"></audio>
       <audio id="a41" src="assets/audio/sfx/pop1.wav" data-start="20.705" data-duration="0.14" data-track-index="13" data-volume="0.55"></audio>
       <audio id="a42" src="assets/audio/sfx/whoosh1.wav" data-start="21.675" data-duration="0.49" data-track-index="14" data-volume="0.7"></audio>
@@ -284,7 +284,7 @@
             lead: ['<span class="k">add it</span>', 'at the'], leadB: 'end',
             prompt: 'Pick sound effects for this animation sequence.',
             pay: ['<span class="k">Claude</span>', 'finds a sound for'], payB: 'every move',
-            follow: { type: 'pills', pills: [['sound', '148 curated sounds'], ['grid', '10 categories']],
+            follow: { type: 'pills', pills: [['sound', '147 curated sounds'], ['grid', '10 categories']],
               small: ['pops,', 'clicks', 'and'], big: 'risers on cue' } },
           { cmd: '/video-review-loop', bot: '05', pos: 'end',
             lead: ['<span class="k">add this</span>', 'at the'], leadB: 'end',
@@ -353,6 +353,7 @@
         }
         /* pixel mascots move on twos: a stepped bob, never a smooth float */
         function bob(tl, el, from, to, amp) {
+          if (to <= from) throw new Error('bob() needs to > from, got ' + from + ' to ' + to);
           var o = { t: 0 };
           tl.fromTo(o, { t: 0 }, { t: to - from, duration: to - from, ease: 'none', immediateRender: false, onUpdate: function () {
             el.style.translate = '0 ' + (Math.floor(o.t / 0.2725) % 2 ? -(amp || 8) : 0) + 'px';
@@ -566,7 +567,7 @@
           $$('#e-crew img').forEach(function (im, i) {
             tl.fromTo(im, { opacity: 0, y: 60 }, { opacity: 1, y: 0, duration: 0.25, ease: 'back.out(2)', immediateRender: false }, E + 1.7 + i * 0.06);
             tl.set(im, { opacity: 0 }, 0);
-            bob(tl, im, E + 2.4 + (i % 2) * 0.136, TOTAL - 1.7, 8);   // the last 1.7 s hold still
+            bob(tl, im, E + 2.0 + (i % 2) * 0.136, TOTAL - 1.7, 8);   // the last 1.7 s hold still
           });
           tl.fromTo('#e-cta', { scale: 1 }, { scale: 1.06, duration: 0.16, yoyo: true, repeat: 1, ease: 'power2.out', immediateRender: false }, E + 2.6);
 

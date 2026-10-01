@@ -21,7 +21,7 @@ The reference's assets, brand and copy are not used. The repo's pixel mascots ap
 ```bash
 python3 tools/cues.py                                  # after changing any cue
 npx hyperframes@0.8.92 lint
-npx hyperframes@0.8.92 snapshot --at 1,5.6,9.6,20.3
+npx hyperframes@0.8.92 snapshot --at 1,5.6,9.6,15.4,20.3,26.4,28.4,35.4,37.4,44.2,46.6,50
 npx hyperframes@0.8.92 render -f 30 -q delivery -o renders/out.mp4
 ```
 
