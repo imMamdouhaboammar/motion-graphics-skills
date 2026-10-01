@@ -83,4 +83,4 @@ CI runs `python3 tools/embed_readme_videos.py --check-ready`. It **fails deliber
 - Revisit the rendered README to confirm that GitHub has not changed its Markdown/media policy.
 - Keep the README source lightweight. GitHub controls the media-player preloading policy; do not claim client-side loading behavior without a real-browser check.
 
-**Known constraint:** the connected GitHub repository API can edit files and create PRs but does not expose the media upload endpoint with a personal OAuth or PAT token. Use personally authenticated `gh` CLI 2.99+ or the GitHub web editor. Never commit generated UUIDs or pretend a source MP4 path is an inline player.
+**Known constraint:** a GitHub-App-authenticated repository integration (such as `GITHUB_TOKEN` in GitHub Actions) cannot upload to the user-attachments endpoint. Use a personally authenticated `gh` CLI 2.99+ (OAuth or PAT) or the GitHub web editor. Never commit generated UUIDs or pretend a source MP4 path is an inline player.

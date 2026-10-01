@@ -39,9 +39,7 @@ Creative direction and code-driven motion production without requiring After Eff
 
 ## Watch the work
 
-Six completed films, presented in their final running order with sound. The images currently shown are **previews or stills**, not full-length playback. The publishing tool replaces each preview with a **native GitHub video player inside this README**, using actual uploaded `user-attachments` URLs; it does not use an external watch page.
-
-> **Publishing status:** The six masters are already in the repository. Inline playback still needs the authenticated GitHub attachment upload step described in [Publish full-length videos](docs/readme-video-embedding.md). Until the resulting URLs are committed, the fallback image opens the full MP4.
+Six completed films, presented in their final running order with original audio. Watch every full-length video directly inside this README with native GitHub video playback controls, timeline seeking, and fullscreen support. Original master renders and project sources are also available below each film.
 
 ### Motion Graphics Skills | Arabic promo
 
@@ -49,7 +47,7 @@ Six completed films, presented in their final running order with sound. The imag
 
 <!-- readme-video:arabic:start -->
 
-[![Contact sheet of the final Arabic Motion Graphics Skills promo](projects/mgs-promo/inspection/contact-sheet-final.png)](projects/mgs-promo/renders/mgs-promo-final.mp4)
+https://github.com/user-attachments/assets/908e651d-f5f5-431c-afaa-ac5dd38100d4
 
 <!-- readme-video:arabic:end -->
 
@@ -61,7 +59,7 @@ Six completed films, presented in their final running order with sound. The imag
 
 <!-- readme-video:curve:start -->
 
-[![Short muted preview of The Curve](assets/readme/curve-promo-preview.gif)](projects/skills-promo-curve/renders/skills-promo-curve.mp4)
+https://github.com/user-attachments/assets/7bd0ed81-8612-4a2e-bae6-dfad2a4f0897
 
 <!-- readme-video:curve:end -->
 
@@ -73,7 +71,7 @@ Six completed films, presented in their final running order with sound. The imag
 
 <!-- readme-video:countdown:start -->
 
-[![Motion Graphics Skills brand artwork for the countdown film](assets/readme/social-preview.png)](projects/skills-countdown-promo/renders/skills-promo-final.mp4)
+https://github.com/user-attachments/assets/899f4294-689e-4c1c-877c-3623a8faa39a
 
 <!-- readme-video:countdown:end -->
 
@@ -85,7 +83,7 @@ Six completed films, presented in their final running order with sound. The imag
 
 <!-- readme-video:teola:start -->
 
-[![Short muted preview of TEOLA product launch](assets/readme/teola-preview.gif)](TEOLA-ad.mp4)
+https://github.com/user-attachments/assets/6a9d2ff2-4e78-42c1-b8a7-3051579b451d
 
 <!-- readme-video:teola:end -->
 
@@ -97,7 +95,7 @@ Six completed films, presented in their final running order with sound. The imag
 
 <!-- readme-video:four-steps:start -->
 
-[![Short muted preview of Four Steps Events](assets/readme/four-steps-preview.gif)](projects/four-steps-events/renders/Four-Steps-Events-Motion-Final-v2.mp4)
+https://github.com/user-attachments/assets/1434eb2f-b280-4272-9cd3-b9f8107fb747
 
 <!-- readme-video:four-steps:end -->
 
@@ -109,7 +107,7 @@ Six completed films, presented in their final running order with sound. The imag
 
 <!-- readme-video:jedar:start -->
 
-[![Contact sheet for JEDAR film](projects/jedar-lesh-majani/renders/contact-sheet.jpg)](projects/jedar-lesh-majani/renders/JEDAR-lesh-majani-final.mp4)
+https://github.com/user-attachments/assets/592daa6c-5ce0-4cef-ad3e-40e976729066
 
 <!-- readme-video:jedar:end -->
 

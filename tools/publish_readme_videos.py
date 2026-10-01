@@ -166,8 +166,13 @@ def main() -> int:
     marker = "README_VIDEO_BATCH_" + secrets.token_hex(8)
     with tempfile.TemporaryDirectory(prefix="motion-readme-") as tmp:
         directory = Path(tmp)
-        videos = {film: fit_video(ROOT / MASTER_FILES[film], film, directory, opts.max_mb)
-                  for film in FILMS}
+        videos = {}
+        for film in FILMS:
+            print(f"Preparing delivery asset for '{film}'...", flush=True)
+            videos[film] = fit_video(ROOT / MASTER_FILES[film], film, directory, opts.max_mb)
+            size_mb = videos[film].stat().st_size / (1024 * 1024)
+            print(f"  -> '{film}' ready ({size_mb:.2f} MB)", flush=True)
+        print(f"All 6 delivery assets prepared. Uploading attachments to PR #{opts.pr}...", flush=True)
         body = directory / "upload-comment.md"
         body.write_text(
             "Full-length README promo assets: " + marker + "\n\n"
@@ -179,18 +184,22 @@ def main() -> int:
         for film in FILMS:
             arguments.extend(["--attach", str(videos[film])])
         run(*arguments)
+        print(f"Upload completed. Fetching uploaded comments for marker {marker}...", flush=True)
         # PR bots can produce >100 comments. Fetch and parse every page before
         # searching for our upload marker, rather than silently truncating page 1.
         comments_ndjson = run("gh", "api", "--paginate",
                               "--jq", ".[] | @json",
                               f"repos/{REPO}/issues/{opts.pr}/comments?per_page=100")
         urls = parse_comment(locate_uploaded_comment(comments_ndjson, marker), marker)
+        print("Successfully extracted attachment URLs:", flush=True)
+        for film, url in urls.items():
+            print(f"  {film}: {url}", flush=True)
         readme_path = ROOT / "README.md"
         updated = render(readme_path.read_text(encoding="utf-8"), urls)
         readme_path.write_text(updated, encoding="utf-8")
         if opts.commit:
             run("git", "add", "README.md")
-            run("git", "commit", "-m", "docs: embed full-length promos as GitHub native README players")
+            run("git", "commit", "--only", "README.md", "-m", "docs: embed full-length promos as GitHub native README players")
         print("Six complete GitHub attachment embeds added to README.")
         print("Verify audio/seek/fullscreen in the GitHub rendered view before merging.")
     return 0
