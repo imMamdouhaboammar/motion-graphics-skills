@@ -4,7 +4,7 @@ import tempfile
 import unittest
 from pathlib import Path
 from tools.embed_readme_videos import render, validate_manifest
-from tools.publish_readme_videos import FILMS, parse_comment, locate_uploaded_comment
+from tools.publish_readme_videos import FILMS, parse_comment, locate_uploaded_comment, validate_delivery_probe
 
 EXAMPLE = """<!-- readme-video:arabic:start -->
   <a href="projects/mgs-promo/renders/mgs-promo-final.mp4"><img src="poster.png"></a>
@@ -87,6 +87,29 @@ class ReadmeVideoTests(unittest.TestCase):
             locate_uploaded_comment('{"body": "not our upload"}', marker)
         with self.assertRaises(ValueError):
             locate_uploaded_comment('{"body": "' + marker + '"}\n{"body": "' + marker + '"}', marker)
+
+    def test_rejects_truncated_delivery_after_video_encoding(self):
+        source = {"format": {"duration": "52.0"}, "streams": [{"codec_type": "video"}, {"codec_type": "audio"}]}
+        delivery = {"format": {"duration": "31.0"}, "streams": [{"codec_type": "video"}, {"codec_type": "audio"}]}
+        with self.assertRaisesRegex(ValueError, "duration"):
+            validate_delivery_probe(source, delivery, "countdown")
+
+    def test_rejects_delivery_that_loses_original_audio(self):
+        source = {"format": {"duration": "26.6"}, "streams": [{"codec_type": "video"}, {"codec_type": "audio"}]}
+        delivery = {"format": {"duration": "26.6"}, "streams": [{"codec_type": "video"}]}
+        with self.assertRaisesRegex(ValueError, "audio"):
+            validate_delivery_probe(source, delivery, "arabic")
+
+    def test_accepts_full_length_delivery_with_preserved_audio(self):
+        source = {"format": {"duration": "59.0"}, "streams": [{"codec_type": "video"}, {"codec_type": "audio"}]}
+        delivery = {"format": {"duration": "58.94"}, "streams": [{"codec_type": "video"}, {"codec_type": "audio"}]}
+        validate_delivery_probe(source, delivery, "jedar")
+
+    def test_rejects_delivery_that_has_no_video(self):
+        source = {"format": {"duration": "30"}, "streams": [{"codec_type": "video"}, {"codec_type": "audio"}]}
+        delivery = {"format": {"duration": "30"}, "streams": [{"codec_type": "audio"}]}
+        with self.assertRaisesRegex(ValueError, "video"):
+            validate_delivery_probe(source, delivery, "curve")
 
     def test_all_six_final_files_are_listed(self):
         readme = (Path(__file__).resolve().parents[1] / "README.md").read_text()
