@@ -53,8 +53,11 @@ c(word("sfx"), "pop1"); c(word("sfx") + 0.25, "click")
 c(word("gives"), "pop1"); c(word("every"), "hit-light", 0.22); c(word("move"), "click", 0.35); c(word("its"), "pop2"); c(word("sound"), "ding")
 c(16.1, "whoosh1"); c(16.4, "whoosh-rev", 0.22)          # flip to paper, film strip slides in
 c(word("video"), "pop1"); c(word("checks"), "scan")
+# one tick per film-strip frame as the scan line crosses it; these mirror the B7 numbers in index.html
+SCAN_T0, SCAN_DUR, SCAN_TRAVEL = 17.2, 1.6, 780      # scan starts at x 60 and moves 780 px in 1.6 s
+CHECK_OFFSET, FRAME_STEP = 77, 152                   # check i sits 77 + 152 * i px right of the scan start
 for i in range(5):
-    c(17.2 + 1.6 * (77 + i * 152) / 780, "pop1", 0.3)
+    c(SCAN_T0 + SCAN_DUR * (CHECK_OFFSET + i * FRAME_STEP) / SCAN_TRAVEL, "pop1", 0.3)
 c(19.4, "whoosh-rev"); c(20.05, "pop2"); c(word("post"), "send")
 c(21.5, "whoosh-elec")                                   # flip to the void
 for i, t in enumerate([21.8, 22.15, 22.5, 22.85]):

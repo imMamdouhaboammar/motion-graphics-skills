@@ -1,4 +1,5 @@
 stock-raw/
 snapshots/
 renders/*
+!renders/skills-promo-curve.mp4
 .debug/
