@@ -16,7 +16,7 @@ Apply when any of the following are needed:
 - Programmatic sound generation (synths, oscillators, UI sounds)
 - Adding audio effects (reverb, delay, distortion) to any source
 
-**Related skills:** For timeline sequencing use **gsap-timeline**; for performance use **gsap-performance**; for scroll-sync use **gsap-scrolltrigger**.
+**Related skills:** For timeline sequencing use **gsap-timeline**, for performance use **gsap-performance**, and for scroll-sync use **gsap-scrolltrigger**.
 
 > ⚠️ **Browser Autoplay Policy** — `Tone.start()` MUST be called inside a user-gesture handler (click, keydown, etc.). Audio context will not resume otherwise. Always gate initialization behind an interaction.
 
