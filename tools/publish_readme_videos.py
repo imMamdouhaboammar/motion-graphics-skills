@@ -109,6 +109,10 @@ def locate_uploaded_comment(ndjson: str, marker: str) -> str:
         if not line.strip():
             continue
         entry = json.loads(line)
+        # gh --jq output may itself JSON-encode strings depending on the
+        # CLI formatter. Accept both plain NDJSON objects and quoted objects.
+        if isinstance(entry, str):
+            entry = json.loads(entry)
         if not isinstance(entry, dict):
             raise ValueError("Unexpected GitHub comment payload")
         body = entry.get("body")
