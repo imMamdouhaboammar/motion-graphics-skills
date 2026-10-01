@@ -26,3 +26,9 @@ npx hyperframes@0.8.92 render -f 30 -q delivery -o renders/out.mp4
 ```
 
 To change the number in the hook, edit `COUNT` in `index.html` (it is 49: the skill folders with a SKILL.md on `main`).
+
+## Delivery
+
+`renders/skills-promo-final.mp4`: H.264 High, yuv420p, bt709, 1560 frames at 30 fps (52.0 s), AAC 48 kHz 192 kbps, faststart.
+Audio mastered after the HyperFrames render (video stream copied): +8.8 dB and a limiter, giving -14.4 LUFS integrated with -1.4 dBTP peak.
+`video-review-loop` on the final: 0 hard findings. The freeze warnings are reading holds of under one second, and the 0.3 s of black at 48.0 s is the cut to the end card.
