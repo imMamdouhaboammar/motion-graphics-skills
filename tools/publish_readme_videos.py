@@ -9,6 +9,7 @@ from __future__ import annotations
 
 import argparse
 import json
+import math
 import re
 import secrets
 import shutil
@@ -55,15 +56,44 @@ def preflight() -> None:
             raise RuntimeError(f"Missing / empty final master: {path}")
 
 
+
+def probe_media(path: Path) -> dict:
+    """Read the actual container duration and audio/video track inventory."""
+    return json.loads(run("ffprobe", "-v", "error",
+                          "-show_entries", "format=duration:stream=codec_type",
+                          "-of", "json", str(path)))
+
+
+def validate_delivery_probe(source: dict, delivery: dict, film: str) -> None:
+    """Fail closed on truncated clips, missing video tracks, or dropped audio."""
+    try:
+        duration = float(source["format"]["duration"])
+        delivered_duration = float(delivery["format"]["duration"])
+        source_streams = {item["codec_type"] for item in source["streams"]}
+        delivery_streams = {item["codec_type"] for item in delivery["streams"]}
+    except (KeyError, ValueError, TypeError) as exc:
+        raise ValueError(f"{film}: invalid media metadata") from exc
+    if (not math.isfinite(duration) or not math.isfinite(delivered_duration)
+            or duration <= 0 or delivered_duration <= 0):
+        raise ValueError(f"{film}: invalid media duration")
+    if "video" not in source_streams or "video" not in delivery_streams:
+        raise ValueError(f"{film}: video track missing")
+    if "audio" in source_streams and "audio" not in delivery_streams:
+        raise ValueError(f"{film}: audio track disappeared during delivery encode")
+    if abs(duration - delivered_duration) > max(0.35, duration * 0.01):
+        raise ValueError(
+            f"{film}: delivery duration mismatch "
+            f"({delivered_duration:.2f}s vs source {duration:.2f}s)"
+        )
+
+
 def fit_video(path: Path, key: str, directory: Path, max_mb: int) -> Path:
     budget = max_mb * 1024 * 1024
+    source_probe = probe_media(path)
+    validate_delivery_probe(source_probe, source_probe, key)
     if path.stat().st_size < int(budget * .97):
         return path
-    info = json.loads(run("ffprobe", "-v", "error", "-show_entries", "format=duration",
-                          "-of", "json", str(path)))
-    duration = float(info["format"]["duration"])
-    if duration <= 0:
-        raise RuntimeError(f"No duration in {path}")
+    duration = float(source_probe["format"]["duration"])
     # Reserve audio, MP4 overhead and a margin for account-specific upload limits.
     audio_bps = 96000
     video_bps = max(200000, int((budget * .88 * 8 / duration) - audio_bps))
@@ -81,6 +111,7 @@ def fit_video(path: Path, key: str, directory: Path, max_mb: int) -> Path:
     if outfile.stat().st_size >= budget:
         raise RuntimeError(f"Upload encode of {key} is still too large ({outfile.stat().st_size} bytes); "
                            f"reduce --max-mb or video bitrate manually")
+    validate_delivery_probe(source_probe, probe_media(outfile), key)
     return outfile
 
 
