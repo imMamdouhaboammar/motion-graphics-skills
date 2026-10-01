@@ -1,0 +1,132 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 500 320" width="100%" height="100%">
+  <defs>
+    <linearGradient id="grad-accent" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#FF5E3A" />
+      <stop offset="50%" stop-color="#FF2A6D" />
+      <stop offset="100%" stop-color="#05D9E8" />
+    </linearGradient>
+    <linearGradient id="grad-glow" x1="0%" y1="100%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#00F2FE" />
+      <stop offset="100%" stop-color="#4FACFE" />
+    </linearGradient>
+    <linearGradient id="grad-gold" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#FFD166" />
+      <stop offset="100%" stop-color="#FF9F1C" />
+    </linearGradient>
+    <filter id="soft-shadow" x="-10%" y="-10%" width="120%" height="120%">
+      <feDropShadow dx="0" dy="8" stdDeviation="12" flood-color="#05D9E8" flood-opacity="0.18" />
+    </filter>
+  </defs>
+
+  <!-- Background Ambient Glow & Framing -->
+  <g filter="url(#soft-shadow)">
+    <!-- Main Slate / Canvas Screen (Doodle Line Art) -->
+    <rect x="90" y="55" width="320" height="200" rx="24" fill="#0d1117" stroke="url(#grad-accent)" stroke-width="4.5" stroke-linecap="round" stroke-linejoin="round" />
+  </g>
+
+  <!-- Doodle Screen Inner Bezel -->
+  <rect x="105" y="70" width="290" height="150" rx="16" fill="#161b22" stroke="#30363d" stroke-width="2" stroke-dasharray="6 4" />
+
+  <!-- Code Window Controls (Doodle Dots) -->
+  <circle cx="125" cy="88" r="5" fill="#FF5E3A" />
+  <circle cx="140" cy="88" r="5" fill="#FFD166" />
+  <circle cx="155" cy="88" r="5" fill="#05D9E8" />
+
+  <!-- Doodle Timeline Track at Top of Canvas -->
+  <path d="M 180 88 L 380 88" stroke="#30363d" stroke-width="3" stroke-linecap="round" />
+  <!-- Keyframe Diamonds on Timeline -->
+  <polygon points="230,83 235,88 230,93 225,88" fill="#FFD166" stroke="#FFD166" stroke-width="1.5" />
+  <polygon points="290,83 295,88 290,93 285,88" fill="#05D9E8" stroke="#05D9E8" stroke-width="1.5" />
+  <polygon points="350,83 355,88 350,93 345,88" fill="#FF2A6D" stroke="#FF2A6D" stroke-width="1.5" />
+
+  <!-- Central Dynamic Motion Graphic: Playhead + Code + Motion Wave -->
+  <!-- Bezier Motion Wave (Graph Editor Curve) -->
+  <path d="M 120 195 C 160 195, 180 115, 230 115 C 280 115, 300 185, 340 135 C 360 110, 380 120, 385 125" 
+        fill="none" stroke="url(#grad-glow)" stroke-width="4" stroke-linecap="round" stroke-linejoin="round" />
+
+  <!-- Animated Easing Tangent Handles (Doodle Line Art) -->
+  <line x1="205" y1="115" x2="255" y2="115" stroke="#FFD166" stroke-width="2" stroke-linecap="round" />
+  <circle cx="205" cy="115" r="3.5" fill="#FFD166" />
+  <circle cx="255" cy="115" r="3.5" fill="#FFD166" />
+  <circle cx="230" cy="115" r="5" fill="#FF5E3A" />
+
+  <!-- Central Playhead / Play Triangle Doodle -->
+  <g transform="translate(250, 155)">
+    <!-- Glowing motion circle -->
+    <circle cx="0" cy="0" r="28" fill="#0d1117" stroke="url(#grad-accent)" stroke-width="3.5" stroke-linecap="round" />
+    <!-- Play Icon with hand-drawn character -->
+    <path d="M -7 -12 L 13 0 L -7 12 Z" fill="url(#grad-gold)" stroke="#FFD166" stroke-width="2" stroke-linejoin="round" />
+  </g>
+
+  <!-- Code Brackets < / > Doodles on sides -->
+  <path d="M 135 130 L 120 145 L 135 160" fill="none" stroke="#FF2A6D" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round" />
+  <path d="M 365 155 L 380 170 L 365 185" fill="none" stroke="#05D9E8" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round" />
+
+  <!-- Playhead Vertical Needle -->
+  <line x1="250" y1="95" x2="250" y2="127" stroke="#FF2A6D" stroke-width="2.5" stroke-dasharray="4 3" stroke-linecap="round" />
+
+  <!-- Hand-drawn Film Strip / Clapperboard top tabs -->
+  <path d="M 150 55 L 170 30 L 210 30 L 190 55" fill="#1f242c" stroke="url(#grad-accent)" stroke-width="3" stroke-linejoin="round" />
+  <path d="M 230 55 L 250 30 L 290 30 L 270 55" fill="#1f242c" stroke="url(#grad-accent)" stroke-width="3" stroke-linejoin="round" />
+  <path d="M 310 55 L 330 30 L 370 30 L 350 55" fill="#1f242c" stroke="url(#grad-accent)" stroke-width="3" stroke-linejoin="round" />
+
+  <!-- Lower Timeline Scrubber & Frame Numbers -->
+  <rect x="120" y="228" width="260" height="14" rx="7" fill="#161b22" stroke="#30363d" stroke-width="1.5" />
+  <!-- Scrubber handle -->
+  <rect x="220" y="225" width="24" height="20" rx="5" fill="#FF5E3A" stroke="#FFF" stroke-width="1.5" />
+  <!-- Little tick marks -->
+  <line x1="140" y1="235" x2="140" y2="238" stroke="#8b949e" stroke-width="1.5" stroke-linecap="round" />
+  <line x1="170" y1="233" x2="170" y2="240" stroke="#8b949e" stroke-width="1.5" stroke-linecap="round" />
+  <line x1="200" y1="235" x2="200" y2="238" stroke="#8b949e" stroke-width="1.5" stroke-linecap="round" />
+  <line x1="280" y1="235" x2="280" y2="238" stroke="#8b949e" stroke-width="1.5" stroke-linecap="round" />
+  <line x1="310" y1="233" x2="310" y2="240" stroke="#8b949e" stroke-width="1.5" stroke-linecap="round" />
+  <line x1="340" y1="235" x2="340" y2="238" stroke="#8b949e" stroke-width="1.5" stroke-linecap="round" />
+
+  <!-- Whimsical Doodles & Sparkles around the frame -->
+  <!-- Top Left Sparkle ✦ -->
+  <g transform="translate(60, 45)">
+    <path d="M 0 -14 Q 0 0 14 0 Q 0 0 0 14 Q 0 0 -14 0 Q 0 0 0 -14 Z" fill="#FFD166" />
+    <circle cx="16" cy="-10" r="2.5" fill="#FF5E3A" />
+  </g>
+
+  <!-- Top Right Sparkle & Motion Lines -->
+  <g transform="translate(425, 45)">
+    <path d="M 0 -16 Q 0 0 16 0 Q 0 0 0 16 Q 0 0 -16 0 Q 0 0 0 -16 Z" fill="#05D9E8" />
+    <path d="M 20 -8 C 28 -5, 32 2, 30 10" fill="none" stroke="#FF2A6D" stroke-width="2.5" stroke-linecap="round" />
+    <circle cx="-14" cy="-12" r="2" fill="#FFD166" />
+  </g>
+
+  <!-- Bottom Left Motion Swoosh & Star -->
+  <g transform="translate(55, 230)">
+    <!-- Speed / Motion curves -->
+    <path d="M 0 0 C 15 -10, 25 15, 40 5" fill="none" stroke="#FF5E3A" stroke-width="3" stroke-linecap="round" />
+    <path d="M 5 15 C 20 8, 25 25, 38 18" fill="none" stroke="#05D9E8" stroke-width="2.5" stroke-linecap="round" stroke-dasharray="3 3" />
+    <polygon points="12,32 15,38 22,39 17,44 18,51 12,47 6,51 7,44 2,39 9,38" fill="#FFD166" />
+  </g>
+
+  <!-- Bottom Right Kinetic Burst & Diamond -->
+  <g transform="translate(435, 220)">
+    <!-- Speed arcs -->
+    <path d="M -10 25 C 10 20, 20 5, 28 -15" fill="none" stroke="#05D9E8" stroke-width="3" stroke-linecap="round" />
+    <line x1="15" y1="18" x2="30" y2="28" stroke="#FF2A6D" stroke-width="2.5" stroke-linecap="round" />
+    <line x1="25" y1="2" x2="42" y2="2" stroke="#FFD166" stroke-width="2.5" stroke-linecap="round" />
+    <polygon points="5,-5 12,-15 19,-5 12,5" fill="#FF2A6D" />
+  </g>
+
+  <!-- Hand-drawn Camera Aperture / Lens Doodle in Top Left -->
+  <g transform="translate(70, 130)">
+    <circle cx="0" cy="0" r="14" fill="none" stroke="#FFD166" stroke-width="2.5" stroke-dasharray="4 2" />
+    <circle cx="0" cy="0" r="6" fill="#FF5E3A" />
+    <line x1="-18" y1="-10" x2="-26" y2="-15" stroke="#FFD166" stroke-width="2" stroke-linecap="round" />
+    <line x1="-20" y1="5" x2="-28" y2="8" stroke="#FFD166" stroke-width="2" stroke-linecap="round" />
+  </g>
+
+  <!-- Monitor Stand (Line Art) -->
+  <path d="M 230 255 L 220 285 L 280 285 L 270 255" fill="#161b22" stroke="url(#grad-accent)" stroke-width="3.5" stroke-linejoin="round" />
+  <path d="M 190 285 C 220 282, 280 282, 310 285" fill="none" stroke="url(#grad-accent)" stroke-width="4.5" stroke-linecap="round" />
+
+  <!-- Doodled Sparkle below Stand -->
+  <circle cx="250" cy="298" r="3" fill="#05D9E8" />
+  <circle cx="235" cy="298" r="1.5" fill="#FFD166" />
+  <circle cx="265" cy="298" r="1.5" fill="#FF5E3A" />
+</svg>

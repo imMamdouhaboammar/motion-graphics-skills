@@ -1,0 +1,4 @@
+stock-raw/
+snapshots/
+renders/*
+.debug/
