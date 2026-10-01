@@ -3,7 +3,7 @@ import json
 import tempfile
 import unittest
 from pathlib import Path
-from tools.embed_readme_videos import render, validate_manifest
+from tools.embed_readme_videos import render, validate_manifest, check_readme_video_ready
 from tools.publish_readme_videos import FILMS, parse_comment, locate_uploaded_comment, validate_delivery_probe
 
 EXAMPLE = """<!-- readme-video:arabic:start -->
@@ -110,6 +110,20 @@ class ReadmeVideoTests(unittest.TestCase):
         delivery = {"format": {"duration": "30"}, "streams": [{"codec_type": "audio"}]}
         with self.assertRaisesRegex(ValueError, "video"):
             validate_delivery_probe(source, delivery, "curve")
+
+    def test_merge_gate_requires_all_six_inline_video_urls(self):
+        gallery = "\n".join(
+            f"<!-- readme-video:{film}:start -->\n\n"
+            f"https://github.com/user-attachments/assets/"
+            f"00000000-0000-0000-0000-{index + 1:012x}\n\n"
+            f"<!-- readme-video:{film}:end -->"
+            for index, film in enumerate(FILMS)
+        )
+        self.assertEqual(check_readme_video_ready(gallery), 6)
+        with self.assertRaisesRegex(ValueError, "arabic"):
+            check_readme_video_ready(EXAMPLE)
+        with self.assertRaisesRegex(ValueError, "duplicate|each film"):
+            check_readme_video_ready(gallery.replace("000000000002", "000000000001"))
 
     def test_all_six_final_files_are_listed(self):
         readme = (Path(__file__).resolve().parents[1] / "README.md").read_text()
