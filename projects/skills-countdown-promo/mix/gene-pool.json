@@ -1,0 +1,27 @@
+{
+  "brief": "30 s English promo with voice over for an open motion-graphics skill pack for Claude Code; every frame is code",
+  "references": [
+    {"id": "A", "domain": "kinetic-type-reel (countdown of prompt codes)", "role": "primary",
+     "genes": {
+       "typography": ["letters drift in from scattered blurred grey positions and settle into ink"],
+       "structure": ["numbered countdown, each item: command, prompt card, payoff line"],
+       "object": ["dark prompt card with the command chip hanging on a dashed wire"],
+       "transition": ["black starbursts sweep corners to frame each new item"],
+       "color": ["grey grid paper, black ink, one red pill as the only saturated element"]
+     }},
+    {"id": "B", "domain": "voice-led-explainer-reel (creator growth)", "role": "primary",
+     "genes": {
+       "rhythm": ["one spoken phrase per shot, about 1.5 s, the world flips between cream paper and black void"],
+       "typography": ["each line has one red key word set larger than the rest"],
+       "object": ["one hero object per line acts out the phrase (bulb, briefcase, keyboard, emoji)"],
+       "transition": ["a thick grey ribbon road sweeps through cream scenes and carries the eye"],
+       "light": ["red words glow in a black void like neon"]
+     }},
+    {"id": "W1", "domain": "animation-graph-editor (bezier easing curves, keyframe diamonds)", "role": "wildcard",
+     "genes": {
+       "transition": ["one easing curve with handles describes how every value moves over time"],
+       "object": ["keyframe diamonds sit on the curve and mark decisions"],
+       "structure": ["a playhead sweeps left to right and everything it crosses changes state"]
+     }}
+  ]
+}
