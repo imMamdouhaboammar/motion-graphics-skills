@@ -48,12 +48,12 @@ class ReadmeVideoTests(unittest.TestCase):
 
     def test_parse_full_video_uploads_preserves_film_identity(self):
         marker = "README_VIDEO_BATCH_test"
-        body = "Full-length README promo assets: " + marker + "\\n\\n"
+        body = "Full-length README promo assets: " + marker + "\n\n"
         for index, film in enumerate(FILMS):
             body += (
-                f"### {film}\\n\\n"
+                f"### {film}\n\n"
                 f"https://github.com/user-attachments/assets/"
-                f"00000000-0000-0000-0000-{index+1:012x}\\n\\n"
+                f"00000000-0000-0000-0000-{index+1:012x}\n\n"
             )
         result = parse_comment(body, marker)
         self.assertEqual(len(result), 6)
@@ -62,7 +62,7 @@ class ReadmeVideoTests(unittest.TestCase):
 
     def test_parser_rejects_unmatched_upload_comment(self):
         with self.assertRaises(ValueError):
-            parse_comment("### arabic\\n\\nhttps://github.com/user-attachments/assets/"
+            parse_comment("### arabic\n\nhttps://github.com/user-attachments/assets/"
                           "95f6dc55-5fce-4661-b5df-8043f32cb359", "missing-marker")
 
     def test_all_six_final_files_are_listed(self):
