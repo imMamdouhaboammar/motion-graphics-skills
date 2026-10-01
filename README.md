@@ -1,49 +1,117 @@
 <p align="center">
-  <img src="assets/readme/logo.svg" alt="Motion Graphics Skills Logo" width="380">
+  <img src="assets/readme/logo.svg" alt="Motion Graphics Skills logo" width="360">
 </p>
 
 <h1 align="center">Motion Graphics Skill Pack</h1>
 
 <p align="center">
-  <strong>22 skills for directing and building professional motion graphics and video editing with Claude Code. Every frame is code.</strong>
+  <strong>49 agent skills for motion design, animation, video editing, creative direction and production</strong><br>
+  Claude Code · Codex · HyperFrames<br>
+  <sub>Every frame is code</sub>
 </p>
 
 <p align="center">
   <a href="https://github.com/imMamdouhaboammar/motion-graphics-skills/stargazers"><img src="https://img.shields.io/github/stars/imMamdouhaboammar/motion-graphics-skills?style=flat-square&color=D97557&labelColor=00132F&label=stars" alt="GitHub stars"></a>
-  <img src="https://img.shields.io/badge/skills-22-D97557?style=flat-square&labelColor=00132F" alt="22 skills">
-  <img src="https://img.shields.io/badge/runs_in-Claude_Code_%C2%B7_Codex-58B6FF?style=flat-square&labelColor=00132F" alt="Runs in Claude Code and Codex">
-  <a href="LICENSE"><img src="https://img.shields.io/badge/license-Proprietary-red?style=flat-square&labelColor=00132F" alt="Licence"></a>
-  <a href="https://github.com/imMamdouhaboammar"><img src="https://img.shields.io/badge/creator-Mamdouh_Aboammar-FFD11A?style=flat-square&labelColor=00132F" alt="Creator"></a>
-<p align="center">
-  <img src="assets/sprites/robot_director_00_128.png" alt="Orb Camera Drone" width="44">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-  <img src="assets/sprites/robot_director_01_128.png" alt="Lead Motion Director" width="56">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-  <img src="assets/sprites/robot_director_07_128.png" alt="Social Spark" width="44">
+  <img src="https://img.shields.io/badge/skills-49-D97557?style=flat-square&labelColor=00132F" alt="49 agent skills">
+  <img src="https://img.shields.io/badge/Claude_Code_%2B_Codex-supported-58B6FF?style=flat-square&labelColor=00132F" alt="Claude Code and Codex">
+  <a href="LICENSE"><img src="https://img.shields.io/badge/license-see_LICENSE-red?style=flat-square&labelColor=00132F" alt="License"></a>
 </p>
 
 <p align="center">
-  <a href="https://immamdouhaboammar.github.io/motion-graphics-skills/">Website</a> &nbsp;·&nbsp;
-  <a href="#install">Install</a> &nbsp;·&nbsp;
-  <a href="#see-it-work">See it work</a> &nbsp;·&nbsp;
-  <a href="#the-skills">The skills</a> &nbsp;·&nbsp;
-  <a href="#how-they-fit-together">How they fit</a> &nbsp;·&nbsp;
-  <a href="#meet-the-director-crew">The Fleet</a> &nbsp;·&nbsp;
-  <a href="#prompts">Prompts</a> &nbsp;·&nbsp;
+  <img src="assets/sprites/robot_director_00_128.png" width="44" alt="Camera drone">&nbsp;&nbsp;&nbsp;
+  <img src="assets/sprites/robot_director_01_128.png" width="56" alt="Motion director">&nbsp;&nbsp;&nbsp;
+  <img src="assets/sprites/robot_director_07_128.png" width="44" alt="Social spark">
+</p>
+
+<p align="center">
+  <a href="https://immamdouhaboammar.github.io/motion-graphics-skills/">Website</a> ·
+  <a href="#watch-the-work">Watch the work</a> ·
+  <a href="#install">Install</a> ·
+  <a href="#the-skills">Skills</a> ·
+  <a href="#how-they-fit-together">Workflow</a> ·
+  <a href="#prompts">Prompts</a> ·
   <a href="https://github.com/imMamdouhaboammar">Author</a>
 </p>
 
 ---
 
-This pack directs and builds code-driven motion graphics without requiring After Effects. It covers brand films, event promos, explainers, kinetic typography, editorial collage, charts, title sequences, product launches, 2D, 2.5D and true 3D. Claude Code or Codex can author the composition, while HyperFrames can provide the reusable runtime, validation, preview, audio and rendering layers instead of rebuilding them.
+Creative direction and code-driven motion production without requiring After Effects. Build brand films, event promos, explainers, kinetic typography, product launch films, editorial motion and 2D/3D sequences. Use the pack for direction and craft; use [HyperFrames](https://github.com/heygen-com/hyperframes) for reusable runtime, validation, audio and render workflows.
 
-<p align="center">
-  <a href="projects/skills-promo-curve/renders/skills-promo-curve.mp4">
-    <img src="assets/readme/curve-promo-preview.gif" alt="The Curve: promo for this skill pack" width="300">
-  </a>
-</p>
-<p align="center">
-  <a href="projects/skills-promo-curve/renders/skills-promo-curve.mp4">▶ Watch the 31-second promo with sound</a><br>
-  <sub>This promo was made with the pack: one coral easing curve becomes a beat map, a waveform, a film strip and a phone. Source in <a href="projects/skills-promo-curve/">projects/skills-promo-curve</a>.</sub>
-</p>
+## Watch the work
+
+Six completed films, presented in their final running order with original audio. Watch every full-length video directly inside this README with native GitHub video playback controls, timeline seeking, and fullscreen support. Original master renders and project sources (where provided) are also available below each film.
+
+### Motion Graphics Skills | Arabic promo
+
+<sub>26.6 seconds · Arabic voice-over · 1080 × 1920 · 30 fps</sub>
+
+<!-- readme-video:arabic:start -->
+
+https://github.com/user-attachments/assets/908e651d-f5f5-431c-afaa-ac5dd38100d4
+
+<!-- readme-video:arabic:end -->
+
+[Full-length original MP4](projects/mgs-promo/renders/mgs-promo-final.mp4) · [Project source](projects/mgs-promo/)
+
+### The Curve | English promo
+
+<sub>31 seconds · English voice-over · 1080 × 1920 · 30 fps</sub>
+
+<!-- readme-video:curve:start -->
+
+https://github.com/user-attachments/assets/7bd0ed81-8612-4a2e-bae6-dfad2a4f0897
+
+<!-- readme-video:curve:end -->
+
+[Full-length original MP4](projects/skills-promo-curve/renders/skills-promo-curve.mp4) · [Project source](projects/skills-promo-curve/)
+
+### 5 Skills Countdown | English promo
+
+<sub>52 seconds · Music and sound effects · 1080 × 1920 · 30 fps</sub>
+
+<!-- readme-video:countdown:start -->
+
+https://github.com/user-attachments/assets/899f4294-689e-4c1c-877c-3623a8faa39a
+
+<!-- readme-video:countdown:end -->
+
+[Full-length original MP4](projects/skills-countdown-promo/renders/skills-promo-final.mp4) · [Project source](projects/skills-countdown-promo/)
+
+### TEOLA | Product Launch
+
+<sub>Final product-launch film</sub>
+
+<!-- readme-video:teola:start -->
+
+https://github.com/user-attachments/assets/6a9d2ff2-4e78-42c1-b8a7-3051579b451d
+
+<!-- readme-video:teola:end -->
+
+[Full-length original MP4](TEOLA-ad.mp4)
+
+### Four Steps | Events
+
+<sub>Arabic · Vertical event promo · Voice-over</sub>
+
+<!-- readme-video:four-steps:start -->
+
+https://github.com/user-attachments/assets/1434eb2f-b280-4272-9cd3-b9f8107fb747
+
+<!-- readme-video:four-steps:end -->
+
+[Full-length original MP4](projects/four-steps-events/renders/Four-Steps-Events-Motion-Final-v2.mp4) · [Project source](projects/four-steps-events/)
+
+### JEDAR | ليش مجاني؟
+
+<sub>59 seconds · Arabic voice-over · 1080 × 1920 · 30 fps</sub>
+
+<!-- readme-video:jedar:start -->
+
+https://github.com/user-attachments/assets/592daa6c-5ce0-4cef-ad3e-40e976729066
+
+<!-- readme-video:jedar:end -->
+
+[Full-length original MP4](projects/jedar-lesh-majani/renders/JEDAR-lesh-majani-final.mp4) · [Project source](projects/jedar-lesh-majani/)
 
 ## Install
 
@@ -64,7 +132,7 @@ Download this repo (green **Code** button, then **Download ZIP**) and unzip it, 
 git clone https://github.com/imMamdouhaboammar/motion-graphics-skills.git
 ```
 
-Copy the 22 folders inside `skills/` into `~/.claude/skills/` (every project) or your project's `.claude/skills/` (one project). This loop keeps any skill folder you already have:
+Copy the skill folders inside `skills/` into `~/.claude/skills/` (every project) or your project's `.claude/skills/` (one project). This loop keeps any skill folder you already have:
 
 ```bash
 mkdir -p ~/.claude/skills
@@ -125,33 +193,6 @@ Add HyperFrames once (free, open source): `npx skills add heygen-com/hyperframes
 
 </details>
 
-## See it work
-
-<table>
-  <tr>
-    <td width="50%" valign="top" align="center">
-      <h3>TEOLA Product Launch</h3>
-      <a href="https://github.com/imMamdouhaboammar/motion-graphics-skills/blob/main/TEOLA-ad.mp4">
-        <img src="assets/readme/teola-preview.gif" alt="TEOLA Product Launch Preview" width="100%">
-      </a>
-      <p align="center">
-        <a href="https://github.com/imMamdouhaboammar/motion-graphics-skills/blob/main/TEOLA-ad.mp4">▶ Play Full Video (TEOLA-ad.mp4)</a>
-      </p>
-      <p align="left"><sub>Full product launch commercial built completely with code and motion direction. Deep blue glass, glow transitions, and every word from an approved fact list.</sub></p>
-    </td>
-    <td width="50%" valign="top" align="center">
-      <h3>Four Steps Events Motion Final</h3>
-      <a href="https://github.com/imMamdouhaboammar/motion-graphics-skills/blob/main/projects/four-steps-events/renders/Four-Steps-Events-Motion-Final-v2.mp4">
-        <img src="assets/readme/four-steps-preview.gif" alt="Four Steps Events Motion Preview" width="100%">
-      </a>
-      <p align="center">
-        <a href="https://github.com/imMamdouhaboammar/motion-graphics-skills/blob/main/projects/four-steps-events/renders/Four-Steps-Events-Motion-Final-v2.mp4">▶ Play Full Video (Four-Steps-Events-Motion-Final-v2.mp4)</a>
-      </p>
-      <p align="left"><sub>Bilingual event promo with Arabic typography, custom brand cutouts, synchronized voiceover, and kinetic typography.</sub></p>
-    </td>
-  </tr>
-</table>
-
 ### Start here: one line, 60 seconds
 
 <table>
@@ -178,7 +219,7 @@ When you want a specific job done properly, pick a skill below.
 
 ## The skills
 
-Twenty-two skills, with motion-director as the broad creative front door. Type the line on the right into Claude Code and the right skill picks it up.
+49 installed skill folders are available in [`skills/`](skills/). The table below highlights 22 motion-production skills; the remaining folders cover supporting workflows and design, audio and runtime tooling. Start with `motion-director` for broad creative work.
 
 | Stage | Skill | What you get | Say this |
 |---|---|---|---|
