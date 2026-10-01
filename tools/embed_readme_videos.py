@@ -33,7 +33,7 @@ def validate_manifest(manifest: object) -> dict[str, str]:
             raise ValueError(f"{film}: upload MP4 via GitHub Markdown editor and paste a github.com/user-attachments/assets/UUID URL")
         u = urlsplit(value)
         if (u.scheme != "https" or u.netloc != "github.com"
-                or not ATTACHMENT.fullmatch(u.path) or u.query or u.fragment
+                or not ATTACHMENT.fullmatch(u.path)
                 or u.username or u.password):
             raise ValueError(f"{film}: upload MP4 via GitHub Markdown editor and paste a github.com/user-attachments/assets/UUID URL")
         validated[film] = value
