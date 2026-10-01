@@ -5,12 +5,12 @@
 <h1 align="center">Motion Graphics Skill Pack</h1>
 
 <p align="center">
-  <strong>20 skills for directing and building professional motion graphics and video editing with Claude Code. Every frame is code.</strong>
+  <strong>22 skills for directing and building professional motion graphics and video editing with Claude Code. Every frame is code.</strong>
 </p>
 
 <p align="center">
   <a href="https://github.com/imMamdouhaboammar/motion-graphics-skills/stargazers"><img src="https://img.shields.io/github/stars/imMamdouhaboammar/motion-graphics-skills?style=flat-square&color=D97557&labelColor=00132F&label=stars" alt="GitHub stars"></a>
-  <img src="https://img.shields.io/badge/skills-20-D97557?style=flat-square&labelColor=00132F" alt="20 skills">
+  <img src="https://img.shields.io/badge/skills-22-D97557?style=flat-square&labelColor=00132F" alt="22 skills">
   <img src="https://img.shields.io/badge/runs_in-Claude_Code_%C2%B7_Codex-58B6FF?style=flat-square&labelColor=00132F" alt="Runs in Claude Code and Codex">
   <a href="LICENSE"><img src="https://img.shields.io/badge/license-Proprietary-red?style=flat-square&labelColor=00132F" alt="Licence"></a>
   <a href="https://github.com/imMamdouhaboammar"><img src="https://img.shields.io/badge/creator-Mamdouh_Aboammar-FFD11A?style=flat-square&labelColor=00132F" alt="Creator"></a>
@@ -54,7 +54,7 @@ Download this repo (green **Code** button, then **Download ZIP**) and unzip it, 
 git clone https://github.com/imMamdouhaboammar/motion-graphics-skills.git
 ```
 
-Copy the 20 folders inside `skills/` into `~/.claude/skills/` (every project) or your project's `.claude/skills/` (one project). This loop keeps any skill folder you already have:
+Copy the 22 folders inside `skills/` into `~/.claude/skills/` (every project) or your project's `.claude/skills/` (one project). This loop keeps any skill folder you already have:
 
 ```bash
 mkdir -p ~/.claude/skills
@@ -168,7 +168,7 @@ When you want a specific job done properly, pick a skill below.
 
 ## The skills
 
-Twenty skills, with motion-director as the broad creative front door. Type the line on the right into Claude Code and the right skill picks it up.
+Twenty-two skills, with motion-director as the broad creative front door. Type the line on the right into Claude Code and the right skill picks it up.
 
 | Stage | Skill | What you get | Say this |
 |---|---|---|---|
@@ -191,6 +191,8 @@ Twenty skills, with motion-director as the broad creative front door. Type the l
 | <img src="assets/sprites/robot_director_07_128.png" width="22" align="absmiddle" alt="Promote"> Promote | [**newsletter-promo**](skills/newsletter-promo/) | A 12 to 20 second promo that sends people to an edition. | "Make a promo for this week’s newsletter." |
 | <img src="assets/sprites/robot_director_07_128.png" width="22" align="absmiddle" alt="Promote"> Promote | [**loop-cover**](skills/loop-cover/) | Your newsletter cover as a seamless looping GIF. | "Make my newsletter cover a looping GIF." |
 | <img src="assets/sprites/robot_director_07_128.png" width="22" align="absmiddle" alt="Promote"> Promote | [**reel-export**](skills/reel-export/) | Any video as a clean 1080 x 1920 Reel or TikTok. | "Make this a reel for Instagram." |
+| <img src="assets/sprites/robot_director_03_128.png" width="22" align="absmiddle" alt="Audio"> Audio | [**sfx-picker**](skills/sfx-picker/) | Select and integrate curated SFX assets into motion graphics and video editing timelines. | "Pick sound effects for this animation sequence." |
+| <img src="assets/sprites/robot_director_03_128.png" width="22" align="absmiddle" alt="Audio"> Audio | [**tonejs**](skills/tonejs/) | Tone.js audio generation, GSAP timeline sync via Tone.Draw, audio-reactive animation and effects. | "Generate sound effects with Tone.js and sync with GSAP." |
 | <img src="assets/sprites/robot_director_01_128.png" width="22" align="absmiddle" alt="Review"> Review | [**video-review-loop**](skills/video-review-loop/) | Pre-delivery technical and motion gates, timecoded defect logs, frozen frame, and audio checks. | "Review this rendered video cut by timecode." |
 
 See each skill's `SKILL.md` for its trigger phrases, the inputs it asks for and what it learned the hard way.
@@ -361,7 +363,7 @@ The master skill adds creative direction, narrative, typography, composition, mo
 
 ## Meet the Motion Director Crew
 
-Every frame is code, and every cut has a specialist. These retro cyberpunk pixel art mascots were crafted with the Sprite Fusion API to personify the creative roles across the 20 skills:
+Every frame is code, and every cut has a specialist. These retro cyberpunk pixel art mascots were crafted with the Sprite Fusion API to personify the creative roles across the skills:
 
 <p align="center">
   <img src="assets/sprites/cyberpunk_director_preview_grid.png" alt="Motion Director Robot Fleet" width="620">
