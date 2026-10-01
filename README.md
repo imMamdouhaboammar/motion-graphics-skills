@@ -46,36 +46,48 @@ These are **complete, rendered films**, not AI-generated mockups. Every title be
 <table>
 <tr>
 <td width="50%" valign="top" align="center">
-  <a href="projects/mgs-promo/renders/mgs-promo-final.mp4"><img src="projects/mgs-promo/inspection/contact-sheet-final.png" alt="Contact sheet for the Arabic Motion Graphics Skills promo" width="100%"></a><br>
+  <!-- readme-video:arabic:start -->
+  <a href="projects/mgs-promo/renders/mgs-promo-final.mp4"><img src="projects/mgs-promo/inspection/contact-sheet-final.png" alt="Contact sheet for the Arabic Motion Graphics Skills promo" width="100%"></a>
+  <!-- readme-video:arabic:end --><br>
   <strong>Motion Graphics Skills: Arabic</strong><br><sub>26.6s · Arabic · 9:16 · voice-over</sub><br>
   <a href="projects/mgs-promo/renders/mgs-promo-final.mp4">Watch complete MP4 with sound</a> · <a href="projects/mgs-promo/">Source</a>
 </td>
 <td width="50%" valign="top" align="center">
-  <a href="projects/skills-promo-curve/renders/skills-promo-curve.mp4"><img src="assets/readme/curve-promo-preview.gif" alt="Short animated preview of The Curve promo" width="100%"></a><br>
+  <!-- readme-video:curve:start -->
+  <a href="projects/skills-promo-curve/renders/skills-promo-curve.mp4"><img src="assets/readme/curve-promo-preview.gif" alt="Short animated preview of The Curve promo" width="100%"></a>
+  <!-- readme-video:curve:end --><br>
   <strong>The Curve</strong><br><sub>31s · English · 9:16 · voice-over</sub><br>
   <a href="projects/skills-promo-curve/renders/skills-promo-curve.mp4">Watch complete MP4 with sound</a> · <a href="projects/skills-promo-curve/">Source</a>
 </td>
 </tr>
 <tr>
 <td width="50%" valign="top" align="center">
-  <a href="projects/skills-countdown-promo/renders/skills-promo-final.mp4"><img src="assets/readme/social-preview.png" alt="Motion Graphics Skill Pack artwork for the English countdown promo" width="100%"></a><br>
+  <!-- readme-video:countdown:start -->
+  <a href="projects/skills-countdown-promo/renders/skills-promo-final.mp4"><img src="assets/readme/social-preview.png" alt="Motion Graphics Skill Pack artwork for the English countdown promo" width="100%"></a>
+  <!-- readme-video:countdown:end --><br>
   <strong>5 Skills Countdown</strong><br><sub>52s · English · 9:16 · music and SFX</sub><br>
   <a href="projects/skills-countdown-promo/renders/skills-promo-final.mp4">Watch complete MP4 with sound</a> · <a href="projects/skills-countdown-promo/">Source</a>
 </td>
 <td width="50%" valign="top" align="center">
-  <a href="TEOLA-ad.mp4"><img src="assets/readme/teola-preview.gif" alt="Short animated preview of TEOLA product launch" width="100%"></a><br>
+  <!-- readme-video:teola:start -->
+  <a href="TEOLA-ad.mp4"><img src="assets/readme/teola-preview.gif" alt="Short animated preview of TEOLA product launch" width="100%"></a>
+  <!-- readme-video:teola:end --><br>
   <strong>TEOLA Product Launch</strong><br><sub>Product launch · motion direction · final film</sub><br>
   <a href="TEOLA-ad.mp4">Watch complete MP4 with sound</a>
 </td>
 </tr>
 <tr>
 <td width="50%" valign="top" align="center">
-  <a href="projects/four-steps-events/renders/Four-Steps-Events-Motion-Final-v2.mp4"><img src="assets/readme/four-steps-preview.gif" alt="Short animated preview of Four Steps Events" width="100%"></a><br>
+  <!-- readme-video:four-steps:start -->
+  <a href="projects/four-steps-events/renders/Four-Steps-Events-Motion-Final-v2.mp4"><img src="assets/readme/four-steps-preview.gif" alt="Short animated preview of Four Steps Events" width="100%"></a>
+  <!-- readme-video:four-steps:end --><br>
   <strong>Four Steps Events</strong><br><sub>Arabic · 9:16 · voice-over</sub><br>
   <a href="projects/four-steps-events/renders/Four-Steps-Events-Motion-Final-v2.mp4">Watch complete MP4 with sound</a> · <a href="projects/four-steps-events/">Source</a>
 </td>
 <td width="50%" valign="top" align="center">
-  <a href="projects/jedar-lesh-majani/renders/JEDAR-lesh-majani-final.mp4"><img src="projects/jedar-lesh-majani/renders/contact-sheet.jpg" alt="Storyboard contact sheet for JEDAR Arabic film" width="100%"></a><br>
+  <!-- readme-video:jedar:start -->
+  <a href="projects/jedar-lesh-majani/renders/JEDAR-lesh-majani-final.mp4"><img src="projects/jedar-lesh-majani/renders/contact-sheet.jpg" alt="Storyboard contact sheet for JEDAR Arabic film" width="100%"></a>
+  <!-- readme-video:jedar:end --><br>
   <strong>JEDAR: ليش مجاني؟</strong><br><sub>59s · Arabic · 9:16 · voice-over</sub><br>
   <a href="projects/jedar-lesh-majani/renders/JEDAR-lesh-majani-final.mp4">Watch complete MP4 with sound</a> · <a href="projects/jedar-lesh-majani/">Source</a>
 </td>
