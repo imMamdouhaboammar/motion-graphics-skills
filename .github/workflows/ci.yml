@@ -64,6 +64,11 @@ jobs:
       - name: Test README video embed integrity
         run: python3 -m unittest discover -s tests -p 'test_embed_readme_videos.py' -v
 
+      # Deliberately red until the README displays six real GitHub-hosted films.
+      # This is an acceptance gate, distinct from the passing parser unit tests.
+      - name: Require six native README video players
+        run: python3 tools/embed_readme_videos.py --check-ready
+
       - name: Check landing JavaScript syntax
         run: node --check landing/app.js
 
