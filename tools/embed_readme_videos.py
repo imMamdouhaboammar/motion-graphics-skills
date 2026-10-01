@@ -46,10 +46,10 @@ def render(readme: str, urls: dict[str, str]) -> str:
         if readme.count(begin) != 1 or readme.count(end) != 1:
             raise ValueError(f"Expected exactly one marker pair for {film}")
         slot = re.compile(re.escape(begin) + r"[\s\S]*?" + re.escape(end))
-        player = (
-            f'{begin}\n  <video src="{url}" controls playsinline '
-            f'preload="metadata" width="300"></video>\n  {end}'
-        )
+        # GitHub recognizes an attachment URL on its own Markdown line and
+        # renders its native player. Embedding this inside an HTML table or
+        # image-link Markdown prevents reliable video recognition.
+        player = f"{begin}\\n\\n{url}\\n\\n{end}"
         readme, count = slot.subn(lambda _match: player, readme)
         if count != 1:
             raise ValueError(f"Failed to replace slot for {film}")
