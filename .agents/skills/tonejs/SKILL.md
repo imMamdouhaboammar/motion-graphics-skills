@@ -12,13 +12,13 @@ Apply when any of the following are needed:
 
 - Playing audio files (SFX, VO, music) alongside GSAP animations
 - Beat-synchronized or BPM-locked animation (e.g. scene cuts on the beat)
-- Audio-reactive visuals — DOM/SVG elements animated by waveform or frequency data
+- Audio-reactive visuals: DOM/SVG elements animated by waveform or frequency data
 - Programmatic sound generation (synths, oscillators, UI sounds)
 - Adding audio effects (reverb, delay, distortion) to any source
 
 **Related skills:** For timeline sequencing use **gsap-timeline**, for performance use **gsap-performance**, and for scroll-sync use **gsap-scrolltrigger**.
 
-> ⚠️ **Browser Autoplay Policy** — `Tone.start()` MUST be called inside a user-gesture handler (click, keydown, etc.). Audio context will not resume otherwise. Always gate initialization behind an interaction.
+> ⚠️ **Browser Autoplay Policy**: `Tone.start()` MUST be called inside a user-gesture handler (click, keydown, etc.). Audio context will not resume otherwise. Always gate initialization behind an interaction.
 
 ---
 
@@ -77,21 +77,21 @@ All nodes connect via `.connect()` or `.toDestination()` shorthand.
 
 ---
 
-## GSAP Sync — The Right Way
+## GSAP Sync: The Right Way
 
 **Problem:** Tone callbacks run on the audio thread. Calling `gsap.to()` directly inside them causes jitter.
 
 **Solution:** Always use `Tone.getDraw().schedule()` to bridge audio events to the visual frame.
 
 ```js
-// ✅ Correct — no jitter
+// Correct: no jitter
 Tone.getTransport().scheduleRepeat((time) => {
   Tone.getDraw().schedule(() => {
     gsap.fromTo('#element', { scale: 1 }, { scale: 1.2, duration: 0.1 });
   }, time);
 }, '4n');
 
-// ❌ Wrong — triggers on audio thread, causes jitter
+// Wrong: triggers on audio thread, causes jitter
 Tone.getTransport().scheduleRepeat((time) => {
   gsap.to('#element', { scale: 1.2 }); // DO NOT do this
 }, '4n');
@@ -114,14 +114,14 @@ gsap.ticker.add(() => {
 
   bars.forEach((bar, i) => {
     const amp = Math.abs(waveform[i] ?? 0);
-    gsap.set(bar, { scaleY: 1 + amp * 15 }); // gsap.set — no tween overhead
+    gsap.set(bar, { scaleY: 1 + amp * 15 }); // gsap.set: no tween overhead
   });
 });
 
 synth.triggerAttackRelease('C3', '1n');
 ```
 
-> Use `gsap.set()` (not `gsap.to()`) inside `ticker.add()` — creating new tweens every frame is expensive.
+> Use `gsap.set()` (not `gsap.to()`) inside `ticker.add()` because creating new tweens every frame is expensive.
 
 ---
 
@@ -175,12 +175,12 @@ synth.triggerAttackRelease('A3', '4n');
 
 | Mistake | Fix |
 |---|---|
-| Audio doesn't start | Call `await Tone.start()` inside a click/keydown handler first |
-| Jittery visuals | Never call `gsap.to()` directly in Tone callbacks — use `Tone.getDraw().schedule()` |
-| `gsap.to()` inside ticker | Use `gsap.set()` inside `gsap.ticker.add()` — never create tweens per frame |
+| Audio does not start | Call `await Tone.start()` inside a click or keydown handler first |
+| Jittery visuals | Never call `gsap.to()` directly in Tone callbacks. Use `Tone.getDraw().schedule()` |
+| `gsap.to()` inside ticker | Use `gsap.set()` inside `gsap.ticker.add()` instead of creating tweens per frame |
 | Transport events fire twice | Call `Tone.getTransport().cancel()` before re-scheduling |
 | Player not ready | Wrap `player.start()` in the `player.load()` promise or use `onsuccess` |
-| High CPU from analyser | Use a small buffer size (32–64) and avoid FFT when waveform is enough |
+| High CPU from analyser | Use a small buffer size (32 to 64) and avoid FFT when waveform is enough |
 
 ---
 
