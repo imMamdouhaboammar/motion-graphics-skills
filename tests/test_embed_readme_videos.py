@@ -4,6 +4,7 @@ import tempfile
 import unittest
 from pathlib import Path
 from tools.embed_readme_videos import render, validate_manifest
+from tools.publish_readme_videos import FILMS, parse_comment
 
 EXAMPLE = """<!-- readme-video:arabic:start -->
   <a href="projects/mgs-promo/renders/mgs-promo-final.mp4"><img src="poster.png"></a>
@@ -44,6 +45,25 @@ class ReadmeVideoTests(unittest.TestCase):
             render("README has no slots", {"arabic": URL})
         with self.assertRaises(ValueError):
             render(EXAMPLE + "\n" + EXAMPLE, {"arabic": URL})
+
+    def test_parse_full_video_uploads_preserves_film_identity(self):
+        marker = "README_VIDEO_BATCH_test"
+        body = "Full-length README promo assets: " + marker + "\\n\\n"
+        for index, film in enumerate(FILMS):
+            body += (
+                f"### {film}\\n\\n"
+                f"https://github.com/user-attachments/assets/"
+                f"00000000-0000-0000-0000-{index+1:012x}\\n\\n"
+            )
+        result = parse_comment(body, marker)
+        self.assertEqual(len(result), 6)
+        self.assertTrue(result["arabic"].endswith("000000000001"))
+        self.assertTrue(result["jedar"].endswith("000000000006"))
+
+    def test_parser_rejects_unmatched_upload_comment(self):
+        with self.assertRaises(ValueError):
+            parse_comment("### arabic\\n\\nhttps://github.com/user-attachments/assets/"
+                          "95f6dc55-5fce-4661-b5df-8043f32cb359", "missing-marker")
 
     def test_all_six_final_files_are_listed(self):
         readme = (Path(__file__).resolve().parents[1] / "README.md").read_text()
