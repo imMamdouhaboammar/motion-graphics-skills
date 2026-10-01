@@ -56,6 +56,11 @@ jobs:
       - name: Validate landing catalog sync
         run: python landing/validate_landing.py
 
+      - name: Check README video publisher CLI
+        run: |
+          python3 -m py_compile tools/embed_readme_videos.py tools/publish_readme_videos.py
+          python3 tools/publish_readme_videos.py --help
+
       - name: Test README video embed integrity
         run: python3 -m unittest discover -s tests -p 'test_embed_readme_videos.py' -v
 
