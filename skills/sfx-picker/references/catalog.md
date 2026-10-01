@@ -1,4 +1,4 @@
-# SFX Catalog — Cozer Motion Library
+# SFX Catalog - Cozer Motion Library
 
 All 148 audio files in `assets/sfx/`. Use this file as the single source of truth before picking any SFX. Every filename here is exact and verified.
 

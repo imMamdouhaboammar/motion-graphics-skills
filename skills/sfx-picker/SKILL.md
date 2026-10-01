@@ -3,7 +3,7 @@ name: sfx-picker
 description: Pick and assign sound effects from the Cozer SFX library to motion graphics compositions, animation keyframes, and UI interactions. Reads the full catalog in references/catalog.md and maps each sound to a visual moment. Use when building motion graphics that need audio, adding SFX to HyperFrames timelines, or when someone says "add sound", "which SFX fits here", "pick a click sound", "add a glitch sound", or "suggest SFX for this animation".
 ---
 
-# SFX Picker — Cozer Motion SFX Library
+# SFX Picker - Cozer Motion SFX Library
 
 148 curated sound effects across 10 categories, purpose-built for motion graphics, UI animations, and editorial video. Every file lives under `assets/sfx/` in this repository and is ready to use in HyperFrames, ffmpeg pipelines, After Effects, or browser-based HTML compositions.
 
@@ -21,10 +21,10 @@ Map the animation to a list of keyframe moments. For each moment, state:
 Example moment list:
 
 ```
-0.0s — hero title slides in from left — punchy, confident
-0.4s — subtitle fades up — soft, airy
-1.2s — CTA button appears — crisp click, satisfying
-2.0s — background grid glitches — digital, corrupted
+0.0s: hero title slides in from left - punchy, confident
+0.4s: subtitle fades up - soft, airy
+1.2s: CTA button appears - crisp click, satisfying
+2.0s: background grid glitches - digital, corrupted
 ```
 
 ## Step 2: Match each moment to a category
@@ -50,7 +50,7 @@ After picking sounds, produce a cue sheet in this format:
 
 ```
 TIME    CATEGORY        FILE                                NOTES
-0.0s    crisp           Crisp  (14).mp3                    Title slide — punchy cut
+0.0s    crisp           Crisp  (14).mp3                    Title slide: punchy cut
 0.4s    ui-sounds       ES_UI, Positive 02 - Epidemic Sound.mp3   Subtitle appears
 1.2s    digital-click   ui degital click by clips.mp3      CTA button appears
 2.0s    glitch          UIGlitch_Futuristic_Machines_Devices_Glitch_2_Ocular_Sounds_Sci.wav  Grid glitch
