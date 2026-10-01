@@ -29,7 +29,7 @@ class ReadmeVideoTests(unittest.TestCase):
 
     def test_replaces_thumbnail_with_full_length_embedded_player(self):
         output = render(EXAMPLE, {"arabic": URL})
-        self.assertIn("\\n\\n" + URL + "\\n\\n", output)
+        self.assertIn("\n\n" + URL + "\n\n", output)
         self.assertNotIn("<video", output)
         self.assertNotIn("![", output)
         self.assertNotIn('src="poster.png"', output)
