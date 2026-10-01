@@ -39,60 +39,81 @@ Creative direction and code-driven motion production without requiring After Eff
 
 ## Watch the work
 
-These are **complete, rendered films**, not AI-generated mockups. Every title below points to a finished MP4 with the original sound. The animation thumbnails are deliberately short, muted previews and **are not** full-length videos.
+Six completed films, presented in their final running order with sound. The images currently shown are **previews or stills**, not full-length playback. The publishing tool replaces each preview with a **native GitHub video player inside this README**, using actual uploaded `user-attachments` URLs; it does not use an external watch page.
 
-> **Native playback:** GitHub does not turn repository MP4 paths into inline README players. The full-length players require assets uploaded through GitHub's Markdown attachment uploader or GitHub CLI 2.99+ (`--attach`), then embedded with their generated `user-attachments` URLs. This branch provides the six slots and a [one-command publishing tool](docs/readme-video-embedding.md). The player upload step still requires a personally authenticated GitHub session. Until then, these are thumbnails and master links, not embedded video players.
+> **Publishing status:** The six masters are already in the repository. Inline playback still needs the authenticated GitHub attachment upload step described in [Publish full-length videos](docs/readme-video-embedding.md). Until the resulting URLs are committed, the fallback image opens the full MP4.
 
-<table>
-<tr>
-<td width="50%" valign="top" align="center">
-  <!-- readme-video:arabic:start -->
-  <a href="projects/mgs-promo/renders/mgs-promo-final.mp4"><img src="projects/mgs-promo/inspection/contact-sheet-final.png" alt="Contact sheet for the Arabic Motion Graphics Skills promo" width="100%"></a>
-  <!-- readme-video:arabic:end --><br>
-  <strong>Motion Graphics Skills: Arabic</strong><br><sub>26.6s · Arabic · 9:16 · voice-over</sub><br>
-  <a href="projects/mgs-promo/renders/mgs-promo-final.mp4">Watch complete MP4 with sound</a> · <a href="projects/mgs-promo/">Source</a>
-</td>
-<td width="50%" valign="top" align="center">
-  <!-- readme-video:curve:start -->
-  <a href="projects/skills-promo-curve/renders/skills-promo-curve.mp4"><img src="assets/readme/curve-promo-preview.gif" alt="Short animated preview of The Curve promo" width="100%"></a>
-  <!-- readme-video:curve:end --><br>
-  <strong>The Curve</strong><br><sub>31s · English · 9:16 · voice-over</sub><br>
-  <a href="projects/skills-promo-curve/renders/skills-promo-curve.mp4">Watch complete MP4 with sound</a> · <a href="projects/skills-promo-curve/">Source</a>
-</td>
-</tr>
-<tr>
-<td width="50%" valign="top" align="center">
-  <!-- readme-video:countdown:start -->
-  <a href="projects/skills-countdown-promo/renders/skills-promo-final.mp4"><img src="assets/readme/social-preview.png" alt="Motion Graphics Skill Pack artwork for the English countdown promo" width="100%"></a>
-  <!-- readme-video:countdown:end --><br>
-  <strong>5 Skills Countdown</strong><br><sub>52s · English · 9:16 · music and SFX</sub><br>
-  <a href="projects/skills-countdown-promo/renders/skills-promo-final.mp4">Watch complete MP4 with sound</a> · <a href="projects/skills-countdown-promo/">Source</a>
-</td>
-<td width="50%" valign="top" align="center">
-  <!-- readme-video:teola:start -->
-  <a href="TEOLA-ad.mp4"><img src="assets/readme/teola-preview.gif" alt="Short animated preview of TEOLA product launch" width="100%"></a>
-  <!-- readme-video:teola:end --><br>
-  <strong>TEOLA Product Launch</strong><br><sub>Product launch · motion direction · final film</sub><br>
-  <a href="TEOLA-ad.mp4">Watch complete MP4 with sound</a>
-</td>
-</tr>
-<tr>
-<td width="50%" valign="top" align="center">
-  <!-- readme-video:four-steps:start -->
-  <a href="projects/four-steps-events/renders/Four-Steps-Events-Motion-Final-v2.mp4"><img src="assets/readme/four-steps-preview.gif" alt="Short animated preview of Four Steps Events" width="100%"></a>
-  <!-- readme-video:four-steps:end --><br>
-  <strong>Four Steps Events</strong><br><sub>Arabic · 9:16 · voice-over</sub><br>
-  <a href="projects/four-steps-events/renders/Four-Steps-Events-Motion-Final-v2.mp4">Watch complete MP4 with sound</a> · <a href="projects/four-steps-events/">Source</a>
-</td>
-<td width="50%" valign="top" align="center">
-  <!-- readme-video:jedar:start -->
-  <a href="projects/jedar-lesh-majani/renders/JEDAR-lesh-majani-final.mp4"><img src="projects/jedar-lesh-majani/renders/contact-sheet.jpg" alt="Storyboard contact sheet for JEDAR Arabic film" width="100%"></a>
-  <!-- readme-video:jedar:end --><br>
-  <strong>JEDAR: ليش مجاني؟</strong><br><sub>59s · Arabic · 9:16 · voice-over</sub><br>
-  <a href="projects/jedar-lesh-majani/renders/JEDAR-lesh-majani-final.mp4">Watch complete MP4 with sound</a> · <a href="projects/jedar-lesh-majani/">Source</a>
-</td>
-</tr>
-</table>
+### Motion Graphics Skills | Arabic promo
+
+<sub>26.6 seconds · Arabic voice-over · 1080 × 1920 · 30 fps</sub>
+
+<!-- readme-video:arabic:start -->
+
+[![Contact sheet of the final Arabic Motion Graphics Skills promo](projects/mgs-promo/inspection/contact-sheet-final.png)](projects/mgs-promo/renders/mgs-promo-final.mp4)
+
+<!-- readme-video:arabic:end -->
+
+[Full-length original MP4](projects/mgs-promo/renders/mgs-promo-final.mp4) · [Project source](projects/mgs-promo/)
+
+### The Curve | English promo
+
+<sub>31 seconds · English voice-over · 1080 × 1920 · 30 fps</sub>
+
+<!-- readme-video:curve:start -->
+
+[![Short muted preview of The Curve](assets/readme/curve-promo-preview.gif)](projects/skills-promo-curve/renders/skills-promo-curve.mp4)
+
+<!-- readme-video:curve:end -->
+
+[Full-length original MP4](projects/skills-promo-curve/renders/skills-promo-curve.mp4) · [Project source](projects/skills-promo-curve/)
+
+### 5 Skills Countdown | English promo
+
+<sub>52 seconds · Music and sound effects · 1080 × 1920 · 30 fps</sub>
+
+<!-- readme-video:countdown:start -->
+
+[![Motion Graphics Skills brand artwork for the countdown film](assets/readme/social-preview.png)](projects/skills-countdown-promo/renders/skills-promo-final.mp4)
+
+<!-- readme-video:countdown:end -->
+
+[Full-length original MP4](projects/skills-countdown-promo/renders/skills-promo-final.mp4) · [Project source](projects/skills-countdown-promo/)
+
+### TEOLA | Product Launch
+
+<sub>Final product-launch film</sub>
+
+<!-- readme-video:teola:start -->
+
+[![Short muted preview of TEOLA product launch](assets/readme/teola-preview.gif)](TEOLA-ad.mp4)
+
+<!-- readme-video:teola:end -->
+
+[Full-length original MP4](TEOLA-ad.mp4)
+
+### Four Steps | Events
+
+<sub>Arabic · Vertical event promo · Voice-over</sub>
+
+<!-- readme-video:four-steps:start -->
+
+[![Short muted preview of Four Steps Events](assets/readme/four-steps-preview.gif)](projects/four-steps-events/renders/Four-Steps-Events-Motion-Final-v2.mp4)
+
+<!-- readme-video:four-steps:end -->
+
+[Full-length original MP4](projects/four-steps-events/renders/Four-Steps-Events-Motion-Final-v2.mp4) · [Project source](projects/four-steps-events/)
+
+### JEDAR | ليش مجاني؟
+
+<sub>59 seconds · Arabic voice-over · 1080 × 1920 · 30 fps</sub>
+
+<!-- readme-video:jedar:start -->
+
+[![Contact sheet for JEDAR film](projects/jedar-lesh-majani/renders/contact-sheet.jpg)](projects/jedar-lesh-majani/renders/JEDAR-lesh-majani-final.mp4)
+
+<!-- readme-video:jedar:end -->
+
+[Full-length original MP4](projects/jedar-lesh-majani/renders/JEDAR-lesh-majani-final.mp4) · [Project source](projects/jedar-lesh-majani/)
 
 ## Install
 
@@ -200,7 +221,7 @@ When you want a specific job done properly, pick a skill below.
 
 ## The skills
 
-49 installable skills, with motion-director as the broad creative front door. Type the line on the right into Claude Code and the right skill picks it up.
+49 installed skill folders are available in [`skills/`](skills/). The table below highlights 22 motion-production skills; the remaining folders cover supporting workflows and design, audio and runtime tooling. Start with `motion-director` for broad creative work.
 
 | Stage | Skill | What you get | Say this |
 |---|---|---|---|
