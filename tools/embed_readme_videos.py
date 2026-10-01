@@ -49,7 +49,7 @@ def render(readme: str, urls: dict[str, str]) -> str:
         # GitHub recognizes an attachment URL on its own Markdown line and
         # renders its native player. Embedding this inside an HTML table or
         # image-link Markdown prevents reliable video recognition.
-        player = f"{begin}\\n\\n{url}\\n\\n{end}"
+        player = f"{begin}\n\n{url}\n\n{end}"
         readme, count = slot.subn(lambda _match: player, readme)
         if count != 1:
             raise ValueError(f"Failed to replace slot for {film}")
