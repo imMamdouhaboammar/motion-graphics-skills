@@ -41,7 +41,7 @@ Creative direction and code-driven motion production without requiring After Eff
 
 These are **complete, rendered films**, not AI-generated mockups. Every title below points to a finished MP4 with the original sound. The animation thumbnails are deliberately short, muted previews and **are not** full-length videos.
 
-> **About inline playback on GitHub:** An MP4 committed to a repository does not become a native player in README Markdown. To watch the **full film, with audio and seeking, inside this README**, its MP4 must first be attached through GitHub's Markdown editor and its generated `github.com/user-attachments/assets/…` URL embedded here. The repository keeps its original masters; see [README video embedding](docs/readme-video-embedding.md) for the exact upload and publishing process. We do not pretend that a GIF or a linked file is an embedded full-length video.
+> **Native playback:** GitHub does not turn repository MP4 paths into inline README players. The full-length players require assets uploaded through GitHub's Markdown attachment uploader or GitHub CLI 2.99+ (`--attach`), then embedded with their generated `user-attachments` URLs. This branch provides the six slots and a [one-command publishing tool](docs/readme-video-embedding.md). The player upload step still requires a personally authenticated GitHub session. Until then, these are thumbnails and master links, not embedded video players.
 
 <table>
 <tr>
