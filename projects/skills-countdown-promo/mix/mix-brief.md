@@ -2,7 +2,7 @@
 
 ## Project brief
 
-A 30 s vertical English promo (1080 × 1920) for the motion-graphics-skills repo, with a recorded voice over.
+A 30 s vertical English promo (about 28 s of speech plus the end card) (1080 × 1920) for the motion-graphics-skills repo, with a recorded voice over.
 Feedback on v1: the hip-hop bed was tiring across the whole film, the motion felt traditional, and the owner asked for a fresher idea built from more than one reference.
 
 ## References

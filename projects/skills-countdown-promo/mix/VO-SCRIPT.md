@@ -1,4 +1,4 @@
-# Voice-over script (about 28 s)
+# Voice-over script (about 28 s of speech; the cut runs about 30 s with the end card)
 
 Warm, conversational, a little playful. Talk to one person. Each **bold** word becomes the red key word on screen.
 
