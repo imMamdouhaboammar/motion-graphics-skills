@@ -70,6 +70,10 @@ python3 -m unittest discover -s tests -p 'test_embed_readme_videos.py' -v
 
 This replaces six labeled thumbnail slots with a **bare GitHub attachment URL in its own Markdown paragraph**. GitHub recognizes these links and creates its native video player on the rendered README. URLs in HTML tables, image Markdown or ordinary repository-file links are not equivalent. Commit the updated README and inspect the rendered README on GitHub (not only a local Markdown preview). GitHub may start players muted; unmute using the native control to hear the original audio.
 
+## Automated merge gate
+
+CI runs `python3 tools/embed_readme_videos.py --check-ready`. It **fails deliberately** while any of the six final videos is still a thumbnail, an MP4 source link, a missing asset, or a repeated/invalid attachment URL. After uploading the videos and pushing the README update, the structural gate becomes green. This cannot substitute for testing playback duration and audio in GitHub's rendered README before merging.
+
 ## Acceptance checklist
 
 - All six players appear **inside** the README, not on a separate website.
