@@ -29,35 +29,35 @@ SFX = {
     "scan": (1.6, 0.18), "send": (0.9, 0.35), "glitch": (0.9, 0.16), "twinkle": (2.6, 0.3), "riser-ui": (1.2, 0.2),
 }
 cues = []
-def c(t, name, vol=None, dur=None):
+def c(t, name, dur=None, vol=None):
     d, v = SFX[name]
     cues.append((round(t, 3), name, dur or d, vol if vol is not None else v))
 
-c(0.05, "swipe", 0.18)                                   # curve draws on
-c(word("motion"), "hit-light", 0.22)
+c(0.05, "swipe", vol=0.18)                                   # curve draws on
+c(word("motion"), "hit-light", vol=0.22)
 c(1.82, "whoosh-elec")                                   # playhead flip to the void
 c(word("timeline") + 0.1, "glitch"); c(word("week"), "hit-mid")
 c(word("skip"), "pop2"); c(word("skip") + 0.05, "whoosh-rev")
 c(5.6, "whoosh1")                                        # flip to paper
 c(word("write"), "type1"); c(word("write") + 0.3, "type2")
-c(word("brand"), "pop1"); c(word("brand") + 0.12, "pop2", 0.3); c(word("brand") + 0.25, "click")
+c(word("brand"), "pop1"); c(word("brand") + 0.12, "pop2", vol=0.3); c(word("brand") + 0.25, "click")
 for i in range(3):
-    c(word("colors") + i * 0.1, "pop1", 0.32)
+    c(word("colors") + i * 0.1, "pop1", vol=0.32)
 c(word("type"), "pop2"); c(word("timing"), "hit-light")
-c(word("motion", 2), "pop1"); c(word("motion", 2) + 0.12, "pop2", 0.3); c(word("motion", 2) + 0.25, "click")
-c(word("reference"), "ui-open"); c(word("beat"), "hit-light", 0.22)
+c(word("motion", 2), "pop1"); c(word("motion", 2) + 0.12, "pop2", vol=0.3); c(word("motion", 2) + 0.25, "click")
+c(word("reference"), "ui-open"); c(word("beat"), "hit-light", vol=0.22)
 for i in range(6):
-    c(word("beat") + i * 0.07, "pop1", 0.2)
+    c(word("beat") + i * 0.07, "pop1", vol=0.2)
 c(13.2, "whoosh-elec")                                   # flip to the void
 c(word("sfx"), "pop1"); c(word("sfx") + 0.25, "click")
-c(word("gives"), "pop1"); c(word("every"), "hit-light", 0.22); c(word("move"), "click", 0.35); c(word("its"), "pop2"); c(word("sound"), "ding")
-c(16.1, "whoosh1"); c(16.4, "whoosh-rev", 0.22)          # flip to paper, film strip slides in
+c(word("gives"), "pop1"); c(word("every"), "hit-light", vol=0.22); c(word("move"), "click", vol=0.35); c(word("its"), "pop2"); c(word("sound"), "ding")
+c(16.1, "whoosh1"); c(16.4, "whoosh-rev", vol=0.22)          # flip to paper, film strip slides in
 c(word("video"), "pop1"); c(word("checks"), "scan")
 # one tick per film-strip frame as the scan line crosses it; these mirror the B7 numbers in index.html
 SCAN_T0, SCAN_DUR, SCAN_TRAVEL = 17.2, 1.6, 780      # scan starts at x 60 and moves 780 px in 1.6 s
 CHECK_OFFSET, FRAME_STEP = 77, 152                   # check i sits 77 + 152 * i px right of the scan start
 for i in range(5):
-    c(SCAN_T0 + SCAN_DUR * (CHECK_OFFSET + i * FRAME_STEP) / SCAN_TRAVEL, "pop1", 0.3)
+    c(SCAN_T0 + SCAN_DUR * (CHECK_OFFSET + i * FRAME_STEP) / SCAN_TRAVEL, "pop1", vol=0.3)
 c(19.4, "whoosh-rev"); c(20.05, "pop2"); c(word("post"), "send")
 c(21.5, "whoosh-elec")                                   # flip to the void
 for i, t in enumerate([21.8, 22.15, 22.5, 22.85]):
@@ -65,8 +65,8 @@ for i, t in enumerate([21.8, 22.15, 22.5, 22.85]):
 c(23.45, "whoosh-rev"); c(word("code"), "hit-mid")
 c(23.9, "riser-ui"); c(25.05, "twinkle")
 for i in range(7):
-    c(25.6 + i * 0.1, "pop1", 0.18)
-c(word("grab"), "ding", 0.32)
+    c(25.6 + i * 0.1, "pop1", vol=0.18)
+c(word("grab"), "ding", vol=0.32)
 
 lines = ['      <!-- CUES -->',
          f'      <audio id="a-bed" src="assets/audio/music/bed.wav" data-start="0" data-duration="{TOTAL}" data-track-index="11" data-volume="0.2"></audio>']

@@ -7,6 +7,8 @@ One coral easing curve directs the film. It draws itself like a graph-editor cur
 carries each skill as a keyframe diamond with its mascot, then becomes a beat map, a waveform, a film strip, a 9:16 phone, the frame of the video, and the arch the crew stands on.
 A playhead sweep flips the world between paper and a black void. Each spoken line shows a few words, landing on the times they are spoken, and one coral key word.
 
+**Watch:** [`renders/skills-promo-curve.mp4`](renders/skills-promo-curve.mp4). The root README shows an 18 s preview (`assets/readme/curve-promo-preview.gif`) linked to the same file.
+
 | Path | What it is |
 |---|---|
 | `index.html` | the composition: a 16-segment bezier morph engine and one seek-safe GSAP timeline |
