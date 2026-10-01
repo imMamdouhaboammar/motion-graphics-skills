@@ -1,6 +1,6 @@
 # Full videos inside GitHub README
 
-GitHub renders a full, controllable video player in a README for videos uploaded via its **Markdown attachment uploader**. A relative path to an MP4 committed in this repository, a `raw.githubusercontent.com` URL, and an `iframe` are **not equivalent** and must not be presented as working inline video embeds.
+GitHub renders a full, controllable video player in a README for videos uploaded via its **Markdown attachment uploader** or the official GitHub CLI media attachment option (`gh` 2.99+). A relative path to an MP4 committed in this repository, a `raw.githubusercontent.com` URL, and an `iframe` are **not equivalent** and must not be presented as working inline video embeds.
 
 The original high-quality masters remain under `projects/**/renders/` and the root `TEOLA-ad.mp4`. GitHub attachment copies are only for in-README streaming, with audio, seek bar and fullscreen (subject to the browser's and GitHub's player behavior).
 
@@ -15,7 +15,31 @@ The original high-quality masters remain under `projects/**/renders/` and the ro
 | `four-steps` | [Four Steps Events](../projects/four-steps-events/renders/Four-Steps-Events-Motion-Final-v2.mp4) |
 | `jedar` | [JEDAR](../projects/jedar-lesh-majani/renders/JEDAR-lesh-majani-final.mp4) |
 
-## Upload the MP4s to GitHub's attachment service
+## Automated publishing (recommended)
+
+Check out this PR's branch locally on a computer signed in to your GitHub account. You need [GitHub CLI 2.99 or later](https://cli.github.com/) with personal login (OAuth or personal access token), Python 3, FFmpeg and FFprobe.
+
+```bash
+gh auth login
+git checkout fix/readme-playable-promos-20261001
+python3 tools/publish_readme_videos.py --pr 33 --max-mb 10 --commit
+git push origin fix/readme-playable-promos-20261001
+```
+
+This command:
+1. Reads **each of the six final film masters**, including the original sound and full duration.
+2. Uploads originals if they are below the size limit. Otherwise, makes a separate 2-pass H.264/AAC upload encode within the 10 MB attachment limit. The final masters in the repository **remain untouched**.
+3. Uses official `gh pr comment --attach` to upload full videos and create real `github.com/user-attachments/assets/UUID` links.
+4. Extracts the links from the new PR comment, validates them and fills the six README video slots with native players.
+5. Commits the README locally (without pushing until the final command).
+
+With a paid GitHub account that permits 100 MB video attachments, use `--max-mb 100` to keep **all six original masters** rather than compressing them. The command is idempotent at the README slot level, but each run re-uploads attachments. Use it once and verify the result.
+
+**Important:** A GitHub Actions `GITHUB_TOKEN` is a GitHub App installation token. The native attachment endpoint does not accept that token type, so this cannot be completed from CI with only `GITHUB_TOKEN`. A personally authenticated CLI (or the web editor below) is required.
+
+## Browser upload (manual alternative)
+
+
 
 1. Open the repository on GitHub, sign in, open `README.md`, and choose **Edit this file**.
 2. Drag a complete MP4 into the editor (or use the editor's **Attach files** control). **Do not commit the temporary edit.** Uploading it creates a URL beginning with `https://github.com/user-attachments/assets/` and ending in a UUID. Copy it.
@@ -55,4 +79,4 @@ This replaces the six labeled thumbnail slots with native HTML5 `<video>` player
 - Revisit the rendered README to confirm that GitHub has not changed its Markdown/media policy.
 - Keep the README lightweight: use `preload="metadata"` so six full films are not eagerly downloaded at page load.
 
-**Known constraint:** the GitHub repository connector can edit files and create PRs but cannot upload files into GitHub's browser-only `user-attachments` store. A GitHub-authenticated upload through the web editor is required for native README players. No generated UUID or fake attachment URL should ever be committed.
+**Known constraint:** the connected GitHub repository API can edit files and create PRs but does not expose the media upload endpoint with a personal OAuth or PAT token. Use personally authenticated `gh` CLI 2.99+ or the GitHub web editor. Never commit generated UUIDs or pretend a source MP4 path is an inline player.
