@@ -7,7 +7,7 @@ import argparse
 import json
 import math
 import sys
-from typing import Dict, List
+from typing import Dict, List, Optional
 
 
 def quantize_time_12fps(t: float) -> float:
@@ -24,27 +24,36 @@ def build_paper_piece(
     y: int,
     rotation_deg: float,
     bg_color: str = "#FAF8F5",
-    text_color: str = "#1A1A1A"
+    text_color: str = "#1A1A1A",
+    enter_at: Optional[float] = None,
 ) -> Dict:
     """
     Build metadata for a single paper cut cutout piece.
     """
-    return {
+    piece = {
         "text": text,
         "x": x,
         "y": y,
         "rotation": round(rotation_deg, 1),
         "bg_color": bg_color,
         "text_color": text_color,
-        "shadow": "2px 4px 6px rgba(0,0,0,0.18)"
+        "shadow": "2px 4px 6px rgba(0,0,0,0.18)",
     }
+    if enter_at is not None:
+        if not math.isfinite(enter_at) or enter_at < 0:
+            raise ValueError("enter_at must be a non-negative finite number")
+        piece["enter_at"] = round(enter_at, 4)
+    return piece
 
 
 def generate_paper_html(pieces: List[Dict], width: int = 1080, height: int = 1920) -> str:
     """
-    Generate minimal standalone HTML file with window.seek(seconds) support.
+    Generate minimal standalone HTML file with deterministic window.seek(seconds) support.
     """
-    pieces_json = json.dumps(pieces)
+    if width <= 0 or height <= 0:
+        raise ValueError("Canvas dimensions must be positive")
+
+    pieces_json = json.dumps(pieces).replace("<", "\\u003c")
     html = f"""<!DOCTYPE html>
 <html>
 <head>
@@ -60,6 +69,7 @@ def generate_paper_html(pieces: List[Dict], width: int = 1080, height: int = 192
     font-weight: bold;
     transform-origin: center center;
     border: 1px dashed rgba(0,0,0,0.06);
+    will-change: transform, opacity;
   }}
 </style>
 </head>
@@ -78,14 +88,31 @@ pieces.forEach((p, i) => {{
   el.style.color = p.text_color;
   el.style.left = p.x + "px";
   el.style.top = p.y + "px";
-  el.style.transform = `rotate(${{p.rotation}}deg)`;
   stage.appendChild(el);
 }});
 
+function renderFrame(stepT) {{
+  pieces.forEach((p, i) => {{
+    const el = document.getElementById("p-" + i);
+    const enterAt = Number.isFinite(p.enter_at) ? p.enter_at : i * 0.35;
+    const enterDuration = 0.25;
+    const progress = Math.max(0, Math.min(1, (stepT - enterAt) / enterDuration));
+    const dropY = (1 - progress) * 80;
+
+    el.style.visibility = stepT < enterAt ? "hidden" : "visible";
+    el.style.opacity = String(progress);
+    el.style.transform = `translateY(${{dropY}}px) rotate(${{p.rotation}}deg)`;
+  }});
+}}
+
 window.seek = function(seconds) {{
-  const stepT = Math.floor(seconds * 12) / 12;
+  const safeSeconds = Math.max(0, Number(seconds) || 0);
+  const stepT = Math.floor(safeSeconds * 12) / 12;
+  renderFrame(stepT);
   return stepT;
 }};
+
+renderFrame(0);
 </script>
 </body>
 </html>"""
@@ -111,14 +138,15 @@ def main():
 
         html = generate_paper_html([piece])
         assert "window.seek" in html
+        assert "renderFrame(stepT)" in html
         assert "EVIDENCE" in html
         print("Self-test passed successfully.")
         return 0
 
     pieces = [
-        build_paper_piece("THE BRIEF", 180, 420, -2.5),
-        build_paper_piece("EXHIBIT A", 220, 680, 4.0),
-        build_paper_piece("RESULT: 10X", 260, 940, -1.2)
+        build_paper_piece("THE BRIEF", 180, 420, -2.5, enter_at=0.0),
+        build_paper_piece("EXHIBIT A", 220, 680, 4.0, enter_at=0.35),
+        build_paper_piece("RESULT: 10X", 260, 940, -1.2, enter_at=0.70),
     ]
     html = generate_paper_html(pieces)
     if args.output:

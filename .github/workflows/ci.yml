@@ -35,6 +35,7 @@ jobs:
       - name: Verify test scripts exist
         run: |
           for script in \
+            "landing/validate_landing.py" \
             "skills/mix-and-match/scripts/test_mix_matrix.py" \
             "skills/motion-director/scripts/test_work_guard.py" \
             "skills/motion-director/scripts/browser-readiness-probe.cjs" \
@@ -51,6 +52,21 @@ jobs:
 
       - name: Validate Skills and Prompts
         run: bash validate-skills.sh
+
+      - name: Validate landing catalog sync
+        run: python landing/validate_landing.py
+
+      - name: Check landing JavaScript syntax
+        run: node --check landing/app.js
+
+      - name: Test video editing skill planners
+        run: |
+          python -m pytest \
+            skills/jump-cut-pacing/scripts/test_cut_plan.py \
+            skills/paper-cut-motion/scripts/test_paper_builder.py \
+            skills/speaker-cutout/scripts/test_speaker_layer.py \
+            skills/video-spotlight/scripts/test_spotlight_plan.py \
+            -v
 
       - name: Test Mix and Match helper
         run: python skills/mix-and-match/scripts/test_mix_matrix.py

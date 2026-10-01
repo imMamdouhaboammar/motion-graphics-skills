@@ -1,9 +1,14 @@
 #!/usr/bin/env python3
 from pathlib import Path
+import json
+import math
 import sys
+
+import pytest
 
 sys.path.insert(0, str(Path(__file__).parent))
 
+import speaker_layer
 from speaker_layer import (
     calculate_pip_layout,
     generate_depth_stack_filter,
@@ -43,3 +48,41 @@ def test_build_speaker_windows():
     assert len(windows) == 2
     assert windows[0]["duration"] == 4.5
     assert windows[1]["scale"] == 0.65
+
+
+@pytest.mark.parametrize(
+    "event",
+    [
+        {"start": -0.1, "end": 1.0},
+        {"start": 2.0, "end": 2.0},
+        {"start": 4.0, "end": 3.0},
+        {"start": 0.0, "end": 10.1},
+        {"start": math.nan, "end": 2.0},
+        {"start": 0.0, "end": math.inf},
+    ],
+)
+def test_build_speaker_windows_rejects_invalid_intervals(event):
+    with pytest.raises(ValueError, match="start|end|interval"):
+        build_speaker_windows([event], 10.0)
+
+
+def test_full_mode_ignores_pip_scale_and_anchors(monkeypatch, capsys):
+    monkeypatch.setattr(
+        sys,
+        "argv",
+        [
+            "speaker_layer.py",
+            "--mode",
+            "full",
+            "--scale",
+            "0.4",
+            "--anchor-x",
+            "1.0",
+            "--anchor-y",
+            "1.0",
+        ],
+    )
+
+    assert speaker_layer.main() == 0
+    layout = json.loads(capsys.readouterr().out)
+    assert layout == {"width": 1080, "height": 1920, "x": 0, "y": 0}

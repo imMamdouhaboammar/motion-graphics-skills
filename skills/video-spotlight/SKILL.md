@@ -1,62 +1,145 @@
 ---
 name: video-spotlight
-description: Apply selective lighting, focus spotlights, and timed grading beats to emphasize key moments in video footage. Dims and desaturates background elements by a controlled amount while keeping a target person, product, or area bright with an optional brand accent glow. Supports timed high-contrast and monochrome focus beats without altering global footage color matrix. Use when someone says "video spotlight", "selective lighting", "dim the background", "highlight this product", "focus beat", or "timed grade".
+description: Apply timed selective lighting to focus attention on a person, product, interface area, or visual detail while preserving the original pixels inside the target and dimming the surroundings. Uses normalized target geometry and a spatial FFmpeg mask. Use for "video spotlight", "selective lighting", "dim the background", "highlight this product", "focus beat", or timed visual emphasis.
 ---
 
 # Video Spotlight and Timed Lighting
 
-Draw the eye precisely to a speaker, product, chart element, or physical coordinate by dimming and desaturating the surroundings for 1 to 3 seconds.
+A spotlight is an attention edit.
+
+It should make the viewer look at one meaningful target for a short beat, then return the image to normal.
+
+It is not a global vignette or permanent grade.
+
+## Decision gate
+
+Use this skill when a specific object or area needs temporary emphasis.
+
+Good triggers include:
+
+- a product is named
+- a chart value is discussed
+- a UI control matters for one instruction
+- a face reaction is the narrative beat
+- a physical detail would otherwise be missed
+
+Do not use it when the entire frame is equally important.
+
+Do not leave the effect active simply because the shot is visually quiet.
 
 ## Lighting modes
 
-1. **Area Spotlight:** A soft elliptical beam highlighting a point or quadrant while peripheral areas darken.
-2. **Subject Glow:** The speaker or an object is masked, illuminated, and accented with the brand secondary tone while the background drops in saturation.
-3. **Dramatic Contrast Beat:** Short monochrome or punchy high-contrast interval timed to a key revelation or dramatic punchline.
+1. Area spotlight for a known region
+2. Subject emphasis when a stable subject mask already exists
+3. Short contrast beat for a deliberate dramatic change
+
+The bundled planner implements area spotlight geometry.
 
 ## Workflow
 
-### Step 1: Define spotlight target and timing
+### Step 1: Define the target in normalized coordinates
 
-Define the time interval and normalized coordinates `(x, y, rx, ry)` in `spotlight.json`:
+Use x and y for target center and rx and ry for horizontal and vertical radius.
 
-```json
+Example:
+
+~~~json
 {
-  "windows": [
-    {
-      "start": 4.2,
-      "end": 6.0,
-      "target": "area",
-      "area": { "x": 0.5, "y": 0.45, "rx": 0.25, "ry": 0.20 },
-      "dim": 0.45,
-      "desat": 0.60
-    }
-  ]
+  "start": 4.2,
+  "end": 6.0,
+  "target": "area",
+  "area": { "x": 0.50, "y": 0.45, "rx": 0.25, "ry": 0.20 },
+  "dim": 0.45,
+  "desat": 0.60
 }
-```
+~~~
 
-### Step 2: Validate coordinates
+### Step 2: Generate the plan and filter
 
-Run the plan validator to confirm boundary and timing constraints:
+~~~bash
+python3 scripts/spotlight_plan.py   --start 4.2   --end 6.0   --x 0.50   --y 0.45   --rx 0.25   --ry 0.20   --dim 0.45   --desat 0.60   --frame-width 1080   --frame-height 1920   > "$WORK/spotlight.json"
+~~~
 
-```bash
-python3 scripts/spotlight_plan.py --start 4.2 --end 6.0 --dim 0.45 --desat 0.60
-```
+The plan preserves:
 
-### Step 3: Composite spotlight in FFmpeg
+- normalized target geometry
+- lighting strength
+- frame dimensions
+- timing
+- generated ffmpeg_filter
 
-Apply the filter chain with smooth enable transitions:
+### Step 3: Understand the spatial composite
 
-```bash
-ffmpeg -y -i "$WORK/cut.mp4" -filter_complex \
-  "split[base][dimmed]; \
-   [dimmed]eq=brightness=-0.12:contrast=0.92,hue=s=0.4[dark]; \
-   [base][dark]blend=all_expr='if(between(T,4.2,6.0),B,A)'[out]" \
-  -map "[out]" -map 0:a? -c:v libx264 -crf 18 -pix_fmt yuv420p "$WORK/spotlight.mp4"
-```
+The generated filter does four things:
+
+1. keeps an untouched base copy
+2. creates a dimmed and desaturated copy
+3. builds an elliptical grayscale mask from the configured target
+4. restores the original pixels inside that mask and overlays the effect only during the requested time window
+
+Outside the time window, original footage passes through unchanged.
+
+The focal area stays bright because original pixels are preserved there. The effect is not a whole-frame substitution.
+
+### Step 4: Apply the generated filter
+
+Read ffmpeg_filter from the plan and use it as the video filter graph.
+
+Keep source audio unchanged unless the creative brief also calls for an audio accent.
+
+When the active composition already runs in HyperFrames, use the same target geometry and timing to build the equivalent masked layer there instead of adding a second render path.
+
+## Strength rules
+
+Start subtle.
+
+A normal emphasis beat should usually:
+
+- retain enough peripheral detail to understand context
+- reduce saturation rather than remove all color
+- avoid crushing skin tones or black levels
+- last only as long as the spoken or visual idea needs
+
+The target should attract attention because its surroundings recede, not because it glows like an effect demo.
+
+## Target tracking
+
+The bundled area plan is static.
+
+If the target moves significantly during the window, do one of these:
+
+- shorten the window
+- split it into multiple target windows
+- use subject tracking from the active runtime
+- use an existing subject mask
+
+Do not keep a static spotlight while the subject walks out of it.
+
+## Color integrity
+
+Preserve the delivery color contract.
+
+For normal web video, verify BT.709 tags and range on the final rendered file.
+
+Do not assume a correct filter string guarantees correct color after encoding.
+
+Read references/color-integrity.md.
+
+## Creative QA
+
+Hard-fail when:
+
+- the target itself becomes darker
+- the whole frame stays dim outside the effect window
+- the mask points at empty space
+- the spotlight remains after the relevant word or action
+- the effect is stronger than the content
+- skin tone changes noticeably
+- repeated spotlights create a predictable visual gimmick
 
 ## What I learned the hard way
 
-- **Never apply permanent color shifts.** A spotlight must feel like a brief visual breath. Keeping it on screen longer than 4 seconds causes viewer fatigue.
-- **Retain 40% peripheral saturation.** Dropping the background to pure greyscale can feel jarring like a retro filter. Reducing saturation by 50% to 60% feels like cinematic studio lighting.
-- **Respect BT.709 tags.** Color filters must not strip the color range or transform limited TV range into full range. Keep explicit color tags on the final output.
-- **Align to keyword audio.** Start the spotlight precisely on the accented word and cut it cleanly when the sentence concludes.
+- A full-frame grade cannot create a local spotlight by itself.
+- Timing the restoration is as important as timing the darkening.
+- Static coordinates fail on moving subjects.
+- The most useful spotlight often looks less dramatic than the first draft.

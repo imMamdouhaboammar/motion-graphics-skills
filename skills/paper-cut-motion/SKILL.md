@@ -1,61 +1,141 @@
 ---
 name: paper-cut-motion
-description: Create tactile stop-motion paper-cut and collage video sequences. Uses 12 fps stepped motion math, physical paper edge textures, drop shadows, pushpins, stamps, and newspaper clippings for investigative or editorial storytelling. Pure code with window.seek compatibility for HyperFrames or direct MP4 export. Use when someone says "paper-cut animation", "stop-motion video", "Vox paper style", "collage motion", "investigation board animation", or "tactile video graphics".
+description: Create tactile stop-motion paper-cut and collage sequences with deterministic 12 fps stepped motion, physical layering, paper shadows, stamps, pins, and editorial evidence boards. Use for investigative explainers, documentary collage, scrapbook storytelling, archival sequences, or requests such as "paper-cut animation", "stop-motion video", "collage motion", and "investigation board animation".
 ---
 
-# Paper-Cut and Stop-Motion Graphics
+# Paper Cut and Stop Motion Graphics
 
-Build tactile paper-cut animations, investigative collage boards, and stop-motion explainers entirely in code.
+This is an editorial material system, not a paper texture preset.
 
-## Core craft rules
+Use paper because documents, fragments, evidence, memory, or handmade assembly are part of the story.
 
-1. **12 fps time stepping:** Real paper moves in physical increments. All motion curves step at 12 fps (`stepT = Math.floor(t * 12) / 12`).
-2. **Directional paper shadows:** Crisp directional drop shadows simulate physical layers resting on a desk surface.
-3. **Tactile props:** Pushpins, red yarn connections, masking tape strips, and ink stamps tie disparate facts into a cohesive narrative board.
+## Decision gate
+
+Use this skill when the narrative benefits from physical evidence, collected fragments, archival material, or visible assembly.
+
+Do not use it merely to make a normal promo feel retro.
+
+Choose another visual lane when:
+
+- the story needs clean product UI fidelity
+- the brand depends on polished geometric precision
+- smooth camera movement is the main reference behavior
+- the paper metaphor has no relationship to the message
+
+## Build the evidence hierarchy first
+
+Before animating, classify every piece:
+
+1. Anchor: the central claim, person, place, or question
+2. Evidence: supporting photo, document, number, quote, or diagram
+3. Connector: line, thread, arrow, label, stamp, or annotation
+4. Resolution: the conclusion or final reveal
+
+Do not give every scrap equal visual weight.
+
+A strong board usually has one anchor, three to six evidence pieces, and only the connectors needed to explain relationships.
+
+## Physical world rules
+
+- Use stepped motion at 12 fps for paper movement.
+- Keep slight rotation differences between pieces.
+- Use directional shadows that agree on one light source.
+- Let heavy paper stop quickly.
+- Use overlap and occlusion to show physical order.
+- Replace one sheet by covering or removing it rather than morphing paper into unrelated geometry.
+- Keep texture subordinate to text readability.
+
+Read references/stop-motion-craft.md before adding more props.
 
 ## Workflow
 
-### Step 1: Collect story facts and evidence
+### Step 1: Plan entry order
 
-1. **The central claim:** The core headline or mystery being explained.
-2. **Evidence pieces:** 3 to 6 documents, newspaper headlines, charts, or photo clippings.
-3. **Color palette:** Warm newsprint `#FAF8F5`, cardboard kraft `#D8CBB5`, and dark charcoal ink `#1E1D1B`.
+Decide when each evidence piece enters.
 
-### Step 2: Generate the paper scene HTML
+The bundled builder supports enter_at per piece. If no explicit time is supplied, pieces enter in sequence using a deterministic default stagger.
 
-Generate a standalone seekable HTML template:
+### Step 2: Generate a seekable scene
 
-```bash
+~~~bash
 python3 scripts/paper_builder.py --output "$WORK/paper_scene.html"
-```
+~~~
 
-The template implements `window.seek(seconds)` so every frame can be inspected and exported.
+The generated file exposes window.seek(seconds).
 
-### Step 3: Animate with 12 fps discretization
+Seeking is deterministic. Every call quantizes the requested time to 12 fps and recalculates each piece's visibility, opacity, position, and rotation from that timestamp.
 
-In your animation script or GSAP timeline:
+Backward seeking must reconstruct the earlier frame correctly. Never make frame state depend on the previous seek call.
 
-```javascript
-function renderFrame(seconds) {
-  // Quantize continuous time to 12 frames per second
-  const stepT = Math.floor(seconds * 12) / 12;
+### Step 3: Author motion as physical action
 
-  // Pieces snap into position rather than gliding smoothly
-  const progress = Math.min(1.0, stepT / 0.5);
-  piece.style.transform = `translateY(${(1 - progress) * 80}px) rotate(${piece.rotation}deg)`;
-}
-```
+Good actions include:
 
-### Step 4: Add tactile audio accents
+- sheet drops
+- clipped photo slides
+- stamp impacts
+- pin placement
+- thread connections
+- tape reveals
+- stacked document replacement
 
-Pair each paper drop with a tactile sound:
-- Paper slide: soft dry friction sound.
-- Evidence pin: short percussive click.
-- Ink stamp: hollow thud.
+Avoid generic UI animation vocabulary such as floating cards, elastic spring motion, and continuous hover drift.
+
+### Step 4: Use typography like print
+
+Text should feel placed on physical material.
+
+Prefer:
+
+- newspaper scale contrast
+- short label strips
+- stamped classifications
+- typed evidence captions
+- large single-phrase headlines
+
+Avoid turning every paper piece into a paragraph.
+
+### Step 5: Add tactile sound only where contact happens
+
+Useful accents include:
+
+- dry paper slide
+- tape pull
+- pin click
+- stamp impact
+- pencil or marker stroke
+
+Do not add a sound effect to every movement.
+
+## Deterministic render contract
+
+The same timestamp must produce the same frame.
+
+This is required for:
+
+- HyperFrames capture
+- frame-by-frame review
+- batch rendering
+- backwards seeking
+- reproducible fixes
+
+If randomness is used for paper imperfections, seed it from stable piece data rather than runtime time or previous state.
+
+## Creative QA
+
+Hard-fail when:
+
+- the board looks like digital cards with paper colors
+- every element enters with the same move
+- evidence hierarchy is unclear
+- shadows disagree about light direction
+- text becomes unreadable under texture
+- backward seek produces a different frame
+- collage density grows without helping the story
 
 ## What I learned the hard way
 
-- **Smooth 60 fps kills the paper aesthetic.** Smooth interpolation makes paper pieces look like weightless digital UI cards. 12 fps stepping is mandatory.
-- **Physical cutouts do not morph.** When replacing one document with another, drop the second paper on top of the first, or slide it off screen.
-- **Slight rotation breaks digital perfection.** Perfectly horizontal paper cutouts look machine-generated. Tilt each piece by -3 to +4 degrees.
-- **Hard drop on impact.** A paper piece should fall and stop abruptly in a single frame. Never add bouncy cartoon overshoot to a heavy document.
+- Smooth interpolation can erase the handmade character.
+- Texture alone does not create materiality. Weight, overlap, timing, and shadow do.
+- Too many pins, strings, and stamps turn evidence into decoration.
+- A tactile style is strongest when the material itself explains the narrative.
