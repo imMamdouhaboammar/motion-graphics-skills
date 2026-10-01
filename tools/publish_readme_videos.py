@@ -17,7 +17,10 @@ import sys
 import tempfile
 from pathlib import Path
 
-from embed_readme_videos import FILMS, ROOT, render
+if __package__:
+    from .embed_readme_videos import FILMS, ROOT, render
+else:
+    from embed_readme_videos import FILMS, ROOT, render
 
 REPO = "imMamdouhaboammar/motion-graphics-skills"
 MASTER_FILES = {
