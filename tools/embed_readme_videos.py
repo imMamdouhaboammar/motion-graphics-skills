@@ -68,11 +68,11 @@ def check_readme_video_ready(readme: str) -> int:
         end = f"<!-- readme-video:{film}:end -->"
         if readme.count(begin) != 1 or readme.count(end) != 1:
             raise ValueError(f"{film}: missing or duplicate player slot")
-        match = re.search(re.escape(begin) + r"([\\s\\S]*?)" + re.escape(end), readme)
+        match = re.search(re.escape(begin) + r"(.*?)" + re.escape(end), readme, flags=re.S)
         if match is None:
             raise ValueError(f"{film}: malformed player slot")
         candidate = match.group(1).strip()
-        if "\\n" in candidate or not candidate.startswith("https://github.com/user-attachments/assets/"):
+        if len(candidate.splitlines()) != 1 or not candidate.startswith("https://github.com/user-attachments/assets/"):
             raise ValueError(f"{film}: full video attachment URL has not been published")
         urls[film] = candidate
     try:
