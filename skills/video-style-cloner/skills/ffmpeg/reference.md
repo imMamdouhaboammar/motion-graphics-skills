@@ -144,7 +144,7 @@ ffmpeg -i input.mp4 -ss 00:00:05 -vframes 1 -q:v 2 thumbnail.jpg
 ffmpeg -i input.mp4 -vf "fps=10,scale=480:-1" output.gif
 
 # With palette (better quality, smaller)
-ffmpeg -i input.mp4 -vf "fps=10,scale=480:-1,split[s0][s1];[s0]palettegen[p];[s1][p]paletteuse" output.gif
+ffmpeg -i input.mp4 -filter_complex "fps=10,scale=480:-1,split[s0][s1];[s0]palettegen[p];[s1][p]paletteuse" output.gif
 ```
 
 ### Picture-in-Picture

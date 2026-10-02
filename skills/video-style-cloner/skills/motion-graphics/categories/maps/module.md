@@ -7,7 +7,7 @@ Geographic motion: highlight regions, connect places, zoom to a location. **Firs
 Set `content.lane` first:
 
 - **vector** (default) — stylized region shapes, no real imagery. Native + live in HF, cheap. `asset_needs: []`.
-- **basemap** — needs real satellite/dark tiles, globe, or zoom-to-real-place. `asset_needs: [{ type: "map-bake", … }]`. **Bake the imagery in Source**: HF forbids render-time network and requires determinism, so live tiles (which re-fetch and can change per render) can't be the imagery layer — baking freezes it (and is smooth as a bonus). See Basemap lane + Determinism.
+- **basemap** — needs real satellite/dark tiles, globe, or zoom-to-real-place. `asset_needs: [{ role: "basemap", type: "map-bake", env: { NAME, STYLE, CENTER, ZSTART, ZEND, COUNTRIES, FPS, DUR } }]`. **Bake the imagery in Source**: HF forbids render-time network and requires determinism, so live tiles (which re-fetch and can change per render) can't be the imagery layer — baking freezes it (and is smooth as a bonus). See Basemap lane + Determinism.
 
 `content`: `{ lane, shot: highlight|flow|choropleth|labels|flag|pin-rollout|zoom-to, regions[], points[], basemap: satellite|dark, palette, headline, overlays: [label|pin|callout-card] }`.
 

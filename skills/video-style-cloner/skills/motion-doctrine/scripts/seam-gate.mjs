@@ -457,7 +457,7 @@ async function verify() {
         add(
           "zero-overlap",
           "FAIL",
-          `incoming ${en.selector} already visible at cut-1f (op ${enPre.op.toFixed(2)}) while outgoing still on screen — reads as a dissolve`,
+          `incoming ${en.selector} already visible at cut-1f (op ${enPre.op.toFixed(2)}) — incoming should be hidden before the boundary`,
         );
       else if (visible(exPost))
         add(
@@ -465,7 +465,7 @@ async function verify() {
           "FAIL",
           `outgoing ${ex.selector} still visible at cut+1f (op ${exPost.op.toFixed(2)})`,
         );
-      else add("zero-overlap", "PASS", "one side visible per frame");
+      else add("zero-overlap", "PASS", "incoming hidden at cut-1f; outgoing hidden at cut+1f");
 
       // Z-sign scan: the incoming scene's OWN entrances must not fight the seam's Z sign
       if (en.axis === "z") {

@@ -1,9 +1,4 @@
-use crate::{
-    agents::dispatch_parallel_production,
-    executor,
-    models::*,
-    router,
-};
+use crate::{agents::dispatch_parallel_production, executor, models::*, router};
 use anyhow::{Context, Result};
 use std::path::Path;
 use std::sync::Arc;
@@ -19,23 +14,67 @@ pub struct Pipeline {
 impl Pipeline {
     pub fn new(config: EngineConfig) -> (Self, mpsc::Receiver<String>) {
         let (tx, rx) = mpsc::channel(256);
-        (Self { config: Arc::new(config), event_tx: tx }, rx)
+        (
+            Self {
+                config: Arc::new(config),
+                event_tx: tx,
+            },
+            rx,
+        )
     }
 
     /// Run all phases for a project in sequence
     pub async fn run(&self, project: &mut Project) -> Result<()> {
-        self.emit(&project.slug, "pipeline", "Starting full pipeline").await;
+        self.emit(&project.slug, "pipeline", "Starting full pipeline")
+            .await;
 
-        self.phase_analyse(project).await?;
-        self.phase_audio(project).await?;
-        self.phase_route(project).await?;
-        self.phase_storyboard(project).await?;
+        if project.state == ProjectState::Complete {
+            return Ok(());
+        }
+        // Each persisted preproduction state resumes at its earliest unfinished phase.
+        let next_phase = match project.state {
+            ProjectState::Intake | ProjectState::Analysing => 1,
+            ProjectState::AudioAnalysis => 2,
+            ProjectState::StyleRouting => 3,
+            ProjectState::StoryboardDraft
+                if !project.storyboard.as_ref().is_some_and(|s| s.approved) =>
+            {
+                4
+            }
+            _ => 5,
+        };
+        if next_phase <= 1 && project.analysis.is_none() {
+            self.phase_analyse(project).await?;
+        }
+        if next_phase <= 2 {
+            self.phase_audio(project).await?;
+        }
+        if next_phase <= 3 && project.style.is_none() {
+            self.phase_route(project).await?;
+        }
+        if next_phase <= 4 {
+            self.phase_storyboard(project).await?;
+        }
+        if project.state == ProjectState::AwaitingApproval {
+            self.emit(
+                &project.slug,
+                "storyboard",
+                "Paused. Author plan.json and resume with --approve-storyboard after reviewing it.",
+            )
+            .await;
+            return Ok(());
+        }
+        anyhow::ensure!(
+            project.storyboard.as_ref().is_some_and(|s| s.approved),
+            "Production requires an explicitly approved storyboard"
+        );
         self.phase_produce(project).await?;
         self.phase_assemble(project).await?;
         self.phase_final_review(project).await?;
 
         project.state = ProjectState::Complete;
-        self.emit(&project.slug, "pipeline", "✅ Pipeline complete").await;
+        self.emit(&project.slug, "pipeline", "✅ Pipeline complete")
+            .await;
 
         self.persist_project(project)?;
         Ok(())
@@ -45,14 +84,13 @@ impl Pipeline {
 
     pub async fn phase_analyse(&self, project: &mut Project) -> Result<()> {
         project.state = ProjectState::Analysing;
-        self.emit(&project.slug, "analyse", "Analysing reference video").await;
+        self.persist_project(project)?;
+        self.emit(&project.slug, "analyse", "Analysing reference video")
+            .await;
 
         let out_dir = format!("{}/{}/analysis", self.config.projects_dir, project.slug);
-        let analysis = executor::run_analysis(
-            project.reference.as_str(),
-            &out_dir,
-            &self.config,
-        ).await?;
+        let analysis =
+            executor::run_analysis(project.reference.as_str(), &out_dir, &self.config).await?;
 
         // Check audio flags
         if analysis.silent {
@@ -72,24 +110,45 @@ impl Pipeline {
     pub async fn phase_audio(&self, project: &mut Project) -> Result<()> {
         let audio_path = match &project.audio {
             Some(p) => p.clone(),
-            None => return Ok(()),  // silent video
+            None => return Ok(()), // silent video
         };
 
         project.state = ProjectState::AudioAnalysis;
-        self.emit(&project.slug, "audio", "Analysing audio file").await;
+        self.persist_project(project)?;
+        self.emit(&project.slug, "audio", "Analysing audio file")
+            .await;
 
-        let out_dir = format!("{}/{}/analysis/song", self.config.projects_dir, project.slug);
+        let out_dir = format!(
+            "{}/{}/analysis/song",
+            self.config.projects_dir, project.slug
+        );
         let _audio_analysis = executor::run_analysis(&audio_path, &out_dir, &self.config).await?;
 
         // Prepare clipped audio for production
-        let clip_out = format!("{}/{}/assets/clip.m4a", self.config.projects_dir, project.slug);
-        std::fs::create_dir_all(format!("{}/{}/assets", self.config.projects_dir, project.slug))?;
+        let clip_out = format!(
+            "{}/{}/assets/clip.m4a",
+            self.config.projects_dir, project.slug
+        );
+        std::fs::create_dir_all(format!(
+            "{}/{}/assets",
+            self.config.projects_dir, project.slug
+        ))?;
 
-        executor::prepare_audio_clip(&audio_path, 0.0, project.duration_s, &clip_out, &self.config).await?;
+        executor::prepare_audio_clip(
+            &audio_path,
+            0.0,
+            project.duration_s,
+            &clip_out,
+            &self.config,
+        )
+        .await?;
 
         // Align lyrics if provided
         if let Some(lyrics_path) = &project.lyrics_file {
-            let out_lrc = format!("{}/{}/analysis/lyrics/subs.lrc", self.config.projects_dir, project.slug);
+            let out_lrc = format!(
+                "{}/{}/analysis/lyrics/subs.lrc",
+                self.config.projects_dir, project.slug
+            );
             std::fs::create_dir_all(Path::new(&out_lrc).parent().unwrap())?;
             executor::align_lyrics(&audio_path, lyrics_path, &out_lrc, &self.config).await?;
         }
@@ -102,13 +161,17 @@ impl Pipeline {
 
     pub async fn phase_route(&self, project: &mut Project) -> Result<()> {
         project.state = ProjectState::StyleRouting;
-        self.emit(&project.slug, "route", "Selecting production style").await;
+        self.persist_project(project)?;
+        self.emit(&project.slug, "route", "Selecting production style")
+            .await;
 
         let styles = router::load_style_registry(&self.config.skills_dir)
             .context("Failed to load style registry")?;
 
         // Determine medium from analysis (default to painted if unknown)
-        let _analysis = project.analysis.as_ref()
+        let _analysis = project
+            .analysis
+            .as_ref()
             .context("Analysis must complete before routing")?;
 
         // Detect medium from STYLE.md (written by analyse phase)
@@ -117,8 +180,8 @@ impl Pipeline {
             "{}/{}/analysis/STYLE.md",
             self.config.projects_dir, project.slug
         );
-        let detected_medium = read_medium_from_style_md(&style_md_path)
-            .unwrap_or(Medium::Painted2D);
+        let detected_medium =
+            read_medium_from_style_md(&style_md_path).unwrap_or(Medium::Painted2D);
 
         let selection = router::route_style(&styles, &detected_medium, None, None)
             .context("Style routing failed")?;
@@ -132,11 +195,19 @@ impl Pipeline {
             );
         }
 
-        info!("Style selected: {} → engine: {}", selection.style_name, selection.engine);
+        info!(
+            "Style selected: {} → engine: {}",
+            selection.style_name, selection.engine
+        );
         self.emit(
-            &project.slug, "route",
-            &format!("Style: {} → engine: {}", selection.style_name, selection.engine)
-        ).await;
+            &project.slug,
+            "route",
+            &format!(
+                "Style: {} → engine: {}",
+                selection.style_name, selection.engine
+            ),
+        )
+        .await;
 
         project.style = Some(selection);
         self.persist_project(project)?;
@@ -147,75 +218,124 @@ impl Pipeline {
 
     pub async fn phase_storyboard(&self, project: &mut Project) -> Result<()> {
         project.state = ProjectState::StoryboardDraft;
-        self.emit(&project.slug, "storyboard", "Generating storyboard").await;
+        self.persist_project(project)?;
+        self.emit(&project.slug, "storyboard", "Generating storyboard")
+            .await;
 
-        // In production: call AI agent with engine SKILL.md + analysis + brief
-        // Agent writes STORYBOARD.md + plan.json, engine reads them back.
-        //
-        // For now: scaffold empty storyboard structure, agent fills it.
-        let storyboard_path = format!(
-            "{}/{}/STORYBOARD.md", self.config.projects_dir, project.slug
-        );
-
-        if !Path::new(&storyboard_path).exists() {
-            std::fs::write(
-                &storyboard_path,
-                "# Storyboard — to be generated by production agent\n"
-            )?;
+        let plan_path = Path::new(&self.config.projects_dir)
+            .join(&project.slug)
+            .join("plan.json");
+        if plan_path.exists() {
+            project.storyboard = Some(
+                serde_json::from_str(&std::fs::read_to_string(&plan_path)?)
+                    .context("plan.json must contain a Storyboard object")?,
+            );
         }
-
+        project.state = ProjectState::AwaitingApproval;
+        self.persist_project(project)?;
         if project.auto_approve {
-            info!("Auto-approve enabled — skipping human storyboard approval gate");
-            project.state = ProjectState::StoryboardDraft;
+            self.approve_storyboard(project)?;
         } else {
-            project.state = ProjectState::AwaitingApproval;
-            self.emit(&project.slug, "storyboard", "⏳ Awaiting user approval of storyboard").await;
-            // In CLI mode: user reads STORYBOARD.md and types 'approve' or edits it
+            self.emit(&project.slug, "storyboard", "Awaiting storyboard approval. Create/review STORYBOARD.md and plan.json, then resume --approve-storyboard.").await;
         }
 
         self.persist_project(project)?;
         Ok(())
     }
 
+    /// Called only by explicit CLI approval or the requested auto-approve mode.
+    pub fn approve_storyboard(&self, project: &mut Project) -> Result<()> {
+        anyhow::ensure!(
+            project.state == ProjectState::AwaitingApproval,
+            "Project is not awaiting storyboard approval"
+        );
+        let root = Path::new(&self.config.projects_dir).join(&project.slug);
+        let mut storyboard: Storyboard = serde_json::from_str(
+            &std::fs::read_to_string(root.join("plan.json"))
+                .context("Write a complete plan.json before approving")?,
+        )?;
+        anyhow::ensure!(
+            !storyboard.shots.is_empty(),
+            "Storyboard must contain shots"
+        );
+        let mut ids = std::collections::HashSet::new();
+        for shot in &storyboard.shots {
+            anyhow::ensure!(
+                shot.id > 0 && ids.insert(shot.id),
+                "Shot IDs must be positive and unique"
+            );
+        }
+        anyhow::ensure!(
+            storyboard
+                .required_inputs
+                .iter()
+                .all(|i| i.provided || i.skipped),
+            "Resolve required inputs before approving"
+        );
+        storyboard.approved = true;
+        std::fs::write(
+            root.join("plan.json"),
+            serde_json::to_string_pretty(&storyboard)?,
+        )?;
+        project.storyboard = Some(storyboard);
+        project.state = ProjectState::StoryboardDraft;
+        self.persist_project(project)
+    }
+
     // ─── Phase 5: Production ─────────────────────────────────────────────────
 
     pub async fn phase_produce(&self, project: &mut Project) -> Result<()> {
-        let engine = project.style.as_ref()
+        let engine = project
+            .style
+            .as_ref()
             .map(|s| s.engine.clone())
             .unwrap_or_else(|| "general-video".to_string());
 
         // Build segments (2-5 shots per segment, max 6 parallel)
-        let shots = project.storyboard.as_ref()
-            .map(|sb| sb.shots.len())
-            .unwrap_or(6);  // default estimate
-
-        let segments = build_segments(shots, &engine, project);
+        let storyboard = project
+            .storyboard
+            .as_ref()
+            .context("Storyboard is required")?;
+        anyhow::ensure!(storyboard.approved, "Storyboard is not approved");
+        let segments = build_segments(storyboard.shots.len(), &engine, project);
         let seg_count = segments.len();
 
-        project.state = ProjectState::Producing { segment: 0, total: seg_count };
+        project.state = ProjectState::Producing {
+            segment: 0,
+            total: seg_count,
+        };
         self.emit(
-            &project.slug, "produce",
-            &format!("Dispatching {} segments across up to {} agents", seg_count, self.config.max_parallel_agents)
-        ).await;
+            &project.slug,
+            "produce",
+            &format!(
+                "Dispatching {} segments across up to {} agents",
+                seg_count, self.config.max_parallel_agents
+            ),
+        )
+        .await;
 
         let updated = dispatch_parallel_production(
             project,
             segments,
             Arc::clone(&self.config),
             self.event_tx.clone(),
-        ).await?;
+        )
+        .await?;
 
         // Collect failures
-        let failures: Vec<_> = updated.iter()
+        let failures: Vec<_> = updated
+            .iter()
             .filter(|s| matches!(s.state, SegmentState::ReviewFailed { .. }))
             .collect();
 
-        if !failures.is_empty() {
-            warn!("{} segments failed QA after max fix rounds", failures.len());
-        }
-
+        let failed_count = failures.len();
         project.segments = updated;
         self.persist_project(project)?;
+        anyhow::ensure!(
+            failed_count == 0,
+            "{} segments failed QA. Assembly blocked",
+            failed_count
+        );
         Ok(())
     }
 
@@ -223,13 +343,51 @@ impl Pipeline {
 
     pub async fn phase_assemble(&self, project: &mut Project) -> Result<()> {
         project.state = ProjectState::Assembling;
-        self.emit(&project.slug, "assemble", "Assembling final video").await;
+        self.persist_project(project)?;
+        self.emit(&project.slug, "assemble", "Assembling final video")
+            .await;
 
-        let frames_dir = format!("{}/{}/build/frames/assembled", self.config.projects_dir, project.slug);
+        let frames_dir = format!(
+            "{}/{}/build/frames/assembled",
+            self.config.projects_dir, project.slug
+        );
         let out_dir = format!("{}/{}/out", self.config.projects_dir, project.slug);
         std::fs::create_dir_all(&out_dir)?;
 
-        let audio_clip = format!("{}/{}/assets/clip.m4a", self.config.projects_dir, project.slug);
+        anyhow::ensure!(!project.segments.is_empty(), "No segments to assemble");
+        let assembled = Path::new(&frames_dir);
+        if assembled.exists() {
+            std::fs::remove_dir_all(assembled)?;
+        }
+        std::fs::create_dir_all(assembled)?;
+        let mut index = 1usize;
+        for segment in &project.segments {
+            anyhow::ensure!(
+                segment.state == SegmentState::Approved,
+                "Segment {} has not passed QA",
+                segment.id
+            );
+            let source = segment
+                .frames_dir
+                .as_ref()
+                .context("Approved segment has no frames")?;
+            executor::validate_frames(Path::new(source), &self.config).await?;
+            for frame in executor::frame_sequence(Path::new(source))? {
+                std::fs::copy(frame, assembled.join(format!("frame_{:06}.png", index)))?;
+                index += 1;
+            }
+        }
+        anyhow::ensure!(
+            index - 1 == project.duration_s as usize * 24,
+            "Rendered frame count {} does not match target {} seconds at 24 FPS",
+            index - 1,
+            project.duration_s
+        );
+
+        let audio_clip = format!(
+            "{}/{}/assets/clip.m4a",
+            self.config.projects_dir, project.slug
+        );
         let audio_arg = if Path::new(&audio_clip).exists() {
             Some(audio_clip.as_str())
         } else {
@@ -239,10 +397,12 @@ impl Pipeline {
         let out_mp4 = format!("{}/final.mp4", out_dir);
         let scale = project.aspect.ffmpeg_scale();
 
-        executor::assemble_video(&frames_dir, audio_arg, 24.0, scale, &out_mp4, &self.config).await?;
+        executor::assemble_video(&frames_dir, audio_arg, 24.0, scale, &out_mp4, &self.config)
+            .await?;
 
         info!("Assembly complete: {}", out_mp4);
-        self.emit(&project.slug, "assemble", &format!("✅ {}", out_mp4)).await;
+        self.emit(&project.slug, "assemble", &format!("✅ {}", out_mp4))
+            .await;
         Ok(())
     }
 
@@ -250,11 +410,45 @@ impl Pipeline {
 
     pub async fn phase_final_review(&self, project: &mut Project) -> Result<()> {
         project.state = ProjectState::FinalReview;
-        self.emit(&project.slug, "final-review", "Running final cross-segment review").await;
+        self.persist_project(project)?;
+        self.emit(
+            &project.slug,
+            "final-review",
+            "Running final cross-segment review",
+        )
+        .await;
 
-        // Final review checks: seams, continuity, rhythm, subtitle consistency
-        // In production: spawn fresh agent with final-review prompt
-        info!("Final review complete");
+        let root = Path::new(&self.config.projects_dir).join(&project.slug);
+        let video = root.join("out/final.mp4");
+        let status = tokio::process::Command::new(&self.config.ffmpeg_bin)
+            .args(["-v", "error", "-xerror", "-i"])
+            .arg(&video)
+            .args(["-f", "null", "-"])
+            .status()
+            .await?;
+        anyhow::ensure!(status.success(), "Final video cannot be decoded");
+        let review = crate::agents::run_review(
+            &root.join("review_final.py"),
+            &root,
+            None,
+            &video,
+            &self.config,
+        )
+        .await?;
+        std::fs::write(
+            root.join("out/final-review.json"),
+            serde_json::to_string_pretty(&review)?,
+        )?;
+        anyhow::ensure!(
+            review.passed
+                && review.score.is_finite()
+                && review.score >= self.config.qa_pass_threshold
+                && !review
+                    .failures
+                    .iter()
+                    .any(|f| f.severity == QaSeverity::Critical),
+            "Final QA failed"
+        );
         Ok(())
     }
 
@@ -277,24 +471,32 @@ impl Pipeline {
 
 // ─── Helpers ─────────────────────────────────────────────────────────────────
 
-fn build_segments(shot_count: usize, engine: &str, _project: &Project) -> Vec<Segment> {
+fn build_segments(shot_count: usize, engine: &str, project: &Project) -> Vec<Segment> {
     // Group shots into segments of 2-5 shots
     const SHOTS_PER_SEGMENT: usize = 4;
-    let shot_ids: Vec<u32> = (1..=(shot_count as u32)).collect();
+    let shot_ids: Vec<u32> = project
+        .storyboard
+        .as_ref()
+        .map(|s| s.shots.iter().map(|s| s.id).collect())
+        .unwrap_or_else(|| (1..=(shot_count as u32)).collect());
     let chunks: Vec<Vec<u32>> = shot_ids
         .chunks(SHOTS_PER_SEGMENT)
         .map(|c| c.to_vec())
         .collect();
 
-    chunks.into_iter().enumerate().map(|(i, ids)| Segment {
-        id: format!("{}", (b'A' + i as u8) as char),
-        shot_ids: ids,
-        engine: engine.to_string(),
-        state: SegmentState::Pending,
-        frames_dir: None,
-        review_result: None,
-        fix_rounds: 0,
-    }).collect()
+    chunks
+        .into_iter()
+        .enumerate()
+        .map(|(i, ids)| Segment {
+            id: format!("{}", (b'A' + i as u8) as char),
+            shot_ids: ids,
+            engine: engine.to_string(),
+            state: SegmentState::Pending,
+            frames_dir: None,
+            review_result: None,
+            fix_rounds: 0,
+        })
+        .collect()
 }
 
 fn read_medium_from_style_md(path: &str) -> Option<Medium> {
@@ -302,7 +504,16 @@ fn read_medium_from_style_md(path: &str) -> Option<Medium> {
     // Look for a line starting with "2d-" or "live-action" in the Medium section
     for line in content.lines() {
         let line = line.trim().to_lowercase();
-        for prefix in &["2d-painted", "2d-cel", "2d-pixel", "2d-crayon", "2d-paper", "2d-lineart", "2d-vector", "live-action"] {
+        for prefix in &[
+            "2d-painted",
+            "2d-cel",
+            "2d-pixel",
+            "2d-crayon",
+            "2d-paper",
+            "2d-lineart",
+            "2d-vector",
+            "live-action",
+        ] {
             if line.contains(prefix) {
                 return Some(Medium::from_str(prefix));
             }

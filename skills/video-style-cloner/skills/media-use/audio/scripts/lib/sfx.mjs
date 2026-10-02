@@ -3,11 +3,10 @@
 // mirroring how TTS and BGM degrade.
 //
 //   HeyGen credential present  →  retrieve EVERY cue from HeyGen's audio library
-//        (/v3/audio/sounds, type=sound_effects, min_score=0.4). The bundled
-//        library is NOT consulted.
-//   HeyGen credential absent   →  resolve cues against the bundled 21-file
-//        library (assets/sfx/manifest.json), copying matched files into the
-//        project. Offline, deterministic, free.
+//        (/v3/audio/sounds, type=sound_effects, min_score=0.4). The local
+//        library is not consulted.
+//   HeyGen credential absent   →  resolve cues against user-supplied local
+//        assets (assets/sfx/manifest.json). The shipped manifest is empty.
 //
 // A cue that matches nothing is skipped (recorded as an anomaly); SFX never
 // blocks a render. Every cue sits at volume ~0.35, under voice + BGM.
@@ -75,7 +74,7 @@ export async function resolveSfx({ cues, heygenOK, headers, hyperframesDir, sfxL
     return { sfx, anomalies };
   }
 
-  // ── offline: bundled library ──
+  // ── offline: local library ──
   const manifestPath = join(sfxLibDir, "manifest.json");
   if (!existsSync(manifestPath)) {
     if (uniq.length)
@@ -90,7 +89,7 @@ export async function resolveSfx({ cues, heygenOK, headers, hyperframesDir, sfxL
     return { sfx, anomalies };
   }
   // Build lookups: by manifest key, by file basename, and by slug of either, so
-  // a cue can name "whoosh", "whoosh.mp3", or "ui click" (→ slug match).
+  // a cue can name "whoosh", "whoosh.mp3", or "click" (→ slug match).
   const byKey = new Map();
   for (const [key, entry] of Object.entries(manifest)) {
     if (!entry?.file || !isFinite(entry.duration)) continue;
@@ -106,7 +105,7 @@ export async function resolveSfx({ cues, heygenOK, headers, hyperframesDir, sfxL
     if (!hit) {
       const known = [...new Set([...byKey.values()].map((v) => v.key))].slice(0, 8).join(", ");
       anomalies.push(
-        `sfx "${name}" (id ${id}): not in bundled library — skipped (have: ${known}…)`,
+        `sfx "${name}" (id ${id}): not in local library — skipped (have: ${known}…)`,
       );
       continue;
     }
@@ -122,8 +121,8 @@ export async function resolveSfx({ cues, heygenOK, headers, hyperframesDir, sfxL
       if (!existsSync(src)) {
         anomalies.push(
           `sfx "${name}" (id ${id}): bundled file ${hit.file} missing from the offline ` +
-            `library (${sfxLibDir}) — skipped. Reinstall the media-use skill to ` +
-            `restore assets/sfx/*.mp3, or configure a HeyGen credential for retrieval.`,
+            `library (${sfxLibDir}) — skipped. Supply licensed files and manifest entries in ` +
+            `assets/sfx/, or configure a HeyGen credential for retrieval.`,
         );
         continue;
       }

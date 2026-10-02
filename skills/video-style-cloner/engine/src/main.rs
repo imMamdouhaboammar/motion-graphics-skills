@@ -15,8 +15,7 @@ async fn main() -> Result<()> {
     let cli = Cli::parse();
 
     // Initialize logging
-    let filter = EnvFilter::try_new(&cli.log_level)
-        .unwrap_or_else(|_| EnvFilter::new("info"));
+    let filter = EnvFilter::try_new(&cli.log_level).unwrap_or_else(|_| EnvFilter::new("info"));
 
     if cli.json_logs {
         tracing_subscriber::fmt()
@@ -62,27 +61,32 @@ async fn main() -> Result<()> {
 
         Commands::Analyse(args) => {
             let config = EngineConfig::default();
-            reelmimic_engine::executor::run_analysis(
-                &args.reference,
-                &args.out,
-                &config,
-            ).await?;
+            reelmimic_engine::executor::run_analysis(&args.reference, &args.out, &config).await?;
             println!("✅ Analysis complete → {}", args.out);
         }
 
         Commands::Resume(args) => {
-            let config = EngineConfig::default();
+            let config = EngineConfig {
+                projects_dir: args.projects_dir.clone(),
+                ..EngineConfig::default()
+            };
             let project_path = format!("{}/{}/project.json", config.projects_dir, args.slug);
             let raw = std::fs::read_to_string(&project_path)
                 .map_err(|_| anyhow::anyhow!("Project '{}' not found", args.slug))?;
             let mut project: Project = serde_json::from_str(&raw)?;
-            info!("Resuming project '{}' from state: {}", project.slug, project.state);
+            info!(
+                "Resuming project '{}' from state: {}",
+                project.slug, project.state
+            );
             let (pipeline, mut events) = Pipeline::new(config);
             tokio::spawn(async move {
                 while let Some(ev) = events.recv().await {
                     println!("  {}", ev);
                 }
             });
+            if args.approve_storyboard {
+                pipeline.approve_storyboard(&mut project)?;
+            }
             pipeline.run(&mut project).await?;
         }
 
@@ -101,11 +105,23 @@ async fn main() -> Result<()> {
             };
 
             // Build config
-            let config = EngineConfig {
+            let mut config = EngineConfig {
                 projects_dir: args.projects_dir.clone(),
-                skills_dir: args.skills_dir.clone(),
                 ..EngineConfig::default()
             };
+            if let Some(skills) = args.skills_dir {
+                config.skills_dir = skills;
+                if std::env::var_os("REELMIMIC_SCRIPTS").is_none() {
+                    let scripts =
+                        std::path::Path::new(&config.skills_dir).join("video-clone/scripts");
+                    config.analyse_script = scripts.join("analyze.py").to_string_lossy().into();
+                    config.align_lyrics_script =
+                        scripts.join("align_lyrics.py").to_string_lossy().into();
+                    config.fetch_assets_script =
+                        scripts.join("fetch_assets.py").to_string_lossy().into();
+                    config.compare_script = scripts.join("compare.py").to_string_lossy().into();
+                }
+            }
 
             // Build project
             let mut project = Project {
@@ -141,6 +157,11 @@ async fn main() -> Result<()> {
             });
 
             pipeline.run(&mut project).await?;
+
+            if project.state == ProjectState::AwaitingApproval {
+                println!("Paused for storyboard approval. Resume {} --projects-dir {} --approve-storyboard after reviewing plan.json", slug, args.projects_dir);
+                return Ok(());
+            }
 
             // Final summary
             let out_path = format!("{}/{}/out/final.mp4", args.projects_dir, slug);

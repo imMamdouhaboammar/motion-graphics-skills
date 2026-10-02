@@ -1,70 +1,37 @@
-# Shot Analysis Reference — analyze.py Output Fields
+# Shot Analysis Reference: analyze.py Output Fields
 
 ## report.json Structure
 
 ```json
 {
-  "duration_s": 58.4,
-  "fps": 24,
-  "resolution": [1920, 1080],
-  "bpm": 128.0,
-  "beat_times": [0.0, 0.47, 0.94, ...],
-  "avg_shot_length_s": 2.3,
-  "avg_shot_length_beats": 4.6,
-  "silent": false,
-  "phase_inverted": false,
-  "noise_floor_db": -52.0,
-  "look_summary": {
-    "brightness": "mid-high",
-    "contrast": "high",
-    "saturation": "vivid",
-    "dominant_palette": ["#F4A261", "#264653", "#2A9D8F"]
-  },
-  "transitions": ["cut", "cut", "dissolve", "cut"],
-  "shot_details": [
-    {
-      "id": 1,
-      "start_s": 0.0,
-      "end_s": 2.3,
-      "duration_s": 2.3,
-      "duration_beats": 4.6,
-      "camera_move": "slow-push",
-      "camera_speed": "slow",
-      "brightness": 0.72,
-      "contrast": 0.85,
-      "shadow_ratio": 0.12,
-      "saturation": 0.91,
-      "dominant_colors": ["#F4A261", "#E76F51"],
-      "content_description": "Character walking left-to-right",
-      "transition_out": "cut"
-    }
-  ]
+  "source": "source.mp4",
+  "input": "reference.mp4",
+  "analysed": "source.mp4",
+  "video": {"duration": 58.4, "fps": 24, "width": 1920, "height": 1080, "has_audio": true, "channels": 2},
+  "crop": null,
+  "shots": [[0.0, 2.3]],
+  "pacing": {"count": 1, "mean_shot_s": 2.3, "shortest_s": 2.3, "longest_s": 2.3, "mean_shot_beats": 4.9},
+  "audio": {"present": true, "silent": false, "bpm": 128.0, "beat_seconds": 0.469, "beats": [0.0, 0.469], "phase_inverted": false, "noise_floor_db": -52.0, "best_30s_starts": [{"start": 12.0, "density": 0.8}]},
+  "look_summary": {"low_key_shots": 0.0, "moving_camera_shots": 1.0, "mean_brightness": 0.72, "camera_kinds": ["push_in"]},
+  "shot_details": [{
+    "shot": 1, "start": 0.0, "end": 2.3,
+    "camera": {"pan_x": 0.0, "tilt_y": 0.0, "zoom": 0.02, "rotate": 0.0, "kind": ["push_in"], "speed": 0.02, "pace": "slow"},
+    "look": {"brightness": 0.72, "contrast": 0.2, "dark_ratio": 0.12, "colourfulness": 0.4, "dominant": ["#F4A261", "#264653"]}
+  }]
 }
 ```
 
-## Camera Move Types
-| Value | Description |
-|---|---|
-| `static` | No camera movement |
-| `slow-push` | Gradual zoom toward subject |
-| `fast-push` | Quick zoom toward subject |
-| `slow-pull` | Gradual zoom away from subject |
-| `fast-pull` | Quick zoom away from subject |
-| `pan-left` / `pan-right` | Horizontal panning |
-| `tilt-up` / `tilt-down` | Vertical tilting |
-| `orbit` | Arc movement around subject |
-| `whip-pan` | Very fast horizontal swipe |
-| `handheld` | Organic shake |
-| `crane-up` / `crane-down` | Vertical dolly movement |
+The example abbreviates arrays and optional audio diagnostics. Audio-only inputs have null video dimensions and FPS, no shots and no `look_summary`. Missing audio returns `audio.present: false`. Silent recordings omit BPM and beat measurements. `pacing.mean_shot_beats` is only emitted when tempo is available. Transitions and content descriptions are human annotations, not analyzer measurements.
 
-## Camera Speed Values
-- `very-slow`, `slow`, `medium`, `fast`, `very-fast`
+## Camera Measurements
+
+`camera.kind` is an array containing `static`, `push_in`, `pull_out`, `move_left`, `move_right`, `move_up`, `move_down`, or `roll/orbit`. Multiple kinds can occur together. Numeric `speed` is measured from optical flow. `pace` is `still`, `slow`, `medium`, or `fast`.
 
 ## Plan.json Shot Entry (storyboard machine format)
 
 ```json
 {
-  "shot": 3,
+  "id": 3,
   "ref_shot": 7,
   "ref_what": "slow zoom in on subject with warm backlight",
   "beats": 4,
@@ -80,7 +47,7 @@
     "angle_start": 0,
     "angle_end": 3
   },
-  "notes": "Warmer colour grade than ref — product is more pastel"
+  "notes": "Warmer colour grade than ref, product is more pastel"
 }
 ```
 
@@ -88,11 +55,11 @@
 
 When scoring a reference against a style's identification features:
 1. `medium` match: must match (2d-painted, 2d-cel, etc.)
-2. `avg_shot_length_beats`: high (> 6 beats) = contemplative/lyrical, low (< 3) = energetic/kinetic
-3. `transitions`: mostly cuts = editorial, dissolves = dreamy, whip-pans = dynamic
-4. `shadow_ratio`: high = dramatic, low = flat/clean
-5. `saturation`: vivid = kawaii/food, muted = moody/art-house
-6. Camera moves: mostly static = classic, mostly motion = documentary feel
+2. `pacing.mean_shot_beats`: high (> 6 beats) = contemplative/lyrical, low (< 3) = energetic/kinetic
+3. Transitions: annotate cuts, dissolves and whip-pans by inspecting the contact sheets
+4. `shot_details[].look.dark_ratio`: high = dramatic, low = flat/clean
+5. `shot_details[].look.colourfulness`: vivid = kawaii/food, muted = moody/art-house
+6. `look_summary.moving_camera_shots`: mostly static = classic, mostly motion = documentary feel
 
 ## sheet_1fps.jpg / sheet_scenes.jpg
 

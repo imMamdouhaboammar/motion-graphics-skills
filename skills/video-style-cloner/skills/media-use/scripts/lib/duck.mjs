@@ -18,7 +18,8 @@ export function speechSpans(meta, { mergeGap = 0.6, offsets, sequential = false,
     if (offsets) {
       const id = voice?.id ?? String(i);
       if (!(id in offsets)) throw new Error(`--offsets is missing voice "${id}"`);
-      offset = Number(offsets[id]) || 0;
+      offset = Number(offsets[id]);
+      if (!Number.isFinite(offset)) throw new Error(`--offsets has an invalid time for voice "${id}"`);
     } else if (sequential) {
       offset = cursor;
       const lineDuration = Number(voice?.duration_s) || Math.max(...lists[i].map((w) => w.end), 0);
@@ -57,14 +58,30 @@ export function duckKeyframes(
 /** Volume lane for `data-automation`: composition-time keyframes as clip-local ramps. */
 export function duckLane(keyframes, { clipStart = 0, baseVolume = 1 } = {}) {
   const start = finiteOr(clipStart, 0);
-  const points = [{ t: 0, v: round3(finiteOr(baseVolume, 1)) }];
-  const push = (t, v) => {
-    if (t > points.at(-1).t) points.push({ t: round3(t), v });
+  const envelope = [{ t: 0, v: finiteOr(baseVolume, 1) }];
+  const valueAt = (time) => {
+    for (let i = 1; i < envelope.length; i++) {
+      const right = envelope[i], left = envelope[i - 1];
+      if (time <= right.t)
+        return left.v + (right.v - left.v) * (time - left.t) / (right.t - left.t);
+    }
+    return envelope.at(-1).v;
   };
-  for (const kf of keyframes) {
-    const t = Math.max(0, kf.time - start);
-    push(t, points.at(-1).v);
-    push(t + kf.duration, kf.volume);
+  for (const kf of [...keyframes].sort((a, b) => a.time - b.time)) {
+    const time = Math.max(0, finiteOr(kf.time, 0));
+    const duration = Number(kf.duration);
+    if (!Number.isFinite(duration) || duration <= 0)
+      throw new Error("ducking attack and release durations must be positive finite seconds");
+    const volume = finiteOr(kf.volume, envelope.at(-1).v);
+    const current = valueAt(time);
+    // A new ramp interrupts any preceding unfinished ramp.
+    while (envelope.at(-1)?.t >= time) envelope.pop();
+    envelope.push({ t: time, v: current });
+    envelope.push({ t: time + duration, v: volume });
+  }
+  const points = [{ t: 0, v: round3(valueAt(start)) }];
+  for (const point of envelope) {
+    if (point.t > start) points.push({ t: round3(point.t - start), v: round3(point.v) });
   }
   return { version: 1, lanes: [{ target: "volume", points }] };
 }

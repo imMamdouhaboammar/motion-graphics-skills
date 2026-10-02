@@ -4,22 +4,22 @@ The video workflows (`product-launch-video` / `faceless-explainer` / `pr-to-vide
 
 ## The contract (identical on every harness)
 
-- **DISPATCH(role_file, dispatch_context)** — start one child agent whose prompt is the **full contents of the named role file** (a builder-assembled payload like `.hyperframes/frame-packets/_role.md`, or a workflow's `sub-agents/<role>.md`) followed by the `## Dispatch context` block from the workflow, copied **verbatim** (never digested or paraphrased). Every harness below accepts arbitrary task text, so this works everywhere; never rely on the child seeing your conversation, memory, or skills — the prompt and the files on disk are its entire world.
+- **DISPATCH(role_file, assigned_packets, dispatch_context)** — start one child agent whose prompt contains the **complete role file**, **every assigned packet**, and **all dispatch-context fields specified by that workflow**, copied verbatim (never digested or paraphrased). Role and packets may be pasted in full or supplied as readable absolute file paths with instructions to read them first, as the workflow allows. Motion-graphics roles use the workflow's plan/design/build inputs rather than frame packets. There is no required `## Dispatch context` heading: include the actual fields the workflow enumerates, such as `PROJECT_DIR`, assigned `frame_id`(s), canvas, confirmed-sketch status, and caption status/keep-out band when required. Never rely on the child seeing your conversation, memory, or skills — the prompt and the files on disk are its entire world.
 - **Parallel fan-out** — when a step says "start N workers in parallel", the workers are mutually independent (no ordering, no shared state beyond the filesystem). Run as many concurrently as your harness allows.
 - **WAIT** — a step's completion criterion is always **the expected artifact existing on disk** (e.g. `compositions/<scene-id>.html`), never the harness's completion notification (some harnesses deliver results best-effort). After waiting, verify the artifacts; a missing artifact means that child failed — re-dispatch it once with the same prompt before surfacing an error.
 
 ## Concurrency cap → batching rule (cap never changes scope)
 
-A harness concurrency limit **reduces parallelism, not work**: every scene still gets built, one scene per dispatch, with the available slots chewing through the full list.
+A harness concurrency limit **reduces parallelism, not work**: every assigned scene still gets built, with the available slots processing the workflow-defined worker batches. Preserve the workflow's packet grouping: general-video assigns 2–3 scenes per worker, pr-to-video balances packets across at most three workers, and product-launch-video / faceless-explainer assign one frame per worker.
 
-- When the harness queues excess children internally, submit **all N at once** and let the queue drain.
-- Harness hard-caps active children (e.g. OpenClaw `maxChildrenPerAgent`) → dispatch in **waves of the cap size**: start `cap` workers, wait for their artifacts, start the next wave, until all N scenes exist. Example: 9 scenes on a cap-3 harness = 3 waves of 3 — never drop scenes, never merge scenes into one worker to fit the cap.
+- When the harness queues excess children internally, submit **all planned workers at once** and let the queue drain.
+- Harness hard-caps active children (e.g. OpenClaw `maxChildrenPerAgent`) → dispatch in **waves of the cap size**: start `cap` workers, wait for their artifacts, start the next wave, until every required per-scene artifact exists. Example for a one-frame-per-worker workflow: 9 scenes on a cap-3 harness = 3 waves of 3 — never drop scenes, never change the workflow's packet grouping just to fit the cap.
 
 ## Harness mapping
 
 Use the current harness's native delegation and waiting tools when they are available. The workflow contract stays the same:
 
-- **DISPATCH** sends the complete role file and dispatch context to one worker.
+- **DISPATCH** sends the complete role file, every assigned packet, and the workflow-defined dispatch context to one worker.
 - **Parallel fan-out** starts independent workers concurrently up to the harness limit.
 - **WAIT** verifies the expected artifacts on disk, not only a completion notification.
 - **Re-dispatch** starts a fresh worker with the same context plus the gate failure.

@@ -1,11 +1,13 @@
 # source phase — asset sourcing (asset-first)
 
-Runs **only when `shot-plan.json.asset_needs` is non-empty** (the form categories never reach here). Sources each needed asset → a **frozen project-local path** + a ledger (`assets/index.md`). Uses `/media-use` (capture / asset prep) plus, **when an external asset-search skill such as media-use is installed**, its `resolve` step. If no such search capability is available, it **degrades to asset-free** (see below).
+Runs **only when `shot-plan.json.asset_needs` is non-empty** (including logo and maps basemap needs). Sources each needed asset → a **frozen project-local path** + a ledger (`assets/index.md`). Uses `/media-use` for its supported media types, an available RWA/web-search capability for real-source discovery, and the maps bake helper for basemaps. If no such search capability is available, it **degrades to asset-free** (see below).
 
 ## Per asset_need
 
-- `image / icon / logo / svg` → media-use `resolve`: **search** (asset_scout: Google Images / SerpAPI + Noun Project), **generate** (image model), or **user-supplied** (logo). Optional `treatment`: cutout (remove-bg) / recolor / vectorize.
-- `news / web / tweet` → **RWA-style search** (media-use's documented lineage — `media-use/references/search-strategy.md` traces `resolve` to the RWA subagent). Two-pole queries: **atomic** (1–3 words, composable) or **specific** (5–15 words: a news event / tweet); never the middle. A failed specific query is dropped, not broadened.
+- `kind: image / icon / logo` → media-use `resolve` with `--type <kind> --intent "<query>" --project "$PROJECT_DIR"`. A known-brand logo also passes `--entity "<entity>"`; use official marks, never regenerate them. A supplied file/direct asset URL uses `--from "<source>"`. Optional `treatment`: cutout (remove-background) / recolor / vectorize through an available prep capability.
+- `kind: svg` → freeze a supplied SVG or use an available asset-search capability for a real SVG; `svg` is not a media-use resolve type. If recording it through media-use, ingest with a supported semantic type (`icon` or `logo`).
+- `kind: news / web / tweet` → use an installed RWA/web-search capability for source discovery; for a supplied page URL, use `hyperframes capture` when available. Preserve the real source URL and article/tweet text in the ledger, and freeze any capture and supporting media locally. These are not media-use resolve types. Two-pole queries: **atomic** (1–3 words, composable) or **specific** (5–15 words: a news event / tweet); never the middle. A failed specific query is dropped, not broadened.
+- `type: map-bake` → run `node "$SKILL_DIR/categories/maps/bake-basemap.mjs"` with the need's `env` parameters and `OUT="$PROJECT_DIR/assets"`; map `FPS` / `DUR` to the envelope. See the maps module for Chrome, puppeteer-core, and ffmpeg requirements. Record both `assets/<NAME>.mp4` and `assets/<NAME>-coords.json` in the ledger. This lane does not call media-use resolve.
 
 ## Steps
 
@@ -18,4 +20,4 @@ Runs **only when `shot-plan.json.asset_needs` is non-empty** (the form categorie
 
 If a provider / search is unavailable, mark the need unmet in `context.log`; the category falls back to asset-free where possible (e.g. `news` → typographic headline without the sourced image).
 
-> Illustrative: `(cd "$PROJECT_DIR" && node <SKILL_DIR>/phases/source/resolve.mjs --plan ./shot-plan.json --out ./assets)` — or drive media-use's `resolve` procedure directly.
+Drive the documented resolver/search/bake capability directly; this skill has no `phases/source/resolve.mjs` wrapper.

@@ -15,6 +15,9 @@ pub async fn run_doctor(config: &EngineConfig) -> Result<()> {
     check_python_pkg(&config.python_bin, "faster_whisper").await;
     check_python_pkg(&config.python_bin, "cv2").await;
     check_python_pkg(&config.python_bin, "librosa").await;
+    check_python_pkg(&config.python_bin, "numpy").await;
+    check_python_pkg(&config.python_bin, "scipy").await;
+    check_python_pkg(&config.python_bin, "PIL").await;
 
     // Check skill scripts exist
     check_file("analyze.py", &config.analyse_script);
@@ -24,7 +27,10 @@ pub async fn run_doctor(config: &EngineConfig) -> Result<()> {
 
     // Check skills directory
     check_dir("skills/", &config.skills_dir);
-    check_dir("skills/video-clone/", &format!("{}/video-clone", config.skills_dir));
+    check_dir(
+        "skills/video-clone/",
+        &format!("{}/video-clone", config.skills_dir),
+    );
 
     println!("\n✅ Doctor complete. Fix any ❌ items above before running.\n");
     Ok(())
@@ -54,7 +60,11 @@ async fn check_python_pkg(python: &str, pkg: &str) {
             println!("  ✅ python:{:<16} installed", pkg);
         }
         _ => {
-            println!("  ❌ python:{:<16} NOT INSTALLED — pip install {}", pkg, pkg.replace('_', "-"));
+            println!(
+                "  ❌ python:{:<16} NOT INSTALLED — pip install {}",
+                pkg,
+                python_distribution(pkg)
+            );
         }
     }
 }
@@ -72,5 +82,24 @@ fn check_dir(name: &str, path: &str) {
         println!("  ✅ dir:{:<20} {}", name, path);
     } else {
         println!("  ❌ dir:{:<20} NOT FOUND at {}", name, path);
+    }
+}
+
+fn python_distribution(module: &str) -> String {
+    match module {
+        "cv2" => "opencv-python".into(),
+        "PIL" => "pillow".into(),
+        other => other.replace('_', "-"),
+    }
+}
+#[cfg(test)]
+mod tests {
+    #[test]
+    fn distribution_names() {
+        assert_eq!(super::python_distribution("cv2"), "opencv-python");
+        assert_eq!(
+            super::python_distribution("faster_whisper"),
+            "faster-whisper"
+        );
     }
 }

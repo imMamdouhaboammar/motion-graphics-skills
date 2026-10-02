@@ -6,21 +6,28 @@ use tracing::{debug, info, warn};
 /// Frontmatter parsed from a style/*.md file
 #[derive(Debug, Clone)]
 pub struct StyleDef {
-    pub name: String,          // filename without .md
-    pub engine: String,        // engine skill name
+    pub name: String,   // filename without .md
+    pub engine: String, // engine skill name
     pub medium: Medium,
     pub priority: u8,
-    pub body: String,          // raw markdown body (identification features etc.)
+    pub body: String, // raw markdown body (identification features etc.)
 }
 
 /// Parse all style/*.md files from the skill directory
 pub fn load_style_registry(skills_dir: &str) -> Result<Vec<StyleDef>> {
-    let styles_path = Path::new(skills_dir)
-        .join("video-clone")
-        .join("styles");
+    let skills_path = Path::new(skills_dir);
+    let bundled = skills_path.parent().unwrap_or(skills_path).join("styles");
+    let styles_path = if bundled.is_dir() {
+        bundled
+    } else {
+        skills_path.join("video-clone/styles")
+    };
 
     if !styles_path.exists() {
-        warn!("Styles directory not found at {:?}; using empty registry", styles_path);
+        warn!(
+            "Styles directory not found at {:?}; using empty registry",
+            styles_path
+        );
         return Ok(vec![]);
     }
 
@@ -47,7 +54,10 @@ pub fn load_style_registry(skills_dir: &str) -> Result<Vec<StyleDef>> {
                 if engine_skill_path.exists() {
                     styles.push(def);
                 } else {
-                    warn!("Skipping style '{}' — engine skill '{}' not installed", name, def.engine);
+                    warn!(
+                        "Skipping style '{}' — engine skill '{}' not installed",
+                        name, def.engine
+                    );
                 }
             }
         }
@@ -83,12 +93,22 @@ fn parse_style_frontmatter(name: &str, content: &str) -> Option<StyleDef> {
         return None;
     }
 
-    Some(StyleDef { name: name.to_string(), engine, medium, priority, body })
+    Some(StyleDef {
+        name: name.to_string(),
+        engine,
+        medium,
+        priority,
+        body,
+    })
 }
 
 /// Score a style against the reference analysis
 /// Returns 0.0 - 10.0
-fn score_style(style: &StyleDef, ref_medium: &Medium, _analysis_json: Option<&serde_json::Value>) -> f32 {
+fn score_style(
+    style: &StyleDef,
+    ref_medium: &Medium,
+    _analysis_json: Option<&serde_json::Value>,
+) -> f32 {
     let mut score: f32 = 0.0;
 
     // Medium match is mandatory for base score
@@ -98,12 +118,14 @@ fn score_style(style: &StyleDef, ref_medium: &Medium, _analysis_json: Option<&se
         // Partial credit for related mediums (lineart ↔ vector, painted ↔ crayon)
         let partial = matches!(
             (&style.medium, ref_medium),
-            (Medium::Lineart2D, Medium::Vector2D) |
-            (Medium::Vector2D, Medium::Lineart2D) |
-            (Medium::Painted2D, Medium::Crayon2D) |
-            (Medium::Crayon2D, Medium::Painted2D)
+            (Medium::Lineart2D, Medium::Vector2D)
+                | (Medium::Vector2D, Medium::Lineart2D)
+                | (Medium::Painted2D, Medium::Crayon2D)
+                | (Medium::Crayon2D, Medium::Painted2D)
         );
-        if partial { score += 3.0; }
+        if partial {
+            score += 3.0;
+        }
     }
 
     // Priority bonus
@@ -121,7 +143,10 @@ pub fn route_style(
 ) -> Result<StyleSelection> {
     // User override takes precedence
     if let Some(override_name) = user_override {
-        if let Some(style) = styles.iter().find(|s| s.name == override_name || s.engine == override_name) {
+        if let Some(style) = styles
+            .iter()
+            .find(|s| s.name == override_name || s.engine == override_name)
+        {
             info!("User override: routing to style '{}'", style.name);
             return Ok(StyleSelection {
                 style_name: style.name.clone(),
@@ -133,23 +158,25 @@ pub fn route_style(
                 is_downgrade: false,
             });
         }
-        warn!("User override '{}' not found in registry; falling back to auto-routing", override_name);
+        warn!(
+            "User override '{}' not found in registry; falling back to auto-routing",
+            override_name
+        );
     }
 
     // Is the reference a 2D medium we can match directly?
     let is_downgrade = !detected_medium.is_2d();
 
     // Filter to 2D styles only (3D track is disabled)
-    let candidates: Vec<_> = styles.iter()
-        .filter(|s| s.medium.is_2d())
-        .collect();
+    let candidates: Vec<_> = styles.iter().filter(|s| s.medium.is_2d()).collect();
 
     if candidates.is_empty() {
         anyhow::bail!("No 2D styles found in registry. Check skills/video-clone/styles/");
     }
 
     // Score and rank
-    let mut scored: Vec<(&StyleDef, f32)> = candidates.iter()
+    let mut scored: Vec<(&StyleDef, f32)> = candidates
+        .iter()
         .map(|s| (*s, score_style(s, detected_medium, analysis_json)))
         .collect();
 
@@ -158,7 +185,10 @@ pub fn route_style(
     let (best, score) = scored[0];
 
     let why = if &best.medium == detected_medium {
-        format!("Matched medium {:?} with score {:.1}", detected_medium, score)
+        format!(
+            "Matched medium {:?} with score {:.1}",
+            detected_medium, score
+        )
     } else {
         format!(
             "No exact medium match for {:?}; closest 2D style is '{}' ({:?}), score {:.1}",
@@ -166,7 +196,10 @@ pub fn route_style(
         )
     };
 
-    info!("Style routed: {} → engine: {} (score: {:.1})", best.name, best.engine, score);
+    info!(
+        "Style routed: {} → engine: {} (score: {:.1})",
+        best.name, best.engine, score
+    );
 
     Ok(StyleSelection {
         style_name: best.name.clone(),
@@ -224,15 +257,13 @@ Some content here.
 
     #[test]
     fn test_user_override() {
-        let styles = vec![
-            StyleDef {
-                name: "pixel-art".to_string(),
-                engine: "pixel-art".to_string(),
-                medium: Medium::Pixel2D,
-                priority: 7,
-                body: String::new(),
-            },
-        ];
+        let styles = vec![StyleDef {
+            name: "pixel-art".to_string(),
+            engine: "pixel-art".to_string(),
+            medium: Medium::Pixel2D,
+            priority: 7,
+            body: String::new(),
+        }];
 
         let sel = route_style(&styles, &Medium::Painted2D, None, Some("pixel-art")).unwrap();
         assert_eq!(sel.style_name, "pixel-art");

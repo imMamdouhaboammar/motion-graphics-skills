@@ -1,181 +1,192 @@
-use crate::models::{
-    EngineConfig, Project, Segment, SegmentState, ReviewResult, QaSeverity,
+use crate::{executor, models::*};
+use anyhow::{Context, Result};
+use std::{path::Path, sync::Arc};
+use tokio::{
+    process::Command,
+    sync::{mpsc, Semaphore},
 };
-use anyhow::Result;
-use std::sync::Arc;
-use tokio::sync::{mpsc, Semaphore};
-use tracing::{error, info, warn};
 
-/// Dispatch up to N production agents in parallel for a set of segments.
-/// Each segment is produced by one agent, then reviewed by a fresh independent agent.
-/// Returns updated segments.
+/// Project adapters are real subprocesses. A reviewer is launched separately for every round.
 pub async fn dispatch_parallel_production(
     project: &Project,
     segments: Vec<Segment>,
     config: Arc<EngineConfig>,
     event_tx: mpsc::Sender<String>,
 ) -> Result<Vec<Segment>> {
-    let concurrency = config.max_parallel_agents.min(segments.len());
-    let semaphore = Arc::new(Semaphore::new(concurrency));
-    let mut handles = Vec::new();
-
-    info!(
-        "Dispatching {} segments with max {} parallel agents",
-        segments.len(),
-        concurrency
+    anyhow::ensure!(
+        !segments.is_empty(),
+        "Storyboard contains no production segments"
     );
-
+    anyhow::ensure!(
+        config.max_parallel_agents > 0,
+        "max_parallel_agents must be positive"
+    );
+    let semaphore = Arc::new(Semaphore::new(
+        config.max_parallel_agents.min(segments.len()),
+    ));
+    let mut handles = Vec::new();
     for segment in segments {
         let sem = Arc::clone(&semaphore);
         let cfg = Arc::clone(&config);
-        let project_slug = project.slug.clone();
-        let engine = segment.engine.clone();
+        let slug = project.slug.clone();
         let tx = event_tx.clone();
-
-        let handle = tokio::spawn(async move {
-            let _permit = sem.acquire().await.expect("semaphore closed");
-            produce_segment(segment, &project_slug, &engine, cfg, tx).await
-        });
-
-        handles.push(handle);
+        handles.push(tokio::spawn(async move {
+            let _permit = sem.acquire().await?;
+            produce_segment(segment, &slug, cfg, tx).await
+        }));
     }
-
+    // Join every task even if one fails, so no renderer continues after returning an error.
     let mut results = Vec::new();
+    let mut failure = None;
     for handle in handles {
         match handle.await {
-            Ok(Ok(seg)) => results.push(seg),
-            Ok(Err(e)) => {
-                error!("Segment production failed: {}", e);
-                // Push a failed segment — don't lose it
+            Ok(Ok(segment)) => results.push(segment),
+            Ok(Err(error)) => {
+                failure.get_or_insert(error);
             }
-            Err(e) => {
-                error!("Segment task panicked: {}", e);
+            Err(error) => {
+                failure.get_or_insert(anyhow::Error::from(error));
             }
         }
     }
-
+    if let Some(error) = failure {
+        return Err(error);
+    }
     Ok(results)
 }
 
-/// Produce a single segment and immediately run review
 async fn produce_segment(
     mut segment: Segment,
-    project_slug: &str,
-    engine: &str,
+    slug: &str,
     config: Arc<EngineConfig>,
-    event_tx: mpsc::Sender<String>,
+    tx: mpsc::Sender<String>,
 ) -> Result<Segment> {
-    info!("Segment {} → producing with engine '{}'", segment.id, engine);
-    segment.state = SegmentState::Producing;
-
-    let _ = event_tx.send(format!(
-        "[{}] segment:{} phase:produce engine:{}", project_slug, segment.id, engine
-    )).await;
-
-    // ── In a real system this calls the AI agent subprocess ──
-    // The agent reads skills/<engine>/SKILL.md and renders frames.
-    // For now we model the interface contract:
-    let frames_dir = format!("projects/{}/build/frames/{}", project_slug, segment.id);
-    std::fs::create_dir_all(&frames_dir)?;
-    segment.frames_dir = Some(frames_dir.clone());
-
-    // ── Review loop (max N rounds) ──────────────────────────
-    let mut round = 0u8;
-    loop {
-        segment.state = SegmentState::AwaitingReview;
-        info!("Segment {} → review round {}", segment.id, round + 1);
-
-        let review = run_independent_review(&segment, project_slug, &config).await?;
-
-        if review.passed {
-            info!("Segment {} → APPROVED (score {:.1})", segment.id, review.score);
-            segment.review_result = Some(review);
-            segment.state = SegmentState::Approved;
-            break;
-        }
-
-        let critical = review.failures.iter().any(|f| f.severity == QaSeverity::Critical);
-        warn!(
-            "Segment {} → FAILED (score {:.1}, {} failures, critical={})",
-            segment.id, review.score, review.failures.len(), critical
-        );
-
-        round += 1;
-        if round >= config.max_fix_rounds {
-            let reason = format!(
-                "Failed QA after {} rounds. Last score: {:.1}. Issues: {:?}",
-                round,
-                review.score,
-                review.failures.iter().map(|f| &f.item).collect::<Vec<_>>()
-            );
-            segment.review_result = Some(review);
-            segment.state = SegmentState::ReviewFailed { reason };
-            break;
-        }
-
-        // Request fix from producer agent
-        segment.state = SegmentState::Producing;
-        segment.fix_rounds += 1;
-        request_segment_fix(&segment, &review, project_slug, engine, &config).await?;
-    }
-
-    Ok(segment)
-}
-
-/// Run an independent reviewer agent (different from the producer)
-async fn run_independent_review(
-    segment: &Segment,
-    _project_slug: &str,
-    _config: &EngineConfig,
-) -> Result<ReviewResult> {
-    // In production: spawn fresh agent subprocess with reviewer prompt
-    // pointing it at segment.frames_dir and the QA checklist.
-    // The agent outputs a structured JSON review result.
-    //
-    // For now we model the interface:
-    let frames_dir = segment.frames_dir.as_deref().unwrap_or(".");
-    info!("Independent review of segment {} at {}", segment.id, frames_dir);
-
-    // Simulated: read compare.py output or agent JSON output
-    // Real impl would call: compare_shots(...) and parse QA checklist results
-    Ok(ReviewResult {
-        passed: true,      // ← real impl reads actual agent output
-        failures: vec![],
-        score: 4.5,
-    })
-}
-
-/// Request the producer agent to fix a failed segment
-async fn request_segment_fix(
-    segment: &Segment,
-    review: &ReviewResult,
-    project_slug: &str,
-    engine: &str,
-    _config: &EngineConfig,
-) -> Result<()> {
-    info!(
-        "Requesting fix for segment {} from engine '{}' — {} failures",
-        segment.id, engine, review.failures.len()
+    let project = Path::new(&config.projects_dir).join(slug);
+    let frames = project.join("build/frames").join(&segment.id);
+    let producer = project.join("render_segment.py");
+    let reviewer = project.join("review_segment.py");
+    anyhow::ensure!(
+        producer.is_file(),
+        "Missing renderer adapter {}. See engine/README.md",
+        producer.display()
     );
+    anyhow::ensure!(
+        reviewer.is_file(),
+        "Missing independent reviewer adapter {}",
+        reviewer.display()
+    );
+    let plan = project.join("plan.json");
+    let fixes = project
+        .join("build")
+        .join(format!("fixes_{}.json", segment.id));
+    for round in 0..=config.max_fix_rounds {
+        segment.state = SegmentState::Producing;
+        let _ = tx
+            .send(format!(
+                "[{}] Rendering segment {} round {}",
+                slug, segment.id, round
+            ))
+            .await;
+        // Each pass must produce fresh frames. Old output must never stand in for a failed render.
+        if frames.exists() {
+            std::fs::remove_dir_all(&frames)?;
+        }
+        std::fs::create_dir_all(&frames)?;
+        let mut command = Command::new(&config.python_bin);
+        command
+            .arg(&producer)
+            .arg("--project")
+            .arg(&project)
+            .arg("--plan")
+            .arg(&plan)
+            .arg("--segment")
+            .arg(&segment.id)
+            .arg("--engine")
+            .arg(&segment.engine)
+            .arg("--shot-ids")
+            .arg(
+                segment
+                    .shot_ids
+                    .iter()
+                    .map(u32::to_string)
+                    .collect::<Vec<_>>()
+                    .join(","),
+            )
+            .arg("--frames")
+            .arg(&frames);
+        if round > 0 {
+            command.arg("--fixes").arg(&fixes);
+        }
+        let status = command
+            .status()
+            .await
+            .context("Failed to launch segment renderer")?;
+        anyhow::ensure!(status.success(), "Segment {} renderer failed", segment.id);
+        executor::validate_frames(&frames, &config).await?;
+        segment.frames_dir = Some(frames.to_string_lossy().into());
+        segment.state = SegmentState::AwaitingReview;
+        let review = run_review(&reviewer, &project, Some(&segment.id), &frames, &config).await?;
+        let passed = review.passed
+            && review.score.is_finite()
+            && review.score >= config.qa_pass_threshold
+            && !review
+                .failures
+                .iter()
+                .any(|f| f.severity == QaSeverity::Critical);
+        segment.review_result = Some(review.clone());
+        if passed {
+            segment.state = SegmentState::Approved;
+            return Ok(segment);
+        }
+        if round == config.max_fix_rounds {
+            segment.state = SegmentState::ReviewFailed {
+                reason: format!("QA failed after {} fixes", round),
+            };
+            return Ok(segment);
+        }
+        std::fs::write(&fixes, serde_json::to_string_pretty(&review)?)?;
+        segment.fix_rounds += 1;
+    }
+    unreachable!()
+}
 
-    // Write a fixes.json entry per failure
-    let fix_entries: Vec<serde_json::Value> = review.failures.iter().map(|f| {
-        serde_json::json!({
-            "segment": segment.id,
-            "category": f.category,
-            "item": f.item,
-            "severity": format!("{:?}", f.severity),
-            "before_frame": null,   // agent fills this
-            "after_frame": null,    // agent fills this
-            "validated": false
-        })
-    }).collect();
-
-    let fixes_path = format!("projects/{}/fixes.json", project_slug);
-    let existing_raw = std::fs::read_to_string(&fixes_path).unwrap_or_else(|_| "[]".to_string());
-    let mut existing: Vec<serde_json::Value> = serde_json::from_str(&existing_raw).unwrap_or_default();
-    existing.extend(fix_entries);
-    std::fs::write(&fixes_path, serde_json::to_string_pretty(&existing)?)?;
-
-    Ok(())
+/// Reviewer stdout must be a ReviewResult JSON object. Diagnostics belong on stderr.
+pub async fn run_review(
+    script: &Path,
+    project: &Path,
+    segment: Option<&str>,
+    artifact: &Path,
+    config: &EngineConfig,
+) -> Result<ReviewResult> {
+    anyhow::ensure!(
+        script.is_file(),
+        "Missing reviewer adapter {}",
+        script.display()
+    );
+    let mut command = Command::new(&config.python_bin);
+    command
+        .arg(script)
+        .arg("--project")
+        .arg(project)
+        .arg("--plan")
+        .arg(project.join("plan.json"));
+    if let Some(id) = segment {
+        command
+            .arg("--segment")
+            .arg(id)
+            .arg("--frames")
+            .arg(artifact);
+    } else {
+        command.arg("--video").arg(artifact);
+    }
+    let output = command
+        .output()
+        .await
+        .context("Failed to launch independent reviewer")?;
+    anyhow::ensure!(
+        output.status.success(),
+        "Reviewer failed: {}",
+        String::from_utf8_lossy(&output.stderr)
+    );
+    serde_json::from_slice(&output.stdout).context("Reviewer stdout must contain ReviewResult JSON")
 }

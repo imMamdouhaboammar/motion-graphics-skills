@@ -1,4 +1,4 @@
-# Audio Reference — BPM Alignment & Audio Pitfalls
+# Audio Reference: BPM Alignment & Audio Pitfalls
 
 ## Analyzing Audio
 
@@ -10,12 +10,15 @@ python .claude/skills/video-clone/scripts/analyze.py "<audio_or_video>" \
 Key fields in `analysis/song/report.json`:
 ```json
 {
-  "bpm": 128.0,
-  "beat_times": [0.0, 0.469, 0.938, ...],
-  "silent": false,
-  "phase_inverted": false,
-  "noise_floor_db": -52.1,
-  "hottest_30s_start": 42.0
+  "audio": {
+    "present": true,
+    "bpm": 128.0,
+    "beats": [0.0, 0.469, 0.938],
+    "silent": false,
+    "phase_inverted": false,
+    "noise_floor_db": -52.1,
+    "best_30s_starts": [{"start": 42.0, "density": 0.85}]
+  }
 }
 ```
 
@@ -32,12 +35,14 @@ Key fields in `analysis/song/report.json`:
 Always trim starting at a beat boundary so frame 0 = beat 0:
 
 ```bash
-# 1. Find target start (choose beat nearest to hottest_30s_start)
+# 1. Find target start (choose audio.beats entry nearest to audio.best_30s_starts[0].start)
 # 2. Trim + loudnorm + fade
 ffmpeg -ss <start_s> -t <duration_s> -i input.wav \
   -af "loudnorm=I=-14:TP=-1.5,afade=t=in:d=0.08,afade=t=out:st=<dur-2>:d=2" \
   -c:a aac -b:a 192k assets/clip.m4a
 ```
+
+An audio-less source returns `audio.present: false`. A silent recording omits beat and window measurements. Check these flags before reading `audio.beats` or selecting a start.
 
 **Parameters:**
 - `loudnorm=I=-14` → Integrated loudness target (streaming standard)
@@ -61,7 +66,7 @@ Example at BPM=128:
 
 Store in plan.json:
 ```json
-{"shot": 1, "beats": 4, "start_beat": 0}
+{"id": 1, "beats": 4, "start_beat": 0}
 ```
 
 ## Lyric Alignment
@@ -76,8 +81,8 @@ python .claude/skills/video-clone/scripts/align_lyrics.py \
 **Rules:**
 - faster-whisper timestamps are used as reference only
 - The actual text MUST be the user-provided lyric text verbatim
-- Lines with `match_score < 0.6` → interpolated from surrounding timestamps
-- Output: `.lrc` (time-tagged) + `.json` (per-word with confidence)
+- Each line reports `match`, the ratio of matched characters. Only lines with no matched characters receive interpolated timestamps.
+- Output: `.lrc` (time-tagged lines) + `.json` (per-line `match` and per-character timing).
 
 **NEVER:**
 - Transcribe audio and use that text as lyrics

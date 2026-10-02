@@ -28,6 +28,9 @@ message AnalysisReport {
   double noise_floor_db = 10;
   repeated ShotDetail shots = 11;
   string report_json_path = 12;
+  double avg_shot_length_beats = 13;
+  LookSummary look_summary = 14;
+  repeated string transitions = 15;
 }
 
 message ShotDetail {
@@ -39,6 +42,18 @@ message ShotDetail {
   float brightness = 6;
   float saturation = 7;
   string transition_out = 8;
+  float contrast = 9;
+  float shadow_ratio = 10;
+  repeated string dominant_colors = 11;
+  double duration_s = 12;
+  double duration_beats = 13;
+}
+
+message LookSummary {
+  double low_key_shots = 1;
+  double moving_camera_shots = 2;
+  double mean_brightness = 3;
+  repeated string camera_kinds = 4;
 }
 
 // ─── Style Router Service (East-West) ─────────────────────────────────────────

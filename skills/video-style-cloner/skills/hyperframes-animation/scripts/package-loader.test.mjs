@@ -74,16 +74,21 @@ test("hyperframesPackageSpec: env override wins", async () => {
   }
 });
 
-// (b) resolvable version (in-repo) pins the bundled hyperframes/@hyperframes/cli version.
-test("hyperframesPackageSpec: resolvable in-repo version pins it", async () => {
-  const prev = process.env[ENV];
-  delete process.env[ENV];
+// Exercise actual package ancestry in an isolated fixture, independent of the host repo.
+test("hyperframesPackageSpec: resolvable ancestor version pins it", () => {
+  const dir = mkdtempSync(join(tmpdir(), "hf-pkgloader-pinned-"));
   try {
-    const { hyperframesPackageSpec } = await import("./package-loader.mjs");
-    const spec = hyperframesPackageSpec("@hyperframes/producer");
-    assert.match(spec, /^@hyperframes\/producer@\d+\.\d+\.\d+/);
+    copyFileSync(join(HERE, "package-loader.mjs"), join(dir, "package-loader.mjs"));
+    writeFileSync(join(dir, "package.json"), JSON.stringify({name: "hyperframes", version: "0.7.55", type: "module"}));
+    const probe = join(dir, "probe.mjs");
+    writeFileSync(probe, 'import { hyperframesPackageSpec } from "./package-loader.mjs"; process.stdout.write(hyperframesPackageSpec("@hyperframes/producer"));');
+    const env = {...process.env};
+    delete env[ENV];
+    const result = spawnSync(process.execPath, [probe], {cwd: dir, encoding: "utf8", env});
+    assert.equal(result.status, 0, result.stderr);
+    assert.equal(result.stdout.trim(), "@hyperframes/producer@0.7.55");
   } finally {
-    if (prev !== undefined) process.env[ENV] = prev;
+    rmSync(dir, {recursive: true, force: true});
   }
 });
 

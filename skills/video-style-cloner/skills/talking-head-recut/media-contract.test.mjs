@@ -2,7 +2,7 @@ import assert from "node:assert/strict";
 import { readFileSync } from "node:fs";
 import test from "node:test";
 
-const skill = readFileSync(new URL("./SKILL.md", import.meta.url), "utf8");
+const skill = readFileSync(new URL("./talking-head-recut.md", import.meta.url), "utf8");
 
 function findTag(tagName, id) {
   const match = skill.match(new RegExp(`<${tagName}\\b[^>]*\\bid="${id}"[^>]*>`, "i"));

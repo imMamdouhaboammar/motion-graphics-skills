@@ -10,7 +10,7 @@ KEEP_DEMO="${2:-}"
 if [ -e "$TARGET/studio.html" ]; then echo "error: $TARGET already has a studio.html; not overwriting" >&2; exit 1; fi
 mkdir -p "$TARGET"
 if command -v rsync >/dev/null; then rsync -a --exclude node_modules --exclude out "$SKILL_DIR/template/" "$TARGET/"
-else (cd "$SKILL_DIR/template" && for f in * .gitignore; do case "$f" in node_modules|out) ;; *) cp -R "$f" "$TARGET/";; esac; done); fi   # Git Bash on Windows has no rsync
+else for f in "$SKILL_DIR"/template/* "$SKILL_DIR"/template/.gitignore; do case "${f##*/}" in node_modules|out) ;; *) [ ! -e "$f" ] || cp -R "$f" "$TARGET/";; esac; done; fi   # Git Bash on Windows has no rsync
 mkdir -p "$TARGET/assets" "$TARGET/out/check"
 
 # The demo is an example, not a template: unless asked, unhook it so the new video starts clean.

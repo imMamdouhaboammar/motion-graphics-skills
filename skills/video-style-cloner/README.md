@@ -5,7 +5,7 @@
 
 ## What this skill does
 
-Give any AI agent a reference video and a creative brief. It produces a new video in the same style — fully agentic, multi-agent production pipeline.
+Give an AI agent a reference video and a creative brief. The instructions guide analysis, an approved storyboard, production and independent review. The Rust CLI orchestrates project-supplied render and review adapters. It does not include an AI service that writes the creative plan or renders every style out of the box. See [the engine contract and technical smoke example](engine/README.md).
 
 ## Structure
 
@@ -13,7 +13,7 @@ Give any AI agent a reference video and a creative brief. It produces a new vide
 video-style-cloner/
 ├── SKILL.md                    ← Main agent instructions (START HERE)
 ├── skills/                     ← All production engines, cloned as-is from ReelMimic
-│   ├── video-clone/            ← Orchestrator (SKILL.md + CONTRACT.md + scripts + styles)
+│   ├── video-clone/            ← Analyzer and media helpers (video-clone.md + CONTRACT.md + scripts)
 │   ├── painted-animation/      ← Watercolour/ink 2D animation engine
 │   ├── anime-cel/              ← Japanese cel animation engine
 │   ├── pixel-art/              ← Pixel art engine
@@ -47,8 +47,8 @@ video-style-cloner/
 1. Read `SKILL.md`
 2. When user provides reference video + brief → activate
 3. Follow phases 0–6 in SKILL.md
-4. Route to correct engine via `skills/video-clone/styles/`
-5. Load engine SKILL.md from `skills/<engine>/SKILL.md`
+4. Route to correct engine via `styles/`
+5. Load the engine entry point `skills/<engine>/<engine>.md`, such as `skills/painted-animation/painted-animation.md`. These sub-skills use named entry files rather than `SKILL.md`.
 
 ## Installation
 

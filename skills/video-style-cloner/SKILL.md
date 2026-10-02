@@ -37,7 +37,7 @@ tags:
 
 <!--
   ╔═══════════════════════════════════════════════════════════╗
-  ║              VIDEO STYLE CLONER — AGENTIC SKILL           ║
+  ║              VIDEO STYLE CLONER: AGENTIC SKILL           ║
   ║  Adapted from edenfunf/reelmimic (MIT)                    ║
   ║  Skillified by Mamdouh Aboammar for universal agents      ║
   ╚═══════════════════════════════════════════════════════════╝
@@ -46,7 +46,7 @@ tags:
 # Video Style Cloner
 
 > Show an AI agent a video you love. Get a new video in the same style.
-> Fully agentic — analyses, plans, produces, reviews, and iterates autonomously.
+> The host agent analyses, plans, produces and reviews using the available tools. Production requires an approved storyboard and an installed renderer.
 
 $$\text{Reference Video} \xrightarrow{\text{Phase 1: Analyse}} \text{Style DNA} \xrightarrow{\text{Phase 2: Plan}} \text{Storyboard} \xrightarrow{\text{Phase 3: Produce}} \text{Multi-agent Shots} \xrightarrow{\text{Phase 4: Review}} \text{Final MP4}$$
 
@@ -80,6 +80,10 @@ $$\text{Reference Video} \xrightarrow{\text{Phase 1: Analyse}} \text{Style DNA} 
 
 ---
 
+Set `SKILL_DIR` to the absolute path of this `video-style-cloner` directory before running commands. Engine entry points are named `skills/<engine>/<engine>.md`.
+
+The optional Rust CLI coordinates project-provided render/review adapters. It does not generate creative assets or supply an AI reviewer by itself. Read `engine/README.md` before using it. Its technical smoke example proves encoding and approval flow, not visual style fidelity.
+
 ## Required Tools / Runtime
 
 Read `references/runtime.md` for version requirements and install commands.
@@ -94,18 +98,18 @@ Read `references/runtime.md` for version requirements and install commands.
 
 ---
 
-## Phase 0 — Intake
+## Phase 0: Intake
 
 Collect from the user:
 
 | Input | Required | Default |
 |---|---|---|
-| Reference video | **YES** | — |
-| Creative brief (what new video is about) | **YES** | — |
+| Reference video | **YES** |: |
+| Creative brief (what new video is about) | **YES** |: |
 | Target length | No | 30 s |
 | Aspect ratio | No | 16:9 |
 | Music/audio file | No | Silent or user-provided |
-| LRC/lyrics text | No (needed if lyrics appear in video) | — |
+| LRC/lyrics text | No (needed if lyrics appear in video) |: |
 | Character design sheets | No | AI-designed original characters |
 
 Create project workspace:
@@ -121,17 +125,17 @@ projects/<slug>/
 
 ---
 
-## Phase 1 — Analyse Reference
+## Phase 1: Analyse Reference
 
 ```bash
-python .claude/skills/video-clone/scripts/analyze.py "<file_or_url>" \
+python "$SKILL_DIR/skills/video-clone/scripts/analyze.py" "<file_or_url>" \
   --out projects/<slug>/analysis
 ```
 
 This script produces:
-- `report.json` — shot_details (each shot: duration, camera_move, speed, brightness, contrast, saturation, dominant_colors), BPM, beat_times, avg_shot_length, transitions
-- `sheet_1fps.jpg` — one frame per second contact sheet
-- `sheet_scenes.jpg` — one frame per scene break
+- `report.json`: video metadata under `video`, audio measurements under `audio`, editing rhythm under `pacing`, and each shot's nested `camera` and `look` measurements under `shot_details`. Read `references/shot-analysis.md` for the emitted schema.
+- `sheet_1fps.jpg`: one frame per second contact sheet
+- `sheet_scenes.jpg`: one frame per scene break
 
 **After running**, visually inspect `sheet_1fps.jpg` and `sheet_scenes.jpg` using the Read tool. Then write `analysis/STYLE.md`:
 
@@ -171,7 +175,7 @@ Report the analysis to the user: shot table + 3-5 "why this video works" insight
 
 ---
 
-## Phase 2 — Select Style → Route to Production Engine
+## Phase 2: Select Style → Route to Production Engine
 
 Read all `styles/*.md` files in this skill directory. Each has frontmatter:
 ```yaml
@@ -194,18 +198,18 @@ Load the engine skill and follow its instructions for production details.
 
 ---
 
-## Phase 3 — Music (skip if silent)
+## Phase 3: Music (skip if silent)
 
 If the video has music:
 1. User must provide the audio file (do not download copyrighted music).
 2. Analyse the audio:
    ```bash
-   python .claude/skills/video-clone/scripts/analyze.py "<audio_file>" \
+   python "$SKILL_DIR/skills/video-clone/scripts/analyze.py" "<audio_file>" \
      --out projects/<slug>/analysis/song
    ```
 3. Check `report.json`:
-   - `silent: true` → ask user to re-record with system audio
-   - `phase_inverted: true` or noise_floor > -45 dB → warn user about audio quality
+   - `audio.silent: true` → ask user to re-record with system audio
+   - `audio.phase_inverted: true` or `audio.noise_floor_db > -45` → warn user about audio quality
 4. Trim to target length starting on a beat:
    ```bash
    ffmpeg -ss <start> -t <len> -i audio.wav \
@@ -216,14 +220,14 @@ If the video has music:
 
 If user provides lyrics:
 ```bash
-python .claude/skills/video-clone/scripts/align_lyrics.py <audio> inputs/lyrics.txt \
+python "$SKILL_DIR/skills/video-clone/scripts/align_lyrics.py" <audio> inputs/lyrics.txt \
   --out analysis/lyrics/subs.lrc
 ```
 Use ONLY user-provided lyric text. Never invent or transcribe lyrics.
 
 ---
 
-## Phase 4 — Storyboard
+## Phase 4: Storyboard
 
 Write `projects/<slug>/STORYBOARD.md`:
 
@@ -278,11 +282,11 @@ Present storyboard to user with brief summary. Wait for approval unless user sai
 
 ---
 
-## Phase 5 — Production Pipeline
+## Phase 5: Production Pipeline
 
 **Order is mandatory. Never skip a gate.**
 
-### Gate 0 — Required Inputs Checklist
+### Gate 0: Required Inputs Checklist
 Before production agent starts, list everything only the user can provide:
 - Lyrics text (if needed)
 - Character design sheets (if using user's IP)
@@ -290,7 +294,7 @@ Before production agent starts, list everything only the user can provide:
 
 Missing items block production. Write them to `plan.json → required_inputs`. Do not generate placeholders silently.
 
-### Gate 1 — Director Setup
+### Gate 1: Director Setup
 Create `build/production.json`:
 ```json
 {
@@ -303,7 +307,7 @@ Create `build/production.json`:
 }
 ```
 
-### Gate 2 — Character Approval
+### Gate 2: Character Approval
 1. Production agent renders character sheets: front view, 8+ expressions, 6+ poses.
 2. A **fresh independent reviewer agent** (not the production agent) inspects full-resolution crops using this checklist:
 
@@ -321,7 +325,7 @@ Create `build/production.json`:
 
 Fail → return to production agent for fix (max 3 rounds). Pass → proceed.
 
-### Gate 3 — Parallel Segment Production + Inline Review
+### Gate 3: Parallel Segment Production + Inline Review
 - Up to 6 production agents work simultaneously on different segments.
 - Each finished segment immediately goes to a **fresh reviewer agent** (not the same one that made it).
 - Reviewer checks every shot's frame sheet, strip, and character crops against Visual QA Checklist.
@@ -329,7 +333,7 @@ Fail → return to production agent for fix (max 3 rounds). Pass → proceed.
 - Fix must include: `fixes.json` entry with before/after full-resolution crops.
 - Reviewer validates the before/after before accepting.
 
-### Gate 4 — Assembly + Final Review
+### Gate 4: Assembly + Final Review
 - Assemble all segments in sequence.
 - Final reviewer (fresh agent, not any prior producer or reviewer) checks:
   - [ ] Segment seams are clean
@@ -340,7 +344,7 @@ Fail → return to production agent for fix (max 3 rounds). Pass → proceed.
 
 ---
 
-## Phase 6 — Output & Feedback Loop
+## Phase 6: Output & Feedback Loop
 
 Report to user:
 ```
@@ -365,8 +369,9 @@ Shot summary:
 
 Fetch free assets when user has none:
 ```bash
-python .claude/skills/video-clone/scripts/fetch_assets.py search "keyword" --sources openverse,pixabay,freesound
-python .claude/skills/video-clone/scripts/fetch_assets.py get <asset_id> --out assets/
+python "$SKILL_DIR/skills/video-clone/scripts/fetch_assets.py" search --kind image --q "keyword" --cc0
+python "$SKILL_DIR/skills/video-clone/scripts/fetch_assets.py" get --project projects/<slug> --url "<asset_url>" \
+  --name background.jpg --source openverse --license "CC0"
 ```
 
 Log every asset to `assets/ASSETS.md`:
@@ -394,7 +399,7 @@ Supported 2D styles (read individual `styles/<name>.md` for engine, features, kn
 | slideshow | 2d-vector | slideshow |
 | music-to-video | 2d-* | music-to-video |
 
-To add a new style: copy `styles/_TEMPLATE.md` → fill engine, medium, identification features, production defaults, known gotchas. The engine must be an installed skill under `.claude/skills/`.
+To add a new style: copy `styles/_TEMPLATE.md` → fill engine, medium, identification features, production defaults, known gotchas. The engine entry point must exist at `skills/<engine>/<engine>.md` within this suite.
 
 ---
 
@@ -424,10 +429,10 @@ Load on demand:
 | `references/licensing.md` | Asset sources, licence grades, attribution format |
 | `references/qa-checklist.md` | Full expanded Visual QA checklist |
 | `styles/*.md` | Per-style identification features + engine defaults |
-| `scripts/analyze.py` | Video/audio analysis — see inline docstring |
-| `scripts/align_lyrics.py` | Lyrics timestamp alignment |
-| `scripts/fetch_assets.py` | Asset search and download |
-| `scripts/compare.py` | Side-by-side shot comparison scorer |
+| `skills/video-clone/scripts/analyze.py` | Video/audio analysis: see inline docstring |
+| `skills/video-clone/scripts/align_lyrics.py` | Lyrics timestamp alignment |
+| `skills/video-clone/scripts/fetch_assets.py` | Asset search and download |
+| `skills/video-clone/scripts/compare.py` | Side-by-side shot comparison evidence |
 | `evals/evals.json` | Benchmark trigger and behaviour assertions |
 
 ---

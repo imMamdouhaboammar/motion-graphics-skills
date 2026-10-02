@@ -41,9 +41,9 @@ impl VideoRef {
 
 #[derive(Debug, Clone, Copy, Serialize, Deserialize, PartialEq, Eq)]
 pub enum AspectRatio {
-    Landscape,  // 16:9
-    Portrait,   // 9:16
-    Square,     // 1:1
+    Landscape, // 16:9
+    Portrait,  // 9:16
+    Square,    // 1:1
 }
 
 impl AspectRatio {
@@ -119,12 +119,13 @@ pub struct AnalysisResult {
     pub shot_details: Vec<ShotDetail>,
 }
 
-#[derive(Debug, Clone, Serialize, Deserialize)]
+#[derive(Debug, Clone, Default, Serialize, Deserialize)]
+#[serde(default)]
 pub struct LookSummary {
-    pub brightness: String,
-    pub contrast: String,
-    pub saturation: String,
-    pub dominant_palette: Vec<String>,
+    pub low_key_shots: f64,
+    pub moving_camera_shots: f64,
+    pub mean_brightness: f64,
+    pub camera_kinds: Vec<String>,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
@@ -189,7 +190,7 @@ pub struct StyleSelection {
     pub priority: u8,
     pub score: f32,
     pub why: String,
-    pub is_downgrade: bool,  // true if ref is 3D/live-action but we're doing 2D
+    pub is_downgrade: bool, // true if ref is 3D/live-action but we're doing 2D
 }
 
 // ─── Storyboard types ─────────────────────────────────────────────────────────
@@ -275,8 +276,8 @@ pub struct QaFailure {
 
 #[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq)]
 pub enum QaSeverity {
-    Critical,    // blocks — character integrity, no fix = retry
-    Minor,       // log + continue
+    Critical, // blocks — character integrity, no fix = retry
+    Minor,    // log + continue
 }
 
 // ─── Fix evidence types ───────────────────────────────────────────────────────
@@ -346,19 +347,27 @@ pub struct EngineConfig {
 
 impl Default for EngineConfig {
     fn default() -> Self {
+        let skills = if std::path::Path::new(".claude/skills/video-clone").is_dir() {
+            std::path::PathBuf::from(".claude/skills")
+        } else {
+            std::path::Path::new(env!("CARGO_MANIFEST_DIR")).join("../skills")
+        };
+        let scripts = std::env::var_os("REELMIMIC_SCRIPTS")
+            .map(std::path::PathBuf::from)
+            .unwrap_or_else(|| skills.join("video-clone/scripts"));
         Self {
             projects_dir: "projects".to_string(),
-            skills_dir: ".claude/skills".to_string(),
+            skills_dir: skills.to_string_lossy().into(),
             python_bin: "python3".to_string(),
             ffmpeg_bin: "ffmpeg".to_string(),
             node_bin: "node".to_string(),
             max_parallel_agents: 6,
             max_fix_rounds: 3,
             qa_pass_threshold: 4.0,
-            analyse_script: ".claude/skills/video-clone/scripts/analyze.py".to_string(),
-            align_lyrics_script: ".claude/skills/video-clone/scripts/align_lyrics.py".to_string(),
-            fetch_assets_script: ".claude/skills/video-clone/scripts/fetch_assets.py".to_string(),
-            compare_script: ".claude/skills/video-clone/scripts/compare.py".to_string(),
+            analyse_script: scripts.join("analyze.py").to_string_lossy().into(),
+            align_lyrics_script: scripts.join("align_lyrics.py").to_string_lossy().into(),
+            fetch_assets_script: scripts.join("fetch_assets.py").to_string_lossy().into(),
+            compare_script: scripts.join("compare.py").to_string_lossy().into(),
         }
     }
 }
@@ -420,7 +429,17 @@ mod tests {
     #[test]
     fn test_project_state_display() {
         assert_eq!(ProjectState::Intake.to_string(), "intake");
-        assert_eq!(ProjectState::Producing { segment: 1, total: 3 }.to_string(), "producing [1/3]");
-        assert_eq!(ProjectState::Failed("timeout".into()).to_string(), "failed: timeout");
+        assert_eq!(
+            ProjectState::Producing {
+                segment: 1,
+                total: 3
+            }
+            .to_string(),
+            "producing [1/3]"
+        );
+        assert_eq!(
+            ProjectState::Failed("timeout".into()).to_string(),
+            "failed: timeout"
+        );
     }
 }

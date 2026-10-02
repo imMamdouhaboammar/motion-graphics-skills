@@ -11,14 +11,14 @@
 //
 //   TTS : HeyGen REST → ElevenLabs → Kokoro (CLI)
 //   BGM : HeyGen retrieve  → (no credential) Lyria/MusicGen generate
-//   SFX : HeyGen retrieve  → (no credential) bundled 19-file library
+//   SFX : HeyGen retrieve  → (no credential) user-supplied local assets (none shipped)
 //
 // ── audio_request.json (input) ────────────────────────────────────────────────
 //   {
 //     "provider": "auto",          // auto|heygen|elevenlabs|kokoro|gemini (override: --provider)
 //     "lang": "en", "speed": 1.0,
 //     "lines": [                   // one TTS unit each; id joins back to the caller's model
-//       { "id": "01", "text": "...", "sfx": ["whoosh", "ui click"] }
+//       { "id": "01", "text": "...", "sfx": ["whoosh", "click"] }
 //     ],
 //     "bgm": { "mode": "retrieve", // retrieve|generate|none (override: --bgm-mode / --no-bgm)
 //              "query": "calm cinematic underscore",   // mood for retrieval
@@ -273,7 +273,7 @@ if (only.has("sfx")) {
   sfx = res.sfx;
   anomalies.push(...res.anomalies);
   console.error(
-    `· sfx: ${sfx.length} cue(s) resolved (${heygenOK ? "heygen retrieval" : "bundled library"})`,
+    `· sfx: ${sfx.length} cue(s) resolved (${heygenOK ? "heygen retrieval" : "local library"})`,
   );
 }
 

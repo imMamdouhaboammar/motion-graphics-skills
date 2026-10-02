@@ -47,6 +47,7 @@ At ~90% through the burn, the incoming scene fades in SLOWLY from black — the 
 
 ```js
 // Scene 2 stays at opacity: 0 during the burn — black behind the fire
+tl.set("#scene2", { opacity: 0 }, T);
 tl.set("#s2-title", { opacity: 0 }, T);
 tl.set("#s2-subtitle", { opacity: 0 }, T);
 

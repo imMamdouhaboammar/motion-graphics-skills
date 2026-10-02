@@ -23,7 +23,7 @@ function sane(w, h) {
 // renders (no behavior change vs the old landscape lock).
 export function parseFormat(format) {
   const s = typeof format === "string" ? format.trim().toLowerCase() : "";
-  if (ORIENTATION_PRESETS[s]) return { ...ORIENTATION_PRESETS[s], source: `orientation=${s}` };
+  if (Object.hasOwn(ORIENTATION_PRESETS, s)) return { ...ORIENTATION_PRESETS[s], source: `orientation=${s}` };
   const m = s.match(/^(\d+)\s*[x×]\s*(\d+)$/);
   if (m) {
     const w = parseInt(m[1] ?? "", 10);

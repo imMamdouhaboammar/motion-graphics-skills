@@ -11,15 +11,17 @@
  * Reads  <project>/plan.json (groups[].words[].text, in spoken order) + transcript.json.
  * Writes <project>/plan.json with each word's start/end and each group's in/out filled.
  * A group word that can't be matched keeps whatever time it had + is reported (so a typo
- * or an added word degrades gracefully instead of silently mis-timing).
+ * or an added word cannot silently mis-time later repeated words).
+ * After a miss, later words keep prior times until the author repairs alignment and reruns.
  */
 const path = require("path");
 const fs = require("fs");
 
 const norm = (s) =>
   String(s == null ? "" : s)
+    .normalize("NFC")
     .toLowerCase()
-    .replace(/[^a-z0-9]/g, "");
+    .replace(/[^\p{L}\p{N}\p{M}]/gu, "");
 const LOOKAHEAD = 40; // how far past the pointer to search for a group word (skips dropped fillers)
 
 function fillGroup(g, tw, state) {
@@ -27,7 +29,8 @@ function fillGroup(g, tw, state) {
   const unmatched = [];
   for (const w of g.words || []) {
     const target = norm(w.text);
-    if (!target) {
+    if (state.blocked || !target) {
+      state.blocked = true;
       unmatched.push(w.text);
       continue;
     }
@@ -44,6 +47,9 @@ function fillGroup(g, tw, state) {
       matched.push(w);
       state.p = found + 1;
     } else {
+      // Once alignment is uncertain, text alone cannot disambiguate repeated words.
+      // Preserve subsequent timestamps until the plan is repaired and rerun.
+      state.blocked = true;
       unmatched.push(w.text);
     }
   }
@@ -87,7 +93,7 @@ function main() {
     process.exit(0);
   }
 
-  const state = { p: 0 };
+  const state = { p: 0, blocked: false };
   let totalMatched = 0,
     totalUnmatched = 0;
   const groups = plan.groups || [];
@@ -114,7 +120,7 @@ function main() {
   console.log(
     `[fill-timings] filled ${totalMatched} word time(s) from transcript by sequence` +
       (totalUnmatched
-        ? `; ${totalUnmatched} unmatched (kept prior time — check those words)`
+        ? `; ${totalUnmatched} unmatched or blocked after an alignment miss (kept prior time — repair the first miss and rerun)`
         : `; all matched ✓`),
   );
   console.log(

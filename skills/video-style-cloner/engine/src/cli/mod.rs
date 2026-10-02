@@ -77,8 +77,8 @@ pub struct RunArgs {
     pub projects_dir: String,
 
     /// Skills root directory
-    #[arg(long, default_value = ".claude/skills")]
-    pub skills_dir: String,
+    #[arg(long)]
+    pub skills_dir: Option<String>,
 }
 
 #[derive(clap::Args, Debug)]
@@ -96,6 +96,10 @@ pub struct AnalyseArgs {
 pub struct ResumeArgs {
     /// Project slug to resume
     pub slug: String,
+
+    /// Explicitly approve the reviewed plan.json and continue production
+    #[arg(long)]
+    pub approve_storyboard: bool,
 
     /// Projects root directory
     #[arg(long, default_value = "projects")]

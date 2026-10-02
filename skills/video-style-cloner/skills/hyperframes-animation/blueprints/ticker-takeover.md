@@ -22,7 +22,7 @@
 
 - smooth single-phrase typewriter lead-in → `discrete-text-sequence` (smooth-slice / continuous `floor(progress)` form — no typo machinery)
 - accent word slot-machine cycling through options → `vertical-spring-ticker` (`STEPS` = number of options the hero will replace; the rule's footer-reveal is unused — Scene 3 takes its place)
-- hero shoves the text group aside on impact → `reactive-displacement` (the text is the displaced mass; express the hero's "heavy land" as a longer `power2` settle, not the rule's default `back.out`)
+- hero shoves the text group aside on impact → `reactive-displacement` (keep the text fully opaque while translating it off-screen; express the hero's "heavy land" as a longer `power2` settle, not the rule's default `back.out`)
 - hero's fast off-screen crash-in → `motion-blur-streak` (directional velocity blur resolving sharp as it lands)
 - resting-hero aliveness → `sine-wave-loop` (low-amplitude dual-frequency register — scale + rotation jitter composing onto the hero's final landed scale; never a yoyo around 1)
 

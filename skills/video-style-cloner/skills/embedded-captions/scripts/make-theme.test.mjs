@@ -63,6 +63,7 @@ test("every embedded-caption theme compiles a sane heroless body timeline", asyn
     await t.test(themeName, () => {
       const project = join(workspace, themeName);
       cpSync(fixturesDir, project, { recursive: true });
+      cpSync(join(fixturesDir, "transcript.fixture.json"), join(project, "transcript.json"));
       writeFileSync(
         join(project, "theme.json"),
         JSON.stringify({ ...fixtureTheme, dna: themeName }),
@@ -96,6 +97,7 @@ for (const heroless of [false, true]) {
       t.after(() => rmSync(workspace, { recursive: true, force: true }));
       const project = join(workspace, "project");
       cpSync(fixturesDir, project, { recursive: true });
+      cpSync(join(fixturesDir, "transcript.fixture.json"), join(project, "transcript.json"));
       mkdirSync(join(workspace, "scripts"));
       mkdirSync(join(workspace, "themes"));
       const compiler = join(workspace, "scripts", "make-theme.cjs");

@@ -21,7 +21,7 @@ Timeline options:
 
 ## Position Parameter
 
-The third argument to `.to()`/`.from()`/`.fromTo()` controls placement on the timeline:
+The position argument controls placement on the timeline. It is the third argument to `.to()` and `.from()`, and the fourth argument to `.fromTo()`:
 
 | Form           | Meaning                              |
 | -------------- | ------------------------------------ |

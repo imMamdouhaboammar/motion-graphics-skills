@@ -27,8 +27,10 @@ with only the climax(es) promoted to embed. Rail is not a fallback — it's the 
 - **≤ 2 lines.** Broadcast target ~ 32–42 chars/line; break at a clause/phrase boundary, never
   mid-word, never leave a dangling 1-word line.
 - **Word-synced.** Each group's window envelops its words (`group.in ≤ first word.start`,
-  `group.out ≥ last word.end`); each group ≥ 0.5s on screen; ~1.5s min gap discipline so it
-  doesn't strobe. Word timings within 80ms of transcript (same gate as everywhere).
+  `group.out ≥ last word.end`); each group ≥ 0.5s on screen. Keep transitions brief
+  (0–50ms gaps where speech permits); switch at the next phrase without hiding words.
+  Merge or repartition very short groups rather than inserting long blank intervals.
+  Word timings within 80ms of transcript (same gate as everywhere).
 - **Grouping** = short readable phrases (see [caption-grouping.md](caption-grouping.md)) — not the
   embed track's "phrase = composition" rule; here it's just legible subtitle chunking.
 

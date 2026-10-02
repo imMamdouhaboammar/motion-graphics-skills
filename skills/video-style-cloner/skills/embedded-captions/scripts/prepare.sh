@@ -17,6 +17,9 @@ PROJECT="${1:?usage: prepare.sh <project-dir>}"
 PROJECT="$(cd "$PROJECT" && pwd)"
 SD="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
+# All workers must see one stable input; their standalone discovery policies differ.
+node "$SD/resolve-source.cjs" "$PROJECT"
+
 echo "[prepare] matte ∥ transcribe ∥ envelope …"
 MLOG="$PROJECT/_prepare_matte.log"; TLOG="$PROJECT/_prepare_transcribe.log"; ELOG="$PROJECT/_prepare_envelope.log"
 node "$SD/matte.cjs" "$PROJECT"      > "$MLOG" 2>&1 &  MPID=$!

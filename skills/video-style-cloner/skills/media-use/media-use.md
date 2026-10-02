@@ -20,7 +20,7 @@ Returns one line: `resolved <id> → <path> (<type>, <metadata>)`. All search no
 | Type    | One-line intent                                                                  |
 | ------- | -------------------------------------------------------------------------------- |
 | `bgm`   | background music (HeyGen catalog, 10k+ tracks)                                   |
-| `sfx`   | sound effects (bundled 19-file library + catalog)                                |
+| `sfx`   | sound effects (HeyGen catalog or user-supplied local assets)                                |
 | `image` | photos, backgrounds (HeyGen asset search, 75k+ vectors)                          |
 | `icon`  | icons, symbols (transparent)                                                     |
 | `logo`  | official brand marks (theSVG → GitHub avatar → favicon; never redrawn)           |

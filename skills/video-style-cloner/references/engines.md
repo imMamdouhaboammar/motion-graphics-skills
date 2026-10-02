@@ -3,19 +3,20 @@
 ## Engine Overview
 
 Each engine is a separate skill that handles rendering for one animation style.
-The `video-style-cloner` orchestrates them — it never renders directly.
+The `video-style-cloner` orchestrates them. It never renders directly.
 
 ## HyperFrames (Core 2D Engine)
 
-HyperFrames is the primary animation renderer. It takes a declarative JSON/TS
-timeline and renders it to PNG frames via a headless browser, then FFmpeg
-assembles the MP4.
+HyperFrames is the primary animation renderer. It takes an
+HTML composition and captures it with a headless browser. Its installed CLI encodes
+the final video. Read the named `hyperframes-cli` and `hyperframes-core` entries
+for the current composition contract.
 
 ### Key sub-skills (from ReelMimic)
 | Sub-skill | Purpose |
 |---|---|
 | `hyperframes-core` | Timeline data model, scene/shot schema |
-| `hyperframes-cli` | CLI commands: `hf render`, `hf preview` |
+| `hyperframes-cli` | CLI commands: `npx hyperframes render`, `npx hyperframes preview` |
 | `hyperframes-animation` | Easing functions, keyframe interpolation |
 | `hyperframes-audio` | Beat-synced animation, audio waveform binding |
 | `hyperframes-keyframes` | Frame-precise keyframe authoring |
@@ -23,21 +24,20 @@ assembles the MP4.
 | `hyperframes-studio` | Multi-segment project orchestration |
 | `hyperframes-registry` | Style registry and preset management |
 
-### Basic HyperFrames render loop
-```bash
-# 1. Generate frames from timeline
-hf render projects/<slug>/timeline.json --out projects/<slug>/build/frames
+### HyperFrames render loop
 
-# 2. Assemble video from frames + audio
-ffmpeg \
-  -framerate 24 -i projects/<slug>/build/frames/frame_%06d.png \
-  -i assets/clip.m4a \
-  -c:v libx264 -preset slow -crf 18 \
-  -c:a copy \
-  -pix_fmt yuv420p \
-  -shortest \
-  projects/<slug>/out/final.mp4
+Run in the authored project directory, with HyperFrames installed:
+
+```bash
+npx hyperframes check
+npx hyperframes preview --background
+# After the user approves the preview:
+npx hyperframes render --quality delivery --output out/final.mp4
+ffprobe -v error -show_format -show_streams out/final.mp4
 ```
+
+The Rust adapter contract is separate. A project's renderer adapter must export
+its own frame sequence as specified in `engine/README.md`.
 
 ## Style Engine Map
 
@@ -71,19 +71,19 @@ assets/vector_rig/
 **MUST NOT** build characters from separate circle + rectangle + arm primitives.
 The rig must be a single unified outline with deformation zones.
 
-## Compare Script (Shot Scoring)
+## Compare script
 
-After rendering, score each shot against reference:
+After rendering, generate comparison evidence from the project directory and its plan:
+
 ```bash
-python scripts/compare.py \
-  --ref projects/<slug>/analysis/sheet_scenes.jpg \
-  --out projects/<slug>/build/frames \
-  --shot-map projects/<slug>/plan.json \
-  --threshold 4.0
+python "$SKILL_DIR/skills/video-clone/scripts/compare.py" projects/<slug> \
+  --video out/final.mp4
 ```
 
-A shot scores 1-5:
-- ≥ 4.0 → approved
-- < 4.0 → returned to producer for fix
+`--video` is relative to the project. The script reads `analysis/report.json` and
+`plan.json`, then writes `out/check/compare_<id>.jpg`, `compare_all.jpg`, and
+`compare.json`. It reports measured camera and look differences. It does not
+produce numerical style scores or enforce a threshold.
 
-Score dimensions: composition, colour match, camera move match, timing match.
+An independent reviewer must inspect the paired frames for composition, colour,
+camera motion and timing before approving each shot. Record that review separately.

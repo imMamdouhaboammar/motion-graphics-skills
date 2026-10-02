@@ -1,4 +1,4 @@
-# Runtime Reference — Video Style Cloner
+# Runtime Reference: Video Style Cloner
 
 ## Required Tools
 
@@ -14,9 +14,7 @@ brew install python@3.12
 sudo apt install python3.12 python3.12-venv
 
 # Install Python dependencies
-pip install -r requirements.txt
-# or from source repo:
-# pip install yt-dlp faster-whisper opencv-python librosa numpy scipy pillow
+python3 -m pip install yt-dlp faster-whisper opencv-python librosa numpy scipy pillow
 ```
 
 ### FFmpeg 6.0+
@@ -65,7 +63,8 @@ pip install faster-whisper
 Run this to verify all tools are available:
 ```bash
 python3 -c "
-import subprocess, sys
+import subprocess, sys, importlib
+failed = False
 tools = {
   'python':  ('python3', '--version'),
   'ffmpeg':  ('ffmpeg',  '-version'),
@@ -75,9 +74,19 @@ tools = {
 for name, (cmd, flag) in tools.items():
     try:
         r = subprocess.run([cmd, flag], capture_output=True, text=True)
-        print(f'✅ {name}: {r.stdout.strip() or r.stderr.strip()}')
+        failed |= r.returncode != 0
+        print(f'{name}: {r.stdout.strip() or r.stderr.strip()} (exit {r.returncode})')
     except FileNotFoundError:
-        print(f'❌ {name}: NOT FOUND — install required')
+        failed = True
+        print(f'❌ {name}: NOT FOUND, install required')
+for module, distribution in [('yt_dlp', 'yt-dlp'), ('faster_whisper', 'faster-whisper'), ('cv2', 'opencv-python'), ('librosa', 'librosa'), ('numpy', 'numpy'), ('scipy', 'scipy'), ('PIL', 'pillow')]:
+    try:
+        importlib.import_module(module)
+        print(f'✅ python:{module}')
+    except Exception as error:
+        failed = True
+        print(f'❌ python:{module}: {error}, install {distribution}')
+sys.exit(1 if failed else 0)
 "
 ```
 

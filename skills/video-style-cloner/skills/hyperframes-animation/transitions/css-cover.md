@@ -11,8 +11,8 @@ tl.set("#wipe-a", { x: -1920 }, T - 0.01);
 tl.set("#wipe-b", { x: -1920 }, T - 0.01);
 tl.to("#wipe-a", { x: 0, duration: 0.25, ease: "power3.inOut" }, T);
 tl.to("#wipe-b", { x: 0, duration: 0.25, ease: "power3.inOut" }, T + 0.06);
-tl.set(old, { opacity: 0 }, T + 0.2);
-tl.set(new, { opacity: 1 }, T + 0.2);
+tl.set(old, { opacity: 0 }, T + 0.25);
+tl.set(newScene, { opacity: 1 }, T + 0.25);
 tl.to("#wipe-a", { x: 1920, duration: 0.25, ease: "power3.inOut" }, T + 0.28);
 tl.to("#wipe-b", { x: 1920, duration: 0.25, ease: "power3.inOut" }, T + 0.34);
 ```
@@ -32,7 +32,7 @@ for (var i = 0; i < N; i++) {
   tl.fromTo("#blind-h-" + i, { x: -1920 }, { x: 0, duration: 0.2, ease: "power3.inOut" }, T + i * stagger);
 }
 tl.set(old, { opacity: 0 }, T + coverTime);
-tl.set(new, { opacity: 1 }, T + coverTime);
+tl.set(newScene, { opacity: 1 }, T + coverTime);
 for (var i = 0; i < N; i++) {
   tl.to("#blind-h-" + i, { x: 1920, duration: 0.2, ease: "power3.inOut" }, T + exitStart + i * stagger);
 }

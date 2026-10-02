@@ -27,6 +27,9 @@ for (const [network, prefix] of [
 for (const [network, prefix] of [
   ["::", 128],
   ["::1", 128],
+  // Translation prefixes can embed private IPv4 addresses. Reject the prefixes.
+  ["64:ff9b::", 96],
+  ["64:ff9b:1::", 48],
   ["fc00::", 7],
   ["fe80::", 10],
   ["fec0::", 10],

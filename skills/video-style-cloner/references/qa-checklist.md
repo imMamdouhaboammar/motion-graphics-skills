@@ -1,10 +1,10 @@
-# Visual QA Checklist — Full Expanded Version
+# Visual QA Checklist: Full Expanded Version
 
 Use this checklist at EVERY gate. No gate passes without running it.
 Use the Read tool to open frame crops at full resolution. If unclear → crop and zoom.
 
 ## Character Integrity
-- [ ] All limbs attached to body — no floating arms, legs, or hands
+- [ ] All limbs attached to body: no floating arms, legs, or hands
 - [ ] Neck present and proportionally natural
 - [ ] Head connected to neck without gap or seam
 - [ ] Fingers/hands: correct count, not fused or missing
@@ -15,7 +15,7 @@ Use the Read tool to open frame crops at full resolution. If unclear → crop an
 - [ ] No double-stroke outlines (no ghosting)
 - [ ] Consistent line weight throughout frame
 - [ ] No seams where separate elements join
-- [ ] Outlines close completely — no open paths
+- [ ] Outlines close completely: no open paths
 
 ## Character Consistency
 - [ ] Design matches approved character sheets
@@ -45,7 +45,7 @@ Use the Read tool to open frame crops at full resolution. If unclear → crop an
 - [ ] Motion has anticipation (wind-up before fast move)
 - [ ] Motion has follow-through (settle after move completes)
 - [ ] Camera move speed matches plan.json `camera.speed`
-- [ ] No teleport cuts — subject positions make continuity sense
+- [ ] No teleport cuts: subject positions make continuity sense
 
 ## Audio Sync (final assembly gate only)
 - [ ] Beat cuts align within ±1 frame of plan.json beat markers

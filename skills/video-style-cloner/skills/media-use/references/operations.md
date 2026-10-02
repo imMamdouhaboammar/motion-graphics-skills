@@ -146,7 +146,7 @@ Use `--plan` first when you want to inspect the kept segment JSON before encodin
 ## Ducking (declare in-composition / bake for export)
 
 B1, declare ducking in the composition. `audio-duck.mjs` emits a volume lane
-as a `data-automation` attribute. Add it to the background `<audio>` element;
+as a `data-automation` attribute. Attack and release durations must be positive finite seconds; instantaneous (zero-duration) transitions are unsupported and rejected. Add it to the background `<audio>` element;
 the source file stays untouched. Lane times are clip-local, so pass
 `--composition` to let the script subtract the element's `data-start`.
 

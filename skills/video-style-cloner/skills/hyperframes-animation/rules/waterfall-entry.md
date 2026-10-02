@@ -63,11 +63,11 @@ tl.to("#el-3", { y: 0, duration: 0.14, ease: "power4.out" }, t2);
 var t3 = t2 + 0.14 - F;
 tl.set("#frag-a", { opacity: 1, y: 70 }, t3);
 tl.to("#frag-a", { y: 0, duration: 0.16, ease: "power4.out" }, t3);
-var t4 = t3 + 0.14 - F;
+var t4 = t3 + 0.16 - F;
 tl.set("#frag-b", { opacity: 1, y: 70 }, t4);
 tl.to("#frag-b", { y: 0, duration: 0.15, ease: "power4.out" }, t4);
 // punctuation: lightest, fastest
-var t5 = t4 + 0.13 - 2 * F;
+var t5 = t4 + 0.15 - 2 * F;
 tl.set("#dot", { opacity: 1, y: 48 }, t5);
 tl.to("#dot", { y: 0, duration: 0.12, ease: "power4.out" }, t5);
 ```

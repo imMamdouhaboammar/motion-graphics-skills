@@ -34,8 +34,8 @@ Options:
   --meta          audio_meta.json or JSON word transcript
   --target        GSAP selector for the background audio element
   --duck          Duck multiplier (default: 0.25)
-  --attack        Duck-in duration seconds (default: 0.15)
-  --release       Restore duration seconds (default: 0.4)
+  --attack        Positive duck-in duration seconds (default: 0.15)
+  --release       Positive restore duration seconds (default: 0.4)
   --merge-gap     Bridge speech gaps smaller than this many seconds (default: 0.6)
   --sequential    Place multi-line meta back to back at composition time
   --gap           Extra seconds between sequential lines (default: 0)
@@ -57,17 +57,24 @@ try {
 
 function run() {
   if (!args.meta || !args.target) throw new Error("--meta and --target are required");
+  for (const name of ["attack", "release"]) {
+    const value = Number(args[name]);
+    if (!Number.isFinite(value) || value <= 0)
+      throw new Error(`--${name} must be positive finite seconds`);
+  }
   const meta = JSON.parse(readFileSync(resolve(args.meta), "utf8"));
   const target = args.target;
   const { baseVolume, clipStart } = readTargetAttrs(args.composition, target);
-  const offsets = args.offsets
-    ? Object.fromEntries(
-        args.offsets.split(",").map((pair) => {
-          const [id, t] = pair.split("=");
-          return [id.trim(), Number(t)];
-        }),
-      )
-    : undefined;
+  const offsets = args.offsets === undefined ? undefined : Object.fromEntries(
+    args.offsets.split(",").map((pair) => {
+      const parts = pair.split("=");
+      const id = parts[0]?.trim();
+      const value = parts[1]?.trim();
+      if (parts.length !== 2 || !id || !value || !Number.isFinite(Number(value)))
+        throw new Error('--offsets requires comma-separated "voice_id=finite_seconds" pairs');
+      return [id, Number(value)];
+    }),
+  );
   const spans = speechSpans(meta, {
     mergeGap: Number(args["merge-gap"]),
     sequential: args.sequential,

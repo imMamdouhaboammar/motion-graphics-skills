@@ -8,7 +8,7 @@ function read(relativePath) {
 }
 
 test("product launch capture treats blocked output as a hard gate", () => {
-  const skill = read("../SKILL.md");
+  const skill = read("../product-launch-video.md");
 
   assert.match(skill, /hyperframes capture[^\n]+--json/);
   assert.match(skill, /capture\/BLOCKED\.md[^\n]+hard stop/i);

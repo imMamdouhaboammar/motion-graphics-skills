@@ -1,6 +1,6 @@
 # logo-reveal — category module
 
-A **logo sting / brand lockup**. The logo is user-supplied, or resolved for a known brand (`resolve --type logo --entity <brand>`); `asset_needs` = one logo `source`. ~3–5s. Often `export: alpha-overlay` (sting to drop on other footage).
+A **logo sting / brand lockup**. The logo is user-supplied, or resolved for a known brand (`resolve --type logo --entity <brand>`); `asset_needs` = one `{ role: "logo", kind: "logo", source: "<path>" }` need, or `{ role: "logo", kind: "logo", entity: "<brand>", query: "<brand> official logo" }` for a known brand. Source freezes the official mark and Director Part 2 sets `content.logo` to that local path. ~3–5s. Often `export: alpha-overlay` (sting to drop on other footage).
 
 ## Plan (Director)
 

@@ -15,7 +15,7 @@ Emit a DRAFT `shot-plan.json`.
    | `kinetic-type` | a punchy line / quote / title; text is the hero                                                                                                                                    |
    | `stat`         | a single hero number / count-up                                                                                                                                                    |
    | `charts`       | bar / line / pie / race / % from data                                                                                                                                              |
-   | `logo-reveal`  | a logo sting / brand lockup (user supplies the logo)                                                                                                                               |
+   | `logo-reveal`  | a logo sting / brand lockup (user-supplied or known-brand logo)                                                                                                                               |
    | `lower-thirds` | name/title bars, callouts, social overlays                                                                                                                                         |
    | `maps`         | a geographic shot — highlight regions, connect places, zoom to a location. Sub-fork: **vector** (D3, stylized) vs **basemap** (baked MapLibre — real satellite/dark/zoom-to-place) |
    | `webpage`      | highlight / animate a real captured web page or UI _(search-driven)_                                                                                                               |
@@ -25,12 +25,12 @@ Emit a DRAFT `shot-plan.json`.
 
    If genuinely ambiguous between two, ask exactly one question. Then load `categories/<id>/module.md` for that category's specifics.
 
-2. **Asset strategy → `asset_needs[]`.** Each item: `{ role, kind: image|icon|logo|svg|news|web|tweet, query|source, treatment }`.
+2. **Asset strategy → `asset_needs[]`.** Each item: `{ role, kind: image|icon|logo|svg|news|web|tweet, query|source, entity?, treatment }` (or the maps `type: "map-bake"` variant below).
    - asset-free (`kinetic-type`, most `stat`/`charts`) → `asset_needs: []`.
-   - `maps` → **vector** lane: `asset_needs: []` (D3/TopoJSON, runs live in HF). **basemap** lane (satellite/dark/zoom-to-place): `asset_needs: [{ type: "map-bake", … }]` (baked in Source — see `categories/maps/module.md`).
+   - `maps` → **vector** lane: `asset_needs: []` (D3/TopoJSON, runs live in HF). **basemap** lane (satellite/dark/zoom-to-place): `asset_needs: [{ role: "basemap", type: "map-bake", env: { NAME, STYLE, CENTER, ZSTART, ZEND, COUNTRIES, FPS, DUR } }]` (baked in Source — see `categories/maps/module.md`).
    - `webpage` / `news` / `tweet` → search the real source (page / article / tweet) + a supporting image. **Two-pole queries only**: atomic (1–3 words, composable: portraits, logos, objects) OR specific (5–15 words: a news event, a tweet). Never the middle. A failed specific query is dropped, not broadened.
    - `asset-fusion` → search or generate one hero asset.
-   - `logo-reveal` → user-supplied logo (`source`).
+   - `logo-reveal` → emit one `{ role: "logo", kind: "logo", source: "<user logo path>" }` need for a supplied logo, or `{ role: "logo", kind: "logo", entity: "<brand>", query: "<brand> official logo" }` for a known brand. Source resolves the official mark and Part 2 sets `content.logo` to its frozen local path.
 
 3. **Envelope**: `duration_s` (3–30), `fps` (30), `canvas` (default 1080×1920; 16:9 / 1:1 per platform), `style`, `palette` (hex list, or `"derive-from-asset"`), `font` (from the HF embed list), `beats`, `export` (`mp4` | `alpha-overlay`).
 

@@ -17,23 +17,23 @@ never eyeball coordinates; localize by discrete choice. (RSVP, ACL 2025.)
 ## Routing — pick the cheapest path that's actually available
 
 1. **A strong detector is available** (e.g. `GEMINI_API_KEY` in env) →
-   `node grounding/locate.mjs auto <img> "<target>"` — one call, done.
+   `node "$SKILL_DIR/grounding/locate.mjs" auto <img> "<target>"` — one call, done.
    **Never assume the key exists.** No key → path 2.
 2. **No detector (the normal case)** → YOU are the localizer; run the grid loop.
 
 ## The grid loop (you read images between steps)
 
 ```
-node grounding/locate.mjs overlay <img> --out /tmp/g
+node "$SKILL_DIR/grounding/locate.mjs" overlay <img> --out /tmp/g
   → READ /tmp/g/gv.png (vertical strips 1-9) and gh.png (horizontal 1-9);
     decide which strip numbers the target spans (list EVERY strip it touches).
-node grounding/locate.mjs region <img> --vids 4,5 --hids 6,7 --out /tmp/g
+node "$SKILL_DIR/grounding/locate.mjs" region <img> --vids 4,5 --hids 6,7 --out /tmp/g
   → READ /tmp/g/gc.png (the region cropped + upscaled, finer 6×6 grid);
     pick the finer strips. (Pick strips again — do NOT switch to estimating
     coordinates; discrete choice is the whole point, at BOTH stages.)
-node grounding/locate.mjs final <img> --region <from step 2> --vids 3,4 --hids 3,4
+node "$SKILL_DIR/grounding/locate.mjs" final <img> --region <from step 2> --vids 3,4 --hids 3,4
   → the final {box, center}.
-node grounding/locate.mjs mark <img> --box <final box> --out /tmp/g/check.png
+node "$SKILL_DIR/grounding/locate.mjs" mark <img> --box <final box> --out /tmp/g/check.png
   → VERIFY: READ check.png. Red box ON the target → done. Off → redo
     region/final with corrected strips (you now know which direction). Never
     skip this step; it converts silent misses into one cheap retry.

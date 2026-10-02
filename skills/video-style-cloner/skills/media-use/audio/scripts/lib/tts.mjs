@@ -58,7 +58,7 @@ export function pickProvider(userProvider) {
 
 // ── voice resolution ──────────────────────────────────────────────────────────
 // HeyGen /v3/voices/speech only accepts STARFISH voice_ids; auto-pick the first
-// English public starfish voice when none is pinned. ElevenLabs/Kokoro have
+// public starfish voice matching the requested language when none is pinned. ElevenLabs/Kokoro have
 // their own defaults.
 export async function resolveVoiceId({ provider, userVoice, lang = "en" }) {
   if (userVoice) return userVoice;
@@ -77,8 +77,15 @@ export async function resolveVoiceId({ provider, userVoice, lang = "en" }) {
     headers: heygenAuthHeaders(),
   });
   const voices = payload.data ?? payload.voices ?? [];
-  const pick = voices.find((v) => v.language === "English") ?? voices[0];
-  if (!pick) throw new Error("no public starfish voice to default to — pass --voice");
+  const requested = String(lang).trim().toLowerCase().split(/[-_]/)[0];
+  let languageName;
+  try { languageName = new Intl.DisplayNames(["en"], { type: "language" }).of(requested)?.toLowerCase(); }
+  catch { languageName = requested; }
+  const pick = voices.find((v) => {
+    const language = String(v.language ?? "").trim().toLowerCase();
+    return language === languageName || language.split(/[-_]/)[0] === requested;
+  });
+  if (!pick) throw new Error(`no public starfish voice for language "${lang}" — pass --voice`);
   return pick.voice_id;
 }
 

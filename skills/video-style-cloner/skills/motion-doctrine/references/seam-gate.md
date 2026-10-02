@@ -66,7 +66,7 @@ Lives at the project root. One row per seam; this is the vector ledger as data.
 
 - `cut` — seconds on the master clock, the frame the incoming side ignites.
 - `type` — `"cut"` (default; full vector checks), `"match-cut"` / `"morph"`
-  (carrier-continuity + overlap only; motion may start AT the boundary).
+  (carrier-continuity only; overlap is not checked, and motion may start AT the boundary).
 - `axis` — `"x"`, `"y"`, or `"z"` (z = scale). `dir` — sign of motion:
   x −1 = leftward, y −1 = upward, z +1 = push (growing), z −1 = pull (shrinking).
 - `selector` — the element that CARRIES the seam motion. Use the wrapper when the
@@ -85,9 +85,11 @@ Lives at the project root. One row per seam; this is the vector ledger as data.
 | `exit-moving` / `entry-moving`       | rule 1/3 — no settled exits, no from-rest entries              |
 | `exit-direction` / `entry-direction` | rule 3 — measured sign matches the ledger                      |
 | `speed-match` (WARN)                 | law §3 — entry velocity ≈ exit velocity                        |
-| `zero-overlap`                       | rule 6 — one side visible per frame, never both                |
+| `zero-overlap`                       | incoming hidden at cut−1f; outgoing hidden at cut+1f                |
 | `z-sign-scan`                        | rule 7 — incoming scene's own entrances don't fight the Z sign |
 | `carrier-*`                          | rules 3/4 — carrier rect continuity, ancestor scale included   |
 
 Velocities are measured on `getBoundingClientRect` (center for x/y, width-ratio for z),
 so ancestor wrapper transforms are automatically included.
+
+`zero-overlap` applies only to `cut` rows. It samples those two visibility conditions; it does not inspect the interval between them or guarantee that either side stays visible. Inspect boundary frames separately to verify the full visual handoff.

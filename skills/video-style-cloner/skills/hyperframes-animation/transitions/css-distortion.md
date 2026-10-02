@@ -5,9 +5,9 @@
 RGB-tinted overlays (NOT multiply blend — use normal blending at 35% opacity) jitter with large offsets. Scene itself also jitters.
 
 ```js
-tl.set("#glitch-r", { opacity: 1, x: 40, y: -8 }, T);
-tl.set("#glitch-g", { opacity: 1, x: -30, y: 12 }, T);
-tl.set("#glitch-b", { opacity: 1, x: 15, y: -20 }, T);
+tl.set("#glitch-r", { opacity: 0.35, x: 40, y: -8 }, T);
+tl.set("#glitch-g", { opacity: 0.35, x: -30, y: 12 }, T);
+tl.set("#glitch-b", { opacity: 0.35, x: 15, y: -20 }, T);
 tl.set(old, { x: -15 }, T);
 // 6 jitter frames at 0.03s intervals with big offsets (±30-60px)
 // ... swap and clear at T + 0.2
