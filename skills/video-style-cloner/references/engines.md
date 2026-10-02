@@ -2,12 +2,11 @@
 
 ## Engine Overview
 
-Each engine is a separate skill that handles rendering for one animation style.
-The `video-style-cloner` orchestrates them. It never renders directly.
+These are nested named workflow modules inside one imported `video-style-cloner` skill. Production modules provide style-specific templates and instructions. Supporting modules cover HyperFrames, media, captions and doctrine. They are not all separate renderers. See the complete release inventory in `docs/plugin/CATALOG.md` in the source repository.
 
 ## HyperFrames (Core 2D Engine)
 
-HyperFrames is the primary animation renderer. It takes an
+For new HyperFrames compositions, HyperFrames is the primary animation renderer. The drawing templates for anime, pixel, crayon, paper and whiteboard routes use their own browser-capture scripts and FFmpeg. Preserve their working project runtime. It takes an
 HTML composition and captures it with a headless browser. Its installed CLI encodes
 the final video. Read the named `hyperframes-cli` and `hyperframes-core` entries
 for the current composition contract.
@@ -54,6 +53,10 @@ its own frame sequence as specified in `engine/README.md`.
 | `slideshow` | Slideshow with transitions | 2d-vector | Photo/graphic presentation |
 | `music-to-video` | Lyric video / visualiser | 2d-* | Beat-synced text/shapes |
 | `cut-the-curve` | Trending short-form kinetic | 2d-vector | Fast cuts, bold typography |
+
+## Other bundled modules
+
+The suite also includes `product-launch-video`, `pr-to-video`, `talking-head-recut`, `embedded-captions`, `general-video`, `remotion-to-hyperframes`, `ffmpeg`, `figma`, `media-use`, `motion-doctrine`, `seam-craft`, `captions-overlay`, `oversized-cursor`, `frontend-design`, the `hyperframes` gateway and `video-clone` analysis. The bundled `blender-product-film` guide is disabled in the current 2D style-cloning track. Remotion conversion requires an explicit port request and does not bundle the Remotion runtime.
 
 ## Character Rigging Rule
 

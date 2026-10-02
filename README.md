@@ -5,14 +5,14 @@
 <h1 align="center">Motion Graphics Skill Pack</h1>
 
 <p align="center">
-  <strong>52 agent skills for motion design, animation, video editing, creative direction and production</strong><br>
-  Claude Code · Codex · HyperFrames<br>
+  <strong>53 agent skills for motion design, animation, video editing, creative direction and production</strong><br>
+  ChatGPT · Claude Code · Codex · HyperFrames<br>
   <sub>Every frame is code</sub>
 </p>
 
 <p align="center">
   <a href="https://github.com/imMamdouhaboammar/motion-graphics-skills/stargazers"><img src="https://img.shields.io/github/stars/imMamdouhaboammar/motion-graphics-skills?style=flat-square&color=D97557&labelColor=00132F&label=stars" alt="GitHub stars"></a>
-  <img src="https://img.shields.io/badge/skills-52-D97557?style=flat-square&labelColor=00132F" alt="52 agent skills">
+  <img src="https://img.shields.io/badge/skills-53-D97557?style=flat-square&labelColor=00132F" alt="53 agent skills">
   <img src="https://img.shields.io/badge/Claude_Code_%2B_Codex-supported-58B6FF?style=flat-square&labelColor=00132F" alt="Claude Code and Codex">
   <a href="LICENSE"><img src="https://img.shields.io/badge/license-see_LICENSE-red?style=flat-square&labelColor=00132F" alt="License"></a>
 </p>
@@ -125,14 +125,14 @@ The thumbnail opens the committed full video. A native in-README attachment play
 
 ## ChatGPT and Codex plugin
 
-The pack also supports a skills-only plugin with 49 original specialists plus three host helpers. Start with `motion-studio` to route a task according to the tools available in your session.
+The pack also supports a skills-only plugin with 50 domain specialists plus three host helpers. Start with `motion-studio` to route a task according to the tools available in your session.
 
-See [plugin installation and runtime requirements](docs/plugin/README.md). Planning, storyboards and review can run without a media-provider account. Rendering requires an execution-capable host and working dependencies.
+See [plugin installation](docs/plugin/README.md), the [complete 53-skill and 36-module catalog](docs/plugin/CATALOG.md), and the [runtime and engine guide](docs/plugin/RUNTIMES.md). Planning, storyboards and review can run without a media-provider account. Rendering requires an execution-capable host and working dependencies.
 
 Build a private import archive from a checkout:
 
 ```bash
-python3 tools/build_plugin.py /absolute/path/motion-graphics-skills-1.0.0.zip
+python3 tools/build_plugin.py /absolute/path/motion-graphics-skills-1.2.0.zip
 ```
 
 ## Install
@@ -239,9 +239,15 @@ Add HyperFrames once (free, open source): `npx skills add heygen-com/hyperframes
 
 When you want a specific job done properly, pick a skill below.
 
+## Engines and production routes
+
+Video Style Cloner adds reference analysis, approved storyboards, style-specific production and independent review. Its 36 nested modules include painted animation, anime cel, pixel art, crayon storybook, paper cutout, whiteboard, explainers, product promos, music videos, captions and HyperFrames guidance. These are supporting modules within one imported skill. The optional Rust CLI coordinates project-provided render/review adapters. Its current style-cloning track is 2D.
+
+See the [engine and runtime matrix](docs/plugin/RUNTIMES.md) for prerequisites, the optional Rust contract and the bundled Blender guide's routing limit.
+
 ## The skills
 
-52 installed skill folders are available in [`skills/`](skills/). The table below highlights 22 motion-production skills; the remaining folders cover supporting workflows and design, audio and runtime tooling. Start with `motion-director` for broad creative work.
+53 installed skill folders are available in [`skills/`](skills/). The table below highlights 22 motion-production skills; the remaining folders cover supporting workflows and design, audio and runtime tooling. Start with `motion-director` for broad creative work.
 
 | Stage | Skill | What you get | Say this |
 |---|---|---|---|
@@ -357,12 +363,12 @@ Every prompt from the edition, ready to paste, one file per job. Each one says w
 <details>
 <summary><strong>What each skill needs to run</strong></summary>
 
-Only install what the job needs. Nothing here needs an API key.
+Only install what the job needs. Planning and local media workflows do not require provider credentials. Optional media, TTS and music providers may need API keys or authorized accounts.
 
 | Workflow | Needs | If it is missing |
 |---|---|---|
 | Any skill, on-brand | `brand.md` and `MOTION.md` from `brand-intake` | The skill asks for hex codes, font and logo, and does not call the result on-brand |
-| Build any animation | Claude Code on Opus 5.5 | Nothing to build with |
+| Build animation source | A coding host with workspace/execution tools, such as Claude Code or Codex | Produce the storyboard or implementation handoff |
 | MP4 export | HyperFrames, or ffmpeg plus Chrome | You get the HTML with `window.seek()`, export pending |
 | `loop-cover` measuring | ffmpeg and Python 3 | GIF made, seam and motion unmeasured, so not called done |
 | `reel-export` and `model-showdown` stacking | ffmpeg and ffprobe | Stacked layout as HTML, final encode and checks pending |
@@ -375,7 +381,8 @@ Only install what the job needs. Nothing here needs an API key.
 <details>
 <summary><strong>House rules every skill follows</strong></summary>
 
-1. **Reuse first.** Use the current project, specialist skills and HyperFrames capabilities before building new infrastructure.\n2. **Facts first.** Every name, date and number on screen comes from a list you approve. Nothing invented.
+1. **Reuse first.** Use the current project, specialist skills and HyperFrames capabilities before building new infrastructure.
+2. **Facts first.** Every name, date and number on screen comes from a list you approve. Nothing invented.
 3. **Your brand, not the average.** Colours and fonts come from `brand-intake` or from you. With nothing given, it asks.
 4. **Banned defaults:** typewriter text, glow, bounce, gradients on text, purple-to-blue backgrounds.
 5. **Motion on twos** for anything hand-made in feel (hold each pose for 2 frames at 24fps).
