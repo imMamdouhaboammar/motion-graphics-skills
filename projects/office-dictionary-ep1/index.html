@@ -1,0 +1,653 @@
+<!doctype html>
+<html lang="ar">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=1080, height=1920" />
+    <title>قاموس المكتب: مين عنده سؤال؟</title>
+    <script src="assets/vendor/gsap.min.js"></script>
+    <style>
+      @font-face { font-family: "Sans"; src: url("assets/fonts/thmanyahsans-Regular.woff2") format("woff2"); font-weight: 400; }
+      @font-face { font-family: "Sans"; src: url("assets/fonts/thmanyahsans-Medium.woff2") format("woff2"); font-weight: 500; }
+      @font-face { font-family: "Sans"; src: url("assets/fonts/thmanyahsans-Bold.woff2") format("woff2"); font-weight: 700; }
+      @font-face { font-family: "Sans"; src: url("assets/fonts/thmanyahsans-Black.woff2") format("woff2"); font-weight: 900; }
+      @font-face { font-family: "Serif"; src: url("assets/fonts/thmanyahserifdisplay-Black.woff2") format("woff2"); font-weight: 900; }
+
+      :root {
+        --board: #0e1528; --board2: #17213c; --chalk: #eef0f5; --chalkdim: #7d87a6;
+        --red: #e2332b; --red2: #8e1218; --redbg: #3a070b;
+        --lav: #eceefc; --lav2: #f8f8ff; --blue: #2b4bff; --ink: #141a36; --grey: #9aa0bd;
+      }
+      * { margin: 0; padding: 0; box-sizing: border-box; }
+      html, body { width: 1080px; height: 1920px; overflow: hidden; background: var(--board); }
+      #root { position: relative; width: 1080px; height: 1920px; overflow: hidden; background: var(--board); font-family: "Sans", sans-serif; color: var(--chalk); }
+      .layer { position: absolute; inset: 0; }
+      .abs { position: absolute; }
+      .hid { opacity: 0; }
+      .chalk { font-family: "Serif", serif; font-weight: 900; color: var(--chalk); filter: url(#chalky); text-shadow: 0 0 10px rgba(238, 240, 245, 0.25), 0 0 40px #0e1528, 0 0 80px #0e1528; }
+      .c { left: 0; right: 0; text-align: center; }
+      .chalk, .c, #stamp, #mail, #chat, #card, #proj, #bars, #jargon, #jargon2, #jargon3 { direction: rtl; }
+
+      /* worlds */
+      #board { background: radial-gradient(ellipse 90% 70% at 50% 45%, var(--board2) 0%, var(--board) 75%); }
+      #jargon .j, #jargon2 .j, #jargon3 .j { position: absolute; white-space: nowrap; color: var(--chalk); font-family: "Sans", sans-serif; font-weight: 500; }
+      #red { background: radial-gradient(ellipse 70% 55% at 50% 50%, #6d0d13 0%, var(--redbg) 80%); opacity: 0; }
+      #lav { background: radial-gradient(ellipse 90% 70% at 50% 40%, var(--lav2) 0%, var(--lav) 80%); clip-path: circle(0% at 50% 50%); }
+      .blob { width: 900px; height: 900px; border-radius: 50%; filter: blur(80px); opacity: 0.55; }
+      #blobA { left: -300px; top: 200px; background: #c9d1ff; } #blobB { left: 500px; top: 1100px; background: #dcd3ff; }
+      #grain { opacity: 0.09; mix-blend-mode: overlay; pointer-events: none; }
+
+      /* characters */
+      .ch { position: absolute; width: 200px; height: 270px; transform-origin: 50% 100%; }
+      .ch svg { width: 100%; height: 100%; overflow: visible; }
+
+      /* meeting */
+      #table { position: absolute; left: 60px; right: 60px; top: 1530px; height: 10px; border-radius: 6px; background: var(--chalk); opacity: 0.85; filter: url(#chalky); }
+      #tableTop { position: absolute; left: 60px; right: 60px; top: 1540px; height: 380px; background: linear-gradient(180deg, rgba(238,240,245,0.10), rgba(238,240,245,0)); }
+      #hook { top: 300px; font-size: 120px; line-height: 1.25; }
+      #hookUnder { top: 520px; height: 8px; left: 300px; right: 300px; background: var(--red); border-radius: 4px; transform-origin: 100% 50%; filter: url(#chalky); }
+      #count { top: 1640px; font-size: 64px; }
+      #count b { color: #ff6a5e; font-weight: 700; }
+
+      /* inside the head */
+      #spiral { position: absolute; left: 50%; top: 50%; width: 2600px; height: 2600px; margin: -1300px 0 0 -1300px; }
+      #bigHead { position: absolute; left: 90px; top: 760px; width: 900px; height: 1215px; }
+      #stamp { position: absolute; left: 150px; top: 620px; width: 780px; padding: 18px 0 26px; text-align: center; font-family: "Sans"; font-weight: 900; font-size: 116px; color: var(--red); border: 12px solid var(--red); border-radius: 28px; background: rgba(255, 238, 232, 0.94); transform: rotate(-7deg); box-shadow: 0 30px 80px rgba(0,0,0,0.45); }
+      #mail { position: absolute; left: 110px; top: 560px; width: 860px; border-radius: 34px; background: #fff; color: var(--ink); box-shadow: 0 40px 90px rgba(0,0,0,0.5); padding: 40px 48px 50px; }
+      #mail .hd { display: flex; gap: 22px; align-items: center; font-weight: 700; font-size: 40px; color: #505779; }
+      #mail .av { width: 70px; height: 70px; border-radius: 50%; background: #c9cdea; flex: none; }
+      #mail .sub { margin-top: 26px; font-weight: 900; font-size: 50px; }
+      #mail .body { margin-top: 18px; font-weight: 500; font-size: 52px; line-height: 1.45; min-height: 150px; }
+      #mail .body i { font-style: normal; color: var(--red); font-weight: 900; }
+      #eye { position: absolute; left: 340px; top: 250px; width: 400px; height: 200px; transform-origin: 50% 50%; }
+      #watchLbl { top: 470px; font-size: 92px; }
+      #clock { position: absolute; left: 820px; top: 210px; width: 190px; height: 190px; }
+
+      /* corridor chat */
+      #door { position: absolute; inset: 0; }
+      #door .lf, #door .rt { position: absolute; top: 0; height: 1920px; width: 540px; background: #090e1c; }
+      #door .lf { left: 0; border-left: 6px solid #2b3658; } #door .rt { right: 0; border-right: 6px solid #2b3658; }
+      #door .knob { position: absolute; top: 1000px; left: 470px; width: 40px; height: 40px; border-radius: 50%; background: #c9a24a; }
+      #chat { position: absolute; left: 70px; right: 70px; top: 360px; }
+      #chat .head { display: flex; align-items: center; gap: 24px; padding-bottom: 34px; border-bottom: 3px solid rgba(238,240,245,0.15); margin-bottom: 40px; }
+      #chat .gav { width: 110px; height: 110px; border-radius: 50%; background: #2b3658; display: flex; align-items: center; justify-content: center; font-size: 54px; font-weight: 900; color: var(--chalk); flex: none; }
+      #chat .gname { font-size: 54px; font-weight: 900; }
+      #chat .gsub { font-size: 38px; color: var(--chalkdim); font-weight: 500; }
+      .bub { position: relative; max-width: 720px; margin-bottom: 34px; padding: 28px 40px; border-radius: 42px; font-size: 62px; font-weight: 700; line-height: 1.35; }
+      .bub .who { display: block; font-size: 34px; font-weight: 700; color: #8fa2ff; margin-bottom: 4px; }
+      .bub.in { background: #1d2746; color: var(--chalk); border-top-right-radius: 12px; }
+      .bub.out { background: #3a55ff; color: #fff; margin-right: auto; border-top-left-radius: 12px; }
+
+      /* safe world: dictionary card */
+      #card { position: absolute; left: 90px; top: 300px; width: 900px; border-radius: 48px; background: #fff; color: var(--ink); box-shadow: 0 50px 110px rgba(43, 75, 255, 0.18), 0 6px 20px rgba(20, 26, 54, 0.08); padding: 56px 70px 64px; transform-origin: 50% 0%; }
+      #card .top { display: flex; justify-content: space-between; align-items: center; font-weight: 700; font-size: 38px; color: var(--blue); }
+      #card .top span:last-child { color: var(--grey); font-weight: 500; }
+      #card .word { margin-top: 30px; display: flex; align-items: baseline; gap: 26px; }
+      #card .word .w { font-family: "Serif"; font-weight: 900; font-size: 150px; line-height: 1.15; color: var(--ink); }
+      #card .word .pos { font-size: 46px; color: var(--grey); font-weight: 500; }
+      #card hr { border: 0; height: 4px; background: #e3e6fb; margin: 26px 0 30px; transform-origin: 100% 50%; }
+      #card .def { font-size: 50px; font-weight: 700; color: #4a5075; margin-bottom: 20px; }
+      #card .row { display: flex; align-items: center; gap: 28px; font-size: 64px; font-weight: 900; margin: 10px 0; }
+      #card .row svg { width: 70px; height: 70px; flex: none; }
+      #card .safe { margin-top: 26px; font-size: 70px; font-weight: 900; color: var(--blue); }
+
+      /* proof */
+      #pLbl { top: 270px; font-size: 46px; font-weight: 700; color: #4a5075; }
+      #pLbl b { color: var(--ink); font-weight: 900; }
+      #pNum { top: 350px; font-family: "Sans"; font-weight: 900; font-size: 300px; line-height: 1; color: var(--blue); direction: ltr; }
+      #pUnit { top: 680px; font-size: 80px; font-weight: 900; color: var(--ink); }
+      #dots { position: absolute; left: 120px; top: 840px; width: 840px; height: 640px; }
+      #dots i { position: absolute; width: 30px; height: 30px; border-radius: 50%; background: var(--blue); }
+      #scanbar { position: absolute; top: 800px; width: 14px; height: 720px; background: linear-gradient(180deg, transparent, var(--blue), transparent); box-shadow: 0 0 40px 10px rgba(43, 75, 255, 0.35); opacity: 0; }
+      #bars { position: absolute; left: 100px; right: 100px; top: 900px; height: 760px; }
+      .bar { position: absolute; bottom: 160px; width: 130px; border-radius: 65px 65px 18px 18px; background: linear-gradient(180deg, #8d9cff, #3a55ff); transform-origin: 50% 100%; }
+      .bar.dim { background: linear-gradient(180deg, #c7cdf3, #a3acdc); }
+      .blbl { position: absolute; bottom: 74px; width: 170px; margin-left: -20px; text-align: center; font-size: 31px; font-weight: 700; color: #7b82a6; }
+      #badge { position: absolute; padding: 10px 34px; border-radius: 40px; background: var(--blue); color: #fff; font-weight: 900; font-size: 54px; box-shadow: 0 16px 40px rgba(43, 75, 255, 0.4); }
+      #oneLbl { top: 300px; font-size: 104px; font-weight: 900; color: var(--ink); }
+      #oneLbl em { font-style: normal; color: var(--blue); }
+
+      /* payoff */
+      #proj { position: absolute; left: 140px; right: 140px; top: 330px; }
+      #proj .lbl { display: flex; justify-content: space-between; font-size: 70px; }
+      #proj .track { position: relative; margin-top: 24px; height: 64px; border: 6px solid var(--chalk); border-radius: 40px; filter: url(#chalky); overflow: hidden; }
+      #proj .fill { position: absolute; top: 0; bottom: 0; right: 0; width: 62%; background: #b8433d; }
+      #proj .ghost { position: absolute; top: 0; bottom: 0; right: 62%; width: 0%; background: repeating-linear-gradient(-45deg, rgba(110, 140, 255, 0.85) 0 18px, rgba(110, 140, 255, 0.25) 18px 36px); }
+      #big { position: absolute; left: 240px; top: 760px; width: 600px; height: 810px; }
+
+      /* cta */
+      #plane { position: absolute; left: 0; top: 0; width: 150px; height: 150px; }
+      #sendChip { top: 330px; font-size: 92px; font-weight: 900; }
+      #spot { position: absolute; inset: 0; background: radial-gradient(ellipse 34% 30% at 50% 66%, rgba(255, 250, 230, 0.16) 0%, rgba(0,0,0,0) 70%), rgba(3, 5, 12, 0.86); opacity: 0; }
+      #beam { position: absolute; left: 280px; top: -40px; width: 520px; height: 1700px; background: linear-gradient(180deg, rgba(255, 248, 225, 0.0), rgba(255, 248, 225, 0.12)); clip-path: polygon(42% 0, 58% 0, 100% 100%, 0 100%); opacity: 0; }
+      #fear { top: 330px; font-size: 104px; }
+      #got { top: 470px; font-size: 104px; }
+      #got .tk { color: #7d96ff; }
+
+      /* end card */
+      #eTitle { top: 650px; font-size: 168px; line-height: 1.2; }
+      #eLine { top: 900px; left: 330px; right: 330px; height: 8px; background: var(--red); border-radius: 4px; filter: url(#chalky); transform-origin: 100% 50%; }
+      #eEp { top: 960px; font-size: 64px; font-weight: 700; color: var(--chalk); }
+      #jargon3 { opacity: 0.45; }
+      #eEp, #eNext { text-shadow: 0 0 30px #0e1528, 0 0 60px #0e1528; }
+      #eNext { top: 1450px; font-size: 50px; font-weight: 500; color: var(--chalkdim); }
+      #eNext b { display: block; margin-top: 14px; font-family: "Serif"; font-weight: 900; font-size: 84px; color: var(--chalk); filter: url(#chalky); }
+      #moon { position: absolute; left: 800px; top: 1280px; width: 110px; height: 110px; border-radius: 50%; box-shadow: -26px 16px 0 0 #f4e3a2; transform: rotate(-20deg); }
+    </style>
+  </head>
+  <body>
+    <svg width="0" height="0" style="position:absolute">
+      <filter id="chalky" x="-5%" y="-5%" width="110%" height="110%">
+        <feTurbulence type="fractalNoise" baseFrequency="0.9" numOctaves="2" seed="4" result="n" />
+        <feDisplacementMap in="SourceGraphic" in2="n" scale="3.2" xChannelSelector="R" yChannelSelector="G" result="d" />
+        <feComponentTransfer in="n" result="holes"><feFuncA type="discrete" tableValues="1 1 1 0.55 1 1 0.7 1" /></feComponentTransfer>
+        <feComposite in="d" in2="holes" operator="in" />
+      </filter>
+    </svg>
+
+    <div id="root" data-composition-id="main" data-start="0" data-duration="41.5" data-width="1080" data-height="1920">
+      <!-- world 1: the board -->
+      <div id="board" class="layer">
+        <div id="jargon" class="layer"></div>
+      </div>
+
+      <!-- meeting -->
+      <div id="meeting" class="layer">
+        <div id="hook" class="abs c chalk">مين عنده سؤال؟</div>
+        <div id="hookUnder" class="abs"></div>
+        <div id="crew" class="layer"></div>
+        <div id="tableTop"></div>
+        <div id="table"></div>
+        <div id="count" class="abs c chalk hid">6 أسئلة <span style="color:var(--chalkdim)">·</span> <b>0</b> اتقالوا</div>
+      </div>
+
+      <!-- world 2: inside the head -->
+      <div id="red" class="layer">
+        <svg id="spiral" viewBox="-1300 -1300 2600 2600"></svg>
+        <div id="bigHead"></div>
+        <svg id="eye" viewBox="0 0 400 200" class="hid">
+          <path d="M10 100 Q200 -40 390 100 Q200 240 10 100 Z" fill="#f6e9e4" />
+          <circle class="iris" cx="200" cy="100" r="58" fill="#c3141c" />
+          <circle class="pupil" cx="200" cy="100" r="24" fill="#1c0204" />
+          <circle cx="182" cy="82" r="10" fill="#fff" opacity="0.8" />
+          <path d="M10 100 Q200 -40 390 100" fill="none" stroke="#1c0204" stroke-width="10" stroke-linecap="round" />
+        </svg>
+        <svg id="clock" viewBox="0 0 190 190" class="hid">
+          <circle cx="95" cy="95" r="84" fill="#f6e9e4" stroke="#1c0204" stroke-width="10" />
+          <line x1="95" y1="95" x2="95" y2="42" stroke="#1c0204" stroke-width="10" stroke-linecap="round" />
+          <line class="hand" x1="95" y1="95" x2="140" y2="95" stroke="#c3141c" stroke-width="7" stroke-linecap="round" />
+          <circle cx="95" cy="95" r="9" fill="#1c0204" />
+        </svg>
+        <div id="watchLbl" class="abs c chalk hid">باصص في الساعة</div>
+        <div id="stamp" class="hid">هيبان غبي</div>
+        <div id="mail" class="hid">
+          <div class="hd"><div class="av"></div><div>المدير<br /><span style="font-weight:500;font-size:34px;color:#8a90b0">إلى: الفريق</span></div></div>
+          <div class="sub">Re: سؤال بسيط</div>
+          <div class="body"><span class="ty"></span></div>
+        </div>
+      </div>
+
+      <!-- corridor -->
+      <div id="corridor" class="layer hid">
+        <div id="chat">
+          <div class="head">
+            <div class="gav">ف</div>
+            <div><div class="gname">جروب الفريق</div><div class="gsub">من غير المدير</div></div>
+          </div>
+          <div class="bub in hid"><span class="who">سارة</span>هو قصده إيه؟</div>
+          <div class="bub in hid"><span class="who">كريم</span>محدش فاهم</div>
+          <div class="bub out hid">اسأله إنت</div>
+        </div>
+      </div>
+      <div id="door" class="hid"><div class="lf"><div class="knob"></div></div><div class="rt"></div></div>
+
+      <!-- world 3: safe -->
+      <div id="lav" class="layer">
+        <div id="blobA" class="abs blob"></div><div id="blobB" class="abs blob"></div>
+        <div id="card" class="hid">
+          <div class="top"><span>قاموس المكتب</span><span>ح 1</span></div>
+          <div class="word"><span class="w">أمان نفسي</span><span class="pos">(اسم)</span></div>
+          <hr />
+          <div class="def">إنك:</div>
+          <div class="row" data-k="0"><svg viewBox="0 0 70 70"><circle cx="35" cy="35" r="31" fill="none" stroke="#dfe3fb" stroke-width="6" /><path class="tick" d="M20 36 L31 47 L51 24" fill="none" stroke="#2b4bff" stroke-width="8" stroke-linecap="round" stroke-linejoin="round" /></svg><span>تسأل</span></div>
+          <div class="row" data-k="1"><svg viewBox="0 0 70 70"><circle cx="35" cy="35" r="31" fill="none" stroke="#dfe3fb" stroke-width="6" /><path class="tick" d="M20 36 L31 47 L51 24" fill="none" stroke="#2b4bff" stroke-width="8" stroke-linecap="round" stroke-linejoin="round" /></svg><span>تغلط</span></div>
+          <div class="row" data-k="2"><svg viewBox="0 0 70 70"><circle cx="35" cy="35" r="31" fill="none" stroke="#dfe3fb" stroke-width="6" /><path class="tick" d="M20 36 L31 47 L51 24" fill="none" stroke="#2b4bff" stroke-width="8" stroke-linecap="round" stroke-linejoin="round" /></svg><span>تقول «مش فاهم»</span></div>
+          <div class="safe hid">وتفضل في أمان.</div>
+        </div>
+        <div id="safeCrew" class="layer"></div>
+
+        <div id="proof" class="layer">
+          <div id="pLbl" class="abs c hid">دراسة <b>جوجل</b> · Project Aristotle</div>
+          <div id="pNum" class="abs c hid">+0</div>
+          <div id="pUnit" class="abs c hid">فريق اتدرس</div>
+          <div id="dots"></div>
+          <div id="scanbar"></div>
+          <div id="oneLbl" class="abs c hid">رقم 1: <em>الأمان النفسي</em></div>
+          <div id="bars"></div>
+        </div>
+      </div>
+
+      <!-- world 4: back on the board -->
+      <div id="board2" class="layer hid" style="background: radial-gradient(ellipse 90% 70% at 50% 45%, var(--board2) 0%, var(--board) 75%);">
+        <div id="jargon2" class="layer"></div>
+        <div id="proj" class="hid">
+          <div class="lbl chalk"><span>المشروع</span><span class="pct" style="direction:ltr">62%</span></div>
+          <div class="track"><div class="fill"></div><div class="ghost"></div></div>
+        </div>
+        <div id="big"></div>
+        <div id="spot"></div>
+        <div id="beam"></div>
+        <svg id="plane" viewBox="0 0 150 150" class="hid"><path d="M10 72 L140 12 L96 140 L74 88 Z" fill="#eef0f5" /><path d="M74 88 L140 12" stroke="#7d87a6" stroke-width="6" /></svg>
+        <div id="sendChip" class="abs c hid">ابعته لمديرك</div>
+        <div id="fear" class="abs c chalk hid">ولو خايف تبعته...</div>
+        <div id="got" class="abs c chalk hid">يبقى فهمت الحلقة <span class="tk">✓</span></div>
+      </div>
+
+      <!-- end card -->
+      <div id="end" class="layer hid" style="background: radial-gradient(ellipse 90% 70% at 50% 45%, var(--board2) 0%, var(--board) 75%);">
+        <div id="jargon3" class="layer"></div>
+        <div id="eTitle" class="abs c chalk">قاموس المكتب</div>
+        <div id="eLine" class="abs"></div>
+        <div id="eEp" class="abs c">الحلقة 1 · مين عنده سؤال؟</div>
+        <div id="moon"></div>
+        <div id="eNext" class="abs c">الحلقة الجاية<b>«معلش، حاجة سريعة»</b></div>
+      </div>
+
+      <svg id="grain" class="layer" width="1080" height="1920"><filter id="gr"><feTurbulence type="fractalNoise" baseFrequency="0.8" numOctaves="3" seed="9" /><feColorMatrix type="saturate" values="0" /></filter><rect width="1080" height="1920" filter="url(#gr)" /></svg>
+
+      <!-- CUES -->
+      <audio id="a-vo" src="assets/audio/vo.wav" data-start="0" data-duration="40.2" data-track-index="10" data-volume="1"></audio>
+      <audio id="a-bed" src="assets/audio/music/bed.wav" data-start="0" data-duration="41.5" data-track-index="11" data-volume="0.42"></audio>
+      <audio id="s1" src="assets/audio/sfx/chalk.wav" data-start="0.0" data-duration="1.3" data-track-index="12" data-volume="0.32"></audio>
+      <audio id="s2" src="assets/audio/sfx/hit-light.wav" data-start="1.2" data-duration="0.5" data-track-index="13" data-volume="0.18"></audio>
+      <audio id="s3" src="assets/audio/sfx/tick.wav" data-start="1.5" data-duration="3.0" data-track-index="12" data-volume="0.42"></audio>
+      <audio id="s4" src="assets/audio/sfx/pop1.wav" data-start="2.82" data-duration="0.14" data-track-index="13" data-volume="0.26"></audio>
+      <audio id="s5" src="assets/audio/sfx/pop1.wav" data-start="3.0" data-duration="0.14" data-track-index="13" data-volume="0.26"></audio>
+      <audio id="s6" src="assets/audio/sfx/pop1.wav" data-start="3.18" data-duration="0.14" data-track-index="13" data-volume="0.26"></audio>
+      <audio id="s7" src="assets/audio/sfx/pop1.wav" data-start="3.36" data-duration="0.14" data-track-index="13" data-volume="0.26"></audio>
+      <audio id="s8" src="assets/audio/sfx/pop1.wav" data-start="3.54" data-duration="0.14" data-track-index="13" data-volume="0.26"></audio>
+      <audio id="s9" src="assets/audio/sfx/pop1.wav" data-start="3.72" data-duration="0.14" data-track-index="13" data-volume="0.26"></audio>
+      <audio id="s10" src="assets/audio/sfx/pop2.wav" data-start="4.0" data-duration="0.22" data-track-index="13" data-volume="0.32"></audio>
+      <audio id="s11" src="assets/audio/sfx/whoosh-elec.wav" data-start="4.64" data-duration="0.85" data-track-index="12" data-volume="0.3"></audio>
+      <audio id="s12" src="assets/audio/sfx/pop2.wav" data-start="4.94" data-duration="0.22" data-track-index="13" data-volume="0.24"></audio>
+      <audio id="s13" src="assets/audio/sfx/heart.wav" data-start="5.04" data-duration="3.4" data-track-index="14" data-volume="0.34"></audio>
+      <audio id="s14" src="assets/audio/sfx/stamp.wav" data-start="6.85" data-duration="0.6" data-track-index="12" data-volume="0.55"></audio>
+      <audio id="s15" src="assets/audio/sfx/whoosh1.wav" data-start="7.66" data-duration="0.49" data-track-index="12" data-volume="0.3"></audio>
+      <audio id="s16" src="assets/audio/sfx/type1.wav" data-start="8.7" data-duration="0.45" data-track-index="12" data-volume="0.22"></audio>
+      <audio id="s17" src="assets/audio/sfx/type2.wav" data-start="9.12" data-duration="0.32" data-track-index="13" data-volume="0.22"></audio>
+      <audio id="s18" src="assets/audio/sfx/whoosh-rev.wav" data-start="9.55" data-duration="0.5" data-track-index="12" data-volume="0.18"></audio>
+      <audio id="s19" src="assets/audio/sfx/hit-mid.wav" data-start="9.91" data-duration="0.6" data-track-index="13" data-volume="0.3"></audio>
+      <audio id="s20" src="assets/audio/sfx/tick.wav" data-start="10.36" data-duration="1.0" data-track-index="12" data-volume="0.5"></audio>
+      <audio id="s21" src="assets/audio/sfx/whoosh-rev.wav" data-start="10.86" data-duration="0.5" data-track-index="13" data-volume="0.26"></audio>
+      <audio id="s22" src="assets/audio/sfx/click.wav" data-start="11.78" data-duration="0.3" data-track-index="12" data-volume="0.28"></audio>
+      <audio id="s23" src="assets/audio/sfx/click.wav" data-start="12.12" data-duration="0.3" data-track-index="12" data-volume="0.28"></audio>
+      <audio id="s24" src="assets/audio/sfx/door.wav" data-start="13.17" data-duration="1.2" data-track-index="12" data-volume="0.45"></audio>
+      <audio id="s25" src="assets/audio/sfx/pop2.wav" data-start="14.24" data-duration="0.22" data-track-index="13" data-volume="0.32"></audio>
+      <audio id="s26" src="assets/audio/sfx/pop1.wav" data-start="14.76" data-duration="0.14" data-track-index="12" data-volume="0.3"></audio>
+      <audio id="s27" src="assets/audio/sfx/send.wav" data-start="15.18" data-duration="0.9" data-track-index="12" data-volume="0.22"></audio>
+      <audio id="s28" src="assets/audio/sfx/whoosh1.wav" data-start="15.57" data-duration="0.49" data-track-index="13" data-volume="0.3"></audio>
+      <audio id="s29" src="assets/audio/sfx/whoosh-rev.wav" data-start="15.92" data-duration="0.5" data-track-index="14" data-volume="0.2"></audio>
+      <audio id="s30" src="assets/audio/sfx/hit-light.wav" data-start="16.55" data-duration="0.5" data-track-index="12" data-volume="0.24"></audio>
+      <audio id="s31" src="assets/audio/sfx/click.wav" data-start="17.68" data-duration="0.3" data-track-index="12" data-volume="0.32"></audio>
+      <audio id="s32" src="assets/audio/sfx/click.wav" data-start="18.34" data-duration="0.3" data-track-index="12" data-volume="0.32"></audio>
+      <audio id="s33" src="assets/audio/sfx/click.wav" data-start="19.4" data-duration="0.3" data-track-index="12" data-volume="0.32"></audio>
+      <audio id="s34" src="assets/audio/sfx/ding.wav" data-start="20.48" data-duration="0.6" data-track-index="12" data-volume="0.26"></audio>
+      <audio id="s35" src="assets/audio/sfx/exhale.wav" data-start="20.73" data-duration="1.6" data-track-index="13" data-volume="0.3"></audio>
+      <audio id="s36" src="assets/audio/sfx/whoosh1.wav" data-start="21.97" data-duration="0.49" data-track-index="12" data-volume="0.22"></audio>
+      <audio id="s37" src="assets/audio/sfx/pop2.wav" data-start="22.22" data-duration="0.22" data-track-index="14" data-volume="0.26"></audio>
+      <audio id="s38" src="assets/audio/sfx/scan.wav" data-start="23.74" data-duration="1.2" data-track-index="12" data-volume="0.12"></audio>
+      <audio id="s39" src="assets/audio/sfx/scan.wav" data-start="25.5" data-duration="1.7" data-track-index="12" data-volume="0.15"></audio>
+      <audio id="s40" src="assets/audio/sfx/whoosh-rev.wav" data-start="27.76" data-duration="0.5" data-track-index="12" data-volume="0.2"></audio>
+      <audio id="s41" src="assets/audio/sfx/pop1.wav" data-start="28.06" data-duration="0.14" data-track-index="13" data-volume="0.2"></audio>
+      <audio id="s42" src="assets/audio/sfx/pop1.wav" data-start="28.18" data-duration="0.14" data-track-index="14" data-volume="0.2"></audio>
+      <audio id="s43" src="assets/audio/sfx/pop1.wav" data-start="28.3" data-duration="0.14" data-track-index="12" data-volume="0.2"></audio>
+      <audio id="s44" src="assets/audio/sfx/pop1.wav" data-start="28.42" data-duration="0.14" data-track-index="13" data-volume="0.2"></audio>
+      <audio id="s45" src="assets/audio/sfx/pop1.wav" data-start="28.54" data-duration="0.14" data-track-index="12" data-volume="0.2"></audio>
+      <audio id="s46" src="assets/audio/sfx/stamp.wav" data-start="30.26" data-duration="0.6" data-track-index="12" data-volume="0.42"></audio>
+      <audio id="s47" src="assets/audio/sfx/ding.wav" data-start="30.31" data-duration="0.6" data-track-index="13" data-volume="0.24"></audio>
+      <audio id="s48" src="assets/audio/sfx/whoosh-elec.wav" data-start="30.74" data-duration="0.85" data-track-index="14" data-volume="0.24"></audio>
+      <audio id="s49" src="assets/audio/sfx/hit-mid.wav" data-start="32.17" data-duration="0.6" data-track-index="12" data-volume="0.24"></audio>
+      <audio id="s50" src="assets/audio/sfx/ding.wav" data-start="34.16" data-duration="0.6" data-track-index="12" data-volume="0.3"></audio>
+      <audio id="s51" src="assets/audio/sfx/hit-light.wav" data-start="34.26" data-duration="0.5" data-track-index="13" data-volume="0.2"></audio>
+      <audio id="s52" src="assets/audio/sfx/send.wav" data-start="35.68" data-duration="0.9" data-track-index="12" data-volume="0.34"></audio>
+      <audio id="s53" src="assets/audio/sfx/heart.wav" data-start="37.06" data-duration="3.0" data-track-index="12" data-volume="0.36"></audio>
+      <audio id="s54" src="assets/audio/sfx/chalk.wav" data-start="38.25" data-duration="0.9" data-track-index="13" data-volume="0.26"></audio>
+      <audio id="s55" src="assets/audio/sfx/ding.wav" data-start="39.36" data-duration="0.6" data-track-index="13" data-volume="0.22"></audio>
+      <audio id="s56" src="assets/audio/sfx/whoosh-rev.wav" data-start="40.1" data-duration="0.5" data-track-index="12" data-volume="0.16"></audio>
+      <audio id="s57" src="assets/audio/sfx/chalk.wav" data-start="40.3" data-duration="0.9" data-track-index="13" data-volume="0.3"></audio>
+      <audio id="s58" src="assets/audio/sfx/pop1.wav" data-start="41.0" data-duration="0.14" data-track-index="12" data-volume="0.22"></audio>
+      <!-- /CUES -->
+    </div>
+
+    <script>
+      (function () {
+        var $ = function (s, r) { return (r || document).querySelector(s); };
+        var $$ = function (s, r) { return Array.prototype.slice.call((r || document).querySelectorAll(s)); };
+        var TOTAL = 41.5;
+        var seed = 11;
+        function rnd() { seed = (seed * 16807) % 2147483647; return (seed - 1) / 2147483646; }
+
+        /* VO word times (faster-whisper medium, assets/audio/vo-words.json) */
+        var T = {
+          wala: 1.50, ma3: 2.38, kol: 2.82, so2al: 4.00, tab: 4.64, ashan1: 6.06, deh: 6.90, ashan2: 7.46, sa2al: 8.70,
+          ashan3: 9.60, modir: 10.06, kolena: 10.96, nhez: 11.78, netla3: 12.72, egtma3: 13.40, nes2al: 14.14, tor2a: 14.98,
+          haga: 15.82, esm: 16.60, tes2al: 17.56, teghlat: 18.22, te2ool: 18.98, fahem: 19.94, tefdal: 20.48, aman: 21.40,
+          google: 22.22, n180: 23.84, fari2: 24.58, ashan4: 25.50, nage7: 26.66, awel: 27.96, nata2eg: 29.50, hya: 30.26,
+          ya3ni: 31.04, bala3: 31.82, momken: 32.78, yenkez: 34.26, mashroo3: 34.74, ebaat: 35.58, modirak: 36.30,
+          walaw: 37.06, tebaato: 37.50, yeb2a: 38.20, kwayes: 39.46, end: 40.02
+        };
+
+        /* ---------- character (R3 body language, R2 glass-dome head) ---------- */
+        var CID = 0;
+        function charSVG() {
+          var i = ++CID;
+          return '<svg viewBox="0 0 200 270"><defs>' +
+            '<linearGradient id="gs' + i + '" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#46547c"/><stop offset="1" stop-color="#1c2442"/></linearGradient>' +
+            '<linearGradient id="gb' + i + '" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#5a78ff"/><stop offset="1" stop-color="#2238e0"/></linearGradient>' +
+            '<radialGradient id="gl' + i + '" cx="0.5" cy="0.6" r="0.6"><stop offset="0" stop-color="#ff5a4e" stop-opacity="0.95"/><stop offset="1" stop-color="#ff5a4e" stop-opacity="0"/></radialGradient>' +
+            '<radialGradient id="gq' + i + '" cx="0.5" cy="0.5" r="0.5"><stop offset="0" stop-color="#9fb2ff" stop-opacity="0.95"/><stop offset="1" stop-color="#9fb2ff" stop-opacity="0"/></radialGradient>' +
+            '<clipPath id="cd' + i + '"><circle cx="100" cy="100" r="58"/></clipPath></defs>' +
+            '<g class="body"><path d="M14 270 C14 196 56 166 100 166 C144 166 186 196 186 270 Z" fill="url(#gs' + i + ')"/>' +
+            '<path class="blu" d="M14 270 C14 196 56 166 100 166 C144 166 186 196 186 270 Z" fill="url(#gb' + i + ')" opacity="0"/>' +
+            '<circle class="chestglow" cx="100" cy="202" r="50" fill="url(#gq' + i + ')" opacity="0"/>' +
+            '<text class="cq" x="100" y="218" text-anchor="middle" font-family="Serif" font-weight="900" font-size="56" fill="#eef0f5" opacity="0">؟</text></g>' +
+            '<g class="head"><circle cx="100" cy="100" r="62" fill="url(#gs' + i + ')"/><circle class="blu" cx="100" cy="100" r="62" fill="url(#gb' + i + ')" opacity="0"/>' +
+            '<g clip-path="url(#cd' + i + ')"><rect x="30" y="30" width="140" height="62" fill="rgba(255,255,255,0.10)"/><circle class="glow" cx="100" cy="74" r="62" fill="url(#gl' + i + ')" opacity="0"/></g>' +
+            '<path d="M44 92 L156 92" stroke="#9aa6c8" stroke-width="4" class="rim"/>' +
+            '<path d="M60 70 Q66 52 86 46" stroke="rgba(255,255,255,0.4)" stroke-width="5" fill="none" stroke-linecap="round"/>' +
+            '<text class="q" x="100" y="86" text-anchor="middle" font-family="Serif" font-weight="900" font-size="58" fill="#eef0f5" opacity="0">؟</text>' +
+            '<g class="eyes"><g class="eye" transform="translate(80 124)"><ellipse rx="10" ry="12" fill="#eef0f5"/><circle class="pp" r="5" fill="#10162b"/></g>' +
+            '<g class="eye" transform="translate(120 124)"><ellipse rx="10" ry="12" fill="#eef0f5"/><circle class="pp" r="5" fill="#10162b"/></g></g>' +
+            '<path class="happy" d="M70 126 q10 -11 20 0 M110 126 q10 -11 20 0" stroke="#eef0f5" stroke-width="5" fill="none" stroke-linecap="round" opacity="0"/>' +
+            '<path class="smile" d="M90 146 q10 7 20 0" stroke="#eef0f5" stroke-width="4" fill="none" stroke-linecap="round" opacity="0"/>' +
+            '<path class="sweat" d="M156 66 q9 15 0 22 q-9 -7 0 -22z" fill="#9fd3ff" opacity="0"/></g></svg>';
+        }
+        function makeChar(parent, x, y, w) {
+          var d = document.createElement('div');
+          d.className = 'ch';
+          d.style.left = x + 'px'; d.style.top = y + 'px';
+          if (w) { d.style.width = w + 'px'; d.style.height = (w * 1.35) + 'px'; }
+          d.innerHTML = charSVG();
+          parent.appendChild(d);
+          return d;
+        }
+
+        /* ---------- R1: drifting chalk jargon at several depths ---------- */
+        var JW = ['KPI', 'Q3', 'deadline', 'ASAP', 'sync', 'Action items', 'approval', 'تسليم الخميس', 'ميتنج 10:00', 'تارجت',
+                  'برزنتيشن', 'خطة 2026', 'feedback', 'budget', '→', 'تقرير الشهر', 'follow up', 'scope', 'المراجعة النهائية', 'ROI', 'priority', 'نسخة 7', 'final_v3', 'escalate'];
+        function jargon(host, n, s0) {
+          seed = s0;
+          var out = [];
+          for (var k = 0; k < n; k++) {
+            var depth = rnd();
+            var e = document.createElement('div');
+            e.className = 'j';
+            e.textContent = JW[Math.floor(rnd() * JW.length)];
+            var size = 26 + depth * depth * 120;
+            e.style.fontSize = size.toFixed(0) + 'px';
+            e.style.left = (-120 + rnd() * 1200).toFixed(0) + 'px';
+            e.style.top = (-80 + rnd() * 2000).toFixed(0) + 'px';
+            e.style.opacity = (0.06 + 0.17 * (1 - Math.abs(depth - 0.45) * 1.4)).toFixed(2);
+            e.style.filter = 'blur(' + (Math.abs(depth - 0.4) * 9).toFixed(1) + 'px)';
+            e.style.transform = 'rotate(' + (-8 + rnd() * 16).toFixed(1) + 'deg)';
+            host.appendChild(e);
+            out.push({ el: e, depth: depth });
+          }
+          return out;
+        }
+
+        /* ---------- R2: spiral ---------- */
+        function spiralD() {
+          var d = '', a = 46;
+          for (var t = 0; t <= Math.PI * 2 * 13; t += 0.08) {
+            var r = a * t, x = r * Math.cos(t), y = r * Math.sin(t);
+            d += (t === 0 ? 'M' : 'L') + x.toFixed(1) + ' ' + y.toFixed(1);
+          }
+          return d;
+        }
+
+        function ready() {
+          var faces = ['400 40px Sans', '500 40px Sans', '700 40px Sans', '900 40px Sans', '900 40px Serif'].map(function (f) { return document.fonts.load(f, 'سؤال Aa'); });
+          return Promise.all(faces).then(function () { return document.fonts.ready; }).then(function () {
+            var missing = ['500 40px Sans', '900 40px Sans', '900 40px Serif'].filter(function (f) { return !document.fonts.check(f, 'سؤال'); });
+            if (missing.length) throw new Error('font missing: ' + missing.join(', '));
+            return true;
+          });
+        }
+
+        window.__ready = ready().then(function () {
+          var tl = gsap.timeline({ paused: true });
+          function at(sel, from, to, t) { to.immediateRender = false; tl.fromTo(sel, from, to, t); }
+          function show(sel, t, d) { at(sel, { opacity: 0 }, { opacity: 1, duration: d || 0.25 }, t); }
+          function hide(sel, t, d) { at(sel, { opacity: 1 }, { opacity: 0, duration: d || 0.25 }, t); }
+          function pop(sel, t, d, y) { at(sel, { opacity: 0, scale: 0.6, y: y || 30 }, { opacity: 1, scale: 1, y: 0, duration: d || 0.4, ease: 'back.out(2)' }, t); }
+          function write(sel, t, d) { at(sel, { clipPath: 'inset(0 0 0 100%)' }, { clipPath: 'inset(0 0 0 0%)', duration: d, ease: 'none' }, t); }
+
+          /* ---------- build ---------- */
+          var J1 = jargon($('#jargon'), 34, 11), J2 = jargon($('#jargon2'), 30, 29), J3 = jargon($('#jargon3'), 22, 47);
+          [J1, J2, J3].forEach(function (J, n) {
+            J.forEach(function (o) {
+              var dy = -(140 + o.depth * 620), dx = (o.depth - 0.5) * 160;
+              at(o.el, { x: 0, y: 0 }, { x: dx, y: dy, duration: TOTAL, ease: 'none' }, 0);
+            });
+          });
+          $('#spiral').innerHTML = '<path d="' + spiralD() + '" fill="none" stroke="#b5141c" stroke-width="64" stroke-linecap="round"/>';
+
+          var crew = [], X = [-10, 165, 340, 515, 690, 865];
+          X.forEach(function (x, k) { crew.push(makeChar($('#crew'), x + 15, 1270 + (k % 2) * 14, 200)); });
+          var big = makeChar($('#bigHead'), 0, 0, 900);
+          var safe = [], SX = [60, 230, 400, 570, 740];
+          SX.forEach(function (x) { safe.push(makeChar($('#safeCrew'), x + 30, 1460, 190)); });
+          var me = makeChar($('#big'), 0, 0, 600);
+
+          /* ========== B1 hook 0 - 4.6 ========== */
+          write('#hook', 0.0, 1.25);
+          at('#hookUnder', { scaleX: 0 }, { scaleX: 1, duration: 0.35, ease: 'power2.out' }, 1.2);
+          crew.forEach(function (c, k) { at(c, { y: 0 }, { y: -6, duration: 1.2, ease: 'sine.inOut', yoyo: true, repeat: 1 }, 0.05 * k); });
+          // "wala 7ad": every pair of eyes drops to the table
+          crew.forEach(function (c, k) {
+            at($$('.pp', c), { attr: { cy: 0 } }, { attr: { cy: 6 }, duration: 0.2, ease: 'power2.out' }, T.wala + 0.05 * k);
+          });
+          // every dome lights with a swallowed "?"
+          crew.forEach(function (c, k) {
+            var t0 = T.kol + 0.18 * k;
+            at($('.glow', c), { opacity: 0 }, { opacity: 0.85, duration: 0.3 }, t0);
+            at($('.q', c), { opacity: 0, attr: { y: 98 } }, { opacity: 1, attr: { y: 86 }, duration: 0.3, ease: 'back.out(2)' }, t0);
+          });
+          pop('#count', T.so2al, 0.4);
+
+          /* ========== B2 into the head 4.6 - 11 ========== */
+          var head3 = crew[3];
+          var hx = 515 + 15 + 100, hy = 1270 + 14 + 70;     // dome centre of the 4th character in root coords
+          at('#meeting', { scale: 1, transformOrigin: hx + 'px ' + hy + 'px', filter: 'blur(0px)' }, { scale: 11, filter: 'blur(6px)', duration: 0.62, ease: 'power3.in' }, T.tab);
+          at('#red', { opacity: 0 }, { opacity: 1, duration: 0.3 }, T.tab + 0.4);
+          at('#bigHead', { scale: 0.6, y: 300 }, { scale: 1, y: 0, duration: 0.7, ease: 'expo.out' }, T.tab + 0.45);
+          tl.set($('.glow', big), { opacity: 0.9 }, 0);
+          tl.set($('.q', big), { opacity: 1 }, 0);
+          at('#spiral', { rotation: 0 }, { rotation: -140, duration: 6.4, ease: 'none' }, T.tab + 0.3);
+          at($('.q', big), { scale: 1, transformOrigin: '100px 70px' }, { scale: 1.25, duration: 0.35, ease: 'back.out(3)', yoyo: true, repeat: 1 }, 4.94);
+          // "3ashan el so2al deh..." -> screen completes: STAMP
+          at('#stamp', { opacity: 0, scale: 2.2, rotation: -16 }, { opacity: 1, scale: 1, rotation: -7, duration: 0.22, ease: 'power4.in' }, T.deh - 0.05);
+          at('#bigHead', { x: 0 }, { x: 14, duration: 0.05, yoyo: true, repeat: 3 }, T.deh + 0.17);
+          hide('#stamp', T.ashan2 + 0.15, 0.2);
+          // "w 3ashan a5er marra 7ad sa2al..." -> the reply mail
+          at('#mail', { opacity: 0, x: -700, rotation: -6 }, { opacity: 1, x: 0, rotation: -2, duration: 0.5, ease: 'expo.out' }, T.ashan2 + 0.2);
+          var MT = 'ده مكتوب في <i>الإيميل اللي فات</i>.', mo = { n: 0 }, plain = MT.replace(/<[^>]+>/g, '');
+          at(mo, { n: 0 }, { n: plain.length, duration: 0.9, ease: 'none', onUpdate: function () {
+            var n = Math.round(mo.n), out = '', c = 0, inTag = false;
+            for (var k = 0; k < MT.length && c < n; k++) { var ch = MT[k]; out += ch; if (ch === '<') inTag = true; else if (ch === '>') inTag = false; else if (!inTag) c++; }
+            if (out.indexOf('<i>') > -1 && out.indexOf('</i>') < 0) out += '</i>';
+            $('#mail .ty').innerHTML = out;
+          } }, T.sa2al);
+          at('#mail', { opacity: 1, y: 0 }, { opacity: 0, y: -120, duration: 0.3, ease: 'power2.in' }, T.ashan3 - 0.05);
+          // "w 3ashan el modir..." -> the eye opens, then glances at the clock
+          at('#eye', { opacity: 0, scaleY: 0.05 }, { opacity: 1, scaleY: 1, duration: 0.3, ease: 'back.out(2)' }, T.modir - 0.15);
+          pop('#clock', T.modir + 0.35, 0.35);
+          at($$('#eye .iris, #eye .pupil'), { x: 0 }, { x: 70, duration: 0.25, ease: 'power2.inOut' }, T.modir + 0.45);
+          at($('#clock .hand'), { rotation: 0, svgOrigin: '95 95' }, { rotation: 300, duration: 1.0, ease: 'none' }, T.modir + 0.3);
+          write('#watchLbl', T.modir + 0.4, 0.45);
+          tl.set('#watchLbl', { opacity: 1 }, T.modir + 0.4);
+          at($$('.eyes', big), { y: 0 }, { y: 5, duration: 0.2 }, T.modir + 0.2);
+
+          /* ========== B3 back out: nod, leave, corridor 11 - 15.6 ========== */
+          hide(['#eye', '#clock', '#watchLbl'], T.kolena - 0.15, 0.15);
+          at('#red', { opacity: 1 }, { opacity: 0, duration: 0.3 }, T.kolena - 0.05);
+          at('#meeting', { scale: 11, filter: 'blur(6px)' }, { scale: 1, filter: 'blur(0px)', duration: 0.6, ease: 'expo.out' }, T.kolena - 0.1);
+          crew.forEach(function (c, k) {
+            var hd = $('.head', c);
+            at(hd, { y: 0 }, { y: 12, duration: 0.17, ease: 'power2.inOut', yoyo: true, repeat: 3 }, T.nhez);
+            at($('.glow', c), { opacity: 0.85 }, { opacity: 0.25, duration: 0.5 }, T.nhez + 0.2);
+          });
+          hide('#count', T.nhez + 0.1);
+          // the door closes on the meeting
+          tl.set('#door', { opacity: 1 }, T.netla3 + 0.1);
+          at('#door .lf', { x: -560 }, { x: 0, duration: 0.55, ease: 'power3.in' }, T.netla3 + 0.1);
+          at('#door .rt', { x: 560 }, { x: 0, duration: 0.55, ease: 'power3.in' }, T.netla3 + 0.1);
+          tl.set('#meeting', { opacity: 0 }, T.egtma3 + 0.3);
+          at('#door', { opacity: 1 }, { opacity: 0, duration: 0.3 }, T.egtma3 + 0.25);
+          show('#corridor', T.egtma3 + 0.2, 0.25);
+          var bubs = $$('#chat .bub');
+          [T.nes2al + 0.1, T.nes2al + 0.62, T.tor2a + 0.2].forEach(function (t, k) { pop(bubs[k], t, 0.35, 40); });
+
+          /* ========== B4 the name: lavender world 15.6 - 22 ========== */
+          at('#lav', { clipPath: 'circle(0% at 50% 62%)' }, { clipPath: 'circle(150% at 50% 62%)', duration: 0.7, ease: 'power3.inOut' }, T.haga - 0.25);
+          tl.set('#corridor', { opacity: 0 }, T.haga + 0.5);
+          tl.set('#board', { opacity: 0 }, T.haga + 0.5);
+          at('#card', { opacity: 0, rotationX: 70, y: -120, transformPerspective: 1600 }, { opacity: 1, rotationX: 0, y: 0, duration: 0.8, ease: 'expo.out' }, T.haga + 0.1);
+          at('#card .word', { opacity: 0, scale: 0.85 }, { opacity: 1, scale: 1, duration: 0.45, ease: 'back.out(2)' }, T.esm - 0.05);
+          at('#card hr', { scaleX: 0 }, { scaleX: 1, duration: 0.4 }, T.esm + 0.2);
+          show('#card .def', T.esm + 0.35, 0.3);
+          tl.set($$('#card .row'), { opacity: 0.18 }, 0);
+          [T.tes2al, T.teghlat, T.te2ool + 0.3].forEach(function (t, k) {
+            var row = $('#card .row[data-k="' + k + '"]'), tick = $('.tick', row);
+            at(row, { opacity: 0.18, x: 40 }, { opacity: 1, x: 0, duration: 0.3, ease: 'power2.out' }, t - 0.05);
+            at(tick, { strokeDasharray: 60, strokeDashoffset: 60 }, { strokeDashoffset: 0, duration: 0.3, ease: 'power2.out' }, t + 0.12);
+          });
+          pop('#card .safe', T.tefdal, 0.45);
+          safe.forEach(function (c, k) {
+            pop(c, T.haga + 0.6 + k * 0.08, 0.45, 60);
+            tl.set($$('.blu', c), { opacity: 1 }, 0);
+            tl.set($('.rim', c), { attr: { stroke: '#a9b8ff' } }, 0);
+            at($('.eyes', c), { opacity: 1 }, { opacity: 0, duration: 0.15 }, T.tefdal + 0.25 + k * 0.05);
+            at($('.happy', c), { opacity: 0 }, { opacity: 1, duration: 0.15 }, T.tefdal + 0.25 + k * 0.05);
+            at(c, { y: 0 }, { y: 10, duration: 0.6, ease: 'sine.inOut' }, T.tefdal + 0.25);
+            at($('.head', c), { y: 0 }, { y: -6, duration: 1.0, ease: 'sine.inOut', yoyo: true, repeat: 1 }, T.aman);
+          });
+
+          at('#blobA', { x: 0, y: 0 }, { x: 260, y: 180, duration: 15.5, ease: 'sine.inOut' }, 15.6);
+          at('#blobB', { x: 0, y: 0 }, { x: -240, y: -260, duration: 15.5, ease: 'sine.inOut' }, 15.6);
+          at('#card', { y: 0 }, { y: -16, duration: 1.6, ease: 'sine.inOut', yoyo: true, repeat: 2 }, T.esm + 0.4);
+          at('#proof', { scale: 1 }, { scale: 1.04, duration: 9, ease: 'none' }, 22.0);
+          at('#chat', { y: 0 }, { y: -50, duration: 2.2, ease: 'none' }, T.egtma3 + 0.2);
+          /* ========== B5 proof 22.2 - 31 ========== */
+          at('#card', { opacity: 1, y: -16, filter: 'blur(0px)' }, { opacity: 0, y: -260, filter: 'blur(14px)', duration: 0.45, ease: 'power2.in' }, T.google - 0.25);
+          safe.forEach(function (c, k) { at(c, { opacity: 1, y: 10 }, { opacity: 0, y: 220, duration: 0.4, ease: 'power2.in' }, T.google - 0.25 + k * 0.03); });
+          pop('#pLbl', T.google, 0.4);
+          show('#pNum', T.google + 0.6, 0.3);
+          show('#pUnit', T.n180 + 0.3, 0.3);
+          var cnt = { n: 0 };
+          at(cnt, { n: 0 }, { n: 180, duration: 1.1, ease: 'power2.out', onUpdate: function () { $('#pNum').textContent = '+' + Math.round(cnt.n); } }, T.n180 - 0.1);
+          var dots = [], COLS = 15, ROWS = 12;
+          for (var r = 0; r < ROWS; r++) for (var q = 0; q < COLS; q++) {
+            var dEl = document.createElement('i');
+            dEl.style.left = (q * 55 + 6).toFixed(0) + 'px'; dEl.style.top = (r * 52 + 6).toFixed(0) + 'px';
+            $('#dots').appendChild(dEl); dots.push(dEl);
+          }
+          tl.set(dots, { opacity: 0 }, 0);
+          dots.forEach(function (d, k) { at(d, { opacity: 0, scale: 0 }, { opacity: 1, scale: 1, duration: 0.2, ease: 'back.out(3)' }, T.n180 - 0.1 + (k / dots.length) * 1.1); });
+          // scan the 180 teams
+          at('#scanbar', { opacity: 0, x: 960 }, { opacity: 1, x: 960, duration: 0.15 }, T.ashan4);
+          at('#scanbar', { x: 960 }, { x: 100, duration: 1.7, ease: 'sine.inOut' }, T.ashan4);
+          hide('#scanbar', T.ashan4 + 1.7, 0.2);
+          dots.forEach(function (d, k) {
+            var col = k % COLS, t = T.ashan4 + 1.7 * (1 - col / COLS);
+            at(d, { scale: 1 }, { scale: 1.35, duration: 0.12, yoyo: true, repeat: 1 }, t);
+          });
+          // the dots collapse into the five team dynamics
+          hide(['#pNum', '#pUnit'], T.awel - 0.2, 0.3);
+          dots.forEach(function (d, k) { at(d, { opacity: 1, y: 0 }, { opacity: 0, y: 260, duration: 0.35, ease: 'power2.in' }, T.awel - 0.2 + (k % COLS) * 0.012); });
+          hide('#pLbl', T.awel - 0.2, 0.3);
+          var NAMES = ['الأمان النفسي', 'الاعتمادية', 'الوضوح', 'المعنى', 'الأثر'], H = [520, 380, 330, 290, 250], bars = [];
+          NAMES.forEach(function (nm, k) {
+            var left = 880 - 50 - k * 175 - 130;       // RTL: number one stands on the right
+            var b = document.createElement('div'); b.className = 'bar dim'; b.style.left = left + 'px'; b.style.height = H[k] + 'px';
+            var l = document.createElement('div'); l.className = 'blbl'; l.style.left = left + 'px'; l.textContent = nm;
+            $('#bars').appendChild(b); $('#bars').appendChild(l); bars.push([b, l]);
+            tl.set(b, { scaleY: 0 }, 0); tl.set(l, { opacity: 0 }, 0);
+            at(b, { scaleY: 0 }, { scaleY: 1, duration: 0.6, ease: 'expo.out' }, T.awel + 0.1 + (4 - k) * 0.12);
+            show(l, T.awel + 0.3 + (4 - k) * 0.12, 0.3);
+          });
+          var b1 = bars[0][0];
+          var bdg = document.createElement('div'); bdg.id = 'badge'; bdg.textContent = '#1';
+          bdg.style.left = (880 - 50 - 130 + 65 - 55) + 'px'; bdg.style.top = (760 - 160 - 520 - 110) + 'px';
+          $('#bars').appendChild(bdg);
+          tl.set(bdg, { opacity: 0 }, 0);
+          at(bars[0][0], { backgroundImage: 'linear-gradient(180deg, #c7cdf3, #a3acdc)' }, { backgroundImage: 'linear-gradient(180deg, #8d9cff, #2b4bff)', duration: 0.3 }, T.hya - 0.05);
+          at(bars[0][0], { scaleX: 1 }, { scaleX: 1.12, duration: 0.2, yoyo: true, repeat: 1 }, T.hya);
+          at(bars[0][1], { color: '#7b82a6' }, { color: '#141a36', duration: 0.2 }, T.hya);
+          pop(bdg, T.hya, 0.4, 40);
+          bars.slice(1).forEach(function (bl) { at(bl, { opacity: 1 }, { opacity: 0.35, duration: 0.3 }, T.hya); });
+          pop('#oneLbl', T.hya + 0.08, 0.45);
+
+          /* ========== B6 the swallowed question 31 - 35.5 ========== */
+          at('#lav', { clipPath: 'circle(150% at 50% 62%)' }, { clipPath: 'circle(0% at 50% 62%)', duration: 0.55, ease: 'power3.inOut' }, T.ya3ni - 0.3);
+          tl.set('#board2', { opacity: 1 }, T.ya3ni - 0.3);
+          pop('#big', T.ya3ni - 0.05, 0.5, 80);
+          tl.set($('.q', me), { opacity: 1 }, 0);
+          tl.set($('.glow', me), { opacity: 0.8 }, 0);
+          show('#proj', T.ya3ni + 0.15, 0.35);
+          // gulp: the ? drops from the dome into the chest
+          at($('.q', me), { attr: { y: 86 }, opacity: 1 }, { attr: { y: 222 }, opacity: 0, duration: 0.45, ease: 'power2.in' }, T.bala3);
+          at($('.cq', me), { opacity: 0, scale: 1.6, transformOrigin: '100px 202px' }, { opacity: 0.45, scale: 0.7, duration: 0.3, ease: 'power2.out' }, T.bala3 + 0.4);
+          at($('.glow', me), { opacity: 0.8 }, { opacity: 0, duration: 0.3 }, T.bala3);
+          at($$('.eye', me), { scaleY: 1 }, { scaleY: 0.15, duration: 0.12, yoyo: true, repeat: 1 }, T.bala3 + 0.05);
+          at($('.head', me), { y: 0 }, { y: 6, duration: 0.15, yoyo: true, repeat: 1 }, T.bala3 + 0.15);
+          // "momken ykoon howa elly kan haynkez el mashroo3": the ghost fill
+          at($('.chestglow', me), { opacity: 0 }, { opacity: 1, duration: 0.4 }, T.yenkez - 0.1);
+          at($('.cq', me), { opacity: 0.45, scale: 0.7 }, { opacity: 1, scale: 1.1, duration: 0.4, ease: 'back.out(2)' }, T.yenkez - 0.1);
+          at('#proj .ghost', { width: '0%' }, { width: '38%', duration: 0.75, ease: 'power2.inOut' }, T.yenkez);
+          var pc = { n: 62 };
+          at(pc, { n: 62 }, { n: 100, duration: 0.75, ease: 'power2.inOut', onUpdate: function () { $('#proj .pct').textContent = Math.round(pc.n) + '%'; } }, T.yenkez);
+
+          at('#board2', { scale: 1 }, { scale: 1.06, duration: 9.2, ease: 'none' }, T.ya3ni - 0.3);
+          at($('.head', me), { y: 0 }, { y: -5, duration: 0.9, ease: 'sine.inOut', yoyo: true, repeat: 1 }, T.bala3 + 0.6);
+          /* ========== B7 CTA 35.5 - 40 ========== */
+          hide('#proj', T.ebaat - 0.1, 0.25);
+          at($('.chestglow', me), { opacity: 1 }, { opacity: 0, duration: 0.3 }, T.ebaat - 0.1);
+          at($('.cq', me), { opacity: 1 }, { opacity: 0, duration: 0.3 }, T.ebaat - 0.1);
+          at('#plane', { opacity: 0, x: 470, y: 1000, scale: 0.4, rotation: 0 }, { opacity: 1, x: 120, y: 160, scale: 1, rotation: -8, duration: 0.9, ease: 'power2.out' }, T.ebaat + 0.1);
+          at('#plane', { x: 120, y: 160 }, { x: -260, y: -60, duration: 0.5, ease: 'power2.in' }, T.modirak + 0.5);
+          write('#sendChip', T.ebaat + 0.15, 0.45);
+          tl.set('#sendChip', { opacity: 1 }, T.ebaat + 0.15);
+          hide('#sendChip', T.walaw - 0.1, 0.2);
+          show('#spot', T.walaw - 0.05, 0.3);
+          show('#beam', T.walaw + 0.05, 0.3);
+          write('#fear', T.walaw + 0.05, 0.6);
+          tl.set('#fear', { opacity: 1 }, T.walaw + 0.05);
+          at('#big', { scale: 1 }, { scale: 0.92, duration: 0.4, ease: 'power2.out' }, T.walaw + 0.2);
+          at($('.sweat', me), { opacity: 0, y: 0 }, { opacity: 1, y: 30, duration: 0.7, ease: 'power1.in' }, T.tebaato);
+          at($$('.pp', me), { attr: { cx: 0 } }, { attr: { cx: -4 }, duration: 0.1, yoyo: true, repeat: 5 }, T.tebaato);
+          hide('#fear', T.yeb2a - 0.05, 0.2);
+          write('#got', T.yeb2a + 0.05, 0.75);
+          tl.set('#got', { opacity: 1 }, T.yeb2a + 0.05);
+          at($('.eyes', me), { opacity: 1 }, { opacity: 0, duration: 0.15 }, T.kwayes - 0.1);
+          at($('.happy', me), { opacity: 0 }, { opacity: 1, duration: 0.15 }, T.kwayes - 0.1);
+          at($('.smile', me), { opacity: 0 }, { opacity: 1, duration: 0.2 }, T.kwayes);
+          at($('.sweat', me), { opacity: 1 }, { opacity: 0, duration: 0.3 }, T.kwayes);
+
+          /* ========== B8 end card 40 - 41.5 ========== */
+          show('#end', T.end - 0.05, 0.3);
+          write('#eTitle', T.end + 0.1, 0.7);
+          at('#eLine', { scaleX: 0 }, { scaleX: 1, duration: 0.35 }, T.end + 0.75);
+          show('#eEp', T.end + 0.6, 0.3);
+          pop('#moon', T.end + 0.8, 0.4);
+          show('#eNext', T.end + 0.85, 0.35);
+
+          tl.set({}, {}, TOTAL);
+          window.__timelines = window.__timelines || {};
+          window.__timelines['main'] = tl;
+          return true;
+        });
+      })();
+    </script>
+  </body>
+</html>
