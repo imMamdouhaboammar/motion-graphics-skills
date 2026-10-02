@@ -5,14 +5,14 @@
 <h1 align="center">Motion Graphics Skill Pack</h1>
 
 <p align="center">
-  <strong>49 agent skills for motion design, animation, video editing, creative direction and production</strong><br>
+  <strong>52 agent skills for motion design, animation, video editing, creative direction and production</strong><br>
   Claude Code · Codex · HyperFrames<br>
   <sub>Every frame is code</sub>
 </p>
 
 <p align="center">
   <a href="https://github.com/imMamdouhaboammar/motion-graphics-skills/stargazers"><img src="https://img.shields.io/github/stars/imMamdouhaboammar/motion-graphics-skills?style=flat-square&color=D97557&labelColor=00132F&label=stars" alt="GitHub stars"></a>
-  <img src="https://img.shields.io/badge/skills-49-D97557?style=flat-square&labelColor=00132F" alt="49 agent skills">
+  <img src="https://img.shields.io/badge/skills-52-D97557?style=flat-square&labelColor=00132F" alt="52 agent skills">
   <img src="https://img.shields.io/badge/Claude_Code_%2B_Codex-supported-58B6FF?style=flat-square&labelColor=00132F" alt="Claude Code and Codex">
   <a href="LICENSE"><img src="https://img.shields.io/badge/license-see_LICENSE-red?style=flat-square&labelColor=00132F" alt="License"></a>
 </p>
@@ -112,6 +112,18 @@ https://github.com/user-attachments/assets/592daa6c-5ce0-4cef-ad3e-40e976729066
 <!-- readme-video:jedar:end -->
 
 [Full-length original MP4](projects/jedar-lesh-majani/renders/JEDAR-lesh-majani-final.mp4) · [Project source](projects/jedar-lesh-majani/)
+
+## ChatGPT and Codex plugin
+
+The pack also supports a skills-only plugin with 49 original specialists plus three host helpers. Start with `motion-studio` to route a task according to the tools available in your session.
+
+See [plugin installation and runtime requirements](docs/plugin/README.md). Planning, storyboards and review can run without a media-provider account. Rendering requires an execution-capable host and working dependencies.
+
+Build a private import archive from a checkout:
+
+```bash
+python3 tools/build_plugin.py /absolute/path/motion-graphics-skills-1.0.0.zip
+```
 
 ## Install
 
@@ -219,7 +231,7 @@ When you want a specific job done properly, pick a skill below.
 
 ## The skills
 
-49 installed skill folders are available in [`skills/`](skills/). The table below highlights 22 motion-production skills; the remaining folders cover supporting workflows and design, audio and runtime tooling. Start with `motion-director` for broad creative work.
+52 installed skill folders are available in [`skills/`](skills/). The table below highlights 22 motion-production skills; the remaining folders cover supporting workflows and design, audio and runtime tooling. Start with `motion-director` for broad creative work.
 
 | Stage | Skill | What you get | Say this |
 |---|---|---|---|

@@ -1,0 +1,32 @@
+{
+  "name": "motion-graphics-skills",
+  "version": "1.0.0",
+  "description": "Creative direction, storyboards, code-driven animation, media preparation and video review for motion graphics.",
+  "author": {
+    "name": "Mamdouh Aboammar",
+    "url": "https://github.com/imMamdouhaboammar"
+  },
+  "skills": "./skills/",
+  "interface": {
+    "displayName": "Motion Graphics Skills",
+    "shortDescription": "Plan, build and review motion",
+    "longDescription": "Plan brand films, event promos, explainers and kinetic typography. Study references, write production briefs, prepare assets, build code-driven animation and review timecoded cuts. Includes Arabic and RTL guidance. Rendering requires an execution-capable host, installed runtime dependencies and available media. This skills-only plugin does not include a hosted renderer, connected media service or API credentials. Use motion-studio to start and motion-director for broader production jobs.",
+    "developerName": "Mamdouh Aboammar",
+    "category": "Creativity",
+    "capabilities": [
+      "Motion briefs and storyboards",
+      "Reference-led creative direction",
+      "Code-driven animation",
+      "Arabic and RTL motion",
+      "Timecoded video review"
+    ],
+    "websiteURL": "https://github.com/imMamdouhaboammar/motion-graphics-skills",
+    "defaultPrompt": [
+      "Plan a 30-second Arabic brand film from my script and visual reference.",
+      "Build a code-driven motion sequence from my approved storyboard.",
+      "Review my video and give me timecoded fixes for typography, pacing and transitions."
+    ],
+    "logo": "./assets/plugin/logo-light.svg",
+    "composerIcon": "./assets/plugin/icon.svg"
+  }
+}
