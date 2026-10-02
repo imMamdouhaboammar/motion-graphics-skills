@@ -1,0 +1,29 @@
+# Requirements & Caches
+
+## Credential & key priority
+
+Run `npx hyperframes auth status` to see what's configured and which engines a workflow will use (see the skill's **Preflight** section). Keys resolve in this order — **first match wins**:
+
+| Provider                             | Resolution order (first non-empty wins)                                                                                                                                    | Local deps when used                             |
+| ------------------------------------ | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------ |
+| **HeyGen** (TTS + BGM/SFX retrieval) | `$HEYGEN_API_KEY` → `$HYPERFRAMES_API_KEY` → `~/.heygen/credentials` (shared with heygen-cli; `$HEYGEN_CONFIG_DIR` overrides the dir; written by `hyperframes auth login`) | none (REST)                                      |
+| **ElevenLabs** (TTS fallback)        | `$ELEVENLABS_API_KEY`                                                                                                                                                      | `pip install elevenlabs`                         |
+| **Lyria** (BGM fallback)             | `$GEMINI_API_KEY` → `$GOOGLE_API_KEY`                                                                                                                                      | `pip install google-genai`                       |
+| **Kokoro** (TTS, no key)             | always — final voice fallback                                                                                                                                              | `pip install kokoro-onnx soundfile`              |
+| **MusicGen** (BGM, no key)           | always — final music fallback                                                                                                                                              | `pip install transformers torch soundfile numpy` |
+
+`hyperframes auth login` (browser OAuth) is the recommended setup: one sign-in, every project, no per-repo `.env`. An OAuth login is sent as `Authorization: Bearer`; an API key as `X-Api-Key`; OAuth requests are tagged with `X-HeyGen-Source: cli`; both auth types carry `X-HeyGen-Client-Source: media-use`. OAuth CLI users can consume the web-plan free allowance for HeyGen TTS (10 min/month); API keys follow the normal API billing path. Without a HeyGen credential, automatic TTS uses ElevenLabs when `ELEVENLABS_API_KEY` is set and the Python SDK is available; otherwise it uses local Kokoro. BGM generation uses cloud Lyria when `GEMINI_API_KEY` or `GOOGLE_API_KEY` is configured; otherwise it uses local MusicGen. These cloud fallbacks send text or music prompts to the selected provider and can incur provider charges. Gemini TTS is also available when explicitly selected and configured. For local processing, explicitly select `provider: "kokoro"` for TTS and remove the Lyria keys from the BGM process environment. Local models may still download on first use. Offline SFX requires user-supplied files; none are shipped. Run `hyperframes doctor` to check installed local dependencies.
+
+## Model caches & system dependencies
+
+Each command downloads its own model on first run and caches it under `~/.cache/hyperframes/`:
+
+- **TTS (HeyGen)** — no local deps; needs a HeyGen credential + `ffmpeg` on PATH (to transcode the mp3 response to `.wav`). Credential resolves like the CLI: `$HEYGEN_API_KEY` → `$HYPERFRAMES_API_KEY` → `~/.heygen/credentials` (shared with heygen-cli; run `npx hyperframes auth login`). An OAuth login is sent as `Authorization: Bearer`; an API key as `X-Api-Key`; OAuth requests include `X-HeyGen-Source: cli` so the backend can apply CLI OAuth usage; both auth types include `X-HeyGen-Client-Source: media-use`.
+- **TTS (ElevenLabs)** — same as HeyGen: API key + `ffmpeg`.
+- **TTS (Kokoro)** — Kokoro-82M (~311 MB) + voices (~27 MB) in `tts/`. Requires Python 3.8+ with `kokoro-onnx` and `soundfile` (`pip install kokoro-onnx soundfile`). Non-English text also needs `espeak-ng` system-wide.
+- **BGM (Lyria)** — needs `$GEMINI_API_KEY` or `$GOOGLE_API_KEY` + `pip install google-genai`. No local model cache.
+- **BGM (MusicGen)** — `pip install transformers torch soundfile`. `facebook/musicgen-small` (~300 MB) cached under `~/.cache/huggingface/` on first run.
+- **Transcribe** — Whisper model size depending on choice (75 MB – 3.1 GB) in `whisper/`, downloaded from HuggingFace on first use. `whisper.cpp` itself is NOT bundled: the CLI resolves it from PATH, installs via Homebrew (macOS), or builds it from source with git+cmake on first use (`$HYPERFRAMES_WHISPER_PATH` overrides).
+- **Remove-background** — `u2net_human_seg` (~168 MB ONNX) in `background-removal/models/`. Peak inference RAM ~1.5 GB.
+
+Run `npx hyperframes doctor` if a command fails because of a missing dependency.

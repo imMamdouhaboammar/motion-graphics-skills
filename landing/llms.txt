@@ -6,7 +6,7 @@ Official repository: https://github.com/imMamdouhaboammar/motion-graphics-skills
 Website: https://immamdouhaboammar.github.io/motion-graphics-skills/
 Version: 1.2.0
 
-Motion Graphics Skill Pack is a set of 49 skills for Claude Code and Codex covering creative direction, reference analysis, brand intake, motion briefs, motion graphics, video editing, programmatic video, Arabic and RTL motion, publishing, and rendered-film review.
+Motion Graphics Skill Pack is a set of 53 skills for Claude Code and Codex covering creative direction, reference analysis, brand intake, motion briefs, motion graphics, video editing, programmatic video, Arabic and RTL motion, publishing, and rendered-film review.
 
 The master motion-director skill owns concept, narrative, art direction, typography, composition, choreography, production routing and creative QA.
 
@@ -72,6 +72,12 @@ Review:
 - video-review-loop
 - full-output-enforcement
 - gsap-performance
+
+Host workflow and reference styles:
+- host-workspace-operator
+- motion-studio
+- sandbox-python-executor
+- video-style-cloner
 
 ## Core docs
 

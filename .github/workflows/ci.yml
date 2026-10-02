@@ -22,7 +22,7 @@ jobs:
       - name: Set up Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: "20"
+          node-version: "22"
 
       - name: Install Python test deps
         run: pip install -r requirements.txt
@@ -55,6 +55,24 @@ jobs:
 
       - name: Validate landing catalog sync
         run: python landing/validate_landing.py
+
+      - name: Test video style cloner scripts
+        env:
+          DO_NOT_TRACK: "1"
+          HYPERFRAMES_NO_TELEMETRY: "1"
+        run: |
+          node --test $(find skills/video-style-cloner -name '*.test.mjs' -type f)
+          python -m unittest discover -s skills/video-style-cloner/skills/embedded-captions/scripts/tests -v
+
+      - name: Install FFmpeg for rendering integration tests
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y ffmpeg
+          ffmpeg -version
+          ffprobe -version
+
+      - name: Test Rust video style cloner engine
+        run: cargo test --locked --manifest-path skills/video-style-cloner/engine/Cargo.toml
 
       - name: Check README video publisher CLI
         run: |

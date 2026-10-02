@@ -1,0 +1,11 @@
+{
+  "text": "Quiet captions continue without a hero.",
+  "words": [
+    { "text": "Quiet", "start": 0.3, "end": 0.85, "type": "word" },
+    { "text": "captions", "start": 0.9, "end": 1.65, "type": "word" },
+    { "text": "continue", "start": 2.1, "end": 2.85, "type": "word" },
+    { "text": "without", "start": 2.9, "end": 3.6, "type": "word" },
+    { "text": "a", "start": 4.05, "end": 4.2, "type": "word" },
+    { "text": "hero.", "start": 4.25, "end": 5.15, "type": "word" }
+  ]
+}
