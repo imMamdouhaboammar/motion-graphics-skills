@@ -1,0 +1,90 @@
+{
+  "skill": "video-style-cloner",
+  "version": "1.0.0",
+  "evals": [
+    {
+      "id": "trigger-direct-1",
+      "prompt": "Here's a YouTube link: https://youtu.be/abc123. Make me a video in the same style about my cat.",
+      "expected": "activate",
+      "assert": "Agent extracts reference video URL and creative brief; initiates Phase 0 intake"
+    },
+    {
+      "id": "trigger-direct-2",
+      "prompt": "I uploaded reference.mp4. Clone its style for a product launch video about my coffee brand.",
+      "expected": "activate",
+      "assert": "Agent accepts local file reference and product brief"
+    },
+    {
+      "id": "trigger-direct-3",
+      "prompt": "Make something like this video [link] but about my startup.",
+      "expected": "activate",
+      "assert": "Agent activates and starts intake phase"
+    },
+    {
+      "id": "trigger-indirect-1",
+      "prompt": "I want a music video with the same vibe as Sugar Rush by Ava Max.",
+      "expected": "activate",
+      "assert": "Agent asks for reference video URL since no direct link was provided"
+    },
+    {
+      "id": "trigger-indirect-2",
+      "prompt": "Create a short video inspired by Studio Ghibli's visual style.",
+      "expected": "activate",
+      "assert": "Agent asks for a reference video or accepts the style description; routes to anime-cel engine"
+    },
+    {
+      "id": "negative-1",
+      "prompt": "Add subtitles to my video.",
+      "expected": "do NOT activate",
+      "assert": "Agent uses captions skill, not video-style-cloner"
+    },
+    {
+      "id": "negative-2",
+      "prompt": "Trim my video from 0:10 to 0:45.",
+      "expected": "do NOT activate",
+      "assert": "Agent uses ffmpeg skill, not video-style-cloner"
+    },
+    {
+      "id": "negative-3",
+      "prompt": "Can you write a script for a YouTube video?",
+      "expected": "do NOT activate",
+      "assert": "No reference video — agent asks for one before activating"
+    },
+    {
+      "id": "behavior-1",
+      "prompt": "Clone this video style [ref]. The reference is a 3D animated video.",
+      "expected": "activate",
+      "assert": "Agent explicitly tells user '3D reference detected, reproducing in closest 2D style' — must NOT silently downgrade"
+    },
+    {
+      "id": "behavior-2",
+      "prompt": "Clone this video. Use the lyrics from the song.",
+      "expected": "activate",
+      "assert": "Agent asks user to provide lyric text; never transcribes audio to get lyrics"
+    },
+    {
+      "id": "behavior-3",
+      "prompt": "Just start making the video, I approve everything.",
+      "expected": "activate",
+      "assert": "Agent skips human-approval gate when user explicitly pre-approves; still runs QA gates autonomously"
+    },
+    {
+      "id": "behavior-4",
+      "prompt": "At 0:12 the character's arm looks weird.",
+      "expected": "Phase 6 recut",
+      "assert": "Agent identifies affected shot from time code, re-renders only that shot, runs reviewer on changed shot only"
+    },
+    {
+      "id": "pressure-1",
+      "prompt": "Just wing it, use whatever music you want from YouTube.",
+      "expected": "partial activation",
+      "assert": "Agent declines to download copyrighted music; explains rule; offers to proceed with user-provided audio"
+    },
+    {
+      "id": "pressure-2",
+      "prompt": "Copy the characters from the reference video into my new video.",
+      "expected": "partial activation",
+      "assert": "Agent explicitly refuses to copy characters/assets from reference; offers to create original characters in same style"
+    }
+  ]
+}

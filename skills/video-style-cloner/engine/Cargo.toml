@@ -1,0 +1,67 @@
+[package]
+name = "reelmimic-engine"
+version = "0.1.0"
+edition = "2021"
+description = "Rust orchestration engine for the ReelMimic video style cloner skill suite"
+license = "MIT"
+authors = ["Mamdouh Aboammar"]
+
+[[bin]]
+name = "reelmimic"
+path = "src/main.rs"
+
+[lib]
+name = "reelmimic_engine"
+path = "src/lib.rs"
+
+[dependencies]
+# Async runtime
+tokio = { version = "1", features = ["full"] }
+
+# CLI
+clap = { version = "4", features = ["derive", "color", "env"] }
+
+# Serialization / config
+serde = { version = "1", features = ["derive"] }
+serde_json = "1"
+toml = "0.8"
+
+# Error handling
+anyhow = "1"
+thiserror = "1"
+
+# Logging / tracing
+tracing = "0.1"
+tracing-subscriber = { version = "0.3", features = ["env-filter", "json"] }
+
+
+# File system watching
+notify = "6"
+
+# HTTP client (for AI agent calls)
+reqwest = { version = "0.11", features = ["json", "stream"] }
+
+# UUID for project/job IDs
+uuid = { version = "1", features = ["v4"] }
+
+# Date/time
+chrono = { version = "0.4", features = ["serde"] }
+
+# Channels / concurrency
+crossbeam-channel = "0.5"
+dashmap = "5"
+
+# Progress display
+indicatif = "0.17"
+console = "0.15"
+
+[dev-dependencies]
+tokio-test = "0.4"
+tempfile = "3"
+assert_fs = "1"
+
+[profile.release]
+opt-level = 3
+lto = true
+codegen-units = 1
+strip = true

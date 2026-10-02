@@ -1,0 +1,147 @@
+syntax = "proto3";
+
+package reelmimic;
+
+// ─── Analysis Service (East-West, internal) ───────────────────────────────────
+
+service AnalysisService {
+  rpc AnalyseVideo(AnalyseRequest) returns (AnalysisReport);
+  rpc AnalyseAudio(AnalyseRequest) returns (AnalysisReport);
+}
+
+message AnalyseRequest {
+  string input_path_or_url = 1;
+  string output_dir = 2;
+  string project_slug = 3;
+}
+
+message AnalysisReport {
+  string slug = 1;
+  double duration_s = 2;
+  float fps = 3;
+  repeated uint32 resolution = 4;
+  double bpm = 5;
+  repeated double beat_times = 6;
+  double avg_shot_length_s = 7;
+  bool silent = 8;
+  bool phase_inverted = 9;
+  double noise_floor_db = 10;
+  repeated ShotDetail shots = 11;
+  string report_json_path = 12;
+}
+
+message ShotDetail {
+  uint32 id = 1;
+  double start_s = 2;
+  double end_s = 3;
+  string camera_move = 4;
+  string camera_speed = 5;
+  float brightness = 6;
+  float saturation = 7;
+  string transition_out = 8;
+}
+
+// ─── Style Router Service (East-West) ─────────────────────────────────────────
+
+service StyleRouterService {
+  rpc RouteStyle(RouteRequest) returns (RouteResponse);
+}
+
+message RouteRequest {
+  string project_slug = 1;
+  string detected_medium = 2;
+  string user_override = 3;         // empty = auto
+  string skills_dir = 4;
+}
+
+message RouteResponse {
+  string style_name = 1;
+  string engine = 2;
+  string medium = 3;
+  uint32 priority = 4;
+  float score = 5;
+  string why = 6;
+  bool is_downgrade = 7;
+}
+
+// ─── Production Agent Service (East-West) ────────────────────────────────────
+
+service ProductionAgentService {
+  rpc ProduceSegment(SegmentRequest) returns (stream ProductionEvent);
+  rpc ReviewSegment(ReviewRequest) returns (ReviewResponse);
+  rpc FixSegment(FixRequest) returns (FixResponse);
+}
+
+message SegmentRequest {
+  string project_slug = 1;
+  string segment_id = 2;
+  repeated uint32 shot_ids = 3;
+  string engine = 4;
+  string plan_json_path = 5;
+  string frames_out_dir = 6;
+}
+
+message ProductionEvent {
+  string segment_id = 1;
+  string phase = 2;
+  string message = 3;
+  float progress = 4;             // 0.0-1.0
+  bool complete = 5;
+  bool error = 6;
+}
+
+message ReviewRequest {
+  string project_slug = 1;
+  string segment_id = 2;
+  string frames_dir = 3;
+  string plan_json_path = 4;
+  float pass_threshold = 5;
+}
+
+message ReviewResponse {
+  bool passed = 1;
+  float score = 2;
+  repeated QaFailure failures = 3;
+}
+
+message QaFailure {
+  string category = 1;
+  string item = 2;
+  string severity = 3;            // "critical" | "minor"
+}
+
+message FixRequest {
+  string project_slug = 1;
+  string segment_id = 2;
+  repeated QaFailure failures = 3;
+  string frames_dir = 4;
+  string engine = 5;
+}
+
+message FixResponse {
+  bool applied = 1;
+  string before_frame = 2;
+  string after_frame = 3;
+}
+
+// ─── Assembly Service (East-West) ─────────────────────────────────────────────
+
+service AssemblyService {
+  rpc Assemble(AssembleRequest) returns (AssembleResponse);
+}
+
+message AssembleRequest {
+  string project_slug = 1;
+  string frames_dir = 2;
+  string audio_path = 3;
+  float fps = 4;
+  string aspect_scale = 5;        // "1920:1080" etc
+  string output_path = 6;
+}
+
+message AssembleResponse {
+  bool success = 1;
+  string output_path = 2;
+  double duration_s = 3;
+  string error = 4;
+}
