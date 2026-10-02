@@ -5,7 +5,7 @@ import { fetchMedia } from "../../../scripts/lib/media-fetch.mjs";
 // credentials (oauth → Bearer, else api_key → X-Api-Key; $HEYGEN_CONFIG_DIR
 // overrides the dir). Vendored so the skill ships standalone. Pure node.
 
-import { existsSync, mkdirSync, readFileSync, writeFileSync } from "node:fs";
+import { closeSync, constants, existsSync, fstatSync, mkdirSync, openSync, readFileSync, writeFileSync } from "node:fs";
 import { homedir } from "node:os";
 import { dirname, join, resolve } from "node:path";
 
@@ -52,8 +52,23 @@ export function heygenCredential() {
   if (envKey) return { headers: { "X-Api-Key": envKey } };
 
   const file = join(process.env.HEYGEN_CONFIG_DIR || join(homedir(), ".heygen"), "credentials");
-  if (!existsSync(file)) return null;
-  const raw = readFileSync(file, "utf8").trim();
+  let fd;
+  let raw;
+  try {
+    // Check the same open file that is read, avoiding a stat/read replacement race.
+    // Nonblocking open lets non-regular files fail without hanging on a FIFO.
+    fd = openSync(file, constants.O_RDONLY | constants.O_NONBLOCK);
+    const stat = fstatSync(fd);
+    if (!stat.isFile()) return null;
+    if (process.platform !== "win32" && (stat.mode & 0o077) !== 0) return null;
+    raw = readFileSync(fd, "utf8").trim();
+  } catch {
+    return null;
+  } finally {
+    if (fd !== undefined) {
+      try { closeSync(fd); } catch { /* Preserve the failure-to-null contract. */ }
+    }
+  }
   if (!raw) return null;
   if (!raw.startsWith("{")) return { headers: { "X-Api-Key": raw } };
 
@@ -103,7 +118,7 @@ export function heygenAuthHeaders() {
       "HeyGen OAuth token expired — run `npx hyperframes auth refresh` (or `npx hyperframes auth login`)",
     );
   throw new Error(
-    "no HeyGen credentials — set $HEYGEN_API_KEY, or run `npx hyperframes auth login` (writes ~/.heygen/credentials)",
+    "no usable HeyGen credentials — set $HEYGEN_API_KEY, or run `npx hyperframes auth login` (writes ~/.heygen/credentials). On POSIX, restrict the credentials file with chmod 600",
   );
 }
 
