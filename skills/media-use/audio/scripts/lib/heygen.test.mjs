@@ -1,9 +1,9 @@
 import { test } from "node:test";
 import assert from "node:assert/strict";
-import { mkdtempSync, rmSync, writeFileSync } from "node:fs";
+import { chmodSync, mkdirSync, mkdtempSync, rmSync, writeFileSync } from "node:fs";
 import { tmpdir } from "node:os";
 import { join } from "node:path";
-import { heygenAuthHeaders, heygenAuthMethod } from "./heygen.mjs";
+import { heygenAuthHeaders, heygenAuthMethod, heygenCredential } from "./heygen.mjs";
 
 function withCleanHeygenEnv(fn) {
   const previousApiKey = process.env.HEYGEN_API_KEY;
@@ -50,6 +50,7 @@ test("heygenAuthHeaders tags OAuth requests as CLI traffic and with the media-us
             expires_at: "2099-01-01T00:00:00Z",
           },
         }),
+        { mode: 0o600 },
       );
       assert.deepEqual(heygenAuthHeaders(), {
         Authorization: "Bearer at_test",
@@ -82,6 +83,7 @@ test("heygenAuthMethod returns oauth for a live OAuth credential", () => {
             expires_at: "2099-01-01T00:00:00Z",
           },
         }),
+        { mode: 0o600 },
       );
       assert.equal(heygenAuthMethod(), "oauth");
     } finally {
@@ -99,5 +101,59 @@ test("heygenAuthMethod returns null with no credential at all", () => {
     } finally {
       rmSync(dir, { recursive: true, force: true });
     }
+  });
+});
+
+function withCredentialFile(fn) {
+  withCleanHeygenEnv(() => {
+    const dir = mkdtempSync(join(tmpdir(), "heygen-permissions-"));
+    try {
+      process.env.HEYGEN_CONFIG_DIR = dir;
+      fn(join(dir, "credentials"));
+    } finally {
+      rmSync(dir, { recursive: true, force: true });
+    }
+  });
+}
+
+test("private plain and JSON API-key credentials remain usable", () => {
+  withCredentialFile(file => {
+    writeFileSync(file, "hg_fixture", { mode: 0o600 });
+    assert.deepEqual(heygenCredential(), { headers: { "X-Api-Key": "hg_fixture" } });
+    writeFileSync(file, JSON.stringify({ api_key: "hg_json_fixture" }));
+    assert.deepEqual(heygenCredential(), { headers: { "X-Api-Key": "hg_json_fixture" } });
+  });
+});
+
+test("POSIX credentials with any group or other access are rejected", { skip: process.platform === "win32" }, () => {
+  withCredentialFile(file => {
+    writeFileSync(file, "hg_fixture", { mode: 0o600 });
+    for (const mode of [0o640, 0o602, 0o610, 0o644, 0o666]) {
+      chmodSync(file, mode);
+      assert.equal(heygenCredential(), null, `mode ${mode.toString(8)}`);
+    }
+    chmodSync(file, 0o600);
+    assert.equal(heygenAuthMethod(), "api_key");
+  });
+});
+
+test("credential filesystem failures and invalid JSON never throw", () => {
+  withCredentialFile(file => {
+    mkdirSync(file);
+    assert.doesNotThrow(() => assert.equal(heygenCredential(), null));
+    rmSync(file, { recursive: true });
+    assert.equal(heygenCredential(), null);
+    for (const raw of ["", "{broken", "{}", "{\"oauth\":null}"]) {
+      writeFileSync(file, raw, { mode: 0o600 });
+      assert.doesNotThrow(() => assert.equal(heygenCredential(), null));
+    }
+  });
+});
+
+test("environment credentials take precedence over rejected file permissions", () => {
+  withCredentialFile(file => {
+    writeFileSync(file, "hg_file_fixture", { mode: 0o644 });
+    process.env.HEYGEN_API_KEY = "hg_env_fixture";
+    assert.deepEqual(heygenCredential(), { headers: { "X-Api-Key": "hg_env_fixture" } });
   });
 });
