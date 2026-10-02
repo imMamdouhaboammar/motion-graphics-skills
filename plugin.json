@@ -1,8 +1,8 @@
 {
   "$schema": "https://agent-plugins.org/schemas/1.0.0/plugin.schema.json",
   "name": "motion-graphics-skills",
-  "version": "1.0.0",
-  "description": "Creative direction, storyboards, code-driven animation, media preparation and video review for motion graphics.",
+  "version": "1.2.0",
+  "description": "53 skills for motion direction, reference-led video production, animation, media preparation and timecoded review.",
   "author": {
     "name": "Mamdouh Aboammar",
     "url": "https://github.com/imMamdouhaboammar"
@@ -21,15 +21,18 @@
       "interface": {
         "displayName": "Motion Graphics Skills",
         "shortDescription": "Plan, build and review motion",
-        "longDescription": "Plan brand films, event promos, explainers and kinetic typography. Study references, write production briefs, prepare assets, build code-driven animation and review timecoded cuts. Includes Arabic and RTL guidance. Rendering requires an execution-capable host, installed runtime dependencies and available media. This skills-only plugin does not include a hosted renderer, connected media service or API credentials. Use motion-studio to start and motion-director for broader production jobs.",
+        "longDescription": "Plan, build and review brand films, event promos, explainers and kinetic typography with 53 skills. Includes Video Style Cloner with 36 bundled workflow modules for 2D style production, HyperFrames, media and review, plus optional Rust orchestration source. Use motion-studio for host-aware routing and motion-director for broader production. Includes Arabic/RTL, reference-fidelity gates, GSAP, Tone.js and 3D direction. Rendering requires an execution-capable host, installed dependencies and media. Rust orchestration requires project render/review adapters and an approved plan. Blender guidance is bundled but disabled in the current 2D style-cloning track. No hosted renderer or provider credentials are supplied.",
         "developerName": "Mamdouh Aboammar",
         "category": "Creativity",
         "capabilities": [
           "Motion briefs and storyboards",
           "Reference-led creative direction",
-          "Code-driven animation",
+          "2D video style production",
+          "HyperFrames runtime guidance",
+          "GSAP choreography and Tone.js audio",
           "Arabic and RTL motion",
-          "Timecoded video review"
+          "Reference fidelity and timecoded review",
+          "Optional Rust production orchestration"
         ],
         "websiteURL": "https://github.com/imMamdouhaboammar/motion-graphics-skills",
         "defaultPrompt": [

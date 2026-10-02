@@ -56,6 +56,11 @@ jobs:
       - name: Validate landing catalog sync
         run: python landing/validate_landing.py
 
+      - name: Validate plugin inventory and packaging
+        run: |
+          python3 -m unittest discover -s tests -p 'test_plugin_catalog.py' -v
+          python3 -m unittest discover -s tests -p 'test_build_plugin.py' -v
+
       - name: Test video style cloner scripts
         env:
           DO_NOT_TRACK: "1"

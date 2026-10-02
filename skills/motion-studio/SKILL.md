@@ -14,6 +14,7 @@ Start with the user's requested deliverable and the capabilities actually availa
 | Write a production prompt from an idea | motion-brief-writer |
 | Establish brand facts and constraints | brand-intake |
 | Direct a film, study a reference or combine styles | motion-director |
+| Reference video plus a new creative brief in the same 2D style | video-style-cloner |
 | Compose code-driven animation | motion-design |
 | Explain a topic with editorial motion | vox-explainer |
 | Paper collage and cutout motion | paper-cut-motion |
@@ -22,6 +23,8 @@ Start with the user's requested deliverable and the capabilities actually availa
 | Export an approved composition | reel-export |
 
 Use specialist instructions progressively. Do not load all skills together. For specialist animation or media needs, inspect the matching skill's name and description first.
+
+For Video Style Cloner, resolve its installed directory, then load only the selected `skills/<module>/<module>.md` entry. The 36 nested modules are supporting workflows, not separate imported plugin skills. Consult its `references/engines.md` and `engine/README.md`. The optional Rust CLI needs project render/review adapters and an approved complete plan. The current cloning track is 2D, even though a Blender guide is bundled. Do not silently downgrade a 3D reference.
 
 ## Host capability check
 

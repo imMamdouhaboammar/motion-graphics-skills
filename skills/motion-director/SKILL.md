@@ -49,6 +49,8 @@ A working custom deterministic composition must not be migrated only because a n
 
 Read references/hyperframes-playbook.md before deciding how HyperFrames fits.
 
+For a reference video plus a new 2D film brief, consult `video-style-cloner/SKILL.md` in the installed pack. Its nested named modules include style templates, HyperFrames workflows and media utilities. Load only the selected module. Its optional Rust orchestration source requires project render/review adapters and an approved complete plan. Keep true 3D work on a compatible project runtime, since the current cloning track supports 2D.
+
 ## HyperFrames responsibility policy
 
 For greenfield code-driven motion work, HyperFrames is a production dependency, not merely an optional exporter.

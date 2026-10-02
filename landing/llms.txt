@@ -6,6 +6,10 @@ Official repository: https://github.com/imMamdouhaboammar/motion-graphics-skills
 Website: https://immamdouhaboammar.github.io/motion-graphics-skills/
 Version: 1.2.0
 
+ChatGPT/Codex plugin: 1.2.0, skills-only. Includes 53 top-level skills and 36 nested Video Style Cloner workflow modules, not 36 additional imported skills. Catalog: https://github.com/imMamdouhaboammar/motion-graphics-skills/blob/main/docs/plugin/CATALOG.md
+Runtime matrix: https://github.com/imMamdouhaboammar/motion-graphics-skills/blob/main/docs/plugin/RUNTIMES.md
+Video Style Cloner supports 2D style routing. The optional Rust orchestration source requires project render/review adapters and an approved complete plan. Rendering requires an execution-capable host and installed runtime dependencies.
+
 Motion Graphics Skill Pack is a set of 53 skills for Claude Code and Codex covering creative direction, reference analysis, brand intake, motion briefs, motion graphics, video editing, programmatic video, Arabic and RTL motion, publishing, and rendered-film review.
 
 The master motion-director skill owns concept, narrative, art direction, typography, composition, choreography, production routing and creative QA.
