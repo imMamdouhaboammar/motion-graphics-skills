@@ -1,0 +1,146 @@
+[
+  {
+    "beat": 1,
+    "start": 0,
+    "end": 3.02,
+    "cue": "فيه نوع من العملاء عنده قدرة خارقة للطبيعة",
+    "action": "العميل يتخذ وقفة بطل خارق، وفاتورة طويلة تقوم بدور الرداء",
+    "transition": "حافة الرداء إلى خط الحبر",
+    "timing_status": "Measured ASR phrase anchor; source audio unchanged; not manually certified phoneme alignment"
+  },
+  {
+    "beat": 2,
+    "start": 3.02,
+    "end": 8.22,
+    "cue": "إنه يعرف الشغلانة هتاخد منك وقت قد إيه",
+    "action": "ساعة ضخمة تؤكد ثقته، ثم يتعثر أمام أداة رسم بسيطة",
+    "transition": "عقرب الساعة إلى مؤشر",
+    "timing_status": "Measured ASR phrase anchor; source audio unchanged; not manually certified phoneme alignment"
+  },
+  {
+    "beat": 3,
+    "start": 8.22,
+    "end": 13.86,
+    "cue": "يكلمك مثلا يقولك: بص يا هندسة",
+    "action": "البريف يتضخم بينما إشارة يديه تصر على أنه صغير",
+    "transition": "ثنية الورق إلى منحنى",
+    "timing_status": "Measured ASR phrase anchor; source audio unchanged; not manually certified phoneme alignment"
+  },
+  {
+    "beat": 4,
+    "start": 13.86,
+    "end": 19.36,
+    "cue": "لوجو كده يبقى جديد، بس مألوف",
+    "action": "نسختان من الشعار تسحبان ذراعي المصمم في اتجاهين متناقضين",
+    "transition": "حبل المنحنى إلى طريق",
+    "timing_status": "Measured ASR phrase anchor; source audio unchanged; not manually certified phoneme alignment"
+  },
+  {
+    "beat": 5,
+    "start": 19.36,
+    "end": 24.6,
+    "cue": "ومش عايزه زحمة، بس ياريت يحكي قصة البراند",
+    "action": "خط الشعار يتحول إلى طريق وحكاية تمتد خارج الكادر",
+    "transition": "القلم يمسح الكادر",
+    "timing_status": "Measured ASR phrase anchor; source audio unchanged; not manually certified phoneme alignment"
+  },
+  {
+    "beat": 6,
+    "start": 24.6,
+    "end": 30.54,
+    "cue": "يعني طلبات بسيطة جدا",
+    "action": "طفل صغير يتعامل بجدية زائدة مع قلم ولوح رسم كبير",
+    "transition": "تسليم القلم إلى يد المصمم",
+    "timing_status": "Measured ASR phrase anchor; source audio unchanged; not manually certified phoneme alignment"
+  },
+  {
+    "beat": 7,
+    "start": 30.54,
+    "end": 35.36,
+    "cue": "المهم، تشتغل وتخلص وتبعت الشغل",
+    "action": "حركة يد مركزة تجمع الفوضى في تصميم مكتمل ثم ترسله",
+    "transition": "سهم الإرسال إلى عقرب ساعة",
+    "timing_status": "Measured ASR phrase anchor; source audio unchanged; not manually certified phoneme alignment"
+  },
+  {
+    "beat": 8,
+    "start": 35.36,
+    "end": 38.72,
+    "cue": "إيه ده؟ هو إنت خلصته في ساعة؟",
+    "action": "العميل يقارن التصميم الصغير بساعة عملاقة",
+    "transition": "العقرب إلى ضوء تفتيش",
+    "timing_status": "Measured ASR phrase anchor; source audio unchanged; not manually certified phoneme alignment"
+  },
+  {
+    "beat": 9,
+    "start": 38.72,
+    "end": 41.74,
+    "cue": "حضرتك مسكتني متلبس بالشطارة",
+    "action": "نور مسرحي يقبض على المصمم، والقلم يرتدي قيودا لعبة",
+    "transition": "القيد إلى دائرة الساعة",
+    "timing_status": "Measured ASR phrase anchor; source audio unchanged; not manually certified phoneme alignment"
+  },
+  {
+    "beat": 10,
+    "start": 41.74,
+    "end": 46.98,
+    "cue": "طب أنا هحكيلك حاجة غريبة",
+    "action": "دائرة الساعة تفتح ممرا من السنوات، تتباطأ الكاميرا",
+    "transition": "خط الساعة إلى كابل الجهاز",
+    "timing_status": "Measured ASR phrase anchor; source audio unchanged; not manually certified phoneme alignment"
+  },
+  {
+    "beat": 11,
+    "start": 46.98,
+    "end": 55.68,
+    "cue": "قعدت ليالي قدام الشاشة",
+    "action": "ليل ثم صباح، حماس لنسخة جديدة يعقبه مسحها",
+    "transition": "مسحة الممحاة إلى صفحة",
+    "timing_status": "Measured ASR phrase anchor; source audio unchanged; not manually certified phoneme alignment"
+  },
+  {
+    "beat": 12,
+    "start": 55.68,
+    "end": 62.04,
+    "cue": "اتعلمت حاجات، ونسيتها، واتعلمتها تاني",
+    "action": "دفاتر وأوراق محاولات تتكرر، تتراكم حوله علامات الشك",
+    "transition": "الورق إلى ظلام الغرفة",
+    "timing_status": "Measured ASR phrase anchor; source audio unchanged; not manually certified phoneme alignment"
+  },
+  {
+    "beat": 13,
+    "start": 62.04,
+    "end": 69.28,
+    "cue": "وكان فيه أيام بجد",
+    "action": "يغلق الجهاز ويتوقف، ثم تعود يده لفتحه، إضاءة دافئة صغيرة",
+    "transition": "ضوء الشاشة يرسم منحنى جديدا",
+    "timing_status": "Measured ASR phrase anchor; source audio unchanged; not manually certified phoneme alignment"
+  },
+  {
+    "beat": 14,
+    "start": 69.28,
+    "end": 75.26,
+    "cue": "لحد ما الحاجة اللي كانت بتاخد مني أسبوع",
+    "action": "تقويم أسبوع ينطوي إلى يوم ثم يتحول إلى ساعة",
+    "transition": "دائرة الساعة إلى التصميم",
+    "timing_status": "Measured ASR phrase anchor; source audio unchanged; not manually certified phoneme alignment"
+  },
+  {
+    "beat": 15,
+    "start": 75.26,
+    "end": 88.28,
+    "cue": "وهنا بقى حصلت المفاجأة السعيدة",
+    "action": "تزداد الخبرة وينكمش المقابل، نظرة صامتة للمشاهد",
+    "transition": "قلب الميزان يكشف النتيجة",
+    "timing_status": "Measured ASR phrase anchor; source audio unchanged; not manually certified phoneme alignment"
+  },
+  {
+    "beat": 16,
+    "start": 88.28,
+    "end": 111.64735416666667,
+    "cue": "بس عارف؟",
+    "action": "النتيجة أمامه وخط الجهد خلفها، ثم العميل يقدم عملتين ونصف بثقة",
+    "transition": "نصف العملة ثم قطع إلى أسود بعد تمام الكلام",
+    "timing_status": "Measured ASR phrase anchor; source audio unchanged; not manually certified phoneme alignment"
+  }
+]

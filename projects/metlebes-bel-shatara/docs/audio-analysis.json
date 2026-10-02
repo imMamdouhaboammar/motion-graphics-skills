@@ -1,0 +1,306 @@
+{
+  "duration": 111.64735416666667,
+  "samples": 5359073,
+  "sample_rate": 48000,
+  "channels": 1,
+  "sha256": "e5849b165bcab62486d80a4ecc45697c925040553269d795f80769b5ccac336a",
+  "peak_dbfs": -2.457169823015285,
+  "pause_detection": "10ms RMS windows; threshold 0.015; minimum 180ms; candidate pauses only",
+  "pause_candidates": [
+    {
+      "start": 2.72,
+      "end": 3.02,
+      "duration": 0.3
+    },
+    {
+      "start": 8.01,
+      "end": 8.29,
+      "duration": 0.28
+    },
+    {
+      "start": 9.43,
+      "end": 9.72,
+      "duration": 0.29
+    },
+    {
+      "start": 10.27,
+      "end": 10.56,
+      "duration": 0.29
+    },
+    {
+      "start": 12.94,
+      "end": 13.83,
+      "duration": 0.89
+    },
+    {
+      "start": 15.05,
+      "end": 15.48,
+      "duration": 0.43
+    },
+    {
+      "start": 15.96,
+      "end": 16.58,
+      "duration": 0.62
+    },
+    {
+      "start": 17.82,
+      "end": 18.04,
+      "duration": 0.22
+    },
+    {
+      "start": 18.92,
+      "end": 19.43,
+      "duration": 0.51
+    },
+    {
+      "start": 20.21,
+      "end": 20.49,
+      "duration": 0.28
+    },
+    {
+      "start": 22.92,
+      "end": 23.12,
+      "duration": 0.2
+    },
+    {
+      "start": 24.39,
+      "end": 24.83,
+      "duration": 0.44
+    },
+    {
+      "start": 26.29,
+      "end": 26.52,
+      "duration": 0.23
+    },
+    {
+      "start": 30.14,
+      "end": 30.55,
+      "duration": 0.41
+    },
+    {
+      "start": 30.88,
+      "end": 31.26,
+      "duration": 0.38
+    },
+    {
+      "start": 31.74,
+      "end": 31.97,
+      "duration": 0.23
+    },
+    {
+      "start": 35.14,
+      "end": 35.41,
+      "duration": 0.27
+    },
+    {
+      "start": 35.64,
+      "end": 35.99,
+      "duration": 0.35
+    },
+    {
+      "start": 37.01,
+      "end": 37.22,
+      "duration": 0.21
+    },
+    {
+      "start": 38.5,
+      "end": 38.68,
+      "duration": 0.18
+    },
+    {
+      "start": 39.15,
+      "end": 39.38,
+      "duration": 0.23
+    },
+    {
+      "start": 41.58,
+      "end": 41.81,
+      "duration": 0.23
+    },
+    {
+      "start": 42.89,
+      "end": 43.18,
+      "duration": 0.29
+    },
+    {
+      "start": 44.86,
+      "end": 45.05,
+      "duration": 0.19
+    },
+    {
+      "start": 46.8,
+      "end": 47.07,
+      "duration": 0.27
+    },
+    {
+      "start": 48.52,
+      "end": 48.71,
+      "duration": 0.19
+    },
+    {
+      "start": 49.7,
+      "end": 49.93,
+      "duration": 0.23
+    },
+    {
+      "start": 52.21,
+      "end": 52.52,
+      "duration": 0.31
+    },
+    {
+      "start": 53.69,
+      "end": 53.88,
+      "duration": 0.19
+    },
+    {
+      "start": 55.31,
+      "end": 55.64,
+      "duration": 0.33
+    },
+    {
+      "start": 56.4,
+      "end": 56.77,
+      "duration": 0.37
+    },
+    {
+      "start": 58.4,
+      "end": 58.58,
+      "duration": 0.18
+    },
+    {
+      "start": 60.7,
+      "end": 60.89,
+      "duration": 0.19
+    },
+    {
+      "start": 61.77,
+      "end": 62.07,
+      "duration": 0.3
+    },
+    {
+      "start": 62.97,
+      "end": 63.38,
+      "duration": 0.41
+    },
+    {
+      "start": 64.41,
+      "end": 64.62,
+      "duration": 0.21
+    },
+    {
+      "start": 66.16,
+      "end": 66.63,
+      "duration": 0.47
+    },
+    {
+      "start": 69.07,
+      "end": 69.25,
+      "duration": 0.18
+    },
+    {
+      "start": 71.44,
+      "end": 71.7,
+      "duration": 0.26
+    },
+    {
+      "start": 72.47,
+      "end": 72.78,
+      "duration": 0.31
+    },
+    {
+      "start": 73.93,
+      "end": 74.14,
+      "duration": 0.21
+    },
+    {
+      "start": 74.99,
+      "end": 75.34,
+      "duration": 0.35
+    },
+    {
+      "start": 77.18,
+      "end": 77.56,
+      "duration": 0.38
+    },
+    {
+      "start": 78.52,
+      "end": 78.72,
+      "duration": 0.2
+    },
+    {
+      "start": 80.34,
+      "end": 80.67,
+      "duration": 0.33
+    },
+    {
+      "start": 83.58,
+      "end": 83.88,
+      "duration": 0.3
+    },
+    {
+      "start": 86.11,
+      "end": 86.54,
+      "duration": 0.43
+    },
+    {
+      "start": 87.97,
+      "end": 88.31,
+      "duration": 0.34
+    },
+    {
+      "start": 88.69,
+      "end": 89.01,
+      "duration": 0.32
+    },
+    {
+      "start": 91.49,
+      "end": 91.75,
+      "duration": 0.26
+    },
+    {
+      "start": 93.49,
+      "end": 93.79,
+      "duration": 0.3
+    },
+    {
+      "start": 97.18,
+      "end": 97.45,
+      "duration": 0.27
+    },
+    {
+      "start": 99.05,
+      "end": 99.35,
+      "duration": 0.3
+    },
+    {
+      "start": 104.33,
+      "end": 104.69,
+      "duration": 0.36
+    },
+    {
+      "start": 105.13,
+      "end": 105.32,
+      "duration": 0.19
+    },
+    {
+      "start": 105.46,
+      "end": 105.9,
+      "duration": 0.44
+    },
+    {
+      "start": 106.78,
+      "end": 106.96,
+      "duration": 0.18
+    },
+    {
+      "start": 107.02,
+      "end": 107.58,
+      "duration": 0.56
+    },
+    {
+      "start": 111.41,
+      "end": 111.65,
+      "duration": 0.24
+    }
+  ]
+}

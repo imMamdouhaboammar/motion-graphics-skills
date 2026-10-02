@@ -1,0 +1,496 @@
+{
+  "ok": true,
+  "strict": false,
+  "lint": {
+    "ok": true,
+    "errorCount": 0,
+    "warningCount": 17,
+    "infoCount": 0,
+    "findings": [
+      {
+        "code": "timeline_track_too_dense",
+        "severity": "warning",
+        "message": "Track 0 has 16 timed elements in this HTML file. Smaller sub-compositions keep timelines easier to read, iterate on, and diff.",
+        "selector": "[data-composition-id]",
+        "dataAttributes": {},
+        "sourceFile": "/workspace/scratch/2cad3e912a13/metlebes/runtime/index.html",
+        "bbox": {
+          "x": 0,
+          "y": 0,
+          "width": 0,
+          "height": 0
+        },
+        "time": 0,
+        "fixHint": "Move coherent scene groups into separate .html files under compositions/ and mount them from the parent with data-composition-src so the timeline stays easier to inspect, revise, and validate."
+      },
+      {
+        "code": "nested_structure_needs_subcomposition",
+        "severity": "warning",
+        "message": "<div id=\"scene01\"> is a timeline element that contains nested <svg>. The timeline shows one row per top-level element, and the root composition is built only from sub-compositions.",
+        "selector": "#scene01",
+        "dataAttributes": {},
+        "sourceFile": "/workspace/scratch/2cad3e912a13/metlebes/runtime/index.html",
+        "bbox": {
+          "x": 0,
+          "y": 0,
+          "width": 0,
+          "height": 0
+        },
+        "time": 0,
+        "fixHint": "Move <div id=\"scene01\"> and its contents into a sub-composition file and mount it with data-composition-src."
+      },
+      {
+        "code": "nested_structure_needs_subcomposition",
+        "severity": "warning",
+        "message": "<div id=\"scene02\"> is a timeline element that contains nested <svg>. The timeline shows one row per top-level element, and the root composition is built only from sub-compositions.",
+        "selector": "#scene02",
+        "dataAttributes": {},
+        "sourceFile": "/workspace/scratch/2cad3e912a13/metlebes/runtime/index.html",
+        "bbox": {
+          "x": 0,
+          "y": 0,
+          "width": 0,
+          "height": 0
+        },
+        "time": 0,
+        "fixHint": "Move <div id=\"scene02\"> and its contents into a sub-composition file and mount it with data-composition-src."
+      },
+      {
+        "code": "nested_structure_needs_subcomposition",
+        "severity": "warning",
+        "message": "<div id=\"scene03\"> is a timeline element that contains nested <svg>. The timeline shows one row per top-level element, and the root composition is built only from sub-compositions.",
+        "selector": "#scene03",
+        "dataAttributes": {},
+        "sourceFile": "/workspace/scratch/2cad3e912a13/metlebes/runtime/index.html",
+        "bbox": {
+          "x": 0,
+          "y": 0,
+          "width": 0,
+          "height": 0
+        },
+        "time": 0,
+        "fixHint": "Move <div id=\"scene03\"> and its contents into a sub-composition file and mount it with data-composition-src."
+      },
+      {
+        "code": "nested_structure_needs_subcomposition",
+        "severity": "warning",
+        "message": "<div id=\"scene04\"> is a timeline element that contains nested <svg>. The timeline shows one row per top-level element, and the root composition is built only from sub-compositions.",
+        "selector": "#scene04",
+        "dataAttributes": {},
+        "sourceFile": "/workspace/scratch/2cad3e912a13/metlebes/runtime/index.html",
+        "bbox": {
+          "x": 0,
+          "y": 0,
+          "width": 0,
+          "height": 0
+        },
+        "time": 0,
+        "fixHint": "Move <div id=\"scene04\"> and its contents into a sub-composition file and mount it with data-composition-src."
+      },
+      {
+        "code": "nested_structure_needs_subcomposition",
+        "severity": "warning",
+        "message": "<div id=\"scene05\"> is a timeline element that contains nested <svg>. The timeline shows one row per top-level element, and the root composition is built only from sub-compositions.",
+        "selector": "#scene05",
+        "dataAttributes": {},
+        "sourceFile": "/workspace/scratch/2cad3e912a13/metlebes/runtime/index.html",
+        "bbox": {
+          "x": 0,
+          "y": 0,
+          "width": 0,
+          "height": 0
+        },
+        "time": 0,
+        "fixHint": "Move <div id=\"scene05\"> and its contents into a sub-composition file and mount it with data-composition-src."
+      },
+      {
+        "code": "nested_structure_needs_subcomposition",
+        "severity": "warning",
+        "message": "<div id=\"scene06\"> is a timeline element that contains nested <svg>. The timeline shows one row per top-level element, and the root composition is built only from sub-compositions.",
+        "selector": "#scene06",
+        "dataAttributes": {},
+        "sourceFile": "/workspace/scratch/2cad3e912a13/metlebes/runtime/index.html",
+        "bbox": {
+          "x": 0,
+          "y": 0,
+          "width": 0,
+          "height": 0
+        },
+        "time": 0,
+        "fixHint": "Move <div id=\"scene06\"> and its contents into a sub-composition file and mount it with data-composition-src."
+      },
+      {
+        "code": "nested_structure_needs_subcomposition",
+        "severity": "warning",
+        "message": "<div id=\"scene07\"> is a timeline element that contains nested <svg>. The timeline shows one row per top-level element, and the root composition is built only from sub-compositions.",
+        "selector": "#scene07",
+        "dataAttributes": {},
+        "sourceFile": "/workspace/scratch/2cad3e912a13/metlebes/runtime/index.html",
+        "bbox": {
+          "x": 0,
+          "y": 0,
+          "width": 0,
+          "height": 0
+        },
+        "time": 0,
+        "fixHint": "Move <div id=\"scene07\"> and its contents into a sub-composition file and mount it with data-composition-src."
+      },
+      {
+        "code": "nested_structure_needs_subcomposition",
+        "severity": "warning",
+        "message": "<div id=\"scene08\"> is a timeline element that contains nested <svg>. The timeline shows one row per top-level element, and the root composition is built only from sub-compositions.",
+        "selector": "#scene08",
+        "dataAttributes": {},
+        "sourceFile": "/workspace/scratch/2cad3e912a13/metlebes/runtime/index.html",
+        "bbox": {
+          "x": 0,
+          "y": 0,
+          "width": 0,
+          "height": 0
+        },
+        "time": 0,
+        "fixHint": "Move <div id=\"scene08\"> and its contents into a sub-composition file and mount it with data-composition-src."
+      },
+      {
+        "code": "nested_structure_needs_subcomposition",
+        "severity": "warning",
+        "message": "<div id=\"scene09\"> is a timeline element that contains nested <svg>. The timeline shows one row per top-level element, and the root composition is built only from sub-compositions.",
+        "selector": "#scene09",
+        "dataAttributes": {},
+        "sourceFile": "/workspace/scratch/2cad3e912a13/metlebes/runtime/index.html",
+        "bbox": {
+          "x": 0,
+          "y": 0,
+          "width": 0,
+          "height": 0
+        },
+        "time": 0,
+        "fixHint": "Move <div id=\"scene09\"> and its contents into a sub-composition file and mount it with data-composition-src."
+      },
+      {
+        "code": "nested_structure_needs_subcomposition",
+        "severity": "warning",
+        "message": "<div id=\"scene10\"> is a timeline element that contains nested <svg>. The timeline shows one row per top-level element, and the root composition is built only from sub-compositions.",
+        "selector": "#scene10",
+        "dataAttributes": {},
+        "sourceFile": "/workspace/scratch/2cad3e912a13/metlebes/runtime/index.html",
+        "bbox": {
+          "x": 0,
+          "y": 0,
+          "width": 0,
+          "height": 0
+        },
+        "time": 0,
+        "fixHint": "Move <div id=\"scene10\"> and its contents into a sub-composition file and mount it with data-composition-src."
+      },
+      {
+        "code": "nested_structure_needs_subcomposition",
+        "severity": "warning",
+        "message": "<div id=\"scene11\"> is a timeline element that contains nested <svg>. The timeline shows one row per top-level element, and the root composition is built only from sub-compositions.",
+        "selector": "#scene11",
+        "dataAttributes": {},
+        "sourceFile": "/workspace/scratch/2cad3e912a13/metlebes/runtime/index.html",
+        "bbox": {
+          "x": 0,
+          "y": 0,
+          "width": 0,
+          "height": 0
+        },
+        "time": 0,
+        "fixHint": "Move <div id=\"scene11\"> and its contents into a sub-composition file and mount it with data-composition-src."
+      },
+      {
+        "code": "nested_structure_needs_subcomposition",
+        "severity": "warning",
+        "message": "<div id=\"scene12\"> is a timeline element that contains nested <svg>. The timeline shows one row per top-level element, and the root composition is built only from sub-compositions.",
+        "selector": "#scene12",
+        "dataAttributes": {},
+        "sourceFile": "/workspace/scratch/2cad3e912a13/metlebes/runtime/index.html",
+        "bbox": {
+          "x": 0,
+          "y": 0,
+          "width": 0,
+          "height": 0
+        },
+        "time": 0,
+        "fixHint": "Move <div id=\"scene12\"> and its contents into a sub-composition file and mount it with data-composition-src."
+      },
+      {
+        "code": "nested_structure_needs_subcomposition",
+        "severity": "warning",
+        "message": "<div id=\"scene13\"> is a timeline element that contains nested <svg>. The timeline shows one row per top-level element, and the root composition is built only from sub-compositions.",
+        "selector": "#scene13",
+        "dataAttributes": {},
+        "sourceFile": "/workspace/scratch/2cad3e912a13/metlebes/runtime/index.html",
+        "bbox": {
+          "x": 0,
+          "y": 0,
+          "width": 0,
+          "height": 0
+        },
+        "time": 0,
+        "fixHint": "Move <div id=\"scene13\"> and its contents into a sub-composition file and mount it with data-composition-src."
+      },
+      {
+        "code": "nested_structure_needs_subcomposition",
+        "severity": "warning",
+        "message": "<div id=\"scene14\"> is a timeline element that contains nested <svg>. The timeline shows one row per top-level element, and the root composition is built only from sub-compositions.",
+        "selector": "#scene14",
+        "dataAttributes": {},
+        "sourceFile": "/workspace/scratch/2cad3e912a13/metlebes/runtime/index.html",
+        "bbox": {
+          "x": 0,
+          "y": 0,
+          "width": 0,
+          "height": 0
+        },
+        "time": 0,
+        "fixHint": "Move <div id=\"scene14\"> and its contents into a sub-composition file and mount it with data-composition-src."
+      },
+      {
+        "code": "nested_structure_needs_subcomposition",
+        "severity": "warning",
+        "message": "<div id=\"scene15\"> is a timeline element that contains nested <svg>. The timeline shows one row per top-level element, and the root composition is built only from sub-compositions.",
+        "selector": "#scene15",
+        "dataAttributes": {},
+        "sourceFile": "/workspace/scratch/2cad3e912a13/metlebes/runtime/index.html",
+        "bbox": {
+          "x": 0,
+          "y": 0,
+          "width": 0,
+          "height": 0
+        },
+        "time": 0,
+        "fixHint": "Move <div id=\"scene15\"> and its contents into a sub-composition file and mount it with data-composition-src."
+      },
+      {
+        "code": "nested_structure_needs_subcomposition",
+        "severity": "warning",
+        "message": "<div id=\"scene16\"> is a timeline element that contains nested <svg>. The timeline shows one row per top-level element, and the root composition is built only from sub-compositions.",
+        "selector": "#scene16",
+        "dataAttributes": {},
+        "sourceFile": "/workspace/scratch/2cad3e912a13/metlebes/runtime/index.html",
+        "bbox": {
+          "x": 0,
+          "y": 0,
+          "width": 0,
+          "height": 0
+        },
+        "time": 0,
+        "fixHint": "Move <div id=\"scene16\"> and its contents into a sub-composition file and mount it with data-composition-src."
+      }
+    ],
+    "filesScanned": 1
+  },
+  "runtime": {
+    "ok": true,
+    "errorCount": 0,
+    "warningCount": 0,
+    "infoCount": 0,
+    "findings": []
+  },
+  "layout": {
+    "ok": true,
+    "errorCount": 0,
+    "warningCount": 3,
+    "infoCount": 1,
+    "findings": [
+      {
+        "code": "rotation_pivot_drift",
+        "severity": "warning",
+        "time": 86.565,
+        "selector": "#s15-lead-la",
+        "dataAttributes": {},
+        "sourceFile": "index.html",
+        "bbox": {
+          "x": 197.76500000000001,
+          "y": 520.62,
+          "width": 228.69,
+          "height": 229.6
+        },
+        "rect": {
+          "left": 197.76500000000001,
+          "top": 520.62,
+          "right": 426.45500000000004,
+          "bottom": 750.2199999999999,
+          "width": 228.69,
+          "height": 229.6
+        },
+        "message": "Rotating element's bounding-box center drifts 136px across rotation — it is not spinning about its own center (check transformOrigin/svgOrigin).",
+        "fixHint": "The bounding-box center should stay fixed while the element spins; check its transformOrigin/svgOrigin so rotation pivots about the element's own center rather than a point in a coordinate space it was resized out of.",
+        "firstSeen": 86.565,
+        "lastSeen": 86.565,
+        "occurrences": 1,
+        "heldMs": 0
+      },
+      {
+        "code": "rotation_pivot_drift",
+        "severity": "warning",
+        "time": 109.96,
+        "selector": "#s16-client-la",
+        "dataAttributes": {},
+        "sourceFile": "index.html",
+        "bbox": {
+          "x": 1240.125,
+          "y": 585.305,
+          "width": 234.05,
+          "height": 220.45
+        },
+        "rect": {
+          "left": 1240.125,
+          "top": 585.305,
+          "right": 1474.1750000000002,
+          "bottom": 805.755,
+          "width": 234.05,
+          "height": 220.45
+        },
+        "message": "Rotating element's bounding-box center drifts 82px across rotation — it is not spinning about its own center (check transformOrigin/svgOrigin).",
+        "fixHint": "The bounding-box center should stay fixed while the element spins; check its transformOrigin/svgOrigin so rotation pivots about the element's own center rather than a point in a coordinate space it was resized out of.",
+        "firstSeen": 109.96,
+        "lastSeen": 109.96,
+        "occurrences": 1,
+        "heldMs": 0
+      },
+      {
+        "code": "rotation_pivot_drift",
+        "severity": "warning",
+        "time": 109.96,
+        "selector": "#s16-client-ra",
+        "dataAttributes": {},
+        "sourceFile": "index.html",
+        "bbox": {
+          "x": 1517.49,
+          "y": 578.975,
+          "width": 234.72,
+          "height": 204.25
+        },
+        "rect": {
+          "left": 1517.49,
+          "top": 578.975,
+          "right": 1752.2099999999998,
+          "bottom": 783.225,
+          "width": 234.72,
+          "height": 204.25
+        },
+        "message": "Rotating element's bounding-box center drifts 65px across rotation — it is not spinning about its own center (check transformOrigin/svgOrigin).",
+        "fixHint": "The bounding-box center should stay fixed while the element spins; check its transformOrigin/svgOrigin so rotation pivots about the element's own center rather than a point in a coordinate space it was resized out of.",
+        "firstSeen": 109.96,
+        "lastSeen": 109.96,
+        "occurrences": 1,
+        "heldMs": 0
+      },
+      {
+        "code": "container_overflow",
+        "severity": "info",
+        "time": 53.81,
+        "selector": "#s11-camera",
+        "message": "Element extends outside a clipping layout container.",
+        "rect": {
+          "left": 280.57,
+          "top": 223.35,
+          "right": 1574.85,
+          "bottom": 1301.75,
+          "width": 1294.28,
+          "height": 1078.4
+        },
+        "containerSelector": "#scene11 > svg:nth-of-type(1)",
+        "fixHint": "Resize/reposition the child or container, or mark intentional overflow with data-layout-allow-overflow.",
+        "containerRect": {
+          "left": 0,
+          "top": 0,
+          "right": 1920,
+          "bottom": 1080,
+          "width": 1920,
+          "height": 1080
+        },
+        "overflow": {
+          "bottom": 221.75
+        },
+        "dataAttributes": {},
+        "sourceFile": "index.html",
+        "bbox": {
+          "x": 280.57,
+          "y": 223.35,
+          "width": 1294.28,
+          "height": 1078.4
+        },
+        "firstSeen": 53.81,
+        "lastSeen": 53.81,
+        "occurrences": 1,
+        "heldMs": 0
+      }
+    ],
+    "duration": 112.3,
+    "samples": [
+      2.34,
+      7.019,
+      11.698,
+      16.377,
+      21.056,
+      25.735,
+      30.415,
+      35.094,
+      39.773,
+      44.452,
+      49.131,
+      53.81,
+      58.49,
+      63.169,
+      67.848,
+      72.527,
+      77.206,
+      81.885,
+      86.565,
+      91.244,
+      95.923,
+      100.602,
+      105.281,
+      109.96
+    ],
+    "transitionSamples": [],
+    "transitionSamplesDropped": 0,
+    "tolerance": 2,
+    "totalIssueCount": 4,
+    "truncated": false
+  },
+  "motion": {
+    "ok": true,
+    "errorCount": 0,
+    "warningCount": 0,
+    "infoCount": 0,
+    "findings": [],
+    "enabled": false,
+    "samples": 0
+  },
+  "contrast": {
+    "ok": true,
+    "errorCount": 0,
+    "warningCount": 0,
+    "infoCount": 0,
+    "findings": [],
+    "enabled": true,
+    "samples": [
+      2.34,
+      25.735,
+      53.81,
+      81.885,
+      109.96
+    ],
+    "checked": 0,
+    "passed": 0
+  },
+  "hdr": {
+    "autoPromotion": null,
+    "inspection": "available"
+  },
+  "snapshots": {
+    "enabled": false,
+    "files": [],
+    "times": [],
+    "findingFiles": []
+  },
+  "_meta": {
+    "version": "0.8.111",
+    "updateAvailable": false
+  }
+}

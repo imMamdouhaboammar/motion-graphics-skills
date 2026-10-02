@@ -39,7 +39,7 @@ Creative direction and code-driven motion production without requiring After Eff
 
 ## Watch the work
 
-Six completed films, presented in their final running order with original audio. Watch every full-length video directly inside this README with native GitHub video playback controls, timeline seeking, and fullscreen support. Original master renders and project sources (where provided) are also available below each film.
+Seven films with original audio. The six promos below use native GitHub attachment players with timeline seeking and fullscreen support. The Egyptian cartoon opens its full committed MP4 from the linked preview. Original master renders and project sources (where provided) are available below each film.
 
 ### Motion Graphics Skills | Arabic promo
 
@@ -112,6 +112,16 @@ https://github.com/user-attachments/assets/592daa6c-5ce0-4cef-ad3e-40e976729066
 <!-- readme-video:jedar:end -->
 
 [Full-length original MP4](projects/jedar-lesh-majani/renders/JEDAR-lesh-majani-final.mp4) · [Project source](projects/jedar-lesh-majani/)
+
+### متلبس بالشطارة | Egyptian satirical cartoon
+
+<sub>112.3 seconds · Original Egyptian Arabic narration · 1920 × 1080 · 30 fps</sub>
+
+[![Watch متلبس بالشطارة](projects/metlebes-bel-shatara/docs/poster.jpg)](https://github.com/imMamdouhaboammar/motion-graphics-skills/blob/main/projects/metlebes-bel-shatara/renders/Metlebes_Bel_Shatara_Final.mp4)
+
+[Watch the full film / download MP4](projects/metlebes-bel-shatara/renders/Metlebes_Bel_Shatara_Final.mp4) · [Editable project and original art](projects/metlebes-bel-shatara/) · [Storyboard, motion proofs and QA](projects/metlebes-bel-shatara/README.md#story-and-production-evidence)
+
+The thumbnail opens the committed full video. A native in-README attachment player has not been uploaded for this film.
 
 ## ChatGPT and Codex plugin
 
