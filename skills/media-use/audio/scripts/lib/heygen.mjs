@@ -5,7 +5,7 @@ import { fetchMedia } from "../../../scripts/lib/media-fetch.mjs";
 // credentials (oauth → Bearer, else api_key → X-Api-Key; $HEYGEN_CONFIG_DIR
 // overrides the dir). Vendored so the skill ships standalone. Pure node.
 
-import { existsSync, mkdirSync, readFileSync, writeFileSync } from "node:fs";
+import { existsSync, mkdirSync, readFileSync, statSync, writeFileSync } from "node:fs";
 import { homedir } from "node:os";
 import { dirname, join, resolve } from "node:path";
 
@@ -53,6 +53,9 @@ export function heygenCredential() {
 
   const file = join(process.env.HEYGEN_CONFIG_DIR || join(homedir(), ".heygen"), "credentials");
   if (!existsSync(file)) return null;
+  // Refuse to trust a credentials file that's readable/writable by group or
+  // other — on a shared/multi-user box that's a leaked-secret waiting to happen.
+  if (process.platform !== "win32" && (statSync(file).mode & 0o077) !== 0) return null;
   const raw = readFileSync(file, "utf8").trim();
   if (!raw) return null;
   if (!raw.startsWith("{")) return { headers: { "X-Api-Key": raw } };
