@@ -35,7 +35,9 @@ Key fields in `analysis/song/report.json`:
 Always trim starting at a beat boundary so frame 0 = beat 0:
 
 ```bash
-# 1. Find target start (choose audio.beats entry nearest to audio.best_30s_starts[0].start)
+# 1. If audio.best_30s_starts is nonempty, choose its best window and the nearest audio.beats entry.
+#    Otherwise choose a valid beat manually; if no beats were detected, use start_s = 0.
+#    Keep start_s + duration_s within the input duration.
 # 2. Trim + loudnorm + fade
 ffmpeg -ss <start_s> -t <duration_s> -i input.wav \
   -af "loudnorm=I=-14:TP=-1.5,afade=t=in:d=0.08,afade=t=out:st=<dur-2>:d=2" \

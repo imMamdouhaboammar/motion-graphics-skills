@@ -13,6 +13,10 @@ pub async fn dispatch_parallel_production(
     config: Arc<EngineConfig>,
     event_tx: mpsc::Sender<String>,
 ) -> Result<Vec<Segment>> {
+    crate::project_paths::project_dir(&config.projects_dir, &project.slug)?;
+    for segment in &segments {
+        crate::project_paths::validate_identifier(&segment.id, "segment ID")?;
+    }
     anyhow::ensure!(
         !segments.is_empty(),
         "Storyboard contains no production segments"
@@ -61,7 +65,7 @@ async fn produce_segment(
     config: Arc<EngineConfig>,
     tx: mpsc::Sender<String>,
 ) -> Result<Segment> {
-    let project = Path::new(&config.projects_dir).join(slug);
+    let project = crate::project_paths::project_dir(&config.projects_dir, slug)?;
     let frames = project.join("build/frames").join(&segment.id);
     let producer = project.join("render_segment.py");
     let reviewer = project.join("review_segment.py");
@@ -87,6 +91,7 @@ async fn produce_segment(
                 slug, segment.id, round
             ))
             .await;
+        crate::project_paths::check_tree(&project)?;
         // Each pass must produce fresh frames. Old output must never stand in for a failed render.
         if frames.exists() {
             std::fs::remove_dir_all(&frames)?;
@@ -122,10 +127,11 @@ async fn produce_segment(
             .await
             .context("Failed to launch segment renderer")?;
         anyhow::ensure!(status.success(), "Segment {} renderer failed", segment.id);
+        crate::project_paths::check_tree(&project)?;
         executor::validate_frames(&frames, &config).await?;
         segment.frames_dir = Some(frames.to_string_lossy().into());
         segment.state = SegmentState::AwaitingReview;
-        let review = run_review(&reviewer, &project, Some(&segment.id), &frames, &config).await?;
+        let review = run_review(&reviewer, &project, Some(&segment), &frames, &config).await?;
         let passed = review.passed
             && review.score.is_finite()
             && review.score >= config.qa_pass_threshold
@@ -154,7 +160,7 @@ async fn produce_segment(
 pub async fn run_review(
     script: &Path,
     project: &Path,
-    segment: Option<&str>,
+    segment: Option<&Segment>,
     artifact: &Path,
     config: &EngineConfig,
 ) -> Result<ReviewResult> {
@@ -170,10 +176,19 @@ pub async fn run_review(
         .arg(project)
         .arg("--plan")
         .arg(project.join("plan.json"));
-    if let Some(id) = segment {
+    if let Some(segment) = segment {
         command
             .arg("--segment")
-            .arg(id)
+            .arg(&segment.id)
+            .arg("--shot-ids")
+            .arg(
+                segment
+                    .shot_ids
+                    .iter()
+                    .map(u32::to_string)
+                    .collect::<Vec<_>>()
+                    .join(","),
+            )
             .arg("--frames")
             .arg(artifact);
     } else {

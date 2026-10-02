@@ -2,7 +2,7 @@
 
 This engine orchestrates analysis and project-provided renderer and independent reviewer processes. Creating the creative storyboard and implementing a renderer for the chosen production engine require a production agent or human. There is no bundled autonomous AI service. Missing adapters or missing artifacts are errors.
 
-The default configuration uses the suite's bundled scripts and style registry, or an installed `.claude/skills` tree when present. Set `REELMIMIC_SCRIPTS` to override the script directory. `run --skills-dir` overrides the skills and associated scripts unless the environment override is set. `run` analyses and routes the reference, then pauses at `AwaitingApproval`. Write and review `STORYBOARD.md` and the machine-readable `plan.json` before continuing:
+The default configuration uses the suite's bundled scripts and style registry, or an installed `.claude/skills` tree when present. Set `REELMIMIC_SCRIPTS` to override the script directory. `run --skills-dir` and `resume --skills-dir` override the skills and associated scripts unless the environment override is set. `run` analyses and routes the reference, then pauses at `AwaitingApproval`. Write and review `STORYBOARD.md` and the machine-readable `plan.json` before continuing:
 
 ```bash
 reelmimic resume my-project --projects-dir /path/to/projects --approve-storyboard
@@ -17,7 +17,7 @@ Place these Python scripts in the project directory:
 | Script | Arguments | Required output |
 | --- | --- | --- |
 | `render_segment.py` | `--project`, `--plan`, `--segment`, `--engine`, `--shot-ids` (comma-separated), `--frames`, optional `--fixes` | Fresh contiguous PNG sequence from `frame_000001.png` at 24 FPS |
-| `review_segment.py` | `--project`, `--plan`, `--segment`, `--frames` | ReviewResult JSON on stdout |
+| `review_segment.py` | `--project`, `--plan`, `--segment`, `--shot-ids`, `--frames` | ReviewResult JSON on stdout |
 | `review_final.py` | `--project`, `--plan`, `--video` | ReviewResult JSON on stdout |
 
 Render adapters call the chosen engine's actual renderer. Review adapters run independently and inspect frames against the reference and approved plan. Diagnostic messages go to stderr. A ReviewResult has this shape:
@@ -39,3 +39,5 @@ cargo test --test regressions real_renderer_review_assembly_and_custom_resume --
 ```
 
 Python 3, FFmpeg and FFprobe must be installed for this test.
+
+The bundled and local `video-clone/styles` registries are merged. Local entries override bundled entries with the same style name. A priority bonus is normalized to at most three points, preserving exact medium matches over related or unrelated styles. Project slugs and segment IDs must use ASCII letters, digits, hyphens or underscores, beginning with a letter or digit. Project content containing symlinks is rejected before processing or frame cleanup, including dangling links. The configured projects root itself may be a symlink.

@@ -11,3 +11,5 @@ pub mod agents;
 pub mod executor;
 
 pub use anyhow::Result;
+
+pub mod project_paths;

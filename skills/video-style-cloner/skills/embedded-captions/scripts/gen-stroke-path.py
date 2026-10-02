@@ -26,12 +26,17 @@ font_path, text, target_w, baseline_y, x0 = (
 # Attribute order and namespace prefixes have no bearing on glyph lookup.
 root = ET.parse(font_path).getroot()
 glyphs = {}
-for glyph in root.iter():
-    if glyph.tag.rsplit("}", 1)[-1] != "glyph":
+for font in root.iter():
+    if font.tag.rsplit("}", 1)[-1] != "font":
         continue
-    ch = glyph.get("unicode", "")
-    if len(ch) == 1:
-        glyphs[ch] = (float(glyph.get("horiz-adv-x", "300")), glyph.get("d", ""))
+    font_advance = font.get("horiz-adv-x", "300")
+    for glyph in font:
+        if glyph.tag.rsplit("}", 1)[-1] != "glyph":
+            continue
+        ch = glyph.get("unicode", "")
+        if len(ch) == 1:
+            # SVG glyphs inherit their containing font's advance unless overridden.
+            glyphs[ch] = (float(glyph.get("horiz-adv-x", font_advance)), glyph.get("d", ""))
 # default advance for space
 space_adv = glyphs.get(" ", (300, ""))[0]
 

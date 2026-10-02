@@ -345,6 +345,22 @@ pub struct EngineConfig {
     pub compare_script: String,
 }
 
+impl EngineConfig {
+    /// Shared configuration application for run and resume.
+    pub fn apply_skills_dir(&mut self, skills: Option<String>) {
+        if let Some(skills) = skills {
+            self.skills_dir = skills;
+            if std::env::var_os("REELMIMIC_SCRIPTS").is_none() {
+                let scripts = std::path::Path::new(&self.skills_dir).join("video-clone/scripts");
+                self.analyse_script = scripts.join("analyze.py").to_string_lossy().into();
+                self.align_lyrics_script = scripts.join("align_lyrics.py").to_string_lossy().into();
+                self.fetch_assets_script = scripts.join("fetch_assets.py").to_string_lossy().into();
+                self.compare_script = scripts.join("compare.py").to_string_lossy().into();
+            }
+        }
+    }
+}
+
 impl Default for EngineConfig {
     fn default() -> Self {
         let skills = if std::path::Path::new(".claude/skills/video-clone").is_dir() {

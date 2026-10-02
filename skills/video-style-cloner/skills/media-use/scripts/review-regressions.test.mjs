@@ -48,9 +48,9 @@ test('HeyGen default matches requested language and fails when unavailable',asyn
 });
 test('resolve delegates argv to installed HyperFrames and preserves status',()=>{
  const dir=mkdtempSync(join(tmpdir(),'resolve-review-'));
- try {const command=join(dir,'hyperframes');writeFileSync(command,'#!/usr/bin/env node\nconsole.log(JSON.stringify(process.argv.slice(2)));process.exit(7);\n');chmodSync(command,0o755);
+ try {const command=join(dir,'npx');writeFileSync(command,'#!/usr/bin/env node\nconsole.log(JSON.stringify(process.argv.slice(2)));process.exit(7);\n');chmodSync(command,0o755);
  const r=spawnSync(process.execPath,[new URL('./resolve.mjs',import.meta.url).pathname,'--intent','value with spaces'],{encoding:'utf8',env:{...process.env,PATH:dir+':'+process.env.PATH}});
- assert.equal(r.status,7);assert.deepEqual(JSON.parse(r.stdout),['media-use','resolve','--intent','value with spaces']);
+ assert.equal(r.status,7);assert.deepEqual(JSON.parse(r.stdout),['--no-install','hyperframes','media-use','resolve','--intent','value with spaces']);
  }finally{rmSync(dir,{recursive:true,force:true});}
 });
 
@@ -74,5 +74,16 @@ test('CLI rejects unsupported zero and invalid attack or release',()=>{
    const r=spawnSync(process.execPath,[new URL('./audio-duck.mjs',import.meta.url).pathname,'--meta',meta,'--target','#bgm',`--${name}=${value}`,'--json'],{encoding:'utf8',env:{...process.env,DO_NOT_TRACK:'1'}});
    assert.equal(r.status,1,`${name}=${value}`);assert.match(r.stdout,new RegExp(`--${name} must be positive finite`));
   }
+ }finally{rmSync(dir,{recursive:true,force:true});}
+});
+
+test('resolve runs npm JS CLI on Windows and preserves literal argv',async()=>{
+ const { runResolve } = await import('./resolve.mjs');
+ const dir=mkdtempSync(join(tmpdir(),'resolve-windows-review-'));
+ try {
+  const cli=join(dir,'npx-cli.js');writeFileSync(cli,'console.log(JSON.stringify(process.argv.slice(2)));process.exit(7);\n');
+  const value='value & echo $PATH';
+  const result=runResolve(['--intent',value],{platform:'win32',env:{npm_execpath:cli,npm_node_execpath:process.execPath},opts:{encoding:'utf8',stdio:'pipe'}});
+  assert.equal(result.status,7);assert.deepEqual(JSON.parse(result.stdout),['--no-install','hyperframes','media-use','resolve','--intent',value]);
  }finally{rmSync(dir,{recursive:true,force:true});}
 });

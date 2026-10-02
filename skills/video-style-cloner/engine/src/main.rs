@@ -66,14 +66,21 @@ async fn main() -> Result<()> {
         }
 
         Commands::Resume(args) => {
-            let config = EngineConfig {
+            let mut config = EngineConfig {
                 projects_dir: args.projects_dir.clone(),
                 ..EngineConfig::default()
             };
-            let project_path = format!("{}/{}/project.json", config.projects_dir, args.slug);
+            config.apply_skills_dir(args.skills_dir);
+            let project_root =
+                reelmimic_engine::project_paths::project_dir(&config.projects_dir, &args.slug)?;
+            let project_path = project_root.join("project.json");
             let raw = std::fs::read_to_string(&project_path)
                 .map_err(|_| anyhow::anyhow!("Project '{}' not found", args.slug))?;
             let mut project: Project = serde_json::from_str(&raw)?;
+            anyhow::ensure!(
+                project.slug == args.slug,
+                "Stored project slug does not match requested slug"
+            );
             info!(
                 "Resuming project '{}' from state: {}",
                 project.slug, project.state
@@ -109,19 +116,8 @@ async fn main() -> Result<()> {
                 projects_dir: args.projects_dir.clone(),
                 ..EngineConfig::default()
             };
-            if let Some(skills) = args.skills_dir {
-                config.skills_dir = skills;
-                if std::env::var_os("REELMIMIC_SCRIPTS").is_none() {
-                    let scripts =
-                        std::path::Path::new(&config.skills_dir).join("video-clone/scripts");
-                    config.analyse_script = scripts.join("analyze.py").to_string_lossy().into();
-                    config.align_lyrics_script =
-                        scripts.join("align_lyrics.py").to_string_lossy().into();
-                    config.fetch_assets_script =
-                        scripts.join("fetch_assets.py").to_string_lossy().into();
-                    config.compare_script = scripts.join("compare.py").to_string_lossy().into();
-                }
-            }
+            config.apply_skills_dir(args.skills_dir);
+            reelmimic_engine::project_paths::project_dir(&config.projects_dir, &slug)?;
 
             // Build project
             let mut project = Project {

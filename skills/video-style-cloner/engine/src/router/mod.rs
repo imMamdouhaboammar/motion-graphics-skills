@@ -17,54 +17,45 @@ pub struct StyleDef {
 pub fn load_style_registry(skills_dir: &str) -> Result<Vec<StyleDef>> {
     let skills_path = Path::new(skills_dir);
     let bundled = skills_path.parent().unwrap_or(skills_path).join("styles");
-    let styles_path = if bundled.is_dir() {
-        bundled
-    } else {
-        skills_path.join("video-clone/styles")
-    };
+    // Load bundled definitions first. Local/legacy entries with the same name override them.
+    let paths = [bundled, skills_path.join("video-clone/styles")];
+    let mut styles = std::collections::BTreeMap::new();
+    for styles_path in paths {
+        if !styles_path.is_dir() {
+            continue;
+        }
+        let entries = std::fs::read_dir(&styles_path)
+            .with_context(|| format!("Cannot read styles dir: {:?}", styles_path))?;
+        for entry in entries {
+            let entry = entry?;
+            let path = entry.path();
+            if path.extension().map(|e| e == "md").unwrap_or(false) {
+                let name = path.file_stem().unwrap().to_string_lossy().to_string();
+                if name.starts_with('_') {
+                    debug!("Skipping template file: {}", name);
+                    continue;
+                }
 
-    if !styles_path.exists() {
-        warn!(
-            "Styles directory not found at {:?}; using empty registry",
-            styles_path
-        );
-        return Ok(vec![]);
-    }
+                let content = std::fs::read_to_string(&path)
+                    .with_context(|| format!("Cannot read style file: {:?}", path))?;
 
-    let mut styles = Vec::new();
-    let entries = std::fs::read_dir(&styles_path)
-        .with_context(|| format!("Cannot read styles dir: {:?}", styles_path))?;
-
-    for entry in entries {
-        let entry = entry?;
-        let path = entry.path();
-        if path.extension().map(|e| e == "md").unwrap_or(false) {
-            let name = path.file_stem().unwrap().to_string_lossy().to_string();
-            if name.starts_with('_') {
-                debug!("Skipping template file: {}", name);
-                continue;
-            }
-
-            let content = std::fs::read_to_string(&path)
-                .with_context(|| format!("Cannot read style file: {:?}", path))?;
-
-            if let Some(def) = parse_style_frontmatter(&name, &content) {
-                // Only include styles whose engine skill exists
-                let engine_skill_path = Path::new(skills_dir).join(&def.engine);
-                if engine_skill_path.exists() {
-                    styles.push(def);
-                } else {
-                    warn!(
-                        "Skipping style '{}' — engine skill '{}' not installed",
-                        name, def.engine
-                    );
+                if let Some(def) = parse_style_frontmatter(&name, &content) {
+                    // Only include styles whose engine skill exists
+                    let engine_skill_path = Path::new(skills_dir).join(&def.engine);
+                    if engine_skill_path.exists() {
+                        styles.insert(name, def);
+                    } else {
+                        warn!(
+                            "Skipping style '{}' — engine skill '{}' not installed",
+                            name, def.engine
+                        );
+                    }
                 }
             }
         }
     }
-
-    info!("Loaded {} styles from registry", styles.len());
-    Ok(styles)
+    info!("Loaded {} styles from merged registries", styles.len());
+    Ok(styles.into_values().collect())
 }
 
 fn parse_style_frontmatter(name: &str, content: &str) -> Option<StyleDef> {
@@ -128,8 +119,9 @@ fn score_style(
         }
     }
 
-    // Priority bonus
-    score += (style.priority as f32 / 10.0) * 3.0;
+    // Registries use priorities on a 0-100 scale. Keep their bonus within three
+    // points so it cannot outweigh exact medium (7) or related medium (3).
+    score += (style.priority.min(100) as f32 / 100.0) * 3.0;
 
     score.min(10.0)
 }

@@ -2,7 +2,8 @@
 
 ## Asset sources
 
-Run commands from the repository root, or set `$SKILL_DIR` to this suite's absolute path.
+Set `$SKILL_DIR` to this suite's absolute path before running commands.
+From the repository root, run `export SKILL_DIR="$(pwd)/skills/video-style-cloner"`.
 The search command always queries Openverse. It also queries Pixabay for images
 when `PIXABAY_KEY` is set, or Freesound for audio when `FREESOUND_KEY` is set.
 There is no `--sources` option. Check each returned asset's license before use.
@@ -31,7 +32,7 @@ when the project's distribution terms cannot satisfy ShareAlike.
 | **CC-BY-SA** | Openverse adaptations | Yes, subject to ShareAlike | Required, with license and changes. Share adaptations under the same or a compatible license |
 | **CC-BY-NC** | Some Freesound | ❌ Personal only | Required |
 | **Royalty-free** | Pixabay, Unsplash | ✅ Yes | Check per-source TOS |
-| **Unknown** | Random web search | ❌ Assume no |. |
+| **Unknown** | Random web search | ❌ Assume no | N/A |
 
 ## ASSETS.md Format
 
@@ -42,9 +43,9 @@ Every fetched or user-provided asset goes here:
 
 | Filename | Source | Author | Licence | URL | Notes |
 |---|---|---|---|---|---|
-| background_forest.jpg | Openverse | Jane Smith | CC0 | https://... |. |
+| background_forest.jpg | Openverse | Jane Smith | CC0 | https://... | N/A |
 | sfx_whoosh.wav | Freesound | sounduser42 | CC-BY | https://... | Attribute in credits |
-| logo_client.png | User-provided | Client | Proprietary |. | Client IP |
+| logo_client.png | User-provided | Client | Proprietary | N/A | Client IP |
 | mystery_icon.svg | Google Images search | Unknown | Licence unconfirmed | https://... | ⚠️ Confirm before release |
 ```
 

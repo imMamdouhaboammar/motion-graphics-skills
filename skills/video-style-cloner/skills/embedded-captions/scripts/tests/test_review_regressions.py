@@ -52,6 +52,15 @@ class ReviewRegressions(unittest.TestCase):
         r = subprocess.run(['python3', str(SCRIPTS / 'gen-stroke-path.py'), str(font), "'&é", '30', '0', '0'], check=True, capture_output=True, text=True)
         self.assertEqual(r.stdout.strip(), 'M 0.0 0.0 L 1.0 -1.0 M 10.0 0.0 L 11.0 -1.0 M 20.0 0.0 L 21.0 -1.0')
 
+    def test_svg_glyph_inherits_font_advance_when_omitted(self):
+        font = self.root / 'font.svg'
+        font.write_text('<svg xmlns="http://www.w3.org/2000/svg"><defs><font horiz-adv-x="20">'
+                        '<glyph unicode="A" d="M 0 0 L 4 4"/>'
+                        '<glyph unicode="B" horiz-adv-x="10" d="M 0 0 L 2 2"/>'
+                        '</font></defs></svg>')
+        r = subprocess.run(['python3', str(SCRIPTS / 'gen-stroke-path.py'), str(font), 'AB', '30', '0', '0'], check=True, capture_output=True, text=True)
+        self.assertEqual(r.stdout.strip(), 'M 0.0 0.0 L 4.0 -4.0 M 20.0 0.0 L 22.0 -2.0')
+
     def fake_bin(self):
         bin_dir = self.root / 'bin'
         bin_dir.mkdir()
@@ -82,6 +91,18 @@ class ReviewRegressions(unittest.TestCase):
         r = subprocess.run([NODE, str(SCRIPTS / 'resolve-source.cjs'), str(self.root)], capture_output=True)
         self.assertEqual(r.returncode, 0, r.stderr)
         self.assertEqual((self.root / 'source.mp4').read_bytes(), b'explicit source')
+
+    def test_resolver_keeps_input_names_starting_with_artifact_names(self):
+        for name in ['railway.mp4', 'indexed.mp4']:
+            with self.subTest(name=name):
+                project = self.root / name[:-4]
+                project.mkdir()
+                (project / name).write_bytes(b'input')
+                for artifact in ['rail.mp4', 'index.mp4']:
+                    (project / artifact).write_bytes(b'x' * 100)
+                r = subprocess.run([NODE, str(SCRIPTS / 'resolve-source.cjs'), str(project)], capture_output=True)
+                self.assertEqual(r.returncode, 0, r.stderr)
+                self.assertEqual((project / 'source.mp4').read_bytes(), b'input')
 
     def test_resolver_missing_input_fails_without_creating_source(self):
         (self.root / 'final.mp4').write_bytes(b'export')

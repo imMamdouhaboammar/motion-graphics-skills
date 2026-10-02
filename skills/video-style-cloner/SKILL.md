@@ -104,12 +104,12 @@ Collect from the user:
 
 | Input | Required | Default |
 |---|---|---|
-| Reference video | **YES** |: |
-| Creative brief (what new video is about) | **YES** |: |
+| Reference video | **YES** | None |
+| Creative brief (what new video is about) | **YES** | None |
 | Target length | No | 30 s |
 | Aspect ratio | No | 16:9 |
 | Music/audio file | No | Silent or user-provided |
-| LRC/lyrics text | No (needed if lyrics appear in video) |: |
+| LRC/lyrics text | No (needed if lyrics appear in video) | None |
 | Character design sheets | No | AI-designed original characters |
 
 Create project workspace:

@@ -12,7 +12,7 @@ function resolveSource(project) {
   }
   const candidates = fs.readdirSync(project)
     .filter(name => /\.(mp4|mov|webm|mkv|m4v)$/i.test(name) &&
-      !/^(_|final(?:\.|$)|bg_plus_caps(?:\.|$)|fg_caps(?:\.|$)|audio(?:\.|$)|rail|index)/i.test(name))
+      !/^(_|final(?:\.|$)|bg_plus_caps(?:\.|$)|fg_caps(?:\.|$)|audio(?:\.|$)|rail(?:\.|$)|index(?:\.|$))/i.test(name))
     .map(name => ({ name, stat: fs.statSync(path.join(project, name)) }))
     .filter(candidate => candidate.stat.isFile())
     .sort((a, b) => b.stat.size - a.stat.size || (a.name < b.name ? -1 : a.name > b.name ? 1 : 0));

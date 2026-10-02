@@ -49,7 +49,7 @@ pub struct RunArgs {
     pub brief: String,
 
     /// Project slug (auto-generated if omitted)
-    #[arg(short, long)]
+    #[arg(short, long, value_parser = parse_slug)]
     pub slug: Option<String>,
 
     /// Target duration in seconds
@@ -95,7 +95,12 @@ pub struct AnalyseArgs {
 #[derive(clap::Args, Debug)]
 pub struct ResumeArgs {
     /// Project slug to resume
+    #[arg(value_parser = parse_slug)]
     pub slug: String,
+
+    /// Skills root directory used for unfinished pipeline phases
+    #[arg(long)]
+    pub skills_dir: Option<String>,
 
     /// Explicitly approve the reviewed plan.json and continue production
     #[arg(long)]
@@ -104,4 +109,9 @@ pub struct ResumeArgs {
     /// Projects root directory
     #[arg(long, default_value = "projects")]
     pub projects_dir: String,
+}
+
+fn parse_slug(value: &str) -> Result<String, String> {
+    crate::project_paths::validate_slug(value).map_err(|error| error.to_string())?;
+    Ok(value.into())
 }

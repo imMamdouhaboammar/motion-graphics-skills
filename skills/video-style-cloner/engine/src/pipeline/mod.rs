@@ -25,6 +25,7 @@ impl Pipeline {
 
     /// Run all phases for a project in sequence
     pub async fn run(&self, project: &mut Project) -> Result<()> {
+        crate::project_paths::project_dir(&self.config.projects_dir, &project.slug)?;
         self.emit(&project.slug, "pipeline", "Starting full pipeline")
             .await;
 
@@ -245,6 +246,7 @@ impl Pipeline {
 
     /// Called only by explicit CLI approval or the requested auto-approve mode.
     pub fn approve_storyboard(&self, project: &mut Project) -> Result<()> {
+        crate::project_paths::project_dir(&self.config.projects_dir, &project.slug)?;
         anyhow::ensure!(
             project.state == ProjectState::AwaitingApproval,
             "Project is not awaiting storyboard approval"
@@ -285,6 +287,7 @@ impl Pipeline {
     // ─── Phase 5: Production ─────────────────────────────────────────────────
 
     pub async fn phase_produce(&self, project: &mut Project) -> Result<()> {
+        crate::project_paths::project_dir(&self.config.projects_dir, &project.slug)?;
         let engine = project
             .style
             .as_ref()
@@ -461,6 +464,7 @@ impl Pipeline {
     }
 
     fn persist_project(&self, project: &Project) -> Result<()> {
+        crate::project_paths::project_dir(&self.config.projects_dir, &project.slug)?;
         let path = format!("{}/{}/project.json", self.config.projects_dir, project.slug);
         std::fs::create_dir_all(Path::new(&path).parent().unwrap())?;
         let json = serde_json::to_string_pretty(project)?;
