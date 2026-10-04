@@ -1,0 +1,13 @@
+scene,start_s_approx,end_s_approx,mechanism,direction_speed_measurement
+1,0,1.7,low camera drop + prop reveal,PENDING
+2,1.7,4.7,"frontal locked center, hands advance from edges",PENDING
+3,4.7,8.4,topdown snap reframes x3,PENDING
+4,8.4,11,"hard jump assembly, one short push",PENDING
+5,11,16.8,long route-follow topdown camera,PENDING
+6,16.8,19.3,lateral repeat cascade + one punch,PENDING
+7,19.3,22.8,close prop handoff + axial move,PENDING
+8,22.8,26,frontal snap + screen-plane tilt,PENDING
+9,26,30.8,"diagonal tracked move, cards pass camera",PENDING
+10,30.8,32.7,rapid stagger vertical tiles + lateral rack,PENDING
+11,32.7,35.1,"mostly still, small recession",PENDING
+12,35.1,38.704807,near-static final hold,PENDING

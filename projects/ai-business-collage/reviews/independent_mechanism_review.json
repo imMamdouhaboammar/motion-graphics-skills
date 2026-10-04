@@ -1,0 +1,117 @@
+{
+  "reviewer": "Independent reference/camera review agent",
+  "artifact_reviewed": "/workspace/scratch/84a9a71a0bd6/projects/ai-business-collage/renders/AI_Business_Collage.mp4",
+  "scope": "Actual decoded MP4 frames plus native GSAP timeline read; source mechanics from separately measured reference report. No changes to production files.",
+  "overall_status": "PARTIAL",
+  "export_status": "PASS",
+  "export_evidence": {
+    "resolution": [
+      1080,
+      1920
+    ],
+    "fps": 30,
+    "codecs": [
+      "h264",
+      "aac"
+    ],
+    "duration_s": 48.366667,
+    "voiceover_duration_s": 48.352667,
+    "duration_difference_s": 0.014
+  },
+  "font_status": "PASS",
+  "font_evidence": "Native @font-face references actual Thmanyah regular/bold/black WOFF2; connected Arabic visible in actual decoded frames. No independent licensing audit performed.",
+  "checks": [
+    {
+      "mechanism": "Opening sky/runner/banner",
+      "status": "PARTIAL",
+      "observed": "Photographed founder/sky and large burgundy banner; whole-stage downward reveal. Frame0 has bare cream band at bottom because translated world bounds expose background; source sky is more continuous."
+    },
+    {
+      "mechanism": "Frontal pressure crowding",
+      "status": "PASS",
+      "observed": "Center manager stays stable while independent hand/clipboard/phone/folder props arrive from sides. Photo foreground separation is clear."
+    },
+    {
+      "mechanism": "Overhead workplace switches",
+      "status": "PASS",
+      "observed": "Actual decoded7.6 and9.1 show genuine topdown people on wood tabletop; previous blank frames fixed. Native world translates rapidly between three separate work areas."
+    },
+    {
+      "mechanism": "Mixed person/numeral assembly",
+      "status": "PARTIAL",
+      "observed": "Final actual12.0s shows large burgundy numeral, mixed clothing strips, separately cropped giving and receiving hands, and independent blank handoff card. Receiver and giver translate separately with five-step easing; paper moves/rotates independently. Anatomical gesture is photographic sprite animation rather than articulated limb/grip motion."
+    },
+    {
+      "mechanism": "Route pullback/draw/pins",
+      "status": "PASS",
+      "observed": "Final actual15.8s shows non-geographic business-process route with contour lines and block shapes behind five pins. Native map animation preserves pullback, drawn path, and staggered pin reveals. Street geography is not required by this business-process brief."
+    },
+    {
+      "mechanism": "Audience traveling cutouts",
+      "status": "PASS",
+      "observed": "Final actual17.6s shows complete connected phrase كيف يوصلك العميل؟; #w6 overflow:visible resolves local clipping. Photo/caption boundary crops remain deliberate."
+    },
+    {
+      "mechanism": "Physical paperwork handoff",
+      "status": "PARTIAL",
+      "observed": "Paperwork stage retains layered photo folders/slips/hands with translation and camera push. A separate independently timed donor/receiver/paper exchange is now present in the earlier copy/paste beat. Physical transfer anatomy remains photographic sprite animation, not articulated hand/finger motion."
+    },
+    {
+      "mechanism": "Monitor and connections",
+      "status": "PARTIAL",
+      "observed": "Real photographed bezel/stand and phone with animated SVG wire; dashboard positioned inside monitor horizontal footprint. Actual25s lower dashboard edge extends into lower bezel slightly; perspective motion affects monitor but not dashboard mask."
+    },
+    {
+      "mechanism": "Diagonal card field",
+      "status": "PASS",
+      "observed": "Final actual29.5s shows continuous diagonal photo-card field beneath fully readable stationary header. Native field has perspective(2400px),rotateX(15deg),rotateZ(-17deg); prior flat in-plane-only issue resolved. Perspective remains subtler than source and photo art repeats."
+    },
+    {
+      "mechanism": "Ivory portfolio grid",
+      "status": "PASS",
+      "observed": "Actual36.8 shows primarily ivory two-row portrait grid; leftward drift and two brief negative flashes match broad source mechanism. Boundary cards partly crop by intent."
+    },
+    {
+      "mechanism": "Sparse close/CTA hold",
+      "status": "PASS",
+      "observed": "Actual48.3 has fully connected/readable Arabic CTA ابدأ and support text on quiet ivory. Final CTA differs semantically from source as required by new project."
+    }
+  ],
+  "required_fixes": [],
+  "remaining_craft_limitations": [
+    "Reference camera-language adaptation rather than exact scene clone",
+    "Photographic sprite transfer includes independent paper movement but not articulated hand/finger contact animation",
+    "Monitor dashboard still slightly low near bottom bezel; mask/perspective synchronization remains approximate",
+    "Repeated coffee/clipboard photo cards limit marketing-specific visual meaning",
+    "Opening first frame exposes cream at bottom during stage reveal"
+  ],
+  "verification_limits": [
+    "Duration/codecs read with FFprobe; no full subjective audio-listening review by this agent",
+    "Movement assessed from decoded samples and actual GSAP transforms rather than optical flow",
+    "Final recheck targeted specified corrected beats; previous full review findings retained where unrelated to changes"
+  ],
+  "delivery_blocker_status": "RESOLVED",
+  "final_recheck": {
+    "method": "Decoded actual final MP4 at12.0,15.8,17.6,29.5 seconds; rechecked final HTML mechanics and FFprobe export",
+    "result": "Prior P0 heading issue resolved in actual17.6s decode; full phrase visible. No remaining independently identified delivery blocker in requested recheck.",
+    "source_alignment": "Reference is camera/compositional language, with original non-geographic business-process map permitted by project brief."
+  },
+  "resolved_fixes": [
+    {
+      "previous_priority": "P0",
+      "finding": "Audience heading clipped at17.6s",
+      "resolution": "#w6 overflow visible plus final rerender",
+      "verification": "Decoded final MP417.6s: full phrase visible"
+    },
+    {
+      "finding": "Card field lacked foreshortening",
+      "resolution": "Perspective2400px rotateX15deg and static clipped wrapper under header",
+      "verification": "Final HTML transform and decoded29.5s inspected"
+    },
+    {
+      "finding": "Copy/paste hands moved as one sprite",
+      "resolution": "Separate left/right photo crops and independently translated/rotated paper layer",
+      "verification": "Decoded12.0s and final GSAP timelines inspected"
+    }
+  ]
+}

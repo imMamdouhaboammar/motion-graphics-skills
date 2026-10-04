@@ -1,0 +1,349 @@
+{
+  "version": 2,
+  "entry": "motion-director",
+
+  "_comment_agent_skills": "Agent utility skills are loaded dynamically from agent-skills-index.json. The router merges them at runtime — no manual registration needed per skill.",
+  "agent_skills_index": "skills/motion-director/router/agent-skills-index.json",
+
+  "nodes": [
+    {
+      "name": "motion-director",
+      "kind": "skill",
+      "path": "skills/motion-director/SKILL.md",
+      "role": "orchestrator",
+      "optional": false
+    },
+    {
+      "name": "brand-intake",
+      "kind": "skill",
+      "path": "skills/brand-intake/SKILL.md",
+      "role": "truth-prep",
+      "optional": false
+    },
+    {
+      "name": "motion-brief-writer",
+      "kind": "skill",
+      "path": "skills/motion-brief-writer/SKILL.md",
+      "role": "brief",
+      "optional": false
+    },
+    {
+      "name": "launch-video",
+      "kind": "skill",
+      "path": "skills/launch-video/SKILL.md",
+      "role": "specialist",
+      "optional": false
+    },
+    {
+      "name": "apple-launch-film",
+      "kind": "skill",
+      "path": "skills/apple-launch-film/SKILL.md",
+      "role": "specialist",
+      "optional": false
+    },
+    {
+      "name": "vox-explainer",
+      "kind": "skill",
+      "path": "skills/vox-explainer/SKILL.md",
+      "role": "specialist",
+      "optional": false
+    },
+    {
+      "name": "animated-chart",
+      "kind": "skill",
+      "path": "skills/animated-chart/SKILL.md",
+      "role": "specialist",
+      "optional": false
+    },
+    {
+      "name": "milestone-reveal",
+      "kind": "skill",
+      "path": "skills/milestone-reveal/SKILL.md",
+      "role": "specialist",
+      "optional": false
+    },
+    {
+      "name": "motion-effects",
+      "kind": "skill",
+      "path": "skills/motion-effects/SKILL.md",
+      "role": "specialist",
+      "optional": false
+    },
+    {
+      "name": "title-sequence-3d",
+      "kind": "skill",
+      "path": "skills/title-sequence-3d/SKILL.md",
+      "role": "specialist",
+      "optional": false
+    },
+    {
+      "name": "model-showdown",
+      "kind": "skill",
+      "path": "skills/model-showdown/SKILL.md",
+      "role": "specialist",
+      "optional": false
+    },
+    {
+      "name": "newsletter-promo",
+      "kind": "skill",
+      "path": "skills/newsletter-promo/SKILL.md",
+      "role": "specialist",
+      "optional": false
+    },
+    {
+      "name": "loop-cover",
+      "kind": "skill",
+      "path": "skills/loop-cover/SKILL.md",
+      "role": "specialist",
+      "optional": false
+    },
+    {
+      "name": "reel-export",
+      "kind": "skill",
+      "path": "skills/reel-export/SKILL.md",
+      "role": "specialist",
+      "optional": false
+    },
+    {
+      "name": "reference-fidelity",
+      "kind": "tool",
+      "path": "skills/motion-director/scripts/reference_fidelity.py",
+      "role": "reference-gate",
+      "optional": false
+    },
+    {
+      "name": "mix-and-match",
+      "kind": "skill",
+      "path": "skills/mix-and-match/SKILL.md",
+      "role": "creative-augmentation",
+      "optional": true
+    },
+    {
+      "name": "video-review-loop",
+      "kind": "skill",
+      "path": "skills/video-review-loop/SKILL.md",
+      "role": "review",
+      "optional": false
+    },
+    {
+      "name": "gpu-policy",
+      "kind": "tool",
+      "path": "skills/motion-director/scripts/gpu_policy.py",
+      "role": "execution-gate",
+      "optional": false
+    },
+    {
+      "name": "work-guard",
+      "kind": "tool",
+      "path": "skills/motion-director/scripts/work_guard.py",
+      "role": "reliability",
+      "optional": true
+    }
+  ],
+  "edges": [
+    {
+      "from": "motion-director",
+      "to": "brand-intake",
+      "relation": "prepares",
+      "when": "brand truth is missing",
+      "passes": [
+        "known brief",
+        "available brand assets"
+      ],
+      "returns": "motion-director"
+    },
+    {
+      "from": "motion-director",
+      "to": "mix-and-match",
+      "relation": "augments",
+      "when": "multiple references must become an original direction",
+      "passes": [
+        "brief",
+        "references",
+        "protected specifics"
+      ],
+      "returns": "motion-director"
+    },
+    {
+      "from": "motion-director",
+      "to": "motion-brief-writer",
+      "relation": "specializes",
+      "when": "the requested deliverable is a brief only",
+      "passes": [
+        "truth",
+        "constraints"
+      ],
+      "returns": "motion-director"
+    },
+    {
+      "from": "motion-director",
+      "to": "launch-video",
+      "relation": "specializes",
+      "when": "focused launch or offer film",
+      "passes": [
+        "truth",
+        "motion thesis",
+        "approved copy"
+      ],
+      "returns": "motion-director"
+    },
+    {
+      "from": "motion-director",
+      "to": "apple-launch-film",
+      "relation": "specializes",
+      "when": "Apple-keynote-like product film",
+      "passes": [
+        "truth",
+        "approved product facts"
+      ],
+      "returns": "motion-director"
+    },
+    {
+      "from": "motion-director",
+      "to": "vox-explainer",
+      "relation": "specializes",
+      "when": "sourced documentary explanation",
+      "passes": [
+        "sources",
+        "script",
+        "truth"
+      ],
+      "returns": "motion-director"
+    },
+    {
+      "from": "motion-director",
+      "to": "animated-chart",
+      "relation": "specializes",
+      "when": "chart-first or data story",
+      "passes": [
+        "verified data",
+        "chart intent"
+      ],
+      "returns": "motion-director"
+    },
+    {
+      "from": "motion-director",
+      "to": "milestone-reveal",
+      "relation": "specializes",
+      "when": "milestone reveal",
+      "passes": [
+        "verified milestone",
+        "brand rules"
+      ],
+      "returns": "motion-director"
+    },
+    {
+      "from": "motion-director",
+      "to": "motion-effects",
+      "relation": "specializes",
+      "when": "one named effect or transition",
+      "passes": [
+        "effect goal",
+        "existing composition constraints"
+      ],
+      "returns": "motion-director"
+    },
+    {
+      "from": "motion-director",
+      "to": "title-sequence-3d",
+      "relation": "specializes",
+      "when": "short cinematic 3D title",
+      "passes": [
+        "title copy",
+        "3D rationale",
+        "brand rules"
+      ],
+      "returns": "motion-director"
+    },
+    {
+      "from": "motion-director",
+      "to": "model-showdown",
+      "relation": "specializes",
+      "when": "model comparison",
+      "passes": [
+        "verified comparison facts",
+        "visual hierarchy"
+      ],
+      "returns": "motion-director"
+    },
+    {
+      "from": "motion-director",
+      "to": "newsletter-promo",
+      "relation": "specializes",
+      "when": "newsletter edition promotion",
+      "passes": [
+        "edition truth",
+        "CTA"
+      ],
+      "returns": "motion-director"
+    },
+    {
+      "from": "motion-director",
+      "to": "loop-cover",
+      "relation": "specializes",
+      "when": "looping cover",
+      "passes": [
+        "loop contract",
+        "visual identity"
+      ],
+      "returns": "motion-director"
+    },
+    {
+      "from": "motion-director",
+      "to": "reel-export",
+      "relation": "specializes",
+      "when": "vertical or platform adaptation",
+      "passes": [
+        "approved master",
+        "platform constraints"
+      ],
+      "returns": "motion-director"
+    },
+    {
+      "from": "motion-director",
+      "to": "gpu-policy",
+      "relation": "prepares",
+      "when": "heavy media or browser render work",
+      "passes": [
+        "runtime",
+        "media path"
+      ],
+      "returns": "motion-director"
+    },
+    {
+      "from": "motion-director",
+      "to": "work-guard",
+      "relation": "augments",
+      "when": "hang-prone command and guard is installed",
+      "passes": [
+        "exact command",
+        "safe retry policy"
+      ],
+      "returns": "motion-director"
+    },
+    {
+      "from": "motion-director",
+      "to": "video-review-loop",
+      "relation": "reviews",
+      "when": "a rendered video exists or review was requested",
+      "passes": [
+        "rendered video",
+        "delivery contract",
+        "motion thesis"
+      ],
+      "returns": "motion-director"
+    },
+    {
+      "from": "motion-director",
+      "to": "reference-fidelity",
+      "relation": "prepares",
+      "when": "reference_mode is structural-fidelity or challenge mode preserves reference difficulty",
+      "passes": [
+        "reference study",
+        "reference contract",
+        "difficulty intent"
+      ],
+      "returns": "motion-director"
+    }
+  ]
+}

@@ -1,0 +1,25 @@
+[SystemMemory] cgroup memory limit detected: 8192 MiB — it governs memory-adaptive render behaviour instead of host RAM.
+◆  Capturing 8 frames at [1.7s, 5.6s, 7.3s, 8.9s, 20.5s, 27.5s, 35s, 45.9s] from ai-business-collage
+[StaticGuard] Invalid HyperFrame contract: Full-frame overlay "#toolcontent" starts visible before its first GSAP opacity tween at 6.53s. It will cover earlier render frames, often as a blank/white video.
+[HyperFrames] Not inlining "assets/generated/A02_business_start_line_environment.png" (2.3 MB exceeds the 2 MB inline limit). The bundle may not be self-contained.
+[HyperFrames] Not inlining "assets/generated/A07_hand_blank_folder.png" (2.1 MB exceeds the 2 MB inline limit). The bundle may not be self-contained.
+[HyperFrames] Not inlining "assets/generated/A07_hand_blank_folder.png" (2.1 MB exceeds the 2 MB inline limit). The bundle may not be self-contained.
+[HyperFrames] Not inlining "assets/generated/A20_paper_request_slips_blank.png" (2.3 MB exceeds the 2 MB inline limit). The bundle may not be self-contained.
+[HyperFrames] Not inlining "assets/generated/A14_workwear_layer_blazer.png" (2.2 MB exceeds the 2 MB inline limit). The bundle may not be self-contained.
+[HyperFrames] Not inlining "assets/rebuild/R02_olive_plant.png" (2.4 MB exceeds the 2 MB inline limit). The bundle may not be self-contained.
+[HyperFrames] Not inlining "assets/generated/A22_contract_folders_blank.png" (2.1 MB exceeds the 2 MB inline limit). The bundle may not be self-contained.
+[HyperFrames] Not inlining "assets/generated/A20_paper_request_slips_blank.png" (2.3 MB exceeds the 2 MB inline limit). The bundle may not be self-contained.
+
+   Fonts: 3 loaded
+
+◇  8 snapshots saved to /workspace/scratch/84a9a71a0bd6/projects/ai-business-collage/reviews/v2-requested
+   reviews/v2-requested/frame-00-at-1.7s.png
+   reviews/v2-requested/frame-01-at-5.6s.png
+   reviews/v2-requested/frame-02-at-7.3s.png
+   reviews/v2-requested/frame-03-at-8.9s.png
+   reviews/v2-requested/frame-04-at-20.5s.png
+   reviews/v2-requested/frame-05-at-27.5s.png
+   reviews/v2-requested/frame-06-at-35s.png
+   reviews/v2-requested/frame-07-at-45.9s.png
+   contact-sheet.jpg (grid view for AI review)
+   --describe: GEMINI_API_KEY not set, skipping

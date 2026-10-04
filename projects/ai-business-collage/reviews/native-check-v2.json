@@ -1,0 +1,2834 @@
+{
+  "ok": false,
+  "strict": false,
+  "lint": {
+    "ok": true,
+    "errorCount": 0,
+    "warningCount": 19,
+    "infoCount": 0,
+    "findings": [
+      {
+        "code": "duplicate_media_discovery_risk",
+        "severity": "warning",
+        "message": "Detected 4 matching img entries with the same source/start/duration.",
+        "selector": "[data-composition-id]",
+        "dataAttributes": {},
+        "sourceFile": "/workspace/scratch/84a9a71a0bd6/projects/ai-business-collage/index.html",
+        "bbox": {
+          "x": 0,
+          "y": 0,
+          "width": 0,
+          "height": 0
+        },
+        "time": 0,
+        "fixHint": "Avoid duplicated media nodes that can be discovered twice during compilation."
+      },
+      {
+        "code": "duplicate_media_discovery_risk",
+        "severity": "warning",
+        "message": "Detected 3 matching img entries with the same source/start/duration.",
+        "selector": "[data-composition-id]",
+        "dataAttributes": {},
+        "sourceFile": "/workspace/scratch/84a9a71a0bd6/projects/ai-business-collage/index.html",
+        "bbox": {
+          "x": 0,
+          "y": 0,
+          "width": 0,
+          "height": 0
+        },
+        "time": 0,
+        "fixHint": "Avoid duplicated media nodes that can be discovered twice during compilation."
+      },
+      {
+        "code": "duplicate_media_discovery_risk",
+        "severity": "warning",
+        "message": "Detected 2 matching img entries with the same source/start/duration.",
+        "selector": "[data-composition-id]",
+        "dataAttributes": {},
+        "sourceFile": "/workspace/scratch/84a9a71a0bd6/projects/ai-business-collage/index.html",
+        "bbox": {
+          "x": 0,
+          "y": 0,
+          "width": 0,
+          "height": 0
+        },
+        "time": 0,
+        "fixHint": "Avoid duplicated media nodes that can be discovered twice during compilation."
+      },
+      {
+        "code": "duplicate_media_discovery_risk",
+        "severity": "warning",
+        "message": "Detected 9 matching img entries with the same source/start/duration.",
+        "selector": "[data-composition-id]",
+        "dataAttributes": {},
+        "sourceFile": "/workspace/scratch/84a9a71a0bd6/projects/ai-business-collage/index.html",
+        "bbox": {
+          "x": 0,
+          "y": 0,
+          "width": 0,
+          "height": 0
+        },
+        "time": 0,
+        "fixHint": "Avoid duplicated media nodes that can be discovered twice during compilation."
+      },
+      {
+        "code": "duplicate_media_discovery_risk",
+        "severity": "warning",
+        "message": "Detected 5 matching img entries with the same source/start/duration.",
+        "selector": "[data-composition-id]",
+        "dataAttributes": {},
+        "sourceFile": "/workspace/scratch/84a9a71a0bd6/projects/ai-business-collage/index.html",
+        "bbox": {
+          "x": 0,
+          "y": 0,
+          "width": 0,
+          "height": 0
+        },
+        "time": 0,
+        "fixHint": "Avoid duplicated media nodes that can be discovered twice during compilation."
+      },
+      {
+        "code": "duplicate_media_discovery_risk",
+        "severity": "warning",
+        "message": "Detected 8 matching img entries with the same source/start/duration.",
+        "selector": "[data-composition-id]",
+        "dataAttributes": {},
+        "sourceFile": "/workspace/scratch/84a9a71a0bd6/projects/ai-business-collage/index.html",
+        "bbox": {
+          "x": 0,
+          "y": 0,
+          "width": 0,
+          "height": 0
+        },
+        "time": 0,
+        "fixHint": "Avoid duplicated media nodes that can be discovered twice during compilation."
+      },
+      {
+        "code": "duplicate_media_discovery_risk",
+        "severity": "warning",
+        "message": "Detected 6 matching img entries with the same source/start/duration.",
+        "selector": "[data-composition-id]",
+        "dataAttributes": {},
+        "sourceFile": "/workspace/scratch/84a9a71a0bd6/projects/ai-business-collage/index.html",
+        "bbox": {
+          "x": 0,
+          "y": 0,
+          "width": 0,
+          "height": 0
+        },
+        "time": 0,
+        "fixHint": "Avoid duplicated media nodes that can be discovered twice during compilation."
+      },
+      {
+        "code": "nested_structure_needs_subcomposition",
+        "severity": "warning",
+        "message": "<section id=\"s1\"> is a timeline element that contains nested <div id=\"cam1\">. The timeline shows one row per top-level element, and the root composition is built only from sub-compositions.",
+        "selector": "#s1",
+        "dataAttributes": {},
+        "sourceFile": "/workspace/scratch/84a9a71a0bd6/projects/ai-business-collage/index.html",
+        "bbox": {
+          "x": 0,
+          "y": 0,
+          "width": 0,
+          "height": 0
+        },
+        "time": 0,
+        "fixHint": "Move <section id=\"s1\"> and its contents into a sub-composition file and mount it with data-composition-src."
+      },
+      {
+        "code": "nested_structure_needs_subcomposition",
+        "severity": "warning",
+        "message": "<section id=\"s2\"> is a timeline element that contains nested <div id=\"cam2\">. The timeline shows one row per top-level element, and the root composition is built only from sub-compositions.",
+        "selector": "#s2",
+        "dataAttributes": {},
+        "sourceFile": "/workspace/scratch/84a9a71a0bd6/projects/ai-business-collage/index.html",
+        "bbox": {
+          "x": 0,
+          "y": 0,
+          "width": 0,
+          "height": 0
+        },
+        "time": 0,
+        "fixHint": "Move <section id=\"s2\"> and its contents into a sub-composition file and mount it with data-composition-src."
+      },
+      {
+        "code": "nested_structure_needs_subcomposition",
+        "severity": "warning",
+        "message": "<section id=\"s3\"> is a timeline element that contains nested <div id=\"cam3\">. The timeline shows one row per top-level element, and the root composition is built only from sub-compositions.",
+        "selector": "#s3",
+        "dataAttributes": {},
+        "sourceFile": "/workspace/scratch/84a9a71a0bd6/projects/ai-business-collage/index.html",
+        "bbox": {
+          "x": 0,
+          "y": 0,
+          "width": 0,
+          "height": 0
+        },
+        "time": 0,
+        "fixHint": "Move <section id=\"s3\"> and its contents into a sub-composition file and mount it with data-composition-src."
+      },
+      {
+        "code": "nested_structure_needs_subcomposition",
+        "severity": "warning",
+        "message": "<section id=\"s4\"> is a timeline element that contains nested <div id=\"cam4\">. The timeline shows one row per top-level element, and the root composition is built only from sub-compositions.",
+        "selector": "#s4",
+        "dataAttributes": {},
+        "sourceFile": "/workspace/scratch/84a9a71a0bd6/projects/ai-business-collage/index.html",
+        "bbox": {
+          "x": 0,
+          "y": 0,
+          "width": 0,
+          "height": 0
+        },
+        "time": 0,
+        "fixHint": "Move <section id=\"s4\"> and its contents into a sub-composition file and mount it with data-composition-src."
+      },
+      {
+        "code": "nested_structure_needs_subcomposition",
+        "severity": "warning",
+        "message": "<section id=\"s5\"> is a timeline element that contains nested <div id=\"cam5\">. The timeline shows one row per top-level element, and the root composition is built only from sub-compositions.",
+        "selector": "#s5",
+        "dataAttributes": {},
+        "sourceFile": "/workspace/scratch/84a9a71a0bd6/projects/ai-business-collage/index.html",
+        "bbox": {
+          "x": 0,
+          "y": 0,
+          "width": 0,
+          "height": 0
+        },
+        "time": 0,
+        "fixHint": "Move <section id=\"s5\"> and its contents into a sub-composition file and mount it with data-composition-src."
+      },
+      {
+        "code": "nested_structure_needs_subcomposition",
+        "severity": "warning",
+        "message": "<section id=\"s6\"> is a timeline element that contains nested <div id=\"cam6\">. The timeline shows one row per top-level element, and the root composition is built only from sub-compositions.",
+        "selector": "#s6",
+        "dataAttributes": {},
+        "sourceFile": "/workspace/scratch/84a9a71a0bd6/projects/ai-business-collage/index.html",
+        "bbox": {
+          "x": 0,
+          "y": 0,
+          "width": 0,
+          "height": 0
+        },
+        "time": 0,
+        "fixHint": "Move <section id=\"s6\"> and its contents into a sub-composition file and mount it with data-composition-src."
+      },
+      {
+        "code": "nested_structure_needs_subcomposition",
+        "severity": "warning",
+        "message": "<section id=\"s7\"> is a timeline element that contains nested <div id=\"cam7\">. The timeline shows one row per top-level element, and the root composition is built only from sub-compositions.",
+        "selector": "#s7",
+        "dataAttributes": {},
+        "sourceFile": "/workspace/scratch/84a9a71a0bd6/projects/ai-business-collage/index.html",
+        "bbox": {
+          "x": 0,
+          "y": 0,
+          "width": 0,
+          "height": 0
+        },
+        "time": 0,
+        "fixHint": "Move <section id=\"s7\"> and its contents into a sub-composition file and mount it with data-composition-src."
+      },
+      {
+        "code": "nested_structure_needs_subcomposition",
+        "severity": "warning",
+        "message": "<section id=\"s8\"> is a timeline element that contains nested <div id=\"cam8\">. The timeline shows one row per top-level element, and the root composition is built only from sub-compositions.",
+        "selector": "#s8",
+        "dataAttributes": {},
+        "sourceFile": "/workspace/scratch/84a9a71a0bd6/projects/ai-business-collage/index.html",
+        "bbox": {
+          "x": 0,
+          "y": 0,
+          "width": 0,
+          "height": 0
+        },
+        "time": 0,
+        "fixHint": "Move <section id=\"s8\"> and its contents into a sub-composition file and mount it with data-composition-src."
+      },
+      {
+        "code": "nested_structure_needs_subcomposition",
+        "severity": "warning",
+        "message": "<section id=\"s9\"> is a timeline element that contains nested <div id=\"cam9\">. The timeline shows one row per top-level element, and the root composition is built only from sub-compositions.",
+        "selector": "#s9",
+        "dataAttributes": {},
+        "sourceFile": "/workspace/scratch/84a9a71a0bd6/projects/ai-business-collage/index.html",
+        "bbox": {
+          "x": 0,
+          "y": 0,
+          "width": 0,
+          "height": 0
+        },
+        "time": 0,
+        "fixHint": "Move <section id=\"s9\"> and its contents into a sub-composition file and mount it with data-composition-src."
+      },
+      {
+        "code": "nested_structure_needs_subcomposition",
+        "severity": "warning",
+        "message": "<section id=\"s10\"> is a timeline element that contains nested <div id=\"cam10\">. The timeline shows one row per top-level element, and the root composition is built only from sub-compositions.",
+        "selector": "#s10",
+        "dataAttributes": {},
+        "sourceFile": "/workspace/scratch/84a9a71a0bd6/projects/ai-business-collage/index.html",
+        "bbox": {
+          "x": 0,
+          "y": 0,
+          "width": 0,
+          "height": 0
+        },
+        "time": 0,
+        "fixHint": "Move <section id=\"s10\"> and its contents into a sub-composition file and mount it with data-composition-src."
+      },
+      {
+        "code": "nested_structure_needs_subcomposition",
+        "severity": "warning",
+        "message": "<section id=\"s11\"> is a timeline element that contains nested <div id=\"cam11\">. The timeline shows one row per top-level element, and the root composition is built only from sub-compositions.",
+        "selector": "#s11",
+        "dataAttributes": {},
+        "sourceFile": "/workspace/scratch/84a9a71a0bd6/projects/ai-business-collage/index.html",
+        "bbox": {
+          "x": 0,
+          "y": 0,
+          "width": 0,
+          "height": 0
+        },
+        "time": 0,
+        "fixHint": "Move <section id=\"s11\"> and its contents into a sub-composition file and mount it with data-composition-src."
+      },
+      {
+        "code": "nested_structure_needs_subcomposition",
+        "severity": "warning",
+        "message": "<section id=\"s12\"> is a timeline element that contains nested <div id=\"cam12\">. The timeline shows one row per top-level element, and the root composition is built only from sub-compositions.",
+        "selector": "#s12",
+        "dataAttributes": {},
+        "sourceFile": "/workspace/scratch/84a9a71a0bd6/projects/ai-business-collage/index.html",
+        "bbox": {
+          "x": 0,
+          "y": 0,
+          "width": 0,
+          "height": 0
+        },
+        "time": 0,
+        "fixHint": "Move <section id=\"s12\"> and its contents into a sub-composition file and mount it with data-composition-src."
+      }
+    ],
+    "filesScanned": 1
+  },
+  "runtime": {
+    "ok": true,
+    "errorCount": 0,
+    "warningCount": 0,
+    "infoCount": 0,
+    "findings": []
+  },
+  "layout": {
+    "ok": false,
+    "errorCount": 47,
+    "warningCount": 33,
+    "infoCount": 0,
+    "findings": [
+      {
+        "code": "content_overlap",
+        "severity": "error",
+        "time": 11.748,
+        "selector": "#body3",
+        "message": "Two text blocks overlap and may render unreadable.",
+        "rect": {
+          "left": 741.5,
+          "top": 594.89,
+          "right": 1080,
+          "bottom": 1445.15,
+          "width": 338.5,
+          "height": 850.26
+        },
+        "containerSelector": "#bodyaction",
+        "text": "٣",
+        "fixHint": "Give each block its own zone, or mark intentional layering with data-layout-allow-overlap.",
+        "dataAttributes": {},
+        "sourceFile": "index.html",
+        "bbox": {
+          "x": 741.5,
+          "y": 594.89,
+          "width": 338.5,
+          "height": 850.26
+        },
+        "firstSeen": 11.748,
+        "lastSeen": 13.498,
+        "occurrences": 16,
+        "heldMs": 1750
+      },
+      {
+        "code": "content_overlap",
+        "severity": "error",
+        "time": 27.12,
+        "selector": "#c9print8 > div:nth-of-type(2) > div:nth-of-type(1) > b:nth-of-type(1)",
+        "message": "Two text blocks overlap and may render unreadable.",
+        "rect": {
+          "left": 0,
+          "top": 40.47,
+          "right": 63.09,
+          "bottom": 126.03,
+          "width": 63.09,
+          "height": 85.56
+        },
+        "containerSelector": "#c9print8 > div:nth-of-type(2) > div:nth-of-type(1) > div:nth-of-type(1)",
+        "text": "الطلبات",
+        "fixHint": "Give each block its own zone, or mark intentional layering with data-layout-allow-overlap.",
+        "dataAttributes": {},
+        "sourceFile": "index.html",
+        "bbox": {
+          "x": 0,
+          "y": 40.47,
+          "width": 63.09,
+          "height": 85.56
+        },
+        "firstSeen": 27.12,
+        "lastSeen": 29.995,
+        "occurrences": 25,
+        "heldMs": 2875
+      },
+      {
+        "code": "content_overlap",
+        "severity": "error",
+        "time": 27.12,
+        "selector": "#c9print8 > div:nth-of-type(2) > div:nth-of-type(1) > div:nth-of-type(1)",
+        "message": "Two text blocks overlap and may render unreadable.",
+        "rect": {
+          "left": 0,
+          "top": 108.62,
+          "right": 85.37,
+          "bottom": 171.93,
+          "width": 85.37,
+          "height": 63.31
+        },
+        "containerSelector": "#c9print8 > div:nth-of-type(2) > div:nth-of-type(1) > div:nth-of-type(2)",
+        "text": "✓ استفسار",
+        "fixHint": "Give each block its own zone, or mark intentional layering with data-layout-allow-overlap.",
+        "dataAttributes": {},
+        "sourceFile": "index.html",
+        "bbox": {
+          "x": 0,
+          "y": 108.62,
+          "width": 85.37,
+          "height": 63.31
+        },
+        "firstSeen": 27.12,
+        "lastSeen": 30.12,
+        "occurrences": 26,
+        "heldMs": 3000
+      },
+      {
+        "code": "content_overlap",
+        "severity": "error",
+        "time": 27.12,
+        "selector": "#c9print8 > div:nth-of-type(2) > div:nth-of-type(1) > div:nth-of-type(3)",
+        "message": "Two text blocks overlap and may render unreadable.",
+        "rect": {
+          "left": 0,
+          "top": 203.02,
+          "right": 126.68,
+          "bottom": 276.33,
+          "width": 126.68,
+          "height": 73.31
+        },
+        "containerSelector": "#c9print8 > div:nth-of-type(3)",
+        "text": "✓ مع فريقك",
+        "fixHint": "Give each block its own zone, or mark intentional layering with data-layout-allow-overlap.",
+        "dataAttributes": {},
+        "sourceFile": "index.html",
+        "bbox": {
+          "x": 0,
+          "y": 203.02,
+          "width": 126.68,
+          "height": 73.31
+        },
+        "firstSeen": 27.12,
+        "lastSeen": 30.495,
+        "occurrences": 29,
+        "heldMs": 3375
+      },
+      {
+        "code": "content_overlap",
+        "severity": "error",
+        "time": 27.12,
+        "selector": "#c9print9 > div:nth-of-type(3)",
+        "message": "Two text blocks overlap and may render unreadable.",
+        "rect": {
+          "left": 260.76,
+          "top": 0,
+          "right": 514.75,
+          "bottom": 45,
+          "width": 253.99,
+          "height": 45
+        },
+        "containerSelector": "#c9print9 > div:nth-of-type(4)",
+        "text": "استفسار العميل كيف تبدأ؟",
+        "fixHint": "Give each block its own zone, or mark intentional layering with data-layout-allow-overlap.",
+        "dataAttributes": {},
+        "sourceFile": "index.html",
+        "bbox": {
+          "x": 260.76,
+          "y": 0,
+          "width": 253.99,
+          "height": 45
+        },
+        "firstSeen": 27.12,
+        "lastSeen": 29.745,
+        "occurrences": 23,
+        "heldMs": 2625
+      },
+      {
+        "code": "content_overlap",
+        "severity": "error",
+        "time": 27.12,
+        "selector": "#c9print9 > div:nth-of-type(3) > span:nth-of-type(1)",
+        "message": "Two text blocks overlap and may render unreadable.",
+        "rect": {
+          "left": 354.59,
+          "top": 0,
+          "right": 469.05,
+          "bottom": 51.38,
+          "width": 114.46,
+          "height": 51.38
+        },
+        "containerSelector": "#c9print9 > div:nth-of-type(4)",
+        "text": "كيف تبدأ؟",
+        "fixHint": "Give each block its own zone, or mark intentional layering with data-layout-allow-overlap.",
+        "dataAttributes": {},
+        "sourceFile": "index.html",
+        "bbox": {
+          "x": 354.59,
+          "y": 0,
+          "width": 114.46,
+          "height": 51.38
+        },
+        "firstSeen": 27.12,
+        "lastSeen": 29.87,
+        "occurrences": 24,
+        "heldMs": 2750
+      },
+      {
+        "code": "content_overlap",
+        "severity": "error",
+        "time": 27.12,
+        "selector": "#c9print14 > div:nth-of-type(3)",
+        "message": "Two text blocks overlap and may render unreadable.",
+        "rect": {
+          "left": 2.8,
+          "top": 829.01,
+          "right": 253.69,
+          "bottom": 932.55,
+          "width": 250.89,
+          "height": 103.54
+        },
+        "containerSelector": "#c9print20 > div:nth-of-type(1)",
+        "text": "يتابع الطلبات مع فريقك",
+        "fixHint": "Give each block its own zone, or mark intentional layering with data-layout-allow-overlap.",
+        "dataAttributes": {},
+        "sourceFile": "index.html",
+        "bbox": {
+          "x": 2.8,
+          "y": 829.01,
+          "width": 250.89,
+          "height": 103.54
+        },
+        "firstSeen": 27.12,
+        "lastSeen": 30.995,
+        "occurrences": 33,
+        "heldMs": 3875
+      },
+      {
+        "code": "content_overlap",
+        "severity": "error",
+        "time": 27.12,
+        "selector": "#c9print15 > div:nth-of-type(2)",
+        "message": "Two text blocks overlap and may render unreadable.",
+        "rect": {
+          "left": 380.03,
+          "top": 217.98,
+          "right": 599.35,
+          "bottom": 422.17,
+          "width": 219.32,
+          "height": 204.19
+        },
+        "containerSelector": "#c9print15 > div:nth-of-type(3)",
+        "text": "يرد",
+        "fixHint": "Give each block its own zone, or mark intentional layering with data-layout-allow-overlap.",
+        "dataAttributes": {},
+        "sourceFile": "index.html",
+        "bbox": {
+          "x": 380.03,
+          "y": 217.98,
+          "width": 219.32,
+          "height": 204.19
+        },
+        "firstSeen": 27.12,
+        "lastSeen": 31.994,
+        "occurrences": 41,
+        "heldMs": 4873.999999999999
+      },
+      {
+        "code": "content_overlap",
+        "severity": "error",
+        "time": 27.12,
+        "selector": "#c9print15 > div:nth-of-type(3)",
+        "message": "Two text blocks overlap and may render unreadable.",
+        "rect": {
+          "left": 402.04,
+          "top": 369.24,
+          "right": 661.8,
+          "bottom": 534.05,
+          "width": 259.76,
+          "height": 164.81
+        },
+        "containerSelector": "#c9print15 > div:nth-of-type(4)",
+        "text": "استفسار العميل كيف تبدأ؟",
+        "fixHint": "Give each block its own zone, or mark intentional layering with data-layout-allow-overlap.",
+        "dataAttributes": {},
+        "sourceFile": "index.html",
+        "bbox": {
+          "x": 402.04,
+          "y": 369.24,
+          "width": 259.76,
+          "height": 164.81
+        },
+        "firstSeen": 27.12,
+        "lastSeen": 32.119,
+        "occurrences": 42,
+        "heldMs": 4998.999999999999
+      },
+      {
+        "code": "content_overlap",
+        "severity": "error",
+        "time": 27.12,
+        "selector": "#c9print15 > div:nth-of-type(3) > span:nth-of-type(1)",
+        "message": "Two text blocks overlap and may render unreadable.",
+        "rect": {
+          "left": 503.46,
+          "top": 454.75,
+          "right": 621.8,
+          "bottom": 536.83,
+          "width": 118.34,
+          "height": 82.08
+        },
+        "containerSelector": "#c9print15 > div:nth-of-type(4)",
+        "text": "كيف تبدأ؟",
+        "fixHint": "Give each block its own zone, or mark intentional layering with data-layout-allow-overlap.",
+        "dataAttributes": {},
+        "sourceFile": "index.html",
+        "bbox": {
+          "x": 503.46,
+          "y": 454.75,
+          "width": 118.34,
+          "height": 82.08
+        },
+        "firstSeen": 27.12,
+        "lastSeen": 32.119,
+        "occurrences": 42,
+        "heldMs": 4998.999999999999
+      },
+      {
+        "code": "content_overlap",
+        "severity": "error",
+        "time": 27.12,
+        "selector": "#c9print15 > div:nth-of-type(4) > span:nth-of-type(1)",
+        "message": "Two text blocks overlap and may render unreadable.",
+        "rect": {
+          "left": 569.2,
+          "top": 536.84,
+          "right": 692.38,
+          "bottom": 598.04,
+          "width": 123.18,
+          "height": 61.2
+        },
+        "containerSelector": "#c9print15 > div:nth-of-type(5)",
+        "text": "مع فريقك",
+        "fixHint": "Give each block its own zone, or mark intentional layering with data-layout-allow-overlap.",
+        "dataAttributes": {},
+        "sourceFile": "index.html",
+        "bbox": {
+          "x": 569.2,
+          "y": 536.84,
+          "width": 123.18,
+          "height": 61.2
+        },
+        "firstSeen": 27.12,
+        "lastSeen": 32.119,
+        "occurrences": 42,
+        "heldMs": 4998.999999999999
+      },
+      {
+        "code": "content_overlap",
+        "severity": "error",
+        "time": 27.12,
+        "selector": "#c9print2 > div:nth-of-type(2) > div:nth-of-type(1) > div:nth-of-type(3)",
+        "message": "Two text blocks overlap and may render unreadable.",
+        "rect": {
+          "left": 70.79,
+          "top": 140.07,
+          "right": 200.96,
+          "bottom": 206.71,
+          "width": 130.17,
+          "height": 66.64
+        },
+        "containerSelector": "#c9print2 > div:nth-of-type(3)",
+        "text": "✓ مع فريقك",
+        "fixHint": "Give each block its own zone, or mark intentional layering with data-layout-allow-overlap.",
+        "dataAttributes": {},
+        "sourceFile": "index.html",
+        "bbox": {
+          "x": 70.79,
+          "y": 140.07,
+          "width": 130.17,
+          "height": 66.64
+        },
+        "firstSeen": 27.12,
+        "lastSeen": 28.495,
+        "occurrences": 12,
+        "heldMs": 1375
+      },
+      {
+        "code": "content_overlap",
+        "severity": "error",
+        "time": 27.12,
+        "selector": "#c9print2 > div:nth-of-type(3)",
+        "message": "Two text blocks overlap and may render unreadable.",
+        "rect": {
+          "left": 1.31,
+          "top": 191.8,
+          "right": 219.33,
+          "bottom": 286.8,
+          "width": 218.02,
+          "height": 95
+        },
+        "containerSelector": "#c9print8 > div:nth-of-type(1)",
+        "text": "يتابع الطلبات مع فريقك",
+        "fixHint": "Give each block its own zone, or mark intentional layering with data-layout-allow-overlap.",
+        "dataAttributes": {},
+        "sourceFile": "index.html",
+        "bbox": {
+          "x": 1.31,
+          "y": 191.8,
+          "width": 218.02,
+          "height": 95
+        },
+        "firstSeen": 27.12,
+        "lastSeen": 28.995,
+        "occurrences": 16,
+        "heldMs": 1875
+      },
+      {
+        "code": "content_overlap",
+        "severity": "error",
+        "time": 27.12,
+        "selector": "#c9print8 > div:nth-of-type(2) > div:nth-of-type(1) > div:nth-of-type(2)",
+        "message": "Two text blocks overlap and may render unreadable.",
+        "rect": {
+          "left": 320.38,
+          "top": 545.78,
+          "right": 427.44,
+          "bottom": 616.01,
+          "width": 107.06,
+          "height": 70.23
+        },
+        "containerSelector": "#c9print8 > div:nth-of-type(2) > div:nth-of-type(1) > div:nth-of-type(3)",
+        "text": "✓ متابعة",
+        "fixHint": "Give each block its own zone, or mark intentional layering with data-layout-allow-overlap.",
+        "dataAttributes": {},
+        "sourceFile": "index.html",
+        "bbox": {
+          "x": 320.38,
+          "y": 545.78,
+          "width": 107.06,
+          "height": 70.23
+        },
+        "firstSeen": 27.12,
+        "lastSeen": 29.12,
+        "occurrences": 17,
+        "heldMs": 2000
+      },
+      {
+        "code": "content_overlap",
+        "severity": "error",
+        "time": 27.12,
+        "selector": "#c9print9 > div:nth-of-type(2)",
+        "message": "Two text blocks overlap and may render unreadable.",
+        "rect": {
+          "left": 552.39,
+          "top": 96.1,
+          "right": 771.77,
+          "bottom": 299.78,
+          "width": 219.38,
+          "height": 203.68
+        },
+        "containerSelector": "#c9print9 > div:nth-of-type(3)",
+        "text": "يرد",
+        "fixHint": "Give each block its own zone, or mark intentional layering with data-layout-allow-overlap.",
+        "dataAttributes": {},
+        "sourceFile": "index.html",
+        "bbox": {
+          "x": 552.39,
+          "y": 96.1,
+          "width": 219.38,
+          "height": 203.68
+        },
+        "firstSeen": 27.12,
+        "lastSeen": 29.12,
+        "occurrences": 17,
+        "heldMs": 2000
+      },
+      {
+        "code": "content_overlap",
+        "severity": "error",
+        "time": 27.245,
+        "selector": "#c9print20 > div:nth-of-type(2) > div:nth-of-type(1) > div:nth-of-type(3)",
+        "message": "Two text blocks overlap and may render unreadable.",
+        "rect": {
+          "left": 342.84,
+          "top": 1357.94,
+          "right": 512.36,
+          "bottom": 1462,
+          "width": 169.52,
+          "height": 104.06
+        },
+        "containerSelector": "#c9print20 > div:nth-of-type(3)",
+        "text": "✓ مع فريقك",
+        "fixHint": "Give each block its own zone, or mark intentional layering with data-layout-allow-overlap.",
+        "dataAttributes": {},
+        "sourceFile": "index.html",
+        "bbox": {
+          "x": 342.84,
+          "y": 1357.94,
+          "width": 169.52,
+          "height": 104.06
+        },
+        "firstSeen": 27.245,
+        "lastSeen": 32.119,
+        "occurrences": 41,
+        "heldMs": 4873.999999999999
+      },
+      {
+        "code": "content_overlap",
+        "severity": "error",
+        "time": 27.245,
+        "selector": "#c9print21 > div:nth-of-type(2)",
+        "message": "Two text blocks overlap and may render unreadable.",
+        "rect": {
+          "left": 1031.63,
+          "top": 1144.7,
+          "right": 1080,
+          "bottom": 1423.43,
+          "width": 48.37,
+          "height": 278.73
+        },
+        "containerSelector": "#c9print21 > div:nth-of-type(3)",
+        "text": "يرد",
+        "fixHint": "Give each block its own zone, or mark intentional layering with data-layout-allow-overlap.",
+        "dataAttributes": {},
+        "sourceFile": "index.html",
+        "bbox": {
+          "x": 1031.63,
+          "y": 1144.7,
+          "width": 48.37,
+          "height": 278.73
+        },
+        "firstSeen": 27.245,
+        "lastSeen": 28.745,
+        "occurrences": 13,
+        "heldMs": 1500
+      },
+      {
+        "code": "content_overlap",
+        "severity": "error",
+        "time": 27.87,
+        "selector": "#c9print21 > div:nth-of-type(3)",
+        "message": "Two text blocks overlap and may render unreadable.",
+        "rect": {
+          "left": 661.34,
+          "top": 924.65,
+          "right": 967.42,
+          "bottom": 1114.12,
+          "width": 306.08,
+          "height": 189.47
+        },
+        "containerSelector": "#c9print21 > div:nth-of-type(4)",
+        "text": "استفسار العميل كيف تبدأ؟",
+        "fixHint": "Give each block its own zone, or mark intentional layering with data-layout-allow-overlap.",
+        "dataAttributes": {},
+        "sourceFile": "index.html",
+        "bbox": {
+          "x": 661.34,
+          "y": 924.65,
+          "width": 306.08,
+          "height": 189.47
+        },
+        "firstSeen": 27.87,
+        "lastSeen": 32.119,
+        "occurrences": 36,
+        "heldMs": 4248.999999999999
+      },
+      {
+        "code": "content_overlap",
+        "severity": "error",
+        "time": 27.87,
+        "selector": "#c9print21 > div:nth-of-type(3) > span:nth-of-type(1)",
+        "message": "Two text blocks overlap and may render unreadable.",
+        "rect": {
+          "left": 777.53,
+          "top": 1029.66,
+          "right": 916.6,
+          "bottom": 1126.58,
+          "width": 139.07,
+          "height": 96.92
+        },
+        "containerSelector": "#c9print21 > div:nth-of-type(4)",
+        "text": "كيف تبدأ؟",
+        "fixHint": "Give each block its own zone, or mark intentional layering with data-layout-allow-overlap.",
+        "dataAttributes": {},
+        "sourceFile": "index.html",
+        "bbox": {
+          "x": 777.53,
+          "y": 1029.66,
+          "width": 139.07,
+          "height": 96.92
+        },
+        "firstSeen": 27.87,
+        "lastSeen": 32.119,
+        "occurrences": 36,
+        "heldMs": 4248.999999999999
+      },
+      {
+        "code": "content_overlap",
+        "severity": "error",
+        "time": 27.87,
+        "selector": "#c9print21 > div:nth-of-type(3) > span:nth-of-type(1)",
+        "message": "Two text blocks overlap and may render unreadable.",
+        "rect": {
+          "left": 1078.45,
+          "top": 1359.75,
+          "right": 1080,
+          "bottom": 1465.62,
+          "width": 1.55,
+          "height": 105.87
+        },
+        "containerSelector": "#c9lens > div:nth-of-type(1)",
+        "text": "كيف تبدأ؟",
+        "fixHint": "Give each block its own zone, or mark intentional layering with data-layout-allow-overlap.",
+        "dataAttributes": {},
+        "sourceFile": "index.html",
+        "bbox": {
+          "x": 1078.45,
+          "y": 1359.75,
+          "width": 1.55,
+          "height": 105.87
+        },
+        "firstSeen": 27.87,
+        "lastSeen": 28.995,
+        "occurrences": 10,
+        "heldMs": 1125
+      },
+      {
+        "code": "content_overlap",
+        "severity": "error",
+        "time": 27.87,
+        "selector": "#c9print21 > div:nth-of-type(4)",
+        "message": "Two text blocks overlap and may render unreadable.",
+        "rect": {
+          "left": 1074.45,
+          "top": 1385.9,
+          "right": 1080,
+          "bottom": 1507.67,
+          "width": 5.55,
+          "height": 121.77
+        },
+        "containerSelector": "#c9lens > div:nth-of-type(1)",
+        "text": "مساعد يعمل مع فريقك",
+        "fixHint": "Give each block its own zone, or mark intentional layering with data-layout-allow-overlap.",
+        "dataAttributes": {},
+        "sourceFile": "index.html",
+        "bbox": {
+          "x": 1074.45,
+          "y": 1385.9,
+          "width": 5.55,
+          "height": 121.77
+        },
+        "firstSeen": 27.87,
+        "lastSeen": 28.87,
+        "occurrences": 9,
+        "heldMs": 1000
+      },
+      {
+        "code": "content_overlap",
+        "severity": "error",
+        "time": 27.87,
+        "selector": "#c9print21 > div:nth-of-type(5)",
+        "message": "Two text blocks overlap and may render unreadable.",
+        "rect": {
+          "left": 1074.72,
+          "top": 1549.42,
+          "right": 1080,
+          "bottom": 1712.77,
+          "width": 5.28,
+          "height": 163.35
+        },
+        "containerSelector": "#c9lens > div:nth-of-type(1)",
+        "text": "يرد على الاستفسارات",
+        "fixHint": "Give each block its own zone, or mark intentional layering with data-layout-allow-overlap.",
+        "dataAttributes": {},
+        "sourceFile": "index.html",
+        "bbox": {
+          "x": 1074.72,
+          "y": 1549.42,
+          "width": 5.28,
+          "height": 163.35
+        },
+        "firstSeen": 27.87,
+        "lastSeen": 28.495,
+        "occurrences": 6,
+        "heldMs": 625
+      },
+      {
+        "code": "content_overlap",
+        "severity": "error",
+        "time": 27.995,
+        "selector": "#c9print21 > div:nth-of-type(3)",
+        "message": "Two text blocks overlap and may render unreadable.",
+        "rect": {
+          "left": 940.52,
+          "top": 1226.99,
+          "right": 1080,
+          "bottom": 1434.32,
+          "width": 139.48,
+          "height": 207.33
+        },
+        "containerSelector": "#c9lens > div:nth-of-type(1)",
+        "text": "استفسار العميل كيف تبدأ؟",
+        "fixHint": "Give each block its own zone, or mark intentional layering with data-layout-allow-overlap.",
+        "dataAttributes": {},
+        "sourceFile": "index.html",
+        "bbox": {
+          "x": 940.52,
+          "y": 1226.99,
+          "width": 139.48,
+          "height": 207.33
+        },
+        "firstSeen": 27.995,
+        "lastSeen": 29.12,
+        "occurrences": 10,
+        "heldMs": 1125
+      },
+      {
+        "code": "content_overlap",
+        "severity": "error",
+        "time": 28.37,
+        "selector": "#c9print21 > div:nth-of-type(2)",
+        "message": "Two text blocks overlap and may render unreadable.",
+        "rect": {
+          "left": 843.36,
+          "top": 936.79,
+          "right": 1080,
+          "bottom": 1201.47,
+          "width": 236.64,
+          "height": 264.68
+        },
+        "containerSelector": "#c9lens > div:nth-of-type(1)",
+        "text": "يرد",
+        "fixHint": "Give each block its own zone, or mark intentional layering with data-layout-allow-overlap.",
+        "dataAttributes": {},
+        "sourceFile": "index.html",
+        "bbox": {
+          "x": 843.36,
+          "y": 936.79,
+          "width": 236.64,
+          "height": 264.68
+        },
+        "firstSeen": 28.37,
+        "lastSeen": 29.495,
+        "occurrences": 10,
+        "heldMs": 1125
+      },
+      {
+        "code": "content_overlap",
+        "severity": "error",
+        "time": 28.495,
+        "selector": "#c9print27 > div:nth-of-type(2)",
+        "message": "Two text blocks overlap and may render unreadable.",
+        "rect": {
+          "left": 1053.31,
+          "top": 1603.64,
+          "right": 1080,
+          "bottom": 1920,
+          "width": 26.69,
+          "height": 316.36
+        },
+        "containerSelector": "#c9lens > div:nth-of-type(3)",
+        "text": "يرد",
+        "fixHint": "Give each block its own zone, or mark intentional layering with data-layout-allow-overlap.",
+        "dataAttributes": {},
+        "sourceFile": "index.html",
+        "bbox": {
+          "x": 1053.31,
+          "y": 1603.64,
+          "width": 26.69,
+          "height": 316.36
+        },
+        "firstSeen": 28.495,
+        "lastSeen": 29.37,
+        "occurrences": 8,
+        "heldMs": 875
+      },
+      {
+        "code": "content_overlap",
+        "severity": "error",
+        "time": 28.62,
+        "selector": "#c9lens > div:nth-of-type(2) > div:nth-of-type(1) > b:nth-of-type(1)",
+        "message": "Two text blocks overlap and may render unreadable.",
+        "rect": {
+          "left": 563.43,
+          "top": 847.68,
+          "right": 812.5,
+          "bottom": 1020.8,
+          "width": 249.07,
+          "height": 173.12
+        },
+        "containerSelector": "#c9lens > div:nth-of-type(2) > div:nth-of-type(1) > div:nth-of-type(1)",
+        "text": "الطلبات",
+        "fixHint": "Give each block its own zone, or mark intentional layering with data-layout-allow-overlap.",
+        "dataAttributes": {},
+        "sourceFile": "index.html",
+        "bbox": {
+          "x": 563.43,
+          "y": 847.68,
+          "width": 249.07,
+          "height": 173.12
+        },
+        "firstSeen": 28.62,
+        "lastSeen": 31.245,
+        "occurrences": 23,
+        "heldMs": 2625
+      },
+      {
+        "code": "content_overlap",
+        "severity": "error",
+        "time": 28.62,
+        "selector": "#c9print21 > div:nth-of-type(4) > span:nth-of-type(1)",
+        "message": "Two text blocks overlap and may render unreadable.",
+        "rect": {
+          "left": 1025,
+          "top": 1333.76,
+          "right": 1080,
+          "bottom": 1405.85,
+          "width": 55,
+          "height": 72.09
+        },
+        "containerSelector": "#c9lens > div:nth-of-type(2) > div:nth-of-type(1) > b:nth-of-type(1)",
+        "text": "مع فريقك",
+        "fixHint": "Give each block its own zone, or mark intentional layering with data-layout-allow-overlap.",
+        "dataAttributes": {},
+        "sourceFile": "index.html",
+        "bbox": {
+          "x": 1025,
+          "y": 1333.76,
+          "width": 55,
+          "height": 72.09
+        },
+        "firstSeen": 28.62,
+        "lastSeen": 29.12,
+        "occurrences": 5,
+        "heldMs": 500
+      },
+      {
+        "code": "content_overlap",
+        "severity": "error",
+        "time": 28.62,
+        "selector": "#c9print21 > div:nth-of-type(5)",
+        "message": "Two text blocks overlap and may render unreadable.",
+        "rect": {
+          "left": 937.2,
+          "top": 1401.53,
+          "right": 1080,
+          "bottom": 1557.88,
+          "width": 142.8,
+          "height": 156.35
+        },
+        "containerSelector": "#c9lens > div:nth-of-type(2) > div:nth-of-type(1) > div:nth-of-type(1)",
+        "text": "يرد على الاستفسارات",
+        "fixHint": "Give each block its own zone, or mark intentional layering with data-layout-allow-overlap.",
+        "dataAttributes": {},
+        "sourceFile": "index.html",
+        "bbox": {
+          "x": 937.2,
+          "y": 1401.53,
+          "width": 142.8,
+          "height": 156.35
+        },
+        "firstSeen": 28.62,
+        "lastSeen": 29.12,
+        "occurrences": 5,
+        "heldMs": 500
+      },
+      {
+        "code": "content_overlap",
+        "severity": "error",
+        "time": 28.745,
+        "selector": "#c9print27 > div:nth-of-type(2)",
+        "message": "Two text blocks overlap and may render unreadable.",
+        "rect": {
+          "left": 844.67,
+          "top": 1377.83,
+          "right": 1080,
+          "bottom": 1682.68,
+          "width": 235.33,
+          "height": 304.85
+        },
+        "containerSelector": "#c9print27 > div:nth-of-type(3)",
+        "text": "يرد",
+        "fixHint": "Give each block its own zone, or mark intentional layering with data-layout-allow-overlap.",
+        "dataAttributes": {},
+        "sourceFile": "index.html",
+        "bbox": {
+          "x": 844.67,
+          "y": 1377.83,
+          "width": 235.33,
+          "height": 304.85
+        },
+        "firstSeen": 28.745,
+        "lastSeen": 32.119,
+        "occurrences": 29,
+        "heldMs": 3373.9999999999986
+      },
+      {
+        "code": "content_overlap",
+        "severity": "error",
+        "time": 28.745,
+        "selector": "#c9lens > div:nth-of-type(2) > div:nth-of-type(1) > div:nth-of-type(1)",
+        "message": "Two text blocks overlap and may render unreadable.",
+        "rect": {
+          "left": 640.8,
+          "top": 974.72,
+          "right": 845.1,
+          "bottom": 1099.03,
+          "width": 204.3,
+          "height": 124.31
+        },
+        "containerSelector": "#c9lens > div:nth-of-type(2) > div:nth-of-type(1) > div:nth-of-type(2)",
+        "text": "✓ استفسار",
+        "fixHint": "Give each block its own zone, or mark intentional layering with data-layout-allow-overlap.",
+        "dataAttributes": {},
+        "sourceFile": "index.html",
+        "bbox": {
+          "x": 640.8,
+          "y": 974.72,
+          "width": 204.3,
+          "height": 124.31
+        },
+        "firstSeen": 28.745,
+        "lastSeen": 31.37,
+        "occurrences": 23,
+        "heldMs": 2625
+      },
+      {
+        "code": "content_overlap",
+        "severity": "error",
+        "time": 28.745,
+        "selector": "#c9lens > div:nth-of-type(2) > div:nth-of-type(1) > div:nth-of-type(2)",
+        "message": "Two text blocks overlap and may render unreadable.",
+        "rect": {
+          "left": 695.76,
+          "top": 1057.89,
+          "right": 875.37,
+          "bottom": 1173.22,
+          "width": 179.61,
+          "height": 115.33
+        },
+        "containerSelector": "#c9lens > div:nth-of-type(2) > div:nth-of-type(1) > div:nth-of-type(3)",
+        "text": "✓ متابعة",
+        "fixHint": "Give each block its own zone, or mark intentional layering with data-layout-allow-overlap.",
+        "dataAttributes": {},
+        "sourceFile": "index.html",
+        "bbox": {
+          "x": 695.76,
+          "y": 1057.89,
+          "width": 179.61,
+          "height": 115.33
+        },
+        "firstSeen": 28.745,
+        "lastSeen": 31.37,
+        "occurrences": 23,
+        "heldMs": 2625
+      },
+      {
+        "code": "content_overlap",
+        "severity": "error",
+        "time": 28.745,
+        "selector": "#c9print21 > div:nth-of-type(4)",
+        "message": "Two text blocks overlap and may render unreadable.",
+        "rect": {
+          "left": 918.25,
+          "top": 1215.65,
+          "right": 1080,
+          "bottom": 1330.82,
+          "width": 161.75,
+          "height": 115.17
+        },
+        "containerSelector": "#c9lens > div:nth-of-type(2) > div:nth-of-type(1) > b:nth-of-type(1)",
+        "text": "مساعد يعمل مع فريقك",
+        "fixHint": "Give each block its own zone, or mark intentional layering with data-layout-allow-overlap.",
+        "dataAttributes": {},
+        "sourceFile": "index.html",
+        "bbox": {
+          "x": 918.25,
+          "y": 1215.65,
+          "width": 161.75,
+          "height": 115.17
+        },
+        "firstSeen": 28.745,
+        "lastSeen": 29.245,
+        "occurrences": 5,
+        "heldMs": 500
+      },
+      {
+        "code": "content_overlap",
+        "severity": "error",
+        "time": 28.745,
+        "selector": "#c9print21 > div:nth-of-type(5)",
+        "message": "Two text blocks overlap and may render unreadable.",
+        "rect": {
+          "left": 912.04,
+          "top": 1374.43,
+          "right": 1080,
+          "bottom": 1529.49,
+          "width": 167.96,
+          "height": 155.06
+        },
+        "containerSelector": "#c9lens > div:nth-of-type(2) > div:nth-of-type(1) > div:nth-of-type(2)",
+        "text": "يرد على الاستفسارات",
+        "fixHint": "Give each block its own zone, or mark intentional layering with data-layout-allow-overlap.",
+        "dataAttributes": {},
+        "sourceFile": "index.html",
+        "bbox": {
+          "x": 912.04,
+          "y": 1374.43,
+          "width": 167.96,
+          "height": 155.06
+        },
+        "firstSeen": 28.745,
+        "lastSeen": 29.245,
+        "occurrences": 5,
+        "heldMs": 500
+      },
+      {
+        "code": "content_overlap",
+        "severity": "error",
+        "time": 28.87,
+        "selector": "#c9print21 > div:nth-of-type(3)",
+        "message": "Two text blocks overlap and may render unreadable.",
+        "rect": {
+          "left": 661.34,
+          "top": 924.65,
+          "right": 967.42,
+          "bottom": 1114.12,
+          "width": 306.08,
+          "height": 189.47
+        },
+        "containerSelector": "#c9lens > div:nth-of-type(2) > div:nth-of-type(1) > b:nth-of-type(1)",
+        "text": "استفسار العميل كيف تبدأ؟",
+        "fixHint": "Give each block its own zone, or mark intentional layering with data-layout-allow-overlap.",
+        "dataAttributes": {},
+        "sourceFile": "index.html",
+        "bbox": {
+          "x": 661.34,
+          "y": 924.65,
+          "width": 306.08,
+          "height": 189.47
+        },
+        "firstSeen": 28.87,
+        "lastSeen": 29.62,
+        "occurrences": 8,
+        "heldMs": 750
+      },
+      {
+        "code": "content_overlap",
+        "severity": "error",
+        "time": 28.87,
+        "selector": "#c9print21 > div:nth-of-type(3) > span:nth-of-type(1)",
+        "message": "Two text blocks overlap and may render unreadable.",
+        "rect": {
+          "left": 898.53,
+          "top": 1162.53,
+          "right": 1038.14,
+          "bottom": 1263.11,
+          "width": 139.61,
+          "height": 100.58
+        },
+        "containerSelector": "#c9lens > div:nth-of-type(2) > div:nth-of-type(1) > b:nth-of-type(1)",
+        "text": "كيف تبدأ؟",
+        "fixHint": "Give each block its own zone, or mark intentional layering with data-layout-allow-overlap.",
+        "dataAttributes": {},
+        "sourceFile": "index.html",
+        "bbox": {
+          "x": 898.53,
+          "y": 1162.53,
+          "width": 139.61,
+          "height": 100.58
+        },
+        "firstSeen": 28.87,
+        "lastSeen": 29.37,
+        "occurrences": 5,
+        "heldMs": 500
+      },
+      {
+        "code": "content_overlap",
+        "severity": "error",
+        "time": 29.12,
+        "selector": "#c9print15 > div:nth-of-type(5)",
+        "message": "Two text blocks overlap and may render unreadable.",
+        "rect": {
+          "left": 494.22,
+          "top": 577.98,
+          "right": 774.66,
+          "bottom": 712.8,
+          "width": 280.44,
+          "height": 134.82
+        },
+        "containerSelector": "#c9lens > div:nth-of-type(1)",
+        "text": "يرد على الاستفسارات",
+        "fixHint": "Give each block its own zone, or mark intentional layering with data-layout-allow-overlap.",
+        "dataAttributes": {},
+        "sourceFile": "index.html",
+        "bbox": {
+          "x": 494.22,
+          "y": 577.98,
+          "width": 280.44,
+          "height": 134.82
+        },
+        "firstSeen": 29.12,
+        "lastSeen": 29.995,
+        "occurrences": 9,
+        "heldMs": 875
+      },
+      {
+        "code": "content_overlap",
+        "severity": "error",
+        "time": 29.245,
+        "selector": "#c9print21 > div:nth-of-type(3)",
+        "message": "Two text blocks overlap and may render unreadable.",
+        "rect": {
+          "left": 661.34,
+          "top": 924.65,
+          "right": 967.42,
+          "bottom": 1114.12,
+          "width": 306.08,
+          "height": 189.47
+        },
+        "containerSelector": "#c9lens > div:nth-of-type(2) > div:nth-of-type(1) > div:nth-of-type(1)",
+        "text": "استفسار العميل كيف تبدأ؟",
+        "fixHint": "Give each block its own zone, or mark intentional layering with data-layout-allow-overlap.",
+        "dataAttributes": {},
+        "sourceFile": "index.html",
+        "bbox": {
+          "x": 661.34,
+          "y": 924.65,
+          "width": 306.08,
+          "height": 189.47
+        },
+        "firstSeen": 29.245,
+        "lastSeen": 29.745,
+        "occurrences": 6,
+        "heldMs": 500
+      },
+      {
+        "code": "content_overlap",
+        "severity": "error",
+        "time": 29.245,
+        "selector": "#c9print27 > div:nth-of-type(3)",
+        "message": "Two text blocks overlap and may render unreadable.",
+        "rect": {
+          "left": 885.44,
+          "top": 1613.2,
+          "right": 1080,
+          "bottom": 1853.75,
+          "width": 194.56,
+          "height": 240.55
+        },
+        "containerSelector": "#c9print27 > div:nth-of-type(4)",
+        "text": "استفسار العميل كيف تبدأ؟",
+        "fixHint": "Give each block its own zone, or mark intentional layering with data-layout-allow-overlap.",
+        "dataAttributes": {},
+        "sourceFile": "index.html",
+        "bbox": {
+          "x": 885.44,
+          "y": 1613.2,
+          "width": 194.56,
+          "height": 240.55
+        },
+        "firstSeen": 29.245,
+        "lastSeen": 32.119,
+        "occurrences": 25,
+        "heldMs": 2873.9999999999986
+      },
+      {
+        "code": "content_overlap",
+        "severity": "error",
+        "time": 29.245,
+        "selector": "#c9print27 > div:nth-of-type(3) > span:nth-of-type(1)",
+        "message": "Two text blocks overlap and may render unreadable.",
+        "rect": {
+          "left": 1013.5,
+          "top": 1742.33,
+          "right": 1080,
+          "bottom": 1863.96,
+          "width": 66.5,
+          "height": 121.63
+        },
+        "containerSelector": "#c9print27 > div:nth-of-type(4)",
+        "text": "كيف تبدأ؟",
+        "fixHint": "Give each block its own zone, or mark intentional layering with data-layout-allow-overlap.",
+        "dataAttributes": {},
+        "sourceFile": "index.html",
+        "bbox": {
+          "x": 1013.5,
+          "y": 1742.33,
+          "width": 66.5,
+          "height": 121.63
+        },
+        "firstSeen": 29.245,
+        "lastSeen": 32.119,
+        "occurrences": 25,
+        "heldMs": 2873.9999999999986
+      },
+      {
+        "code": "content_overlap",
+        "severity": "error",
+        "time": 29.37,
+        "selector": "#c9print15 > div:nth-of-type(4) > span:nth-of-type(1)",
+        "message": "Two text blocks overlap and may render unreadable.",
+        "rect": {
+          "left": 569.2,
+          "top": 536.84,
+          "right": 692.38,
+          "bottom": 598.04,
+          "width": 123.18,
+          "height": 61.2
+        },
+        "containerSelector": "#c9lens > div:nth-of-type(1)",
+        "text": "مع فريقك",
+        "fixHint": "Give each block its own zone, or mark intentional layering with data-layout-allow-overlap.",
+        "dataAttributes": {},
+        "sourceFile": "index.html",
+        "bbox": {
+          "x": 569.2,
+          "y": 536.84,
+          "width": 123.18,
+          "height": 61.2
+        },
+        "firstSeen": 29.37,
+        "lastSeen": 29.87,
+        "occurrences": 6,
+        "heldMs": 500
+      },
+      {
+        "code": "content_overlap",
+        "severity": "error",
+        "time": 29.37,
+        "selector": "#c9print21 > div:nth-of-type(2)",
+        "message": "Two text blocks overlap and may render unreadable.",
+        "rect": {
+          "left": 648.59,
+          "top": 721.28,
+          "right": 896.17,
+          "bottom": 970.4,
+          "width": 247.58,
+          "height": 249.12
+        },
+        "containerSelector": "#c9lens > div:nth-of-type(2) > div:nth-of-type(1) > b:nth-of-type(1)",
+        "text": "يرد",
+        "fixHint": "Give each block its own zone, or mark intentional layering with data-layout-allow-overlap.",
+        "dataAttributes": {},
+        "sourceFile": "index.html",
+        "bbox": {
+          "x": 648.59,
+          "y": 721.28,
+          "width": 247.58,
+          "height": 249.12
+        },
+        "firstSeen": 29.37,
+        "lastSeen": 29.87,
+        "occurrences": 6,
+        "heldMs": 500
+      },
+      {
+        "code": "content_overlap",
+        "severity": "error",
+        "time": 29.495,
+        "selector": "#c9print15 > div:nth-of-type(4)",
+        "message": "Two text blocks overlap and may render unreadable.",
+        "rect": {
+          "left": 498.6,
+          "top": 464.98,
+          "right": 731.41,
+          "bottom": 566.45,
+          "width": 232.81,
+          "height": 101.47
+        },
+        "containerSelector": "#c9lens > div:nth-of-type(1)",
+        "text": "مساعد يعمل مع فريقك",
+        "fixHint": "Give each block its own zone, or mark intentional layering with data-layout-allow-overlap.",
+        "dataAttributes": {},
+        "sourceFile": "index.html",
+        "bbox": {
+          "x": 498.6,
+          "y": 464.98,
+          "width": 232.81,
+          "height": 101.47
+        },
+        "firstSeen": 29.495,
+        "lastSeen": 29.995,
+        "occurrences": 6,
+        "heldMs": 500
+      },
+      {
+        "code": "content_overlap",
+        "severity": "error",
+        "time": 29.495,
+        "selector": "#c9print21 > div:nth-of-type(3)",
+        "message": "Two text blocks overlap and may render unreadable.",
+        "rect": {
+          "left": 661.34,
+          "top": 924.65,
+          "right": 967.42,
+          "bottom": 1114.12,
+          "width": 306.08,
+          "height": 189.47
+        },
+        "containerSelector": "#c9lens > div:nth-of-type(2) > div:nth-of-type(1) > div:nth-of-type(2)",
+        "text": "استفسار العميل كيف تبدأ؟",
+        "fixHint": "Give each block its own zone, or mark intentional layering with data-layout-allow-overlap.",
+        "dataAttributes": {},
+        "sourceFile": "index.html",
+        "bbox": {
+          "x": 661.34,
+          "y": 924.65,
+          "width": 306.08,
+          "height": 189.47
+        },
+        "firstSeen": 29.495,
+        "lastSeen": 29.995,
+        "occurrences": 6,
+        "heldMs": 500
+      },
+      {
+        "code": "content_overlap",
+        "severity": "error",
+        "time": 29.557,
+        "selector": "#c9print15 > div:nth-of-type(3) > span:nth-of-type(1)",
+        "message": "Two text blocks overlap and may render unreadable.",
+        "rect": {
+          "left": 503.46,
+          "top": 454.75,
+          "right": 621.8,
+          "bottom": 536.83,
+          "width": 118.34,
+          "height": 82.08
+        },
+        "containerSelector": "#c9lens > div:nth-of-type(1)",
+        "text": "كيف تبدأ؟",
+        "fixHint": "Give each block its own zone, or mark intentional layering with data-layout-allow-overlap.",
+        "dataAttributes": {},
+        "sourceFile": "index.html",
+        "bbox": {
+          "x": 503.46,
+          "y": 454.75,
+          "width": 118.34,
+          "height": 82.08
+        },
+        "firstSeen": 29.557,
+        "lastSeen": 30.12,
+        "occurrences": 6,
+        "heldMs": 563.0000000000024
+      },
+      {
+        "code": "content_overlap",
+        "severity": "error",
+        "time": 29.62,
+        "selector": "#c9print15 > div:nth-of-type(3)",
+        "message": "Two text blocks overlap and may render unreadable.",
+        "rect": {
+          "left": 391.95,
+          "top": 358.1,
+          "right": 651.61,
+          "bottom": 522.15,
+          "width": 259.66,
+          "height": 164.05
+        },
+        "containerSelector": "#c9lens > div:nth-of-type(1)",
+        "text": "استفسار العميل كيف تبدأ؟",
+        "fixHint": "Give each block its own zone, or mark intentional layering with data-layout-allow-overlap.",
+        "dataAttributes": {},
+        "sourceFile": "index.html",
+        "bbox": {
+          "x": 391.95,
+          "y": 358.1,
+          "width": 259.66,
+          "height": 164.05
+        },
+        "firstSeen": 29.62,
+        "lastSeen": 30.37,
+        "occurrences": 7,
+        "heldMs": 750
+      },
+      {
+        "code": "content_overlap",
+        "severity": "error",
+        "time": 29.745,
+        "selector": "#c9print27 > div:nth-of-type(4) > span:nth-of-type(1)",
+        "message": "Two text blocks overlap and may render unreadable.",
+        "rect": {
+          "left": 1056.51,
+          "top": 1828.01,
+          "right": 1080,
+          "bottom": 1915.58,
+          "width": 23.49,
+          "height": 87.57
+        },
+        "containerSelector": "#c9print27 > div:nth-of-type(5)",
+        "text": "مع فريقك",
+        "fixHint": "Give each block its own zone, or mark intentional layering with data-layout-allow-overlap.",
+        "dataAttributes": {},
+        "sourceFile": "index.html",
+        "bbox": {
+          "x": 1056.51,
+          "y": 1828.01,
+          "width": 23.49,
+          "height": 87.57
+        },
+        "firstSeen": 29.745,
+        "lastSeen": 30.245,
+        "occurrences": 5,
+        "heldMs": 500
+      },
+      {
+        "code": "content_overlap",
+        "severity": "error",
+        "time": 31.495,
+        "selector": "#c9print26 > div:nth-of-type(3)",
+        "message": "Two text blocks overlap and may render unreadable.",
+        "rect": {
+          "left": 0,
+          "top": 1823.6,
+          "right": 268.91,
+          "bottom": 1920,
+          "width": 268.91,
+          "height": 96.4
+        },
+        "containerSelector": "#c9print32 > div:nth-of-type(1)",
+        "text": "يتابع الطلبات مع فريقك",
+        "fixHint": "Give each block its own zone, or mark intentional layering with data-layout-allow-overlap.",
+        "dataAttributes": {},
+        "sourceFile": "index.html",
+        "bbox": {
+          "x": 0,
+          "y": 1823.6,
+          "width": 268.91,
+          "height": 96.4
+        },
+        "firstSeen": 31.495,
+        "lastSeen": 32.119,
+        "occurrences": 6,
+        "heldMs": 623.9999999999987
+      },
+      {
+        "code": "content_overlap",
+        "severity": "warning",
+        "time": 27.37,
+        "selector": "#c9print2 > div:nth-of-type(2) > div:nth-of-type(1) > b:nth-of-type(1)",
+        "message": "Two text blocks overlap and may render unreadable.",
+        "rect": {
+          "left": 0,
+          "top": 0,
+          "right": 114.19,
+          "bottom": 19.93,
+          "width": 114.19,
+          "height": 19.93
+        },
+        "containerSelector": "#c9print2 > div:nth-of-type(2) > div:nth-of-type(1) > div:nth-of-type(1)",
+        "text": "الطلبات",
+        "fixHint": "Give each block its own zone, or mark intentional layering with data-layout-allow-overlap.",
+        "dataAttributes": {},
+        "sourceFile": "index.html",
+        "bbox": {
+          "x": 0,
+          "y": 0,
+          "width": 114.19,
+          "height": 19.93
+        },
+        "firstSeen": 27.37,
+        "lastSeen": 27.495,
+        "occurrences": 2,
+        "heldMs": 125
+      },
+      {
+        "code": "content_overlap",
+        "severity": "warning",
+        "time": 27.62,
+        "selector": "#c9print2 > div:nth-of-type(2) > div:nth-of-type(1) > div:nth-of-type(1)",
+        "message": "Two text blocks overlap and may render unreadable.",
+        "rect": {
+          "left": 1.6,
+          "top": 0,
+          "right": 108.96,
+          "bottom": 33.72,
+          "width": 107.36,
+          "height": 33.72
+        },
+        "containerSelector": "#c9print2 > div:nth-of-type(2) > div:nth-of-type(1) > div:nth-of-type(2)",
+        "text": "✓ استفسار",
+        "fixHint": "Give each block its own zone, or mark intentional layering with data-layout-allow-overlap.",
+        "dataAttributes": {},
+        "sourceFile": "index.html",
+        "bbox": {
+          "x": 1.6,
+          "y": 0,
+          "width": 107.36,
+          "height": 33.72
+        },
+        "firstSeen": 27.62,
+        "lastSeen": 27.745,
+        "occurrences": 2,
+        "heldMs": 125
+      },
+      {
+        "code": "content_overlap",
+        "severity": "warning",
+        "time": 27.995,
+        "selector": "#c9print2 > div:nth-of-type(2) > div:nth-of-type(1) > div:nth-of-type(2)",
+        "message": "Two text blocks overlap and may render unreadable.",
+        "rect": {
+          "left": 0,
+          "top": 0,
+          "right": 86.39,
+          "bottom": 24.23,
+          "width": 86.39,
+          "height": 24.23
+        },
+        "containerSelector": "#c9print2 > div:nth-of-type(2) > div:nth-of-type(1) > div:nth-of-type(3)",
+        "text": "✓ متابعة",
+        "fixHint": "Give each block its own zone, or mark intentional layering with data-layout-allow-overlap.",
+        "dataAttributes": {},
+        "sourceFile": "index.html",
+        "bbox": {
+          "x": 0,
+          "y": 0,
+          "width": 86.39,
+          "height": 24.23
+        },
+        "firstSeen": 27.995,
+        "lastSeen": 28.12,
+        "occurrences": 2,
+        "heldMs": 125
+      },
+      {
+        "code": "content_overlap",
+        "severity": "warning",
+        "time": 28.37,
+        "selector": "#c9print21 > div:nth-of-type(4) > span:nth-of-type(1)",
+        "message": "Two text blocks overlap and may render unreadable.",
+        "rect": {
+          "left": 1067.86,
+          "top": 1380.67,
+          "right": 1080,
+          "bottom": 1453.77,
+          "width": 12.14,
+          "height": 73.1
+        },
+        "containerSelector": "#c9lens > div:nth-of-type(1)",
+        "text": "مع فريقك",
+        "fixHint": "Give each block its own zone, or mark intentional layering with data-layout-allow-overlap.",
+        "dataAttributes": {},
+        "sourceFile": "index.html",
+        "bbox": {
+          "x": 1067.86,
+          "y": 1380.67,
+          "width": 12.14,
+          "height": 73.1
+        },
+        "firstSeen": 28.37,
+        "lastSeen": 28.62,
+        "occurrences": 3,
+        "heldMs": 250
+      },
+      {
+        "code": "content_overlap",
+        "severity": "warning",
+        "time": 28.495,
+        "selector": "#c9print21 > div:nth-of-type(5)",
+        "message": "Two text blocks overlap and may render unreadable.",
+        "rect": {
+          "left": 962.3,
+          "top": 1428.57,
+          "right": 1080,
+          "bottom": 1586.19,
+          "width": 117.7,
+          "height": 157.62
+        },
+        "containerSelector": "#c9lens > div:nth-of-type(2) > div:nth-of-type(1) > b:nth-of-type(1)",
+        "text": "يرد على الاستفسارات",
+        "fixHint": "Give each block its own zone, or mark intentional layering with data-layout-allow-overlap.",
+        "dataAttributes": {},
+        "sourceFile": "index.html",
+        "bbox": {
+          "x": 962.3,
+          "y": 1428.57,
+          "width": 117.7,
+          "height": 157.62
+        },
+        "firstSeen": 28.495,
+        "lastSeen": 28.87,
+        "occurrences": 4,
+        "heldMs": 375
+      },
+      {
+        "code": "content_overlap",
+        "severity": "warning",
+        "time": 28.745,
+        "selector": "#c9print27 > div:nth-of-type(2)",
+        "message": "Two text blocks overlap and may render unreadable.",
+        "rect": {
+          "left": 1001.5,
+          "top": 1547.66,
+          "right": 1080,
+          "bottom": 1862.38,
+          "width": 78.5,
+          "height": 314.72
+        },
+        "containerSelector": "#c9lens > div:nth-of-type(2) > div:nth-of-type(1) > div:nth-of-type(2)",
+        "text": "يرد",
+        "fixHint": "Give each block its own zone, or mark intentional layering with data-layout-allow-overlap.",
+        "dataAttributes": {},
+        "sourceFile": "index.html",
+        "bbox": {
+          "x": 1001.5,
+          "y": 1547.66,
+          "width": 78.5,
+          "height": 314.72
+        },
+        "firstSeen": 28.745,
+        "lastSeen": 28.87,
+        "occurrences": 2,
+        "heldMs": 125
+      },
+      {
+        "code": "content_overlap",
+        "severity": "warning",
+        "time": 28.745,
+        "selector": "#c9print27 > div:nth-of-type(2)",
+        "message": "Two text blocks overlap and may render unreadable.",
+        "rect": {
+          "left": 1001.5,
+          "top": 1547.66,
+          "right": 1080,
+          "bottom": 1862.38,
+          "width": 78.5,
+          "height": 314.72
+        },
+        "containerSelector": "#c9lens > div:nth-of-type(2) > div:nth-of-type(1) > div:nth-of-type(3)",
+        "text": "يرد",
+        "fixHint": "Give each block its own zone, or mark intentional layering with data-layout-allow-overlap.",
+        "dataAttributes": {},
+        "sourceFile": "index.html",
+        "bbox": {
+          "x": 1001.5,
+          "y": 1547.66,
+          "width": 78.5,
+          "height": 314.72
+        },
+        "firstSeen": 28.745,
+        "lastSeen": 29.12,
+        "occurrences": 4,
+        "heldMs": 375
+      },
+      {
+        "code": "content_overlap",
+        "severity": "warning",
+        "time": 28.745,
+        "selector": "#c9print27 > div:nth-of-type(3)",
+        "message": "Two text blocks overlap and may render unreadable.",
+        "rect": {
+          "left": 1052.85,
+          "top": 1788.48,
+          "right": 1080,
+          "bottom": 1920,
+          "width": 27.15,
+          "height": 131.52
+        },
+        "containerSelector": "#c9lens > div:nth-of-type(3)",
+        "text": "استفسار العميل كيف تبدأ؟",
+        "fixHint": "Give each block its own zone, or mark intentional layering with data-layout-allow-overlap.",
+        "dataAttributes": {},
+        "sourceFile": "index.html",
+        "bbox": {
+          "x": 1052.85,
+          "y": 1788.48,
+          "width": 27.15,
+          "height": 131.52
+        },
+        "firstSeen": 28.745,
+        "lastSeen": 28.995,
+        "occurrences": 3,
+        "heldMs": 250
+      },
+      {
+        "code": "content_overlap",
+        "severity": "warning",
+        "time": 28.995,
+        "selector": "#c9print21 > div:nth-of-type(4) > span:nth-of-type(1)",
+        "message": "Two text blocks overlap and may render unreadable.",
+        "rect": {
+          "left": 957.38,
+          "top": 1259.68,
+          "right": 1080,
+          "bottom": 1330.17,
+          "width": 122.62,
+          "height": 70.49
+        },
+        "containerSelector": "#c9lens > div:nth-of-type(2) > div:nth-of-type(1) > div:nth-of-type(1)",
+        "text": "مع فريقك",
+        "fixHint": "Give each block its own zone, or mark intentional layering with data-layout-allow-overlap.",
+        "dataAttributes": {},
+        "sourceFile": "index.html",
+        "bbox": {
+          "x": 957.38,
+          "y": 1259.68,
+          "width": 122.62,
+          "height": 70.49
+        },
+        "firstSeen": 28.995,
+        "lastSeen": 29.245,
+        "occurrences": 3,
+        "heldMs": 250
+      },
+      {
+        "code": "content_overlap",
+        "severity": "warning",
+        "time": 29.12,
+        "selector": "#c9print21 > div:nth-of-type(5)",
+        "message": "Two text blocks overlap and may render unreadable.",
+        "rect": {
+          "left": 760.14,
+          "top": 1210.48,
+          "right": 1080,
+          "bottom": 1357.76,
+          "width": 319.86,
+          "height": 147.28
+        },
+        "containerSelector": "#c9lens > div:nth-of-type(2) > div:nth-of-type(1) > div:nth-of-type(3)",
+        "text": "يرد على الاستفسارات",
+        "fixHint": "Give each block its own zone, or mark intentional layering with data-layout-allow-overlap.",
+        "dataAttributes": {},
+        "sourceFile": "index.html",
+        "bbox": {
+          "x": 760.14,
+          "y": 1210.48,
+          "width": 319.86,
+          "height": 147.28
+        },
+        "firstSeen": 29.12,
+        "lastSeen": 29.557,
+        "occurrences": 5,
+        "heldMs": 436.9999999999976
+      },
+      {
+        "code": "content_overlap",
+        "severity": "warning",
+        "time": 29.12,
+        "selector": "#c9print21 > div:nth-of-type(4)",
+        "message": "Two text blocks overlap and may render unreadable.",
+        "rect": {
+          "left": 851.75,
+          "top": 1142.99,
+          "right": 1080,
+          "bottom": 1255.35,
+          "width": 228.25,
+          "height": 112.36
+        },
+        "containerSelector": "#c9lens > div:nth-of-type(2) > div:nth-of-type(1) > div:nth-of-type(1)",
+        "text": "مساعد يعمل مع فريقك",
+        "fixHint": "Give each block its own zone, or mark intentional layering with data-layout-allow-overlap.",
+        "dataAttributes": {},
+        "sourceFile": "index.html",
+        "bbox": {
+          "x": 851.75,
+          "y": 1142.99,
+          "width": 228.25,
+          "height": 112.36
+        },
+        "firstSeen": 29.12,
+        "lastSeen": 29.495,
+        "occurrences": 4,
+        "heldMs": 375
+      },
+      {
+        "code": "content_overlap",
+        "severity": "warning",
+        "time": 29.245,
+        "selector": "#c9print21 > div:nth-of-type(3) > span:nth-of-type(1)",
+        "message": "Two text blocks overlap and may render unreadable.",
+        "rect": {
+          "left": 777.53,
+          "top": 1029.66,
+          "right": 916.6,
+          "bottom": 1126.58,
+          "width": 139.07,
+          "height": 96.92
+        },
+        "containerSelector": "#c9lens > div:nth-of-type(2) > div:nth-of-type(1) > div:nth-of-type(1)",
+        "text": "كيف تبدأ؟",
+        "fixHint": "Give each block its own zone, or mark intentional layering with data-layout-allow-overlap.",
+        "dataAttributes": {},
+        "sourceFile": "index.html",
+        "bbox": {
+          "x": 777.53,
+          "y": 1029.66,
+          "width": 139.07,
+          "height": 96.92
+        },
+        "firstSeen": 29.245,
+        "lastSeen": 29.557,
+        "occurrences": 4,
+        "heldMs": 311.9999999999976
+      },
+      {
+        "code": "content_overlap",
+        "severity": "warning",
+        "time": 29.245,
+        "selector": "#c9print21 > div:nth-of-type(4) > span:nth-of-type(1)",
+        "message": "Two text blocks overlap and may render unreadable.",
+        "rect": {
+          "left": 907.93,
+          "top": 1205.48,
+          "right": 1052.26,
+          "bottom": 1274.79,
+          "width": 144.33,
+          "height": 69.31
+        },
+        "containerSelector": "#c9lens > div:nth-of-type(2) > div:nth-of-type(1) > div:nth-of-type(2)",
+        "text": "مع فريقك",
+        "fixHint": "Give each block its own zone, or mark intentional layering with data-layout-allow-overlap.",
+        "dataAttributes": {},
+        "sourceFile": "index.html",
+        "bbox": {
+          "x": 907.93,
+          "y": 1205.48,
+          "width": 144.33,
+          "height": 69.31
+        },
+        "firstSeen": 29.245,
+        "lastSeen": 29.495,
+        "occurrences": 3,
+        "heldMs": 250
+      },
+      {
+        "code": "content_overlap",
+        "severity": "warning",
+        "time": 29.37,
+        "selector": "#c9print8 > div:nth-of-type(1)",
+        "message": "Two text blocks overlap and may render unreadable.",
+        "rect": {
+          "left": 0,
+          "top": 0,
+          "right": 8.64,
+          "bottom": 59.34,
+          "width": 8.64,
+          "height": 59.34
+        },
+        "containerSelector": "#c9print8 > div:nth-of-type(2) > div:nth-of-type(1) > b:nth-of-type(1)",
+        "text": "يتابع",
+        "fixHint": "Give each block its own zone, or mark intentional layering with data-layout-allow-overlap.",
+        "dataAttributes": {},
+        "sourceFile": "index.html",
+        "bbox": {
+          "x": 0,
+          "y": 0,
+          "width": 8.64,
+          "height": 59.34
+        },
+        "firstSeen": 29.37,
+        "lastSeen": 29.62,
+        "occurrences": 4,
+        "heldMs": 250
+      },
+      {
+        "code": "content_overlap",
+        "severity": "warning",
+        "time": 29.37,
+        "selector": "#c9print21 > div:nth-of-type(4)",
+        "message": "Two text blocks overlap and may render unreadable.",
+        "rect": {
+          "left": 772.78,
+          "top": 1056.61,
+          "right": 1044.62,
+          "bottom": 1165.63,
+          "width": 271.84,
+          "height": 109.02
+        },
+        "containerSelector": "#c9lens > div:nth-of-type(2) > div:nth-of-type(1) > div:nth-of-type(2)",
+        "text": "مساعد يعمل مع فريقك",
+        "fixHint": "Give each block its own zone, or mark intentional layering with data-layout-allow-overlap.",
+        "dataAttributes": {},
+        "sourceFile": "index.html",
+        "bbox": {
+          "x": 772.78,
+          "y": 1056.61,
+          "width": 271.84,
+          "height": 109.02
+        },
+        "firstSeen": 29.37,
+        "lastSeen": 29.62,
+        "occurrences": 4,
+        "heldMs": 250
+      },
+      {
+        "code": "content_overlap",
+        "severity": "warning",
+        "time": 29.495,
+        "selector": "#c9print21 > div:nth-of-type(3) > span:nth-of-type(1)",
+        "message": "Two text blocks overlap and may render unreadable.",
+        "rect": {
+          "left": 777.53,
+          "top": 1029.66,
+          "right": 916.6,
+          "bottom": 1126.58,
+          "width": 139.07,
+          "height": 96.92
+        },
+        "containerSelector": "#c9lens > div:nth-of-type(2) > div:nth-of-type(1) > div:nth-of-type(2)",
+        "text": "كيف تبدأ؟",
+        "fixHint": "Give each block its own zone, or mark intentional layering with data-layout-allow-overlap.",
+        "dataAttributes": {},
+        "sourceFile": "index.html",
+        "bbox": {
+          "x": 777.53,
+          "y": 1029.66,
+          "width": 139.07,
+          "height": 96.92
+        },
+        "firstSeen": 29.495,
+        "lastSeen": 29.745,
+        "occurrences": 4,
+        "heldMs": 250
+      },
+      {
+        "code": "content_overlap",
+        "severity": "warning",
+        "time": 29.495,
+        "selector": "#c9print21 > div:nth-of-type(4) > span:nth-of-type(1)",
+        "message": "Two text blocks overlap and may render unreadable.",
+        "rect": {
+          "left": 852.22,
+          "top": 1144.32,
+          "right": 995.89,
+          "bottom": 1212.31,
+          "width": 143.67,
+          "height": 67.99
+        },
+        "containerSelector": "#c9lens > div:nth-of-type(2) > div:nth-of-type(1) > div:nth-of-type(3)",
+        "text": "مع فريقك",
+        "fixHint": "Give each block its own zone, or mark intentional layering with data-layout-allow-overlap.",
+        "dataAttributes": {},
+        "sourceFile": "index.html",
+        "bbox": {
+          "x": 852.22,
+          "y": 1144.32,
+          "width": 143.67,
+          "height": 67.99
+        },
+        "firstSeen": 29.495,
+        "lastSeen": 29.62,
+        "occurrences": 3,
+        "heldMs": 125
+      },
+      {
+        "code": "content_overlap",
+        "severity": "warning",
+        "time": 29.495,
+        "selector": "#c9print21 > div:nth-of-type(5)",
+        "message": "Two text blocks overlap and may render unreadable.",
+        "rect": {
+          "left": 760.14,
+          "top": 1210.48,
+          "right": 1080,
+          "bottom": 1357.76,
+          "width": 319.86,
+          "height": 147.28
+        },
+        "containerSelector": "#c9lens > div:nth-of-type(3)",
+        "text": "يرد على الاستفسارات",
+        "fixHint": "Give each block its own zone, or mark intentional layering with data-layout-allow-overlap.",
+        "dataAttributes": {},
+        "sourceFile": "index.html",
+        "bbox": {
+          "x": 760.14,
+          "y": 1210.48,
+          "width": 319.86,
+          "height": 147.28
+        },
+        "firstSeen": 29.495,
+        "lastSeen": 29.87,
+        "occurrences": 5,
+        "heldMs": 375
+      },
+      {
+        "code": "content_overlap",
+        "severity": "warning",
+        "time": 29.745,
+        "selector": "#c9print21 > div:nth-of-type(2)",
+        "message": "Two text blocks overlap and may render unreadable.",
+        "rect": {
+          "left": 615.08,
+          "top": 684.18,
+          "right": 860.75,
+          "bottom": 930.51,
+          "width": 245.67,
+          "height": 246.33
+        },
+        "containerSelector": "#c9lens > div:nth-of-type(2) > div:nth-of-type(1) > div:nth-of-type(1)",
+        "text": "يرد",
+        "fixHint": "Give each block its own zone, or mark intentional layering with data-layout-allow-overlap.",
+        "dataAttributes": {},
+        "sourceFile": "index.html",
+        "bbox": {
+          "x": 615.08,
+          "y": 684.18,
+          "width": 245.67,
+          "height": 246.33
+        },
+        "firstSeen": 29.745,
+        "lastSeen": 29.995,
+        "occurrences": 3,
+        "heldMs": 250
+      },
+      {
+        "code": "content_overlap",
+        "severity": "warning",
+        "time": 29.745,
+        "selector": "#c9print21 > div:nth-of-type(3)",
+        "message": "Two text blocks overlap and may render unreadable.",
+        "rect": {
+          "left": 625.4,
+          "top": 885.67,
+          "right": 931.32,
+          "bottom": 1072.79,
+          "width": 305.92,
+          "height": 187.12
+        },
+        "containerSelector": "#c9lens > div:nth-of-type(2) > div:nth-of-type(1) > div:nth-of-type(3)",
+        "text": "استفسار العميل كيف تبدأ؟",
+        "fixHint": "Give each block its own zone, or mark intentional layering with data-layout-allow-overlap.",
+        "dataAttributes": {},
+        "sourceFile": "index.html",
+        "bbox": {
+          "x": 625.4,
+          "y": 885.67,
+          "width": 305.92,
+          "height": 187.12
+        },
+        "firstSeen": 29.745,
+        "lastSeen": 30.12,
+        "occurrences": 4,
+        "heldMs": 375
+      },
+      {
+        "code": "content_overlap",
+        "severity": "warning",
+        "time": 29.745,
+        "selector": "#c9print21 > div:nth-of-type(3) > span:nth-of-type(1)",
+        "message": "Two text blocks overlap and may render unreadable.",
+        "rect": {
+          "left": 741.04,
+          "top": 989.57,
+          "right": 879.93,
+          "bottom": 1085.36,
+          "width": 138.89,
+          "height": 95.79
+        },
+        "containerSelector": "#c9lens > div:nth-of-type(2) > div:nth-of-type(1) > div:nth-of-type(3)",
+        "text": "كيف تبدأ؟",
+        "fixHint": "Give each block its own zone, or mark intentional layering with data-layout-allow-overlap.",
+        "dataAttributes": {},
+        "sourceFile": "index.html",
+        "bbox": {
+          "x": 741.04,
+          "y": 989.57,
+          "width": 138.89,
+          "height": 95.79
+        },
+        "firstSeen": 29.745,
+        "lastSeen": 29.87,
+        "occurrences": 2,
+        "heldMs": 125
+      },
+      {
+        "code": "content_overlap",
+        "severity": "warning",
+        "time": 29.87,
+        "selector": "#c9print21 > div:nth-of-type(2)",
+        "message": "Two text blocks overlap and may render unreadable.",
+        "rect": {
+          "left": 592.74,
+          "top": 659.43,
+          "right": 837.13,
+          "bottom": 903.89,
+          "width": 244.39,
+          "height": 244.46
+        },
+        "containerSelector": "#c9lens > div:nth-of-type(2) > div:nth-of-type(1) > div:nth-of-type(2)",
+        "text": "يرد",
+        "fixHint": "Give each block its own zone, or mark intentional layering with data-layout-allow-overlap.",
+        "dataAttributes": {},
+        "sourceFile": "index.html",
+        "bbox": {
+          "x": 592.74,
+          "y": 659.43,
+          "width": 244.39,
+          "height": 244.46
+        },
+        "firstSeen": 29.87,
+        "lastSeen": 30.12,
+        "occurrences": 3,
+        "heldMs": 250
+      },
+      {
+        "code": "content_overlap",
+        "severity": "warning",
+        "time": 29.995,
+        "selector": "#c9print14 > div:nth-of-type(2) > div:nth-of-type(1) > div:nth-of-type(1)",
+        "message": "Two text blocks overlap and may render unreadable.",
+        "rect": {
+          "left": 14.4,
+          "top": 563.45,
+          "right": 135.9,
+          "bottom": 626.47,
+          "width": 121.5,
+          "height": 63.02
+        },
+        "containerSelector": "#c9lens > div:nth-of-type(1)",
+        "text": "✓ استفسار",
+        "fixHint": "Give each block its own zone, or mark intentional layering with data-layout-allow-overlap.",
+        "dataAttributes": {},
+        "sourceFile": "index.html",
+        "bbox": {
+          "x": 14.4,
+          "y": 563.45,
+          "width": 121.5,
+          "height": 63.02
+        },
+        "firstSeen": 29.995,
+        "lastSeen": 30.12,
+        "occurrences": 2,
+        "heldMs": 125
+      },
+      {
+        "code": "content_overlap",
+        "severity": "warning",
+        "time": 29.995,
+        "selector": "#c9print15 > div:nth-of-type(2)",
+        "message": "Two text blocks overlap and may render unreadable.",
+        "rect": {
+          "left": 319.01,
+          "top": 149.23,
+          "right": 534.52,
+          "bottom": 347.68,
+          "width": 215.51,
+          "height": 198.45
+        },
+        "containerSelector": "#c9lens > div:nth-of-type(1)",
+        "text": "يرد",
+        "fixHint": "Give each block its own zone, or mark intentional layering with data-layout-allow-overlap.",
+        "dataAttributes": {},
+        "sourceFile": "index.html",
+        "bbox": {
+          "x": 319.01,
+          "y": 149.23,
+          "width": 215.51,
+          "height": 198.45
+        },
+        "firstSeen": 29.995,
+        "lastSeen": 30.37,
+        "occurrences": 4,
+        "heldMs": 375
+      },
+      {
+        "code": "content_overlap",
+        "severity": "warning",
+        "time": 30.12,
+        "selector": "#c9print9 > div:nth-of-type(4) > span:nth-of-type(1)",
+        "message": "Two text blocks overlap and may render unreadable.",
+        "rect": {
+          "left": 336.69,
+          "top": 0,
+          "right": 450.91,
+          "bottom": 21.61,
+          "width": 114.22,
+          "height": 21.61
+        },
+        "containerSelector": "#c9print9 > div:nth-of-type(5)",
+        "text": "مع فريقك",
+        "fixHint": "Give each block its own zone, or mark intentional layering with data-layout-allow-overlap.",
+        "dataAttributes": {},
+        "sourceFile": "index.html",
+        "bbox": {
+          "x": 336.69,
+          "y": 0,
+          "width": 114.22,
+          "height": 21.61
+        },
+        "firstSeen": 30.12,
+        "lastSeen": 30.245,
+        "occurrences": 2,
+        "heldMs": 125
+      },
+      {
+        "code": "content_overlap",
+        "severity": "warning",
+        "time": 30.12,
+        "selector": "#c9print14 > div:nth-of-type(2) > div:nth-of-type(1) > b:nth-of-type(1)",
+        "message": "Two text blocks overlap and may render unreadable.",
+        "rect": {
+          "left": 0,
+          "top": 457.01,
+          "right": 98.73,
+          "bottom": 542.67,
+          "width": 98.73,
+          "height": 85.66
+        },
+        "containerSelector": "#c9lens > div:nth-of-type(1)",
+        "text": "الطلبات",
+        "fixHint": "Give each block its own zone, or mark intentional layering with data-layout-allow-overlap.",
+        "dataAttributes": {},
+        "sourceFile": "index.html",
+        "bbox": {
+          "x": 0,
+          "y": 457.01,
+          "width": 98.73,
+          "height": 85.66
+        },
+        "firstSeen": 30.12,
+        "lastSeen": 30.245,
+        "occurrences": 2,
+        "heldMs": 125
+      },
+      {
+        "code": "content_overlap",
+        "severity": "warning",
+        "time": 30.12,
+        "selector": "#c9print15 > div:nth-of-type(5)",
+        "message": "Two text blocks overlap and may render unreadable.",
+        "rect": {
+          "left": 403.01,
+          "top": 476.93,
+          "right": 682.2,
+          "bottom": 606.22,
+          "width": 279.19,
+          "height": 129.29
+        },
+        "containerSelector": "#c9lens > div:nth-of-type(2) > div:nth-of-type(1) > b:nth-of-type(1)",
+        "text": "يرد على الاستفسارات",
+        "fixHint": "Give each block its own zone, or mark intentional layering with data-layout-allow-overlap.",
+        "dataAttributes": {},
+        "sourceFile": "index.html",
+        "bbox": {
+          "x": 403.01,
+          "y": 476.93,
+          "width": 279.19,
+          "height": 129.29
+        },
+        "firstSeen": 30.12,
+        "lastSeen": 30.37,
+        "occurrences": 3,
+        "heldMs": 250
+      },
+      {
+        "code": "content_overlap",
+        "severity": "warning",
+        "time": 30.12,
+        "selector": "#c9print20 > div:nth-of-type(2) > div:nth-of-type(1) > b:nth-of-type(1)",
+        "message": "Two text blocks overlap and may render unreadable.",
+        "rect": {
+          "left": 157.36,
+          "top": 991.63,
+          "right": 325.2,
+          "bottom": 1109.24,
+          "width": 167.84,
+          "height": 117.61
+        },
+        "containerSelector": "#c9lens > div:nth-of-type(3)",
+        "text": "الطلبات",
+        "fixHint": "Give each block its own zone, or mark intentional layering with data-layout-allow-overlap.",
+        "dataAttributes": {},
+        "sourceFile": "index.html",
+        "bbox": {
+          "x": 157.36,
+          "y": 991.63,
+          "width": 167.84,
+          "height": 117.61
+        },
+        "firstSeen": 30.12,
+        "lastSeen": 30.37,
+        "occurrences": 3,
+        "heldMs": 250
+      },
+      {
+        "code": "content_overlap",
+        "severity": "warning",
+        "time": 30.245,
+        "selector": "#c9print8 > div:nth-of-type(2) > div:nth-of-type(1) > div:nth-of-type(3)",
+        "message": "Two text blocks overlap and may render unreadable.",
+        "rect": {
+          "left": 0,
+          "top": 90.58,
+          "right": 33.39,
+          "bottom": 159.98,
+          "width": 33.39,
+          "height": 69.4
+        },
+        "containerSelector": "#c9lens > div:nth-of-type(1)",
+        "text": "✓ مع فريقك",
+        "fixHint": "Give each block its own zone, or mark intentional layering with data-layout-allow-overlap.",
+        "dataAttributes": {},
+        "sourceFile": "index.html",
+        "bbox": {
+          "x": 0,
+          "y": 90.58,
+          "width": 33.39,
+          "height": 69.4
+        },
+        "firstSeen": 30.245,
+        "lastSeen": 30.495,
+        "occurrences": 3,
+        "heldMs": 250
+      },
+      {
+        "code": "content_overlap",
+        "severity": "warning",
+        "time": 30.245,
+        "selector": "#c9print8 > div:nth-of-type(3)",
+        "message": "Two text blocks overlap and may render unreadable.",
+        "rect": {
+          "left": 0,
+          "top": 118.55,
+          "right": 42.54,
+          "bottom": 219.43,
+          "width": 42.54,
+          "height": 100.88
+        },
+        "containerSelector": "#c9lens > div:nth-of-type(1)",
+        "text": "يتابع الطلبات مع فريقك",
+        "fixHint": "Give each block its own zone, or mark intentional layering with data-layout-allow-overlap.",
+        "dataAttributes": {},
+        "sourceFile": "index.html",
+        "bbox": {
+          "x": 0,
+          "y": 118.55,
+          "width": 42.54,
+          "height": 100.88
+        },
+        "firstSeen": 30.245,
+        "lastSeen": 30.495,
+        "occurrences": 3,
+        "heldMs": 250
+      },
+      {
+        "code": "content_overlap",
+        "severity": "warning",
+        "time": 30.245,
+        "selector": "#c9print14 > div:nth-of-type(1)",
+        "message": "Two text blocks overlap and may render unreadable.",
+        "rect": {
+          "left": 0,
+          "top": 235.92,
+          "right": 30.38,
+          "bottom": 409.14,
+          "width": 30.38,
+          "height": 173.22
+        },
+        "containerSelector": "#c9lens > div:nth-of-type(1)",
+        "text": "يتابع",
+        "fixHint": "Give each block its own zone, or mark intentional layering with data-layout-allow-overlap.",
+        "dataAttributes": {},
+        "sourceFile": "index.html",
+        "bbox": {
+          "x": 0,
+          "y": 235.92,
+          "width": 30.38,
+          "height": 173.22
+        },
+        "firstSeen": 30.245,
+        "lastSeen": 30.37,
+        "occurrences": 2,
+        "heldMs": 125
+      },
+      {
+        "code": "content_overlap",
+        "severity": "warning",
+        "time": 30.495,
+        "selector": "#c9print20 > div:nth-of-type(1)",
+        "message": "Two text blocks overlap and may render unreadable.",
+        "rect": {
+          "left": 0,
+          "top": 698.69,
+          "right": 195.17,
+          "bottom": 926.71,
+          "width": 195.17,
+          "height": 228.02
+        },
+        "containerSelector": "#c9lens > div:nth-of-type(3)",
+        "text": "يتابع",
+        "fixHint": "Give each block its own zone, or mark intentional layering with data-layout-allow-overlap.",
+        "dataAttributes": {},
+        "sourceFile": "index.html",
+        "bbox": {
+          "x": 0,
+          "y": 698.69,
+          "width": 195.17,
+          "height": 228.02
+        },
+        "firstSeen": 30.495,
+        "lastSeen": 30.87,
+        "occurrences": 4,
+        "heldMs": 375
+      },
+      {
+        "code": "content_overlap",
+        "severity": "warning",
+        "time": 30.745,
+        "selector": "#c9print14 > div:nth-of-type(3)",
+        "message": "Two text blocks overlap and may render unreadable.",
+        "rect": {
+          "left": 0,
+          "top": 592.49,
+          "right": 55.4,
+          "bottom": 686.59,
+          "width": 55.4,
+          "height": 94.1
+        },
+        "containerSelector": "#c9lens > div:nth-of-type(3)",
+        "text": "يتابع الطلبات مع فريقك",
+        "fixHint": "Give each block its own zone, or mark intentional layering with data-layout-allow-overlap.",
+        "dataAttributes": {},
+        "sourceFile": "index.html",
+        "bbox": {
+          "x": 0,
+          "y": 592.49,
+          "width": 55.4,
+          "height": 94.1
+        },
+        "firstSeen": 30.745,
+        "lastSeen": 30.995,
+        "occurrences": 3,
+        "heldMs": 250
+      }
+    ],
+    "duration": 48.36666666666667,
+    "samples": [
+      2.687,
+      8.061,
+      13.435,
+      18.809,
+      24.183,
+      29.557,
+      34.931,
+      40.306,
+      45.68
+    ],
+    "transitionSamples": [],
+    "transitionSamplesDropped": 0,
+    "tolerance": 2,
+    "totalIssueCount": 411,
+    "truncated": true
+  },
+  "motion": {
+    "ok": true,
+    "errorCount": 0,
+    "warningCount": 0,
+    "infoCount": 0,
+    "findings": [],
+    "enabled": false,
+    "samples": 0
+  },
+  "contrast": {
+    "ok": true,
+    "errorCount": 0,
+    "warningCount": 2,
+    "infoCount": 0,
+    "findings": [
+      {
+        "code": "contrast_aa_failure",
+        "severity": "warning",
+        "message": "Contrast is 3.86:1; WCAG AA requires 4.5:1.",
+        "text": "تصوّر توضيحي لمسار العمل",
+        "fg": "rgb(132,121,112)",
+        "bg": "rgb(247,244,235)",
+        "ratio": 3.86,
+        "requiredRatio": 4.5,
+        "suggestedColor": "rgb(120,110,102)",
+        "large": false,
+        "selector": "div > section:nth-of-type(8) > div > div > div:nth-of-type(1) > div:nth-of-type(4)",
+        "dataAttributes": {},
+        "sourceFile": "index.html",
+        "bbox": {
+          "x": -129,
+          "y": 1050,
+          "width": 1344,
+          "height": 25
+        },
+        "time": 24.183
+      },
+      {
+        "code": "contrast_aa_failure",
+        "severity": "warning",
+        "message": "Contrast is 1.06:1; WCAG AA requires 3:1.",
+        "text": "متابعة الحملاتمتابعة الحملات",
+        "fg": "rgb(243,237,220)",
+        "bg": "rgb(236,231,218)",
+        "ratio": 1.06,
+        "requiredRatio": 3,
+        "suggestedColor": "rgb(135,132,123)",
+        "large": true,
+        "selector": "div > section:nth-of-type(10) > div > div > div:nth-of-type(1) > div:nth-of-type(2) > div:nth-of-type(1)",
+        "dataAttributes": {},
+        "sourceFile": "index.html",
+        "bbox": {
+          "x": -546.4833984375,
+          "y": 822.7747192382812,
+          "width": 588,
+          "height": 163.15625
+        },
+        "time": 34.931
+      }
+    ],
+    "enabled": true,
+    "samples": [
+      2.687,
+      13.435,
+      24.183,
+      34.931,
+      45.68
+    ],
+    "checked": 42,
+    "passed": 40
+  },
+  "hdr": {
+    "autoPromotion": null,
+    "inspection": "available"
+  },
+  "snapshots": {
+    "enabled": false,
+    "files": [],
+    "times": [],
+    "findingFiles": []
+  },
+  "_meta": {
+    "version": "0.8.92",
+    "updateAvailable": false
+  }
+}

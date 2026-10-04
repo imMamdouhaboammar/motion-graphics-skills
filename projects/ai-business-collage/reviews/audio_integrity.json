@@ -1,0 +1,11 @@
+{
+  "original_sha256": "e6e10319309de5aeb89e154c0ede454679b5744bd6a4affa5bac27406e0ad3fc",
+  "original_hash_matches": true,
+  "original_samples": 2320928,
+  "mixed_master_samples": 2320928,
+  "aac_decoded_samples": 2322432,
+  "all_voice_samples_retained": true,
+  "voice_after_foley_subtraction_max_error_pcm16": 0.0,
+  "aac_voice_correlation": 0.9999485713603928,
+  "last_word_preserved": "Source samples and full48.352667s preserved; final image holds through48.366667s"
+}

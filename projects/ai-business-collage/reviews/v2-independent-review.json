@@ -1,0 +1,149 @@
+{
+  "revision": 2,
+  "reviewer": "fresh independent v2_final_review agent",
+  "overall": "LATEST_USER_REVISION_PASS_WITH_REMAINING_FIDELITY_LIMITS",
+  "reference_fidelity": "PARTIAL_ADAPTATION",
+  "production_edits_by_reviewer": false,
+  "final_film": {
+    "path": "renders/AI_Business_Collage.mp4",
+    "sha256": "cd6abb898111dfc596cdd81a0bd679093b97b57d814497764fc227a92aee74cf",
+    "ffprobe": {
+      "programs": [],
+      "streams": [
+        {
+          "codec_name": "h264",
+          "codec_type": "video",
+          "width": 1080,
+          "height": 1920,
+          "avg_frame_rate": "30/1",
+          "duration": "48.366667"
+        },
+        {
+          "codec_name": "aac",
+          "codec_type": "audio",
+          "avg_frame_rate": "0/0",
+          "duration": "48.366000"
+        }
+      ],
+      "format": {
+        "duration": "48.366667"
+      }
+    }
+  },
+  "method": {
+    "visual": "Independently decoded final export into 1fps contact sheets across entire duration plus precise seek samples at 0,0.15,0.45,3.8,7.3,12.2,21.95,22.1,22.3,22.4,26.2,26.35s; visually inspected all three film sheets and three detail strips",
+    "reference": "Visually inspected actual source-derived analysis/rebuild/clone_analysis/sheet_1fps.jpg, including opening, pressure, desk, body assembly, map, audience, plant, ribbon, monitor, moving fields and spare closing",
+    "limits": [
+      "No real-time full-film playback or audible listening attested",
+      "Sequential film samples demonstrate changing positions and scene transitions but do not certify every-frame smoothness",
+      "1fps FFmpeg contact-sheet labels are sample bins, approximate within half a second; precise detail seeks are separately labeled",
+      "Font identity corroborated by existing font-and-scene-proof.json and active CSS, with distinct calligraphic glyphs visible in redecoded final film"
+    ]
+  },
+  "user_revision_checks": [
+    {
+      "requirement": "Remove wooden surface scene",
+      "status": "PASS",
+      "time_range_s": [
+        4.9333,
+        9.8667
+      ],
+      "evidence": "Final film shows ivory handheld phone, printed postcard and report macros. No overhead wood room/table. Photographic coffee poster wood within later marketing artwork is separate from the cancelled scene"
+    },
+    {
+      "requirement": "Use authentic Thmanyah calligraphic version rather than Sans",
+      "status": "PASS",
+      "evidence": "Active CSS loads thmanyahserifdisplay-Regular, Bold and Black. Distinct calligraphic display forms visible in all inspected main type and supporting copy; no active Sans source in composition"
+    }
+  ],
+  "findings": [
+    {
+      "id": "F01",
+      "severity": "resolved",
+      "time_s": 7.3,
+      "observation": "Previously low-contrast postcard second line now entirely on burgundy after photo was moved down; both lines readable",
+      "status": "FIX_CONFIRMED_IN_FINAL_FILM"
+    },
+    {
+      "id": "F02",
+      "severity": "medium",
+      "time_s": 3.8,
+      "observation": "Pressure sequence central question is partly hidden by large phone and clipboard. The subject and intrusive collage density read well, but full central sentence cannot be read at this sampled moment",
+      "scope": "Remaining design limitation beyond latest font/wood request"
+    },
+    {
+      "id": "F03",
+      "severity": "low",
+      "time_s": 12.2,
+      "observation": "Large numeral3 is cropped by right frame boundary. Action text below reads clearly; no actual visible numeral/action collision despite lint AABB warning",
+      "status": "NO_BLOCKING_TEXT_COLLISION"
+    },
+    {
+      "id": "F04",
+      "severity": "low",
+      "time_range_s": [
+        27,
+        32
+      ],
+      "observation": "Workflow poster field has independent overlap, angled perspective and edge crops. Major per-card verbs and central documents remain recognizable. Projection overlap warnings do not imply an observed central text collision",
+      "status": "INTENTIONAL_FIELD_OVERLAP"
+    },
+    {
+      "id": "F05",
+      "severity": "medium",
+      "time_range_s": [
+        32.2,
+        37.2333
+      ],
+      "observation": "Some marketing headlines cross pale photo borders and lose local contrast; some posters repeat stacked identical reading-results words. This reduces polish and content variety",
+      "scope": "Remaining visual limitation"
+    },
+    {
+      "id": "F06",
+      "severity": "low",
+      "time_range_s": [
+        0,
+        0.6
+      ],
+      "observation": "Banner right edge and some banner text crop during initial camera descent, then full AI question reads by settled opening. Sky opening copy starts fully visible and exits upwards as camera descends",
+      "status": "TRANSIENT_CAMERA_CROP"
+    },
+    {
+      "id": "F07",
+      "severity": "information",
+      "time_range_s": [
+        21.95,
+        22.4
+      ],
+      "observation": "Transferred follow-up sheet expands before cut to negative-color monitor flash. Decoded samples confirm physical paper-to-screen handoff and flash at scene boundary",
+      "status": "TRANSITION_MECHANISM_CONFIRMED"
+    },
+    {
+      "id": "F08",
+      "severity": "information",
+      "time_range_s": [
+        44.9,
+        48.35
+      ],
+      "observation": "Final calligraphic keyword and supporting CTA centered on spare ivory; clear readable hold",
+      "status": "PASS"
+    }
+  ],
+  "fidelity_limits": [
+    "Wooden overhead mechanism deliberately replaced at user request and exempt from reference fidelity target",
+    "Workflow atlas remains schematic rather than photographic street map",
+    "Paper scene is arch, clipboard and paper-transfer still life rather than the source flowing burgundy ribbon",
+    "Repeated poster fields have narrower image and color variety than source",
+    "Source timing is adapted to longer original narration, not frame-for-frame identical"
+  ],
+  "blocking_issues_for_latest_user_request": [],
+  "approval": "No user aesthetic approval claimed. This review does not certify perfect reference match or full audible playback",
+  "evidence_paths": [
+    "reviews/v2-independent/film-sheet-1.jpg",
+    "reviews/v2-independent/film-sheet-2.jpg",
+    "reviews/v2-independent/film-sheet-3.jpg",
+    "reviews/v2-independent/detail-strip-1.jpg",
+    "reviews/v2-independent/detail-strip-2.jpg",
+    "reviews/v2-independent/detail-strip-3.jpg"
+  ]
+}

@@ -1,0 +1,50 @@
+{
+  "A01": {
+    "path": "/workspace/scratch/84a9a71a0bd6/generated_images/exec-2a05dc42-8d21-4bcd-b575-9a40f9f69fc0.png",
+    "prompt": "Photoreal advertising cutout of an original Saudi small-business founder wearing an ivory thobe and beige neutral sneakers, full body fully visible, holding a plain burgundy document case, looking forward thoughtfully, three quarter standing view, natural non-model expression. Warm daylight from upper left. Every limb complete. One subject only. Real photographed paper-collage material, restrained warm colors. True transparent background, no text, no logos, no frame. Alternate casting candidate for a business motion collage film.",
+    "output_path": "assets/alternates/A01_candidate_02.png",
+    "mode": "RGBA",
+    "alpha_range": [
+      0,
+      254
+    ],
+    "selected_candidate": 1,
+    "selection_reason": "First candidate gives useful three-quarter stride and open-plaza integration; alternate frontal pose less kinetic."
+  },
+  "A03": {
+    "path": "/workspace/scratch/84a9a71a0bd6/generated_images/exec-de0dafd8-19e1-425b-99e8-a41a8c2567af.png",
+    "prompt": "Photoreal advertising cutout of an original Arab operations manager seated frontally on a simple office chair, charcoal blazer and white shirt, thoughtful overwhelmed expression, fingers touching temples gently, whole body and hands visible, normal anatomy. Warm diffuse upper-left daylight, subdued contemporary GCC office attire. One photographed subject only, true transparent background. No text, logo, UI, frame or background. Alternative candidate for editorial paper collage.",
+    "output_path": "assets/alternates/A03_candidate_02.png",
+    "mode": "RGBA",
+    "alpha_range": [
+      0,
+      254
+    ],
+    "selected_candidate": 1,
+    "selection_reason": "First candidate expressive pose matches clear side-entry gaps."
+  },
+  "A12": {
+    "path": "/workspace/scratch/84a9a71a0bd6/generated_images/exec-d511f480-641d-401e-8995-78fa3b6bb138.png",
+    "prompt": "Photoreal advertising cutout of an original young Saudi office worker in a white button shirt and charcoal trousers, full body visible, centered frontal standing pose, both arms slightly open with relaxed open palms, looking thoughtfully at camera. Normal anatomy and completed fingers. Warm upper-left daylight, subdued fabric texture, contemporary business photographic collage style. True transparent background. One subject, no writing or logo or props. Alternative hero casting candidate.",
+    "output_path": "assets/alternates/A12_candidate_02.png",
+    "mode": "RGBA",
+    "alpha_range": [
+      0,
+      254
+    ],
+    "selected_candidate": 1,
+    "selection_reason": "First candidate hand positioning fits garment assembly and paper exchange."
+  },
+  "A23": {
+    "path": "/workspace/scratch/84a9a71a0bd6/generated_images/exec-63309e97-6216-46e1-b770-8cf69ffa2769.png",
+    "prompt": "Photoreal advertising product cutout: pristine neutral desktop monitor with completely blank pale ivory screen, thin matte black bezel, warm silver stand, front-facing straight-on product photograph, slight material daylight reflection from upper left. Whole monitor and stand visible with negative space around silhouette. One isolated object on true transparent background. No logos, text, symbols, dashboard, UI or decorations. Alternative monitor candidate for warm photographic paper collage.",
+    "output_path": "assets/alternates/A23_candidate_02.png",
+    "mode": "RGBA",
+    "alpha_range": [
+      0,
+      254
+    ],
+    "selected_candidate": 1,
+    "selection_reason": "First candidate geometry mask-tested and readable; alternate wider screen requires another mask."
+  }
+}

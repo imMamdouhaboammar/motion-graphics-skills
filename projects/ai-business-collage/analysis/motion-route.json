@@ -1,0 +1,222 @@
+{
+  "version": 2,
+  "status": "ready",
+  "entry": "motion-director",
+  "deliverable": "broad-film",
+  "installed": [
+    "animated-chart",
+    "apple-launch-film",
+    "assetseeker",
+    "brand-intake",
+    "brandkit",
+    "design-taste-frontend",
+    "design-taste-frontend-v1",
+    "full-output-enforcement",
+    "gpt-taste",
+    "gpu-policy",
+    "gsap-core",
+    "gsap-frameworks",
+    "gsap-performance",
+    "gsap-plugins",
+    "gsap-react",
+    "gsap-scrolltrigger",
+    "gsap-timeline",
+    "gsap-utils",
+    "high-end-visual-design",
+    "image-to-code",
+    "imagegen-frontend-mobile",
+    "imagegen-frontend-web",
+    "industrial-brutalist-ui",
+    "launch-video",
+    "loop-cover",
+    "media-use",
+    "milestone-reveal",
+    "minimalist-ui",
+    "mix-and-match",
+    "model-showdown",
+    "motion-brief-writer",
+    "motion-design",
+    "motion-director",
+    "motion-effects",
+    "newsletter-promo",
+    "redesign-existing-projects",
+    "reel-export",
+    "reference-fidelity",
+    "remove-background",
+    "speech-to-text",
+    "stitch-design-taste",
+    "text-to-lottie",
+    "title-sequence-3d",
+    "video-review-loop",
+    "vox-explainer",
+    "work-guard"
+  ],
+  "agent_skills": {
+    "media-utility": [
+      "assetseeker",
+      "imagegen-frontend-mobile",
+      "remove-background"
+    ],
+    "design-utility": [
+      "brandkit",
+      "design-taste-frontend",
+      "design-taste-frontend-v1",
+      "high-end-visual-design",
+      "image-to-code",
+      "imagegen-frontend-web",
+      "industrial-brutalist-ui",
+      "minimalist-ui",
+      "redesign-existing-projects",
+      "stitch-design-taste",
+      "text-to-lottie"
+    ],
+    "utility": [
+      "full-output-enforcement"
+    ],
+    "gsap-utility": [
+      "gpt-taste",
+      "gsap-core",
+      "gsap-frameworks",
+      "gsap-performance",
+      "gsap-plugins",
+      "gsap-react",
+      "gsap-scrolltrigger",
+      "gsap-timeline",
+      "gsap-utils",
+      "motion-design"
+    ],
+    "audio-utility": [
+      "media-use",
+      "speech-to-text"
+    ]
+  },
+  "stages": [
+    {
+      "name": "motion-director",
+      "reason": "Own the shared brief, route, creative direction, production state, and final decision gates",
+      "handoff": {
+        "from": "user",
+        "to": "motion-director",
+        "purpose": "Own the shared brief, route, creative direction, production state, and final decision gates",
+        "inherits": [
+          "user brief",
+          "supplied assets",
+          "known project truth"
+        ],
+        "must_return": [
+          "shared truth",
+          "route state",
+          "approved constraints"
+        ],
+        "return_to": null
+      }
+    },
+    {
+      "name": "reference-fidelity",
+      "reason": "Reference fidelity is a production constraint, so signature mechanics and difficulty must be locked before specialization",
+      "handoff": {
+        "from": "motion-director",
+        "to": "reference-fidelity",
+        "purpose": "Reference fidelity is a production constraint, so signature mechanics and difficulty must be locked before specialization",
+        "inherits": [
+          "reference study",
+          "reference contract",
+          "difficulty intent"
+        ],
+        "must_return": [
+          "validated reference contract",
+          "difficulty-preservation requirements",
+          "forbidden substitutions"
+        ],
+        "return_to": "motion-director"
+      }
+    },
+    {
+      "name": "gpu-policy",
+      "reason": "Heavy media work must prove a hardware-accelerated path before execution",
+      "handoff": {
+        "from": "motion-director",
+        "to": "gpu-policy",
+        "purpose": "Heavy media work must prove a hardware-accelerated path before execution",
+        "inherits": [
+          "runtime",
+          "media path"
+        ],
+        "must_return": [
+          "selected hardware backend",
+          "backend evidence",
+          "execution hints"
+        ],
+        "return_to": "motion-director"
+      }
+    },
+    {
+      "name": "work-guard",
+      "reason": "Hang-prone execution should run behind the installed reliability guard",
+      "handoff": {
+        "from": "motion-director",
+        "to": "work-guard",
+        "purpose": "Hang-prone execution should run behind the installed reliability guard",
+        "inherits": [
+          "exact command",
+          "safe retry policy"
+        ],
+        "must_return": [
+          "run evidence",
+          "failure classification",
+          "recovery result"
+        ],
+        "return_to": "motion-director"
+      }
+    },
+    {
+      "name": "video-review-loop",
+      "reason": "A rendered video exists and final signoff requires evidence-based motion review",
+      "handoff": {
+        "from": "motion-director",
+        "to": "video-review-loop",
+        "purpose": "A rendered video exists and final signoff requires evidence-based motion review",
+        "inherits": [
+          "rendered video",
+          "delivery contract",
+          "motion thesis"
+        ],
+        "must_return": [
+          "timecoded findings",
+          "machine evidence",
+          "review status"
+        ],
+        "return_to": "motion-director"
+      }
+    },
+    {
+      "name": "speech-to-text",
+      "reason": "Voice-over or audio track must be transcribed to text using faster-whisper before downstream processing",
+      "handoff": {
+        "from": "motion-director",
+        "to": "speech-to-text",
+        "purpose": "Voice-over or audio track must be transcribed to text using faster-whisper before downstream processing",
+        "inherits": [
+          "shared truth",
+          "approved constraints"
+        ],
+        "must_return": [
+          "specialist decisions",
+          "created or updated artifacts",
+          "risks and unresolved constraints"
+        ],
+        "return_to": "motion-director"
+      }
+    }
+  ],
+  "required_references": [
+    "skills/motion-director/references/arabic-motion.md"
+  ],
+  "constraints": {
+    "reference_mode": "structural-fidelity",
+    "difficulty_preservation": true
+  },
+  "skipped_optional": [],
+  "blockers": [],
+  "warnings": []
+}

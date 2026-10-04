@@ -1,0 +1,20 @@
+[SystemMemory] cgroup memory limit detected: 8192 MiB — it governs memory-adaptive render behaviour instead of host RAM.
+◆  Capturing 5 frames at [12s, 15.5s, 17.6s, 29.5s, 48.333s] from ai-business-collage
+[HyperFrames] Not inlining "assets/generated/A02_business_start_line_environment.png" (2.3 MB exceeds the 2 MB inline limit). The bundle may not be self-contained.
+[HyperFrames] Not inlining "assets/generated/A07_hand_blank_folder.png" (2.1 MB exceeds the 2 MB inline limit). The bundle may not be self-contained.
+[HyperFrames] Not inlining "assets/generated/A08_topdown_desk_empty.png" (2.1 MB exceeds the 2 MB inline limit). The bundle may not be self-contained.
+[HyperFrames] Not inlining "assets/generated/A14_workwear_layer_blazer.png" (2.2 MB exceeds the 2 MB inline limit). The bundle may not be self-contained.
+[HyperFrames] Not inlining "assets/generated/A22_contract_folders_blank.png" (2.1 MB exceeds the 2 MB inline limit). The bundle may not be self-contained.
+[HyperFrames] Not inlining "assets/generated/A20_paper_request_slips_blank.png" (2.3 MB exceeds the 2 MB inline limit). The bundle may not be self-contained.
+[HyperFrames] Not inlining "assets/generated/A32_seamless_cream_paper.png" (2.1 MB exceeds the 2 MB inline limit). The bundle may not be self-contained.
+
+   Fonts: 3 loaded
+
+◇  5 snapshots saved to /workspace/scratch/84a9a71a0bd6/projects/ai-business-collage/reviews/final-snapshots
+   reviews/final-snapshots/frame-00-at-12s.png
+   reviews/final-snapshots/frame-01-at-15.5s.png
+   reviews/final-snapshots/frame-02-at-17.6s.png
+   reviews/final-snapshots/frame-03-at-29.5s.png
+   reviews/final-snapshots/frame-04-at-48.333s.png
+   contact-sheet.jpg (grid view for AI review)
+   --describe: GEMINI_API_KEY not set, skipping

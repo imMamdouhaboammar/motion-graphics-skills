@@ -1,0 +1,90 @@
+{
+  "source": "Original deterministic synthesized short filtered-noise paper transients. No music or catalog recordings.",
+  "voice_source_sha256": "e6e10319309de5aeb89e154c0ede454679b5744bd6a4affa5bac27406e0ad3fc",
+  "voice_gain": 1,
+  "voice_samples": 2320928,
+  "mix_peak": 0.948760986328125,
+  "sfx_peak": 0.015261145169409532,
+  "cues": [
+    {
+      "time": 1.55,
+      "duration": 0.13,
+      "event": "ribbon landing"
+    },
+    {
+      "time": 2.8,
+      "duration": 0.09,
+      "event": "clipboard entry"
+    },
+    {
+      "time": 3.65,
+      "duration": 0.09,
+      "event": "monitor prop"
+    },
+    {
+      "time": 6.53,
+      "duration": 0.08,
+      "event": "photographic tool cut"
+    },
+    {
+      "time": 8.03,
+      "duration": 0.08,
+      "event": "photographic tool cut"
+    },
+    {
+      "time": 10.5,
+      "duration": 0.065,
+      "event": "garment jump"
+    },
+    {
+      "time": 11.1,
+      "duration": 0.065,
+      "event": "garment jump"
+    },
+    {
+      "time": 11.75,
+      "duration": 0.17,
+      "event": "paper handoff"
+    },
+    {
+      "time": 13.75,
+      "duration": 0.065,
+      "event": "route pin"
+    },
+    {
+      "time": 14.18,
+      "duration": 0.065,
+      "event": "route pin"
+    },
+    {
+      "time": 14.61,
+      "duration": 0.065,
+      "event": "route pin"
+    },
+    {
+      "time": 15.04,
+      "duration": 0.065,
+      "event": "route pin"
+    },
+    {
+      "time": 15.47,
+      "duration": 0.065,
+      "event": "route pin"
+    },
+    {
+      "time": 19.6,
+      "duration": 0.16,
+      "event": "slip sorting"
+    },
+    {
+      "time": 23.3,
+      "duration": 0.07,
+      "event": "connection"
+    },
+    {
+      "time": 24.1,
+      "duration": 0.08,
+      "event": "screen panel"
+    }
+  ]
+}

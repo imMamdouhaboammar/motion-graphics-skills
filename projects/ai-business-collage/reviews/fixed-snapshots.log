@@ -1,0 +1,21 @@
+[SystemMemory] cgroup memory limit detected: 8192 MiB — it governs memory-adaptive render behaviour instead of host RAM.
+◆  Capturing 6 frames at [7.6s, 9.1s, 12.5s, 17.6s, 25s, 29.5s] from ai-business-collage
+[HyperFrames] Not inlining "assets/generated/A02_business_start_line_environment.png" (2.3 MB exceeds the 2 MB inline limit). The bundle may not be self-contained.
+[HyperFrames] Not inlining "assets/generated/A07_hand_blank_folder.png" (2.1 MB exceeds the 2 MB inline limit). The bundle may not be self-contained.
+[HyperFrames] Not inlining "assets/generated/A08_topdown_desk_empty.png" (2.1 MB exceeds the 2 MB inline limit). The bundle may not be self-contained.
+[HyperFrames] Not inlining "assets/generated/A14_workwear_layer_blazer.png" (2.2 MB exceeds the 2 MB inline limit). The bundle may not be self-contained.
+[HyperFrames] Not inlining "assets/generated/A22_contract_folders_blank.png" (2.1 MB exceeds the 2 MB inline limit). The bundle may not be self-contained.
+[HyperFrames] Not inlining "assets/generated/A20_paper_request_slips_blank.png" (2.3 MB exceeds the 2 MB inline limit). The bundle may not be self-contained.
+[HyperFrames] Not inlining "assets/generated/A32_seamless_cream_paper.png" (2.1 MB exceeds the 2 MB inline limit). The bundle may not be self-contained.
+
+   Fonts: 3 loaded
+
+◇  6 snapshots saved to /workspace/scratch/84a9a71a0bd6/reviews/fixed-snapshots
+   /workspace/scratch/84a9a71a0bd6/reviews/fixed-snapshots/frame-00-at-7.6s.png
+   /workspace/scratch/84a9a71a0bd6/reviews/fixed-snapshots/frame-01-at-9.1s.png
+   /workspace/scratch/84a9a71a0bd6/reviews/fixed-snapshots/frame-02-at-12.5s.png
+   /workspace/scratch/84a9a71a0bd6/reviews/fixed-snapshots/frame-03-at-17.6s.png
+   /workspace/scratch/84a9a71a0bd6/reviews/fixed-snapshots/frame-04-at-25s.png
+   /workspace/scratch/84a9a71a0bd6/reviews/fixed-snapshots/frame-05-at-29.5s.png
+   contact-sheet.jpg (grid view for AI review)
+   --describe: GEMINI_API_KEY not set, skipping

@@ -1,0 +1,253 @@
+{
+  "source": {
+    "path": "input/reference.mp4",
+    "fps": 30,
+    "decoded_frame_count": 1159,
+    "container_duration_s": 38.704807,
+    "last_decoded_frame_s": 38.6
+  },
+  "method": {
+    "runtime": "CPU FFmpeg, bounded 90x160 and 180x320 frame analysis",
+    "automated_scene_threshold": 0.1,
+    "classification": "Visually inspected frame-indexed thumbnail neighborhoods; negative/inverted flashes separated from structural cuts",
+    "uncertainty": "Frame indices are exact decoded-frame samples. Semantic scene-start selection may choose first inverted plate or first normally exposed plate; both supplied. Directions are visual estimates, not optical-flow measurements."
+  },
+  "sentinel_cuts": [
+    {
+      "onset_frame": 48,
+      "onset_s": 1.6,
+      "normal_exposure_frame": 50,
+      "normal_exposure_s": 1.6666666666666667,
+      "from_to": "sky/runner to frontal pressure",
+      "classification": "structural cut with negative-color flash",
+      "evidence": "New composition appears negative at 48; normal exposure 50"
+    },
+    {
+      "onset_frame": 134,
+      "onset_s": 4.466666666666667,
+      "normal_exposure_frame": 134,
+      "normal_exposure_s": 4.466666666666667,
+      "from_to": "frontal pressure to overhead naming desk",
+      "classification": "hard structural cut",
+      "evidence": "New overhead photographed tabletop, not a frontal desk"
+    },
+    {
+      "onset_frame": 168,
+      "onset_s": 5.6,
+      "normal_exposure_frame": 170,
+      "normal_exposure_s": 5.666666666666667,
+      "from_to": "overhead naming desk to overhead identity desk",
+      "classification": "same-language plate substitution",
+      "evidence": "Negative flash at 168; normal new plate 170"
+    },
+    {
+      "onset_frame": 208,
+      "onset_s": 6.933333333333334,
+      "normal_exposure_frame": 210,
+      "normal_exposure_s": 7.0,
+      "from_to": "overhead identity desk to overhead programmer desk",
+      "classification": "same-language plate substitution",
+      "evidence": "Negative flash at 208; normal new plate 210"
+    },
+    {
+      "onset_frame": 248,
+      "onset_s": 8.266666666666667,
+      "normal_exposure_frame": 249,
+      "normal_exposure_s": 8.3,
+      "from_to": "overhead desk to ivory ending/assembly",
+      "classification": "black flash then structural reset",
+      "evidence": "Black frame at 248; stable ivory frame 249"
+    },
+    {
+      "onset_frame": 330,
+      "onset_s": 11.0,
+      "normal_exposure_frame": 330,
+      "normal_exposure_s": 11.0,
+      "from_to": "assembled person to wordmark and map",
+      "classification": "structural composition reset",
+      "evidence": "Person and large numeral disappear; fresh text reset before map enters"
+    },
+    {
+      "onset_frame": 499,
+      "onset_s": 16.633333333333333,
+      "normal_exposure_frame": 499,
+      "normal_exposure_s": 16.633333333333333,
+      "from_to": "map to audience cutout repetition",
+      "classification": "structural cut",
+      "evidence": "Black frames 497-498 bridge map and fresh blank audience stage"
+    },
+    {
+      "onset_frame": 538,
+      "onset_s": 17.933333333333334,
+      "normal_exposure_frame": 538,
+      "normal_exposure_s": 17.933333333333334,
+      "from_to": "audience to plant/name",
+      "classification": "hard structural cut",
+      "evidence": "Plant clearly replaces repeated people"
+    },
+    {
+      "onset_frame": 579,
+      "onset_s": 19.3,
+      "normal_exposure_frame": 579,
+      "normal_exposure_s": 19.3,
+      "from_to": "plant to physical paperwork",
+      "classification": "hard structural cut",
+      "evidence": "Foreground hands and ribbons replace plant"
+    },
+    {
+      "onset_frame": 674,
+      "onset_s": 22.466666666666665,
+      "normal_exposure_frame": 675,
+      "normal_exposure_s": 22.5,
+      "from_to": "paperwork to monitor",
+      "classification": "structural cut with negative flash",
+      "evidence": "Monitor first appears dark/inverted at 674; normal at 675"
+    },
+    {
+      "onset_frame": 772,
+      "onset_s": 25.733333333333334,
+      "normal_exposure_frame": 772,
+      "normal_exposure_s": 25.733333333333334,
+      "from_to": "monitor to website",
+      "classification": "structural cut",
+      "evidence": "Brief dark frames 770-771 then webpage fills portrait frame"
+    },
+    {
+      "onset_frame": 810,
+      "onset_s": 27.0,
+      "normal_exposure_frame": 810,
+      "normal_exposure_s": 27.0,
+      "from_to": "website to diagonal card field",
+      "classification": "hard structural cut",
+      "evidence": "Perspective card field replaces frontal webpage"
+    },
+    {
+      "onset_frame": 915,
+      "onset_s": 30.5,
+      "normal_exposure_frame": 917,
+      "normal_exposure_s": 30.566666666666666,
+      "from_to": "diagonal field to two-row portfolio",
+      "classification": "structural cut with negative flash",
+      "evidence": "Portfolio new layout first appears inverted at 915; ivory exposure at 917"
+    },
+    {
+      "onset_frame": 948,
+      "onset_s": 31.6,
+      "normal_exposure_frame": 949,
+      "normal_exposure_s": 31.633333333333333,
+      "from_to": "first portfolio grid to second portfolio grid",
+      "classification": "portfolio plate substitution",
+      "evidence": "Second portfolio design visible inverted at 948; normal at 949"
+    },
+    {
+      "onset_frame": 974,
+      "onset_s": 32.46666666666667,
+      "normal_exposure_frame": 976,
+      "normal_exposure_s": 32.53333333333333,
+      "from_to": "portfolio to closing copy",
+      "classification": "dark reset then ivory closing",
+      "evidence": "Blank dark stage 974-975; ivory reset 976"
+    }
+  ],
+  "camera_structure": [
+    {
+      "window_s": [
+        0,
+        1.6
+      ],
+      "observation": "Sky title leads into downward image reveal of runner and physical banner; runner shares sky backdrop. Do not treat this as two unrelated scenes. Type/banner remain visual anchors."
+    },
+    {
+      "window_s": [
+        1.6667,
+        4.4667
+      ],
+      "observation": "Frontal center person holds position while megaphones enter from sides and above. End briefly pushes/defocuses before cut. Crowding derives from independent prop entrances, not continual camera orbit."
+    },
+    {
+      "window_s": [
+        4.4667,
+        8.2667
+      ],
+      "observation": "Three genuinely top-down photographic workstation plates, each with people surrounding horizontal desktop. Small abrupt reframing/plate changes, stable editorial holds; casting and light materially change between plates."
+    },
+    {
+      "window_s": [
+        8.3,
+        11
+      ],
+      "observation": "Blank ivory reset, then mismatch assembled body and oversized burgundy 5. Person is left-heavy, number overlaps/right-side. Large amount of empty stage is intentional."
+    },
+    {
+      "window_s": [
+        11,
+        16.6333
+      ],
+      "observation": "Logo/title begins near middle then reduces/migrates upward as map enters beneath it. Map pulls back as more pins/path appear; first pin moves toward upper portion and shrinks. This is primarily a progressive pullback/reveal, not constant horizontal path tracking."
+    },
+    {
+      "window_s": [
+        16.6333,
+        17.9333
+      ],
+      "observation": "Audience/photo cutouts build diagonally across lower stage under two-line header. Repetition expands and then punch reframes."
+    },
+    {
+      "window_s": [
+        17.9333,
+        19.3
+      ],
+      "observation": "Plant and physical name lettering sit low center; upper header takes phrase additions. The image itself stays almost steady."
+    },
+    {
+      "window_s": [
+        19.3,
+        22.4667
+      ],
+      "observation": "Physical hand/paper transfer with flowing burgundy loop shapes across middle and bottom. Papers overlap and curl; headings build above. Small push, then brief defocus/flash."
+    },
+    {
+      "window_s": [
+        22.4667,
+        25.7333
+      ],
+      "observation": "Frontal monitor body remains lower-middle; screen cards multiply within the screen mask. Copy grows above. Genuine monitor bezel and stand essential."
+    },
+    {
+      "window_s": [
+        25.7333,
+        27
+      ],
+      "observation": "Frontal webpage moves vertically upward as if scrolled. Different screen sections replace earlier sections; it is not a diagonal-card shot yet."
+    },
+    {
+      "window_s": [
+        27,
+        30.5
+      ],
+      "observation": "Perspective card field has tilted rows and real shadow separation. Artwork generally travels up-left, equivalent to camera travel down-right; strong initial change from wide field to closer framing, then steady traverse. Direction approximate from visual card tracking."
+    },
+    {
+      "window_s": [
+        30.5,
+        32.5333
+      ],
+      "observation": "Primarily IVORY portfolio grid of two horizontal rows of portrait cards, drifting left as cards/designs change. Dark frames are negative-color flashes and transient dark resets. Do not conclude dark stage is a sustained source scene from 1fps sheets."
+    },
+    {
+      "window_s": [
+        32.5333,
+        38.6333
+      ],
+      "observation": "Extremely sparse small closing copy centered in ivory. First line moves/adds, second line appears later; otherwise hold. Brief negative flash ~34.1333-34.2667 is not a new scene."
+    }
+  ],
+  "production_feedback": [
+    "Fresh photo assets should follow structural layout and camera language rather than copying reference subjects or content.",
+    "Keep genuine overhead table shots distinct from frontal office imagery.",
+    "Build diagonal card field with perspective geometry, contact shadows, and continuous up-left artwork travel rather than simple face-on carousel.",
+    "Do not derive motion density from uniform animation: pressure props accelerate; map progressively reveals/pulls back; closing remains nearly still.",
+    "Negative-color flicker exists frequently in supplied reference. If target avoids flicker, document that as deliberate accessibility/readability adaptation rather than falsely reporting a faithful omission.",
+    "Previous brief approximation overestimated monitor start (~22.7 vs measured normal 22.5) and diagonal-grid onset (~26 vs measured 27.0), and interpreted dark cards as sustained dark scene."
+  ]
+}

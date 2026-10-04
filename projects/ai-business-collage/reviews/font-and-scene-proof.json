@@ -1,0 +1,25 @@
+{
+  "fonts": [
+    {
+      "file": "assets/fonts/thmanyahserifdisplay-Regular.woff2",
+      "sha256": "214a70d9dabcfa18649086841c25ccc67ef6630179837834bcffd3a149131ca6",
+      "family": "thmanyah serif display",
+      "style": "Regular"
+    },
+    {
+      "file": "assets/fonts/thmanyahserifdisplay-Bold.woff2",
+      "sha256": "d36da84ee5423145415425bdd9c10dc27f57a66afec031bd7b78e662572846ce",
+      "family": "thmanyah serif display",
+      "style": "Bold"
+    },
+    {
+      "file": "assets/fonts/thmanyahserifdisplay-Black.woff2",
+      "sha256": "a057be61138a74a590b9d4d0dce6f6b2926e1c443577ad30eb1d86f11efa0a0b",
+      "family": "thmanyah serif display Black",
+      "style": "Regular"
+    }
+  ],
+  "sans_font_sources_in_active_composition": false,
+  "wooden_room_in_active_composition": false,
+  "scope": "Previously rejected wood room is retained only in archived assets and V1"
+}

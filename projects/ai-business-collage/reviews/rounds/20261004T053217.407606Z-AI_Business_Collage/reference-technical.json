@@ -1,0 +1,25 @@
+{
+  "format_duration": 38.704807,
+  "format_name": "mov,mp4,m4a,3gp,3g2,mj2",
+  "video": {
+    "codec": "h264",
+    "width": 720,
+    "height": 1280,
+    "avg_fps": 30.0,
+    "nominal_fps": 30.0,
+    "pix_fmt": "yuv420p",
+    "duration": 38.633333,
+    "color_space": "bt709",
+    "color_primaries": "bt709",
+    "color_transfer": "bt709",
+    "color_range": "tv",
+    "bit_rate": 1680083.0
+  },
+  "audio": {
+    "codec": "aac",
+    "duration": 38.704807,
+    "sample_rate": 44100,
+    "channels": 2,
+    "bit_rate": 74517.0
+  }
+}

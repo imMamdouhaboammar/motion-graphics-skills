@@ -1,0 +1,18 @@
+{
+  "status": "pass",
+  "mode": "structural-fidelity",
+  "difficulty_mode": "preserve",
+  "contract_ids": [
+    "card-plane",
+    "overhead",
+    "paper-transfer",
+    "route"
+  ],
+  "dominant_language": "Photographic cutout people and physical props change camera framing across ivory editorial environments",
+  "secondary_motifs": [
+    "subtle paper substrate",
+    "burgundy strips and route line"
+  ],
+  "missing": [],
+  "issues": []
+}

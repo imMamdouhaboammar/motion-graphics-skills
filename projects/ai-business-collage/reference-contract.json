@@ -1,0 +1,56 @@
+{
+  "mode": "structural-fidelity",
+  "difficulty_mode": "preserve",
+  "reference": {
+    "source": "input/reference.mp4"
+  },
+  "dominant_language": "Photographic cutout people and physical props change camera framing across ivory editorial environments",
+  "secondary_motifs": [
+    "subtle paper substrate",
+    "burgundy strips and route line"
+  ],
+  "may_translate": [
+    "original people",
+    "AI service copy",
+    "business process diagram replacing geography",
+    "Thmanyah fonts required by user"
+  ],
+  "forbidden_shortcuts": [
+    "Do not replace photographic cutout choreography with equal duration static centered slide zooms"
+  ],
+  "signature": {
+    "rhythm": "Overhead snap reframes alternate with extended route and diagonal plane travel and sparse closing holds",
+    "composition": "Frontal body and hands switch to actual overhead worktable then map pullback and diagonal cards",
+    "typography": "Connected Arabic short phrases appear in burgundy within physical ribbon and paper layers",
+    "transitions": "Hard ivory reset cuts and frame-quantized object entrances replace generic dissolves between slides",
+    "density": "Dense hands and object fields alternate with sparse map and quiet question and keyword CTA",
+    "material": "Real photographic human and physical prop cutouts sit above lightly textured ivory paper"
+  },
+  "must_preserve": [
+    {
+      "id": "overhead",
+      "mechanism": "True overhead camera jumps between three separate photographed desk zones",
+      "why_hard": "requires actual overhead assets and moving camera world",
+      "evidence": "Inspect target6,7.6,9.1 vs source4.5,5.6,6.9"
+    },
+    {
+      "id": "route",
+      "mechanism": "Progressive overhead pullback reveals route corners and sequential burgundy pins",
+      "why_hard": "requires coordinated draw and parent camera transformations",
+      "evidence": "Inspect target13.5–16.2 and source11–16"
+    },
+    {
+      "id": "card-plane",
+      "mechanism": "Perspective-tilted physical cards move continuously upward and left across the viewport",
+      "why_hard": "requires continuous spatial movement and clipping rather than static gallery",
+      "evidence": "Inspect target26.3–32.2 and source27–30.5"
+    },
+    {
+      "id": "paper-transfer",
+      "mechanism": "Photographic donor and receiver hands move a separate paper plane between them",
+      "why_hard": "requires independent layers and contact choreography",
+      "evidence": "Inspect target11.55–12.5 and source19.3–21.0"
+    }
+  ],
+  "created_for": "Final review contract reconstructed from measured reference, no claim it existed before production"
+}

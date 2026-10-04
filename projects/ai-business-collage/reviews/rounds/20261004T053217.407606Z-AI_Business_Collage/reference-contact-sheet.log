@@ -1,0 +1,40 @@
+Input #0, mov,mp4,m4a,3gp,3g2,mj2, from 'projects/ai-business-collage/input/reference.mp4':
+  Metadata:
+    major_brand     : isom
+    minor_version   : 512
+    compatible_brands: isomiso2avc1mp41
+  Duration: 00:00:38.70, start: 0.000000, bitrate: 1758 kb/s
+  Stream #0:0[0x1](und): Video: h264 (High) (avc1 / 0x31637661), yuv420p(tv, bt709, progressive), 720x1280, 1680 kb/s, 30 fps, 30 tbr, 15360 tbn (default)
+    Metadata:
+      handler_name    : VideoHandler
+      vendor_id       : [0][0][0][0]
+      encoder         : AVC Coding
+  Stream #0:1[0x2](und): Audio: aac (HE-AAC) (mp4a / 0x6134706D), 44100 Hz, stereo, fltp, 74 kb/s (default)
+    Metadata:
+      handler_name    : SoundHandler
+      vendor_id       : [0][0][0][0]
+Stream mapping:
+  Stream #0:0 -> #0:0 (h264 (native) -> mjpeg (native))
+Press [q] to stop, [?] for help
+[swscaler @ 0x561e54581400] deprecated pixel format used, make sure you did set range correctly
+[swscaler @ 0x561e54e7f040] deprecated pixel format used, make sure you did set range correctly
+    Last message repeated 2 times
+[mjpeg @ 0x561e546220c0] bitrate tolerance 4000000 too small for bitrate 200000, overriding
+Output #0, image2, to 'projects/ai-business-collage/reviews/rounds/20261004T053217.407606Z-AI_Business_Collage/evidence/reference-contact-sheet.jpg':
+  Metadata:
+    major_brand     : isom
+    minor_version   : 512
+    compatible_brands: isomiso2avc1mp41
+    encoder         : Lavf60.16.100
+  Stream #0:0(und): Video: mjpeg, yuvj420p(pc, bt709, progressive), 1480x1952, q=2-31, 200 kb/s, 0.03 fps, 0.03 tbn (default)
+    Metadata:
+      handler_name    : VideoHandler
+      vendor_id       : [0][0][0][0]
+      encoder         : Lavc60.31.102 mjpeg
+    Side data:
+      cpb: bitrate max/min/avg: 0/0/200000 buffer size: 0 vbv_delay: N/A
+frame=    0 fps=0.0 q=11.3 size=       0kB time=00:00:00.00 bitrate=N/A speed=   0x    
+[image2 @ 0x561e5455ddc0] The specified filename 'projects/ai-business-collage/reviews/rounds/20261004T053217.407606Z-AI_Business_Collage/evidence/reference-contact-sheet.jpg' does not contain an image sequence pattern or a pattern is invalid.
+[image2 @ 0x561e5455ddc0] Use a pattern such as %03d for an image sequence or use the -update option (with -frames:v 1 if needed) to write a single image.
+[out#0/image2 @ 0x561e544f9c80] video:110kB audio:0kB subtitle:0kB other streams:0kB global headers:0kB muxing overhead: unknown
+frame=    1 fps=0.0 q=11.3 Lsize=N/A time=00:00:00.00 bitrate=N/A speed=   0x    

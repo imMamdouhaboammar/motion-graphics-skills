@@ -1,0 +1,225 @@
+{
+  "status": "READY",
+  "checks": [
+    {
+      "name": "voiceover_immutable",
+      "passed": true,
+      "detail": "input/voiceover.wav"
+    },
+    {
+      "name": "reference_immutable",
+      "passed": true,
+      "detail": "input/reference.mp4"
+    },
+    {
+      "name": "ffprobe",
+      "passed": true,
+      "detail": "Required for media verification"
+    },
+    {
+      "name": "ffmpeg",
+      "passed": true,
+      "detail": "Required for media analysis and delivery verification"
+    },
+    {
+      "name": "font:assets/fonts/thmanyahserifdisplay-Regular.woff2",
+      "passed": true,
+      "detail": "Real Thmanyah font required; fallback forbidden"
+    },
+    {
+      "name": "font:assets/fonts/thmanyahserifdisplay-Bold.woff2",
+      "passed": true,
+      "detail": "Real Thmanyah font required; fallback forbidden"
+    },
+    {
+      "name": "font:assets/fonts/thmanyahserifdisplay-Black.woff2",
+      "passed": true,
+      "detail": "Real Thmanyah font required; fallback forbidden"
+    },
+    {
+      "name": "image_provider_decision",
+      "passed": true,
+      "detail": "Native tool cannot expose/select the requested GPT Images 2.5 model; explicit decision required"
+    },
+    {
+      "name": "asset:A01",
+      "passed": true,
+      "detail": "COMPOSITE_REVIEWED"
+    },
+    {
+      "name": "asset:A02",
+      "passed": true,
+      "detail": "COMPOSITE_REVIEWED"
+    },
+    {
+      "name": "asset:A03",
+      "passed": true,
+      "detail": "COMPOSITE_REVIEWED"
+    },
+    {
+      "name": "asset:A04",
+      "passed": true,
+      "detail": "COMPOSITE_REVIEWED"
+    },
+    {
+      "name": "asset:A05",
+      "passed": true,
+      "detail": "COMPOSITE_REVIEWED"
+    },
+    {
+      "name": "asset:A06",
+      "passed": true,
+      "detail": "COMPOSITE_REVIEWED"
+    },
+    {
+      "name": "asset:A07",
+      "passed": true,
+      "detail": "COMPOSITE_REVIEWED"
+    },
+    {
+      "name": "asset:A08",
+      "passed": true,
+      "detail": "COMPOSITE_REVIEWED"
+    },
+    {
+      "name": "asset:A09",
+      "passed": true,
+      "detail": "COMPOSITE_REVIEWED"
+    },
+    {
+      "name": "asset:A10",
+      "passed": true,
+      "detail": "COMPOSITE_REVIEWED"
+    },
+    {
+      "name": "asset:A11",
+      "passed": true,
+      "detail": "COMPOSITE_REVIEWED"
+    },
+    {
+      "name": "asset:A12",
+      "passed": true,
+      "detail": "COMPOSITE_REVIEWED"
+    },
+    {
+      "name": "asset:A13",
+      "passed": true,
+      "detail": "COMPOSITE_REVIEWED"
+    },
+    {
+      "name": "asset:A14",
+      "passed": true,
+      "detail": "COMPOSITE_REVIEWED"
+    },
+    {
+      "name": "asset:A15",
+      "passed": true,
+      "detail": "COMPOSITE_REVIEWED"
+    },
+    {
+      "name": "asset:A16",
+      "passed": true,
+      "detail": "COMPOSITE_REVIEWED"
+    },
+    {
+      "name": "asset:A17",
+      "passed": true,
+      "detail": "COMPOSITE_REVIEWED"
+    },
+    {
+      "name": "asset:A18",
+      "passed": true,
+      "detail": "COMPOSITE_REVIEWED"
+    },
+    {
+      "name": "asset:A19",
+      "passed": true,
+      "detail": "COMPOSITE_REVIEWED"
+    },
+    {
+      "name": "asset:A20",
+      "passed": true,
+      "detail": "COMPOSITE_REVIEWED"
+    },
+    {
+      "name": "asset:A21",
+      "passed": true,
+      "detail": "COMPOSITE_REVIEWED"
+    },
+    {
+      "name": "asset:A22",
+      "passed": true,
+      "detail": "COMPOSITE_REVIEWED"
+    },
+    {
+      "name": "asset:A23",
+      "passed": true,
+      "detail": "COMPOSITE_REVIEWED"
+    },
+    {
+      "name": "asset:A24",
+      "passed": true,
+      "detail": "COMPOSITE_REVIEWED"
+    },
+    {
+      "name": "asset:A25",
+      "passed": true,
+      "detail": "COMPOSITE_REVIEWED"
+    },
+    {
+      "name": "asset:A26",
+      "passed": true,
+      "detail": "COMPOSITE_REVIEWED"
+    },
+    {
+      "name": "asset:A27",
+      "passed": true,
+      "detail": "COMPOSITE_REVIEWED"
+    },
+    {
+      "name": "asset:A28",
+      "passed": true,
+      "detail": "COMPOSITE_REVIEWED"
+    },
+    {
+      "name": "asset:A29",
+      "passed": true,
+      "detail": "COMPOSITE_REVIEWED"
+    },
+    {
+      "name": "asset:A30",
+      "passed": true,
+      "detail": "COMPOSITE_REVIEWED"
+    },
+    {
+      "name": "asset:A31",
+      "passed": true,
+      "detail": "COMPOSITE_REVIEWED"
+    },
+    {
+      "name": "asset:A32",
+      "passed": true,
+      "detail": "COMPOSITE_REVIEWED"
+    },
+    {
+      "name": "phrase_alignment",
+      "passed": true,
+      "detail": "ASR_TIMED_APPROVED_COPY"
+    },
+    {
+      "name": "hyperframes_runtime",
+      "passed": true,
+      "detail": "CLI must be installed and validated before capture"
+    },
+    {
+      "name": "hardware_workload",
+      "passed": true,
+      "detail": "QSV candidate failed actual decode probe"
+    },
+    {
+      "name": "composition",
+      "passed": true,
+      "detail": "Native HyperFrames composition exists"
+    }
+  ]
+}

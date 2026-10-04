@@ -1,0 +1,95 @@
+{
+  "evidence": [
+    "brief/reference_contact_01.jpg",
+    "brief/reference_contact_02.jpg",
+    "analysis/reference_ffprobe.json"
+  ],
+  "visual_review": "Both attached contact sheets inspected. Full video playback and frame-exact camera measurement NOT completed.",
+  "source_windows_status": "APPROXIMATE supplied storyboard, corroborated by contact sheets; not detected hard cuts",
+  "mechanisms": [
+    {
+      "scene": "1",
+      "start_s_approx": "0",
+      "end_s_approx": "1.7",
+      "mechanism": "low camera drop + prop reveal",
+      "direction_speed_measurement": "PENDING"
+    },
+    {
+      "scene": "2",
+      "start_s_approx": "1.7",
+      "end_s_approx": "4.7",
+      "mechanism": "frontal locked center, hands advance from edges",
+      "direction_speed_measurement": "PENDING"
+    },
+    {
+      "scene": "3",
+      "start_s_approx": "4.7",
+      "end_s_approx": "8.4",
+      "mechanism": "topdown snap reframes x3",
+      "direction_speed_measurement": "PENDING"
+    },
+    {
+      "scene": "4",
+      "start_s_approx": "8.4",
+      "end_s_approx": "11",
+      "mechanism": "hard jump assembly, one short push",
+      "direction_speed_measurement": "PENDING"
+    },
+    {
+      "scene": "5",
+      "start_s_approx": "11",
+      "end_s_approx": "16.8",
+      "mechanism": "long route-follow topdown camera",
+      "direction_speed_measurement": "PENDING"
+    },
+    {
+      "scene": "6",
+      "start_s_approx": "16.8",
+      "end_s_approx": "19.3",
+      "mechanism": "lateral repeat cascade + one punch",
+      "direction_speed_measurement": "PENDING"
+    },
+    {
+      "scene": "7",
+      "start_s_approx": "19.3",
+      "end_s_approx": "22.8",
+      "mechanism": "close prop handoff + axial move",
+      "direction_speed_measurement": "PENDING"
+    },
+    {
+      "scene": "8",
+      "start_s_approx": "22.8",
+      "end_s_approx": "26",
+      "mechanism": "frontal snap + screen-plane tilt",
+      "direction_speed_measurement": "PENDING"
+    },
+    {
+      "scene": "9",
+      "start_s_approx": "26",
+      "end_s_approx": "30.8",
+      "mechanism": "diagonal tracked move, cards pass camera",
+      "direction_speed_measurement": "PENDING"
+    },
+    {
+      "scene": "10",
+      "start_s_approx": "30.8",
+      "end_s_approx": "32.7",
+      "mechanism": "rapid stagger vertical tiles + lateral rack",
+      "direction_speed_measurement": "PENDING"
+    },
+    {
+      "scene": "11",
+      "start_s_approx": "32.7",
+      "end_s_approx": "35.1",
+      "mechanism": "mostly still, small recession",
+      "direction_speed_measurement": "PENDING"
+    },
+    {
+      "scene": "12",
+      "start_s_approx": "35.1",
+      "end_s_approx": "38.704807",
+      "mechanism": "near-static final hold",
+      "direction_speed_measurement": "PENDING"
+    }
+  ]
+}

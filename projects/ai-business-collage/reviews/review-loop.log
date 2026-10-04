@@ -1,0 +1,8 @@
+{
+  "round_dir": "projects/ai-business-collage/reviews/rounds/20261004T052437.948236Z-AI_Business_Collage",
+  "status": "agent-review-required",
+  "hard_findings": 0,
+  "warnings": 34,
+  "gpu_decision": "cpu-fallback-explicit",
+  "next": "Review the actual video and write timecoded visual findings into review.md"
+}

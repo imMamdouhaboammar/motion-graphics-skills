@@ -1,0 +1,14 @@
+{
+  "deliverable": "broad-film",
+  "brand_ready": true,
+  "reference_count": 1,
+  "reference_mode": "structural-fidelity",
+  "difficulty_mode": "preserve",
+  "mix_references": false,
+  "language": "ar",
+  "heavy_media": true,
+  "hang_prone": true,
+  "final_video": true,
+  "has_voiceover": true,
+  "needs_transcription": false
+}

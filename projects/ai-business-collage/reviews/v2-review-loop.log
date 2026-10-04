@@ -1,0 +1,8 @@
+{
+  "round_dir": ".motion-review/rounds/20261004T060155.189975Z-AI_Business_Collage",
+  "status": "agent-review-required",
+  "hard_findings": 0,
+  "warnings": 13,
+  "gpu_decision": "cpu-fallback-explicit",
+  "next": "Review the actual video and write timecoded visual findings into review.md"
+}

@@ -1,0 +1,24 @@
+{
+  "original_sha256": "e6e10319309de5aeb89e154c0ede454679b5744bd6a4affa5bac27406e0ad3fc",
+  "original_samples": 2320928,
+  "mixed_samples": 2320928,
+  "decoded_samples": 2322432,
+  "all_voice_samples_retained": true,
+  "voice_after_foley_subtraction_max_error_pcm16": 0.0,
+  "aac_voice_correlation": 0.9999485692285992,
+  "video": {
+    "width": 1080,
+    "height": 1920,
+    "r_frame_rate": "30/1",
+    "nb_frames": "1451",
+    "duration": "48.366667",
+    "pix_fmt": "yuv420p",
+    "color_space": "bt709",
+    "codec_name": "h264"
+  },
+  "audio": {
+    "codec_name": "aac",
+    "sample_rate": "48000",
+    "duration": "48.366000"
+  }
+}

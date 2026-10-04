@@ -1,0 +1,282 @@
+{
+  "status": "ASR_TIMED_APPROVED_COPY",
+  "engine": "faster-whisper base int8; phonetic word recognition imperfect",
+  "scenes": [
+    {
+      "scene": 1,
+      "start_frame": 0,
+      "end_frame": 75
+    },
+    {
+      "scene": 2,
+      "start_frame": 75,
+      "end_frame": 148
+    },
+    {
+      "scene": 3,
+      "start_frame": 148,
+      "end_frame": 296
+    },
+    {
+      "scene": 4,
+      "start_frame": 296,
+      "end_frame": 405
+    },
+    {
+      "scene": 5,
+      "start_frame": 405,
+      "end_frame": 488
+    },
+    {
+      "scene": 6,
+      "start_frame": 488,
+      "end_frame": 543
+    },
+    {
+      "scene": 7,
+      "start_frame": 543,
+      "end_frame": 671
+    },
+    {
+      "scene": 8,
+      "start_frame": 671,
+      "end_frame": 789
+    },
+    {
+      "scene": 9,
+      "start_frame": 789,
+      "end_frame": 966
+    },
+    {
+      "scene": 10,
+      "start_frame": 966,
+      "end_frame": 1117
+    },
+    {
+      "scene": 11,
+      "start_frame": 1117,
+      "end_frame": 1245
+    },
+    {
+      "scene": 12,
+      "start_frame": 1245,
+      "end_frame": 1451
+    }
+  ],
+  "approved_copy": [
+    "ناوي تدخل الذكاء الاصطناعي في شغلك؟",
+    "",
+    "حلو... بس تبدأ من وين؟",
+    "",
+    "أداة ترد على العملاء، وأداة تسوي محتوى، وثالثة تطلع تقارير...",
+    "",
+    "وبالنهاية، فريقك مشغول ينسخ ويلصق بين الأدوات!",
+    "",
+    "عشان كذا، حنا نبدأ من شغلك نفسه.",
+    "",
+    "نفهم كيف يوصلك العميل، وين تتأخر المتابعة، ووش المهام اللي تاخذ من وقت فريقك كل يوم.",
+    "",
+    "بعدها نربط حلول الذكاء الاصطناعي بالأنظمة اللي تستخدمها.",
+    "",
+    "نجهز مساعد يرد على الاستفسارات، يرتب العملاء المحتملين، ويتابع الطلبات مع فريقك.",
+    "",
+    "وفي التسويق، نرتب إنتاج المحتوى، ومتابعة الحملات، وقراءة النتائج.",
+    "",
+    "عشان فريقك يقضي وقته في القرارات المهمة، بدل الشغل المتكرر.",
+    "",
+    "تبي تعرف وين ممكن يفيدك الذكاء الاصطناعي في شغلك؟",
+    "",
+    "راسلنا بكلمة «ابدأ»... وخلنا نحدد أول خطوة تناسبك."
+  ],
+  "method": "Words recognized by faster-whisper base, approved copy restored without changing audio. Boundaries quantized to 30fps, not formal phoneme forced alignment.",
+  "clauses": [
+    {
+      "text": "ناوي تدخل الذكاء الاصطناعي في شغلك؟",
+      "start_s": 0,
+      "end_s": 2.46,
+      "start_frame": 0,
+      "end_frame": 74,
+      "confidence": "medium, ASR phrase boundary with lexical corrections"
+    },
+    {
+      "text": "حلو... بس تبدأ من وين؟",
+      "start_s": 2.46,
+      "end_s": 4.92,
+      "start_frame": 74,
+      "end_frame": 148,
+      "confidence": "medium, ASR phrase boundary with lexical corrections"
+    },
+    {
+      "text": "أداة ترد على العملاء، وأداة تسوي محتوى، وثالثة تطلع تقارير...",
+      "start_s": 4.92,
+      "end_s": 9.58,
+      "start_frame": 148,
+      "end_frame": 287,
+      "confidence": "medium, ASR phrase boundary with lexical corrections"
+    },
+    {
+      "text": "وبالنهاية، فريقك مشغول ينسخ ويلصق بين الأدوات!",
+      "start_s": 9.88,
+      "end_s": 13.12,
+      "start_frame": 296,
+      "end_frame": 394,
+      "confidence": "medium, ASR phrase boundary with lexical corrections"
+    },
+    {
+      "text": "عشان كذا، حنا نبدأ من شغلك نفسه.",
+      "start_s": 13.5,
+      "end_s": 16,
+      "start_frame": 405,
+      "end_frame": 480,
+      "confidence": "medium, ASR phrase boundary with lexical corrections"
+    },
+    {
+      "text": "نفهم كيف يوصلك العميل، وين تتأخر المتابعة، ووش المهام اللي تاخذ من وقت فريقك كل يوم.",
+      "start_s": 16.26,
+      "end_s": 22.1,
+      "start_frame": 488,
+      "end_frame": 663,
+      "confidence": "medium, ASR phrase boundary with lexical corrections"
+    },
+    {
+      "text": "بعدها نربط حلول الذكاء الاصطناعي بالأنظمة اللي تستخدمها.",
+      "start_s": 22.38,
+      "end_s": 26.08,
+      "start_frame": 671,
+      "end_frame": 782,
+      "confidence": "medium, ASR phrase boundary with lexical corrections"
+    },
+    {
+      "text": "نجهز مساعد يرد على الاستفسارات، يرتب العملاء المحتملين، ويتابع الطلبات مع فريقك.",
+      "start_s": 26.3,
+      "end_s": 32,
+      "start_frame": 789,
+      "end_frame": 960,
+      "confidence": "medium, ASR phrase boundary with lexical corrections"
+    },
+    {
+      "text": "وفي التسويق، نرتب إنتاج المحتوى، ومتابعة الحملات، وقراءة النتائج.",
+      "start_s": 32.2,
+      "end_s": 36.92,
+      "start_frame": 966,
+      "end_frame": 1108,
+      "confidence": "medium, ASR phrase boundary with lexical corrections"
+    },
+    {
+      "text": "عشان فريقك يقضي وقته في القرارات المهمة، بدل الشغل المتكرر.",
+      "start_s": 37.24,
+      "end_s": 41.12,
+      "start_frame": 1117,
+      "end_frame": 1234,
+      "confidence": "medium, ASR phrase boundary with lexical corrections"
+    },
+    {
+      "text": "تبي تعرف وين ممكن يفيدك الذكاء الاصطناعي في شغلك؟",
+      "start_s": 41.5,
+      "end_s": 44.64,
+      "start_frame": 1245,
+      "end_frame": 1339,
+      "confidence": "medium, ASR phrase boundary with lexical corrections"
+    },
+    {
+      "text": "راسلنا بكلمة «ابدأ»... وخلنا نحدد أول خطوة تناسبك.",
+      "start_s": 44.64,
+      "end_s": 48.2,
+      "start_frame": 1339,
+      "end_frame": 1446,
+      "confidence": "medium, ASR phrase boundary with lexical corrections"
+    }
+  ],
+  "keyword_landmarks": [
+    {
+      "word": "ترد",
+      "time_s": 5.18,
+      "frame": 155
+    },
+    {
+      "word": "محتوى",
+      "time_s": 7.22,
+      "frame": 217
+    },
+    {
+      "word": "تقارير",
+      "time_s": 9.02,
+      "frame": 271
+    },
+    {
+      "word": "ينسخ",
+      "time_s": 11.6,
+      "frame": 348
+    },
+    {
+      "word": "ويلصق",
+      "time_s": 12.04,
+      "frame": 361
+    },
+    {
+      "word": "شغلك نفسه",
+      "time_s": 15.22,
+      "frame": 457
+    },
+    {
+      "word": "يوصلك العميل",
+      "time_s": 16.88,
+      "frame": 506
+    },
+    {
+      "word": "المتابعة",
+      "time_s": 18.62,
+      "frame": 559
+    },
+    {
+      "word": "المهام",
+      "time_s": 19.8,
+      "frame": 594
+    },
+    {
+      "word": "نربط",
+      "time_s": 22.88,
+      "frame": 686
+    },
+    {
+      "word": "يرد",
+      "time_s": 27.26,
+      "frame": 818
+    },
+    {
+      "word": "يرتب",
+      "time_s": 28.76,
+      "frame": 863
+    },
+    {
+      "word": "يتابع",
+      "time_s": 29.98,
+      "frame": 899
+    },
+    {
+      "word": "المحتوى",
+      "time_s": 33.86,
+      "frame": 1016
+    },
+    {
+      "word": "الحملات",
+      "time_s": 35.14,
+      "frame": 1054
+    },
+    {
+      "word": "النتائج",
+      "time_s": 36.4,
+      "frame": 1092
+    },
+    {
+      "word": "القرارات",
+      "time_s": 38.76,
+      "frame": 1163
+    },
+    {
+      "word": "ابدأ",
+      "time_s": 45.54,
+      "frame": 1366
+    }
+  ]
+}

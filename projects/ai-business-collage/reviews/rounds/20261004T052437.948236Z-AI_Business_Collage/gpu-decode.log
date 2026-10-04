@@ -1,0 +1,6 @@
+Device creation failed: -542398533.
+No device available for decoder: device type qsv needed for codec h264_qsv.
+[vist#0:0/h264 @ 0x560f51135880] Hardware device setup failed for decoder: Generic error in an external library
+[vost#0:0/wrapped_avframe @ 0x560f511e2d00] Error initializing a simple filtergraph
+Error opening output file -.
+Error opening output files: Generic error in an external library

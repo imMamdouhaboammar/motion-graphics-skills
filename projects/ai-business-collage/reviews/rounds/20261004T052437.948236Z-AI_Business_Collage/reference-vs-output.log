@@ -1,0 +1,32 @@
+Input #0, image2, from 'projects/ai-business-collage/reviews/rounds/20261004T052437.948236Z-AI_Business_Collage/evidence/reference-contact-sheet.jpg':
+  Duration: 00:00:00.04, start: 0.000000, bitrate: 22532 kb/s
+  Stream #0:0: Video: mjpeg (Baseline), yuvj420p(pc, bt470bg/unknown/unknown), 1480x1952, 25 fps, 25 tbr, 25 tbn
+Input #1, image2, from 'projects/ai-business-collage/reviews/rounds/20261004T052437.948236Z-AI_Business_Collage/evidence/contact-sheet.jpg':
+  Duration: 00:00:00.04, start: 0.000000, bitrate: 20548 kb/s
+  Stream #1:0: Video: mjpeg (Baseline), yuvj420p(pc, bt470bg/unknown/unknown), 1480x1952 [SAR 1:1 DAR 185:244], 25 fps, 25 tbr, 25 tbn
+Stream mapping:
+  Stream #0:0 (mjpeg) -> scale:default
+  Stream #1:0 (mjpeg) -> scale:default
+  hstack:default -> Stream #0:0 (mjpeg)
+Press [q] to stop, [?] for help
+[swscaler @ 0x5588bf4fe380] deprecated pixel format used, make sure you did set range correctly
+[swscaler @ 0x5588bf7defc0] deprecated pixel format used, make sure you did set range correctly
+[swscaler @ 0x5588bf7b4100] deprecated pixel format used, make sure you did set range correctly
+[swscaler @ 0x5588bf526940] deprecated pixel format used, make sure you did set range correctly
+[swscaler @ 0x5588bf7b4100] deprecated pixel format used, make sure you did set range correctly
+[swscaler @ 0x5588bf7def40] deprecated pixel format used, make sure you did set range correctly
+[swscaler @ 0x5588bf80ae40] deprecated pixel format used, make sure you did set range correctly
+    Last message repeated 1 times
+Output #0, image2, to 'projects/ai-business-collage/reviews/rounds/20261004T052437.948236Z-AI_Business_Collage/evidence/reference-vs-output.jpg':
+  Metadata:
+    encoder         : Lavf60.16.100
+  Stream #0:0: Video: mjpeg, yuvj420p(pc, progressive), 1636x1080, q=2-31, 200 kb/s, 25 fps, 25 tbn
+    Metadata:
+      encoder         : Lavc60.31.102 mjpeg
+    Side data:
+      cpb: bitrate max/min/avg: 0/0/200000 buffer size: 0 vbv_delay: N/A
+frame=    0 fps=0.0 q=11.3 size=       0kB time=00:00:00.00 bitrate=N/A speed=   0x    
+[image2 @ 0x5588bf4f3f40] The specified filename 'projects/ai-business-collage/reviews/rounds/20261004T052437.948236Z-AI_Business_Collage/evidence/reference-vs-output.jpg' does not contain an image sequence pattern or a pattern is invalid.
+[image2 @ 0x5588bf4f3f40] Use a pattern such as %03d for an image sequence or use the -update option (with -frames:v 1 if needed) to write a single image.
+[out#0/image2 @ 0x5588bf4f3e40] video:108kB audio:0kB subtitle:0kB other streams:0kB global headers:0kB muxing overhead: unknown
+frame=    1 fps=0.0 q=11.3 Lsize=N/A time=00:00:00.00 bitrate=N/A speed=   0x    

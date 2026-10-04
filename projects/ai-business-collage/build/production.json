@@ -1,0 +1,56 @@
+{
+  "revision": 2,
+  "status": "V2_RENDERED_USER_REVISION_NOT_USER_APPROVED",
+  "segments": [
+    {
+      "id": "A",
+      "shots": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7
+      ],
+      "engine": "native HyperFrames photographic collage"
+    },
+    {
+      "id": "B",
+      "shots": [
+        8,
+        9,
+        10
+      ],
+      "engine": "native HyperFrames, independently authored card planes"
+    },
+    {
+      "id": "C",
+      "shots": [
+        11,
+        12
+      ],
+      "engine": "native HyperFrames sparse reset"
+    }
+  ],
+  "source": "/workspace/scratch/84a9a71a0bd6/projects/ai-business-collage/input/reference.mp4",
+  "voice_immutable": true,
+  "stage_start_frames": [
+    0,
+    75,
+    148,
+    296,
+    405,
+    488,
+    543,
+    671,
+    789,
+    966,
+    1117,
+    1245,
+    1451
+  ],
+  "prior_revision": "User rejectedV1; retained as archive. No technicalPASS implies fidelityPASS.",
+  "font": "Thmanyah Serif Display calligraphic",
+  "wooden_scene_removed": true
+}

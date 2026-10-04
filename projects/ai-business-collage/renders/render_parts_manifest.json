@@ -1,0 +1,51 @@
+[
+  {
+    "path": "renders/AI_Business_Collage.mp4",
+    "bytes": 32587550,
+    "sha256": "cd6abb898111dfc596cdd81a0bd679093b97b57d814497764fc227a92aee74cf",
+    "parts": [
+      {
+        "path": "renders/AI_Business_Collage.mp4.parts/part-001.bin",
+        "bytes": 10000000,
+        "sha256": "caf948d4194bc71c1eb201aed70d66efd3e243e6b8bd6fe94d8e3ade4e1f1216"
+      },
+      {
+        "path": "renders/AI_Business_Collage.mp4.parts/part-002.bin",
+        "bytes": 10000000,
+        "sha256": "707a9328bfb0207224eb1e0c70f269b6e6eb6b81b8e11b0645eacac35b59a11e"
+      },
+      {
+        "path": "renders/AI_Business_Collage.mp4.parts/part-003.bin",
+        "bytes": 10000000,
+        "sha256": "0cac70fe0cb0f596fbc9d063dd80dcf58f848d50a7955b85f2ea992b287c86d2"
+      },
+      {
+        "path": "renders/AI_Business_Collage.mp4.parts/part-004.bin",
+        "bytes": 2587550,
+        "sha256": "cc5782abc0cf2be75b6da998ce286cf04b29039810d31ff5f0f5ecf8db62374d"
+      }
+    ]
+  },
+  {
+    "path": "renders/archive/AI_Business_Collage_v1_rejected.mp4",
+    "bytes": 21163424,
+    "sha256": "4bdec6314c2616b777909c2f65453f7900db8a46e29af6da64345e29e18073c7",
+    "parts": [
+      {
+        "path": "renders/archive/AI_Business_Collage_v1_rejected.mp4.parts/part-001.bin",
+        "bytes": 10000000,
+        "sha256": "33d5f46c22ab9fc008a2c83c737328bba431d5062c7eb8ff3700cd00d2abf65f"
+      },
+      {
+        "path": "renders/archive/AI_Business_Collage_v1_rejected.mp4.parts/part-002.bin",
+        "bytes": 10000000,
+        "sha256": "1252eb261b900823c2d4a8e124929623208519d21cadfdabdcf8b489c6038a4d"
+      },
+      {
+        "path": "renders/archive/AI_Business_Collage_v1_rejected.mp4.parts/part-003.bin",
+        "bytes": 1163424,
+        "sha256": "96aa52eea5946e99fa25c250d0049d54f584738f0b1b2f0ed8e4648eeddc9654"
+      }
+    ]
+  }
+]

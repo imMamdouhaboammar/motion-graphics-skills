@@ -1,0 +1,55 @@
+{
+  "slug": "ai-business-collage",
+  "status": "V2_RENDERED_USER_REVISION_NOT_USER_APPROVED",
+  "output": {
+    "width": 1080,
+    "height": 1920,
+    "fps": 30,
+    "frames": 1451,
+    "duration_s": 48.36666666666667,
+    "video_codec": "h264",
+    "pixel_format": "yuv420p",
+    "color_space": "bt709",
+    "audio_codec": "aac",
+    "sample_rate": 48000
+  },
+  "inputs": {
+    "voiceover": {
+      "path": "input/voiceover.wav",
+      "sha256": "e6e10319309de5aeb89e154c0ede454679b5744bd6a4affa5bac27406e0ad3fc"
+    },
+    "reference": {
+      "path": "input/reference.mp4",
+      "sha256": "b0c23e5ec553d7cc8f892d19a0e431e5ece592816e6986f91d50c747715c6ef5"
+    }
+  },
+  "font": {
+    "family": "thmanyah serif display",
+    "files": [
+      "assets/fonts/thmanyahserifdisplay-Regular.woff2",
+      "assets/fonts/thmanyahserifdisplay-Bold.woff2",
+      "assets/fonts/thmanyahserifdisplay-Black.woff2"
+    ],
+    "fallback_allowed": false,
+    "official_source": "https://font.thmanyah.com/",
+    "redistribute_font_files": false
+  },
+  "image_generation": {
+    "requested_model": "GPT Images 2.5",
+    "available_tool": "image_gen.imagegen",
+    "model_selectable": false,
+    "model_identity_verifiable": false,
+    "substitution_approved": true,
+    "authorization": "User explicitly authorized available native image tool on 2026-10-04"
+  },
+  "runtime": {
+    "preferred": "HyperFrames + GSAP",
+    "hardware_workload_verified": false,
+    "cpu_fallback_approved": true,
+    "actual_path": "Chromium153 software screenshot capture; FFmpeg libx264 CPU"
+  },
+  "source_repository": {
+    "url": "https://github.com/imMamdouhaboammar/motion-graphics-skills",
+    "commit": "80664b6c3a25e2267adf596537ce37238fc1217c"
+  }
+}

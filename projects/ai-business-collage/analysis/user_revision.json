@@ -1,0 +1,14 @@
+{
+  "request": "Remove wooden surface scene and replace Sans with authentic Thmanyah calligraphic Serif Display",
+  "deleted_active_assets": [
+    "R01_overhead_workspace.png",
+    "A08"
+  ],
+  "font_files": [
+    "thmanyahserifdisplay-Regular.woff2",
+    "thmanyahserifdisplay-Bold.woff2",
+    "thmanyahserifdisplay-Black.woff2"
+  ],
+  "scene3": "Handheld client phone, printed content, report on ivory; no desk or wooden surface",
+  "reference_override": "Wooden reference mechanism explicitly removed at user request"
+}

@@ -1,0 +1,5 @@
+video   720x1280 30.0fps 38.7s
+shots   {'count': 0, 'mean_shot_s': None, 'shortest_s': None, 'longest_s': None}
+audio   117.45 bpm, first beat 1.463s, noise floor -17.7 dB, phase_inverted=False
+best 30s windows: [7.57, 1.46, 5.53, 3.48]
+wrote projects/ai-business-collage/analysis/rebuild/clone_analysis/report.json

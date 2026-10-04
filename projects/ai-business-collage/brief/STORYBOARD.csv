@@ -1,0 +1,13 @@
+﻿scene,reference_start_s_approx,reference_end_s_approx,target_start_s_approx,target_end_s_approx,beat,approx_voice_phrase,original_target_scene,camera_motion_ref_grammar,transition,asset_ids
+1,0,1.7,0,2.1,Launch / first question,ناوي تدخل الذكاء الاصطناعي,Warm physical start-line founder cutout; separate burgundy ribbon and sky paper,low camera drop + prop reveal,snap cut,A01 A02
+2,1.7,4.7,2.1,5.9,Uncertainty,حلو... بس تبدأ من وين؟,Paper-frontal manager surrounded by disconnected prop screens,"frontal locked center, hands advance from edges",paper hard cut,A03 A04 A05 A06 A07
+3,4.7,8.4,5.9,10.5,Three disconnected tools,أداة ترد... وأداة تسوي... وثالثة تقارير,Real 90-degree overhead desk with three separated islands,topdown snap reframes x3,reframe cut,A08 A09 A10 A11
+4,8.4,11,10.5,13.7,Manual copy paste,فريقك مشغول ينسخ ويلصق,Office worker composed of disconnected wardrobe/UI-paper pieces,"hard jump assembly, one short push",number/type punch,A12 A13 A14 A15 A16
+5,11,16.8,13.7,21,Business-process map,حنا نبدأ من شغلك نفسه,Illustrated non-geographic work map with five meaningful burgundy stops,long route-follow topdown camera,straight matched cut,A32 procedural path
+6,16.8,19.3,21,24.1,How customers arrive,نفهم كيف يوصلك العميل,Repetitions of individual customer-journey photo cutouts,lateral repeat cascade + one punch,masked paper swap,A17 A18 A19
+7,19.3,22.8,24.1,28.5,Work bottlenecks,وين تتأخر المتابعة... وش المهام,"Physical hands exchange pending paper slips, old messages and calendar cards",close prop handoff + axial move,paper occlusion,A20 A21 A22
+8,22.8,26,28.5,32.5,Connect existing systems,نربط حلول الذكاء الاصطناعي,"Photographed real monitor, blank dashboard, cardboard-like connector paths",frontal snap + screen-plane tilt,hard screen reveal,A23 A24
+9,26,30.8,32.5,38.4,AI assistant + campaigns,يرد ... يرتب ... يتابع ... التسويق,"Angled physical cards: inbox, qualified leads, follow-up, campaign design, report","diagonal tracked move, cards pass camera",angle-match cut,A25 A26 A27 A28 A29 A30
+10,30.8,32.7,38.4,40.8,Content montage,إنتاج المحتوى، ومتابعة الحملات,Dark relief interlude with 3-4 stacked tall creative previews,rapid stagger vertical tiles + lateral rack,hard ivory cut,A27 A28 A29 A30
+11,32.7,35.1,40.8,44.0,Time for decisions,فريقك يقضي وقته في القرارات المهمة,"Parchment reset, calm Arabic words and one photographed lead exiting","mostly still, small recession",instant cream cut,A31 A32
+12,35.1,38.704807,44,48.352667,Ask to start,تبي تعرف... راسلنا بكلمة ابدأ,Ivory close with real words «راسلنا بكلمة ابدأ» and low-key last line,near-static final hold,none; final CTA,A32

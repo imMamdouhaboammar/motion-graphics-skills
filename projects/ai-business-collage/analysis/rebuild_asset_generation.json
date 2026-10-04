@@ -1,0 +1,42 @@
+[
+  {
+    "id": "R01",
+    "prompt": "Generate a photographic editorial environment plate for a premium paper-cut animation, portrait 9:16 composition. TRUE EXACT 90-DEGREE BIRD'S-EYE OVERHEAD PHOTO, optical axis perpendicular to floor; no oblique view, no horizon. Entire large rectangular deep burgundy and warm walnut collaborative worktable seen from above inside an elegant Saudi coworking room with muted desaturated olive and cream floor. Four EMPTY charcoal chairs arranged around the table, clearly visible from above. The whole table and some surrounding room floor visible, with purposeful rich occupied tabletop density: three open laptops with completely blank ivory screens seen from above, one tablet with blank screen, physical blank ivory sheets, blank notebooks, burgundy file folders, loose paper slips, pencils, two ceramic coffee cups, neatly functional office objects. No people, no bodies, no hands. Photo looks tangible and dimensional through natural shadows and real floor/table/chair architecture. Warm diffuse daylight from upper-left. Editorial high-end documentary photography, fine authentic textures, warm desaturated palette. Real objects, not illustrations or icons. No readable text, no letters, no numbers, no logos, no watermarks. Do NOT make a closeup of empty wood: this is an entire overhead office workspace with rich physical prop density and room context. Crisp photographic details.",
+    "source_png": "/workspace/scratch/84a9a71a0bd6/generated_images/exec-ef2455fa-9307-4e3a-bda5-2c1a6918c790.png",
+    "destination": "projects/ai-business-collage/assets/rebuild/R01_overhead_workspace.png",
+    "tool": "image_gen.imagegen",
+    "model_identity": "not exposed",
+    "transparent_background": false,
+    "dimensions": [
+      941,
+      1672
+    ],
+    "mode": "RGB",
+    "visual_review": "True overhead workspace with four chairs and full room context, dense tangible props"
+  },
+  {
+    "id": "R02",
+    "prompt": "Photoreal original object cutout for an editorial paper collage animation: one healthy mature leafy olive plant in a simple warm neutral plain terracotta pot, full plant side view including every leaf, trunk, and complete pot, isolated on TRANSPARENT background. Natural irregular foliage, small dense sage olive green leaves, elegant woody branches. About 150 cm tall relative to medium sized earthy terracotta pot. Entire object centered with generous clear space around outer leaves and bottom of pot, absolutely no clipping. Authentic daylight from upper left, soft dimensional natural shadows ON object, no broad cast shadow or background. Tangible high detail editorial photography, realistic subtle imperfections, desaturated warm green palette. It is the actual plant and actual pot, NOT a photo print, NOT inside a rectangle, NOT a poster, NOT an illustration. No frame, no text, no label, no logo, no watermark. Transparent background cleanly separating independent movable object.",
+    "source_png": "/workspace/scratch/84a9a71a0bd6/generated_images/exec-9922f42e-89f2-460d-9428-51b031d461c8.png",
+    "destination": "projects/ai-business-collage/assets/rebuild/R02_olive_plant.png",
+    "tool": "image_gen.imagegen",
+    "model_identity": "not exposed",
+    "transparent_background": true,
+    "dimensions": [
+      1024,
+      1536
+    ],
+    "mode": "RGBA",
+    "alpha_extrema": [
+      0,
+      254
+    ],
+    "corner_alpha": [
+      0,
+      0,
+      0,
+      0
+    ],
+    "visual_review": "Plant and pot full object rather than print, all leaves included; displayed preview shows broad dark green haze, alpha needs compositor check"
+  }
+]

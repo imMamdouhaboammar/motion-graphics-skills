@@ -1,0 +1,11 @@
+[SystemMemory] cgroup memory limit detected: 8192 MiB — it governs memory-adaptive render behaviour instead of host RAM.
+◆  Capturing 3 frames at [0.4s, 1s, 1.8s] from 3
+
+   Fonts: 3 loaded
+
+◇  3 snapshots saved to /workspace/scratch/84a9a71a0bd6/projects/ai-business-collage/studies/3/snapshots
+   snapshots/frame-00-at-0.4s.png
+   snapshots/frame-01-at-1s.png
+   snapshots/frame-02-at-1.8s.png
+   contact-sheet.jpg (grid view for AI review)
+   --describe: GEMINI_API_KEY not set, skipping

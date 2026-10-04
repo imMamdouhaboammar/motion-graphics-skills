@@ -1,0 +1,59 @@
+{
+  "fonts": {
+    "bold": true,
+    "regular": true,
+    "black": true
+  },
+  "results": [
+    {
+      "time": 1.7,
+      "deterministic": true,
+      "sha256": "0f3b63d23eb812fd4b524e5b39dfdf5e4bb3dc1f117880b61157960324f5f25e"
+    },
+    {
+      "time": 7.6,
+      "deterministic": true,
+      "sha256": "c5377e77ed7bb526f3c24f9e26fcf3740bc3ad7ac71a34ca6b4307e80073f427"
+    },
+    {
+      "time": 12,
+      "deterministic": true,
+      "sha256": "2dbb5c98f91f7fbe75ae522e3c3248bc68293732e5d0cee69fd07518daacca6c"
+    },
+    {
+      "time": 15.8,
+      "deterministic": true,
+      "sha256": "0290fafa742b11dad78b53fbd9c1efce4f3b609ef3de86897d6e10d179a31d39"
+    },
+    {
+      "time": 17.6,
+      "deterministic": true,
+      "sha256": "c409d28f7f150b54238e21e0a8a74fa796bbda9558576a5be01f0f6295e496c7"
+    },
+    {
+      "time": 25,
+      "deterministic": true,
+      "sha256": "6a970f206b4dfd0cd856bf958ece391ebce5bfe4b6a8b263aadb9ae9452ce55a"
+    },
+    {
+      "time": 29.5,
+      "deterministic": true,
+      "sha256": "4cb174fd5a37228eecccb281096c963f072a5ea66e8d6c7b6b6c463189ba4f38"
+    },
+    {
+      "time": 35.7,
+      "deterministic": true,
+      "sha256": "47b5f6e122fd5a9a690b52386f2b3c7f9579a0ce30f58fca5a91f2fd45b5abe7"
+    },
+    {
+      "time": 39.7,
+      "deterministic": true,
+      "sha256": "6253e3487cd58b5e9d74c353e9444f03ffae49519f18f2d910444128a36142d3"
+    },
+    {
+      "time": 48.333333,
+      "deterministic": true,
+      "sha256": "b6088d3acec1eba31bbb3d6b9ef1c26c348b1a734c8cdae67eb0501499fb6960"
+    }
+  ]
+}

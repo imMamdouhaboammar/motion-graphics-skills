@@ -1,0 +1,1799 @@
+{
+  "ok": false,
+  "strict": false,
+  "lint": {
+    "ok": true,
+    "errorCount": 0,
+    "warningCount": 15,
+    "infoCount": 0,
+    "findings": [
+      {
+        "code": "duplicate_media_discovery_risk",
+        "severity": "warning",
+        "message": "Detected 2 matching img entries with the same source/start/duration.",
+        "selector": "[data-composition-id]",
+        "dataAttributes": {},
+        "sourceFile": "/workspace/scratch/84a9a71a0bd6/projects/ai-business-collage/index.html",
+        "bbox": {
+          "x": 0,
+          "y": 0,
+          "width": 0,
+          "height": 0
+        },
+        "time": 0,
+        "fixHint": "Avoid duplicated media nodes that can be discovered twice during compilation."
+      },
+      {
+        "code": "duplicate_media_discovery_risk",
+        "severity": "warning",
+        "message": "Detected 3 matching img entries with the same source/start/duration.",
+        "selector": "[data-composition-id]",
+        "dataAttributes": {},
+        "sourceFile": "/workspace/scratch/84a9a71a0bd6/projects/ai-business-collage/index.html",
+        "bbox": {
+          "x": 0,
+          "y": 0,
+          "width": 0,
+          "height": 0
+        },
+        "time": 0,
+        "fixHint": "Avoid duplicated media nodes that can be discovered twice during compilation."
+      },
+      {
+        "code": "duplicate_media_discovery_risk",
+        "severity": "warning",
+        "message": "Detected 5 matching img entries with the same source/start/duration.",
+        "selector": "[data-composition-id]",
+        "dataAttributes": {},
+        "sourceFile": "/workspace/scratch/84a9a71a0bd6/projects/ai-business-collage/index.html",
+        "bbox": {
+          "x": 0,
+          "y": 0,
+          "width": 0,
+          "height": 0
+        },
+        "time": 0,
+        "fixHint": "Avoid duplicated media nodes that can be discovered twice during compilation."
+      },
+      {
+        "code": "nested_structure_needs_subcomposition",
+        "severity": "warning",
+        "message": "<section id=\"s1\"> is a timeline element that contains nested <div id=\"w1\">. The timeline shows one row per top-level element, and the root composition is built only from sub-compositions.",
+        "selector": "#s1",
+        "dataAttributes": {},
+        "sourceFile": "/workspace/scratch/84a9a71a0bd6/projects/ai-business-collage/index.html",
+        "bbox": {
+          "x": 0,
+          "y": 0,
+          "width": 0,
+          "height": 0
+        },
+        "time": 0,
+        "fixHint": "Move <section id=\"s1\"> and its contents into a sub-composition file and mount it with data-composition-src."
+      },
+      {
+        "code": "nested_structure_needs_subcomposition",
+        "severity": "warning",
+        "message": "<section id=\"s2\"> is a timeline element that contains nested <div id=\"w2\">. The timeline shows one row per top-level element, and the root composition is built only from sub-compositions.",
+        "selector": "#s2",
+        "dataAttributes": {},
+        "sourceFile": "/workspace/scratch/84a9a71a0bd6/projects/ai-business-collage/index.html",
+        "bbox": {
+          "x": 0,
+          "y": 0,
+          "width": 0,
+          "height": 0
+        },
+        "time": 0,
+        "fixHint": "Move <section id=\"s2\"> and its contents into a sub-composition file and mount it with data-composition-src."
+      },
+      {
+        "code": "nested_structure_needs_subcomposition",
+        "severity": "warning",
+        "message": "<section id=\"s3\"> is a timeline element that contains nested <div id=\"w3\">. The timeline shows one row per top-level element, and the root composition is built only from sub-compositions.",
+        "selector": "#s3",
+        "dataAttributes": {},
+        "sourceFile": "/workspace/scratch/84a9a71a0bd6/projects/ai-business-collage/index.html",
+        "bbox": {
+          "x": 0,
+          "y": 0,
+          "width": 0,
+          "height": 0
+        },
+        "time": 0,
+        "fixHint": "Move <section id=\"s3\"> and its contents into a sub-composition file and mount it with data-composition-src."
+      },
+      {
+        "code": "nested_structure_needs_subcomposition",
+        "severity": "warning",
+        "message": "<section id=\"s4\"> is a timeline element that contains nested <div id=\"w4\">. The timeline shows one row per top-level element, and the root composition is built only from sub-compositions.",
+        "selector": "#s4",
+        "dataAttributes": {},
+        "sourceFile": "/workspace/scratch/84a9a71a0bd6/projects/ai-business-collage/index.html",
+        "bbox": {
+          "x": 0,
+          "y": 0,
+          "width": 0,
+          "height": 0
+        },
+        "time": 0,
+        "fixHint": "Move <section id=\"s4\"> and its contents into a sub-composition file and mount it with data-composition-src."
+      },
+      {
+        "code": "nested_structure_needs_subcomposition",
+        "severity": "warning",
+        "message": "<section id=\"s5\"> is a timeline element that contains nested <div id=\"w5\">. The timeline shows one row per top-level element, and the root composition is built only from sub-compositions.",
+        "selector": "#s5",
+        "dataAttributes": {},
+        "sourceFile": "/workspace/scratch/84a9a71a0bd6/projects/ai-business-collage/index.html",
+        "bbox": {
+          "x": 0,
+          "y": 0,
+          "width": 0,
+          "height": 0
+        },
+        "time": 0,
+        "fixHint": "Move <section id=\"s5\"> and its contents into a sub-composition file and mount it with data-composition-src."
+      },
+      {
+        "code": "nested_structure_needs_subcomposition",
+        "severity": "warning",
+        "message": "<section id=\"s6\"> is a timeline element that contains nested <div id=\"w6\">. The timeline shows one row per top-level element, and the root composition is built only from sub-compositions.",
+        "selector": "#s6",
+        "dataAttributes": {},
+        "sourceFile": "/workspace/scratch/84a9a71a0bd6/projects/ai-business-collage/index.html",
+        "bbox": {
+          "x": 0,
+          "y": 0,
+          "width": 0,
+          "height": 0
+        },
+        "time": 0,
+        "fixHint": "Move <section id=\"s6\"> and its contents into a sub-composition file and mount it with data-composition-src."
+      },
+      {
+        "code": "nested_structure_needs_subcomposition",
+        "severity": "warning",
+        "message": "<section id=\"s7\"> is a timeline element that contains nested <div id=\"w7\">. The timeline shows one row per top-level element, and the root composition is built only from sub-compositions.",
+        "selector": "#s7",
+        "dataAttributes": {},
+        "sourceFile": "/workspace/scratch/84a9a71a0bd6/projects/ai-business-collage/index.html",
+        "bbox": {
+          "x": 0,
+          "y": 0,
+          "width": 0,
+          "height": 0
+        },
+        "time": 0,
+        "fixHint": "Move <section id=\"s7\"> and its contents into a sub-composition file and mount it with data-composition-src."
+      },
+      {
+        "code": "nested_structure_needs_subcomposition",
+        "severity": "warning",
+        "message": "<section id=\"s8\"> is a timeline element that contains nested <div id=\"w8\">. The timeline shows one row per top-level element, and the root composition is built only from sub-compositions.",
+        "selector": "#s8",
+        "dataAttributes": {},
+        "sourceFile": "/workspace/scratch/84a9a71a0bd6/projects/ai-business-collage/index.html",
+        "bbox": {
+          "x": 0,
+          "y": 0,
+          "width": 0,
+          "height": 0
+        },
+        "time": 0,
+        "fixHint": "Move <section id=\"s8\"> and its contents into a sub-composition file and mount it with data-composition-src."
+      },
+      {
+        "code": "nested_structure_needs_subcomposition",
+        "severity": "warning",
+        "message": "<section id=\"s9\"> is a timeline element that contains nested <div id=\"w9\">. The timeline shows one row per top-level element, and the root composition is built only from sub-compositions.",
+        "selector": "#s9",
+        "dataAttributes": {},
+        "sourceFile": "/workspace/scratch/84a9a71a0bd6/projects/ai-business-collage/index.html",
+        "bbox": {
+          "x": 0,
+          "y": 0,
+          "width": 0,
+          "height": 0
+        },
+        "time": 0,
+        "fixHint": "Move <section id=\"s9\"> and its contents into a sub-composition file and mount it with data-composition-src."
+      },
+      {
+        "code": "nested_structure_needs_subcomposition",
+        "severity": "warning",
+        "message": "<section id=\"s10\"> is a timeline element that contains nested <div id=\"w10\">. The timeline shows one row per top-level element, and the root composition is built only from sub-compositions.",
+        "selector": "#s10",
+        "dataAttributes": {},
+        "sourceFile": "/workspace/scratch/84a9a71a0bd6/projects/ai-business-collage/index.html",
+        "bbox": {
+          "x": 0,
+          "y": 0,
+          "width": 0,
+          "height": 0
+        },
+        "time": 0,
+        "fixHint": "Move <section id=\"s10\"> and its contents into a sub-composition file and mount it with data-composition-src."
+      },
+      {
+        "code": "nested_structure_needs_subcomposition",
+        "severity": "warning",
+        "message": "<section id=\"s11\"> is a timeline element that contains nested <div id=\"w11\">. The timeline shows one row per top-level element, and the root composition is built only from sub-compositions.",
+        "selector": "#s11",
+        "dataAttributes": {},
+        "sourceFile": "/workspace/scratch/84a9a71a0bd6/projects/ai-business-collage/index.html",
+        "bbox": {
+          "x": 0,
+          "y": 0,
+          "width": 0,
+          "height": 0
+        },
+        "time": 0,
+        "fixHint": "Move <section id=\"s11\"> and its contents into a sub-composition file and mount it with data-composition-src."
+      },
+      {
+        "code": "nested_structure_needs_subcomposition",
+        "severity": "warning",
+        "message": "<section id=\"s12\"> is a timeline element that contains nested <div id=\"w12\">. The timeline shows one row per top-level element, and the root composition is built only from sub-compositions.",
+        "selector": "#s12",
+        "dataAttributes": {},
+        "sourceFile": "/workspace/scratch/84a9a71a0bd6/projects/ai-business-collage/index.html",
+        "bbox": {
+          "x": 0,
+          "y": 0,
+          "width": 0,
+          "height": 0
+        },
+        "time": 0,
+        "fixHint": "Move <section id=\"s12\"> and its contents into a sub-composition file and mount it with data-composition-src."
+      }
+    ],
+    "filesScanned": 1
+  },
+  "runtime": {
+    "ok": true,
+    "errorCount": 0,
+    "warningCount": 0,
+    "infoCount": 0,
+    "findings": []
+  },
+  "layout": {
+    "ok": false,
+    "errorCount": 2,
+    "warningCount": 0,
+    "infoCount": 35,
+    "findings": [
+      {
+        "code": "content_overlap",
+        "severity": "error",
+        "time": 11.748,
+        "selector": "#three",
+        "message": "Two text blocks overlap and may render unreadable.",
+        "rect": {
+          "left": 214.24,
+          "top": 93.61,
+          "right": 865.74,
+          "bottom": 1155.86,
+          "width": 651.5,
+          "height": 1062.25
+        },
+        "containerSelector": "#copy",
+        "text": "٣",
+        "fixHint": "Give each block its own zone, or mark intentional layering with data-layout-allow-overlap.",
+        "dataAttributes": {},
+        "sourceFile": "index.html",
+        "bbox": {
+          "x": 214.24,
+          "y": 93.61,
+          "width": 651.5,
+          "height": 1062.25
+        },
+        "firstSeen": 11.748,
+        "lastSeen": 13.498,
+        "occurrences": 16,
+        "heldMs": 1750
+      },
+      {
+        "code": "content_overlap",
+        "severity": "error",
+        "time": 29.87,
+        "selector": "#assistant",
+        "message": "Two text blocks overlap and may render unreadable.",
+        "rect": {
+          "left": 140.14,
+          "top": 248,
+          "right": 939.86,
+          "bottom": 352,
+          "width": 799.72,
+          "height": 104
+        },
+        "containerSelector": "#cardlabel2",
+        "text": "مساعد يعمل مع فريقك",
+        "fixHint": "Give each block its own zone, or mark intentional layering with data-layout-allow-overlap.",
+        "dataAttributes": {},
+        "sourceFile": "index.html",
+        "bbox": {
+          "x": 140.14,
+          "y": 248,
+          "width": 799.72,
+          "height": 104
+        },
+        "firstSeen": 29.87,
+        "lastSeen": 30.495,
+        "occurrences": 6,
+        "heldMs": 625
+      },
+      {
+        "code": "canvas_overflow",
+        "severity": "info",
+        "time": 8.061,
+        "selector": "#tool0",
+        "message": "Text extends outside the composition canvas.",
+        "rect": {
+          "left": -825,
+          "top": 228,
+          "right": -532.55,
+          "bottom": 378,
+          "width": 292.45,
+          "height": 150
+        },
+        "containerSelector": "#main",
+        "text": "الردود",
+        "fixHint": "Move the text inward, reduce its size, or mark intentional off-canvas animation with data-layout-allow-overflow.",
+        "containerRect": {
+          "left": 0,
+          "top": 0,
+          "right": 1080,
+          "bottom": 1920,
+          "width": 1080,
+          "height": 1920
+        },
+        "overflow": {
+          "left": 825
+        },
+        "dataAttributes": {},
+        "sourceFile": "index.html",
+        "bbox": {
+          "x": -825,
+          "y": 228,
+          "width": 292.45,
+          "height": 150
+        },
+        "firstSeen": 8.061,
+        "lastSeen": 8.061,
+        "occurrences": 1,
+        "heldMs": 0
+      },
+      {
+        "code": "canvas_overflow",
+        "severity": "info",
+        "time": 8.061,
+        "selector": "#toolsmall0",
+        "message": "Text extends outside the composition canvas.",
+        "rect": {
+          "left": -735.03,
+          "top": 1499,
+          "right": -632.5,
+          "bottom": 1579,
+          "width": 102.53,
+          "height": 80
+        },
+        "containerSelector": "#main",
+        "text": "أداة",
+        "fixHint": "Move the text inward, reduce its size, or mark intentional off-canvas animation with data-layout-allow-overflow.",
+        "containerRect": {
+          "left": 0,
+          "top": 0,
+          "right": 1080,
+          "bottom": 1920,
+          "width": 1080,
+          "height": 1920
+        },
+        "overflow": {
+          "left": 735.03
+        },
+        "dataAttributes": {},
+        "sourceFile": "index.html",
+        "bbox": {
+          "x": -735.03,
+          "y": 1499,
+          "width": 102.53,
+          "height": 80
+        },
+        "firstSeen": 8.061,
+        "lastSeen": 8.061,
+        "occurrences": 1,
+        "heldMs": 0
+      },
+      {
+        "code": "canvas_overflow",
+        "severity": "info",
+        "time": 8.061,
+        "selector": "#tool2",
+        "message": "Text extends outside the composition canvas.",
+        "rect": {
+          "left": 1363.25,
+          "top": 228,
+          "right": 1679.22,
+          "bottom": 378,
+          "width": 315.97,
+          "height": 150
+        },
+        "containerSelector": "#main",
+        "text": "التقارير",
+        "fixHint": "Move the text inward, reduce its size, or mark intentional off-canvas animation with data-layout-allow-overflow.",
+        "containerRect": {
+          "left": 0,
+          "top": 0,
+          "right": 1080,
+          "bottom": 1920,
+          "width": 1080,
+          "height": 1920
+        },
+        "overflow": {
+          "right": 599.22
+        },
+        "dataAttributes": {},
+        "sourceFile": "index.html",
+        "bbox": {
+          "x": 1363.25,
+          "y": 228,
+          "width": 315.97,
+          "height": 150
+        },
+        "firstSeen": 8.061,
+        "lastSeen": 8.061,
+        "occurrences": 1,
+        "heldMs": 0
+      },
+      {
+        "code": "canvas_overflow",
+        "severity": "info",
+        "time": 8.061,
+        "selector": "#toolsmall2",
+        "message": "Text extends outside the composition canvas.",
+        "rect": {
+          "left": 1444.26,
+          "top": 1499,
+          "right": 1588.2,
+          "bottom": 1579,
+          "width": 143.94,
+          "height": 80
+        },
+        "containerSelector": "#main",
+        "text": "وثالثة",
+        "fixHint": "Move the text inward, reduce its size, or mark intentional off-canvas animation with data-layout-allow-overflow.",
+        "containerRect": {
+          "left": 0,
+          "top": 0,
+          "right": 1080,
+          "bottom": 1920,
+          "width": 1080,
+          "height": 1920
+        },
+        "overflow": {
+          "right": 508.2
+        },
+        "dataAttributes": {},
+        "sourceFile": "index.html",
+        "bbox": {
+          "x": 1444.26,
+          "y": 1499,
+          "width": 143.94,
+          "height": 80
+        },
+        "firstSeen": 8.061,
+        "lastSeen": 8.061,
+        "occurrences": 1,
+        "heldMs": 0
+      },
+      {
+        "code": "container_overflow",
+        "severity": "info",
+        "time": 8.061,
+        "selector": "#w3",
+        "message": "Element extends outside a clipping layout container.",
+        "rect": {
+          "left": -1183.77,
+          "top": 0,
+          "right": 2116.23,
+          "bottom": 1920,
+          "width": 3300,
+          "height": 1920
+        },
+        "containerSelector": "#s3",
+        "fixHint": "Resize/reposition the child or container, or mark intentional overflow with data-layout-allow-overflow.",
+        "containerRect": {
+          "left": 0,
+          "top": 0,
+          "right": 1080,
+          "bottom": 1920,
+          "width": 1080,
+          "height": 1920
+        },
+        "overflow": {
+          "left": 1183.77,
+          "right": 1036.23
+        },
+        "dataAttributes": {},
+        "sourceFile": "index.html",
+        "bbox": {
+          "x": -1183.77,
+          "y": 0,
+          "width": 3300,
+          "height": 1920
+        },
+        "firstSeen": 8.061,
+        "lastSeen": 8.061,
+        "occurrences": 1,
+        "heldMs": 0
+      },
+      {
+        "code": "text_occluded",
+        "severity": "info",
+        "time": 13.435,
+        "selector": "#three",
+        "message": "Text is hidden beneath an opaque element.",
+        "rect": {
+          "left": 214.24,
+          "top": 93.61,
+          "right": 865.74,
+          "bottom": 1155.86,
+          "width": 651.5,
+          "height": 1062.26
+        },
+        "containerSelector": "#worker",
+        "text": "٣",
+        "fixHint": "Give the text its own zone, raise its stacking order above the covering element, or mark intentional layering with data-layout-allow-occlusion.",
+        "coveredFraction": 0.15,
+        "dataAttributes": {},
+        "sourceFile": "index.html",
+        "bbox": {
+          "x": 214.24,
+          "y": 93.61,
+          "width": 651.5,
+          "height": 1062.26
+        },
+        "firstSeen": 13.435,
+        "lastSeen": 13.435,
+        "occurrences": 1,
+        "heldMs": 0
+      },
+      {
+        "code": "container_overflow",
+        "severity": "info",
+        "time": 13.435,
+        "selector": "#three",
+        "message": "Element extends outside a clipping layout container.",
+        "rect": {
+          "left": -69.57,
+          "top": 200.53,
+          "right": 1149.57,
+          "bottom": 1049.94,
+          "width": 1219.15,
+          "height": 849.41
+        },
+        "containerSelector": "#w4",
+        "fixHint": "Resize/reposition the child or container, or mark intentional overflow with data-layout-allow-overflow.",
+        "containerRect": {
+          "left": 0.38,
+          "top": 0.67,
+          "right": 1079.62,
+          "bottom": 1919.33,
+          "width": 1079.24,
+          "height": 1918.66
+        },
+        "overflow": {
+          "left": 69.95,
+          "right": 69.95
+        },
+        "dataAttributes": {},
+        "sourceFile": "index.html",
+        "bbox": {
+          "x": -69.57,
+          "y": 200.53,
+          "width": 1219.15,
+          "height": 849.41
+        },
+        "firstSeen": 13.435,
+        "lastSeen": 13.435,
+        "occurrences": 1,
+        "heldMs": 0
+      },
+      {
+        "code": "container_overflow",
+        "severity": "info",
+        "time": 13.435,
+        "selector": "#transfer",
+        "message": "Element extends outside a clipping layout container.",
+        "rect": {
+          "left": 100.31,
+          "top": 1039.94,
+          "right": 1299.47,
+          "bottom": 1639.52,
+          "width": 1199.16,
+          "height": 599.58
+        },
+        "containerSelector": "#w4",
+        "fixHint": "Resize/reposition the child or container, or mark intentional overflow with data-layout-allow-overflow.",
+        "containerRect": {
+          "left": 0.38,
+          "top": 0.67,
+          "right": 1079.62,
+          "bottom": 1919.33,
+          "width": 1079.24,
+          "height": 1918.66
+        },
+        "overflow": {
+          "right": 219.85
+        },
+        "dataAttributes": {
+          "data-hf-authored-opacity": ""
+        },
+        "sourceFile": "index.html",
+        "bbox": {
+          "x": 100.31,
+          "y": 1039.94,
+          "width": 1199.16,
+          "height": 599.58
+        },
+        "firstSeen": 13.435,
+        "lastSeen": 13.435,
+        "occurrences": 1,
+        "heldMs": 0
+      },
+      {
+        "code": "container_overflow",
+        "severity": "info",
+        "time": 18.809,
+        "selector": "#folders",
+        "message": "Element extends outside a clipping layout container.",
+        "rect": {
+          "left": 472.93,
+          "top": 901.51,
+          "right": 1106.61,
+          "bottom": 1323.96,
+          "width": 633.68,
+          "height": 422.45
+        },
+        "containerSelector": "#w7",
+        "fixHint": "Resize/reposition the child or container, or mark intentional overflow with data-layout-allow-overflow.",
+        "containerRect": {
+          "left": 13.55,
+          "top": 24.1,
+          "right": 1066.45,
+          "bottom": 1895.9,
+          "width": 1052.89,
+          "height": 1871.81
+        },
+        "overflow": {
+          "right": 40.16
+        },
+        "dataAttributes": {
+          "data-hf-authored-opacity": ""
+        },
+        "sourceFile": "index.html",
+        "bbox": {
+          "x": 472.93,
+          "y": 901.51,
+          "width": 633.68,
+          "height": 422.45
+        },
+        "firstSeen": 18.809,
+        "lastSeen": 18.809,
+        "occurrences": 1,
+        "heldMs": 0
+      },
+      {
+        "code": "container_overflow",
+        "severity": "info",
+        "time": 24.183,
+        "selector": "#monitor",
+        "message": "Element extends outside a clipping layout container.",
+        "rect": {
+          "left": -30,
+          "top": 590,
+          "right": 1110,
+          "bottom": 1350,
+          "width": 1140,
+          "height": 760
+        },
+        "containerSelector": "#w8",
+        "fixHint": "Resize/reposition the child or container, or mark intentional overflow with data-layout-allow-overflow.",
+        "containerRect": {
+          "left": 0,
+          "top": 0,
+          "right": 1080,
+          "bottom": 1920,
+          "width": 1080,
+          "height": 1920
+        },
+        "overflow": {
+          "left": 30,
+          "right": 30
+        },
+        "dataAttributes": {
+          "data-hf-authored-opacity": ""
+        },
+        "sourceFile": "index.html",
+        "bbox": {
+          "x": -30,
+          "y": 590,
+          "width": 1140,
+          "height": 760
+        },
+        "firstSeen": 24.183,
+        "lastSeen": 24.183,
+        "occurrences": 1,
+        "heldMs": 0
+      },
+      {
+        "code": "canvas_overflow",
+        "severity": "info",
+        "time": 29.557,
+        "selector": "#cardlabel0",
+        "message": "Text extends outside the composition canvas.",
+        "rect": {
+          "left": -748.19,
+          "top": 808.82,
+          "right": -644.67,
+          "bottom": 916.76,
+          "width": 103.52,
+          "height": 107.94
+        },
+        "containerSelector": "#main",
+        "text": "يرد",
+        "fixHint": "Move the text inward, reduce its size, or mark intentional off-canvas animation with data-layout-allow-overflow.",
+        "containerRect": {
+          "left": 0,
+          "top": 0,
+          "right": 1080,
+          "bottom": 1920,
+          "width": 1080,
+          "height": 1920
+        },
+        "overflow": {
+          "left": 748.19
+        },
+        "dataAttributes": {},
+        "sourceFile": "index.html",
+        "bbox": {
+          "x": -748.19,
+          "y": 808.82,
+          "width": 103.52,
+          "height": 107.94
+        },
+        "firstSeen": 29.557,
+        "lastSeen": 29.557,
+        "occurrences": 1,
+        "heldMs": 0
+      },
+      {
+        "code": "canvas_overflow",
+        "severity": "info",
+        "time": 29.557,
+        "selector": "#cardlabel1",
+        "message": "Text extends outside the composition canvas.",
+        "rect": {
+          "left": -73.29,
+          "top": 588.3,
+          "right": 76.62,
+          "bottom": 710.42,
+          "width": 149.91,
+          "height": 122.12
+        },
+        "containerSelector": "#main",
+        "text": "يرتب",
+        "fixHint": "Move the text inward, reduce its size, or mark intentional off-canvas animation with data-layout-allow-overflow.",
+        "containerRect": {
+          "left": 0,
+          "top": 0,
+          "right": 1080,
+          "bottom": 1920,
+          "width": 1080,
+          "height": 1920
+        },
+        "overflow": {
+          "left": 73.29
+        },
+        "dataAttributes": {},
+        "sourceFile": "index.html",
+        "bbox": {
+          "x": -73.29,
+          "y": 588.3,
+          "width": 149.91,
+          "height": 122.12
+        },
+        "firstSeen": 29.557,
+        "lastSeen": 29.557,
+        "occurrences": 1,
+        "heldMs": 0
+      },
+      {
+        "code": "canvas_overflow",
+        "severity": "info",
+        "time": 29.557,
+        "selector": "#cardlabel3",
+        "message": "Text extends outside the composition canvas.",
+        "rect": {
+          "left": -549.38,
+          "top": 1459.11,
+          "right": -445.86,
+          "bottom": 1567.04,
+          "width": 103.52,
+          "height": 107.93
+        },
+        "containerSelector": "#main",
+        "text": "يرد",
+        "fixHint": "Move the text inward, reduce its size, or mark intentional off-canvas animation with data-layout-allow-overflow.",
+        "containerRect": {
+          "left": 0,
+          "top": 0,
+          "right": 1080,
+          "bottom": 1920,
+          "width": 1080,
+          "height": 1920
+        },
+        "overflow": {
+          "left": 549.38
+        },
+        "dataAttributes": {},
+        "sourceFile": "index.html",
+        "bbox": {
+          "x": -549.38,
+          "y": 1459.11,
+          "width": 103.52,
+          "height": 107.93
+        },
+        "firstSeen": 29.557,
+        "lastSeen": 29.557,
+        "occurrences": 1,
+        "heldMs": 0
+      },
+      {
+        "code": "text_occluded",
+        "severity": "info",
+        "time": 29.557,
+        "selector": "#cardlabel4",
+        "message": "Text is hidden beneath an opaque element.",
+        "rect": {
+          "left": 125.52,
+          "top": 1238.59,
+          "right": 275.43,
+          "bottom": 1360.71,
+          "width": 149.91,
+          "height": 122.12
+        },
+        "containerSelector": "#cardphoto4",
+        "text": "يرتب",
+        "fixHint": "Give the text its own zone, raise its stacking order above the covering element, or mark intentional layering with data-layout-allow-occlusion.",
+        "coveredFraction": 0.07,
+        "dataAttributes": {},
+        "sourceFile": "index.html",
+        "bbox": {
+          "x": 125.52,
+          "y": 1238.59,
+          "width": 149.91,
+          "height": 122.12
+        },
+        "firstSeen": 29.557,
+        "lastSeen": 29.557,
+        "occurrences": 1,
+        "heldMs": 0
+      },
+      {
+        "code": "canvas_overflow",
+        "severity": "info",
+        "time": 29.557,
+        "selector": "#cardlabel6",
+        "message": "Text extends outside the composition canvas.",
+        "rect": {
+          "left": -350.57,
+          "top": 2109.4,
+          "right": -247.05,
+          "bottom": 2217.33,
+          "width": 103.52,
+          "height": 107.93
+        },
+        "containerSelector": "#main",
+        "text": "يرد",
+        "fixHint": "Move the text inward, reduce its size, or mark intentional off-canvas animation with data-layout-allow-overflow.",
+        "containerRect": {
+          "left": 0,
+          "top": 0,
+          "right": 1080,
+          "bottom": 1920,
+          "width": 1080,
+          "height": 1920
+        },
+        "overflow": {
+          "left": 350.57,
+          "bottom": 297.33
+        },
+        "dataAttributes": {},
+        "sourceFile": "index.html",
+        "bbox": {
+          "x": -350.57,
+          "y": 2109.4,
+          "width": 103.52,
+          "height": 107.93
+        },
+        "firstSeen": 29.557,
+        "lastSeen": 29.557,
+        "occurrences": 1,
+        "heldMs": 0
+      },
+      {
+        "code": "canvas_overflow",
+        "severity": "info",
+        "time": 29.557,
+        "selector": "#cardlabel7",
+        "message": "Text extends outside the composition canvas.",
+        "rect": {
+          "left": 324.33,
+          "top": 1888.88,
+          "right": 474.25,
+          "bottom": 2011,
+          "width": 149.92,
+          "height": 122.12
+        },
+        "containerSelector": "#main",
+        "text": "يرتب",
+        "fixHint": "Move the text inward, reduce its size, or mark intentional off-canvas animation with data-layout-allow-overflow.",
+        "containerRect": {
+          "left": 0,
+          "top": 0,
+          "right": 1080,
+          "bottom": 1920,
+          "width": 1080,
+          "height": 1920
+        },
+        "overflow": {
+          "bottom": 91
+        },
+        "dataAttributes": {},
+        "sourceFile": "index.html",
+        "bbox": {
+          "x": 324.33,
+          "y": 1888.88,
+          "width": 149.92,
+          "height": 122.12
+        },
+        "firstSeen": 29.557,
+        "lastSeen": 29.557,
+        "occurrences": 1,
+        "heldMs": 0
+      },
+      {
+        "code": "text_occluded",
+        "severity": "info",
+        "time": 29.557,
+        "selector": "#cardlabel7",
+        "message": "Text is hidden beneath an opaque element.",
+        "rect": {
+          "left": 324.33,
+          "top": 1888.88,
+          "right": 474.25,
+          "bottom": 2011,
+          "width": 149.91,
+          "height": 122.12
+        },
+        "containerSelector": "#cardphoto7",
+        "text": "يرتب",
+        "fixHint": "Give the text its own zone, raise its stacking order above the covering element, or mark intentional layering with data-layout-allow-occlusion.",
+        "coveredFraction": 0.07,
+        "dataAttributes": {},
+        "sourceFile": "index.html",
+        "bbox": {
+          "x": 324.33,
+          "y": 1888.88,
+          "width": 149.91,
+          "height": 122.12
+        },
+        "firstSeen": 29.557,
+        "lastSeen": 29.557,
+        "occurrences": 1,
+        "heldMs": 0
+      },
+      {
+        "code": "canvas_overflow",
+        "severity": "info",
+        "time": 29.557,
+        "selector": "#cardlabel8",
+        "message": "Text extends outside the composition canvas.",
+        "rect": {
+          "left": 1023.97,
+          "top": 1675.92,
+          "right": 1170.81,
+          "bottom": 1797.1,
+          "width": 146.84,
+          "height": 121.18
+        },
+        "containerSelector": "#main",
+        "text": "يتابع",
+        "fixHint": "Move the text inward, reduce its size, or mark intentional off-canvas animation with data-layout-allow-overflow.",
+        "containerRect": {
+          "left": 0,
+          "top": 0,
+          "right": 1080,
+          "bottom": 1920,
+          "width": 1080,
+          "height": 1920
+        },
+        "overflow": {
+          "right": 90.81
+        },
+        "dataAttributes": {},
+        "sourceFile": "index.html",
+        "bbox": {
+          "x": 1023.97,
+          "y": 1675.92,
+          "width": 146.84,
+          "height": 121.18
+        },
+        "firstSeen": 29.557,
+        "lastSeen": 29.557,
+        "occurrences": 1,
+        "heldMs": 0
+      },
+      {
+        "code": "container_overflow",
+        "severity": "info",
+        "time": 29.557,
+        "selector": "#field",
+        "message": "Element extends outside a clipping layout container.",
+        "rect": {
+          "left": -1115.47,
+          "top": -183.44,
+          "right": 1881.35,
+          "bottom": 2813.38,
+          "width": 2996.82,
+          "height": 2996.82
+        },
+        "containerSelector": "#w9",
+        "fixHint": "Resize/reposition the child or container, or mark intentional overflow with data-layout-allow-overflow.",
+        "containerRect": {
+          "left": 0,
+          "top": 0,
+          "right": 1080,
+          "bottom": 1920,
+          "width": 1080,
+          "height": 1920
+        },
+        "overflow": {
+          "left": 1115.47,
+          "right": 801.35,
+          "top": 183.44,
+          "bottom": 893.38
+        },
+        "dataAttributes": {},
+        "sourceFile": "index.html",
+        "bbox": {
+          "x": -1115.47,
+          "y": -183.44,
+          "width": 2996.82,
+          "height": 2996.82
+        },
+        "firstSeen": 29.557,
+        "lastSeen": 29.557,
+        "occurrences": 1,
+        "heldMs": 0
+      },
+      {
+        "code": "escaped_container",
+        "severity": "info",
+        "time": 29.557,
+        "selector": "#field",
+        "message": "Positioned element renders far outside its offset parent — its coordinates were likely computed in a different frame (canvas/viewport pixels).",
+        "rect": {
+          "left": -1115.47,
+          "top": -183.44,
+          "right": 1881.35,
+          "bottom": 2813.38,
+          "width": 2996.82,
+          "height": 2996.82
+        },
+        "containerSelector": "#w9",
+        "text": "يرد يرتب يتابع يرد يرتب يتابع يرد يرتب يتابع",
+        "fixHint": "Compute left/top in the offset parent's frame (subtract its rect), or mark intentional placement with data-layout-allow-overflow.",
+        "containerRect": {
+          "left": 0,
+          "top": 0,
+          "right": 1080,
+          "bottom": 1920,
+          "width": 1080,
+          "height": 1920
+        },
+        "dataAttributes": {},
+        "sourceFile": "index.html",
+        "bbox": {
+          "x": -1115.47,
+          "y": -183.44,
+          "width": 2996.82,
+          "height": 2996.82
+        },
+        "firstSeen": 29.557,
+        "lastSeen": 29.557,
+        "occurrences": 1,
+        "heldMs": 0
+      },
+      {
+        "code": "panel_out_of_canvas",
+        "severity": "info",
+        "time": 29.557,
+        "selector": "#card1",
+        "message": "Painted panel extends outside the composition canvas.",
+        "rect": {
+          "left": -417.37,
+          "top": 126.47,
+          "right": 329.7,
+          "bottom": 840.35,
+          "width": 747.07,
+          "height": 713.88
+        },
+        "containerSelector": "#main",
+        "text": "يرتب",
+        "fixHint": "Move the panel inward, or mark intentional off-canvas animation with data-layout-allow-overflow.",
+        "containerRect": {
+          "left": 0,
+          "top": 0,
+          "right": 1080,
+          "bottom": 1920,
+          "width": 1080,
+          "height": 1920
+        },
+        "overflow": {
+          "left": 417.37
+        },
+        "dataAttributes": {},
+        "sourceFile": "index.html",
+        "bbox": {
+          "x": -417.37,
+          "y": 126.47,
+          "width": 747.07,
+          "height": 713.88
+        },
+        "firstSeen": 29.557,
+        "lastSeen": 29.557,
+        "occurrences": 1,
+        "heldMs": 0
+      },
+      {
+        "code": "panel_out_of_canvas",
+        "severity": "info",
+        "time": 29.557,
+        "selector": "#card2",
+        "message": "Painted panel extends outside the composition canvas.",
+        "rect": {
+          "left": 280.73,
+          "top": -86.96,
+          "right": 1027.81,
+          "bottom": 626.92,
+          "width": 747.07,
+          "height": 713.88
+        },
+        "containerSelector": "#main",
+        "text": "يتابع",
+        "fixHint": "Move the panel inward, or mark intentional off-canvas animation with data-layout-allow-overflow.",
+        "containerRect": {
+          "left": 0,
+          "top": 0,
+          "right": 1080,
+          "bottom": 1920,
+          "width": 1080,
+          "height": 1920
+        },
+        "overflow": {
+          "top": 86.96
+        },
+        "dataAttributes": {},
+        "sourceFile": "index.html",
+        "bbox": {
+          "x": 280.73,
+          "y": -86.96,
+          "width": 747.07,
+          "height": 713.88
+        },
+        "firstSeen": 29.557,
+        "lastSeen": 29.557,
+        "occurrences": 1,
+        "heldMs": 0
+      },
+      {
+        "code": "panel_out_of_canvas",
+        "severity": "info",
+        "time": 29.557,
+        "selector": "#card4",
+        "message": "Painted panel extends outside the composition canvas.",
+        "rect": {
+          "left": -218.56,
+          "top": 776.76,
+          "right": 528.52,
+          "bottom": 1490.64,
+          "width": 747.07,
+          "height": 713.88
+        },
+        "containerSelector": "#main",
+        "text": "يرتب",
+        "fixHint": "Move the panel inward, or mark intentional off-canvas animation with data-layout-allow-overflow.",
+        "containerRect": {
+          "left": 0,
+          "top": 0,
+          "right": 1080,
+          "bottom": 1920,
+          "width": 1080,
+          "height": 1920
+        },
+        "overflow": {
+          "left": 218.56
+        },
+        "dataAttributes": {},
+        "sourceFile": "index.html",
+        "bbox": {
+          "x": -218.56,
+          "y": 776.76,
+          "width": 747.07,
+          "height": 713.88
+        },
+        "firstSeen": 29.557,
+        "lastSeen": 29.557,
+        "occurrences": 1,
+        "heldMs": 0
+      },
+      {
+        "code": "panel_out_of_canvas",
+        "severity": "info",
+        "time": 29.557,
+        "selector": "#card5",
+        "message": "Painted panel extends outside the composition canvas.",
+        "rect": {
+          "left": 479.55,
+          "top": 563.33,
+          "right": 1226.62,
+          "bottom": 1277.21,
+          "width": 747.07,
+          "height": 713.88
+        },
+        "containerSelector": "#main",
+        "text": "يتابع",
+        "fixHint": "Move the panel inward, or mark intentional off-canvas animation with data-layout-allow-overflow.",
+        "containerRect": {
+          "left": 0,
+          "top": 0,
+          "right": 1080,
+          "bottom": 1920,
+          "width": 1080,
+          "height": 1920
+        },
+        "overflow": {
+          "right": 146.62
+        },
+        "dataAttributes": {},
+        "sourceFile": "index.html",
+        "bbox": {
+          "x": 479.55,
+          "y": 563.33,
+          "width": 747.07,
+          "height": 713.88
+        },
+        "firstSeen": 29.557,
+        "lastSeen": 29.557,
+        "occurrences": 1,
+        "heldMs": 0
+      },
+      {
+        "code": "panel_out_of_canvas",
+        "severity": "info",
+        "time": 29.557,
+        "selector": "#card6",
+        "message": "Painted panel extends outside the composition canvas.",
+        "rect": {
+          "left": -717.85,
+          "top": 1640.48,
+          "right": 29.22,
+          "bottom": 2354.36,
+          "width": 747.07,
+          "height": 713.88
+        },
+        "containerSelector": "#main",
+        "text": "يرد",
+        "fixHint": "Move the panel inward, or mark intentional off-canvas animation with data-layout-allow-overflow.",
+        "containerRect": {
+          "left": 0,
+          "top": 0,
+          "right": 1080,
+          "bottom": 1920,
+          "width": 1080,
+          "height": 1920
+        },
+        "overflow": {
+          "left": 717.85,
+          "bottom": 434.36
+        },
+        "dataAttributes": {},
+        "sourceFile": "index.html",
+        "bbox": {
+          "x": -717.85,
+          "y": 1640.48,
+          "width": 747.07,
+          "height": 713.88
+        },
+        "firstSeen": 29.557,
+        "lastSeen": 29.557,
+        "occurrences": 1,
+        "heldMs": 0
+      },
+      {
+        "code": "panel_out_of_canvas",
+        "severity": "info",
+        "time": 29.557,
+        "selector": "#card7",
+        "message": "Painted panel extends outside the composition canvas.",
+        "rect": {
+          "left": -19.75,
+          "top": 1427.05,
+          "right": 727.33,
+          "bottom": 2140.93,
+          "width": 747.07,
+          "height": 713.88
+        },
+        "containerSelector": "#main",
+        "text": "يرتب",
+        "fixHint": "Move the panel inward, or mark intentional off-canvas animation with data-layout-allow-overflow.",
+        "containerRect": {
+          "left": 0,
+          "top": 0,
+          "right": 1080,
+          "bottom": 1920,
+          "width": 1080,
+          "height": 1920
+        },
+        "overflow": {
+          "bottom": 220.93
+        },
+        "dataAttributes": {},
+        "sourceFile": "index.html",
+        "bbox": {
+          "x": -19.75,
+          "y": 1427.05,
+          "width": 747.07,
+          "height": 713.88
+        },
+        "firstSeen": 29.557,
+        "lastSeen": 29.557,
+        "occurrences": 1,
+        "heldMs": 0
+      },
+      {
+        "code": "panel_out_of_canvas",
+        "severity": "info",
+        "time": 29.557,
+        "selector": "#card8",
+        "message": "Painted panel extends outside the composition canvas.",
+        "rect": {
+          "left": 678.36,
+          "top": 1213.62,
+          "right": 1425.43,
+          "bottom": 1927.5,
+          "width": 747.07,
+          "height": 713.88
+        },
+        "containerSelector": "#main",
+        "text": "يتابع",
+        "fixHint": "Move the panel inward, or mark intentional off-canvas animation with data-layout-allow-overflow.",
+        "containerRect": {
+          "left": 0,
+          "top": 0,
+          "right": 1080,
+          "bottom": 1920,
+          "width": 1080,
+          "height": 1920
+        },
+        "overflow": {
+          "right": 345.43
+        },
+        "dataAttributes": {},
+        "sourceFile": "index.html",
+        "bbox": {
+          "x": 678.36,
+          "y": 1213.62,
+          "width": 747.07,
+          "height": 713.88
+        },
+        "firstSeen": 29.557,
+        "lastSeen": 29.557,
+        "occurrences": 1,
+        "heldMs": 0
+      },
+      {
+        "code": "canvas_overflow",
+        "severity": "info",
+        "time": 34.931,
+        "selector": "#reellabel0",
+        "message": "Text extends outside the composition canvas.",
+        "rect": {
+          "left": -114.05,
+          "top": 1059,
+          "right": 156.16,
+          "bottom": 1119,
+          "width": 270.21,
+          "height": 60
+        },
+        "containerSelector": "#main",
+        "text": "إنتاج المحتوى",
+        "fixHint": "Move the text inward, reduce its size, or mark intentional off-canvas animation with data-layout-allow-overflow.",
+        "containerRect": {
+          "left": 0,
+          "top": 0,
+          "right": 1080,
+          "bottom": 1920,
+          "width": 1080,
+          "height": 1920
+        },
+        "overflow": {
+          "left": 114.05
+        },
+        "dataAttributes": {},
+        "sourceFile": "index.html",
+        "bbox": {
+          "x": -114.05,
+          "y": 1059,
+          "width": 270.21,
+          "height": 60
+        },
+        "firstSeen": 34.931,
+        "lastSeen": 34.931,
+        "occurrences": 1,
+        "heldMs": 0
+      },
+      {
+        "code": "canvas_overflow",
+        "severity": "info",
+        "time": 34.931,
+        "selector": "#reellabel3",
+        "message": "Text extends outside the composition canvas.",
+        "rect": {
+          "left": -114.05,
+          "top": 1759,
+          "right": 156.16,
+          "bottom": 1819,
+          "width": 270.21,
+          "height": 60
+        },
+        "containerSelector": "#main",
+        "text": "إنتاج المحتوى",
+        "fixHint": "Move the text inward, reduce its size, or mark intentional off-canvas animation with data-layout-allow-overflow.",
+        "containerRect": {
+          "left": 0,
+          "top": 0,
+          "right": 1080,
+          "bottom": 1920,
+          "width": 1080,
+          "height": 1920
+        },
+        "overflow": {
+          "left": 114.05
+        },
+        "dataAttributes": {},
+        "sourceFile": "index.html",
+        "bbox": {
+          "x": -114.05,
+          "y": 1759,
+          "width": 270.21,
+          "height": 60
+        },
+        "firstSeen": 34.931,
+        "lastSeen": 34.931,
+        "occurrences": 1,
+        "heldMs": 0
+      },
+      {
+        "code": "container_overflow",
+        "severity": "info",
+        "time": 34.931,
+        "selector": "#w10",
+        "message": "Element extends outside a clipping layout container.",
+        "rect": {
+          "left": -68.94,
+          "top": 0,
+          "right": 1011.06,
+          "bottom": 1920,
+          "width": 1080,
+          "height": 1920
+        },
+        "containerSelector": "#s10",
+        "fixHint": "Resize/reposition the child or container, or mark intentional overflow with data-layout-allow-overflow.",
+        "containerRect": {
+          "left": 0,
+          "top": 0,
+          "right": 1080,
+          "bottom": 1920,
+          "width": 1080,
+          "height": 1920
+        },
+        "overflow": {
+          "left": 68.94
+        },
+        "dataAttributes": {},
+        "sourceFile": "index.html",
+        "bbox": {
+          "x": -68.94,
+          "y": 0,
+          "width": 1080,
+          "height": 1920
+        },
+        "firstSeen": 34.931,
+        "lastSeen": 34.931,
+        "occurrences": 1,
+        "heldMs": 0
+      },
+      {
+        "code": "panel_out_of_canvas",
+        "severity": "info",
+        "time": 34.931,
+        "selector": "#reel0",
+        "message": "Painted panel extends outside the composition canvas.",
+        "rect": {
+          "left": -178.94,
+          "top": 510,
+          "right": 221.06,
+          "bottom": 1170,
+          "width": 400,
+          "height": 660
+        },
+        "containerSelector": "#main",
+        "text": "إنتاج المحتوى",
+        "fixHint": "Move the panel inward, or mark intentional off-canvas animation with data-layout-allow-overflow.",
+        "containerRect": {
+          "left": 0,
+          "top": 0,
+          "right": 1080,
+          "bottom": 1920,
+          "width": 1080,
+          "height": 1920
+        },
+        "overflow": {
+          "left": 178.94
+        },
+        "dataAttributes": {},
+        "sourceFile": "index.html",
+        "bbox": {
+          "x": -178.94,
+          "y": 510,
+          "width": 400,
+          "height": 660
+        },
+        "firstSeen": 34.931,
+        "lastSeen": 34.931,
+        "occurrences": 1,
+        "heldMs": 0
+      },
+      {
+        "code": "panel_out_of_canvas",
+        "severity": "info",
+        "time": 34.931,
+        "selector": "#reel3",
+        "message": "Painted panel extends outside the composition canvas.",
+        "rect": {
+          "left": -178.94,
+          "top": 1210,
+          "right": 221.06,
+          "bottom": 1870,
+          "width": 400,
+          "height": 660
+        },
+        "containerSelector": "#main",
+        "text": "إنتاج المحتوى",
+        "fixHint": "Move the panel inward, or mark intentional off-canvas animation with data-layout-allow-overflow.",
+        "containerRect": {
+          "left": 0,
+          "top": 0,
+          "right": 1080,
+          "bottom": 1920,
+          "width": 1080,
+          "height": 1920
+        },
+        "overflow": {
+          "left": 178.94
+        },
+        "dataAttributes": {},
+        "sourceFile": "index.html",
+        "bbox": {
+          "x": -178.94,
+          "y": 1210,
+          "width": 400,
+          "height": 660
+        },
+        "firstSeen": 34.931,
+        "lastSeen": 34.931,
+        "occurrences": 1,
+        "heldMs": 0
+      },
+      {
+        "code": "container_overflow",
+        "severity": "info",
+        "time": 40.306,
+        "selector": "#w11",
+        "message": "Element extends outside a clipping layout container.",
+        "rect": {
+          "left": -3.78,
+          "top": -6.72,
+          "right": 1083.78,
+          "bottom": 1926.72,
+          "width": 1087.56,
+          "height": 1933.44
+        },
+        "containerSelector": "#s11",
+        "fixHint": "Resize/reposition the child or container, or mark intentional overflow with data-layout-allow-overflow.",
+        "containerRect": {
+          "left": 0,
+          "top": 0,
+          "right": 1080,
+          "bottom": 1920,
+          "width": 1080,
+          "height": 1920
+        },
+        "overflow": {
+          "left": 3.78,
+          "right": 3.78,
+          "top": 6.72,
+          "bottom": 6.72
+        },
+        "dataAttributes": {},
+        "sourceFile": "index.html",
+        "bbox": {
+          "x": -3.78,
+          "y": -6.72,
+          "width": 1087.56,
+          "height": 1933.44
+        },
+        "firstSeen": 40.306,
+        "lastSeen": 40.306,
+        "occurrences": 1,
+        "heldMs": 0
+      },
+      {
+        "code": "container_overflow",
+        "severity": "info",
+        "time": 40.306,
+        "selector": "#lead",
+        "message": "Element extends outside a clipping layout container.",
+        "rect": {
+          "left": 388.95,
+          "top": 1010.35,
+          "right": 1033.43,
+          "bottom": 1977.07,
+          "width": 644.48,
+          "height": 966.72
+        },
+        "containerSelector": "#w11",
+        "fixHint": "Resize/reposition the child or container, or mark intentional overflow with data-layout-allow-overflow.",
+        "containerRect": {
+          "left": -3.78,
+          "top": -6.72,
+          "right": 1083.78,
+          "bottom": 1926.72,
+          "width": 1087.56,
+          "height": 1933.44
+        },
+        "overflow": {
+          "bottom": 50.35
+        },
+        "dataAttributes": {
+          "data-hf-authored-opacity": ""
+        },
+        "sourceFile": "index.html",
+        "bbox": {
+          "x": 388.95,
+          "y": 1010.35,
+          "width": 644.48,
+          "height": 966.72
+        },
+        "firstSeen": 40.306,
+        "lastSeen": 40.306,
+        "occurrences": 1,
+        "heldMs": 0
+      },
+      {
+        "code": "container_overflow",
+        "severity": "info",
+        "time": 45.68,
+        "selector": "#w12",
+        "message": "Element extends outside a clipping layout container.",
+        "rect": {
+          "left": -3.19,
+          "top": -5.66,
+          "right": 1083.19,
+          "bottom": 1925.66,
+          "width": 1086.37,
+          "height": 1931.33
+        },
+        "containerSelector": "#s12",
+        "fixHint": "Resize/reposition the child or container, or mark intentional overflow with data-layout-allow-overflow.",
+        "containerRect": {
+          "left": 0,
+          "top": 0,
+          "right": 1080,
+          "bottom": 1920,
+          "width": 1080,
+          "height": 1920
+        },
+        "overflow": {
+          "left": 3.19,
+          "right": 3.19,
+          "top": 5.66,
+          "bottom": 5.66
+        },
+        "dataAttributes": {},
+        "sourceFile": "index.html",
+        "bbox": {
+          "x": -3.19,
+          "y": -5.66,
+          "width": 1086.37,
+          "height": 1931.33
+        },
+        "firstSeen": 45.68,
+        "lastSeen": 45.68,
+        "occurrences": 1,
+        "heldMs": 0
+      }
+    ],
+    "duration": 48.36666666666667,
+    "samples": [
+      2.687,
+      8.061,
+      13.435,
+      18.809,
+      24.183,
+      29.557,
+      34.931,
+      40.306,
+      45.68
+    ],
+    "transitionSamples": [],
+    "transitionSamplesDropped": 0,
+    "tolerance": 2,
+    "totalIssueCount": 37,
+    "truncated": false
+  },
+  "motion": {
+    "ok": true,
+    "errorCount": 0,
+    "warningCount": 0,
+    "infoCount": 0,
+    "findings": [],
+    "enabled": false,
+    "samples": 0
+  },
+  "contrast": {
+    "ok": true,
+    "errorCount": 0,
+    "warningCount": 0,
+    "infoCount": 0,
+    "findings": [],
+    "enabled": true,
+    "samples": [
+      2.687,
+      13.435,
+      24.183,
+      34.931,
+      45.68
+    ],
+    "checked": 18,
+    "passed": 18
+  },
+  "hdr": {
+    "autoPromotion": null,
+    "inspection": "available"
+  },
+  "snapshots": {
+    "enabled": false,
+    "files": [],
+    "times": [],
+    "findingFiles": []
+  },
+  "_meta": {
+    "version": "0.8.92",
+    "updateAvailable": false
+  }
+}
