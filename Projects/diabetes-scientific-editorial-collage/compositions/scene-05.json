@@ -1,0 +1,172 @@
+{
+  "scene": 5,
+  "source": "index.html",
+  "animation": "animation/timeline.js",
+  "layers": [
+    {
+      "selector": ".s5 .bg",
+      "source": "assets/backgrounds/scene-05.svg",
+      "text": null,
+      "position": {
+        "left": "0px",
+        "top": "0px",
+        "width": "1920px",
+        "height": "1080px"
+      }
+    },
+    {
+      "selector": ".s5 .eyebrow",
+      "source": null,
+      "text": "الأسئلة الأهم",
+      "position": {
+        "left": "1634px",
+        "top": "78px",
+        "width": "181px",
+        "height": "68px"
+      }
+    },
+    {
+      "selector": ".s5 .folio",
+      "source": null,
+      "text": "05 / 06",
+      "position": {
+        "left": "100px",
+        "top": "85px",
+        "width": "105px",
+        "height": "72px"
+      }
+    },
+    {
+      "selector": ".s5 .spread-intro",
+      "source": null,
+      "text": "مع كل اكتشاف، نعود إلى السؤال",
+      "position": {
+        "left": "1276px",
+        "top": "140px",
+        "width": "534px",
+        "height": "89px"
+      }
+    },
+    {
+      "selector": ".s5 .spread",
+      "source": null,
+      "text": "ما الذي أثبتهالعلم بالفعل؟قراءة الدليل · رسم توضيحيوما الذي لا يزالقيد البحث؟؟حدود المعرفة",
+      "position": {
+        "left": "150px",
+        "top": "230px",
+        "width": "1620px",
+        "height": "675px"
+      }
+    },
+    {
+      "selector": ".s5 .spread-page",
+      "source": null,
+      "text": "ما الذي أثبتهالعلم بالفعل؟قراءة الدليل · رسم توضيحي",
+      "position": {
+        "left": "0px",
+        "top": "0px",
+        "width": "810px",
+        "height": "675px"
+      }
+    },
+    {
+      "selector": ".s5 .title-rule",
+      "source": null,
+      "text": "",
+      "position": {
+        "left": "auto",
+        "top": "auto",
+        "width": "105px",
+        "height": "10px"
+      }
+    },
+    {
+      "selector": ".s5 .diagram.cell",
+      "source": "assets/scientific/islet-cell-cluster.svg",
+      "text": null,
+      "position": {
+        "left": "140px",
+        "top": "325px",
+        "width": "330px",
+        "height": "240px"
+      }
+    },
+    {
+      "selector": ".s5 .page-number",
+      "source": null,
+      "text": "قراءة الدليل · رسم توضيحي",
+      "position": {
+        "left": "453px",
+        "top": "590px",
+        "width": "289px",
+        "height": "57px"
+      }
+    },
+    {
+      "selector": ".s5 .spread-page",
+      "source": null,
+      "text": "وما الذي لا يزالقيد البحث؟؟حدود المعرفة",
+      "position": {
+        "left": "0px",
+        "top": "0px",
+        "width": "810px",
+        "height": "675px"
+      }
+    },
+    {
+      "selector": ".s5 .title-rule",
+      "source": null,
+      "text": "",
+      "position": {
+        "left": "auto",
+        "top": "auto",
+        "width": "105px",
+        "height": "10px"
+      }
+    },
+    {
+      "selector": ".s5 .pending",
+      "source": null,
+      "text": "؟",
+      "position": {
+        "left": "245px",
+        "top": "370px",
+        "width": "69px",
+        "height": "160px"
+      }
+    },
+    {
+      "selector": ".s5 .pending-line",
+      "source": null,
+      "text": "",
+      "position": {
+        "left": "115px",
+        "top": "535px",
+        "width": "575px",
+        "height": "3px"
+      }
+    },
+    {
+      "selector": ".s5 .page-number",
+      "source": null,
+      "text": "حدود المعرفة",
+      "position": {
+        "left": "605px",
+        "top": "590px",
+        "width": "140px",
+        "height": "57px"
+      }
+    },
+    {
+      "selector": ".s5 .spread-caption",
+      "source": null,
+      "text": "الأمل العلمي يبدأ بمعرفة ما نعرفه، وما لم نعرفه بعد",
+      "position": {
+        "left": "1009px",
+        "top": "945px",
+        "width": "691px",
+        "height": "74px"
+      }
+    }
+  ]
+}

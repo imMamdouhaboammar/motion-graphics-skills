@@ -1,0 +1,150 @@
+{
+  "scene": 3,
+  "source": "index.html",
+  "animation": "animation/timeline.js",
+  "layers": [
+    {
+      "selector": ".s3 .bg",
+      "source": "assets/backgrounds/scene-03.svg",
+      "text": null,
+      "position": {
+        "left": "0px",
+        "top": "0px",
+        "width": "1920px",
+        "height": "1080px"
+      }
+    },
+    {
+      "selector": ".s3 .eyebrow",
+      "source": null,
+      "text": "داخل البحث العلمي",
+      "position": {
+        "left": "1545px",
+        "top": "78px",
+        "width": "270px",
+        "height": "68px"
+      }
+    },
+    {
+      "selector": ".s3 .folio",
+      "source": null,
+      "text": "03 / 06",
+      "position": {
+        "left": "100px",
+        "top": "85px",
+        "width": "105px",
+        "height": "72px"
+      }
+    },
+    {
+      "selector": ".s3 .research-heading",
+      "source": null,
+      "text": "أبحاث الخلايا الجذعية",
+      "position": {
+        "left": "165px",
+        "top": "155px",
+        "width": "1650px",
+        "height": "116.797px"
+      }
+    },
+    {
+      "selector": ".s3 .scientific-caution",
+      "source": null,
+      "text": "من مسارات البحث، خاصة في السكري من النوع الأول",
+      "position": {
+        "left": "130px",
+        "top": "255px",
+        "width": "1120px",
+        "height": "63.1875px"
+      }
+    },
+    {
+      "selector": ".s3 .scope",
+      "source": null,
+      "text": "",
+      "position": {
+        "left": "135px",
+        "top": "315px",
+        "width": "805px",
+        "height": "610px"
+      }
+    },
+    {
+      "selector": ".s3 .diagram.cells",
+      "source": "assets/scientific/islet-cell-cluster.svg",
+      "text": null,
+      "position": {
+        "left": "170px",
+        "top": "365px",
+        "width": "705px",
+        "height": "550px"
+      }
+    },
+    {
+      "selector": ".s3 .drawing-label",
+      "source": null,
+      "text": "رسم توضيحي",
+      "position": {
+        "left": "410px",
+        "top": "355px",
+        "width": "150px",
+        "height": "59px"
+      }
+    },
+    {
+      "selector": ".s3 .line.leader",
+      "source": null,
+      "text": "",
+      "position": {
+        "left": "780px",
+        "top": "485px",
+        "width": "300px",
+        "height": "3px"
+      }
+    },
+    {
+      "selector": ".s3 .annotation",
+      "source": null,
+      "text": "خلايا منتجةللإنسولين",
+      "position": {
+        "left": "965px",
+        "top": "355px",
+        "width": "305px",
+        "height": "102.375px"
+      }
+    },
+    {
+      "selector": ".s3 .diagram.micro",
+      "source": "assets/scientific/editorial-microscope.svg",
+      "text": null,
+      "position": {
+        "left": "815px",
+        "top": "520px",
+        "width": "370px",
+        "height": "440px"
+      }
+    },
+    {
+      "selector": ".s3 .photo.researcher",
+      "source": "assets/cutouts/researcher.png",
+      "text": null,
+      "position": {
+        "left": "1150px",
+        "top": "240px",
+        "width": "730px",
+        "height": "815px"
+      }
+    },
+    {
+      "selector": ".s3 .cell-label",
+      "source": null,
+      "text": "آفاق تستحق الاهتمام",
+      "position": {
+        "left": "225px",
+        "top": "945px",
+        "width": "278px",
+        "height": "69px"
+      }
+    }
+  ]
+}

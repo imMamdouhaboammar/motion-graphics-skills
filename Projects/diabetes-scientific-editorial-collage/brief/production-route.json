@@ -1,0 +1,164 @@
+{
+  "version": 2,
+  "status": "ready",
+  "entry": "motion-director",
+  "deliverable": "broad-film",
+  "installed": [
+    "animated-chart",
+    "apple-launch-film",
+    "assetseeker",
+    "brand-intake",
+    "brandkit",
+    "design-taste-frontend",
+    "design-taste-frontend-v1",
+    "full-output-enforcement",
+    "gpt-taste",
+    "gpu-policy",
+    "gsap-core",
+    "gsap-frameworks",
+    "gsap-performance",
+    "gsap-plugins",
+    "gsap-react",
+    "gsap-scrolltrigger",
+    "gsap-timeline",
+    "gsap-utils",
+    "high-end-visual-design",
+    "image-to-code",
+    "imagegen-frontend-mobile",
+    "imagegen-frontend-web",
+    "industrial-brutalist-ui",
+    "launch-video",
+    "loop-cover",
+    "media-use",
+    "milestone-reveal",
+    "minimalist-ui",
+    "mix-and-match",
+    "model-showdown",
+    "motion-brief-writer",
+    "motion-design",
+    "motion-director",
+    "motion-effects",
+    "newsletter-promo",
+    "redesign-existing-projects",
+    "reel-export",
+    "reference-fidelity",
+    "remove-background",
+    "speech-to-text",
+    "stitch-design-taste",
+    "text-to-lottie",
+    "title-sequence-3d",
+    "video-review-loop",
+    "vox-explainer",
+    "work-guard"
+  ],
+  "agent_skills": {
+    "media-utility": [
+      "assetseeker",
+      "imagegen-frontend-mobile",
+      "remove-background"
+    ],
+    "design-utility": [
+      "brandkit",
+      "design-taste-frontend",
+      "design-taste-frontend-v1",
+      "high-end-visual-design",
+      "image-to-code",
+      "imagegen-frontend-web",
+      "industrial-brutalist-ui",
+      "minimalist-ui",
+      "redesign-existing-projects",
+      "stitch-design-taste",
+      "text-to-lottie"
+    ],
+    "utility": [
+      "full-output-enforcement"
+    ],
+    "gsap-utility": [
+      "gpt-taste",
+      "gsap-core",
+      "gsap-frameworks",
+      "gsap-performance",
+      "gsap-plugins",
+      "gsap-react",
+      "gsap-scrolltrigger",
+      "gsap-timeline",
+      "gsap-utils",
+      "motion-design"
+    ],
+    "audio-utility": [
+      "media-use",
+      "speech-to-text"
+    ]
+  },
+  "stages": [
+    {
+      "name": "motion-director",
+      "reason": "Own the shared brief, route, creative direction, production state, and final decision gates",
+      "handoff": {
+        "from": "user",
+        "to": "motion-director",
+        "purpose": "Own the shared brief, route, creative direction, production state, and final decision gates",
+        "inherits": [
+          "user brief",
+          "supplied assets",
+          "known project truth"
+        ],
+        "must_return": [
+          "shared truth",
+          "route state",
+          "approved constraints"
+        ],
+        "return_to": null
+      }
+    },
+    {
+      "name": "mix-and-match",
+      "reason": "Multiple references must be recombined into an original direction before production",
+      "handoff": {
+        "from": "motion-director",
+        "to": "mix-and-match",
+        "purpose": "Multiple references must be recombined into an original direction before production",
+        "inherits": [
+          "brief",
+          "references",
+          "protected specifics"
+        ],
+        "must_return": [
+          "selected concept direction",
+          "creative distance audit",
+          "mix-brief.md"
+        ],
+        "return_to": "motion-director"
+      }
+    },
+    {
+      "name": "work-guard",
+      "reason": "Hang-prone execution should run behind the installed reliability guard",
+      "handoff": {
+        "from": "motion-director",
+        "to": "work-guard",
+        "purpose": "Hang-prone execution should run behind the installed reliability guard",
+        "inherits": [
+          "exact command",
+          "safe retry policy"
+        ],
+        "must_return": [
+          "run evidence",
+          "failure classification",
+          "recovery result"
+        ],
+        "return_to": "motion-director"
+      }
+    }
+  ],
+  "required_references": [
+    "skills/motion-director/references/arabic-motion.md"
+  ],
+  "constraints": {
+    "reference_mode": "inspiration",
+    "difficulty_preservation": false
+  },
+  "skipped_optional": [],
+  "blockers": [],
+  "warnings": []
+}

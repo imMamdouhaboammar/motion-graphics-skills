@@ -1,0 +1,1 @@
+The supplied six-panel storyboard is preserved at ../references/storyboard.png. Executed six-scene proof sheet: ../styleframes/master-scenes/contact-sheet.jpg. Actual narration beat map: ../audio/phrase-beat-map.json. Full working animatic/film: ../renders/diabetes-delivery.mp4.

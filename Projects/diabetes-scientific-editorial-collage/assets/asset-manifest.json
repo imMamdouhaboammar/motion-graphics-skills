@@ -1,0 +1,305 @@
+[
+  {
+    "id": "scene-01",
+    "path": "assets/backgrounds/scene-01.svg",
+    "role": "backgrounds",
+    "dimensions": [
+      1920,
+      1080
+    ],
+    "source": "original authored SVG or seeded texture",
+    "rights": "research/rights.md",
+    "editable": "assets/backgrounds/scene-01.svg",
+    "scenes": [
+      1
+    ],
+    "thumb": "assets/thumbs/scene-01.png",
+    "sha256": "2692c43336b3790a93194dd6613cab72739d6f9aff4f48dd83e8e3d6acadff03"
+  },
+  {
+    "id": "scene-02",
+    "path": "assets/backgrounds/scene-02.svg",
+    "role": "backgrounds",
+    "dimensions": [
+      1920,
+      1080
+    ],
+    "source": "original authored SVG or seeded texture",
+    "rights": "research/rights.md",
+    "editable": "assets/backgrounds/scene-02.svg",
+    "scenes": [
+      2
+    ],
+    "thumb": "assets/thumbs/scene-02.png",
+    "sha256": "69d514b1dc7445aa33c2cc3c4a2d86e3d645896efe6a5dbeb136b1e441d6d00a"
+  },
+  {
+    "id": "scene-03",
+    "path": "assets/backgrounds/scene-03.svg",
+    "role": "backgrounds",
+    "dimensions": [
+      1920,
+      1080
+    ],
+    "source": "original authored SVG or seeded texture",
+    "rights": "research/rights.md",
+    "editable": "assets/backgrounds/scene-03.svg",
+    "scenes": [
+      3
+    ],
+    "thumb": "assets/thumbs/scene-03.png",
+    "sha256": "fcc21382eb822280cbe4884d6524adb948fbaaaf014c0b5e5e4f953b1c5916cb"
+  },
+  {
+    "id": "scene-04",
+    "path": "assets/backgrounds/scene-04.svg",
+    "role": "backgrounds",
+    "dimensions": [
+      1920,
+      1080
+    ],
+    "source": "original authored SVG or seeded texture",
+    "rights": "research/rights.md",
+    "editable": "assets/backgrounds/scene-04.svg",
+    "scenes": [
+      4
+    ],
+    "thumb": "assets/thumbs/scene-04.png",
+    "sha256": "c1a59969c1f10721bec5c74294114f462d91983ed5f97c7f2ab3081db913caf9"
+  },
+  {
+    "id": "scene-05",
+    "path": "assets/backgrounds/scene-05.svg",
+    "role": "backgrounds",
+    "dimensions": [
+      1920,
+      1080
+    ],
+    "source": "original authored SVG or seeded texture",
+    "rights": "research/rights.md",
+    "editable": "assets/backgrounds/scene-05.svg",
+    "scenes": [
+      5
+    ],
+    "thumb": "assets/thumbs/scene-05.png",
+    "sha256": "9a440a235e5c76fb338e5bd38f68e1aac15ea9e8921aa61e0c628b2911a65582"
+  },
+  {
+    "id": "scene-06",
+    "path": "assets/backgrounds/scene-06.svg",
+    "role": "backgrounds",
+    "dimensions": [
+      1920,
+      1080
+    ],
+    "source": "original authored SVG or seeded texture",
+    "rights": "research/rights.md",
+    "editable": "assets/backgrounds/scene-06.svg",
+    "scenes": [
+      6
+    ],
+    "thumb": "assets/thumbs/scene-06.png",
+    "sha256": "12b817bee2c97170e3f3a636b126d73906f487331803fedfde4e38b70e467813"
+  },
+  {
+    "id": "researcher",
+    "path": "assets/cutouts/researcher.png",
+    "role": "cutouts",
+    "dimensions": [
+      1312,
+      1199
+    ],
+    "source": "built-in image generation, fictional subjects",
+    "rights": "research/rights.md",
+    "editable": "raster; layer placement in index.html",
+    "scenes": null,
+    "thumb": "assets/thumbs/researcher.png",
+    "sha256": "8be92c26173eca77beaf9bb38efda185e5ff07949cc67da984f0b6ff5ca58311"
+  },
+  {
+    "id": "saudi-adult",
+    "path": "assets/cutouts/saudi-adult.png",
+    "role": "cutouts",
+    "dimensions": [
+      1145,
+      1374
+    ],
+    "source": "built-in image generation, fictional subjects",
+    "rights": "research/rights.md",
+    "editable": "raster; layer placement in index.html",
+    "scenes": null,
+    "thumb": "assets/thumbs/saudi-adult.png",
+    "sha256": "779b5c3a3de8c01032b4e6e53425d652a33574eccd80f0bae91246267b97239d"
+  },
+  {
+    "id": "clinical-research",
+    "path": "assets/scientific/clinical-research.svg",
+    "role": "scientific",
+    "dimensions": [
+      600,
+      600
+    ],
+    "source": "original authored SVG or seeded texture",
+    "rights": "research/rights.md",
+    "editable": "assets/scientific/clinical-research.svg",
+    "scenes": null,
+    "thumb": "assets/thumbs/clinical-research.png",
+    "sha256": "dbb955071b265ece48ed64d7120be8c00bbed4e48e0adad617448b5de9ddee74"
+  },
+  {
+    "id": "daily-routine-calendar",
+    "path": "assets/scientific/daily-routine-calendar.svg",
+    "role": "scientific",
+    "dimensions": [
+      600,
+      600
+    ],
+    "source": "original authored SVG or seeded texture",
+    "rights": "research/rights.md",
+    "editable": "assets/scientific/daily-routine-calendar.svg",
+    "scenes": null,
+    "thumb": "assets/thumbs/daily-routine-calendar.png",
+    "sha256": "a0f45ec9fa0b17e988941bba62d72460fce8900347312fd3aac37891641b9f2b"
+  },
+  {
+    "id": "editorial-microscope",
+    "path": "assets/scientific/editorial-microscope.svg",
+    "role": "scientific",
+    "dimensions": [
+      600,
+      600
+    ],
+    "source": "original authored SVG or seeded texture",
+    "rights": "research/rights.md",
+    "editable": "assets/scientific/editorial-microscope.svg",
+    "scenes": null,
+    "thumb": "assets/thumbs/editorial-microscope.png",
+    "sha256": "96cc8e9307d3dc0705bb3911357aa1eecd7389d50129d102c882b4b8c86195bf"
+  },
+  {
+    "id": "evidence-journal-sheets",
+    "path": "assets/scientific/evidence-journal-sheets.svg",
+    "role": "scientific",
+    "dimensions": [
+      600,
+      600
+    ],
+    "source": "original authored SVG or seeded texture",
+    "rights": "research/rights.md",
+    "editable": "assets/scientific/evidence-journal-sheets.svg",
+    "scenes": null,
+    "thumb": "assets/thumbs/evidence-journal-sheets.png",
+    "sha256": "3498e8a661079ee0c849eb5870072106a70a8a9b3e047da1615e12d99ea1de89"
+  },
+  {
+    "id": "glucose-meter",
+    "path": "assets/scientific/glucose-meter.svg",
+    "role": "scientific",
+    "dimensions": [
+      600,
+      600
+    ],
+    "source": "original authored SVG or seeded texture",
+    "rights": "research/rights.md",
+    "editable": "assets/scientific/glucose-meter.svg",
+    "scenes": null,
+    "thumb": "assets/thumbs/glucose-meter.png",
+    "sha256": "6db545279f41d5cbe13c120b0617f64b6e854baa78ada0152833e21b63e29c2b"
+  },
+  {
+    "id": "islet-cell-cluster",
+    "path": "assets/scientific/islet-cell-cluster.svg",
+    "role": "scientific",
+    "dimensions": [
+      600,
+      600
+    ],
+    "source": "original authored SVG or seeded texture",
+    "rights": "research/rights.md",
+    "editable": "assets/scientific/islet-cell-cluster.svg",
+    "scenes": null,
+    "thumb": "assets/thumbs/islet-cell-cluster.png",
+    "sha256": "238497a508ce6b0e77f1483a72e22634ce9502f63fa75d10503ec595a7fb7abb"
+  },
+  {
+    "id": "pancreas-islet",
+    "path": "assets/scientific/pancreas-islet.svg",
+    "role": "scientific",
+    "dimensions": [
+      600,
+      600
+    ],
+    "source": "original authored SVG or seeded texture",
+    "rights": "research/rights.md",
+    "editable": "assets/scientific/pancreas-islet.svg",
+    "scenes": null,
+    "thumb": "assets/thumbs/pancreas-islet.png",
+    "sha256": "d54d6671d75847be233fdc6580b8bcb1e34e9501dc3bed3a5616e46d491c3423"
+  },
+  {
+    "id": "petri-dish",
+    "path": "assets/scientific/petri-dish.svg",
+    "role": "scientific",
+    "dimensions": [
+      600,
+      600
+    ],
+    "source": "original authored SVG or seeded texture",
+    "rights": "research/rights.md",
+    "editable": "assets/scientific/petri-dish.svg",
+    "scenes": null,
+    "thumb": "assets/thumbs/petri-dish.png",
+    "sha256": "b434e9ce02de664b380b7e1bd21c1276c3630975fdedf0fb76333de8351cddf3"
+  },
+  {
+    "id": "NotoSansArabic-Bold",
+    "path": "assets/typography/NotoSansArabic-Bold.ttf",
+    "role": "typography",
+    "dimensions": null,
+    "source": "Noto Sans Arabic, OFL",
+    "rights": "research/rights.md",
+    "editable": "assets/typography/NotoSansArabic-Bold.ttf",
+    "scenes": null,
+    "thumb": null,
+    "sha256": "457926cb001ac787dc7415c89e6f5b1c4ce3a0f2c91d0cabc1bc19a05638e7de"
+  },
+  {
+    "id": "NotoSansArabic-Regular",
+    "path": "assets/typography/NotoSansArabic-Regular.ttf",
+    "role": "typography",
+    "dimensions": null,
+    "source": "Noto Sans Arabic, OFL",
+    "rights": "research/rights.md",
+    "editable": "assets/typography/NotoSansArabic-Regular.ttf",
+    "scenes": null,
+    "thumb": null,
+    "sha256": "d6efa4c9fac8ecefd2de19676acc3a396ba7aee99ba7a2d513950246841b6725"
+  },
+  {
+    "id": "OFL",
+    "path": "assets/typography/OFL.txt",
+    "role": "typography",
+    "dimensions": null,
+    "source": "Noto Sans Arabic, OFL",
+    "rights": "research/rights.md",
+    "editable": "assets/typography/OFL.txt",
+    "scenes": null,
+    "thumb": null,
+    "sha256": "a7a5a25eb188bf1cd96982030d53e23c33485c69b1044a562254226857ee13af"
+  },
+  {
+    "id": "print-grain",
+    "path": "assets/textures/print-grain.png",
+    "role": "textures",
+    "dimensions": [
+      960,
+      540
+    ],
+    "source": "original authored SVG or seeded texture",
+    "rights": "research/rights.md",
+    "editable": "assets/textures/print-grain.png",
+    "scenes": null,
+    "thumb": "assets/thumbs/print-grain.png",
+    "sha256": "e683289b1f9d680c5ee90a60968e0db4bd4f081f41a6bf00e56d0bfcf669ee90"
+  }
+]

@@ -1,0 +1,779 @@
+[0;36mValidating skills in /workspace/scratch/4324b468ff4b/motion-graphics-skills/skills[0m
+
+[0;36manimated-chart[0m
+  [0;32mv[0m folder name valid
+  [0;32mv[0m name matches folder
+  [0;32mv[0m description present (327 chars)
+  [0;32mv[0m description has trigger phrasing
+  [0;32mv[0m SKILL.md size OK (54 lines)
+  [0;32mv[0m no em dashes in prose
+  [0;32mv[0m no semicolons in prose
+  [0;32mv[0m no local paths
+
+[0;36mapple-launch-film[0m
+  [0;32mv[0m folder name valid
+  [0;32mv[0m name matches folder
+  [0;32mv[0m description present (460 chars)
+  [0;32mv[0m description has trigger phrasing
+  [0;32mv[0m SKILL.md size OK (59 lines)
+  [0;32mv[0m no em dashes in prose
+  [0;32mv[0m no semicolons in prose
+  [0;32mv[0m no local paths
+
+[0;36massetseeker[0m
+  [0;32mv[0m folder name valid
+  [0;32mv[0m name matches folder
+  [0;32mv[0m description present (532 chars)
+  [0;32mv[0m description has trigger phrasing
+  [0;32mv[0m SKILL.md size OK (275 lines)
+  [0;32mv[0m no em dashes in prose
+  [0;32mv[0m no semicolons in prose
+  [0;32mv[0m no local paths
+  [0;32mv[0m references/asset_catalog.md: no em dashes in prose
+  [0;32mv[0m references/asset_catalog.md: no semicolons in prose
+  [0;32mv[0m references/asset_catalog.md: no local paths
+  [0;32mv[0m has references/ folder
+  [0;32mv[0m has scripts/ folder
+
+[0;36mbrand-intake[0m
+  [0;32mv[0m folder name valid
+  [0;32mv[0m name matches folder
+  [0;32mv[0m description present (559 chars)
+  [0;32mv[0m description has trigger phrasing
+  [0;32mv[0m SKILL.md size OK (97 lines)
+  [0;32mv[0m no em dashes in prose
+  [0;32mv[0m no semicolons in prose
+  [0;32mv[0m no local paths
+
+[0;36mbrandkit[0m
+  [0;32mv[0m folder name valid
+  [0;32mv[0m name matches folder
+  [0;32mv[0m description present (464 chars)
+  [0;33m![0m description should include 'use' or 'when' trigger phrasing in /workspace/scratch/4324b468ff4b/motion-graphics-skills/skills/brandkit/SKILL.md
+  [0;33m![0m SKILL.md is 798 lines, consider moving detail to references/ in /workspace/scratch/4324b468ff4b/motion-graphics-skills/skills/brandkit/SKILL.md
+  [0;32mv[0m no em dashes in prose
+  [0;32mv[0m no semicolons in prose
+  [0;32mv[0m no local paths
+
+[0;36mdesign-taste-frontend-v1[0m
+  [0;32mv[0m folder name valid
+  [0;32mv[0m name matches folder
+  [0;32mv[0m description present (254 chars)
+  [0;32mv[0m description has trigger phrasing
+  [0;32mv[0m SKILL.md size OK (226 lines)
+  [0;32mv[0m no em dashes in prose
+  [0;32mv[0m no semicolons in prose
+  [0;32mv[0m no local paths
+
+[0;36mdesign-taste-frontend[0m
+  [0;32mv[0m folder name valid
+  [0;32mv[0m name matches folder
+  [0;32mv[0m description present (269 chars)
+  [0;32mv[0m description has trigger phrasing
+  [0;33m![0m SKILL.md is 1206 lines, consider moving detail to references/ in /workspace/scratch/4324b468ff4b/motion-graphics-skills/skills/design-taste-frontend/SKILL.md
+  [0;32mv[0m no em dashes in prose
+  [0;32mv[0m no semicolons in prose
+  [0;32mv[0m no local paths
+
+[0;36mfull-output-enforcement[0m
+  [0;32mv[0m folder name valid
+  [0;32mv[0m name matches folder
+  [0;32mv[0m description present (203 chars)
+  [0;33m![0m description should include 'use' or 'when' trigger phrasing in /workspace/scratch/4324b468ff4b/motion-graphics-skills/skills/full-output-enforcement/SKILL.md
+  [0;32mv[0m SKILL.md size OK (49 lines)
+  [0;32mv[0m no em dashes in prose
+  [0;32mv[0m no semicolons in prose
+  [0;32mv[0m no local paths
+
+[0;36mgpt-taste[0m
+  [0;32mv[0m folder name valid
+  [0;32mv[0m name matches folder
+  [0;32mv[0m description present (312 chars)
+  [0;33m![0m description should include 'use' or 'when' trigger phrasing in /workspace/scratch/4324b468ff4b/motion-graphics-skills/skills/gpt-taste/SKILL.md
+  [0;32mv[0m SKILL.md size OK (74 lines)
+  [0;32mv[0m no em dashes in prose
+  [0;32mv[0m no semicolons in prose
+  [0;32mv[0m no local paths
+
+[0;36mgsap-core[0m
+  [0;32mv[0m folder name valid
+  [0;32mv[0m name matches folder
+  [0;32mv[0m description present (543 chars)
+  [0;32mv[0m description has trigger phrasing
+  [0;32mv[0m SKILL.md size OK (254 lines)
+  [0;32mv[0m no em dashes in prose
+  [0;32mv[0m no semicolons in prose
+  [0;32mv[0m no local paths
+
+[0;36mgsap-frameworks[0m
+  [0;32mv[0m folder name valid
+  [0;32mv[0m name matches folder
+  [0;32mv[0m description present (357 chars)
+  [0;32mv[0m description has trigger phrasing
+  [0;32mv[0m SKILL.md size OK (266 lines)
+  [0;32mv[0m no em dashes in prose
+  [0;32mv[0m no semicolons in prose
+  [0;32mv[0m no local paths
+
+[0;36mgsap-performance[0m
+  [0;32mv[0m folder name valid
+  [0;32mv[0m name matches folder
+  [0;32mv[0m description present (230 chars)
+  [0;32mv[0m description has trigger phrasing
+  [0;32mv[0m SKILL.md size OK (79 lines)
+  [0;32mv[0m no em dashes in prose
+  [0;32mv[0m no semicolons in prose
+  [0;32mv[0m no local paths
+
+[0;36mgsap-plugins[0m
+  [0;32mv[0m folder name valid
+  [0;32mv[0m name matches folder
+  [0;32mv[0m description present (354 chars)
+  [0;32mv[0m description has trigger phrasing
+  [0;32mv[0m SKILL.md size OK (433 lines)
+  [0;32mv[0m no em dashes in prose
+  [0;32mv[0m no semicolons in prose
+  [0;32mv[0m no local paths
+
+[0;36mgsap-react[0m
+  [0;32mv[0m folder name valid
+  [0;32mv[0m name matches folder
+  [0;32mv[0m description present (275 chars)
+  [0;32mv[0m description has trigger phrasing
+  [0;32mv[0m SKILL.md size OK (136 lines)
+  [0;32mv[0m no em dashes in prose
+  [0;32mv[0m no semicolons in prose
+  [0;32mv[0m no local paths
+
+[0;36mgsap-scrolltrigger[0m
+  [0;32mv[0m folder name valid
+  [0;32mv[0m name matches folder
+  [0;32mv[0m description present (325 chars)
+  [0;32mv[0m description has trigger phrasing
+  [0;32mv[0m SKILL.md size OK (296 lines)
+  [0;32mv[0m no em dashes in prose
+  [0;32mv[0m no semicolons in prose
+  [0;32mv[0m no local paths
+
+[0;36mgsap-timeline[0m
+  [0;32mv[0m folder name valid
+  [0;32mv[0m name matches folder
+  [0;32mv[0m description present (297 chars)
+  [0;32mv[0m description has trigger phrasing
+  [0;32mv[0m SKILL.md size OK (107 lines)
+  [0;32mv[0m no em dashes in prose
+  [0;32mv[0m no semicolons in prose
+  [0;32mv[0m no local paths
+
+[0;36mgsap-utils[0m
+  [0;32mv[0m folder name valid
+  [0;32mv[0m name matches folder
+  [0;32mv[0m description present (230 chars)
+  [0;32mv[0m description has trigger phrasing
+  [0;32mv[0m SKILL.md size OK (284 lines)
+  [0;32mv[0m no em dashes in prose
+  [0;32mv[0m no semicolons in prose
+  [0;32mv[0m no local paths
+
+[0;36mhigh-end-visual-design[0m
+  [0;32mv[0m folder name valid
+  [0;32mv[0m name matches folder
+  [0;32mv[0m description present (234 chars)
+  [0;33m![0m description should include 'use' or 'when' trigger phrasing in /workspace/scratch/4324b468ff4b/motion-graphics-skills/skills/high-end-visual-design/SKILL.md
+  [0;32mv[0m SKILL.md size OK (98 lines)
+  [0;32mv[0m no em dashes in prose
+  [0;32mv[0m no semicolons in prose
+  [0;32mv[0m no local paths
+
+[0;36mhost-workspace-operator[0m
+  [0;32mv[0m folder name valid
+  [0;32mv[0m name matches folder
+  [0;32mv[0m description present (153 chars)
+  [0;32mv[0m description has trigger phrasing
+  [0;32mv[0m SKILL.md size OK (97 lines)
+  [0;32mv[0m no em dashes in prose
+  [0;32mv[0m no semicolons in prose
+  [0;32mv[0m no local paths
+
+[0;36mimage-to-code[0m
+  [0;32mv[0m folder name valid
+  [0;32mv[0m name matches folder
+  [0;32mv[0m description present (555 chars)
+  [0;33m![0m description should include 'use' or 'when' trigger phrasing in /workspace/scratch/4324b468ff4b/motion-graphics-skills/skills/image-to-code/SKILL.md
+  [0;33m![0m SKILL.md is 1228 lines, consider moving detail to references/ in /workspace/scratch/4324b468ff4b/motion-graphics-skills/skills/image-to-code/SKILL.md
+  [0;32mv[0m no em dashes in prose
+  [0;32mv[0m no semicolons in prose
+  [0;32mv[0m no local paths
+
+[0;36mimagegen-frontend-mobile[0m
+  [0;32mv[0m folder name valid
+  [0;32mv[0m name matches folder
+  [0;32mv[0m description present (638 chars)
+  [0;33m![0m description should include 'use' or 'when' trigger phrasing in /workspace/scratch/4324b468ff4b/motion-graphics-skills/skills/imagegen-frontend-mobile/SKILL.md
+  [0;33m![0m SKILL.md is 1465 lines, consider moving detail to references/ in /workspace/scratch/4324b468ff4b/motion-graphics-skills/skills/imagegen-frontend-mobile/SKILL.md
+  [0;32mv[0m no em dashes in prose
+  [0;32mv[0m no semicolons in prose
+  [0;32mv[0m no local paths
+
+[0;36mimagegen-frontend-web[0m
+  [0;32mv[0m folder name valid
+  [0;32mv[0m name matches folder
+  [0;32mv[0m description present (663 chars)
+  [0;33m![0m description should include 'use' or 'when' trigger phrasing in /workspace/scratch/4324b468ff4b/motion-graphics-skills/skills/imagegen-frontend-web/SKILL.md
+  [0;33m![0m SKILL.md is 987 lines, consider moving detail to references/ in /workspace/scratch/4324b468ff4b/motion-graphics-skills/skills/imagegen-frontend-web/SKILL.md
+  [0;32mv[0m no em dashes in prose
+  [0;32mv[0m no semicolons in prose
+  [0;32mv[0m no local paths
+
+[0;36mindustrial-brutalist-ui[0m
+  [0;32mv[0m folder name valid
+  [0;32mv[0m name matches folder
+  [0;32mv[0m description present (286 chars)
+  [0;33m![0m description should include 'use' or 'when' trigger phrasing in /workspace/scratch/4324b468ff4b/motion-graphics-skills/skills/industrial-brutalist-ui/SKILL.md
+  [0;32mv[0m SKILL.md size OK (92 lines)
+  [0;32mv[0m no em dashes in prose
+  [0;32mv[0m no semicolons in prose
+  [0;32mv[0m no local paths
+
+[0;36mjump-cut-pacing[0m
+  [0;32mv[0m folder name valid
+  [0;32mv[0m name matches folder
+  [0;32mv[0m description present (398 chars)
+  [0;32mv[0m description has trigger phrasing
+  [0;32mv[0m SKILL.md size OK (148 lines)
+  [0;32mv[0m no em dashes in prose
+  [0;32mv[0m no semicolons in prose
+  [0;32mv[0m no local paths
+  [0;32mv[0m references/pacing-rules.md: no em dashes in prose
+  [0;32mv[0m references/pacing-rules.md: no semicolons in prose
+  [0;32mv[0m references/pacing-rules.md: no local paths
+  [0;32mv[0m has references/ folder
+  [0;32mv[0m has scripts/ folder
+
+[0;36mlaunch-video[0m
+  [0;32mv[0m folder name valid
+  [0;32mv[0m name matches folder
+  [0;32mv[0m description present (399 chars)
+  [0;32mv[0m description has trigger phrasing
+  [0;32mv[0m SKILL.md size OK (76 lines)
+  [0;32mv[0m no em dashes in prose
+  [0;32mv[0m no semicolons in prose
+  [0;32mv[0m no local paths
+
+[0;36mloop-cover[0m
+  [0;32mv[0m folder name valid
+  [0;32mv[0m name matches folder
+  [0;32mv[0m description present (424 chars)
+  [0;32mv[0m description has trigger phrasing
+  [0;32mv[0m SKILL.md size OK (58 lines)
+  [0;32mv[0m no em dashes in prose
+  [0;32mv[0m no semicolons in prose
+  [0;32mv[0m no local paths
+
+[0;36mmedia-use[0m
+  [0;32mv[0m folder name valid
+  [0;32mv[0m name matches folder
+  [0;32mv[0m description present (632 chars)
+  [0;32mv[0m description has trigger phrasing
+  [0;32mv[0m SKILL.md size OK (98 lines)
+  [0;32mv[0m no em dashes in prose
+  [0;32mv[0m no semicolons in prose
+  [0;32mv[0m no local paths
+  [0;32mv[0m references/audio.md: no em dashes in prose
+  [0;32mv[0m references/audio.md: no semicolons in prose
+  [0;32mv[0m references/audio.md: no local paths
+  [0;32mv[0m references/grading.md: no em dashes in prose
+  [0;32mv[0m references/grading.md: no semicolons in prose
+  [0;32mv[0m references/grading.md: no local paths
+  [0;32mv[0m references/media-treatment-recipes.md: no em dashes in prose
+  [0;32mv[0m references/media-treatment-recipes.md: no semicolons in prose
+  [0;32mv[0m references/media-treatment-recipes.md: no local paths
+  [0;32mv[0m references/media-treatments.md: no em dashes in prose
+  [0;32mv[0m references/media-treatments.md: no semicolons in prose
+  [0;32mv[0m references/media-treatments.md: no local paths
+  [0;32mv[0m references/memory.md: no em dashes in prose
+  [0;32mv[0m references/memory.md: no semicolons in prose
+  [0;32mv[0m references/memory.md: no local paths
+  [0;32mv[0m references/meta.md: no em dashes in prose
+  [0;32mv[0m references/meta.md: no semicolons in prose
+  [0;32mv[0m references/meta.md: no local paths
+  [0;32mv[0m references/operations.md: no em dashes in prose
+  [0;32mv[0m references/operations.md: no semicolons in prose
+  [0;32mv[0m references/operations.md: no local paths
+  [0;32mv[0m references/plugin-installation.md: no em dashes in prose
+  [0;32mv[0m references/plugin-installation.md: no semicolons in prose
+  [0;32mv[0m references/plugin-installation.md: no local paths
+  [0;32mv[0m references/resolve.md: no em dashes in prose
+  [0;32mv[0m references/resolve.md: no semicolons in prose
+  [0;32mv[0m references/resolve.md: no local paths
+  [0;32mv[0m references/setup-providers.md: no em dashes in prose
+  [0;32mv[0m references/setup-providers.md: no semicolons in prose
+  [0;32mv[0m references/setup-providers.md: no local paths
+  [0;32mv[0m references/telemetry-dashboard.md: no em dashes in prose
+  [0;32mv[0m references/telemetry-dashboard.md: no semicolons in prose
+  [0;32mv[0m references/telemetry-dashboard.md: no local paths
+  [0;32mv[0m has references/ folder
+  [0;32mv[0m has scripts/ folder
+
+[0;36mmilestone-reveal[0m
+  [0;32mv[0m folder name valid
+  [0;32mv[0m name matches folder
+  [0;32mv[0m description present (464 chars)
+  [0;32mv[0m description has trigger phrasing
+  [0;32mv[0m SKILL.md size OK (54 lines)
+  [0;32mv[0m no em dashes in prose
+  [0;32mv[0m no semicolons in prose
+  [0;32mv[0m no local paths
+
+[0;36mminimalist-ui[0m
+  [0;32mv[0m folder name valid
+  [0;32mv[0m name matches folder
+  [0;32mv[0m description present (145 chars)
+  [0;33m![0m description should include 'use' or 'when' trigger phrasing in /workspace/scratch/4324b468ff4b/motion-graphics-skills/skills/minimalist-ui/SKILL.md
+  [0;32mv[0m SKILL.md size OK (85 lines)
+  [0;32mv[0m no em dashes in prose
+  [0;32mv[0m no semicolons in prose
+  [0;32mv[0m no local paths
+
+[0;36mmix-and-match[0m
+  [0;32mv[0m folder name valid
+  [0;32mv[0m name matches folder
+  [0;32mv[0m description present (335 chars)
+  [0;32mv[0m description has trigger phrasing
+  [0;32mv[0m SKILL.md size OK (286 lines)
+  [0;32mv[0m no em dashes in prose
+  [0;32mv[0m no semicolons in prose
+  [0;32mv[0m no local paths
+  [0;32mv[0m references/creative-recombination.md: no em dashes in prose
+  [0;32mv[0m references/creative-recombination.md: no semicolons in prose
+  [0;32mv[0m references/creative-recombination.md: no local paths
+  [0;32mv[0m references/reference-gene-schema.md: no em dashes in prose
+  [0;32mv[0m references/reference-gene-schema.md: no semicolons in prose
+  [0;32mv[0m references/reference-gene-schema.md: no local paths
+  [0;32mv[0m references/wildcard-discovery.md: no em dashes in prose
+  [0;32mv[0m references/wildcard-discovery.md: no semicolons in prose
+  [0;32mv[0m references/wildcard-discovery.md: no local paths
+  [0;32mv[0m evals/assertions.md: no em dashes in prose
+  [0;32mv[0m evals/assertions.md: no semicolons in prose
+  [0;32mv[0m evals/assertions.md: no local paths
+  [0;32mv[0m evals/cases.md: no em dashes in prose
+  [0;32mv[0m evals/cases.md: no semicolons in prose
+  [0;32mv[0m evals/cases.md: no local paths
+  [0;32mv[0m has references/ folder
+  [0;32mv[0m has scripts/ folder
+  [0;32mv[0m has evals/ folder
+
+[0;36mmodel-showdown[0m
+  [0;32mv[0m folder name valid
+  [0;32mv[0m name matches folder
+  [0;32mv[0m description present (471 chars)
+  [0;32mv[0m description has trigger phrasing
+  [0;32mv[0m SKILL.md size OK (53 lines)
+  [0;32mv[0m no em dashes in prose
+  [0;32mv[0m no semicolons in prose
+  [0;32mv[0m no local paths
+
+[0;36mmotion-brief-writer[0m
+  [0;32mv[0m folder name valid
+  [0;32mv[0m name matches folder
+  [0;32mv[0m description present (439 chars)
+  [0;32mv[0m description has trigger phrasing
+  [0;32mv[0m SKILL.md size OK (62 lines)
+  [0;32mv[0m no em dashes in prose
+  [0;32mv[0m no semicolons in prose
+  [0;32mv[0m no local paths
+
+[0;36mmotion-design[0m
+  [0;32mv[0m folder name valid
+  [0;32mv[0m name matches folder
+  [0;32mv[0m description present (417 chars)
+  [0;32mv[0m description has trigger phrasing
+  [0;32mv[0m SKILL.md size OK (315 lines)
+  [0;32mv[0m no em dashes in prose
+  [0;32mv[0m no semicolons in prose
+  [0;32mv[0m no local paths
+
+[0;36mmotion-director[0m
+  [0;32mv[0m folder name valid
+  [0;32mv[0m name matches folder
+  [0;32mv[0m description present (550 chars)
+  [0;32mv[0m description has trigger phrasing
+  [0;33m![0m SKILL.md is 501 lines, consider moving detail to references/ in /workspace/scratch/4324b468ff4b/motion-graphics-skills/skills/motion-director/SKILL.md
+  [0;32mv[0m no em dashes in prose
+  [0;32mv[0m no semicolons in prose
+  [0;32mv[0m no local paths
+  [0;32mv[0m references/anti-slop.md: no em dashes in prose
+  [0;32mv[0m references/anti-slop.md: no semicolons in prose
+  [0;32mv[0m references/anti-slop.md: no local paths
+  [0;32mv[0m references/arabic-motion.md: no em dashes in prose
+  [0;32mv[0m references/arabic-motion.md: no semicolons in prose
+  [0;32mv[0m references/arabic-motion.md: no local paths
+  [0;32mv[0m references/concept-library.md: no em dashes in prose
+  [0;32mv[0m references/concept-library.md: no semicolons in prose
+  [0;32mv[0m references/concept-library.md: no local paths
+  [0;32mv[0m references/creative-direction.md: no em dashes in prose
+  [0;32mv[0m references/creative-direction.md: no semicolons in prose
+  [0;32mv[0m references/creative-direction.md: no local paths
+  [0;32mv[0m references/hyperframes-playbook.md: no em dashes in prose
+  [0;32mv[0m references/hyperframes-playbook.md: no semicolons in prose
+  [0;32mv[0m references/hyperframes-playbook.md: no local paths
+  [0;32mv[0m references/motion-craft.md: no em dashes in prose
+  [0;32mv[0m references/motion-craft.md: no semicolons in prose
+  [0;32mv[0m references/motion-craft.md: no local paths
+  [0;32mv[0m references/narrative-direction.md: no em dashes in prose
+  [0;32mv[0m references/narrative-direction.md: no semicolons in prose
+  [0;32mv[0m references/narrative-direction.md: no local paths
+  [0;32mv[0m references/neural-links.md: no em dashes in prose
+  [0;32mv[0m references/neural-links.md: no semicolons in prose
+  [0;32mv[0m references/neural-links.md: no local paths
+  [0;32mv[0m references/operator-guide.md: no em dashes in prose
+  [0;32mv[0m references/operator-guide.md: no semicolons in prose
+  [0;32mv[0m references/operator-guide.md: no local paths
+  [0;32mv[0m references/reference-analysis.md: no em dashes in prose
+  [0;32mv[0m references/reference-analysis.md: no semicolons in prose
+  [0;32mv[0m references/reference-analysis.md: no local paths
+  [0;32mv[0m references/reference-fidelity.md: no em dashes in prose
+  [0;32mv[0m references/reference-fidelity.md: no semicolons in prose
+  [0;32mv[0m references/reference-fidelity.md: no local paths
+  [0;32mv[0m references/reliability-guard.md: no em dashes in prose
+  [0;32mv[0m references/reliability-guard.md: no semicolons in prose
+  [0;32mv[0m references/reliability-guard.md: no local paths
+  [0;32mv[0m references/review-gates.md: no em dashes in prose
+  [0;32mv[0m references/review-gates.md: no semicolons in prose
+  [0;32mv[0m references/review-gates.md: no local paths
+  [0;32mv[0m references/sources.md: no em dashes in prose
+  [0;32mv[0m references/sources.md: no semicolons in prose
+  [0;32mv[0m references/sources.md: no local paths
+  [0;32mv[0m references/technique-atlas.md: no em dashes in prose
+  [0;32mv[0m references/technique-atlas.md: no semicolons in prose
+  [0;32mv[0m references/technique-atlas.md: no local paths
+  [0;32mv[0m evals/assertions.md: no em dashes in prose
+  [0;32mv[0m evals/assertions.md: no semicolons in prose
+  [0;32mv[0m evals/assertions.md: no local paths
+  [0;32mv[0m evals/cases.md: no em dashes in prose
+  [0;32mv[0m evals/cases.md: no semicolons in prose
+  [0;32mv[0m evals/cases.md: no local paths
+  [0;32mv[0m has references/ folder
+  [0;32mv[0m has scripts/ folder
+  [0;32mv[0m has evals/ folder
+
+[0;36mmotion-effects[0m
+  [0;32mv[0m folder name valid
+  [0;32mv[0m name matches folder
+  [0;32mv[0m description present (450 chars)
+  [0;32mv[0m description has trigger phrasing
+  [0;32mv[0m SKILL.md size OK (93 lines)
+  [0;32mv[0m no em dashes in prose
+  [0;32mv[0m no semicolons in prose
+  [0;32mv[0m no local paths
+  [0;32mv[0m references/effects.md: no em dashes in prose
+  [0;32mv[0m references/effects.md: no semicolons in prose
+  [0;32mv[0m references/effects.md: no local paths
+  [0;32mv[0m has references/ folder
+
+[0;36mmotion-studio[0m
+  [0;32mv[0m folder name valid
+  [0;32mv[0m name matches folder
+  [0;32mv[0m description present (246 chars)
+  [0;32mv[0m description has trigger phrasing
+  [0;32mv[0m SKILL.md size OK (44 lines)
+  [0;32mv[0m no em dashes in prose
+  [0;32mv[0m no semicolons in prose
+  [0;32mv[0m no local paths
+
+[0;36mnewsletter-promo[0m
+  [0;32mv[0m folder name valid
+  [0;32mv[0m name matches folder
+  [0;32mv[0m description present (372 chars)
+  [0;32mv[0m description has trigger phrasing
+  [0;32mv[0m SKILL.md size OK (43 lines)
+  [0;32mv[0m no em dashes in prose
+  [0;32mv[0m no semicolons in prose
+  [0;32mv[0m no local paths
+
+[0;36mpaper-cut-motion[0m
+  [0;32mv[0m folder name valid
+  [0;32mv[0m name matches folder
+  [0;32mv[0m description present (397 chars)
+  [0;32mv[0m description has trigger phrasing
+  [0;32mv[0m SKILL.md size OK (141 lines)
+  [0;32mv[0m no em dashes in prose
+  [0;32mv[0m no semicolons in prose
+  [0;32mv[0m no local paths
+  [0;32mv[0m references/stop-motion-craft.md: no em dashes in prose
+  [0;32mv[0m references/stop-motion-craft.md: no semicolons in prose
+  [0;32mv[0m references/stop-motion-craft.md: no local paths
+  [0;32mv[0m has references/ folder
+  [0;32mv[0m has scripts/ folder
+
+[0;36mredesign-existing-projects[0m
+  [0;32mv[0m folder name valid
+  [0;32mv[0m name matches folder
+  [0;32mv[0m description present (225 chars)
+  [0;33m![0m description should include 'use' or 'when' trigger phrasing in /workspace/scratch/4324b468ff4b/motion-graphics-skills/skills/redesign-existing-projects/SKILL.md
+  [0;32mv[0m SKILL.md size OK (178 lines)
+  [0;32mv[0m no em dashes in prose
+  [0;32mv[0m no semicolons in prose
+  [0;32mv[0m no local paths
+
+[0;36mreel-export[0m
+  [0;32mv[0m folder name valid
+  [0;32mv[0m name matches folder
+  [0;32mv[0m description present (469 chars)
+  [0;32mv[0m description has trigger phrasing
+  [0;32mv[0m SKILL.md size OK (51 lines)
+  [0;32mv[0m no em dashes in prose
+  [0;32mv[0m no semicolons in prose
+  [0;32mv[0m no local paths
+
+[0;36mremove-background[0m
+  [0;32mv[0m folder name valid
+  [0;32mv[0m name matches folder
+  [0;32mv[0m description present (205 chars)
+  [0;32mv[0m description has trigger phrasing
+  [0;32mv[0m SKILL.md size OK (24 lines)
+  [0;32mv[0m no em dashes in prose
+  [0;32mv[0m no semicolons in prose
+  [0;32mv[0m no local paths
+
+[0;36msandbox-python-executor[0m
+  [0;32mv[0m folder name valid
+  [0;32mv[0m name matches folder
+  [0;32mv[0m description present (247 chars)
+  [0;32mv[0m description has trigger phrasing
+  [0;32mv[0m SKILL.md size OK (82 lines)
+  [0;32mv[0m no em dashes in prose
+  [0;32mv[0m no semicolons in prose
+  [0;32mv[0m no local paths
+
+[0;36msfx-picker[0m
+  [0;32mv[0m folder name valid
+  [0;32mv[0m name matches folder
+  [0;32mv[0m description present (445 chars)
+  [0;32mv[0m description has trigger phrasing
+  [0;32mv[0m SKILL.md size OK (110 lines)
+  [0;32mv[0m no em dashes in prose
+  [0;32mv[0m no semicolons in prose
+  [0;32mv[0m no local paths
+  [0;32mv[0m references/catalog.md: no em dashes in prose
+  [0;32mv[0m references/catalog.md: no semicolons in prose
+  [0;32mv[0m references/catalog.md: no local paths
+  [0;32mv[0m has references/ folder
+
+[0;36mspeaker-cutout[0m
+  [0;32mv[0m folder name valid
+  [0;32mv[0m name matches folder
+  [0;32mv[0m description present (374 chars)
+  [0;32mv[0m description has trigger phrasing
+  [0;32mv[0m SKILL.md size OK (156 lines)
+  [0;32mv[0m no em dashes in prose
+  [0;32mv[0m no semicolons in prose
+  [0;32mv[0m no local paths
+  [0;32mv[0m references/depth-stacking.md: no em dashes in prose
+  [0;32mv[0m references/depth-stacking.md: no semicolons in prose
+  [0;32mv[0m references/depth-stacking.md: no local paths
+  [0;32mv[0m has references/ folder
+  [0;32mv[0m has scripts/ folder
+
+[0;36mspeech-to-text[0m
+  [0;32mv[0m folder name valid
+  [0;32mv[0m name matches folder
+  [0;32mv[0m description present (256 chars)
+  [0;32mv[0m description has trigger phrasing
+  [0;32mv[0m SKILL.md size OK (169 lines)
+  [0;32mv[0m no em dashes in prose
+  [0;32mv[0m no semicolons in prose
+  [0;32mv[0m no local paths
+
+[0;36mstitch-design-taste[0m
+  [0;32mv[0m folder name valid
+  [0;32mv[0m name matches folder
+  [0;32mv[0m description present (259 chars)
+  [0;33m![0m description should include 'use' or 'when' trigger phrasing in /workspace/scratch/4324b468ff4b/motion-graphics-skills/skills/stitch-design-taste/SKILL.md
+  [0;32mv[0m SKILL.md size OK (184 lines)
+  [0;32mv[0m no em dashes in prose
+  [0;32mv[0m no semicolons in prose
+  [0;32mv[0m no local paths
+
+[0;36mtext-to-lottie[0m
+  [0;32mv[0m folder name valid
+  [0;32mv[0m name matches folder
+  [0;32mv[0m description present (347 chars)
+  [0;32mv[0m description has trigger phrasing
+  [0;32mv[0m SKILL.md size OK (162 lines)
+  [0;32mv[0m no em dashes in prose
+  [0;32mv[0m no semicolons in prose
+  [0;32mv[0m no local paths
+  [0;32mv[0m references/chapterization-transition-grammar.md: no em dashes in prose
+  [0;32mv[0m references/chapterization-transition-grammar.md: no semicolons in prose
+  [0;32mv[0m references/chapterization-transition-grammar.md: no local paths
+  [0;32mv[0m references/design-taste.md: no em dashes in prose
+  [0;32mv[0m references/design-taste.md: no semicolons in prose
+  [0;32mv[0m references/design-taste.md: no local paths
+  [0;32mv[0m references/lottie-spec-map.md: no em dashes in prose
+  [0;32mv[0m references/lottie-spec-map.md: no semicolons in prose
+  [0;32mv[0m references/lottie-spec-map.md: no local paths
+  [0;32mv[0m references/motion-taste.md: no em dashes in prose
+  [0;32mv[0m references/motion-taste.md: no semicolons in prose
+  [0;32mv[0m references/motion-taste.md: no local paths
+  [0;32mv[0m references/player-contract.md: no em dashes in prose
+  [0;32mv[0m references/player-contract.md: no semicolons in prose
+  [0;32mv[0m references/player-contract.md: no local paths
+  [0;32mv[0m references/recipe-camera-scene-motion.md: no em dashes in prose
+  [0;32mv[0m references/recipe-camera-scene-motion.md: no semicolons in prose
+  [0;32mv[0m references/recipe-camera-scene-motion.md: no local paths
+  [0;32mv[0m references/recipe-data-stats.md: no em dashes in prose
+  [0;32mv[0m references/recipe-data-stats.md: no semicolons in prose
+  [0;32mv[0m references/recipe-data-stats.md: no local paths
+  [0;32mv[0m references/recipe-diagram-technical.md: no em dashes in prose
+  [0;32mv[0m references/recipe-diagram-technical.md: no semicolons in prose
+  [0;32mv[0m references/recipe-diagram-technical.md: no local paths
+  [0;32mv[0m references/recipe-loaders-icons.md: no em dashes in prose
+  [0;32mv[0m references/recipe-loaders-icons.md: no semicolons in prose
+  [0;32mv[0m references/recipe-loaders-icons.md: no local paths
+  [0;32mv[0m references/recipe-logo.md: no em dashes in prose
+  [0;32mv[0m references/recipe-logo.md: no semicolons in prose
+  [0;32mv[0m references/recipe-logo.md: no local paths
+  [0;32mv[0m references/recipe-lower-thirds.md: no em dashes in prose
+  [0;32mv[0m references/recipe-lower-thirds.md: no semicolons in prose
+  [0;32mv[0m references/recipe-lower-thirds.md: no local paths
+  [0;32mv[0m references/recipe-product-promo.md: no em dashes in prose
+  [0;32mv[0m references/recipe-product-promo.md: no semicolons in prose
+  [0;32mv[0m references/recipe-product-promo.md: no local paths
+  [0;32mv[0m references/recipe-starter-projects.md: no em dashes in prose
+  [0;32mv[0m references/recipe-starter-projects.md: no semicolons in prose
+  [0;32mv[0m references/recipe-starter-projects.md: no local paths
+  [0;32mv[0m references/recipe-svg-animation.md: no em dashes in prose
+  [0;32mv[0m references/recipe-svg-animation.md: no semicolons in prose
+  [0;32mv[0m references/recipe-svg-animation.md: no local paths
+  [0;32mv[0m references/recipe-typography.md: no em dashes in prose
+  [0;32mv[0m references/recipe-typography.md: no semicolons in prose
+  [0;32mv[0m references/recipe-typography.md: no local paths
+  [0;32mv[0m references/recipe-ui-microinteractions.md: no em dashes in prose
+  [0;32mv[0m references/recipe-ui-microinteractions.md: no semicolons in prose
+  [0;32mv[0m references/recipe-ui-microinteractions.md: no local paths
+  [0;32mv[0m references/recipe-visual-effects.md: no em dashes in prose
+  [0;32mv[0m references/recipe-visual-effects.md: no semicolons in prose
+  [0;32mv[0m references/recipe-visual-effects.md: no local paths
+  [0;32mv[0m references/svg-compatibility.md: no em dashes in prose
+  [0;32mv[0m references/svg-compatibility.md: no semicolons in prose
+  [0;32mv[0m references/svg-compatibility.md: no local paths
+  [0;32mv[0m evals/output-rubric.md: no em dashes in prose
+  [0;32mv[0m evals/output-rubric.md: no semicolons in prose
+  [0;32mv[0m evals/output-rubric.md: no local paths
+  [0;32mv[0m has references/ folder
+  [0;32mv[0m has evals/ folder
+
+[0;36mtitle-sequence-3d[0m
+  [0;32mv[0m folder name valid
+  [0;32mv[0m name matches folder
+  [0;32mv[0m description present (386 chars)
+  [0;32mv[0m description has trigger phrasing
+  [0;32mv[0m SKILL.md size OK (53 lines)
+  [0;32mv[0m no em dashes in prose
+  [0;32mv[0m no semicolons in prose
+  [0;32mv[0m no local paths
+
+[0;36mtonejs[0m
+  [0;32mv[0m folder name valid
+  [0;32mv[0m name matches folder
+  [0;32mv[0m description present (325 chars)
+  [0;32mv[0m description has trigger phrasing
+  [0;32mv[0m SKILL.md size OK (209 lines)
+  [0;32mv[0m no em dashes in prose
+  [0;32mv[0m no semicolons in prose
+  [0;32mv[0m no local paths
+
+[0;36mvideo-review-loop[0m
+  [0;32mv[0m folder name valid
+  [0;32mv[0m name matches folder
+  [0;32mv[0m description present (384 chars)
+  [0;32mv[0m description has trigger phrasing
+  [0;32mv[0m SKILL.md size OK (375 lines)
+  [0;32mv[0m no em dashes in prose
+  [0;32mv[0m no semicolons in prose
+  [0;32mv[0m no local paths
+  [0;32mv[0m references/review-gates.md: no em dashes in prose
+  [0;32mv[0m references/review-gates.md: no semicolons in prose
+  [0;32mv[0m references/review-gates.md: no local paths
+  [0;32mv[0m has references/ folder
+  [0;32mv[0m has scripts/ folder
+
+[0;36mvideo-spotlight[0m
+  [0;32mv[0m folder name valid
+  [0;32mv[0m name matches folder
+  [0;32mv[0m description present (385 chars)
+  [0;32mv[0m description has trigger phrasing
+  [0;32mv[0m SKILL.md size OK (145 lines)
+  [0;32mv[0m no em dashes in prose
+  [0;32mv[0m no semicolons in prose
+  [0;32mv[0m no local paths
+  [0;32mv[0m references/color-integrity.md: no em dashes in prose
+  [0;32mv[0m references/color-integrity.md: no semicolons in prose
+  [0;32mv[0m references/color-integrity.md: no local paths
+  [0;32mv[0m has references/ folder
+  [0;32mv[0m has scripts/ folder
+
+[0;36mvideo-style-cloner[0m
+  [0;32mv[0m folder name valid
+  [0;32mv[0m name matches folder
+  [0;32mv[0m description present (848 chars)
+  [0;32mv[0m description has trigger phrasing
+  [0;32mv[0m SKILL.md size OK (450 lines)
+  [0;32mv[0m no em dashes in prose
+  [0;32mv[0m no semicolons in prose
+  [0;32mv[0m no local paths
+  [0;32mv[0m references/audio.md: no em dashes in prose
+  [0;32mv[0m references/audio.md: no semicolons in prose
+  [0;32mv[0m references/audio.md: no local paths
+  [0;32mv[0m references/engines.md: no em dashes in prose
+  [0;32mv[0m references/engines.md: no semicolons in prose
+  [0;32mv[0m references/engines.md: no local paths
+  [0;32mv[0m references/licensing.md: no em dashes in prose
+  [0;32mv[0m references/licensing.md: no semicolons in prose
+  [0;32mv[0m references/licensing.md: no local paths
+  [0;32mv[0m references/qa-checklist.md: no em dashes in prose
+  [0;32mv[0m references/qa-checklist.md: no semicolons in prose
+  [0;32mv[0m references/qa-checklist.md: no local paths
+  [0;32mv[0m references/runtime.md: no em dashes in prose
+  [0;32mv[0m references/runtime.md: no semicolons in prose
+  [0;32mv[0m references/runtime.md: no local paths
+  [0;32mv[0m references/shot-analysis.md: no em dashes in prose
+  [0;32mv[0m references/shot-analysis.md: no semicolons in prose
+  [0;32mv[0m references/shot-analysis.md: no local paths
+  [0;32mv[0m has references/ folder
+  [0;32mv[0m has evals/ folder
+
+[0;36mvox-explainer[0m
+  [0;32mv[0m folder name valid
+  [0;32mv[0m name matches folder
+  [0;32mv[0m description present (382 chars)
+  [0;32mv[0m description has trigger phrasing
+  [0;32mv[0m SKILL.md size OK (87 lines)
+  [0;32mv[0m no em dashes in prose
+  [0;32mv[0m no semicolons in prose
+  [0;32mv[0m no local paths
+
+[0;36mprompts[0m
+  [0;32mv[0m brand-design-system.md: no em dashes in prose
+  [0;32mv[0m brand-design-system.md: no semicolons in prose
+  [0;32mv[0m brand-design-system.md: no local paths
+  [0;32mv[0m briefs.md: no em dashes in prose
+  [0;32mv[0m briefs.md: no semicolons in prose
+  [0;32mv[0m briefs.md: no local paths
+  [0;32mv[0m effects.md: no em dashes in prose
+  [0;32mv[0m effects.md: no semicolons in prose
+  [0;32mv[0m effects.md: no local paths
+  [0;32mv[0m polish.md: no em dashes in prose
+  [0;32mv[0m polish.md: no semicolons in prose
+  [0;32mv[0m polish.md: no local paths
+  [0;32mv[0m start-here.md: no em dashes in prose
+  [0;32mv[0m start-here.md: no semicolons in prose
+  [0;32mv[0m start-here.md: no local paths
+
+[0;36mSummary[0m
+  Skills checked: 53
+  Prompt files checked: 5
+  [0;32mPassed:[0m   646
+  [0;33mWarnings:[0m 17
+  [0;31mFailed:[0m   0

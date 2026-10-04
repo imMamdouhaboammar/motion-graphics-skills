@@ -1,0 +1,50 @@
+npm warn Unknown env config "http-proxy". This will stop working in the next major version of npm.
+[SystemMemory] cgroup memory limit detected: 8192 MiB — it governs memory-adaptive render behaviour instead of host RAM.
+◆  Checking diabetes-scientific-editorial-collage
+[hyperframes] browserGpuMode probe → software (WebGL unavailable)
+
+Lint
+  ⚠ nested_structure_needs_subcomposition: <div id="scene-01"> is a timeline element that contains nested <section>. The timeline shows one row per top-level element, and the root composition is built only from sub-compositions.
+    /workspace/scratch/4324b468ff4b/motion-graphics-skills/projects/diabetes-scientific-editorial-collage/index.html #scene-01 t=0s
+    Fix: Move <div id="scene-01"> and its contents into a sub-composition file and mount it with data-composition-src.
+  ⚠ nested_structure_needs_subcomposition: <div id="scene-02"> is a timeline element that contains nested <section>. The timeline shows one row per top-level element, and the root composition is built only from sub-compositions.
+    /workspace/scratch/4324b468ff4b/motion-graphics-skills/projects/diabetes-scientific-editorial-collage/index.html #scene-02 t=0s
+    Fix: Move <div id="scene-02"> and its contents into a sub-composition file and mount it with data-composition-src.
+  ⚠ nested_structure_needs_subcomposition: <div id="scene-03"> is a timeline element that contains nested <section>. The timeline shows one row per top-level element, and the root composition is built only from sub-compositions.
+    /workspace/scratch/4324b468ff4b/motion-graphics-skills/projects/diabetes-scientific-editorial-collage/index.html #scene-03 t=0s
+    Fix: Move <div id="scene-03"> and its contents into a sub-composition file and mount it with data-composition-src.
+  ⚠ nested_structure_needs_subcomposition: <div id="scene-04"> is a timeline element that contains nested <section>. The timeline shows one row per top-level element, and the root composition is built only from sub-compositions.
+    /workspace/scratch/4324b468ff4b/motion-graphics-skills/projects/diabetes-scientific-editorial-collage/index.html #scene-04 t=0s
+    Fix: Move <div id="scene-04"> and its contents into a sub-composition file and mount it with data-composition-src.
+  ⚠ nested_structure_needs_subcomposition: <div id="scene-05"> is a timeline element that contains nested <section>. The timeline shows one row per top-level element, and the root composition is built only from sub-compositions.
+    /workspace/scratch/4324b468ff4b/motion-graphics-skills/projects/diabetes-scientific-editorial-collage/index.html #scene-05 t=0s
+    Fix: Move <div id="scene-05"> and its contents into a sub-composition file and mount it with data-composition-src.
+  ⚠ nested_structure_needs_subcomposition: <div id="scene-06"> is a timeline element that contains nested <section>. The timeline shows one row per top-level element, and the root composition is built only from sub-compositions.
+    /workspace/scratch/4324b468ff4b/motion-graphics-skills/projects/diabetes-scientific-editorial-collage/index.html #scene-06 t=0s
+    Fix: Move <div id="scene-06"> and its contents into a sub-composition file and mount it with data-composition-src.
+  0 error(s), 6 warning(s), 0 info(s)
+
+Runtime
+  ◇ 0 errors, 0 warnings
+
+Layout
+  ⚠ t=4-4.25s (3 samples) content_overlap section.scene.s1 > div:nth-of-type(2) inside section.scene.s2 > div:nth-of-type(2) "01 / 06" — Two text blocks overlap and may render unreadable.
+        Fix: Give each block its own zone, or mark intentional layering with data-layout-allow-overlap.
+  ⚠ t=43.25-43.5s (3 samples) content_overlap div.book > h1:nth-of-type(1) inside div.question "السكري.. هل اقتربت نهاية المرض؟" — Two text blocks overlap and may render unreadable.
+        Fix: Give each block its own zone, or mark intentional layering with data-layout-allow-overlap.
+  ℹ t=30.25s text_occluded div.pending inside div.pending-line "؟" — Text is hidden beneath an opaque element.
+        Fix: Give the text its own zone, raise its stacking order above the covering element, or mark intentional layering with data-layout-allow-occlusion.
+  ℹ t=35.75s text_occluded div.final-copy > p:nth-of-type(1) inside #visual-19 "أسئلة يناقشها الباحثفي كتابه المرتقب" — Text is hidden beneath an opaque element.
+        Fix: Give the text its own zone, raise its stacking order above the covering element, or mark intentional layering with data-layout-allow-occlusion.
+  0 error(s), 2 warning(s), 2 info(s)
+
+Motion
+  ◇ 0 errors, 0 warnings
+
+Contrast
+  ◇ 47/47 text checks pass WCAG AA
+
+Snapshots
+  ◇ disabled
+
+◇  Check passed

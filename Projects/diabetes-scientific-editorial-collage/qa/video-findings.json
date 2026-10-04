@@ -1,0 +1,222 @@
+[
+  {
+    "code": "mid-film-freeze",
+    "severity": "warning",
+    "message": "Frozen interval detected away from the video end",
+    "evidence": {
+      "start": 0.5,
+      "end": 3.0,
+      "duration": 2.5
+    }
+  },
+  {
+    "code": "mid-film-freeze",
+    "severity": "warning",
+    "message": "Frozen interval detected away from the video end",
+    "evidence": {
+      "start": 3.56667,
+      "end": 3.93333,
+      "duration": 0.366667
+    }
+  },
+  {
+    "code": "mid-film-freeze",
+    "severity": "warning",
+    "message": "Frozen interval detected away from the video end",
+    "evidence": {
+      "start": 4.8,
+      "end": 5.23333,
+      "duration": 0.433333
+    }
+  },
+  {
+    "code": "mid-film-freeze",
+    "severity": "warning",
+    "message": "Frozen interval detected away from the video end",
+    "evidence": {
+      "start": 5.23333,
+      "end": 6.4,
+      "duration": 1.16667
+    }
+  },
+  {
+    "code": "mid-film-freeze",
+    "severity": "warning",
+    "message": "Frozen interval detected away from the video end",
+    "evidence": {
+      "start": 6.4,
+      "end": 10.2667,
+      "duration": 3.86667
+    }
+  },
+  {
+    "code": "mid-film-freeze",
+    "severity": "warning",
+    "message": "Frozen interval detected away from the video end",
+    "evidence": {
+      "start": 10.2667,
+      "end": 10.9333,
+      "duration": 0.666667
+    }
+  },
+  {
+    "code": "mid-film-freeze",
+    "severity": "warning",
+    "message": "Frozen interval detected away from the video end",
+    "evidence": {
+      "start": 12.4,
+      "end": 13.2333,
+      "duration": 0.833333
+    }
+  },
+  {
+    "code": "mid-film-freeze",
+    "severity": "warning",
+    "message": "Frozen interval detected away from the video end",
+    "evidence": {
+      "start": 13.2333,
+      "end": 16.9,
+      "duration": 3.66667
+    }
+  },
+  {
+    "code": "mid-film-freeze",
+    "severity": "warning",
+    "message": "Frozen interval detected away from the video end",
+    "evidence": {
+      "start": 16.9,
+      "end": 17.2333,
+      "duration": 0.333333
+    }
+  },
+  {
+    "code": "mid-film-freeze",
+    "severity": "warning",
+    "message": "Frozen interval detected away from the video end",
+    "evidence": {
+      "start": 17.8,
+      "end": 18.6667,
+      "duration": 0.866667
+    }
+  },
+  {
+    "code": "mid-film-freeze",
+    "severity": "warning",
+    "message": "Frozen interval detected away from the video end",
+    "evidence": {
+      "start": 18.6667,
+      "end": 19.8333,
+      "duration": 1.16667
+    }
+  },
+  {
+    "code": "mid-film-freeze",
+    "severity": "warning",
+    "message": "Frozen interval detected away from the video end",
+    "evidence": {
+      "start": 19.8333,
+      "end": 20.7,
+      "duration": 0.866667
+    }
+  },
+  {
+    "code": "mid-film-freeze",
+    "severity": "warning",
+    "message": "Frozen interval detected away from the video end",
+    "evidence": {
+      "start": 20.7,
+      "end": 21.3333,
+      "duration": 0.633333
+    }
+  },
+  {
+    "code": "mid-film-freeze",
+    "severity": "warning",
+    "message": "Frozen interval detected away from the video end",
+    "evidence": {
+      "start": 21.3333,
+      "end": 21.8333,
+      "duration": 0.5
+    }
+  },
+  {
+    "code": "mid-film-freeze",
+    "severity": "warning",
+    "message": "Frozen interval detected away from the video end",
+    "evidence": {
+      "start": 21.8333,
+      "end": 22.9667,
+      "duration": 1.13333
+    }
+  },
+  {
+    "code": "mid-film-freeze",
+    "severity": "warning",
+    "message": "Frozen interval detected away from the video end",
+    "evidence": {
+      "start": 22.9667,
+      "end": 25.2667,
+      "duration": 2.3
+    }
+  },
+  {
+    "code": "mid-film-freeze",
+    "severity": "warning",
+    "message": "Frozen interval detected away from the video end",
+    "evidence": {
+      "start": 26.2667,
+      "end": 27.7,
+      "duration": 1.43333
+    }
+  },
+  {
+    "code": "mid-film-freeze",
+    "severity": "warning",
+    "message": "Frozen interval detected away from the video end",
+    "evidence": {
+      "start": 27.7,
+      "end": 33.7667,
+      "duration": 6.06667
+    }
+  },
+  {
+    "code": "mid-film-freeze",
+    "severity": "warning",
+    "message": "Frozen interval detected away from the video end",
+    "evidence": {
+      "start": 35.7333,
+      "end": 37.3667,
+      "duration": 1.63333
+    }
+  },
+  {
+    "code": "mid-film-freeze",
+    "severity": "warning",
+    "message": "Frozen interval detected away from the video end",
+    "evidence": {
+      "start": 37.3667,
+      "end": 43.3333,
+      "duration": 5.96667
+    }
+  },
+  {
+    "code": "mid-film-freeze",
+    "severity": "warning",
+    "message": "Frozen interval detected away from the video end",
+    "evidence": {
+      "start": 44.2667,
+      "end": 45.2333,
+      "duration": 0.966667
+    }
+  },
+  {
+    "code": "long-silence",
+    "severity": "warning",
+    "message": "Silence interval longer than one second detected",
+    "evidence": {
+      "start": 47.4778,
+      "end": 49.5147,
+      "duration": 2.03685
+    }
+  }
+]

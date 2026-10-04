@@ -1,0 +1,128 @@
+{
+  "scene": 2,
+  "source": "index.html",
+  "animation": "animation/timeline.js",
+  "layers": [
+    {
+      "selector": ".s2 .bg",
+      "source": "assets/backgrounds/scene-02.svg",
+      "text": null,
+      "position": {
+        "left": "0px",
+        "top": "0px",
+        "width": "1920px",
+        "height": "1080px"
+      }
+    },
+    {
+      "selector": ".s2 .eyebrow",
+      "source": null,
+      "text": "السؤال يبدأ من الحياة",
+      "position": {
+        "left": "1516px",
+        "top": "78px",
+        "width": "299px",
+        "height": "68px"
+      }
+    },
+    {
+      "selector": ".s2 .folio",
+      "source": null,
+      "text": "02 / 06",
+      "position": {
+        "left": "100px",
+        "top": "85px",
+        "width": "105px",
+        "height": "72px"
+      }
+    },
+    {
+      "selector": ".s2 .window",
+      "source": null,
+      "text": "",
+      "position": {
+        "left": "170px",
+        "top": "210px",
+        "width": "690px",
+        "height": "665px"
+      }
+    },
+    {
+      "selector": ".s2 .motif",
+      "source": null,
+      "text": "",
+      "position": {
+        "left": "220px",
+        "top": "300px",
+        "width": "165px",
+        "height": "165px"
+      }
+    },
+    {
+      "selector": ".s2 .photo.adult",
+      "source": "assets/cutouts/saudi-adult.png",
+      "text": null,
+      "position": {
+        "left": "165px",
+        "top": "235px",
+        "width": "750px",
+        "height": "770px"
+      }
+    },
+    {
+      "selector": ".s2 .desk",
+      "source": null,
+      "text": "",
+      "position": {
+        "left": "100px",
+        "top": "897px",
+        "width": "875px",
+        "height": "18px"
+      }
+    },
+    {
+      "selector": ".s2 .human-copy",
+      "source": null,
+      "text": "سؤال يشغلالمرضى وأسرهمويواصل الباحثون محاولة الإجابة عنه",
+      "position": {
+        "left": "955px",
+        "top": "250px",
+        "width": "855px",
+        "height": "377.375px"
+      }
+    },
+    {
+      "selector": ".s2 .diagram.meter",
+      "source": "assets/scientific/glucose-meter.svg",
+      "text": null,
+      "position": {
+        "left": "860px",
+        "top": "650px",
+        "width": "190px",
+        "height": "290px"
+      }
+    },
+    {
+      "selector": ".s2 .diagram.calendar",
+      "source": "assets/scientific/daily-routine-calendar.svg",
+      "text": null,
+      "position": {
+        "left": "1080px",
+        "top": "725px",
+        "width": "260px",
+        "height": "250px"
+      }
+    },
+    {
+      "selector": ".s2 .care",
+      "source": null,
+      "text": "تختلف وسائل المتابعة والعلاج من شخص إلى آخر",
+      "position": {
+        "left": "1105px",
+        "top": "905px",
+        "width": "700px",
+        "height": "68px"
+      }
+    }
+  ]
+}

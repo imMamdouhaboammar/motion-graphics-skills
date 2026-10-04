@@ -1,0 +1,139 @@
+{
+  "scene": 1,
+  "source": "index.html",
+  "animation": "animation/timeline.js",
+  "layers": [
+    {
+      "selector": ".s1 .bg",
+      "source": "assets/backgrounds/scene-01.svg",
+      "text": null,
+      "position": {
+        "left": "0px",
+        "top": "0px",
+        "width": "1920px",
+        "height": "1080px"
+      }
+    },
+    {
+      "selector": ".s1 .eyebrow",
+      "source": null,
+      "text": "رحلة سؤال علمي",
+      "position": {
+        "left": "1583px",
+        "top": "78px",
+        "width": "232px",
+        "height": "68px"
+      }
+    },
+    {
+      "selector": ".s1 .folio",
+      "source": null,
+      "text": "01 / 06",
+      "position": {
+        "left": "100px",
+        "top": "85px",
+        "width": "105px",
+        "height": "72px"
+      }
+    },
+    {
+      "selector": ".s1 .mark",
+      "source": null,
+      "text": "؟؟؟",
+      "position": {
+        "left": "1315px",
+        "top": "78px",
+        "width": "460px",
+        "height": "850px"
+      }
+    },
+    {
+      "selector": ".s1 .mark-fragment.frag1",
+      "source": null,
+      "text": "؟",
+      "position": {
+        "left": "0px",
+        "top": "0px",
+        "width": "460px",
+        "height": "850px"
+      }
+    },
+    {
+      "selector": ".s1 .mark-fragment.frag2",
+      "source": null,
+      "text": "؟",
+      "position": {
+        "left": "0px",
+        "top": "0px",
+        "width": "460px",
+        "height": "850px"
+      }
+    },
+    {
+      "selector": ".s1 .mark-fragment.frag3",
+      "source": null,
+      "text": "؟",
+      "position": {
+        "left": "0px",
+        "top": "0px",
+        "width": "460px",
+        "height": "850px"
+      }
+    },
+    {
+      "selector": ".s1 .orange-rule",
+      "source": null,
+      "text": "",
+      "position": {
+        "left": "1080px",
+        "top": "275px",
+        "width": "190px",
+        "height": "13px"
+      }
+    },
+    {
+      "selector": ".s1 .opening-copy",
+      "source": null,
+      "text": "هل اقترب العلم؟مستقبل علاج السكري",
+      "position": {
+        "left": "170px",
+        "top": "300px",
+        "width": "1110px",
+        "height": "322.094px"
+      }
+    },
+    {
+      "selector": ".s1 .diagram.pancreas",
+      "source": "assets/scientific/pancreas-islet.svg",
+      "text": null,
+      "position": {
+        "left": "130px",
+        "top": "630px",
+        "width": "560px",
+        "height": "270px"
+      }
+    },
+    {
+      "selector": ".s1 .annotation",
+      "source": null,
+      "text": "من السؤال الكبيرإلى التفاصيل الصغيرة",
+      "position": {
+        "left": "870px",
+        "top": "690px",
+        "width": "400px",
+        "height": "108.781px"
+      }
+    },
+    {
+      "selector": ".s1 .lens-ring",
+      "source": null,
+      "text": "",
+      "position": {
+        "left": "1520px",
+        "top": "745px",
+        "width": "115px",
+        "height": "115px"
+      }
+    }
+  ]
+}

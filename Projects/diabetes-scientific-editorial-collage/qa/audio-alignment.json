@@ -1,0 +1,9 @@
+{
+  "method": "Sample-aligned correlation after AAC decode; original master vs final mixed audio. Foley and lossy AAC account for small difference.",
+  "sample_rate": 48000,
+  "original_samples": 2290835,
+  "decoded_samples": 2376704,
+  "correlation": 0.9987549750025695,
+  "original_duration": 47.72572916666667,
+  "decoded_duration": 49.51466666666666
+}

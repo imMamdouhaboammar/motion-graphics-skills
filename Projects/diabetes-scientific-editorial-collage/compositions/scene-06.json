@@ -1,0 +1,183 @@
+{
+  "scene": 6,
+  "source": "index.html",
+  "animation": "animation/timeline.js",
+  "layers": [
+    {
+      "selector": ".s6 .bg",
+      "source": "assets/backgrounds/scene-06.svg",
+      "text": null,
+      "position": {
+        "left": "0px",
+        "top": "0px",
+        "width": "1920px",
+        "height": "1080px"
+      }
+    },
+    {
+      "selector": ".s6 .eyebrow",
+      "source": null,
+      "text": "المعرفة المبنية على الدليل",
+      "position": {
+        "left": "1453px",
+        "top": "78px",
+        "width": "362px",
+        "height": "68px"
+      }
+    },
+    {
+      "selector": ".s6 .folio",
+      "source": null,
+      "text": "06 / 06",
+      "position": {
+        "left": "100px",
+        "top": "85px",
+        "width": "105px",
+        "height": "72px"
+      }
+    },
+    {
+      "selector": ".s6 .ending-rule",
+      "source": null,
+      "text": "",
+      "position": {
+        "left": "1660px",
+        "top": "225px",
+        "width": "135px",
+        "height": "10px"
+      }
+    },
+    {
+      "selector": ".s6 .final-copy",
+      "source": null,
+      "text": "بين الأمل العلميوالوعود المتداولةأسئلة يناقشها الباحثفي كتابه المرتقب",
+      "position": {
+        "left": "965px",
+        "top": "250px",
+        "width": "835px",
+        "height": "405.375px"
+      }
+    },
+    {
+      "selector": ".s6 .book-stage",
+      "source": null,
+      "text": "غلاف مؤقتالسكري..هل اقتربتنهاية المرض؟؟كتاب مرتقب",
+      "position": {
+        "left": "195px",
+        "top": "210px",
+        "width": "625px",
+        "height": "720px"
+      }
+    },
+    {
+      "selector": ".s6 .book-leaf.leaf1",
+      "source": null,
+      "text": "",
+      "position": {
+        "left": "30px",
+        "top": "35px",
+        "width": "530px",
+        "height": "660px"
+      }
+    },
+    {
+      "selector": ".s6 .book-leaf.leaf2",
+      "source": null,
+      "text": "",
+      "position": {
+        "left": "30px",
+        "top": "35px",
+        "width": "530px",
+        "height": "660px"
+      }
+    },
+    {
+      "selector": ".s6 .book-leaf.leaf3",
+      "source": null,
+      "text": "",
+      "position": {
+        "left": "30px",
+        "top": "35px",
+        "width": "530px",
+        "height": "660px"
+      }
+    },
+    {
+      "selector": ".s6 .book-leaf.leaf4",
+      "source": null,
+      "text": "",
+      "position": {
+        "left": "30px",
+        "top": "35px",
+        "width": "530px",
+        "height": "660px"
+      }
+    },
+    {
+      "selector": ".s6 .book",
+      "source": null,
+      "text": "غلاف مؤقتالسكري..هل اقتربتنهاية المرض؟؟كتاب مرتقب",
+      "position": {
+        "left": "0px",
+        "top": "0px",
+        "width": "530px",
+        "height": "700px"
+      }
+    },
+    {
+      "selector": ".s6 .temporary",
+      "source": null,
+      "text": "غلاف مؤقت",
+      "position": {
+        "left": "auto",
+        "top": "auto",
+        "width": "175px",
+        "height": "73px"
+      }
+    },
+    {
+      "selector": ".s6 .question",
+      "source": null,
+      "text": "؟",
+      "position": {
+        "left": "50px",
+        "top": "526px",
+        "width": "65px",
+        "height": "150px"
+      }
+    },
+    {
+      "selector": ".s6 .forthcoming",
+      "source": null,
+      "text": "كتاب مرتقب",
+      "position": {
+        "left": "308px",
+        "top": "580px",
+        "width": "164px",
+        "height": "68px"
+      }
+    },
+    {
+      "selector": ".s6 .ending-label",
+      "source": null,
+      "text": "رحلة سؤال لم تنتهِ بعد",
+      "position": {
+        "left": "1464px",
+        "top": "860px",
+        "width": "331px",
+        "height": "74px"
+      }
+    },
+    {
+      "selector": ".s6 .cover-note",
+      "source": null,
+      "text": "تصميم مؤقت إلى حين توفير الغلاف الرسمي",
+      "position": {
+        "left": "175px",
+        "top": "985px",
+        "width": "660px",
+        "height": "57px"
+      }
+    }
+  ]
+}

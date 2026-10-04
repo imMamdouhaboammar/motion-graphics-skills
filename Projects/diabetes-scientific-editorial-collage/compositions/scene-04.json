@@ -1,0 +1,183 @@
+{
+  "scene": 4,
+  "source": "index.html",
+  "animation": "animation/timeline.js",
+  "layers": [
+    {
+      "selector": ".s4 .bg",
+      "source": "assets/backgrounds/scene-04.svg",
+      "text": null,
+      "position": {
+        "left": "0px",
+        "top": "0px",
+        "width": "1920px",
+        "height": "1080px"
+      }
+    },
+    {
+      "selector": ".s4 .eyebrow",
+      "source": null,
+      "text": "من الوعد إلى الدليل",
+      "position": {
+        "left": "1545px",
+        "top": "78px",
+        "width": "270px",
+        "height": "68px"
+      }
+    },
+    {
+      "selector": ".s4 .folio",
+      "source": null,
+      "text": "04 / 06",
+      "position": {
+        "left": "100px",
+        "top": "85px",
+        "width": "105px",
+        "height": "72px"
+      }
+    },
+    {
+      "selector": ".s4 .evidence-heading",
+      "source": null,
+      "text": "النتيجة الواعدة بدايةوالسلامة والفعالية تحتاجان إلى دليل",
+      "position": {
+        "left": "1174px",
+        "top": "175px",
+        "width": "641px",
+        "height": "218.094px"
+      }
+    },
+    {
+      "selector": ".s4 .research-line",
+      "source": null,
+      "text": "",
+      "position": {
+        "left": "145px",
+        "top": "625px",
+        "width": "1655px",
+        "height": "8px"
+      }
+    },
+    {
+      "selector": ".s4 .sheet.sheet1.paper",
+      "source": null,
+      "text": "01البحثالأساسي",
+      "position": {
+        "left": "1490px",
+        "top": "470px",
+        "width": "315px",
+        "height": "410px"
+      }
+    },
+    {
+      "selector": ".s4 .number",
+      "source": null,
+      "text": "01",
+      "position": {
+        "left": "auto",
+        "top": "auto",
+        "width": "267px",
+        "height": "68px"
+      }
+    },
+    {
+      "selector": ".s4 .sheet.sheet2.paper",
+      "source": null,
+      "text": "02الدراساتقبل السريرية",
+      "position": {
+        "left": "1160px",
+        "top": "505px",
+        "width": "315px",
+        "height": "410px"
+      }
+    },
+    {
+      "selector": ".s4 .number",
+      "source": null,
+      "text": "02",
+      "position": {
+        "left": "auto",
+        "top": "auto",
+        "width": "267px",
+        "height": "68px"
+      }
+    },
+    {
+      "selector": ".s4 .sheet.sheet3.paper",
+      "source": null,
+      "text": "03التقييمالسريري",
+      "position": {
+        "left": "830px",
+        "top": "465px",
+        "width": "315px",
+        "height": "410px"
+      }
+    },
+    {
+      "selector": ".s4 .number",
+      "source": null,
+      "text": "03",
+      "position": {
+        "left": "auto",
+        "top": "auto",
+        "width": "267px",
+        "height": "68px"
+      }
+    },
+    {
+      "selector": ".s4 .sheet.sheet4.paper",
+      "source": null,
+      "text": "04السلامةوالفعالية",
+      "position": {
+        "left": "500px",
+        "top": "500px",
+        "width": "315px",
+        "height": "410px"
+      }
+    },
+    {
+      "selector": ".s4 .number",
+      "source": null,
+      "text": "04",
+      "position": {
+        "left": "auto",
+        "top": "auto",
+        "width": "267px",
+        "height": "68px"
+      }
+    },
+    {
+      "selector": ".s4 .sheet.sheet5.paper",
+      "source": null,
+      "text": "05المتابعةطويلة المدى",
+      "position": {
+        "left": "170px",
+        "top": "460px",
+        "width": "315px",
+        "height": "410px"
+      }
+    },
+    {
+      "selector": ".s4 .number",
+      "source": null,
+      "text": "05",
+      "position": {
+        "left": "auto",
+        "top": "auto",
+        "width": "267px",
+        "height": "68px"
+      }
+    },
+    {
+      "selector": ".s4 .footnote",
+      "source": null,
+      "text": "مسار توضيحي لتراكم الأدلة، وقد تختلف المراحل وتتداخل بحسب العلاج",
+      "position": {
+        "left": "145px",
+        "top": "940px",
+        "width": "1650px",
+        "height": "49.5938px"
+      }
+    }
+  ]
+}

@@ -1,0 +1,114 @@
+[
+  {
+    "file": "clinical-research.svg",
+    "source": "Original authored SVG artwork for this production",
+    "rights_status": "Original project artwork; no third-party imagery",
+    "dimensions": [
+      600,
+      600
+    ],
+    "editable_file": "clinical-research.svg",
+    "role": "Simplified explanatory editorial illustration, not experimental data",
+    "scene": 4,
+    "independent_groups": true,
+    "essential_text": false
+  },
+  {
+    "file": "daily-routine-calendar.svg",
+    "source": "Original authored SVG artwork for this production",
+    "rights_status": "Original project artwork; no third-party imagery",
+    "dimensions": [
+      600,
+      600
+    ],
+    "editable_file": "daily-routine-calendar.svg",
+    "role": "Simplified explanatory editorial illustration, not experimental data",
+    "scene": 2,
+    "independent_groups": true,
+    "essential_text": false
+  },
+  {
+    "file": "editorial-microscope.svg",
+    "source": "Original authored SVG artwork for this production",
+    "rights_status": "Original project artwork; no third-party imagery",
+    "dimensions": [
+      600,
+      600
+    ],
+    "editable_file": "editorial-microscope.svg",
+    "role": "Simplified explanatory editorial illustration, not experimental data",
+    "scene": 3,
+    "independent_groups": true,
+    "essential_text": false
+  },
+  {
+    "file": "evidence-journal-sheets.svg",
+    "source": "Original authored SVG artwork for this production",
+    "rights_status": "Original project artwork; no third-party imagery",
+    "dimensions": [
+      600,
+      600
+    ],
+    "editable_file": "evidence-journal-sheets.svg",
+    "role": "Simplified explanatory editorial illustration, not experimental data",
+    "scene": 4,
+    "independent_groups": true,
+    "essential_text": false
+  },
+  {
+    "file": "glucose-meter.svg",
+    "source": "Original authored SVG artwork for this production",
+    "rights_status": "Original project artwork; no third-party imagery",
+    "dimensions": [
+      600,
+      600
+    ],
+    "editable_file": "glucose-meter.svg",
+    "role": "Simplified explanatory editorial illustration, not experimental data",
+    "scene": 2,
+    "independent_groups": true,
+    "essential_text": false
+  },
+  {
+    "file": "islet-cell-cluster.svg",
+    "source": "Original authored SVG artwork for this production",
+    "rights_status": "Original project artwork; no third-party imagery",
+    "dimensions": [
+      600,
+      600
+    ],
+    "editable_file": "islet-cell-cluster.svg",
+    "role": "Simplified explanatory editorial illustration, not experimental data",
+    "scene": 3,
+    "independent_groups": true,
+    "essential_text": false
+  },
+  {
+    "file": "pancreas-islet.svg",
+    "source": "Original authored SVG artwork for this production",
+    "rights_status": "Original project artwork; no third-party imagery",
+    "dimensions": [
+      600,
+      600
+    ],
+    "editable_file": "pancreas-islet.svg",
+    "role": "Simplified explanatory editorial illustration, not experimental data",
+    "scene": 3,
+    "independent_groups": true,
+    "essential_text": false
+  },
+  {
+    "file": "petri-dish.svg",
+    "source": "Original authored SVG artwork for this production",
+    "rights_status": "Original project artwork; no third-party imagery",
+    "dimensions": [
+      600,
+      600
+    ],
+    "editable_file": "petri-dish.svg",
+    "role": "Simplified explanatory editorial illustration, not experimental data",
+    "scene": 3,
+    "independent_groups": true,
+    "essential_text": false
+  }
+]

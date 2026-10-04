@@ -1,0 +1,24 @@
+{
+  "status": "complete narrated review film; official cover pending",
+  "film": "renders/diabetes-delivery.mp4",
+  "width": 1920,
+  "height": 1080,
+  "fps": "30/1",
+  "frames": "1485",
+  "codec": "h264",
+  "duration": "49.500000",
+  "audio_codec": "aac",
+  "master_audio_unchanged": true,
+  "blank_first_frame_fixed": true,
+  "temporary_cover": true,
+  "runtime_check": "passed,0 errors; all47 contrast checks passed; transient overlap warnings inspected",
+  "video_machine_review_hard_findings": 0,
+  "full_av_playback_attested": false,
+  "remaining": [
+    "official cover and author details",
+    "five evidence modules remain more similar than ideal creative brief",
+    "brief transitional text occlusion before next scene settles"
+  ],
+  "orange_transition_hard_cut_fixed": true,
+  "strict_temporal_signals": "pass; 1485 frames; zero flash or extreme-luma candidates"
+}
