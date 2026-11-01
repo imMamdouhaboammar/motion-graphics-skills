@@ -1,8 +1,8 @@
 # Motion Graphics Skills plugin
 
-This is a skills-only plugin for ChatGPT and Codex, built from the canonical `skills/` directory. It preserves all 50 domain specialist skills and adds `motion-studio`, `host-workspace-operator` and `sandbox-python-executor`.
+This is a skills-only plugin for ChatGPT and Codex, built from the canonical `skills/` directory. It preserves all 61 domain specialist skills and adds `motion-studio`, `host-workspace-operator` and `sandbox-python-executor`.
 
-Version **1.2.0** includes 53 top-level skills and 36 nested Video Style Cloner workflow modules. Read the [complete catalog](CATALOG.md) and [engine/runtime requirements](RUNTIMES.md). Nested modules are loaded by their named entry files, not imported as independent plugin skills.
+Version **2.0.0** includes 64 top-level skills and 36 nested Video Style Cloner workflow modules. Read the [complete catalog](CATALOG.md) and [engine/runtime requirements](RUNTIMES.md). Nested modules are loaded by their named entry files, not imported as independent plugin skills.
 
 ## Start here
 
@@ -35,7 +35,7 @@ Rendering needs an execution-capable host and a working renderer. New production
 Run from a checkout, choosing a new output path:
 
 ```bash
-python3 tools/build_plugin.py /absolute/path/motion-graphics-skills-1.2.0.zip
+python3 tools/build_plugin.py /absolute/path/motion-graphics-skills-2.0.0.zip
 ```
 
 The builder includes only manifests, canonical skills, plugin branding, plugin documentation and the original license. It excludes `.git`, `.agents` duplicates, project source, rendered client videos, dependency trees and transient Python files. It refuses an existing output path. A rebuild requires package validation and a clean extraction check before upload.

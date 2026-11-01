@@ -4,13 +4,13 @@
 
 Official repository: https://github.com/imMamdouhaboammar/motion-graphics-skills
 Website: https://immamdouhaboammar.github.io/motion-graphics-skills/
-Version: 1.2.0
+Version: 2.0.0
 
-ChatGPT/Codex plugin: 1.2.0, skills-only. Includes 53 top-level skills and 36 nested Video Style Cloner workflow modules, not 36 additional imported skills. Catalog: https://github.com/imMamdouhaboammar/motion-graphics-skills/blob/main/docs/plugin/CATALOG.md
+ChatGPT/Codex plugin: 2.0.0, skills-only. Includes 64 top-level skills and 36 nested Video Style Cloner workflow modules, not 36 additional imported skills. Catalog: https://github.com/imMamdouhaboammar/motion-graphics-skills/blob/main/docs/plugin/CATALOG.md
 Runtime matrix: https://github.com/imMamdouhaboammar/motion-graphics-skills/blob/main/docs/plugin/RUNTIMES.md
 Video Style Cloner supports 2D style routing. The optional Rust orchestration source requires project render/review adapters and an approved complete plan. Rendering requires an execution-capable host and installed runtime dependencies.
 
-Motion Graphics Skill Pack is a set of 53 skills for Claude Code and Codex covering creative direction, reference analysis, brand intake, motion briefs, motion graphics, video editing, programmatic video, Arabic and RTL motion, publishing, and rendered-film review.
+Motion Graphics Skill Pack is a set of 64 skills for Claude Code and Codex covering creative direction, reference analysis, brand intake, motion briefs, motion graphics, video editing, programmatic video, Arabic and RTL motion, publishing, and rendered-film review.
 
 The master motion-director skill owns concept, narrative, art direction, typography, composition, choreography, production routing and creative QA.
 
@@ -31,6 +31,8 @@ Direct:
 - motion-design
 - redesign-existing-projects
 - stitch-design-taste
+- beat-sheet-director
+- motion-bible
 
 Edit:
 - jump-cut-pacing
@@ -40,6 +42,7 @@ Edit:
 - media-use
 - remove-background
 - speech-to-text
+- audio-mastering-mixer
 
 Build:
 - launch-video
@@ -66,16 +69,24 @@ Build:
 - industrial-brutalist-ui
 - minimalist-ui
 - text-to-lottie
+- blender-3d-studio
+- canonical-motion-moves
+- continuous-shot-engine
+- liquid-glass-25d
+- opencv-fast-renderer
 
 Publish:
 - newsletter-promo
 - loop-cover
 - reel-export
+- transparent-alpha-export
 
 Review:
 - video-review-loop
 - full-output-enforcement
 - gsap-performance
+- director-gate-check
+- safe-zone-qa
 
 Host workflow and reference styles:
 - host-workspace-operator

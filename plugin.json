@@ -22,7 +22,7 @@
     "com.openai": {
       "interface": {
         "displayName": "Claude Code Motion Studios",
-        "shortDescription": "Plan, build and review motion graphics",
+        "shortDescription": "Plan, build and review motion",
         "longDescription": "Elite code-driven motion graphics studio with 64 skills and studio hierarchy mirroring top animation studios. Includes continuous-shot engine, beat-sheet director, physical 3D Blender MCP bridge, clear liquid glass shaders, 10 canonical motion moves, broadcast -14 LUFS mastering, and vertical mobile safe-zone QA. Built for Claude Code, Codex and Antigravity.",
         "developerName": "Mamdouh Aboammar",
         "category": "Creativity",
