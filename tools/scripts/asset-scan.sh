@@ -13,18 +13,19 @@ MISSING=0
 
 # Check font dependencies
 echo "Checking Typography Assets:"
-if [ -d "fonts" ] && [ "$(ls -A fonts 2>/dev/null)" ]; then
+if [ -d "fonts" ] && [ -n "$(ls -A fonts 2>/dev/null)" ]; then
   find fonts -type f \( -name "*.woff2" -o -name "*.ttf" -o -name "*.otf" \) | while read -r f; do
     echo "  [FOUND] $f"
   done
 else
   echo "  [WARN] No local fonts directory found in project root."
   echo "         (Copy required fonts to fonts/ before final rendering)"
+  MISSING=$((MISSING + 1))
 fi
 
 # Check audio stems
 echo "Checking Audio Assets:"
-if [ -d "sfx" ] && [ "$(ls -A sfx 2>/dev/null)" ]; then
+if [ -d "sfx" ] && [ -n "$(ls -A sfx 2>/dev/null)" ]; then
   sfx_count=$(find sfx -type f \( -name "*.wav" -o -name "*.mp3" \) | wc -l | tr -d ' ')
   echo "  [FOUND] sfx/ contains $sfx_count sound effects."
 else

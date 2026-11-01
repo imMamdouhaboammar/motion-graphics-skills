@@ -1,0 +1,138 @@
+{
+  "$schema": "https://raw.githubusercontent.com/oasis-tcs/sarif-spec/master/Schemata/sarif-schema-2.1.0.json",
+  "version": "2.1.0",
+  "runs": [
+    {
+      "tool": {
+        "driver": {
+          "name": "Fable RedTeam & OpenReview Healer",
+          "version": "1.0.0",
+          "rules": [
+            {
+              "id": "VULN-001",
+              "name": "SSRFAndArbitraryFileRead",
+              "shortDescription": {
+                "text": "Server-Side Request Forgery and Arbitrary File Disclosure in Asset Downloader"
+              },
+              "defaultConfiguration": {
+                "level": "error"
+              },
+              "helpUri": "https://cwe.mitre.org/data/definitions/918.html"
+            },
+            {
+              "id": "VULN-002",
+              "name": "PathTraversalAndMetadataSSRF",
+              "shortDescription": {
+                "text": "Path Traversal and Metadata SSRF in Video Asset Fetcher"
+              },
+              "defaultConfiguration": {
+                "level": "error"
+              },
+              "helpUri": "https://cwe.mitre.org/data/definitions/22.html"
+            },
+            {
+              "id": "BUG-001",
+              "name": "SilentErrorSwallowingInLoudnessAuditor",
+              "shortDescription": {
+                "text": "Detection of Error Condition Without Action in lufs-check.py"
+              },
+              "defaultConfiguration": {
+                "level": "warning"
+              },
+              "helpUri": "https://cwe.mitre.org/data/definitions/390.html"
+            },
+            {
+              "id": "BUG-002",
+              "name": "WrongExitCodeInGateCheck",
+              "shortDescription": {
+                "text": "Return of Zero Status Code on Detected Gate Blockers"
+              },
+              "defaultConfiguration": {
+                "level": "warning"
+              },
+              "helpUri": "https://cwe.mitre.org/data/definitions/393.html"
+            }
+          ]
+        }
+      },
+      "results": [
+        {
+          "ruleId": "VULN-001",
+          "level": "error",
+          "message": {
+            "text": "SSRF and local file disclosure via unvalidated URI scheme in _download_file. Remediated with strict scheme whitelist and metadata blocking."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "skills/assetseeker/scripts/seek_assets.py"
+                },
+                "region": {
+                  "startLine": 202
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "VULN-002",
+          "level": "error",
+          "message": {
+            "text": "Path traversal in asset destination resolution. Remediated with os.path.basename enforcement."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "skills/video-style-cloner/skills/video-clone/scripts/fetch_assets.py"
+                },
+                "region": {
+                  "startLine": 64
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "BUG-001",
+          "level": "warning",
+          "message": {
+            "text": "Nonexistent file path caused silent 0 exit in lufs-check.py. Remediated with upfront validation."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "tools/scripts/lufs-check.py"
+                },
+                "region": {
+                  "startLine": 18
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "BUG-002",
+          "level": "warning",
+          "message": {
+            "text": "gate-check.sh exited with 0 when blockers were detected. Remediated with exit 1 on failure."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "tools/scripts/gate-check.sh"
+                },
+                "region": {
+                  "startLine": 68
+                }
+              }
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

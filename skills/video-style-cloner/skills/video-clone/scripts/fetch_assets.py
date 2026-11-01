@@ -62,14 +62,21 @@ def search(a):
 
 def get(a):
     adir = os.path.join(a.project, "assets"); os.makedirs(adir, exist_ok=True)
-    dst = os.path.join(adir, a.name)
+    safe_name = os.path.basename(a.name)
+    dst = os.path.join(adir, safe_name)
+    parsed = urllib.parse.urlparse(a.url)
+    if parsed.scheme.lower() not in ("http", "https"):
+        raise ValueError(f"Invalid URL scheme '{parsed.scheme}'. Only http and https are allowed.")
+    hostname = (parsed.hostname or "").lower()
+    if hostname in ("169.254.169.254", "metadata.google.internal", "instance-data"):
+        raise ValueError("Cloud metadata access is forbidden.")
     with urllib.request.urlopen(urllib.request.Request(a.url, headers=UA), timeout=60) as r, open(dst, "wb") as f:
         f.write(r.read())
     ledger = os.path.join(adir, "ASSETS.md")
     new = not os.path.exists(ledger)
     with open(ledger, "a", encoding="utf-8") as f:
         if new: f.write("| 檔名 | 來源 | 原始頁面 | 授權 | 署名 |\n|---|---|---|---|---|\n")
-        f.write(f"| {a.name} | {a.source} | {a.page or a.url} | {a.license} | {a.attribution or ''} |\n")
+        f.write(f"| {safe_name} | {a.source} | {a.page or a.url} | {a.license} | {a.attribution or ''} |\n")
     print(json.dumps({"file": os.path.relpath(dst, a.project).replace("\\", "/"), "bytes": os.path.getsize(dst)}))
 
 

@@ -64,7 +64,9 @@ fi
 echo "--------------------------------------------------"
 if [ "$FAILED" -eq 0 ]; then
   echo "STAGE AUDIT RESULT: READY TO PROCEED"
+  exit 0
 else
   echo "STAGE AUDIT RESULT: $FAILED BLOCKER(S) DETECTED"
+  exit 1
 fi
 echo "=================================================="

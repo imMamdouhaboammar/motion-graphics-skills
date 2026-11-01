@@ -13,6 +13,7 @@ Usage:
     python seek_assets.py search font "bold sans"    # Search fonts
     python seek_assets.py download <url> -o out.jpg  # Download asset
 """
+from __future__ import annotations
 
 import argparse
 import json
@@ -200,11 +201,35 @@ def _api_get(url: str, headers: dict | None = None) -> Any:
 
 
 def _download_file(url: str, output: str) -> bool:
-    """Download a file from url to output path. Returns True on success."""
+    """Download a file from url to output path. Enforces HTTP(S) scheme, SSRF guards, and chunked streaming."""
     try:
+        parsed = urllib.parse.urlparse(url)
+        if parsed.scheme.lower() not in ("http", "https"):
+            print(f"Security error: Invalid scheme '{parsed.scheme}'. Only http and https are allowed.", file=sys.stderr)
+            return False
+        hostname = (parsed.hostname or "").lower()
+        if hostname in ("169.254.169.254", "metadata.google.internal", "instance-data"):
+            print(f"Security error: Blocked request to cloud metadata host '{hostname}'.", file=sys.stderr)
+            return False
+
+        out_path = Path(output)
+        out_path.parent.mkdir(parents=True, exist_ok=True)
+
         req = urllib.request.Request(url, headers={"User-Agent": "assetseeker/1.0"})
+        max_bytes = 500 * 1024 * 1024
+        downloaded = 0
         with urllib.request.urlopen(req, timeout=60) as resp:
-            Path(output).write_bytes(resp.read())
+            with open(out_path, "wb") as f:
+                while True:
+                    chunk = resp.read(65536)
+                    if not chunk:
+                        break
+                    downloaded += len(chunk)
+                    if downloaded > max_bytes:
+                        print("Security error: Download exceeds maximum allowed size (500MB).", file=sys.stderr)
+                        out_path.unlink(missing_ok=True)
+                        return False
+                    f.write(chunk)
         return True
     except Exception as e:
         print(f"Download error: {e}", file=sys.stderr)
@@ -1193,8 +1218,9 @@ def cmd_download(args: argparse.Namespace) -> None:
     url = args.url
     output = args.output
     if not output:
-        # Infer from URL
-        output = url.split("/")[-1].split("?")[0] or "download"
+        # Infer from URL safely without path traversal
+        raw_name = url.split("/")[-1].split("?")[0] or "download"
+        output = os.path.basename(raw_name) or "download"
 
     print(f"Downloading {url} → {output} …", file=sys.stderr)
     ok = _download_file(url, output)

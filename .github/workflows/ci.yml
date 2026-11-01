@@ -60,6 +60,7 @@ jobs:
         run: |
           python3 -m unittest discover -s tests -p 'test_plugin_catalog.py' -v
           python3 -m unittest discover -s tests -p 'test_build_plugin.py' -v
+          python3 -m unittest discover -s tests -p 'test_security_guards.py' -v
 
       - name: Test video style cloner scripts
         env:

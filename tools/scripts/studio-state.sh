@@ -11,8 +11,10 @@ STAGE="concept"
 RIGOR="standard"
 
 if [ -f "studio.yaml" ]; then
-  STAGE=$(grep "^stage:" studio.yaml | awk '{print $2}' | tr -d '"' || echo "concept")
-  RIGOR=$(grep "rigor:" studio.yaml | awk '{print $2}' | tr -d '"' || echo "standard")
+  parsed_stage=$(grep "^stage:" studio.yaml 2>/dev/null | head -n 1 | awk '{print $2}' | tr -d '"' || true)
+  [ -n "$parsed_stage" ] && STAGE="$parsed_stage"
+  parsed_rigor=$(grep "rigor:" studio.yaml 2>/dev/null | head -n 1 | awk '{print $2}' | tr -d '"' || true)
+  [ -n "$parsed_rigor" ] && RIGOR="$parsed_rigor"
 fi
 
 echo "=========================================="
