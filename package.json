@@ -1,14 +1,17 @@
 {
   "name": "motion-graphics-skills",
-  "version": "1.2.0",
-  "description": "53 skills for motion direction, animation, video editing, reference-led production and review.",
+  "version": "2.0.0",
+  "description": "64 skills and studio hierarchy for motion direction, animation, continuous single shots, 3D Blender MCP, and broadcast review.",
   "type": "module",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/imMamdouhaboammar/motion-graphics-skills.git"
   },
   "scripts": {
-    "validate": "bash validate-skills.sh"
+    "validate": "bash validate-skills.sh",
+    "status": "bash tools/scripts/studio-state.sh",
+    "gate-check": "bash tools/scripts/gate-check.sh",
+    "asset-scan": "bash tools/scripts/asset-scan.sh"
   },
   "keywords": [
     "motion-graphics",
@@ -18,7 +21,7 @@
     "animation",
     "video",
     "hyperframes",
-    "creative-technologist",
+    "blender",
     "threejs",
     "gsap"
   ],

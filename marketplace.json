@@ -1,9 +1,9 @@
 {
   "$schema": "https://json.schemastore.org/claude-plugin-manifest.json",
   "name": "motion-graphics-skills",
-  "displayName": "Motion Graphics Skill Pack",
-  "version": "1.2.0",
-  "description": "53 skills for motion direction, animation, video editing, reference-led production and review.",
+  "displayName": "Claude Code Motion Studios",
+  "version": "2.0.0",
+  "description": "64 skills and studio hierarchy for motion direction, continuous single shots, 3D Blender MCP, liquid glass and broadcast review.",
   "author": {
     "name": "Mamdouh Aboammar",
     "url": "https://github.com/imMamdouhaboammar"

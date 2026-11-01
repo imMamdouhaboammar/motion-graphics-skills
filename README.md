@@ -2,17 +2,19 @@
   <img src="assets/readme/logo.svg" alt="Motion Graphics Skills logo" width="360">
 </p>
 
-<h1 align="center">Motion Graphics Skill Pack</h1>
+<h1 align="center">Claude Code Motion Studios</h1>
 
 <p align="center">
-  <strong>53 agent skills for motion design, animation, video editing, creative direction and production</strong><br>
-  ChatGPT · Claude Code · Codex · HyperFrames<br>
+  <strong>64 agent skills & studio hierarchy for motion design, animation, video editing, creative direction and production</strong><br>
+  ChatGPT · Claude Code · Codex · HyperFrames · Blender MCP<br>
   <sub>Every frame is code</sub>
 </p>
 
 <p align="center">
   <a href="https://github.com/imMamdouhaboammar/motion-graphics-skills/stargazers"><img src="https://img.shields.io/github/stars/imMamdouhaboammar/motion-graphics-skills?style=flat-square&color=D97557&labelColor=00132F&label=stars" alt="GitHub stars"></a>
-  <img src="https://img.shields.io/badge/skills-53-D97557?style=flat-square&labelColor=00132F" alt="53 agent skills">
+  <img src="https://img.shields.io/badge/skills-64-D97557?style=flat-square&labelColor=00132F" alt="64 agent skills">
+  <img src="https://img.shields.io/badge/studio_hierarchy-3_tiers-58B6FF?style=flat-square&labelColor=00132F" alt="Studio Hierarchy">
+  <img src="https://img.shields.io/badge/director_gates-5_gates-58B6FF?style=flat-square&labelColor=00132F" alt="5 Director Gates">
   <img src="https://img.shields.io/badge/Claude_Code_%2B_Codex-supported-58B6FF?style=flat-square&labelColor=00132F" alt="Claude Code and Codex">
   <a href="LICENSE"><img src="https://img.shields.io/badge/license-see_LICENSE-red?style=flat-square&labelColor=00132F" alt="License"></a>
 </p>
@@ -247,7 +249,7 @@ See the [engine and runtime matrix](docs/plugin/RUNTIMES.md) for prerequisites, 
 
 ## The skills
 
-53 installed skill folders are available in [`skills/`](skills/). The table below highlights 22 motion-production skills; the remaining folders cover supporting workflows and design, audio and runtime tooling. Start with `motion-director` for broad creative work.
+64 installed skill folders are available in [`skills/`](skills/). The table below highlights 33 motion-production skills; the remaining folders cover supporting workflows and design, audio and runtime tooling. Start with `motion-studio` for studio coordination or `motion-director` for creative direction.
 
 | Stage | Skill | What you get | Say this |
 |---|---|---|---|
@@ -272,6 +274,17 @@ See the [engine and runtime matrix](docs/plugin/RUNTIMES.md) for prerequisites, 
 | <img src="assets/sprites/robot_director_07_128.png" width="22" align="absmiddle" alt="Promote"> Promote | [**reel-export**](skills/reel-export/) | Any video as a clean 1080 x 1920 Reel or TikTok. | "Make this a reel for Instagram." |
 | <img src="assets/sprites/robot_director_03_128.png" width="22" align="absmiddle" alt="Audio"> Audio | [**sfx-picker**](skills/sfx-picker/) | Select and integrate curated SFX assets into motion graphics and video editing timelines. | "Pick sound effects for this animation sequence." |
 | <img src="assets/sprites/robot_director_03_128.png" width="22" align="absmiddle" alt="Audio"> Audio | [**tonejs**](skills/tonejs/) | Tone.js audio generation, GSAP timeline sync via Tone.Draw, audio-reactive animation and effects. | "Generate sound effects with Tone.js and sync with GSAP." |
+| <img src="assets/sprites/robot_director_03_128.png" width="22" align="absmiddle" alt="Audio"> Audio | [**audio-mastering-mixer**](skills/audio-mastering-mixer/) | Mix voice, music, and foley to broadcast loudness standards (-14 LUFS, -1.25 dBTP). | "Master this video audio to -14 LUFS broadcast standard." |
+| <img src="assets/sprites/robot_director_01_128.png" width="22" align="absmiddle" alt="Direct"> Direct | [**continuous-shot-engine**](skills/continuous-shot-engine/) | Single continuous shot brand ads with zero hard cuts and continuous light filaments. | "Make an unbroken single shot spec ad for my brand." |
+| <img src="assets/sprites/robot_director_02_128.png" width="22" align="absmiddle" alt="Plan"> Plan | [**beat-sheet-director**](skills/beat-sheet-director/) | Frame-exact beat sheets synchronized to spoken words and musical bar grids. | "Build a frame-exact beat sheet locked to this audio track." |
+| <img src="assets/sprites/robot_director_04_128.png" width="22" align="absmiddle" alt="Style"> Style | [**liquid-glass-25d**](skills/liquid-glass-25d/) | Clear liquid glass optical refraction and 3D depth planes around talking heads. | "Make my cards clear liquid glass with real refraction." |
+| <img src="assets/sprites/robot_director_11_128.png" width="22" align="absmiddle" alt="3D"> 3D | [**blender-3d-studio**](skills/blender-3d-studio/) | Blender MCP bridge for physical models, clay preview approval, and contact floor shadows. | "Build this scene in Blender and show a clay preview." |
+| <img src="assets/sprites/robot_director_09_128.png" width="22" align="absmiddle" alt="Moves"> Moves | [**canonical-motion-moves**](skills/canonical-motion-moves/) | 10 canonical animation moves with tested GSAP easing and duration parameters. | "Animate these cards using the 10 canonical motion moves." |
+| <img src="assets/sprites/robot_director_07_128.png" width="22" align="absmiddle" alt="QA"> QA | [**safe-zone-qa**](skills/safe-zone-qa/) | Vertical 9:16 safe area validation, button clearance, and overlay test frames. | "Verify vertical safe areas and Instagram button clearance." |
+| <img src="assets/sprites/robot_director_00_128.png" width="22" align="absmiddle" alt="Render"> Render | [**opencv-fast-renderer**](skills/opencv-fast-renderer/) | Headless Python, NumPy, Pillow, and OpenCV 2.5D rendering streamed to FFmpeg. | "Render this 2.5D animation headlessly with OpenCV." |
+| <img src="assets/sprites/robot_director_05_128.png" width="22" align="absmiddle" alt="Export"> Export | [**transparent-alpha-export**](skills/transparent-alpha-export/) | ProRes 4444 and PNG sequences with preserved alpha transparency for Premiere and DaVinci. | "Export this animation with transparent alpha background." |
+| <img src="assets/sprites/robot_director_04_128.png" width="22" align="absmiddle" alt="System"> System | [**motion-bible**](skills/motion-bible/) | Foundations design system defining color palettes, typography scales, and motion physics. | "Generate the Motion Bible design system for this production." |
+| <img src="assets/sprites/robot_director_01_128.png" width="22" align="absmiddle" alt="Review"> Review | [**director-gate-check**](skills/director-gate-check/) | Evaluates stage completion against the 5 formal Studio Director Quality Gates. | "Check stage completion against all director quality gates." |
 | <img src="assets/sprites/robot_director_01_128.png" width="22" align="absmiddle" alt="Review"> Review | [**video-review-loop**](skills/video-review-loop/) | Pre-delivery technical and motion gates, timecoded defect logs, frozen frame, and audio checks. | "Review this rendered video cut by timecode." |
 
 See each skill's `SKILL.md` for its trigger phrases, the inputs it asks for and what it learned the hard way.
@@ -440,6 +453,42 @@ npx skills add heygen-com/hyperframes
 ```
 
 The master skill adds creative direction, narrative, typography, composition, motion craft, Arabic RTL guidance, reference analysis, and visual QA. HyperFrames is expected to handle the renderable project contract, reusable registry, supported adapters, diagnostics, preview, rendering, batch variants, and audio relationships for greenfield projects. The pack does not copy HyperFrames' renderer or rebuild its engine.
+
+## Claude Code Motion Studios Architecture
+
+Inspired by [Claude-Code-Game-Studios](https://github.com/Donchitos/Claude-Code-Game-Studios), version 2.0.0 elevates this repository into a complete coordinated **Motion Graphics Studio**. Instead of isolated prompt helpers, your AI session operates with the hierarchy, escalation paths, and quality gates of an elite animation studio.
+
+### 1. Three-Tier Studio Hierarchy
+
+- **Tier 1 (Leadership & Vision)**: `creative-director` (narrative hooks, emotional pacing), `technical-director` (render pipelines, hardware budgets), `executive-producer` (timeline coordination, multi-platform deliverable contracts).
+- **Tier 2 (Department Leads)**: `art-director` (Motion Bible design systems, anti-slop visual auditing), `audio-director` (speech synchronization, -14 LUFS mastering), `safe-zone-qa-lead` (9:16 mobile safety, button clearance proofing).
+- **Tier 3 (Specialized Craft)**: Specialists in kinetic typography, refractive liquid glass, editorial paper grain, Blender physical 3D, talking-head VFX, continuous-shot ads, and headless OpenCV rendering.
+
+### 2. Five Studio Director Quality Gates
+
+Before rendering final masters or delivering projects to clients, productions evaluate five formal quality gates (`docs/director-gates/`):
+
+1. **Gate 1 (Creative Director)**: Immediate hook within the first 2 seconds, clear narrative metaphor, and minimum 0.70s readability holds.
+2. **Gate 2 (Technical Director)**: Verified local asset ledger (fonts, stems) with zero un-cached network dependencies during render.
+3. **Gate 3 (Art Director)**: Motion Bible compliance, WCAG AA contrast (minimum 4.5:1), bevelled edges, and physical contact shadows.
+4. **Gate 4 (Audio Director)**: Master loudness verified between -13.5 and -14.5 LUFS, true peak under -1.25 dBTP, and music ducked 12 dB under dialogue.
+5. **Gate 5 (Platform QA)**: Vertical 9:16 content kept within safe margins (top 10%, bottom 20%, right 15% clear) with verified overlay proof.
+
+### 3. Studio Operating System & CLI Tools
+
+```bash
+# Inspect current studio stage and asset readiness
+npm run status
+
+# Audit stage completion against the 5 director quality gates
+npm run gate-check
+
+# Scan local fonts, audio stems, and render artifacts
+npm run asset-scan
+
+# Verify mobile safe zones and generate visual proof overlay
+python3 tools/scripts/safe-zone-verify.py
+```
 
 ## Meet the Motion Director Crew
 

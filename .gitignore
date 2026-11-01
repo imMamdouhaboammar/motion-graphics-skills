@@ -41,3 +41,6 @@ htmlcov/
 *.tmp
 *.log
 .cache/
+
+# Local raw assets & guides
+Raw/

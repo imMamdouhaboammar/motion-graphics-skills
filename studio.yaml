@@ -1,0 +1,41 @@
+# Motion Graphics Studio Configuration
+# Elite Claude Code & Codex Motion Graphics Studio
+
+version: "2.0.0"
+studio:
+  name: "Claude Code Motion Studios"
+  description: "Elite code-driven motion graphics, animation, and video production studio"
+  author: "Mamdouh Aboammar"
+
+stage: "concept" # [concept, storyboard, animatic, audio-lock, production, director-review, delivery]
+
+modes:
+  rigor: "standard" # [minimal, standard, full]
+  automation: "interactive" # [interactive, semi-autonomous, autonomous]
+  review_mode: "lean" # [solo, lean, full]
+
+renderers:
+  primary: "hyperframes" # [hyperframes, blender, opencv, threejs]
+  fallback: "opencv"
+  preview_format: "mp4"
+  master_format: "prores4444"
+
+audio:
+  target_lufs: -14.0
+  max_dbtp: -1.25
+  voice_lufs: -16.0
+  music_ducking_db: -12.0
+  voice_provider: "elevenlabs" # [elevenlabs, hyperframes-tts, system]
+
+platforms:
+  reels:
+    width: 1080
+    height: 1920
+    fps: 60
+    safe_top_pct: 10
+    safe_bottom_pct: 20
+    safe_right_pct: 15
+  landscape:
+    width: 1920
+    height: 1080
+    fps: 60
