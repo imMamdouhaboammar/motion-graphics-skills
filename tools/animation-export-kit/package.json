@@ -11,6 +11,7 @@
     "render": "node render.mjs"
   },
   "dependencies": {
+    "basic-ftp": "6.2.1",
     "puppeteer": "23.11.1"
   }
 }
