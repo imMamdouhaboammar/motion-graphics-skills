@@ -1,0 +1,259 @@
+{
+  "project": "FOUR_STEPS_EXHIBITION_BOOTH_FILM",
+  "version": "gate-a-draft",
+  "status": "source-audit-only",
+  "assets": [
+    {
+      "asset_id": "VO-001",
+      "filename": "علي.wav",
+      "class": "USER_VOICEOVER",
+      "availability": "mentioned_by_user_not_found_in_current_workspace_or_drive_folder_listing",
+      "rights_status": "not_verified",
+      "use": "master voice-over once located and confirmed"
+    },
+    {
+      "asset_id": "REF-001",
+      "filename": "user-described cutout-motion reference video",
+      "class": "STYLE_REFERENCE",
+      "availability": "not_found_in_current_workspace_or_drive_folder_listing",
+      "rights_status": "not_verified",
+      "use": "extract motion language only; do not copy scene identity"
+    },
+    {
+      "asset_id": "DRV-001",
+      "filename": "01_exhibition_booth_cluster.png",
+      "class": "USER_DRIVE_VISUAL",
+      "availability": "linked_in_drive_not_copied",
+      "source_visibility_status": "access_not_verified",
+      "rights_status": "not_verified",
+      "size_bytes": 2267834,
+      "url": "https://drive.google.com/file/d/1n9LN6Yh6HBCkRo_97bExFU2KaDYl-iuy/view?usp=drivesdk"
+    },
+    {
+      "asset_id": "DRV-002",
+      "filename": "02_standard_booth.png",
+      "class": "USER_DRIVE_VISUAL",
+      "availability": "linked_in_drive_not_copied",
+      "source_visibility_status": "access_not_verified",
+      "rights_status": "not_verified",
+      "size_bytes": 1374224,
+      "url": "https://drive.google.com/file/d/1JLVrGTCvTVhaJFSmPAwNqusxEV_pRo7c/view?usp=drivesdk"
+    },
+    {
+      "asset_id": "DRV-003",
+      "filename": "03_premium_booth.png",
+      "class": "USER_DRIVE_VISUAL",
+      "availability": "linked_in_drive_not_copied",
+      "source_visibility_status": "access_not_verified",
+      "rights_status": "not_verified",
+      "size_bytes": 1607942,
+      "url": "https://drive.google.com/file/d/1oAJ9rNaYEM1VVNABL65SMcoMGrSrSGSN/view?usp=drivesdk"
+    },
+    {
+      "asset_id": "DRV-004",
+      "filename": "04-1_visitor_walking.png",
+      "class": "USER_DRIVE_VISUAL",
+      "availability": "linked_in_drive_not_copied",
+      "source_visibility_status": "access_not_verified",
+      "rights_status": "not_verified",
+      "size_bytes": 2185997,
+      "url": "https://drive.google.com/file/d/1wfCcdnmNuk5yJzkxoPaU_Yq2Drks5DjY/view?usp=drivesdk"
+    },
+    {
+      "asset_id": "DRV-005",
+      "filename": "04-2_visitor_walking.png .png",
+      "class": "USER_DRIVE_VISUAL",
+      "availability": "linked_in_drive_not_copied",
+      "source_visibility_status": "access_not_verified",
+      "rights_status": "not_verified",
+      "size_bytes": 1108195,
+      "url": "https://drive.google.com/file/d/1gtTS_EO7pgKWmw0Da3t08wpVVI-4-_1C/view?usp=drivesdk"
+    },
+    {
+      "asset_id": "DRV-006",
+      "filename": "05_visitor_stopping.png",
+      "class": "USER_DRIVE_VISUAL",
+      "availability": "linked_in_drive_not_copied",
+      "source_visibility_status": "access_not_verified",
+      "rights_status": "not_verified",
+      "size_bytes": 1908793,
+      "url": "https://drive.google.com/file/d/1Z_wymVTPWvWIrZjS_C0zlZ5U-qmq0pH9/view?usp=drivesdk"
+    },
+    {
+      "asset_id": "DRV-007",
+      "filename": "06_visitor_talking.png",
+      "class": "USER_DRIVE_VISUAL",
+      "availability": "linked_in_drive_not_copied",
+      "source_visibility_status": "access_not_verified",
+      "rights_status": "not_verified",
+      "size_bytes": 1513518,
+      "url": "https://drive.google.com/file/d/1wYTyDnCExP2NQIBns-r8JsVhu6B8H2He/view?usp=drivesdk"
+    },
+    {
+      "asset_id": "DRV-008",
+      "filename": "07_booth_representative.png",
+      "class": "USER_DRIVE_VISUAL",
+      "availability": "linked_in_drive_not_copied",
+      "source_visibility_status": "access_not_verified",
+      "rights_status": "not_verified",
+      "size_bytes": 1512791,
+      "url": "https://drive.google.com/file/d/1ETC8yW5BivRxgoAiqVVYJdk83JifM17B/view?usp=drivesdk"
+    },
+    {
+      "asset_id": "DRV-009",
+      "filename": "08_digital_display.png",
+      "class": "USER_DRIVE_VISUAL",
+      "availability": "linked_in_drive_not_copied",
+      "source_visibility_status": "access_not_verified",
+      "rights_status": "not_verified",
+      "size_bytes": 1501378,
+      "url": "https://drive.google.com/file/d/1rXUXrAvhCML0QNdP_dkhIHt0ZPxKGhpI/view?usp=drivesdk"
+    },
+    {
+      "asset_id": "DRV-010",
+      "filename": "09_spotlight_fixture.png",
+      "class": "USER_DRIVE_VISUAL",
+      "availability": "linked_in_drive_not_copied",
+      "source_visibility_status": "access_not_verified",
+      "rights_status": "not_verified",
+      "size_bytes": 1367248,
+      "url": "https://drive.google.com/file/d/1mDEfaee-tlsxp_aDPcLb-Ygkox0Sjv1E/view?usp=drivesdk"
+    },
+    {
+      "asset_id": "DRV-011",
+      "filename": "10_reception_counter.png",
+      "class": "USER_DRIVE_VISUAL",
+      "availability": "linked_in_drive_not_copied",
+      "source_visibility_status": "access_not_verified",
+      "rights_status": "not_verified",
+      "size_bytes": 1458695,
+      "url": "https://drive.google.com/file/d/1NFnCJ6BfcdMgGszFajAwTA5fNI9ac5PU/view?usp=drivesdk"
+    },
+    {
+      "asset_id": "DRV-012",
+      "filename": "11_exhibition_floorplan.png .png",
+      "class": "USER_DRIVE_VISUAL",
+      "availability": "linked_in_drive_not_copied",
+      "source_visibility_status": "access_not_verified",
+      "rights_status": "not_verified",
+      "size_bytes": 2055769,
+      "url": "https://drive.google.com/file/d/1oOj0PEmNJpM1A-AqymxSMqbWPXHxGN0L/view?usp=drivesdk"
+    },
+    {
+      "asset_id": "DRV-013",
+      "filename": "12_exhibition_designer.png",
+      "class": "USER_DRIVE_VISUAL",
+      "availability": "linked_in_drive_not_copied",
+      "source_visibility_status": "access_not_verified",
+      "rights_status": "not_verified",
+      "size_bytes": 1710660,
+      "url": "https://drive.google.com/file/d/1HEfV-3zaMfGfoIgeMJtBnmeu6GIi4U0C/view?usp=drivesdk"
+    },
+    {
+      "asset_id": "DRV-014",
+      "filename": "13_booth_wireframe.png",
+      "class": "USER_DRIVE_VISUAL",
+      "availability": "linked_in_drive_not_copied",
+      "source_visibility_status": "access_not_verified",
+      "rights_status": "not_verified",
+      "size_bytes": 2158578,
+      "url": "https://drive.google.com/file/d/1HKvIZmuVf27VrtN89FLMsUKWZGoFvlj0/view?usp=drivesdk"
+    },
+    {
+      "asset_id": "DRV-015",
+      "filename": "14_booth_structure.png",
+      "class": "USER_DRIVE_VISUAL",
+      "availability": "linked_in_drive_not_copied",
+      "source_visibility_status": "access_not_verified",
+      "rights_status": "not_verified",
+      "size_bytes": 2293181,
+      "url": "https://drive.google.com/file/d/1P4woG0I2DNKb5dmQXO7G55q0ZM9o4xhR/view?usp=drivesdk"
+    },
+    {
+      "asset_id": "DRV-016",
+      "filename": "15_material_kit.png",
+      "class": "USER_DRIVE_VISUAL",
+      "availability": "linked_in_drive_not_copied",
+      "source_visibility_status": "access_not_verified",
+      "rights_status": "not_verified",
+      "size_bytes": 2321142,
+      "url": "https://drive.google.com/file/d/1XN5ojDiZEk-e11Eas9gaAIfx_FKmPP7-/view?usp=drivesdk"
+    },
+    {
+      "asset_id": "DRV-017",
+      "filename": "16_installation_technician.png",
+      "class": "USER_DRIVE_VISUAL",
+      "availability": "linked_in_drive_not_copied",
+      "source_visibility_status": "access_not_verified",
+      "rights_status": "not_verified",
+      "size_bytes": 1472425,
+      "url": "https://drive.google.com/file/d/1rkAPI-W4CBL5IyFWTSTJfqrCfeOOcB6q/view?usp=drivesdk"
+    },
+    {
+      "asset_id": "DRV-018",
+      "filename": "17_booth_final_render.png",
+      "class": "USER_DRIVE_VISUAL",
+      "availability": "linked_in_drive_not_copied",
+      "source_visibility_status": "access_not_verified",
+      "rights_status": "not_verified",
+      "size_bytes": 1905346,
+      "url": "https://drive.google.com/file/d/1ZT2ddSb0k-ZVnuf43j658r923MkeUxEq/view?usp=drivesdk"
+    },
+    {
+      "asset_id": "DRV-019",
+      "filename": "18_completed_exhibition_booth.png",
+      "class": "USER_DRIVE_VISUAL",
+      "availability": "linked_in_drive_not_copied",
+      "source_visibility_status": "access_not_verified",
+      "rights_status": "not_verified",
+      "size_bytes": 2193577,
+      "url": "https://drive.google.com/file/d/1DL1TnoVRsmOXFb6TXnbm17A0z0YVJ-7o/view?usp=drivesdk"
+    },
+    {
+      "asset_id": "DRV-020",
+      "filename": "19_project_manager.png",
+      "class": "USER_DRIVE_VISUAL",
+      "availability": "linked_in_drive_not_copied",
+      "source_visibility_status": "access_not_verified",
+      "rights_status": "not_verified",
+      "size_bytes": 830327,
+      "url": "https://drive.google.com/file/d/11VSzw4j7N48OBq3WEsilmoXu6PiotzGR/view?usp=drivesdk"
+    },
+    {
+      "asset_id": "DRV-021",
+      "filename": "20_visitor_welcome.png",
+      "class": "USER_DRIVE_VISUAL",
+      "availability": "linked_in_drive_not_copied",
+      "source_visibility_status": "access_not_verified",
+      "rights_status": "not_verified",
+      "size_bytes": 1985655,
+      "url": "https://drive.google.com/file/d/17vlh1rvlAQ7rIU-5LQVG32Qa9R8FsTNW/view?usp=drivesdk"
+    },
+    {
+      "asset_id": "BR-001",
+      "filename": "Four Steps logo artwork",
+      "class": "BRAND_ASSET_IN_REPO",
+      "availability": "available_in_repository",
+      "path": "assets/brand/",
+      "rights_status": "provided_in_user_selected_repository; campaign_lockup_not_confirmed"
+    },
+    {
+      "asset_id": "BR-002",
+      "filename": "Thmanyah font family",
+      "class": "BRAND_ASSET_IN_REPO",
+      "availability": "available_in_repository",
+      "path": "assets/fonts/",
+      "rights_status": "provided_in_user_selected_repository; use license not independently reviewed"
+    },
+    {
+      "asset_id": "OLD-001",
+      "filename": "Four-Steps-Events-Motion-Final-v2.mp4 and its source package",
+      "class": "PRIOR_PROJECT_OUTPUT",
+      "availability": "available_in_repository",
+      "path": "projects/four-steps-events/",
+      "rights_status": "prior project; not to be reused as footage or as this campaign's voice-over"
+    }
+  ],
+  "drive_folder": "https://drive.google.com/drive/folders/1hJeLlwDkS9nIRdbqEetZNdMIRrkuJSnw",
+  "audit_note": "Drive metadata lists 20 PNG images. The image pixels were not visually inspected in Gate A. Raw Drive assets are linked rather than mirrored to this public repository while source visibility and rights remain unverified."
+}
